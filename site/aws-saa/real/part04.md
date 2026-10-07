@@ -1,0 +1,1191 @@
+# AWS SAA-C03 真题演练卷 · 第 04 份
+
+> 题目 151–200 · 中英对照 · 来源：HydraNode 免费题库（考生回忆真题，仅供参考）
+
+## Question 151  `Select 2`
+
+**EN** A company is running a containerized application using Amazon Elastic Container Service (Amazon ECS) with the Fargate launch type. The application requires seamless scaling based on CPU utilization and must ensure high availability across multiple Availability Zones (AZs). What should the Solutions Architect do to meet these requirements?
+
+**中** 一家公司正在使用 Amazon Elastic Container Service (Amazon ECS) 和 Fargate 启动类型运行容器化应用程序。该应用程序需要根据 CPU 利用率进行无缝扩展，并且必须确保跨多个可用区 (AZ) 的高可用性。解决方案架构师应该做什么来满足这些要求？
+
+- **A.** Configure an Application Load Balancer (ALB) to distribute traffic across ECS tasks deployed in multiple AZs.
+  - 配置 Application Load Balancer (ALB) 以在多个可用区中部署的 ECS 任务之间分配流量。
+- **B.** Use Service Auto Scaling to adjust the desired count of tasks based on CPU utilization.
+  - 使用 Service Auto Scaling 根据 CPU 利用率调整所需的任务数量。
+- **C.** Deploy the ECS service in a single Availability Zone to reduce complexity and cost.
+  - 将 ECS 服务部署在单个可用区中以降低复杂性和成本。
+- **D.** Switch from Fargate to the EC2 launch type to gain more control over scaling policies.
+  - 从 Fargate 切换到 EC2 启动类型，以获得对扩展策略的更多控制。
+- **E.** Enable ECS task placement constraints to restrict tasks to a single AZ.
+  - 启用 ECS 任务放置约束以将任务限制到单个可用区。
+
+**正确答案 / Answer: `A, B`**
+
+To meet the requirements of seamless scaling and high availability across multiple Availability Zones, the ECS service must use Service Auto Scaling to dynamically adjust the number of tasks based on CPU utilization. Additionally, an Application Load Balancer should be used to distribute traffic across tasks running in multiple AZs. Using Fargate simplifies the setup and eliminates the need to manage EC2 instances, while task placement constraints or restricting to a single AZ would violate the high availability requirement.
+
+为了满足跨可用区的无缝扩展和高可用性的要求，ECS 服务必须使用服务弹性伸缩来根据 CPU 利用率动态调整任务数量。此外，Application Load Balancer 应用于在多个可用区中运行的任务之间分配流量。使用 Fargate 可以简化设置并消除管理 EC2 实例的需要，而任务放置约束或限制到单个可用区将违反高可用性要求。
+
+---
+
+## Question 152  `Single answer`
+
+**EN** Your company is deploying a new microservices-based application, and you are tasked with choosing a container orchestration solution. The application requires the ability to scale automatically based on traffic, ensures high availability, and integrates seamlessly with AWS services such as Amazon RDS and Amazon S3. Additionally, the team has limited experience with managing Kubernetes. Which container orchestration solution is the most suitable for this scenario?
+
+**中** 您的公司正在部署一个新的基于微服务的应用程序，您的任务是选择容器编排解决方案。该应用程序需要能够根据流量自动扩展，确保高可用性，并与 Amazon RDS 和 Amazon S3 等 AWS 服务无缝集成。此外，该团队在管理 Kubernetes 方面的经验有限。哪种容器编排方案最适合这个场景？
+
+- **A.** Amazon ECS with AWS Fargate
+  - Amazon ECS 与 AWS Fargate
+- **B.** Amazon EKS with self-managed nodes
+  - Amazon EKS 具有自我管理节点
+- **C.** Amazon EKS with AWS Fargate
+  - Amazon EKS 与 AWS Fargate
+- **D.** Self-hosted Kubernetes on Amazon EC2
+  - Amazon EC2 上的自托管 Kubernetes
+
+**正确答案 / Answer: `A`**
+
+Amazon ECS with AWS Fargate is the best choice for this scenario because it provides a fully managed container orchestration service that integrates seamlessly with AWS services. It abstracts infrastructure management, supports auto-scaling, and ensures high availability, making it an ideal choice for a team with limited Kubernetes expertise.
+
+Amazon ECS 和 AWS Fargate 是此场景的最佳选择，因为它提供了与 AWS 服务无缝集成的完全托管的容器编排服务。它抽象化基础设施管理、支持自动扩展并确保高可用性，使其成为 Kubernetes 专业知识有限的团队的理想选择。
+
+---
+
+## Question 153  `Single answer`
+
+**EN** A company is running a microservices application using containers. The application currently uses Amazon ECS with the Fargate launch type to manage the containers. The company wants to migrate to Amazon EKS to take advantage of Kubernetes features, but without managing the underlying compute infrastructure. Which solution will allow the company to achieve this goal?
+
+**中** 一家公司正在使用容器运行微服务应用程序。该应用程序当前使用 Amazon ECS 和 Fargate 启动类型来管理容器。该公司希望迁移到 Amazon EKS 以利用 Kubernetes 功能，但无需管理底层计算基础设施。哪种解决方案可以帮助公司实现这一目标？
+
+- **A.** Use Amazon EKS with Managed Node Groups to deploy and manage the Kubernetes nodes.
+  - 将 Amazon EKS 与托管节点组结合使用来部署和管理 Kubernetes 节点。
+- **B.** Use Amazon EKS with the Fargate profile to run Kubernetes pods without managing the compute infrastructure.
+  - 将 Amazon EKS 与 Fargate 配置文件结合使用来运行 Kubernetes Pod，而无需管理计算基础设施。
+- **C.** Migrate the application to Amazon EC2 instances and use Amazon EKS to orchestrate the containers.
+  - 将应用程序迁移到 Amazon EC2 实例并使用 Amazon EKS 编排容器。
+- **D.** Run Amazon ECS with EC2 launch type and integrate it with a Kubernetes cluster for orchestration.
+  - 使用 EC2 启动类型运行 Amazon ECS 并将其与 Kubernetes 集群集成以进行编排。
+
+**正确答案 / Answer: `B`**
+
+Amazon EKS provides multiple options for running Kubernetes workloads. By using EKS with Fargate profiles, you can deploy Kubernetes pods without managing any EC2 instances, as Fargate provides a serverless compute environment. This meets the company's goal of leveraging Kubernetes features while avoiding the operational overhead of managing compute infrastructure.
+
+Amazon EKS 提供了运行 Kubernetes 工作负载的多种选项。通过将 EKS 与 Fargate 配置文件结合使用，您可以部署 Kubernetes Pod，而无需管理任何 EC2 实例，因为 Fargate 提供了无服务器计算环境。这满足了公司利用 Kubernetes 功能的目标，同时避免了管理计算基础设施的运营开销。
+
+---
+
+## Question 154  `Single answer`
+
+**EN** A company is running containerized applications using Amazon Elastic Container Service (Amazon ECS) with the AWS Fargate launch type. The company wants to implement a solution that will automatically scale the number of running tasks in their ECS service based on CPU utilization. What should the Solutions Architect do to meet this requirement?
+
+**中** 一家公司正在使用 Amazon Elastic Container Service (Amazon ECS) 和 AWS Fargate 启动类型运行容器化应用程序。该公司希望实施一种解决方案，根据 CPU 利用率自动扩展其 ECS 服务中正在运行的任务数量。解决方案架构师应该做什么来满足这个要求？
+
+- **A.** Enable Service Auto Scaling for the ECS service and define a scaling policy based on CPU utilization.
+  - 为 ECS 服务启用服务弹性伸缩，并根据 CPU 利用率定义伸缩策略。
+- **B.** Use an Application Load Balancer (ALB) to monitor traffic and scale the ECS service automatically.
+  - 使用 Application Load Balancer (ALB) 监控流量并自动扩展 ECS 服务。
+- **C.** Manually increase or decrease the desired count of tasks in the ECS service based on CPU utilization metrics.
+  - 根据 CPU 利用率指标手动增加或减少 ECS 服务中所需的任务数。
+- **D.** Deploy the ECS service to an Amazon EC2 Auto Scaling group to automatically scale tasks based on resource usage.
+  - 将 ECS 服务部署到 Amazon EC2 弹性伸缩组，根据资源使用情况自动伸缩任务。
+
+**正确答案 / Answer: `A`**
+
+To automatically scale ECS tasks based on CPU utilization, you must enable Service Auto Scaling for the ECS service. This involves creating scaling policies that define when to add or remove tasks based on metrics like CPU utilization, which are collected by Amazon CloudWatch. Other options, such as manually scaling tasks or relying on an ALB or EC2 Auto Scaling, do not fulfill the requirement for automatic scaling of ECS tasks.
+
+要根据 CPU 利用率自动伸缩 ECS 任务，您必须为 ECS 服务启用服务弹性伸缩。这涉及创建扩展策略，根据 Amazon CloudWatch 收集的 CPU 利用率等指标来定义何时添加或删除任务。其他选项（例如手动扩展任务或依赖 ALB 或 EC2 Auto Scaling）无法满足 ECS 任务自动扩展的要求。
+
+---
+
+## Question 155  `Single answer`
+
+**EN** Your company runs a high-traffic e-commerce website using an Amazon RDS instance for its MySQL database. Recently, customers have reported delays in loading product pages due to increased database query response times. Upon investigation, you find that the database is experiencing a high volume of read queries, while the write operations are minimal. What is the best solution to improve the database performance in this situation?
+
+**中** 您的公司使用 Amazon RDS 实例作为其 MySQL 数据库运行一个高流量电子商务网站。最近，客户报告由于数据库查询响应时间增加而导致加载产品页面延迟。经过调查，您发现数据库正在经历大量的读取查询，而写入操作却很少。在这种情况下提高数据库性能的最佳解决方案是什么？
+
+- **A.** Enable Multi-AZ deployment for the RDS instance to improve read performance.
+  - 为 RDS 实例启用多可用区部署，以提高读取性能。
+- **B.** Scale up the RDS instance to a larger instance type with more CPU and memory.
+  - 将 RDS 实例扩展到具有更多 CPU 和内存的更大实例类型。
+- **C.** Use Amazon RDS read replicas to offload read queries from the primary database.
+  - 使用 Amazon RDS 只读副本从主数据库卸载读取查询。
+- **D.** Migrate the database to Amazon DynamoDB to handle the increased read traffic.
+  - 将数据库迁移到 Amazon DynamoDB 以处理增加的读取流量。
+
+**正确答案 / Answer: `C`**
+
+When an Amazon RDS instance experiences high read traffic, read replicas are a cost-effective and scalable solution to offload read operations from the primary database. They allow read-heavy applications to distribute the query load across multiple replicas, improving performance without affecting write operations or requiring significant architectural changes. Other options like Multi-AZ deployment or scaling up the instance do not address the underlying issue of high read traffic as effectively.
+
+当 Amazon RDS 实例经历高读取流量时，只读副本是一种经济高效且可扩展的解决方案，可以从主数据库卸载读取操作。它们允许读取密集型应用程序在多个副本之间分配查询负载，从而提高性能，而不会影响写入操作或需要重大的架构更改。其他选项（例如多可用区部署或扩展实例）无法有效解决高读取流量的根本问题。
+
+---
+
+## Question 156  `Single answer`
+
+**EN** You are designing a database architecture for an e-commerce application that experiences high read traffic during peak sales events. The application uses Amazon RDS for its database, and you have been asked to ensure that read performance remains optimal during these events. What is the most appropriate use case for implementing read replicas in this scenario?
+
+**中** 您正在为电子商务应用程序设计数据库架构，该应用程序在销售高峰期间会经历高读取流量。该应用程序使用 Amazon RDS 作为其数据库，并且要求您确保在这些事件期间读取性能保持最佳状态。在这种情况下实施只读副本的最合适的用例是什么？
+
+- **A.** Offloading read traffic from the primary database to improve performance during high traffic periods
+  - 卸载主数据库的读取流量以提高高流量期间的性能
+- **B.** Automatically failing over to a read replica in the event of a primary database failure
+  - 在主数据库发生故障时自动故障转移到只读副本
+- **C.** Reducing the storage size of the primary database by archiving data to the read replicas
+  - 通过将数据归档到只读副本来减少主数据库的存储大小
+- **D.** Enabling writes to multiple database instances to improve write performance
+  - 启用对多个数据库实例的写入以提高写入性能
+
+**正确答案 / Answer: `A`**
+
+Read replicas in Amazon RDS allow you to create read-only copies of your database, which can handle read traffic and offload it from the primary database. This is especially useful for applications that experience high read traffic, such as e-commerce platforms during peak sales events. By distributing the read workload across multiple replicas, you can improve overall database performance and scalability.
+
+Amazon RDS 中的只读副本允许您创建数据库的只读副本，它可以处理读取流量并从主数据库卸载流量。这对于读取流量较高的应用程序尤其有用，例如销售高峰期间的电子商务平台。通过将读取工作负载分配到多个副本，您可以提高数据库的整体性能和可扩展性。
+
+---
+
+## Question 157  `Single answer`
+
+**EN** A company is running an e-commerce application backed by an Amazon RDS database. The application is experiencing high read traffic during peak shopping times, causing performance degradation. How can you improve the database performance while ensuring the main database remains writable?
+
+**中** 一家公司正在运行由 Amazon RDS 数据库支持的电子商务应用程序。应用程序在购物高峰期遇到高读取流量，导致性能下降。如何在保证主数据库保持可写的同时提高数据库性能？
+
+- **A.** Add read replicas to the RDS database and configure the application to direct read queries to the replicas.
+  - 将只读副本添加到 RDS 数据库并配置应用程序以将读取查询定向到副本。
+- **B.** Enable Multi-AZ for the RDS database to distribute read traffic across multiple Availability Zones.
+  - 为 RDS 数据库启用多可用区，以跨多个可用区分配读取流量。
+- **C.** Migrate the database to Amazon DynamoDB to handle the increased read traffic.
+  - 将数据库迁移到 Amazon DynamoDB 以处理增加的读取流量。
+- **D.** Scale up the RDS instance by using a larger instance type.
+  - 使用更大的实例类型来扩展 RDS 实例。
+
+**正确答案 / Answer: `A`**
+
+Read replicas in Amazon RDS are designed to handle high read traffic by offloading read operations from the primary database to replicas, improving application performance. This solution is effective without interrupting write operations on the primary database. Multi-AZ is for high availability and failover, not for scaling reads. While scaling up or migrating to DynamoDB could also be considered, they are less efficient or more complex than simply adding read replicas in this scenario.
+
+Amazon RDS 中的只读副本旨在通过将读取操作从主数据库卸载到副本来处理高读取流量，从而提高应用程序性能。该方案在不中断主库写操作的情况下是有效的。多可用区用于高可用性和故障转移，而不是用于扩展读取。虽然也可以考虑扩展或迁移到 DynamoDB，但在这种情况下，它们比简单地添加只读副本效率更低或更复杂。
+
+---
+
+## Question 158  `Single answer`
+
+**EN** A company is running a MySQL database on Amazon RDS to support a high-traffic e-commerce website. They notice increased read latency during peak shopping seasons due to heavy read traffic. Which solution should the company implement to improve the database's performance?
+
+**中** 某公司正在 Amazon RDS 上运行 MySQL 数据库，以支持高流量的电子商务网站。他们注意到，在购物旺季，由于读取流量过大，读取延迟会增加。公司应该实施哪种解决方案来提高数据库的性能？
+
+- **A.** Enable Multi-AZ deployment for the RDS instance to improve read performance.
+  - 为 RDS 实例启用多可用区部署，以提高读取性能。
+- **B.** Migrate the database to Amazon DynamoDB to handle the read traffic.
+  - 将数据库迁移到 Amazon DynamoDB 以处理读取流量。
+- **C.** Add read replicas to the RDS instance and redirect read queries to the replicas.
+  - 将只读副本添加到 RDS 实例并将读取查询重定向到副本。
+- **D.** Scale up the RDS instance to a larger instance size to handle the increased load.
+  - 将 RDS 实例扩展到更大的实例大小以处理增加的负载。
+
+**正确答案 / Answer: `C`**
+
+Read replicas are ideal for distributing read traffic and improving the performance of a database experiencing high read latency. They allow you to offload read queries from the primary instance to the replicas, which is a scalable and efficient solution for handling high read workloads. Other options like Multi-AZ are designed for failover, not performance, and scaling up the instance may not be cost-effective.
+
+只读副本非常适合分配读取流量并提高经历高读取延迟的数据库的性能。它们允许您将读取查询从主实例卸载到副本，这是处理高读取工作负载的可扩展且高效的解决方案。其他选项（例如多可用区）是为故障转移而不是性能而设计的，并且扩展实例可能不具有成本效益。
+
+---
+
+## Question 159  `Single answer`
+
+**EN** A company is building a serverless application to process customer orders. The workflow involves multiple steps, including validating the order, charging the customer, sending a confirmation email, and updating the inventory. These steps must be executed in sequence, and any failure in one step should trigger a rollback of the entire process. Which AWS service is the MOST suitable choice for orchestrating this workflow?
+
+**中** 一家公司正在构建无服务器应用程序来处理客户订单。该工作流程涉及多个步骤，包括验证订单、向客户收费、发送确认电子邮件和更新库存。这些步骤必须按顺序执行，任何一步失败都应该触发整个流程的回滚。哪种 AWS 服务是编排此工作流程最合适的选择？
+
+- **A.** AWS Step Functions
+  - AWS Step Functions
+- **B.** AWS Lambda
+  - AWS Lambda
+- **C.** Amazon SQS
+  - Amazon SQS
+- **D.** Amazon SWF
+  - 亚马逊 SWF
+
+**正确答案 / Answer: `A`**
+
+AWS Step Functions is designed specifically for workflow orchestration, allowing you to define and execute workflows with built-in error handling, retries, and rollback. It is the best choice for this scenario where sequential execution and failure handling are required. Other options like AWS Lambda, Amazon SQS, and Amazon SWF either lack orchestration capabilities or are less suited to modern serverless architectures.
+
+AWS Step Functions 专为工作流编排而设计，允许您定义和执行具有内置错误处理、重试和回滚功能的工作流。对于这种需要顺序执行和失败处理的场景来说，它是最佳选择。其他选项（例如 AWS Lambda、Amazon SQS 和 Amazon SWF）要么缺乏编排功能，要么不太适合现代无服务器架构。
+
+---
+
+## Question 160  `Single answer`
+
+**EN** A company has an e-commerce platform where customers place orders. Once an order is placed, the system needs to perform several actions in sequence: validate the payment, update the inventory, notify the shipping department, and send a confirmation email to the customer. If any step fails, the system should log the failure and stop further processing. Which AWS service is most suitable for orchestrating this workflow?
+
+**中** 一家公司有一个电子商务平台，客户可以在该平台下订单。下订单后，系统需要按顺序执行多项操作：验证付款、更新库存、通知运输部门并向客户发送确认电子邮件。如果任何步骤失败，系统应记录失败并停止进一步处理。哪种 AWS 服务最适合编排此工作流程？
+
+- **A.** Amazon Simple Notification Service (SNS)
+  - 亚马逊简单通知服务 (SNS)
+- **B.** AWS Step Functions
+  - AWS Step Functions
+- **C.** Amazon S3 Event Notifications
+  - Amazon S3 事件通知
+- **D.** Amazon Simple Queue Service (SQS)
+  - 亚马逊简单队列服务 (SQS)
+
+**正确答案 / Answer: `B`**
+
+AWS Step Functions is the most suitable service for orchestrating the described workflow, as it allows for sequential execution of tasks with built-in error handling and logging. It is specifically designed to manage workflows with complex dependencies, which is essential for the e-commerce platform's requirements. Other services like Amazon SNS, SQS, or S3 Event Notifications lack the ability to orchestrate workflows or handle sequential task execution.
+
+AWS Step Functions 是编排所描述的工作流程的最合适的服务，因为它允许通过内置错误处理和日志记录来顺序执行任务。它专门设计用于管理具有复杂依赖关系的工作流程，这对于电子商务平台的要求至关重要。其他服务（例如 Amazon SNS、SQS 或 S3 事件通知）缺乏编排工作流程或处理顺序任务执行的能力。
+
+---
+
+## Question 161  `Single answer`
+
+**EN** A company is developing a serverless application that processes user-submitted images. The workflow involves three sequential steps: resizing the image, applying filters, and saving the processed image to an Amazon S3 bucket. Each step is implemented as an AWS Lambda function. The company wants to ensure that the workflow is resilient, handles failures gracefully, and automatically retries failed steps. Which service should be used to orchestrate this workflow?
+
+**中** 一家公司正在开发一种无服务器应用程序，用于处理用户提交的图像。该工作流程涉及三个连续步骤：调整图像大小、应用滤镜以及将处理后的图像保存到 Amazon S3 存储桶。每个步骤都作为 AWS Lambda 函数实现。该公司希望确保工作流程具有弹性、优雅地处理故障并自动重试失败的步骤。应使用哪个服务来编排此工作流程？
+
+- **A.** AWS Step Functions
+  - AWS Step Functions
+- **B.** Amazon MQ
+  - Amazon MQ
+- **C.** Amazon Simple Workflow Service (SWF)
+  - 亚马逊简单工作流服务 (SWF)
+- **D.** Amazon EventBridge
+  - Amazon EventBridge
+
+**正确答案 / Answer: `A`**
+
+AWS Step Functions is the ideal service for orchestrating a serverless workflow involving multiple steps, such as image processing in this scenario. It allows developers to define state machines that represent the workflow, manage task dependencies, and implement error handling and retries. This makes it a better option than alternatives like Amazon MQ, SWF, or EventBridge for this use case.
+
+AWS Step Functions 是编排涉及多个步骤的无服务器工作流程的理想服务，例如本场景中的图像处理。它允许开发人员定义表示工作流的状态机、管理任务依赖性以及实现错误处理和重试。对于此用例，这使其成为比 Amazon MQ、SWF 或 EventBridge 等替代品更好的选择。
+
+---
+
+## Question 162  `Single answer`
+
+**EN** A company is building a serverless application that processes incoming customer orders. The application uses an AWS Lambda function to validate the orders, a second Lambda function to charge the customer, and a third Lambda function to notify the fulfillment team. Each function must execute in sequence, and if any function fails, the workflow should stop and log the error. The company wants to minimize custom code for managing the workflow. Which solution should the company choose?
+
+**中** 一家公司正在构建一个无服务器应用程序来处理传入的客户订单。该应用程序使用 AWS Lambda 函数来验证订单，使用第二个 Lambda 函数向客户收费，并使用第三个 Lambda 函数来通知履行团队。每个函数必须按顺序执行，如果任何函数失败，工作流应停止并记录错误。该公司希望最大限度地减少用于管理工作流程的自定义代码。公司应该选择哪种解决方案？
+
+- **A.** Use AWS Step Functions to orchestrate the Lambda functions in a sequential workflow.
+  - 使用 AWS Step Functions 在顺序工作流程中编排 Lambda 函数。
+- **B.** Create an Amazon SQS queue and use it to trigger the Lambda functions in sequence.
+  - 创建 Amazon SQS 队列并使用它按顺序触发 Lambda 函数。
+- **C.** Use Amazon EventBridge to invoke the Lambda functions in order, with custom retry logic for failures.
+  - 使用 Amazon EventBridge 按顺序调用 Lambda 函数，并针对失败自定义重试逻辑。
+- **D.** Write custom code in the first Lambda function to call the second and third Lambda functions sequentially.
+  - 在第一个 Lambda 函数中编写自定义代码以顺序调用第二个和第三个 Lambda 函数。
+
+**正确答案 / Answer: `A`**
+
+AWS Step Functions is the best choice for orchestrating workflows that involve multiple tasks (such as Lambda functions) in a sequence. It provides built-in capabilities for error handling, retries, and state management, reducing the need for custom code. Other options like SQS or EventBridge are not designed for sequential workflows, and writing custom orchestration code increases complexity unnecessarily.
+
+AWS Step Functions 是编排涉及序列中多个任务（例如 Lambda 函数）的工作流程的最佳选择。它提供了内置的错误处理、重试和状态管理功能，减少了对自定义代码的需求。 SQS 或 EventBridge 等其他选项并非专为顺序工作流程而设计，编写自定义编排代码会不必要地增加复杂性。
+
+---
+
+## Question 163  `Select 3`
+
+**EN** A company is building a web application that must be highly available and fault-tolerant. The application is hosted on Amazon EC2 instances behind an Application Load Balancer (ALB). The company wants to ensure that the application remains available even if an entire Availability Zone (AZ) goes down. How should the architecture be designed to meet these requirements?
+
+**中** 一家公司正在构建一个必须具有高可用性和容错性的 Web 应用程序。该应用程序托管在 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上。该公司希望确保即使整个可用区 (AZ) 出现故障，应用程序仍然可用。应该如何设计架构来满足这些要求？
+
+- **A.** Deploy the EC2 instances across multiple Availability Zones and register them with the ALB.
+  - 跨多个可用区部署 EC2 实例并向 ALB 注册它们。
+- **B.** Configure Auto Scaling with a minimum of one instance per Availability Zone.
+  - 配置 Auto Scaling，每个可用区至少有一个实例。
+- **C.** Use a single Availability Zone to reduce costs while ensuring fault tolerance.
+  - 使用单个可用区可以降低成本，同时确保容错能力。
+- **D.** Enable Cross-Zone Load Balancing on the ALB to optimize the distribution of traffic.
+  - 在 ALB 上启用跨区域负载均衡以优化流量分配。
+- **E.** Deploy an ALB in each Availability Zone to ensure traffic routing in case of AZ failure.
+  - 在每个可用区部署 ALB，以保证可用区故障时的流量路由。
+
+**正确答案 / Answer: `A, B, D`**
+
+To design a highly available and fault-tolerant architecture, the EC2 instances must be deployed across multiple Availability Zones to avoid a single point of failure. Auto Scaling ensures that there are always instances available in each AZ, and enabling Cross-Zone Load Balancing on the ALB ensures even traffic distribution across all AZs. These combined strategies provide high availability and fault tolerance for the application.
+
+为了设计高可用和容错的架构，EC2 实例必须跨多个可用区部署，以避免单点故障。 Auto Scaling 可确保每个 AZ 中始终有可用的实例，并且在 ALB 上启用跨可用区负载均衡可确保所有 AZ 之间的流量均匀分配。这些组合策略为应用程序提供了高可用性和容错能力。
+
+---
+
+## Question 164  `Select 3`
+
+**EN** A startup is hosting a web application on Amazon EC2 instances behind an Application Load Balancer (ALB). The application is critical to the business and must be highly available and fault-tolerant. Currently, the EC2 instances are deployed in a single Availability Zone (AZ). What changes should the Solutions Architect make to improve the architecture's availability and fault tolerance?
+
+**中** 一家初创公司在 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上托管 Web 应用程序。应用程序对业务至关重要，必须具有高可用性和容错性。目前，EC2 实例部署在单个可用区 (AZ) 中。解决方案架构师应该做出哪些改变来提高架构的可用性和容错能力？
+
+- **A.** Deploy the EC2 instances across multiple Availability Zones.
+  - 跨多个可用区部署 EC2 实例。
+- **B.** Add an Auto Scaling group to manage the EC2 instances.
+  - 添加 Auto Scaling 组来管理 EC2 实例。
+- **C.** Migrate the application to a single Amazon RDS instance for better performance.
+  - 将应用程序迁移到单个 Amazon RDS 实例以获得更好的性能。
+- **D.** Enable cross-zone load balancing on the Application Load Balancer.
+  - 在 Application Load Balancer 上启用跨可用区负载均衡。
+- **E.** Provision the EC2 instances in multiple AWS Regions.
+  - 在多个 AWS 区域中配置 EC2 实例。
+
+**正确答案 / Answer: `A, B, D`**
+
+To design a highly available and fault-tolerant architecture, EC2 instances should be deployed across multiple Availability Zones to mitigate the impact of an AZ failure. An Auto Scaling group ensures that EC2 instances are dynamically managed based on demand, while enabling cross-zone load balancing on the ALB ensures even traffic distribution across all AZs. These changes together enhance the architecture's resilience and availability.
+
+为了设计高可用和容错的架构，EC2 实例应该跨多个可用区部署，以减轻可用区故障的影响。 Auto Scaling 组可确保根据需求动态管理 EC2 实例，同时在 ALB 上启用跨区域负载均衡，确保流量在所有可用区之间均匀分配。这些变化共同增强了架构的弹性和可用性。
+
+---
+
+## Question 165  `Select 2`
+
+**EN** A company runs a web application on a fleet of Amazon EC2 instances behind an Application Load Balancer (ALB) in a single Availability Zone. The application is mission-critical, and the company wants to improve its fault tolerance and ensure high availability. What changes should the Solutions Architect recommend to meet these requirements?
+
+**中** 一家公司在单个可用区中 Application Load Balancer (ALB) 后面的 Amazon EC2 实例队列上运行 Web 应用程序。该应用程序是关键任务，该公司希望提高其容错能力并确保高可用性。解决方案架构师应该建议进行哪些更改来满足这些要求？
+
+- **A.** Add a second Availability Zone to the load balancer's target group.
+  - 将第二个可用区添加到负载均衡器的目标组。
+- **B.** Replace the Application Load Balancer with a Network Load Balancer.
+  - 将 Application Load Balancer 替换为 Network Load Balancer。
+- **C.** Launch additional EC2 instances in the same Availability Zone.
+  - 在同一可用区中启动其他 EC2 实例。
+- **D.** Enable Auto Scaling across multiple Availability Zones.
+  - 跨多个可用区启用 Auto Scaling。
+- **E.** Deploy an Amazon RDS instance with Multi-AZ enabled for the database tier.
+  - 部署一个 Amazon RDS 实例，并为数据库层启用多可用区。
+
+**正确答案 / Answer: `A, D`**
+
+To design a highly available and fault-tolerant architecture, you need to minimize single points of failure. Adding a second Availability Zone to the load balancer’s target group ensures redundancy in case of an Availability Zone failure, while enabling Auto Scaling across multiple Availability Zones ensures the application can dynamically adjust to traffic demands and remain available. These changes together enhance fault tolerance and high availability for the web application.
+
+要设计高可用性和容错架构，您需要最大限度地减少单点故障。向负载均衡器的目标组添加第二个可用区可确保在可用区发生故障时提供冗余，同时跨多个可用区启用自动缩放可确保应用程序可以动态调整流量需求并保持可用。这些更改共同增强了 Web 应用程序的容错能力和高可用性。
+
+---
+
+## Question 166  `Select 3`
+
+**EN** A company is designing a highly available architecture for their e-commerce application running on AWS. The application consists of a web tier, an application tier, and a database tier. The web and application tiers are stateless, and the database tier must maintain data consistency. How can the company achieve high availability and fault tolerance for this architecture?
+
+**中** 一家公司正在为其在 AWS 上运行的电子商务应用程序设计一个高度可用的架构。该应用程序由 Web 层、应用程序层和数据库层组成。 Web 层和应用层是无状态的，数据库层必须保持数据一致性。公司如何为这个架构实现高可用性和容错能力？
+
+- **A.** Deploy the web and application tiers in an Auto Scaling group across multiple Availability Zones.
+  - 在跨多个可用区的 Auto Scaling 组中部署 Web 和应用程序层。
+- **B.** Use an Amazon RDS Multi-AZ deployment for the database tier.
+  - 对数据库层使用 Amazon RDS 多可用区部署。
+- **C.** Configure an Elastic Load Balancer to distribute traffic across the web tier instances deployed in a single Availability Zone.
+  - 配置 Elastic Load Balancer 以在单个可用区中部署的 Web 层实例之间分配流量。
+- **D.** Store session state in Amazon S3 to ensure stateless operation of the web and application tiers.
+  - 将会话状态存储在 Amazon S3 中，以确保 Web 和应用程序层的无状态操作。
+- **E.** Use Amazon DynamoDB for the database tier instead of Amazon RDS to avoid the need for Multi-AZ.
+  - 对数据库层使用 Amazon DynamoDB 而不是 Amazon RDS，以避免需要多可用区。
+
+**正确答案 / Answer: `A, B, D`**
+
+To design a highly available and fault-tolerant architecture, the web and application tiers should be distributed across multiple Availability Zones using Auto Scaling groups, and an Elastic Load Balancer should distribute traffic across these zones. The database tier should use Amazon RDS Multi-AZ deployments to ensure data consistency and availability. Additionally, stateless architectures for the web and application tiers can be achieved by storing session state in Amazon S3 or other external storage solutions.
+
+要设计高可用性和容错架构，Web 和应用程序层应使用 Auto Scaling 组分布在多个可用区，并且 Elastic Load Balancer 应在这些区域之间分配流量。数据库层应采用 Amazon RDS 多可用区部署，以保证数据的一致性和可用性。此外，通过将会话状态存储在 Amazon S3 或其他外部存储解决方案中，可以实现 Web 和应用程序层的无状态架构。
+
+---
+
+## Question 167  `Single answer`
+
+**EN** A company is running a web application on Amazon EC2 instances behind an Application Load Balancer (ALB). The application stores user-uploaded files in an Amazon S3 bucket. Recently, the company noticed that some users are uploading very large files, causing performance issues for the application. The solution architect is tasked with ensuring that file uploads larger than 100 MB are rejected before they reach the EC2 instances. How can this requirement be met?
+
+**中** 一家公司正在 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上运行 Web 应用程序。该应用程序将用户上传的文件存储在 Amazon S3 存储桶中。最近，该公司注意到一些用户上传非常大的文件，导致应用程序出现性能问题。解决方案架构师的任务是确保大于 100 MB 的文件上传在到达 EC2 实例之前被拒绝。如何才能满足这个要求呢？
+
+- **A.** Configure the ALB with a listener rule to check the Content-Length header and reject requests larger than 100 MB.
+  - 使用侦听器规则配置 ALB 以检查 Content-Length 标头并拒绝大于 100 MB 的请求。
+- **B.** Use an AWS Lambda function triggered by the ALB to validate the file size and reject requests larger than 100 MB.
+  - 使用 ALB 触发的 AWS Lambda 函数来验证文件大小并拒绝大于 100 MB 的请求。
+- **C.** Configure Amazon S3 bucket policies to deny uploads of files larger than 100 MB.
+  - 配置 Amazon S3 存储桶策略以拒绝上传大于 100 MB 的文件。
+- **D.** Leverage an AWS WAF rule associated with the ALB to inspect the Content-Length header and block requests larger than 100 MB.
+  - 利用与 ALB 关联的 AWS WAF 规则来检查 Content-Length 标头并阻止大于 100 MB 的请求。
+
+**正确答案 / Answer: `D`**
+
+The correct solution is to use AWS WAF to block requests with a Content-Length header indicating a file size larger than 100 MB. AWS WAF integrates with the ALB and can inspect HTTP requests for specific patterns, including header values. This approach prevents large file uploads from reaching the EC2 instances, preserving application performance without introducing unnecessary complexity.
+
+正确的解决方案是使用 AWS WAF 来阻止 Content-Length 标头指示文件大小大于 100 MB 的请求。 AWS WAF 与 ALB 集成，可以检查 HTTP 请求的特定模式，包括标头值。这种方法可以防止大文件上传到达 EC2 实例，从而保持应用程序性能，而不会引入不必要的复杂性。
+
+---
+
+## Question 168  `Select 4`
+
+**EN** A company is hosting a multi-tier web application on AWS. The application runs on Amazon EC2 instances behind an Application Load Balancer (ALB). The database layer is hosted on Amazon RDS. The company wants to ensure that the application can handle high traffic while maintaining efficient resource utilization and cost optimization. Which combination of actions should the Solutions Architect recommend?
+
+**中** 一家公司在 AWS 上托管多层 Web 应用程序。该应用程序在 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上运行。数据库层托管在 Amazon RDS 上。该公司希望确保应用程序能够处理高流量，同时保持高效的资源利用和成本优化。解决方案架构师应该推荐哪种操作组合？
+
+- **A.** Enable Auto Scaling for the EC2 instances behind the ALB.
+  - 为 ALB 后面的 EC2 实例启用 Auto Scaling。
+- **B.** Enable Multi-AZ deployment for the Amazon RDS database instance.
+  - 为 Amazon RDS 数据库实例启用多可用区部署。
+- **C.** Use Amazon S3 for serving static content instead of the EC2 instances.
+  - 使用 Amazon S3 代替 EC2 实例来提供静态内容。
+- **D.** Manually provision EC2 instances to handle peak traffic.
+  - 手动配置 EC2 实例以处理高峰流量。
+- **E.** Use Amazon RDS Read Replicas for read-intensive queries.
+  - 使用 Amazon RDS 只读副本进行读取密集型查询。
+
+**正确答案 / Answer: `A, B, C, E`**
+
+To handle high traffic efficiently and ensure cost optimization, the recommended approach is to use Auto Scaling for EC2 instances, enable Multi-AZ for fault tolerance in RDS, offload static content to Amazon S3, and utilize Read Replicas for read-intensive queries. Manually provisioning EC2 instances is not cost-effective or scalable and does not align with AWS best practices.
+
+为了有效处理高流量并确保成本优化，建议的方法是对 EC2 实例使用 Auto Scaling，在 RDS 中启用多可用区容错，将静态内容卸载到 Amazon S3，并利用只读副本进行读取密集型查询。手动配置 EC2 实例不具有成本效益或可扩展性，并且不符合 AWS 最佳实践。
+
+---
+
+## Question 169  `Single answer`
+
+**EN** A company is migrating its on-premises application to AWS. The application stores large amounts of unstructured data, such as images and videos, and needs to provide low-latency access to this data for users worldwide. The company also requires the solution to be highly durable and scalable. Which AWS service should the Solutions Architect recommend?
+
+**中** 一家公司正在将其本地应用程序迁移到 AWS。该应用程序存储大量非结构化数据，例如图像和视频，并且需要为全球用户提供对这些数据的低延迟访问。该公司还要求该解决方案具有高度耐用性和可扩展性。解决方案架构师应该推荐哪种 AWS 服务？
+
+- **A.** Amazon S3 with Transfer Acceleration
+  - Amazon S3 带传输加速
+- **B.** Amazon RDS with global read replicas
+  - 具有全局只读副本的 Amazon RDS
+- **C.** Amazon DynamoDB with global tables
+  - 带全局表的 Amazon DynamoDB
+- **D.** Amazon EFS with cross-region replication
+  - Amazon EFS 具有跨区域复制功能
+
+**正确答案 / Answer: `A`**
+
+Amazon S3 with Transfer Acceleration is the best choice for storing unstructured data such as images and videos. It provides high durability, virtually unlimited scalability, and low-latency access through Transfer Acceleration, which routes traffic through AWS Edge Locations. This makes it an ideal solution for applications requiring global performance and reliability.
+
+具有传输加速功能的 Amazon S3 是存储图像和视频等非结构化数据的最佳选择。它通过传输加速（通过 AWS 边缘站点路由流量）提供高耐用性、几乎无限的可扩展性和低延迟访问。这使其成为需要全局性能和可靠性的应用程序的理想解决方案。
+
+---
+
+## Question 170  `Single answer`
+
+**EN** A company is running an e-commerce application on Amazon EC2 instances behind an Application Load Balancer (ALB). The application stores transactional data in an Amazon RDS PostgreSQL database. The company wants to improve the scalability of the database to handle an increase in read traffic during peak times while ensuring high availability. Which solution should the Solutions Architect recommend?
+
+**中** 一家公司正在 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上运行电子商务应用程序。该应用程序将事务数据存储在 Amazon RDS PostgreSQL 数据库中。该公司希望提高数据库的可扩展性，以应对高峰时段读取流量的增加，同时确保高可用性。解决方案架构师应该推荐哪种解决方案？
+
+- **A.** Enable Multi-AZ deployment for the RDS database.
+  - 为 RDS 数据库启用多可用区部署。
+- **B.** Create Read Replicas for the RDS database and configure the application to distribute read traffic to them.
+  - 为 RDS 数据库创建只读副本并配置应用程序以将读取流量分配给它们。
+- **C.** Upgrade the RDS database instance to a larger instance type.
+  - 将 RDS 数据库实例升级到更大的实例类型。
+- **D.** Enable Amazon ElastiCache in front of the database to cache frequent queries.
+  - 在数据库前面启用 Amazon ElastiCache 来缓存频繁的查询。
+
+**正确答案 / Answer: `B`**
+
+To improve read scalability for the RDS database, creating Read Replicas is the most appropriate solution. Read Replicas allow the read workload to be distributed across multiple database instances, reducing the burden on the primary database instance. This approach is commonly used to handle increased read traffic and is supported by Amazon RDS for PostgreSQL.
+
+为了提高 RDS 数据库的读扩展性，创建只读副本是最合适的解决方案。只读副本允许将读取工作负载分布在多个数据库实例上，从而减轻主数据库实例的负担。此方法通常用于处理增加的读取流量，并受 Amazon RDS for PostgreSQL 支持。
+
+---
+
+## Question 171  `Select 3`
+
+**EN** Your company has deployed a multi-tier web application currently hosted in the us-east-1 AWS Region. For disaster recovery (DR) purposes, you need to ensure that the application can fail over to another AWS Region with minimal downtime. Which combination of actions will allow you to achieve this using AWS global infrastructure?
+
+**中** 您的公司已部署当前托管在 us-east-1 AWS 区域的多层 Web 应用程序。出于灾难恢复 (DR) 目的，您需要确保应用程序可以故障转移到另一个 AWS 区域，同时最大限度地减少停机时间。哪种操作组合可以让您使用 AWS 全球基础设施实现这一目标？
+
+- **A.** Deploy the application's resources, such as EC2 instances and RDS databases, in another AWS Region.
+  - 在另一个 AWS 区域中部署应用程序的资源，例如 EC2 实例和 RDS 数据库。
+- **B.** Configure Amazon Route 53 with a failover routing policy to route traffic to the secondary Region in case of a failure in the primary Region.
+  - 使用故障转移路由策略配置 Amazon Route 53，以便在主区域发生故障时将流量路由到辅助区域。
+- **C.** Use AWS Direct Connect to establish a dedicated connection between the primary and secondary Regions.
+  - 使用 AWS Direct Connect 在主 Region 和次 Region 之间建立专用连接。
+- **D.** Enable Cross-Region Read Replicas for the RDS database to keep data synchronized between the primary and secondary Regions.
+  - 为 RDS 数据库启用跨区域只读副本，以保持主备 Region 之间的数据同步。
+- **E.** Set up AWS Global Accelerator to automatically redirect traffic to the secondary Region in case of failure.
+  - 设置 AWS Global Accelerator 以在发生故障时自动将流量重定向到辅助区域。
+
+**正确答案 / Answer: `A, B, D`**
+
+To implement a disaster recovery strategy using AWS global infrastructure, you need to deploy resources in a secondary AWS Region, use Amazon Route 53 to manage failover routing, and ensure data synchronization between Regions (e.g., with Cross-Region Read Replicas for RDS). These actions together enable minimal downtime and data consistency during a Region-wide failure.
+
+要使用 AWS 全球基础设施实施灾难恢复策略，您需要在辅助 AWS 区域中部署资源，使用 Amazon Route 53 管理故障转移路由，并确保区域之间的数据同步（例如，使用 RDS 的跨区域只读副本）。这些操作共同实现了区域范围内故障期间最短的停机时间和数据一致性。
+
+---
+
+## Question 172  `Select 2`
+
+**EN** A company is designing a highly available web application hosted on AWS. The application needs to serve users globally and must automatically route traffic to the nearest AWS Region while providing failover capabilities in case an entire Region becomes unavailable. Which combination of AWS services and features is the most suitable to meet these requirements?
+
+**中** 一家公司正在设计一个托管在 AWS 上的高度可用的 Web 应用程序。该应用程序需要为全球用户提供服务，并且必须自动将流量路由到最近的 AWS 区域，同时提供故障转移功能，以防整个区域不可用。哪种 AWS 服务和功能组合最适合满足这些要求？
+
+- **A.** Amazon Route 53 latency-based routing
+  - Amazon Route 53 基于延迟的路由
+- **B.** Amazon Route 53 geolocation routing
+  - Amazon Route 53 地理定位路由
+- **C.** AWS Global Accelerator
+  - AWS Global Accelerator
+- **D.** Deploying the application across multiple AWS Regions
+  - 跨多个 AWS 区域部署应用程序
+- **E.** Amazon CloudFront with an origin failover configuration
+  - 具有原始故障转移配置的 Amazon CloudFront
+
+**正确答案 / Answer: `A, D`**
+
+To meet the requirements for global traffic routing and failover across AWS Regions, Amazon Route 53 latency-based routing is ideal as it routes users to the nearest Region with low latency. Additionally, deploying the application in multiple AWS Regions ensures high availability and resilience in the event of a Region failure. Other options either do not meet the global traffic routing requirement or are designed for different use cases.
+
+为了满足跨 AWS 区域的全球流量路由和故障转移的要求，Amazon Route 53 基于延迟的路由是理想的选择，因为它将用户以低延迟路由到最近的区域。此外，在多个 AWS 区域中部署应用程序可确保在区域发生故障时的高可用性和恢复能力。其他选项要么不满足全局流量路由要求，要么是针对不同的用例而设计的。
+
+---
+
+## Question 173  `Single answer`
+
+**EN** A company has deployed a web application across multiple AWS Regions to serve users with low latency. They need to configure a DNS routing policy that directs users to the nearest AWS Region based on their geographic location. Which Amazon Route 53 routing policy should they choose?
+
+**中** 一家公司跨多个 AWS 区域部署了一个 Web 应用程序，以低延迟为用户提供服务。他们需要配置 DNS 路由策略，根据用户的地理位置将用户引导到最近的 AWS 区域。他们应该选择哪种 Amazon Route 53 路由策略？
+
+- **A.** Simple routing policy
+  - 简单的路由策略
+- **B.** Geolocation routing policy
+  - 地理位置路由策略
+- **C.** Latency routing policy
+  - 延迟路由策略
+- **D.** Weighted routing policy
+  - 加权路由策略
+
+**正确答案 / Answer: `B`**
+
+The Geolocation routing policy in Amazon Route 53 is specifically designed to route traffic based on the geographic location of the user. In this scenario, the company needs to direct users to the nearest AWS Region based on their location, making the Geolocation routing policy the correct answer. Other routing policies like Simple, Latency, and Weighted do not fulfill this requirement.
+
+Amazon Route 53 中的 Geolocation 路由策略专门设计用于根据用户的地理位置路由流量。在这种情况下，公司需要根据用户的位置将用户引导到最近的 AWS 区域，从而使地理位置路由策略成为正确的答案。其他路由策略（例如简单、延迟和加权）无法满足此要求。
+
+---
+
+## Question 174  `Select 2`
+
+**EN** A company is deploying a new web application that must serve global users with low latency. The application requires DNS-based traffic routing to direct users to the closest AWS Region with the best performance. Additionally, the company wants to ensure application availability even if an entire AWS Region becomes unavailable. Which combination of AWS services and configurations is MOST appropriate for this use case?
+
+**中** 一家公司正在部署一个新的 Web 应用程序，该应用程序必须以低延迟为全球用户提供服务。该应用程序需要基于 DNS 的流量路由，以将用户引导至最近的具有最佳性能的 AWS 区域。此外，即使整个 AWS 区域不可用，该公司也希望确保应用程序可用性。哪种 AWS 服务和配置组合最适合此用例？
+
+- **A.** Use Amazon Route 53 with a latency-based routing policy to direct traffic to multiple AWS Regions.
+  - 将 Amazon Route 53 与基于延迟的路由策略结合使用，将流量定向到多个 AWS 区域。
+- **B.** Deploy the application in a single AWS Region and use Amazon CloudFront for global caching.
+  - 在单个 AWS 区域中部署应用程序并使用 Amazon CloudFront 进行全局缓存。
+- **C.** Deploy the application across multiple AWS Regions and use Amazon Route 53 with a failover routing policy for disaster recovery.
+  - 跨多个 AWS 区域部署应用程序，并将 Amazon Route 53 与故障转移路由策略结合使用以实现灾难恢复。
+- **D.** Use AWS Global Accelerator to route user traffic to the closest application endpoint in an AWS Region.
+  - 使用 AWS Global Accelerator 将用户流量路由到 AWS 区域中最近的应用程序终端节点。
+- **E.** Deploy the application in multiple Availability Zones within a single AWS Region to achieve high availability globally.
+  - 将应用程序部署在单个 AWS 区域内的多个可用区中，以实现全球高可用性。
+
+**正确答案 / Answer: `A, C`**
+
+To meet the requirements of low latency for global users and disaster recovery across AWS Regions, the application should be deployed in multiple AWS Regions. Amazon Route 53 with latency-based routing ensures users are directed to the closest Region with the best performance, while failover routing provides high availability in case an entire Region becomes unavailable. These configurations work together to fulfill both the performance and availability needs of the application.
+
+为了满足全球用户低延迟和跨 AWS 区域灾难恢复的要求，应用程序应该部署在多个 AWS 区域。 Amazon Route 53 具有基于延迟的路由，可确保用户被定向到具有最佳性能的最近区域，而故障转移路由则在整个区域不可用时提供高可用性。这些配置协同工作以满足应用程序的性能和可用性需求。
+
+---
+
+## Question 175  `Single answer`
+
+**EN** A company wants to implement a solution that can extract meaningful insights such as sentiment analysis, key phrases, and language detection from customer feedback collected via emails and chat logs. Which AWS managed service would be the most appropriate for this use case?
+
+**中** 一家公司希望实施一种解决方案，可以从通过电子邮件和聊天日志收集的客户反馈中提取有意义的见解，例如情绪分析、关键短语和语言检测。哪种 AWS 托管服务最适合此用例？
+
+- **A.** Amazon Polly
+  - 亚马逊波莉
+- **B.** Amazon Comprehend
+  - 亚马逊理解
+- **C.** Amazon Rekognition
+  - 亚马逊重新识别
+- **D.** Amazon Translate
+  - 亚马逊翻译
+
+**正确答案 / Answer: `B`**
+
+Amazon Comprehend is a fully managed natural language processing (NLP) service that enables you to derive insights from text. It can perform tasks such as sentiment analysis, key phrase detection, and language identification, which are directly applicable to analyzing customer feedback. Other services like Amazon Polly, Amazon Rekognition, and Amazon Translate have different use cases unrelated to this scenario.
+
+Amazon Comprehend 是一项完全托管的自然语言处理 (NLP) 服务，使您能够从文本中获取见解。它可以执行情感分析、关键短语检测和语言识别等任务，这些任务直接适用于分析客户反馈。 Amazon Polly、Amazon Rekognition 和 Amazon Translate 等其他服务具有与此场景无关的不同用例。
+
+---
+
+## Question 176  `Select 2`
+
+**EN** A company wants to automatically analyze customer feedback from support emails to determine if the sentiment is positive, neutral, or negative. They also want to convert the analyzed feedback into an audio format for internal review by their support team. Which combination of AWS managed services should the company use to efficiently achieve this solution?
+
+**中** 一家公司希望自动分析来自支持电子邮件的客户反馈，以确定情绪是积极、中性还是消极。他们还希望将分析后的反馈转换为音频格式，以供支持团队进行内部审查。公司应使用哪种 AWS 托管服务组合来有效实现此解决方案？
+
+- **A.** Amazon Comprehend
+  - 亚马逊理解
+- **B.** Amazon Polly
+  - 亚马逊波莉
+- **C.** AWS Lambda
+  - AWS Lambda
+- **D.** Amazon Translate
+  - 亚马逊翻译
+- **E.** Amazon Rekognition
+  - 亚马逊重新识别
+
+**正确答案 / Answer: `A, B`**
+
+To analyze customer feedback sentiment, Amazon Comprehend is the appropriate managed service, as it specializes in natural language processing tasks such as sentiment analysis. To convert the analyzed feedback into audio, Amazon Polly is the correct choice, as it provides text-to-speech capabilities. These two services together meet the requirements of the scenario effectively.
+
+要分析客户反馈情绪，Amazon Comprehend 是合适的托管服务，因为它专门从事情绪分析等自然语言处理任务。要将分析后的反馈转换为音频，Amazon Polly 是正确的选择，因为它提供文本转语音功能。这两项服务共同有效满足了场景的需求。
+
+---
+
+## Question 177  `Select 2`
+
+**EN** A company wants to analyze customer support emails to identify the primary topics of conversations and gain insights into customer sentiment. They also want the ability to automatically convert text-based responses into natural-sounding audio for visually impaired users. Which combination of AWS managed services should the company use to achieve their goals?
+
+**中** 一家公司希望分析客户支持电子邮件，以确定对话的主要主题并深入了解客户情绪。他们还希望能够将基于文本的响应自动转换为适合视障用户的自然声音音频。公司应使用哪种 AWS 托管服务组合来实现其目标？
+
+- **A.** Amazon Comprehend
+  - 亚马逊理解
+- **B.** Amazon Polly
+  - 亚马逊波莉
+- **C.** Amazon Translate
+  - 亚马逊翻译
+- **D.** Amazon Rekognition
+  - 亚马逊重新识别
+- **E.** Amazon Textract
+  - Amazon Textract
+
+**正确答案 / Answer: `A, B`**
+
+Amazon Comprehend is ideal for analyzing text to extract topics and sentiment, fulfilling the requirement to analyze customer support emails. Amazon Polly is suitable for converting text into speech, enabling the company to provide audio responses for visually impaired users. Together, these services address the scenario's requirements effectively, while the other options do not align with the specific use case.
+
+Amazon Comprehend 非常适合分析文本以提取主题和情绪，满足分析客户支持电子邮件的要求。 Amazon Polly 适合将文本转换为语音，使该公司能够为视障用户提供音频响应。这些服务共同有效地满足了场景的要求，而其他选项则与特定用例不相符。
+
+---
+
+## Question 178  `Single answer`
+
+**EN** A media company wants to convert written news articles into engaging audio content to reach a broader audience, including people with visual impairments. The solution should require minimal management effort while ensuring scalability and high-quality voice output. Which AWS managed service is best suited for this use case?
+
+**中** 一家媒体公司希望将书面新闻文章转换为引人入胜的音频内容，以覆盖更广泛的受众，包括视力障碍人士。该解决方案应该需要最少的管理工作，同时确保可扩展性和高质量的语音输出。哪种 AWS 托管服务最适合此用例？
+
+- **A.** Amazon Polly
+  - 亚马逊波莉
+- **B.** Amazon Transcribe
+  - 亚马逊转录
+- **C.** Amazon Comprehend
+  - 亚马逊理解
+- **D.** Amazon Lex
+  - 亚马逊莱克斯
+
+**正确答案 / Answer: `A`**
+
+Amazon Polly is the most appropriate service for converting text into audio content. It provides lifelike speech synthesis with a variety of customizable voices, making it an excellent choice for creating audio versions of written content. The other services (Amazon Transcribe, Amazon Comprehend, and Amazon Lex) do not offer the required text-to-speech functionality.
+
+Amazon Polly 是将文本转换为音频内容的最合适的服务。它提供逼真的语音合成和各种可定制的声音，使其成为创建书面内容的音频版本的绝佳选择。其他服务（Amazon Transcribe、Amazon Comprehend 和 Amazon Lex）不提供所需的文本转语音功能。
+
+---
+
+## Question 179  `Single answer`
+
+**EN** A company has set up a VPC with two subnets: a public subnet and a private subnet. The public subnet contains an Application Load Balancer (ALB), and the private subnet contains an EC2 instance hosting a backend application. The company wants to ensure that the backend EC2 instance can communicate with the ALB, but it should not have direct access to the internet. Which route table configuration in the private subnet will fulfill this requirement?
+
+**中** 某公司建立了一个具有两个子网的 VPC：公有子网和私有子网。公有子网包含 Application Load Balancer (ALB)，私有子网包含托管后端应用程序的 EC2 实例。该公司希望确保后端 EC2 实例可以与 ALB 通信，但它不应该直接访问互联网。私有子网中的哪种路由表配置可以满足此要求？
+
+- **A.** A route table with a route to the ALB's private IP and a route to an internet gateway.
+  - 路由表，其中包含到 ALB 的私有 IP 的路由和到 Internet 网关的路由。
+- **B.** A route table with a route to the ALB's private IP and a route to a NAT gateway.
+  - 路由表，其中包含到 ALB 的私有 IP 的路由和到 NAT 网关的路由。
+- **C.** A route table with a route to the ALB's private IP and a route to a VPC endpoint.
+  - 路由表，其中包含到 ALB 的私有 IP 的路由和到 VPC 终端节点的路由。
+- **D.** A route table with a route to the ALB's private IP and a route to the local VPC CIDR block.
+  - 路由表，其中包含到 ALB 私有 IP 的路由和到本地 VPC CIDR 块的路由。
+
+**正确答案 / Answer: `D`**
+
+In this scenario, the EC2 instance in the private subnet only needs to communicate with the ALB, which resides within the same VPC. The correct route table configuration includes a route to the local VPC CIDR block, allowing internal communication while ensuring that the private subnet does not have internet access. The other options either introduce unnecessary routes or violate the requirement to restrict internet access.
+
+在此场景中，私有子网中的 EC2 实例仅需要与驻留在同一 VPC 内的 ALB 进行通信。正确的路由表配置包括到本地 VPC CIDR 块的路由，允许内部通信，同时确保私有子网无法访问 Internet。其他选项要么引入不必要的路由，要么违反限制互联网访问的要求。
+
+---
+
+## Question 180  `Select 3`
+
+**EN** You are designing a VPC with two public subnets and two private subnets for a web application. The web servers in the public subnets need to communicate with the application servers in the private subnets. Additionally, the application servers need access to the internet for software updates. Which of the following configurations is required to enable this architecture?
+
+**中** 您正在为 Web 应用程序设计一个具有两个公有子网和两个私有子网的 VPC。公有子网中的 Web 服务器需要与私有子网中的应用程序服务器进行通信。此外，应用程序服务器需要访问互联网以进行软件更新。启用此架构需要以下哪些配置？
+
+- **A.** Create a route table for the public subnets with a route directing internet traffic (0.0.0.0/0) to an Internet Gateway.
+  - 为公有子网创建路由表，其中包含将 Internet 流量 (0.0.0.0/0) 定向到 Internet 网关的路由。
+- **B.** Create a route table for the private subnets with a route directing internet traffic (0.0.0.0/0) to a NAT Gateway.
+  - 为私有子网创建路由表，其中包含将 Internet 流量 (0.0.0.0/0) 定向到 NAT 网关的路由。
+- **C.** Attach an Internet Gateway to the VPC.
+  - 将 Internet 网关连接到 VPC。
+- **D.** Add a route to the public subnet route table to direct traffic to the private subnets using their CIDR block.
+  - 将路由添加到公有子网路由表，以使用 CIDR 块将流量引导至私有子网。
+- **E.** Associate the private subnets with the main route table that has a route to the Internet Gateway.
+  - 将私有子网与具有到 Internet 网关的路由的主路由表相关联。
+
+**正确答案 / Answer: `A, B, C`**
+
+To implement the described architecture, the public subnets need internet access through an Internet Gateway, and the private subnets need internet access through a NAT Gateway. The route tables must be properly configured: the public subnets' route table requires a route to the Internet Gateway, and the private subnets' route table requires a route to the NAT Gateway. Additionally, an Internet Gateway must be attached to the VPC to enable internet access.
+
+为了实现所描述的体系结构，公共子网需要通过 Internet 网关访问 Internet，而私有子网需要通过 NAT 网关访问 Internet。必须正确配置路由表：公有子网的路由表需要到 Internet 网关的路由，私有子网的路由表需要到 NAT 网关的路由。此外，必须将 Internet 网关连接到 VPC 才能访问 Internet。
+
+---
+
+## Question 181  `Select 1`
+
+**EN** You have created a VPC with a public and a private subnet. An EC2 instance in the private subnet needs to access the internet to download software updates. What configuration changes or additional resources should you implement to enable internet access for the EC2 instance?
+
+**中** 您已创建具有公有子网和私有子网的 VPC。私有子网中的 EC2 实例需要访问 Internet 以下载软件更新。您应该实施哪些配置更改或额外资源来启用 EC2 实例的互联网访问？
+
+- **A.** Add an Internet Gateway to the VPC and associate it with the private subnet.
+  - 将 Internet 网关添加到 VPC 并将其与私有子网关联。
+- **B.** Create a NAT Gateway in the public subnet and update the private subnet’s route table to use the NAT Gateway for internet-bound traffic.
+  - 在公有子网中创建 NAT 网关并更新私有子网的路由表以使用 NAT 网关处理 Internet 绑定流量。
+- **C.** Add a route in the private subnet’s route table pointing to the Internet Gateway for 0.0.0.0/0.
+  - 在私有子网的路由表中添加一条指向 0.0.0.0/0 的 Internet 网关的路由。
+- **D.** Ensure the EC2 instance in the private subnet has a public IP address.
+  - 确保私有子网中的 EC2 实例具有公共 IP 地址。
+- **E.** Create a NAT Gateway in the private subnet and update the private subnet’s route table to use the NAT Gateway for internet-bound traffic.
+  - 在私有子网中创建 NAT 网关并更新私有子网的路由表以使用 NAT 网关处理 Internet 绑定流量。
+
+**正确答案 / Answer: `B`**
+
+Instances in a private subnet cannot access the internet directly. To enable internet access, a NAT Gateway must be deployed in a public subnet. Then, the private subnet’s route table must be updated to route internet traffic (0.0.0.0/0) through the NAT Gateway. This design ensures outbound internet access while maintaining the security of the private subnet.
+
+私有子网中的实例无法直接访问 Internet。要启用 Internet 访问，必须在公有子网中部署 NAT 网关。然后，必须更新私有子网的路由表以通过 NAT 网关路由互联网流量 (0.0.0.0/0)。此设计可确保出站 Internet 访问，同时维护私有子网的安全。
+
+---
+
+## Question 182  `Single answer`
+
+**EN** Your company has an application running in a custom VPC on AWS. The application is hosted in a private subnet with no Internet Gateway attached. The application needs to download updates from a public software repository on the internet. What is the most cost-effective and secure way to enable this connectivity?
+
+**中** 您的公司有一个应用程序在 AWS 上的自定义 VPC 中运行。该应用程序托管在未连接 Internet 网关的私有子网中。该应用程序需要从互联网上的公共软件存储库下载更新。实现这种连接的最具成本效益和安全的方式是什么？
+
+- **A.** Attach an Internet Gateway to the VPC and update the route table of the private subnet to point to the Internet Gateway.
+  - 将 Internet 网关附加到 VPC 并更新私有子网的路由表以指向 Internet 网关。
+- **B.** Create a NAT Gateway in a public subnet and update the route table of the private subnet to forward traffic destined for the internet to the NAT Gateway.
+  - 在公有子网中创建 NAT 网关，并更新私有子网的路由表，以将发往 Internet 的流量转发到 NAT 网关。
+- **C.** Create a NAT Instance in a public subnet and update the route table of the private subnet to forward traffic destined for the internet to the NAT Instance.
+  - 在公有子网中创建 NAT 实例，并更新私有子网的路由表，以将发往 Internet 的流量转发到 NAT 实例。
+- **D.** Enable VPC peering with another VPC that has internet access and route the traffic through the peered VPC.
+  - 启用与另一个具有 Internet 访问权限的 VPC 对等 VPC，并通过对等 VPC 路由流量。
+
+**正确答案 / Answer: `B`**
+
+To enable internet access for resources in a private subnet securely and cost-effectively, a NAT Gateway should be used. It allows outbound internet traffic from the private subnet while blocking any inbound internet traffic. This ensures the subnet remains private and secure while meeting the application's requirements.
+
+为了安全且经济高效地实现私有子网中资源的 Internet 访问，应使用 NAT 网关。它允许来自私有子网的出站互联网流量，同时阻止任何入站互联网流量。这可确保子网保持私有和安全，同时满足应用程序的要求。
+
+---
+
+## Question 183  `Single answer`
+
+**EN** A company operates a mission-critical web application hosted on AWS. They need a disaster recovery strategy that ensures a maximum Recovery Point Objective (RPO) of 1 hour and a Recovery Time Objective (RTO) of 15 minutes. The application must continue to serve users with minimal downtime during a regional failure. Which disaster recovery strategy is the most suitable for the company?
+
+**中** 一家公司运营托管在 AWS 上的任务关键型 Web 应用程序。他们需要一种灾难恢复策略，确保最大恢复点目标 (RPO) 为 1 小时，恢复时间目标 (RTO) 为 15 分钟。在区域故障期间，应用程序必须以最短的停机时间继续为用户提供服务。哪种灾难恢复策略最适合公司？
+
+- **A.** Backup and restore
+  - 备份和恢复
+- **B.** Pilot light
+  - 指示灯
+- **C.** Warm standby
+  - 温备
+- **D.** Active-active failover
+  - 主动-主动故障转移
+
+**正确答案 / Answer: `D`**
+
+The company requires a disaster recovery strategy with very low RTO and RPO. Active-active failover meets these requirements by running fully operational environments in multiple regions, allowing for seamless failover and minimal downtime. Other strategies, such as backup and restore, pilot light, and warm standby, have higher recovery times or may not meet the stringent RPO and RTO requirements.
+
+该公司需要 RTO 和 RPO 非常低的灾难恢复策略。双活故障转移通过在多个区域运行完全可操作的环境来满足这些要求，从而实现无缝故障转移并最大限度地减少停机时间。其他策略（例如备份和恢复、指示灯和热待机）的恢复时间较长，或者可能无法满足严格的 RPO 和 RTO 要求。
+
+---
+
+## Question 184  `Single answer`
+
+**EN** A gaming company needs to implement a disaster recovery strategy for their multiplayer game platform hosted in AWS. The platform experiences consistent global traffic and requires minimal downtime in case of a regional failure. The company has a strict Recovery Time Objective (RTO) of under 5 minutes and a Recovery Point Objective (RPO) of under 1 minute. Which disaster recovery strategy best meets these requirements?
+
+**中** 一家游戏公司需要为其托管在 AWS 中的多人游戏平台实施灾难恢复策略。该平台经历一致的全球流量，并且在发生区域故障时需要最少的停机时间。该公司严格规定恢复时间目标 (RTO) 不超过 5 分钟，恢复点目标 (RPO) 不超过 1 分钟。哪种灾难恢复策略最能满足这些要求？
+
+- **A.** Backup and Restore
+  - 备份与恢复
+- **B.** Pilot Light
+  - 指示灯
+- **C.** Warm Standby
+  - 温暖待机
+- **D.** Active-Active Failover
+  - 主动-主动故障转移
+
+**正确答案 / Answer: `D`**
+
+Active-Active Failover is the most appropriate disaster recovery strategy for scenarios requiring extremely low RTO and RPO values. By maintaining fully operational environments in multiple regions, the system can instantly route traffic to another region in case of a failure, ensuring minimal downtime and data loss. Other strategies like Backup and Restore, Pilot Light, and Warm Standby involve delays in scaling or restoring, making them unsuitable for such strict requirements.
+
+双活故障转移是最适合需要极低 RTO 和 RPO 值的场景的灾难恢复策略。通过在多个区域维护完全运行的环境，系统可以在发生故障时立即将流量路由到另一个区域，从而确保最大限度地减少停机时间和数据丢失。其他策略（例如备份和恢复、指示灯和热待机）会导致扩展或恢复延迟，因此不适合如此严格的要求。
+
+---
+
+## Question 185  `Single answer`
+
+**EN** A company operates a critical application on AWS. They require a disaster recovery (DR) solution that ensures minimal downtime and data loss in the event of a regional failure. The business has determined that the recovery time objective (RTO) must be less than 15 minutes and the recovery point objective (RPO) must be less than 5 minutes. Which DR strategy should they implement to meet these requirements?
+
+**中** 一家公司在 AWS 上运行一个关键应用程序。他们需要灾难恢复 (DR) 解决方案，以确保在发生区域故障时最大限度地减少停机时间和数据丢失。业务已确定恢复时间目标 (RTO) 必须小于 15 分钟，恢复点目标 (RPO) 必须小于 5 分钟。他们应该实施哪种灾难恢复策略来满足这些要求？
+
+- **A.** Backup and Restore
+  - 备份与恢复
+- **B.** Pilot Light
+  - 指示灯
+- **C.** Warm Standby
+  - 温暖待机
+- **D.** Active-Active Failover
+  - 主动-主动故障转移
+
+**正确答案 / Answer: `D`**
+
+Active-Active Failover is the only strategy that can meet the strict RTO of less than 15 minutes and RPO of less than 5 minutes. By running fully operational instances in multiple regions, the solution ensures continuous availability and immediate failover with minimal data loss. Other strategies, like Backup and Restore, Pilot Light, and Warm Standby, are less costly but come with longer recovery times or higher potential data loss, making them unsuitable for this scenario.
+
+双活故障转移是唯一能够满足小于 15 分钟的严格 RTO 和小于 5 分钟的 RPO 的策略。通过在多个区域运行完全可操作的实例，该解决方案可确保持续可用性和即时故障转移，同时将数据丢失降至最低。其他策略，如备份和恢复、指示灯和热待机，成本较低，但恢复时间较长或潜在的数据丢失较高，因此不适合这种情况。
+
+---
+
+## Question 186  `Single answer`
+
+**EN** An e-commerce company runs a payment processing system in a single AWS Region. To ensure business continuity, they want to implement a Disaster Recovery (DR) strategy with the following requirements: the system must be operational in a secondary AWS Region within one hour of a failure, and the maximum acceptable data loss is 5 minutes. Which DR strategy best meets their requirements?
+
+**中** 一家电子商务公司在单个 AWS 区域中运行支付处理系统。为了确保业务连续性，他们希望实施具有以下要求的灾难恢复 (DR) 策略：系统必须在发生故障后一小时内在辅助 AWS 区域中运行，并且最大可接受的数据丢失时间为 5 分钟。哪种灾难恢复策略最能满足他们的要求？
+
+- **A.** Backup and Restore
+  - 备份与恢复
+- **B.** Pilot Light
+  - 指示灯
+- **C.** Warm Standby
+  - 温暖待机
+- **D.** Active-Active Failover
+  - 主动-主动故障转移
+
+**正确答案 / Answer: `C`**
+
+Warm Standby is the most appropriate DR strategy in this scenario because it balances cost and recovery requirements. It maintains a scaled-down version of the system in the secondary Region, enabling quick failover to meet the 1-hour RTO and the 5-minute RPO. More basic strategies like Backup and Restore or Pilot Light would likely fail to meet the RTO, while Active-Active would add unnecessary complexity and cost.
+
+在这种情况下，热备份是最合适的灾难恢复策略，因为它平衡了成本和恢复要求。在辅助 Region 中维护系统缩容版本，实现快速故障转移，满足 1 小时 RTO 和 5 分钟 RPO。备份和恢复或 Pilot Light 等更基本的策略可能无法满足 RTO，而主动-主动则会增加不必要的复杂性和成本。
+
+---
+
+## Question 187  `Select 3`
+
+**EN** A company is designing a cloud-based e-commerce application that must handle high traffic during holiday sales. The application requires a distributed architecture to ensure high availability and fault tolerance. Which design patterns should the company implement in this scenario?
+
+**中** 一家公司正在设计一款基于云的电子商务应用程序，该应用程序必须处理假日销售期间的高流量。应用程序需要分布式架构来保证高可用性和容错能力。在这种情况下公司应该实施哪些设计模式？
+
+- **A.** Use an auto-scaling group with EC2 instances to handle dynamic traffic loads.
+  - 将自动扩展组与 EC2 实例结合使用来处理动态流量负载。
+- **B.** Implement a tightly coupled architecture to reduce latency.
+  - 实施紧密耦合的架构以减少延迟。
+- **C.** Deploy a message queue, such as Amazon SQS, to decouple components of the application.
+  - 部署消息队列，例如 Amazon SQS，以解耦应用程序的组件。
+- **D.** Store user session data in DynamoDB or ElastiCache to ensure session durability across distributed nodes.
+  - 将用户会话数据存储在 DynamoDB 或 ElastiCache 中，以确保分布式节点之间的会话持久性。
+- **E.** Rely on a single master database instance for all transactions to simplify management.
+  - 所有事务都依靠单个主数据库实例来简化管理。
+
+**正确答案 / Answer: `A, C, D`**
+
+The company needs to design a distributed system that ensures high availability, fault tolerance, and scalability. Using auto-scaling groups ensures the system can handle dynamic traffic loads, while decoupling components with a message queue improves fault tolerance. Storing session data in a distributed manner ensures consistency and availability across nodes. Tightly coupled architectures and single points of failure, such as a single master database, should be avoided in a distributed design.
+
+公司需要设计一个分布式系统，确保高可用性、容错性和可扩展性。使用自动缩放组可确保系统能够处理动态流量负载，同时将组件与消息队列解耦可提高容错能力。以分布式方式存储会话数据可确保跨节点的一致性和可用性。在分布式设计中应避免紧密耦合的架构和单点故障，例如单个主数据库。
+
+---
+
+## Question 188  `Select 3`
+
+**EN** Your company is designing a distributed e-commerce application that must handle spikes in traffic during sales events. The application consists of multiple microservices responsible for user authentication, inventory management, and order processing. To ensure scalability, fault tolerance, and decoupling between these microservices, which of the following design patterns should you implement?
+
+**中** 您的公司正在设计一个分布式电子商务应用程序，该应用程序必须处理销售活动期间的流量高峰。该应用程序由多个微服务组成，负责用户身份验证、库存管理和订单处理。为了确保这些微服务之间的可扩展性、容错性和解耦性，您应该实现以下哪种设计模式？
+
+- **A.** Use an Amazon SQS queue between the order processing and inventory management microservices to decouple them.
+  - 在订单处理和库存管理微服务之间使用 Amazon SQS 队列来解耦它们。
+- **B.** Directly invoke the inventory management microservice from the order processing microservice using synchronous API calls.
+  - 使用同步 API 调用直接从订单处理微服务调用库存管理微服务。
+- **C.** Implement an Amazon SNS topic to publish order status updates to multiple subscribers, such as email notifications and a dashboard service.
+  - 实施 Amazon SNS 主题以向多个订阅者发布订单状态更新，例如电子邮件通知和仪表板服务。
+- **D.** Use an Amazon RDS database with a single read replica to manage state sharing between the microservices.
+  - 使用具有单个只读副本的 Amazon RDS 数据库来管理微服务之间的状态共享。
+- **E.** Implement AWS Step Functions to coordinate the workflow for order processing across multiple microservices.
+  - 实施 AWS Step Functions 来协调跨多个微服务的订单处理工作流程。
+
+**正确答案 / Answer: `A, C, E`**
+
+Distributed design patterns focus on scalability, fault tolerance, and decoupling. By using Amazon SQS, Amazon SNS, and AWS Step Functions, the microservices in the e-commerce application can communicate asynchronously, handle spikes in traffic efficiently, and remain loosely coupled. Synchronous API calls and shared databases are not recommended for distributed architectures as they introduce dependencies and potential failure points.
+
+分布式设计模式注重可扩展性、容错性和解耦性。通过使用 Amazon SQS、Amazon SNS 和 AWS Step Functions，电子商务应用程序中的微服务可以异步通信、有效处理流量峰值并保持松散耦合。不建议将同步 API 调用和共享数据库用于分布式架构，因为它们会引入依赖性和潜在的故障点。
+
+---
+
+## Question 189  `Select 3`
+
+**EN** A company is designing a highly available and scalable e-commerce application on AWS. The application needs to handle sudden spikes in traffic during promotional events. The architecture must ensure decoupling between components to improve fault tolerance and scalability. Which of the following design patterns should the company implement?
+
+**中** 一家公司正在 AWS 上设计一个高度可用且可扩展的电子商务应用程序。应用程序需要处理促销活动期间突然出现的流量高峰。架构必须保证组件之间的解耦，以提高容错能力和可扩展性。公司应该实施以下哪种设计模式？
+
+- **A.** Use an Amazon SQS queue between the front-end application and the order processing service.
+  - 在前端应用程序和订单处理服务之间使用 Amazon SQS 队列。
+- **B.** Directly connect the front-end application to the database using a tightly coupled architecture.
+  - 使用紧密耦合的架构将前端应用程序直接连接到数据库。
+- **C.** Implement an Amazon SNS topic to fan out order confirmation events to multiple downstream systems.
+  - 实施 Amazon SNS 主题，将订单确认事件扇出到多个下游系统。
+- **D.** Use Amazon EC2 Auto Scaling groups to ensure the front-end application can scale horizontally.
+  - 使用 Amazon EC2 Auto Scaling 组来保证前端应用程序可以水平扩展。
+- **E.** Store application state in the local file system of the EC2 instances to improve performance.
+  - 将应用程序状态存储在 EC2 实例的本地文件系统中以提高性能。
+
+**正确答案 / Answer: `A, C, D`**
+
+To build a highly available and scalable e-commerce application, it is essential to use distributed design patterns that promote decoupling and scalability. Amazon SQS and SNS enable loose coupling and scalable message-driven architectures, while EC2 Auto Scaling ensures horizontal scaling based on traffic. Avoid tightly coupled architectures or storing state locally, as these hinder scalability and fault tolerance.
+
+要构建高度可用且可扩展的电子商务应用程序，必须使用促进解耦和可扩展性的分布式设计模式。 Amazon SQS 和 SNS 可实现松散耦合和可扩展的消息驱动架构，而 EC2 Auto Scaling 可确保基于流量的水平扩展。避免紧密耦合的架构或在本地存储状态，因为这些会阻碍可扩展性和容错能力。
+
+---
+
+## Question 190  `Select 3`
+
+**EN** A media company is designing a distributed system to process video uploads from users around the globe. The system must handle large file uploads, support retries in case of partial failures, and ensure that no duplicate processing occurs. Which combination of AWS services and design patterns will best meet these requirements?
+
+**中** 一家媒体公司正在设计一个分布式系统来处理全球用户上传的视频。系统必须能够处理大文件上传，支持部分失败时的重试，并确保不会发生重复处理。 AWS 服务和设计模式的哪种组合最能满足这些要求？
+
+- **A.** Use Amazon S3 for file uploads, enable S3 event notifications, and process the files using an AWS Lambda function.
+  - 使用 Amazon S3 进行文件上传，启用 S3 事件通知，并使用 AWS Lambda 函数处理文件。
+- **B.** Use an Amazon SQS queue to decouple the upload process from the video processing system, ensuring retries and avoiding duplicate processing.
+  - 使用 Amazon SQS 队列将上传过程与视频处理系统解耦，确保重试并避免重复处理。
+- **C.** Use Amazon RDS to temporarily store the video files before processing them with an EC2 auto-scaling group.
+  - 在使用 EC2 自动缩放组处理视频文件之前，使用 Amazon RDS 临时存储视频文件。
+- **D.** Use Amazon Kinesis Data Streams to directly stream the video files into a processing application.
+  - 使用 Amazon Kinesis 数据流将视频文件直接流式传输到处理应用程序中。
+- **E.** Use Amazon DynamoDB to store metadata about the video uploads and track processing statuses.
+  - 使用 Amazon DynamoDB 存储有关视频上传的元数据并跟踪处理状态。
+
+**正确答案 / Answer: `A, B, E`**
+
+A distributed design pattern using Amazon S3, SQS, and DynamoDB is well-suited for this scenario. Amazon S3 handles large file uploads and integrates seamlessly with other AWS services like Lambda for triggering processing actions. Amazon SQS ensures reliable message delivery, retries, and deduplication, making the system fault-tolerant and scalable. Amazon DynamoDB can store metadata about the video uploads and their processing statuses, ensuring the system can track progress effectively. This combination ensures that the distributed architecture meets the requirements for scalability, fault tolerance, and durability.
+
+使用 Amazon S3、SQS 和 DynamoDB 的分布式设计模式非常适合此场景。 Amazon S3 处理大型文件上传，并与 Lambda 等其他 AWS 服务无缝集成，以触发处理操作。 Amazon SQS 确保可靠的消息传递、重试和重复数据删除，使系统具有容错性和可扩展性。 Amazon DynamoDB 可以存储有关视频上传及其处理状态的元数据，确保系统可以有效跟踪进度。这种组合确保了分布式架构满足可扩展性、容错性和持久性的要求。
+
+---
+
+## Question 191  `Single answer`
+
+**EN** Your company runs an e-commerce application deployed in two AWS Regions: us-east-1 and us-west-2. The application uses an Amazon Route 53 DNS setup for routing traffic. You have been tasked with designing a failover strategy to ensure high availability and minimal downtime in case the application in one Region becomes unavailable. Which Route 53 configuration should you implement?
+
+**中** 您的公司运行部署在两个 AWS 区域中的电子商务应用程序：us-east-1 和 us-west-2。该应用程序使用 Amazon Route 53 DNS 设置来路由流量。您的任务是设计一种故障转移策略，以确保在一个区域中的应用程序不可用时的高可用性和最短的停机时间。您应该实施哪种 Route 53 配置？
+
+- **A.** Configure a Route 53 failover routing policy with primary and secondary records pointing to the respective endpoints in us-east-1 and us-west-2.
+  - 使用指向 us-east-1 和 us-west-2 中相应终端节点的主记录和辅助记录配置 Route 53 故障转移路由策略。
+- **B.** Use a Route 53 geolocation routing policy to distribute traffic based on the geographic location of the users.
+  - 使用 Route 53 地理位置路由策略根据用户的地理位置分配流量。
+- **C.** Implement a Route 53 latency routing policy to route traffic to the Region with the lowest latency.
+  - 实施 Route 53 延迟路由策略，将流量路由到延迟最低的区域。
+- **D.** Set up a Route 53 weighted routing policy to evenly distribute traffic across both Regions.
+  - 设置 Route 53 加权路由策略以在两个区域之间均匀分配流量。
+
+**正确答案 / Answer: `A`**
+
+To ensure high availability and minimal downtime during a Regional outage, a Route 53 failover routing policy is the most appropriate choice. This configuration allows Route 53 to monitor the health of the primary endpoint and automatically route traffic to the secondary endpoint if the primary becomes unhealthy. Other routing policies like geolocation, latency, or weighted routing focus on distributing traffic but do not inherently provide failover capabilities.
+
+为了确保区域中断期间的高可用性和最短的停机时间，Route 53 故障转移路由策略是最合适的选择。此配置允许 Route 53 监控主要端点的运行状况，并在主要端点变得不健康时自动将流量路由到辅助端点。其他路由策略（例如地理位置、延迟或加权路由）侧重于分配流量，但本质上并不提供故障转移功能。
+
+---
+
+## Question 192  `Single answer`
+
+**EN** A company runs a web application with a primary Amazon RDS database instance in a single Availability Zone. The company needs to ensure high availability and automatic failover for the database in case of an Availability Zone outage. What should the Solutions Architect do to meet these requirements?
+
+**中** 一家公司在单个可用区中运行具有主 Amazon RDS 数据库实例的 Web 应用程序。公司需要确保数据库的高可用性和自动故障转移，以防可用区中断。解决方案架构师应该做什么来满足这些要求？
+
+- **A.** Enable Multi-AZ deployment for the RDS instance.
+  - 为 RDS 实例启用多可用区部署。
+- **B.** Create a read replica in another Availability Zone.
+  - 在另一个可用区中创建只读副本。
+- **C.** Set up Amazon RDS Proxy to manage failover.
+  - 设置 Amazon RDS 代理来管理故障转移。
+- **D.** Use Amazon Route 53 to route traffic to the database in another Region.
+  - 使用 Amazon Route 53 将流量路由到另一个区域中的数据库。
+
+**正确答案 / Answer: `A`**
+
+To achieve high availability and automatic failover for an Amazon RDS database, enabling Multi-AZ deployment is the recommended approach. This ensures that a standby instance is deployed in a different Availability Zone and automatically promoted if the primary instance becomes unavailable. Other options, such as read replicas, require manual intervention and are not designed for automatic failover scenarios.
+
+为了实现 Amazon RDS 数据库的高可用性和自动故障转移，建议启用多可用区部署。这可确保备用实例部署在不同的可用区中，并在主实例不可用时自动升级。其他选项（例如只读副本）需要手动干预，并且不适用于自动故障转移场景。
+
+---
+
+## Question 193  `Select 3`
+
+**EN** A company runs a mission-critical web application on Amazon EC2 instances behind an Application Load Balancer (ALB). The application is deployed across two Availability Zones (AZs) in the US-East-1 Region. The company wants to implement a failover strategy so that traffic is directed to a backup Region (US-West-2) in case the entire US-East-1 Region becomes unavailable. How can they achieve this failover scenario?
+
+**中** 一家公司在 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上运行任务关键型 Web 应用程序。该应用程序跨 US-East-1 区域的两个可用区 (AZ) 部署。该公司希望实施故障转移策略，以便在整个 US-East-1 区域不可用时将流量定向到备份区域 (US-West-2)。他们如何实现这种故障转移场景？
+
+- **A.** Use Route 53 with a failover routing policy to direct traffic to the backup Region when the primary Region is unhealthy.
+  - 当主区域运行状况不佳时，将 Route 53 与故障转移路由策略结合使用，将流量引导至备份区域。
+- **B.** Configure an Auto Scaling group in the backup Region to automatically spin up EC2 instances when traffic is routed there.
+  - 在备份区域中配置 Auto Scaling 组，以便在流量路由到那里时自动启动 EC2 实例。
+- **C.** Enable Cross-Region Replication (CRR) for the web application's Amazon S3 buckets to ensure data availability in the backup Region.
+  - 为 Web 应用程序的 Amazon S3 存储桶启用跨区域复制(CRR)，以确保备份区域中的数据可用性。
+- **D.** Use an Elastic Load Balancer (ELB) with health checks to automatically redirect traffic between Regions.
+  - 使用带有运行状况检查的 Elastic Load Balancer (ELB) 自动重定向区域之间的流量。
+- **E.** Deploy the application in the backup Region and keep it running in an active-active configuration.
+  - 在备份区域中部署应用程序并使其以主动-主动配置运行。
+
+**正确答案 / Answer: `A, B, C`**
+
+To implement a failover strategy, Route 53 with failover routing ensures traffic is redirected to the backup Region when the primary Region becomes unavailable. An Auto Scaling group in the backup Region automatically provisions necessary resources during failover. Cross-Region Replication (CRR) for S3 ensures that application data is consistent and available in the backup Region. ELBs cannot redirect traffic between Regions, and an active-active configuration does not align with the active-passive failover requirement specified in the scenario.
+
+为了实施故障转移策略，具有故障转移路由功能的 Route 53 可确保在主区域不可用时将流量重定向到备份区域。备份区域中的 Auto Scaling 组会在故障转移期间自动配置必要的资源。 S3 的跨区域复制 (CRR) 可确保应用程序数据在备份区域中一致且可用。 ELB 无法在区域之间重定向流量，并且主动-主动配置与场景中指定的主动-被动故障转移要求不符。
+
+---
+
+## Question 194  `Select 2`
+
+**EN** An e-commerce company is hosting its web application on Amazon EC2 instances behind an Application Load Balancer (ALB) in a single AWS Region. The company wants to implement a failover strategy to ensure high availability in case the primary Region becomes unavailable. Which of the following solutions will ensure minimal downtime and automatic failover in such a scenario?
+
+**中** 一家电子商务公司将其 Web 应用程序托管在单个 AWS 区域中 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上。该公司希望实施故障转移策略，以确保在主区域不可用时的高可用性。在这种情况下，以下哪种解决方案可以确保最短的停机时间和自动故障转移？
+
+- **A.** Deploy the application in a second AWS Region, configure Route 53 with a failover routing policy, and set health checks for the primary and secondary endpoints.
+  - 在第二个 AWS 区域中部署应用程序，使用故障转移路由策略配置 Route 53，并为主终端节点和辅助终端节点设置运行状况检查。
+- **B.** Set up an Auto Scaling group in the primary Region to automatically replace unhealthy instances.
+  - 在主要区域中设置 Auto Scaling 组以自动替换不健康的实例。
+- **C.** Use AWS Global Accelerator to automatically route traffic to the nearest healthy Region.
+  - 使用 AWS Global Accelerator 自动将流量路由到最近的健康区域。
+- **D.** Configure a second ALB in a different Region, replicate the application, and use Route 53 latency-based routing policy to distribute traffic.
+  - 在不同区域中配置第二个 ALB，复制应用程序，并使用 Route 53 基于延迟的路由策略来分配流量。
+- **E.** Enable Multi-AZ deployments for the ALB to ensure automatic failover across Regions.
+  - 为 ALB 启用多可用区部署，以确保跨区域自动故障转移。
+
+**正确答案 / Answer: `A, D`**
+
+Failover strategies for a web application require deploying resources across multiple AWS Regions to ensure availability in case one Region becomes unavailable. Using Route 53 with failover routing and health checks is a common approach to detect Region outages and redirect traffic. Additionally, configuring a second ALB in another Region with Route 53 latency-based routing ensures that traffic can be dynamically routed based on both health and latency, providing a robust failover strategy. Solutions like Auto Scaling and Multi-AZ only enhance resilience within a single Region, and AWS Global Accelerator is not tailored specifically for failover scenarios.
+
+Web 应用程序的故障转移策略需要跨多个 AWS 区域部署资源，以确保在一个区域不可用时可用。将 Route 53 与故障转移路由和运行状况检查结合使用是检测区域中断和重定向流量的常用方法。此外，在另一个区域中使用基于 Route 53 延迟的路由配置第二个 ALB 可确保可以根据运行状况和延迟动态路由流量，从而提供强大的故障转移策略。 Auto Scaling 和 Multi-AZ 等解决方案只能增强单个区域内的弹性，而 AWS Global Accelerator 并不是专门针对故障转移场景而定制的。
+
+---
+
+## Question 195  `Single answer`
+
+**EN** Your company is using an immutable infrastructure approach to manage its web application environments. The application is deployed using Amazon EC2 instances managed by an Auto Scaling group. A new version of the application needs to be released. Which strategy aligns with the principles of immutable infrastructure?
+
+**中** 您的公司正在使用不可变的基础设施方法来管理其 Web 应用程序环境。该应用程序使用 Auto Scaling 组管理的 Amazon EC2 实例进行部署。需要发布应用程序的新版本。哪种策略符合不可变基础设施的原则？
+
+- **A.** Update the application on the existing EC2 instances in the Auto Scaling group using a rolling update.
+  - 使用滚动更新更新 Auto Scaling 组中现有 EC2 实例上的应用程序。
+- **B.** Create a new Auto Scaling group with the updated application version and gradually redirect traffic using an Elastic Load Balancer.
+  - 使用更新的应用程序版本创建新的 Auto Scaling 组，并使用 Elastic Load Balancer 逐步重定向流量。
+- **C.** Log in to the existing EC2 instances via SSH and manually update the application code and dependencies.
+  - 通过 SSH 登录现有 EC2 实例并手动更新应用程序代码和依赖项。
+- **D.** Stop the current Auto Scaling group, update the application, and restart the same group with the new version.
+  - 停止当前 Auto Scaling 组，更新应用程序，然后使用新版本重新启动同一组。
+
+**正确答案 / Answer: `B`**
+
+The principle of immutable infrastructure involves replacing infrastructure components (e.g., EC2 instances) with new ones rather than modifying existing instances. By creating a new Auto Scaling group with the updated version of the application and gradually redirecting traffic, you ensure consistency, minimize deployment risks, and align with the immutable infrastructure approach.
+
+不可变基础设施的原则涉及用新的基础设施组件（例如 EC2 实例）替换基础设施组件，而不是修改现有实例。通过使用更新版本的应用程序创建新的 Auto Scaling 组并逐步重定向流量，您可以确保一致性、最大限度地降低部署风险并与不可变基础设施方法保持一致。
+
+---
+
+## Question 196  `Single answer`
+
+**EN** Your company operates a web application hosted on Amazon EC2 instances behind an Application Load Balancer. To improve reliability and consistency during deployments, you are considering adopting an immutable infrastructure approach. Which of the following strategies aligns with the principles of immutable infrastructure?
+
+**中** 您的公司运行一个托管在 Application Load Balancer 后面的 Amazon EC2 实例上的 Web 应用程序。为了提高部署期间的可靠性和一致性，您正在考虑采用不可变的基础设施方法。以下哪项策略符合不可变基础设施的原则？
+
+- **A.** Deploy updates by replacing existing EC2 instances with new instances built using a pre-configured AMI.
+  - 通过使用预配置 AMI 构建的新实例替换现有 EC2 实例来部署更新。
+- **B.** Log in to the EC2 instances via SSH to apply updates and configuration changes directly.
+  - 通过 SSH 登录 EC2 实例以直接应用更新和配置更改。
+- **C.** Use AWS Elastic Beanstalk to deploy updates using the 'Rolling updates with additional batch' deployment policy.
+  - 使用 AWS Elastic Beanstalk 通过“附加批次滚动更新”部署策略来部署更新。
+- **D.** Modify the running EC2 instances in place by applying changes to the configuration files and restarting services.
+  - 通过对配置文件应用更改并重新启动服务来修改正在运行的 EC2 实例。
+
+**正确答案 / Answer: `A`**
+
+Immutable infrastructure emphasizes the replacement of resources (e.g., EC2 instances) with entirely new versions rather than modifying resources in place. This approach ensures consistency, reduces errors, and simplifies rollback. Building new instances using pre-configured AMIs and replacing old instances aligns with this principle.
+
+不可变基础设施强调用全新版本替换资源（例如 EC2 实例），而不是就地修改资源。这种方法可确保一致性、减少错误并简化回滚。使用预配置的 AMI 构建新实例并替换旧实例符合这一原则。
+
+---
+
+## Question 197  `Single answer`
+
+**EN** A company is adopting an immutable infrastructure approach for its application deployments. The company uses EC2 instances to host its applications and wants to ensure that any infrastructure changes are deployed using a new set of EC2 instances rather than modifying the existing ones. Which strategy aligns with the principles of immutable infrastructure?
+
+**中** 一家公司正在采用不可变的基础设施方法来部署应用程序。该公司使用 EC2 实例来托管其应用程序，并希望确保使用一组新的 EC2 实例来部署任何基础设施更改，而不是修改现有实例。哪种策略符合不可变基础设施的原则？
+
+- **A.** Use an Auto Scaling Group to terminate old EC2 instances and launch new ones with the updated configuration.
+  - 使用 Auto Scaling 组终止旧的 EC2 实例并启动具有更新配置的新实例。
+- **B.** Log in to existing EC2 instances and manually apply the configuration changes.
+  - 登录到现有 EC2 实例并手动应用配置更改。
+- **C.** Update the EC2 instances in place using Systems Manager to apply new configuration scripts.
+  - 使用 Systems Manager 更新 EC2 实例以应用新的配置脚本。
+- **D.** Perform a rolling update by modifying the existing EC2 instances one at a time.
+  - 通过一次修改一个现有 EC2 实例来执行滚动更新。
+
+**正确答案 / Answer: `A`**
+
+Immutable infrastructure emphasizes creating new infrastructure with the desired state rather than modifying existing infrastructure. Using an Auto Scaling Group to replace old EC2 instances with new ones ensures that updates are implemented in line with this principle, avoiding configuration drift or unintended issues caused by modifying running instances.
+
+不可变基础设施强调创建具有所需状态的新基础设施，而不是修改现有基础设施。使用 Auto Scaling 组用新实例替换旧 EC2 实例可确保按照此原则实施更新，避免因修改正在运行的实例而导致配置漂移或意外问题。
+
+---
+
+## Question 198  `Single answer`
+
+**EN** A company is deploying a new web application using an immutable infrastructure approach. They want to ensure that any changes to the application or the underlying infrastructure are thoroughly tested and deployed as entirely new instances, rather than modifying existing instances. Which AWS service or feature is most suitable for implementing this approach?
+
+**中** 一家公司正在使用不可变基础设施方法部署新的 Web 应用程序。他们希望确保对应用程序或底层基础设施的任何更改都经过彻底测试并部署为全新实例，而不是修改现有实例。哪种 AWS 服务或功能最适合实施此方法？
+
+- **A.** AWS Auto Scaling with Launch Configurations or Launch Templates
+  - 具有启动配置或启动模板的 AWS Auto Scaling
+- **B.** AWS Elastic Beanstalk with Immutable Deployment Policy
+  - 具有不可变部署策略的 AWS Elastic Beanstalk
+- **C.** AWS OpsWorks with Chef Recipes for Configuration Management
+  - AWS OpsWorks 与 Chef Recipes 一起进行配置管理
+- **D.** AWS Systems Manager for Patch Management
+  - AWS Systems Manager 用于补丁管理
+
+**正确答案 / Answer: `B`**
+
+AWS Elastic Beanstalk with Immutable Deployment Policy is the most suitable choice for implementing an immutable infrastructure approach. This deployment strategy ensures that updates are deployed by creating a new environment and replacing the old one entirely, rather than modifying existing resources. This approach minimizes risks and ensures consistency across deployments.
+
+具有不可变部署策略的 AWS Elastic Beanstalk 是实施不可变基础设施方法的最合适选择。这一部署策略确保通过创建新环境并完全替换旧环境来部署更新，而不是修改现有资源。这种方法可以最大限度地降低风险并确保部署之间的一致性。
+
+---
+
+## Question 199  `Single answer`
+
+**EN** Your company is hosting a web application on Amazon EC2 instances behind an Application Load Balancer (ALB). The application must handle requests for multiple domains, such as 'example.com' and 'api.example.com', and route them to different target groups based on the domain name. Which feature of the Application Load Balancer should you use to meet this requirement?
+
+**中** 您的公司在 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上托管 Web 应用程序。应用程序必须处理多个域的请求，例如“example.com”和“api.example.com”，并根据域名将它们路由到不同的目标组。您应该使用 Application Load Balancer 的哪些功能来满足此要求？
+
+- **A.** Host-based routing
+  - 基于主机的路由
+- **B.** Path-based routing
+  - 基于路径的路由
+- **C.** Cross-zone load balancing
+  - 跨区域负载均衡
+- **D.** Sticky sessions
+  - 粘性会话
+
+**正确答案 / Answer: `A`**
+
+To route requests to different target groups based on domain names like 'example.com' and 'api.example.com', you can use the Application Load Balancer's host-based routing feature. This allows the ALB to inspect the HTTP Host header and forward traffic to the appropriate target group based on the domain name.
+
+要根据“example.com”和“api.example.com”等域名将请求路由到不同的目标组，您可以使用 Application Load Balancer 的基于主机的路由功能。这允许 ALB 检查 HTTP 主机标头并根据域名将流量转发到适当的目标组。
+
+---
+
+## Question 200  `Single answer`
+
+**EN** A company is hosting a web application in a VPC. The application consists of multiple EC2 instances running in two Availability Zones behind an Application Load Balancer (ALB). Users have reported that certain requests to the application are taking longer than expected to respond. Upon investigation, the company discovers that specific EC2 instances are experiencing higher load than others. What should the company do to resolve this issue?
+
+**中** 一家公司在 VPC 中托管 Web 应用程序。该应用程序由在 Application Load Balancer (ALB) 后面的两个可用区中运行的多个 EC2 实例组成。用户报告说，对应用程序的某些请求的响应时间比预期要长。经过调查，该公司发现特定 EC2 实例的负载高于其他实例。公司应该采取什么措施来解决这个问题？
+
+- **A.** Enable sticky sessions on the Application Load Balancer.
+  - 在 Application Load Balancer 上启用粘性会话。
+- **B.** Adjust the target group health check settings to use a shorter interval.
+  - 调整目标组健康检查设置以使用较短的间隔。
+- **C.** Enable cross-zone load balancing on the Application Load Balancer.
+  - 在 Application Load Balancer 上启用跨可用区负载均衡。
+- **D.** Increase the number of EC2 instances in the target group.
+  - 增加目标组中 EC2 实例的数量。
+
+**正确答案 / Answer: `C`**
+
+Cross-zone load balancing ensures that requests are evenly distributed across all registered targets, regardless of their Availability Zone. This feature helps prevent scenarios where some instances handle more traffic than others, as observed in this case. By enabling cross-zone load balancing on the ALB, the company can ensure better traffic distribution and reduce the load on individual EC2 instances.
+
+跨区域负载平衡可确保请求均匀分布在所有注册目标上，无论其可用区如何。此功能有助于防止出现某些实例比其他实例处理更多流量的情况，如本例所示。通过在 ALB 上启用跨区域负载均衡，该公司可以确保更好的流量分配并减少各个 EC2 实例的负载。
+
+---

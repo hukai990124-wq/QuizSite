@@ -1,0 +1,471 @@
+#1 [Select 3]
+STEEM: A company is designing a web application that stores sensitive customer data. The application is hosted on Amazon EC2 instances within a private subnet, and the data is stored in an Amazon RDS database. The company wants to ensure data security by encrypting data both at rest and in transit. Which combination of steps should be implemented to achieve this goal?
+A) Enable encryption for the RDS database at the time of creation.
+B) Use an Application Load Balancer (ALB) with HTTPS listeners to terminate SSL/TLS connections.
+C) Enable server-side encryption (SSE) on the EC2 instance root volume using AWS KMS.
+D) Configure the application to use SSL/TLS to connect to the RDS database.
+E) Use security groups to block all inbound traffic to the EC2 instances.
+ANS: A, B, D
+EXP: To ensure data security in the given scenario, the company must encrypt data both at rest and in transit. Enabling encryption for the RDS database ensures that data stored in the database is encrypted at rest. Using an Application Load Balancer (ALB) with HTTPS listeners encrypts data in transit between the client and the ALB. Configuring the application to use SSL/TLS for connections to the RDS database secures data in transit between the application and the database. While server-side encryption on EC2 instances and security group rules are important, they do not directly address the encryption requirements for this scenario.
+
+#2 [Select 3]
+STEEM: Your company is building a web application on AWS that stores sensitive customer data in an Amazon S3 bucket. The application is backed by an Amazon RDS database. You are tasked with designing a secure architecture to ensure compliance with security best practices. Which combination of steps should you take to secure the data both in transit and at rest?
+A) Enable server-side encryption (SSE) on the Amazon S3 bucket using AWS Key Management Service (KMS).
+B) Use SSL/TLS to encrypt data in transit between the application and Amazon RDS.
+C) Ensure the Amazon S3 bucket is publicly accessible to simplify application access.
+D) Enable Amazon RDS encryption at rest using AWS-managed keys.
+E) Set up an IAM policy to allow all users full access to the Amazon S3 bucket for testing purposes.
+ANS: A, B, D
+EXP: To design a secure architecture for storing sensitive customer data on AWS, you must ensure both data at rest and data in transit are properly protected. This includes enabling encryption for S3 and RDS to secure data at rest and using SSL/TLS to secure data in transit. Avoiding risky configurations like public bucket access and overly permissive IAM policies is also critical for maintaining a secure environment.
+
+#3 [Select 3]
+STEEM: A company is designing a new web application that will store sensitive customer information in an Amazon RDS database. The company wants to ensure data security by encrypting the data at rest and in transit. Additionally, the company must meet compliance requirements by controlling database access at the network level. Which combination of actions should the Solutions Architect recommend?
+A) Enable encryption at rest for the Amazon RDS instance using AWS KMS.
+B) Use a VPC security group to restrict access to the RDS instance.
+C) Enable AWS Shield to protect the RDS database against DDoS attacks.
+D) Require SSL/TLS for database connections to encrypt data in transit.
+E) Use Amazon RDS Multi-AZ deployment to ensure high availability.
+ANS: A, B, D
+EXP: To design a secure architecture for the web application, the company must ensure that the data is protected both at rest and in transit. Enabling encryption at rest with AWS KMS and requiring SSL/TLS for database connections satisfy these requirements. Additionally, using a VPC security group ensures that access to the database is controlled at the network level. AWS Shield and Multi-AZ deployment are important for other use cases, such as availability and DDoS protection, but they are not directly relevant to the encryption and network security requirements described in this scenario.
+
+#4 [Select 3]
+STEEM: A company is designing a web application that processes sensitive customer information. The application will be hosted on Amazon EC2 instances behind an Application Load Balancer (ALB). As part of the security requirements, the application must ensure that sensitive data is encrypted both in transit and at rest. Which of the following steps should the company take to meet these requirements?
+A) Use an SSL/TLS certificate on the Application Load Balancer to enforce HTTPS connections.
+B) Enable server-side encryption for the S3 bucket where sensitive data backups are stored.
+C) Use an IAM role to allow the EC2 instances to access the sensitive data without hardcoding credentials.
+D) Configure the EC2 instances to use an encrypted Amazon Elastic Block Store (Amazon EBS) volume.
+E) Set up VPC Flow Logs to monitor and log all network traffic for the EC2 instances.
+ANS: A, B, D
+EXP: To meet the requirements of encrypting sensitive data in transit and at rest, the company must enforce HTTPS connections on the ALB with SSL/TLS, enable server-side encryption for S3 buckets, and use encrypted EBS volumes for EC2 instances. While IAM roles and VPC Flow Logs are security best practices, they do not directly address the encryption requirements specified in the scenario.
+
+#5 [Select 3]
+STEEM: A company wants to provide secure access for its developers to manage resources in an AWS account. The developers should only be able to access specific services and actions based on their job roles. Additionally, the company wants to ensure that access keys are not hardcoded into applications or shared manually. Which of the following solutions would meet these requirements?
+A) Create IAM roles with policies that grant the necessary permissions and allow developers to assume these roles.
+B) Create IAM users for each developer, attach policies with required permissions, and share long-term access keys with them.
+C) Use AWS Systems Manager Session Manager to provide secure access to AWS resources without the need for SSH keys or bastion hosts.
+D) Enable Multi-Factor Authentication (MFA) for IAM users and enforce its use for all AWS Management Console logins.
+E) Use Amazon Cognito to manage user identities and their access to AWS resources.
+ANS: A, C, D
+EXP: To design secure access to AWS resources, you should use IAM roles with policies for granting temporary permissions, enforce MFA to enhance account security, and leverage Systems Manager Session Manager for secure access. Sharing long-term credentials or using inappropriate services like Cognito for this purpose is not recommended.
+
+#6 [Select 3]
+STEEM: A company has an S3 bucket named 'company-data' that stores sensitive customer information. The bucket should only be accessible to employees within the company network via the corporate VPN. The company also wants to ensure that any access attempts from outside the corporate network are denied. How can you design secure access to the S3 bucket to meet these requirements?
+A) Configure an S3 bucket policy to allow access only from specific IP ranges corresponding to the corporate VPN.
+B) Enable S3 Block Public Access on the bucket to prevent unauthorized public access.
+C) Use an IAM role with permissions to access the bucket and assign it to employees' EC2 instances in the corporate network.
+D) Enable AWS CloudTrail logging for the bucket to monitor access attempts and identify unauthorized access.
+E) Use VPC endpoints for S3 to ensure traffic to the bucket stays within the AWS network.
+ANS: A, B, E
+EXP: To secure access to the S3 bucket, you should use a combination of an S3 bucket policy to allow access only from the corporate VPN's IP ranges, enable S3 Block Public Access to prevent unauthorized public access, and use VPC endpoints for S3 to keep traffic within the AWS network. These measures collectively ensure that the bucket is only accessible to employees within the corporate network and is protected from unauthorized or public access.
+
+#7 [Single answer]
+STEEM: A company is building a web application hosted on Amazon EC2 instances in a private subnet. The application needs to securely access data stored in an Amazon S3 bucket. The company requires that no S3 bucket credentials are hardcoded in the application, and all communication must remain private. How should the company securely configure access to the S3 bucket?
+A) Assign an IAM role to the EC2 instances and configure a VPC endpoint for S3.
+B) Store the S3 bucket credentials in an encrypted file on the EC2 instances.
+C) Use an IAM user with programmatic access keys and configure the application to use these keys.
+D) Configure a public-facing NAT Gateway in the VPC and use it for accessing the S3 bucket.
+ANS: A
+EXP: The correct approach to securely access an S3 bucket from EC2 instances in a private subnet is to assign an IAM role to the EC2 instances, which provides temporary credentials without hardcoding them. Configuring a VPC endpoint for S3 ensures that all traffic between the EC2 instances and the S3 bucket remains private within the AWS network, eliminating the need to route traffic through the internet or use a NAT Gateway.
+
+#8 [Select 2]
+STEEM: A company wants to grant its development team access to specific Amazon S3 buckets while ensuring that the team cannot access other resources in the AWS account. The team members should authenticate using their corporate Active Directory credentials. Which solution will meet these requirements in the most secure and efficient way?
+A) Use AWS Identity and Access Management (IAM) users with bucket policies attached to each S3 bucket.
+B) Set up AWS Single Sign-On (AWS SSO) integrated with the corporate Active Directory, and assign permissions to access the S3 buckets through IAM roles.
+C) Create an IAM policy allowing access to specific S3 buckets, attach it directly to each developer, and enable multi-factor authentication (MFA).
+D) Use an identity provider (IdP) federation with SAML, create IAM roles granting access to the S3 buckets, and map the roles to permissions based on Active Directory groups.
+ANS: B, D
+EXP: To design secure access to AWS resources, integrating with the corporate Active Directory ensures that the development team can authenticate using their existing credentials. Using AWS SSO or SAML-based federation with an IdP provides a scalable and secure way to grant access to specific resources, such as Amazon S3 buckets, through IAM roles. Options 2 and 4 meet all requirements while adhering to AWS security best practices.
+
+#9 [Single answer]
+STEEM: A company is deploying a new application using Amazon ECS with Fargate. The application requires sensitive database credentials to connect to an Amazon RDS instance. The company wants to securely manage these credentials without hardcoding them into the application code or storing them in the container image. What is the BEST way to achieve this?
+A) Store the credentials in an Amazon S3 bucket and grant the ECS task permissions to access the bucket.
+B) Use AWS Secrets Manager to store the credentials and configure the ECS task definition to retrieve the secrets at runtime.
+C) Embed the credentials directly into the ECS task definition as environment variables.
+D) Encrypt the credentials using AWS KMS and include the encrypted values in the container image.
+ANS: B
+EXP: AWS Secrets Manager is the best solution for securely managing sensitive information such as database credentials. It integrates with Amazon ECS, allowing applications to retrieve secrets at runtime without exposing them in plain text or hardcoding them. This approach also supports automated secret rotation and provides robust security controls.
+
+#10 [Select 3]
+STEEM: A media company runs a video streaming platform that experiences significant traffic spikes during live events. They want to ensure their application can scale automatically to handle unpredictable traffic patterns while minimizing costs. Which combination of AWS services should the company use to achieve this goal?
+A) Amazon EC2 Auto Scaling with an Application Load Balancer
+B) Amazon RDS with Multi-AZ deployment
+C) Amazon DynamoDB with on-demand capacity mode
+D) AWS Elastic Beanstalk with Auto Scaling enabled
+E) Amazon S3 with Transfer Acceleration
+ANS: A, C, D
+EXP: To handle unpredictable traffic spikes effectively, the company should use services that provide automatic scaling and cost optimization. Amazon EC2 Auto Scaling with an Application Load Balancer ensures the compute layer scales based on demand. Amazon DynamoDB with on-demand capacity mode automatically handles traffic spikes at the database layer. AWS Elastic Beanstalk simplifies application scaling by providing a managed environment with Auto Scaling enabled. Together, these services provide a comprehensive solution for scaling the application while minimizing costs.
+
+#11 [Single answer]
+STEEM: A company is migrating its on-premises data to AWS and wants to ensure that its applications remain highly available during the transition. The company plans to use Amazon Route 53 for DNS management and needs a solution that can automatically route traffic to a healthy application version in case of failure. Which Route 53 routing policy should the company use?
+A) Simple routing policy
+B) Failover routing policy
+C) Geolocation routing policy
+D) Latency routing policy
+ANS: B
+EXP: The failover routing policy in Amazon Route 53 is the correct choice because it allows the company to specify a primary resource and a secondary resource. If Route 53 determines that the primary resource is unhealthy, it automatically routes traffic to the secondary resource, ensuring high availability. This matches the company's requirement to maintain application availability during the transition.
+
+#12 [Select 3]
+STEEM: A company is designing a new web application that will be hosted on Amazon EC2 instances behind an Application Load Balancer (ALB). The application stores sensitive customer data in an Amazon RDS database. The solution must ensure that data is encrypted both in transit and at rest. What combination of steps should the Solutions Architect take to meet this requirement?
+A) Enable SSL/TLS on the Application Load Balancer (ALB) and use an HTTPS listener.
+B) Configure the EC2 instances to use an encrypted Amazon EBS volume.
+C) Use AWS Key Management Service (AWS KMS) to enable encryption for the Amazon RDS database.
+D) Enable server-side encryption (SSE) on the Amazon S3 bucket used by the application.
+E) Configure a WAF (Web Application Firewall) to protect the web application from attacks.
+ANS: A, B, C
+EXP: To meet the requirement of encrypting data in transit and at rest, the architect must enable SSL/TLS on the Application Load Balancer to encrypt data in transit and configure encryption for data at rest. This includes using encrypted EBS volumes for EC2 instances and enabling RDS encryption with AWS KMS. Options involving S3 SSE and WAF do not directly address the encryption requirements in this scenario.
+
+#13 [Single answer]
+STEEM: A company has multiple AWS accounts that are used for different departments such as Finance, Development, and Operations. They want to centrally manage access controls to ensure that users can only access resources in their respective accounts, while also enabling centralized billing and monitoring. Which AWS service or feature should they use to achieve this?
+A) AWS Organizations with Service Control Policies (SCPs)
+B) AWS Identity and Access Management (IAM) Roles only
+C) Amazon S3 Cross-Account Access
+D) AWS Resource Access Manager (RAM)
+ANS: A
+EXP: AWS Organizations is the recommended service for managing multiple accounts in a centralized manner. With SCPs, you can define permissions at the organization or account level, ensuring consistent and secure access management. It also integrates with consolidated billing and other governance features, making it the best fit for this scenario.
+
+#14 [Single answer]
+STEEM: Your organization uses AWS Organizations to manage multiple AWS accounts. You need to ensure that IAM users and roles within a member account can access certain resources in another member account securely and with minimal administrative overhead. Which solution satisfies this requirement?
+A) Create cross-account IAM roles in the target account and grant permission to the source account.
+B) Manually create identical IAM users and policies in both accounts.
+C) Use Service Control Policies (SCPs) to grant access to the required resources across accounts.
+D) Enable resource sharing through AWS Resource Access Manager (RAM) for the required resources.
+ANS: A
+EXP: The best way to manage access controls across multiple AWS accounts is to use cross-account IAM roles. These roles allow you to securely grant permissions to IAM users or roles in one account to access resources in another account. This approach is scalable, secure, and adheres to AWS best practices. Other options like SCPs, RAM, or duplicating IAM users are either incorrect or unsuitable for this specific scenario.
+
+#15 [Single answer]
+STEEM: A company has multiple AWS accounts that are part of an AWS Organizations setup. The company wants to centrally manage access for developers to specific resources across these accounts without having to create IAM users in each account. What is the MOST appropriate solution?
+A) Use AWS Systems Manager Parameter Store to share access policies across accounts.
+B) Set up AWS Single Sign-On (AWS SSO) to manage access centrally and grant permissions to resources in member accounts.
+C) Create IAM roles in each account and manually distribute the credentials to developers.
+D) Enable cross-account resource sharing using Resource Access Manager (RAM) and rely on IAM users for access management.
+ANS: B
+EXP: AWS Single Sign-On (AWS SSO) provides a centralized way to manage access across multiple AWS accounts within AWS Organizations. It eliminates the need for creating and managing individual IAM users in each account and provides a scalable solution for controlling access to resources. The other options either do not address the centralized access management requirement or are not recommended practices.
+
+#16 [Single answer]
+STEEM: A company has multiple AWS accounts managed under a single AWS Organization. They want to implement centralized access management for users across all accounts while minimizing administrative overhead. Which approach should they take?
+A) Create IAM users in each account and grant them appropriate permissions.
+B) Use AWS Single Sign-On (AWS SSO) to manage access and permissions centrally for all accounts.
+C) Set up cross-account IAM roles in each account and share the credentials with users.
+D) Use AWS Resource Access Manager (AWS RAM) to manage user access across accounts.
+ANS: B
+EXP: The company requires centralized access management for users across multiple AWS accounts while minimizing administrative overhead. AWS Single Sign-On (AWS SSO) is specifically designed to provide centralized user access management for AWS Organizations, making it the most suitable solution for this scenario.
+
+#17 [Single answer]
+STEEM: A company wants to provide its employees federated access to AWS resources using their existing corporate credentials. The company uses Microsoft Active Directory as its identity provider (IdP). They want to manage access centrally and ensure that employees can log in to the AWS Management Console without creating individual IAM users. Which solution will best meet these requirements?
+A) Set up AWS IAM Identity Center (AWS Single Sign-On) and integrate it with the corporate Active Directory using AWS Directory Service.
+B) Create individual IAM users for each employee and configure password policies to match corporate standards.
+C) Use AWS Cognito to federate access between Microsoft Active Directory and AWS services.
+D) Enable AWS IAM Federation and manually configure Active Directory to issue SAML assertions to AWS.
+ANS: A
+EXP: The best solution for federated access to AWS resources using corporate credentials is AWS IAM Identity Center (AWS Single Sign-On). It provides centralized access management and integrates easily with Microsoft Active Directory using AWS Directory Service. This setup allows employees to use their existing credentials to log in to the AWS Management Console without creating individual IAM users, meeting the company's requirements efficiently.
+
+#18 [Single answer]
+STEEM: A company wants to grant its employees access to multiple AWS accounts using their corporate credentials managed in Microsoft Active Directory (AD). The company also requires centralized management of user permissions across these accounts. How can the company achieve this using AWS services?
+A) Use AWS IAM Identity Center (AWS Single Sign-On) integrated with Microsoft Active Directory to manage federated access and assign permissions to users across AWS accounts.
+B) Create individual IAM users in each AWS account and configure the IAM users to authenticate against Microsoft Active Directory.
+C) Configure an Amazon Cognito user pool to integrate with Microsoft Active Directory and use it to provide access across AWS accounts.
+D) Set up a custom identity broker application that integrates with Microsoft Active Directory and uses AssumeRole API calls to grant access to AWS accounts.
+ANS: A
+EXP: AWS IAM Identity Center (AWS Single Sign-On) is the recommended service for centrally managing federated access to multiple AWS accounts using corporate credentials. It integrates with Microsoft Active Directory to authenticate users and provides a centralized interface for managing permissions across accounts. This approach simplifies access management and eliminates the need for creating individual IAM users or custom identity broker applications.
+
+#19 [Single answer]
+STEEM: A company wants to provide its employees with secure, seamless access to the AWS Management Console and multiple AWS accounts using their existing corporate credentials. The IT team wants to minimize the need for managing IAM users and passwords in AWS. Which solution should the company implement to achieve this?
+A) Configure AWS IAM Identity Center (AWS Single Sign-On) to integrate with the company's existing identity provider (IdP) using SAML 2.0.
+B) Create IAM users for each employee in every AWS account and assign them appropriate permissions.
+C) Set up an AWS Lambda function to authenticate users against the company's corporate directory and grant temporary access to AWS resources.
+D) Use IAM roles with an external identity provider (IdP) to enable federated access to AWS accounts.
+ANS: A
+EXP: AWS IAM Identity Center (AWS Single Sign-On) is the recommended service for providing federated access to AWS accounts using corporate credentials. It simplifies identity management by integrating with existing IdPs through SAML 2.0 and eliminates the need for creating and managing individual IAM users and passwords.
+
+#20 [Single answer]
+STEEM: Your company uses an on-premises Active Directory (AD) for user authentication and is migrating workloads to AWS. The IT team wants to provide federated access to AWS Management Console and other AWS resources for users in the AD domain, without the need to manage individual IAM users in the AWS account. Which solution should you implement?
+A) Set up AWS IAM Identity Center (AWS Single Sign-On) and integrate it with your on-premises Active Directory using AWS Directory Service.
+B) Create individual IAM users for each AD user and configure their permissions manually.
+C) Deploy an AD Connector using AWS Directory Service and configure IAM roles for SAML-based federation.
+D) Use AWS Secrets Manager to store AD credentials and configure IAM policies to authenticate users.
+ANS: A
+EXP: AWS IAM Identity Center (AWS Single Sign-On) is the recommended service for enabling federated access to AWS resources for users in an on-premises Active Directory domain. It simplifies identity management by centralizing authentication and allowing users to access AWS resources without the need for individual IAM user accounts. This solution aligns with best practices and avoids manual, error-prone processes.
+
+#21 [Single answer]
+STEEM: A company is designing a highly available application that must run in multiple locations to ensure fault tolerance in the event of a natural disaster. The application requires low-latency connections to users within specific geographic regions. Which AWS feature should the company use to meet these requirements?
+A) Deploy the application across multiple AWS Regions.
+B) Deploy the application in multiple Availability Zones within a single AWS Region.
+C) Use Amazon CloudFront to distribute the application globally.
+D) Use AWS Local Zones to host the application closer to end users.
+ANS: A
+EXP: To meet the requirements of fault tolerance and low-latency connections for users in specific geographic regions, deploying the application across multiple AWS Regions is the best choice. This approach ensures the application is resilient in the event of a disaster affecting one region and provides lower latency by serving users from the nearest region.
+
+#22 [Select 2]
+STEEM: Your company is planning to deploy a high-availability web application on AWS. The application must be resilient to regional failures and ensure minimal downtime. Which combination of AWS global infrastructure components should you use to meet this requirement?
+A) Deploy the application across multiple Availability Zones within a single AWS Region.
+B) Deploy the application across multiple AWS Regions.
+C) Use a single Availability Zone with Auto Scaling enabled.
+D) Use an Elastic Load Balancer to distribute traffic across Availability Zones.
+E) Enable Amazon CloudFront for global content delivery.
+ANS: B, D
+EXP: To achieve resilience to regional failures and ensure high availability, you should deploy the application across multiple AWS Regions. Additionally, to handle availability within each Region, an Elastic Load Balancer can distribute traffic across multiple Availability Zones. This combination ensures both Regional and AZ-level fault tolerance.
+
+#23 [Select 2]
+STEEM: A company is designing a multi-region disaster recovery solution for its web application. The application is hosted on Amazon EC2 instances behind an Application Load Balancer (ALB). The database is hosted on Amazon RDS. The company wants to ensure high availability and minimize downtime in case of a regional failure. Which combination of strategies should the company use?
+A) Deploy the application in multiple AWS Regions and use Amazon Route 53 to configure DNS failover.
+B) Enable Multi-AZ for the Amazon RDS instance to ensure automatic failover within the same region.
+C) Set up a read replica in another AWS Region for the Amazon RDS instance, and promote it to a standalone database in case of failure.
+D) Use an Auto Scaling group to launch replacement EC2 instances in the same Availability Zone during a failure.
+E) Deploy the ALB in a single Availability Zone to reduce costs.
+ANS: A, C
+EXP: To design a multi-region disaster recovery solution, the application and database must be replicated across multiple AWS Regions. Route 53 can facilitate automated DNS failover, and a read replica in another region ensures database availability during a regional outage. Multi-AZ RDS and single AZ ALB deployments do not cover regional failures, and Auto Scaling in one AZ only addresses instance-level failures.
+
+#24 [Single answer]
+STEEM: Your company is migrating a global application to AWS. The application requires low-latency access for users distributed across multiple continents. Additionally, the application must comply with local data residency laws in certain countries. Which design approach best addresses these requirements?
+A) Deploy the application in a single AWS Region closest to the majority of users and use edge locations for caching.
+B) Deploy the application in multiple AWS Regions and use AWS Global Accelerator to route traffic based on latency.
+C) Deploy the application in a single AWS Region and use Amazon S3 Transfer Acceleration to speed up data uploads.
+D) Deploy the application in multiple Availability Zones within a single AWS Region to ensure high availability.
+ANS: B
+EXP: The best approach is to deploy the application in multiple AWS Regions to reduce latency for users across different continents and comply with local data residency laws. AWS Global Accelerator further enhances performance by routing user traffic to the nearest healthy endpoint based on latency. Other options either fail to address global latency or compliance requirements.
+
+#25 [Select 2]
+STEEM: A company is setting up an AWS environment for their new application and is focused on implementing security best practices. They want to ensure that their IAM users and roles adhere to the principle of least privilege. Which of the following actions align with this principle? (Select TWO.)
+A) Grant permissions to users based on their specific job responsibilities.
+B) Assign the AdministratorAccess policy to all IAM users to ensure they can perform any required task.
+C) Regularly review and remove unused IAM roles and permissions.
+D) Use inline policies instead of managed policies for all users to simplify permission management.
+E) Allow users to self-assign additional permissions when needed.
+ANS: A, C
+EXP: The principle of least privilege requires granting only the permissions necessary for users to perform their tasks and regularly reviewing permissions to remove unnecessary access. This reduces the risk of unauthorized or accidental misuse of resources. Granting excessive permissions, allowing users to self-assign permissions, or mismanaging policies can lead to security vulnerabilities.
+
+#26 [Select 3]
+STEEM: Your company recently hired a new team of developers who need access to an Amazon S3 bucket to store application logs. The logs contain sensitive customer data, so you must ensure the principle of least privilege is followed while granting access. Which steps should you take to securely provide access to the developers?
+A) Create an IAM group for the developers, attach a policy granting access to only the specific S3 bucket, and add the developers to the group.
+B) Attach an AmazonS3FullAccess policy directly to each developer's IAM user for simplicity.
+C) Use an S3 bucket policy to grant access to the developers based on their IAM roles and restrict access to specific actions like 's3:PutObject' and 's3:GetObject'.
+D) Enable multi-factor authentication (MFA) for all developer IAM users and require MFA for S3 bucket access.
+E) Grant public read/write access to the S3 bucket to ensure the developers can access it without additional permissions.
+ANS: A, C, D
+EXP: To follow the principle of least privilege, you should grant only the minimum permissions necessary for developers to perform their tasks. Using an IAM group with specific policies and bucket policies ensures permissions are controlled and limited to the required actions. Additionally, enabling MFA adds an extra layer of security when accessing the sensitive data. Avoid granting overly broad permissions, such as AmazonS3FullAccess, or public access, as these pose significant security risks.
+
+#27 [Single answer]
+STEEM: You are designing a secure architecture for an application on AWS. The application requires access to an Amazon S3 bucket to store and retrieve files. According to AWS security best practices, how should you grant this access to the application?
+A) Attach an AmazonS3FullAccess managed policy directly to the application's IAM role.
+B) Create a custom IAM policy with only the required S3 permissions and attach it to the application's IAM role.
+C) Use the root user to manage access to the S3 bucket for the application.
+D) Make the S3 bucket public so the application can easily access it without requiring IAM permissions.
+ANS: B
+EXP: The principle of least privilege states that you should grant the minimum permissions necessary for a task. By creating a custom IAM policy with only the required S3 permissions and attaching it to the application's IAM role, you ensure that the application has secure and limited access to the S3 bucket, following AWS security best practices. Options 1, 3, and 4 either violate this principle or introduce significant security risks.
+
+#28 [Single answer]
+STEEM: A company is building a multi-tier application on AWS. The application uses an Amazon RDS database in the backend and EC2 instances for the application tier. The company wants to ensure that only the EC2 instances in the application tier can access the RDS database, following the principle of least privilege. How should the company configure access to the RDS database?
+A) Assign an IAM role to the EC2 instances that grants access to the RDS database.
+B) Place the EC2 instances and RDS database in the same security group.
+C) Configure an RDS security group to allow inbound traffic only from the EC2 instances' security group.
+D) Enable public access on the RDS database and restrict access using the database username and password.
+ANS: C
+EXP: To follow the principle of least privilege, access to the RDS database should be restricted to the EC2 instances that need it. Configuring the RDS security group to allow inbound traffic only from the EC2 instances' security group ensures that only the application tier can connect to the database. This approach minimizes the attack surface and ensures secure communication between the application and database tiers.
+
+#29 [Select 3]
+STEEM: A company is planning to host a web application using Amazon EC2 instances and Amazon RDS for its database. The application will process sensitive customer data. Under the AWS shared responsibility model, which of the following tasks is the company responsible for?
+A) Encrypting the data stored in the Amazon RDS database
+B) Managing the physical security of the data center hosting the EC2 instances
+C) Applying security patches to the operating system of the EC2 instances
+D) Configuring network access control lists (NACLs) to restrict incoming and outgoing traffic
+E) Ensuring the hypervisor used by the EC2 instances is patched and secure
+ANS: A, C, D
+EXP: Under the AWS shared responsibility model, AWS is responsible for the security 'of' the cloud, including physical infrastructure and virtualization layers. Customers, on the other hand, are responsible for the security 'in' the cloud, which includes securing their data, configuring network security, and managing operating system patches and updates.
+
+#30 [Select 3]
+STEEM: A company is using Amazon S3 to store sensitive data that is subject to compliance requirements. They also use EC2 instances for processing this data. According to the AWS shared responsibility model, which of the following tasks are the responsibility of the customer?
+A) Encrypting sensitive data stored in Amazon S3
+B) Ensuring that EC2 instances are patched and updated
+C) Maintaining the physical security of AWS data centers
+D) Configuring IAM policies to restrict access to the S3 bucket
+E) Ensuring that AWS provides sufficient power and cooling for its data centers
+ANS: A, B, D
+EXP: In the AWS shared responsibility model, AWS is responsible for 'security of the cloud,' which includes the physical infrastructure such as data centers, power, and cooling. The customer is responsible for 'security in the cloud,' which includes tasks such as configuring access controls (IAM policies), managing encryption, and maintaining the security of their EC2 instances and applications. This distinction ensures that customers have control over their data and workloads while AWS handles the underlying infrastructure.
+
+#31 [Select 3]
+STEEM: A company is hosting a web application on Amazon EC2 instances behind an Application Load Balancer. The company is concerned about the security and compliance of their environment. Based on the AWS shared responsibility model, which tasks are the customer's responsibility?
+A) Configuring security groups and network ACLs for the EC2 instances
+B) Ensuring the operating system running on the EC2 instances is patched and updated
+C) Maintaining the physical security of the data centers hosting the EC2 instances
+D) Encrypting sensitive data stored on the EC2 instances
+E) Monitoring the health and availability of the physical hardware underlying the EC2 instances
+ANS: A, B, D
+EXP: The AWS shared responsibility model defines that AWS is responsible for the security 'of' the cloud, while customers are responsible for the security 'in' the cloud. This means that AWS manages and secures the infrastructure hosting the services, including physical security, hardware, and software maintenance. Meanwhile, customers are responsible for securing their own applications, data, and configurations within the cloud environment. In this scenario, configuring security groups and network ACLs, patching the operating system, and encrypting data are all customer responsibilities.
+
+#32 [Select 2]
+STEEM: A company is planning to migrate its on-premises web application to AWS. The application will run on Amazon EC2 instances and use Amazon S3 for storing static assets. Who is responsible for managing the security of the operating system installed on the EC2 instances and the configuration of S3 bucket permissions?
+A) The customer is responsible for managing the security of the operating system on the EC2 instances.
+B) AWS is responsible for managing the security of the operating system on the EC2 instances.
+C) The customer is responsible for configuring the S3 bucket permissions.
+D) AWS is responsible for configuring the S3 bucket permissions.
+E) AWS is responsible for ensuring that EC2 instances are free from malware.
+ANS: A, C
+EXP: Under the AWS shared responsibility model, AWS is responsible for the security 'of' the cloud (e.g., infrastructure, hardware, and managed services), while the customer is responsible for the security 'in' the cloud. This includes managing the security of their operating systems on EC2 instances and configuring permissions for resources such as S3 buckets. Understanding this distinction is crucial for architecting secure solutions on AWS.
+
+#33 [Select 3]
+STEEM: A company is building a web application that stores sensitive customer data in an Amazon RDS database. The application is hosted on Amazon EC2 instances behind an Application Load Balancer. The company needs to ensure the application is designed securely and minimizes the risk of data breaches. Which of the following design choices should be implemented to achieve this?
+A) Enable encryption at rest for the Amazon RDS database.
+B) Use an Application Load Balancer with SSL/TLS termination to encrypt traffic between clients and the load balancer.
+C) Grant EC2 instances direct public internet access to simplify database access.
+D) Use security groups to restrict database access to the application instances only.
+E) Store database credentials as plaintext environment variables on EC2 instances.
+ANS: A, B, D
+EXP: To design secure workloads and applications, you must ensure data is encrypted both at rest and in transit. Access to sensitive resources like databases should be tightly controlled using security groups and private networking. Additionally, secrets such as database credentials should be managed securely using AWS services designed for this purpose. Following these practices helps minimize the risk of data breaches and unauthorized access.
+
+#34 [Select 2]
+STEEM: Your company is deploying a web application on AWS that handles sensitive customer data. To meet security compliance requirements, you need to ensure that the workload is secure and that the data remains encrypted both at rest and in transit. Which of the following actions should you take? (Select TWO.)
+A) Use Amazon S3 with server-side encryption for storing sensitive data.
+B) Use AWS Certificate Manager to provision and manage SSL/TLS certificates for HTTPS communication.
+C) Store sensitive data in Amazon EC2 instance storage for faster processing.
+D) Disable security groups temporarily to allow unrestricted access during testing.
+E) Configure S3 bucket policies to allow public read access for troubleshooting purposes.
+ANS: A, B
+EXP: To design secure workloads and applications, it is critical to encrypt sensitive data both at rest and in transit. Using Amazon S3 with server-side encryption protects data at rest, while AWS Certificate Manager ensures secure HTTPS communication, protecting data in transit. Options 3, 4, and 5 introduce security vulnerabilities or fail to meet encryption requirements, making them unsuitable for this scenario.
+
+#35 [Select 3]
+STEEM: A company is designing a new web application that stores sensitive customer data. The application will be hosted on Amazon EC2 instances behind an Application Load Balancer (ALB). To ensure data security, the company wants to encrypt all traffic between the client and the application, as well as between the ALB and the EC2 instances. What should the company do to meet this requirement?
+A) Configure the ALB to use an HTTPS listener with a valid SSL/TLS certificate for client-to-ALB communication.
+B) Use an HTTP listener on the ALB and configure the EC2 instances to handle SSL/TLS termination.
+C) Install SSL/TLS certificates on the EC2 instances and configure them to use HTTPS for ALB-to-EC2 communication.
+D) Enable server-side encryption (SSE) for the EC2 instances to secure traffic.
+E) Use AWS Certificate Manager (ACM) to provision and manage SSL/TLS certificates for the ALB.
+ANS: A, C, E
+EXP: To design a secure workload, the company must ensure that traffic is encrypted both between the client and the ALB and between the ALB and the EC2 instances. An HTTPS listener with a valid SSL/TLS certificate on the ALB secures client-to-ALB communication. Installing SSL/TLS certificates on the EC2 instances ensures ALB-to-EC2 encryption. Using AWS Certificate Manager (ACM) simplifies certificate management for the ALB.
+
+#36 [Select 3]
+STEEM: A company is migrating its on-premises application to AWS. The application processes sensitive customer data and must comply with strict regulatory requirements. The application uses an Amazon EC2 instance to host the backend and stores data in an Amazon S3 bucket. As a Solutions Architect, how can you ensure that the workload is secure and meets compliance requirements?
+A) Enable server-side encryption (SSE) for the Amazon S3 bucket to encrypt customer data at rest.
+B) Use AWS Key Management Service (AWS KMS) to manage encryption keys for the S3 bucket.
+C) Attach an IAM policy to the EC2 instance role that grants full S3 bucket access to all users.
+D) Use AWS Systems Manager Session Manager to securely access the EC2 instance without opening SSH ports.
+E) Set up S3 bucket policies to allow public read access for quick data sharing.
+ANS: A, B, D
+EXP: To design secure workloads and applications, it is essential to enforce encryption for data at rest and in transit, minimize attack surfaces, and apply the principle of least privilege. Enabling server-side encryption for S3, using AWS KMS, and leveraging AWS Systems Manager for secure EC2 instance access all contribute to securing the workload and meeting compliance requirements. Avoid granting excessive permissions or exposing sensitive data to the public, as these practices can lead to security vulnerabilities.
+
+#37 [Single answer]
+STEEM: A company runs a web application that stores critical business data in an Amazon RDS MySQL instance. The application has been experiencing performance issues, and the team has identified that the database is under heavy read traffic. The team wants to improve application performance and ensure high availability while minimizing changes to the existing application. What is the BEST solution to meet these requirements?
+A) Enable Multi-AZ deployment for the Amazon RDS MySQL instance.
+B) Create an Amazon RDS Read Replica and configure the application to offload read traffic to the replica.
+C) Increase the RDS instance size to handle more read and write traffic.
+D) Migrate the database to Amazon DynamoDB for better scalability.
+ANS: B
+EXP: The best solution to improve performance for a read-heavy workload while maintaining high availability is to create an Amazon RDS Read Replica. This allows the application to distribute read traffic between the primary instance and the replica, improving performance without requiring significant changes to the application. While other options provide benefits in specific scenarios, they do not address the specific need for scaling read traffic effectively with minimal changes.
+
+#38 [Single answer]
+STEEM: A company is running a web application on Amazon EC2 instances behind an Application Load Balancer (ALB). The application stores user data in an Amazon RDS database and uses an Amazon S3 bucket to store user-uploaded files. The company notices that user-uploaded files occasionally fail to upload due to transient S3 service interruptions. What is the BEST solution to ensure the application's availability and reliability during such interruptions?
+A) Enable S3 Transfer Acceleration to reduce latency and improve performance.
+B) Implement an Amazon SQS queue to temporarily store file upload requests and process them later.
+C) Set up an Amazon CloudFront distribution in front of the S3 bucket to cache the uploaded files.
+D) Use an S3 Event Notification to trigger an AWS Lambda function that retries failed uploads.
+ANS: B
+EXP: Transient service interruptions in S3 can cause file uploads to fail. To address this, decoupling the upload process with an Amazon SQS queue ensures that file upload requests are not lost and can be retried later when the S3 service is available. This approach increases the reliability and availability of the application.
+
+#39 [Single answer]
+STEEM: A company is designing a web application that will be hosted on Amazon EC2 instances behind an Application Load Balancer (ALB). The application needs to store session data for users, ensuring high availability and fault tolerance. Which solution best meets these requirements?
+A) Store session data in Amazon RDS with Multi-AZ enabled.
+B) Store session data in Amazon ElastiCache using Redis with cluster mode enabled.
+C) Store session data on the EC2 instance's instance store.
+D) Store session data in an Amazon S3 bucket.
+ANS: B
+EXP: Amazon ElastiCache using Redis with cluster mode enabled is well-suited for session management due to its ability to provide low-latency, high-throughput access to data. It also ensures fault tolerance and high availability through clustering and replication, making it the best choice for this scenario.
+
+#40 [Select 2]
+STEEM: A company is designing a serverless application using AWS Lambda and Amazon S3. The application needs to process image files uploaded to an S3 bucket. Once an image is uploaded, the Lambda function should be triggered automatically to generate thumbnails for the image. The solution should be cost-effective and scalable. Which configuration steps should be taken to meet these requirements?
+A) Configure the S3 bucket to use Event Notifications to trigger the Lambda function on the 's3:ObjectCreated' event.
+B) Set up an Amazon S3 Lifecycle policy to transition objects to Amazon S3 Glacier after processing.
+C) Write an IAM policy that grants the Lambda function permissions to read objects from the S3 bucket and write thumbnails back to the bucket.
+D) Enable cross-region replication on the S3 bucket to enhance data durability and availability.
+E) Create an Amazon SQS queue to buffer notifications from S3 before invoking the Lambda function.
+ANS: A, C
+EXP: To meet the requirements of a cost-effective, scalable image processing system, AWS S3 Event Notifications should be configured to trigger the Lambda function whenever an image is uploaded. Additionally, the Lambda function must have sufficient IAM permissions to interact with the S3 bucket. The other options, such as lifecycle policies, cross-region replication, or SQS, are unnecessary or irrelevant for this specific use case.
+
+#41 [Single answer]
+STEEM: Your company is developing a serverless application using AWS Lambda. The application needs to securely access an Amazon S3 bucket to store and retrieve files. What is the MOST secure way to grant the Lambda function access to the S3 bucket?
+A) Embed the S3 bucket credentials directly into the Lambda function code.
+B) Store the S3 bucket access keys in an encrypted file within an Amazon S3 bucket and import them into the Lambda function at runtime.
+C) Assign an IAM role to the Lambda function with permissions to access the S3 bucket.
+D) Use environment variables in the Lambda function to store the S3 bucket access keys.
+ANS: C
+EXP: When granting AWS Lambda functions access to other AWS resources, the recommended approach is to assign an IAM role to the Lambda function. This allows AWS to automatically provide secure, temporary credentials to the function when it executes, removing the need to manage or expose static credentials. This approach adheres to the principle of least privilege and helps maintain a secure application architecture.
+
+#42 [Single answer]
+STEEM: A development team is building a serverless application using AWS Lambda functions. The application requires access to an Amazon DynamoDB table to store and retrieve data. To ensure secure access while adhering to the principle of least privilege, how should the team configure the application?
+A) Embed the access keys of an IAM user with DynamoDB permissions directly into the application code.
+B) Assign an IAM role to the Lambda function with the necessary permissions to access the DynamoDB table.
+C) Store the access keys of an IAM user with DynamoDB permissions in AWS Secrets Manager and retrieve them from the Lambda function at runtime.
+D) Assign the Lambda function a policy granting full access to all DynamoDB tables in the AWS account.
+ANS: B
+EXP: The best practice for securing application credentials and adhering to the principle of least privilege is to use IAM roles. By assigning an IAM role to the Lambda function, AWS automatically provides secure, temporary credentials scoped to the permissions defined in the role. This eliminates the need for hardcoding or managing long-term access keys, reducing the risk of accidental exposure.
+
+#43 [Single answer]
+STEEM: An application running on Amazon EC2 instances needs to access an Amazon S3 bucket to store logs. The application currently stores the AWS access key and secret key in a configuration file on the instance. What is the most secure and recommended way to provide the necessary permissions to the application?
+A) Use an IAM role assigned to the EC2 instance to grant the necessary permissions.
+B) Store the AWS access key and secret key in an encrypted file on the instance.
+C) Hardcode the AWS access key and secret key into the application code.
+D) Use Amazon S3 bucket policies to directly allow access to the application.
+ANS: A
+EXP: The recommended approach for securely granting permissions to applications running on EC2 instances is to use IAM roles. By assigning an IAM role to the instance, you eliminate the need to store and manage credentials manually. The instance can retrieve temporary credentials from the instance metadata service, which are automatically rotated and managed by AWS.
+
+#44 [Single answer]
+STEEM: You are developing an application that will run on Amazon EC2 instances. The application requires access to an Amazon S3 bucket to store and retrieve files. How can you securely provide the application with the necessary credentials to access the S3 bucket?
+A) Embed the AWS access key and secret key directly in the application code.
+B) Use an IAM role assigned to the EC2 instance to grant access to the S3 bucket.
+C) Store the AWS access key and secret key in the EC2 instance's user data script.
+D) Manually create long-term access keys and distribute them to the EC2 instance.
+ANS: B
+EXP: Assigning an IAM role to an EC2 instance is the best practice for securely providing applications running on the instance with access to AWS resources. The role allows the instance to request temporary credentials from the instance metadata service, eliminating the need to hardcode or manually manage credentials. This approach minimizes security risks and follows AWS's recommended guidelines for application configuration and credentials management.
+
+#45 [Single answer]
+STEEM: A company is configuring an application that will run in a private subnet of their VPC in AWS. The application needs to access an Amazon S3 bucket in the same region, but the company wants to avoid using the public internet to improve security. What is the most appropriate solution to achieve this?
+A) Create a VPC endpoint for Amazon S3 and update the route table of the private subnet to use the endpoint.
+B) Configure a NAT gateway in the private subnet to allow the application to access Amazon S3.
+C) Use an Elastic IP to assign a public IP address to the application and access Amazon S3 directly.
+D) Enable internet access for the private subnet by associating it with an internet gateway and access Amazon S3.
+ANS: A
+EXP: To securely access Amazon S3 from a private subnet without using the public internet, a VPC endpoint for S3 is the most appropriate solution. This enables private connectivity between the VPC and S3, ensuring data does not traverse the public internet. Updating the route table ensures that traffic destined for S3 is routed through the endpoint.
+
+#46 [Single answer]
+STEEM: A company is running a workload in a VPC and requires private connectivity to AWS services such as Amazon S3 and Amazon DynamoDB. The solution should ensure that traffic does not traverse the public internet and should minimize the need for managing additional infrastructure such as NAT gateways. Which solution meets these requirements?
+A) Create VPC endpoints for Amazon S3 and Amazon DynamoDB.
+B) Use a NAT gateway to route traffic to Amazon S3 and Amazon DynamoDB.
+C) Establish a VPN connection between the VPC and AWS to access Amazon S3 and Amazon DynamoDB privately.
+D) Use an internet gateway to route traffic to Amazon S3 and Amazon DynamoDB.
+ANS: A
+EXP: VPC endpoints provide private connectivity between resources in a VPC and AWS services such as Amazon S3 and DynamoDB, ensuring that traffic does not traverse the public internet. This solution minimizes additional infrastructure requirements and costs compared to options like NAT gateways. Using internet gateways or VPN connections would not achieve the required private connectivity to AWS services.
+
+#47 [Single answer]
+STEEM: A company has deployed an application in a private subnet within a VPC. The application needs to securely access an Amazon S3 bucket in the same region without using a public internet connection. What is the most cost-effective solution to achieve this?
+A) Configure a NAT Gateway in the public subnet and route traffic to the S3 bucket through it.
+B) Set up a VPC endpoint for Amazon S3 and update the route table of the private subnet to route traffic to the endpoint.
+C) Use an Internet Gateway and attach it to the VPC, allowing the application to access S3 over the internet.
+D) Establish a VPN connection from the private subnet to the Amazon S3 service.
+ANS: B
+EXP: The most cost-effective and secure way for an application in a private subnet to access an Amazon S3 bucket in the same region is by setting up a VPC endpoint for Amazon S3. This allows the traffic to remain within the AWS network, avoiding the need for an internet connection or a NAT Gateway, which would incur additional costs.
+
+#48 [Single answer]
+STEEM: A company is deploying an application in a VPC that needs to securely communicate with an Amazon S3 bucket in the same region. The company wants to ensure that the traffic does not traverse the public internet. What is the most appropriate solution?
+A) Use an S3 VPC endpoint to establish private connectivity between the VPC and Amazon S3.
+B) Use an internet gateway to route traffic from the VPC to Amazon S3.
+C) Enable AWS Direct Connect to establish a private connection between the VPC and Amazon S3.
+D) Attach a NAT gateway to the VPC for accessing Amazon S3 privately.
+ANS: A
+EXP: To ensure private communication between a VPC and Amazon S3, an S3 VPC endpoint is the best solution. It uses AWS PrivateLink to keep the traffic within the AWS network, avoiding the public internet. Other options like an internet gateway or NAT gateway do not meet the requirement of keeping the traffic private.
+
+#49 [Single answer]
+STEEM: Your company is hosting a web application on an Amazon EC2 instance in a public subnet. Users report they cannot access the application. Upon investigation, you discover the EC2 instance is running correctly, and the application is listening on port 80. Which configuration change is most likely needed to resolve the issue?
+A) Add an inbound rule to the instance's Security Group to allow traffic on port 80 from 0.0.0.0/0.
+B) Add an outbound rule to the instance's Security Group to allow traffic on port 80 to 0.0.0.0/0.
+C) Create a Network ACL rule to explicitly allow inbound traffic on port 80 from 0.0.0.0/0.
+D) Enable port forwarding in the EC2 instance's operating system to redirect traffic to port 80.
+ANS: A
+EXP: The issue lies in controlling network traffic to the EC2 instance. Security Groups are stateful, and to allow inbound traffic to the application, an inbound rule for port 80 must be added. This ensures external traffic can reach the web application.
+
+#50 [Select 2]
+STEEM: Your company runs a web application hosted on an EC2 instance in a public subnet of a VPC. To improve security, you are tasked with ensuring that only HTTP (port 80) and HTTPS (port 443) traffic from the internet can access the EC2 instance, while blocking all other traffic. Which configuration changes should you make to implement this requirement?
+A) Configure the Security Group attached to the EC2 instance to allow inbound traffic only on ports 80 and 443 from 0.0.0.0/0.
+B) Update the Network ACL associated with the subnet to allow inbound traffic on ports 80 and 443 from 0.0.0.0/0 and deny all other inbound traffic.
+C) Create a new route in the subnet's route table to explicitly allow traffic on ports 80 and 443.
+D) Remove the default outbound rule in the Security Group that allows all traffic.
+E) Disable the default VPC DNS resolver to prevent unauthorized traffic.
+ANS: A, B
+EXP: To control ports, protocols, and network traffic, you need to configure both Security Groups and Network ACLs. Security Groups operate at the instance level and allow or deny specific inbound and outbound traffic. Network ACLs operate at the subnet level and provide an additional layer of control. By configuring both correctly, you ensure that only HTTP and HTTPS traffic can reach the EC2 instance, while blocking all other traffic.

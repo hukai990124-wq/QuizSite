@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMBNXLN4SY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FMBNXLN4SY');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1">
+<link rel="preconnect" href="https://ajax.googleapis.com">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="google-site-verification" content="gxa8fBVLWyKMyI6Pisp2U8e2FDfRJbmJSWtwPRi79XU" />
+<meta name="keywords" content="FP2級,ファイナンシャルプランナー,FP,2級ファイナンシャルプランニング技能検定">
+<meta property="og:site_name" content="FP2級ドットコム">
+<meta property="og:title" content="FP2級ドットコム">
+<meta property="og:description" name="description" content="FP2級の解説でNo.1を目指すサイト。試験の最新動向や過去問題の解説、質問用の掲示板など2級ファイナンシャルプランニング技能士検定に関係する情報を発信しています。トップページの過去問題一問一答で理解度を確認しましょう。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://fp2-siken.com/img/ogimage.png">
+<meta property="og:url" content="https://fp2-siken.com/">
+<link rel="canonical" href="https://fp2-siken.com/">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200&icon_names=event_note,download,calculate,note_alt,delete,print,call_made,circle,close,ink_eraser,ink_pen,pen_size_1,square,title,undo&display=block">
+<style>
+.info{background:var(--main-bg);position:relative;padding:0 0 .5em 140px;font-size:95%}
+.info>b:first-of-type{position:absolute;left:58px;top:0;font-size:12px}
+.info::before{content:"";position:absolute;left:0;top:0;width:50px;font-size:10px;color:#FFF;letter-spacing:0;border-radius:4px;text-align:center}
+.info.new::before{content:"NEW";background:#de5d36}
+.info.news::before{content:"INFO";background:#77b533}
+.info.update::before{content:"UPDATE";background:#ef9c35}
+.info>a{color:var(--link-color)}
+.info>a:hover{text-decoration:underline}
+.info.bbs>a{margin-left:-5px;letter-spacing:0}
+.info.bbs>a::before{content:"『"}
+.info.bbs>a::after{content:"』"}
+.info.bbs>img{vertical-align:middle}
+.divider{font-size:100%;text-align:center}
+.divider:before,.divider:after{content:'―';margin:0 5px}
+main .info:nth-of-type(n+7), .divider{display:none}
+#showMore{display:block;padding:5px;margin:0 60px 5px;border-radius:0 0 7px 7px;text-align:center;background:linear-gradient(var(--main-bg),var(--main-bg) 30%,var(--color-eee));cursor:pointer;margin-bottom:3em}
+.kaisetsu, #countdown2{display:none}
+#jitugi_nittei{margin:0 auto;width:100%;max-width:420px;color:#262626;background:#fff}
+#jitugi_nittei th,#jitugi_nittei td{border:1px solid #888;text-align:center;vertical-align:middle;padding:2px}
+#jitugi_nittei th{font-weight:bold;background:#fac090}
+#jitugi_nittei colgroup{background:#fde9d9 !important}
+
+.kakomonlist li{list-style:none;display:flex;flex-wrap:wrap;margin:10px 0}
+.kakomonlist li div, .kakomonlist li a{padding:8px 0;text-align:center;position:relative}
+.kakomonlist li div{width:20%;background:var(--color-eee);font-weight:bold}
+.kakomonlist li div::before{content:"";width:0;height:0;border:8px solid transparent;border-left-color:var(--color-eee);position:absolute;left:100%;top:50%;margin-top:-8px;z-index:1}
+.kakomonlist li a{display:block;flex:1;background:var(--main-bg-sub);border-right:1px solid var(--dark-border)}
+.kakomonlist li a:hover{text-decoration:underline}
+#tabs>ul{display:none}
+#tab1 .content>h3{border-bottom:2px solid currentColor;padding-left:5px;padding-top:5px;margin-bottom:.5em}
+#tab1>p{margin-bottom:1em}
+.minilogo{float:left;padding-bottom:20px}
+.mutualLink img{display:none}
+.topMessage{background:rgba(227,61,61,0.1);margin:5px 0;padding:5px;color:#cd4f4f;border:2px solid currentColor;text-align:center}
+.chartWrap{height:350px;margin-bottom:2em}
+
+@media (max-width:770px)
+{
+.img_margin.main{margin:0;font-size:0}
+main .info:nth-of-type(n+5){display:none}
+.mutualLink img{display:block;position:absolute;top:50%;right:10px;margin-top:-16px}
+#countdown2{display:block;padding:10px 5px;text-align:center}
+#countdown2 span{color:#e65959;font-size:110%}
+#countdown2 span.big{font-weight:bold}
+#countdown2::before{position:static}
+.countdown-message{display:inline-block;margin-left:0.7em}
+#tabs>ul{display:flex}
+}
+@media (max-width:600px)
+{
+.info{padding:24px 5px .5em;border-bottom:1px solid var(--dark-border);font-size:13px}
+.info>b:first-of-type{top:3px}
+.info::before{top:4px;left:2px}
+.kakomonlist li{margin:0;border-top:0}
+.kakomonlist li div{width:100%;text-align:left;padding:3px 5px;font-size:12px;color:inherit;background:rgba(171,166,166,0.2);text-shadow:none}
+.kakomonlist li div::before{border-left-color:transparent;border-top-color:rgba(171,166,166,0.2);left:16px;top:100%;margin-top:0}
+.kakomonlist li a{padding:12px 0;background:var(--main-bg)}
+.chartWrap{height:300px}
+}
+</style>
+<title>FP2級ドットコム － 過去問題を徹底解説</title>
+</head>
+<body>
+
+<script>
+if (typeof localStorage !== undefined) {
+const theme = localStorage.getItem('DARK') || 0;
+if (theme == 1) document.body.className += ' dark';
+if (theme == 2) document.body.className += ' beige';
+}
+</script>
+
+<div id="main_contents">
+<!--MAINCONTENT START-->
+<header id="pageTop">
+<h1>
+<a href="/">
+<picture>
+<source srcset="/img/title.avif" type="image/avif">
+<source srcset="/img/title.webp" type="image/webp">
+<img src="/img/title.png" alt="FP2級ドットコムトップページへ" title="FP2級ドットコムトップページへ" id="logo" width="273" height="42">
+</picture>
+</a>
+</h1>
+<div class="header_right">
+<div id="countdown"></div>
+<ul id="header_menu">
+<li><a href="/kakomon.php">過去問道場(学科)</a></li>
+<li><a href="/kakomon_j.php">過去問道場(実技)</a></li>
+<li><a href="/marubatu.php">一問一答道場</a></li>
+<li><a href="/bbs.php">掲示板</a></li>
+</ul>
+</div>
+<div id="menuBtn"></div>
+</header>
+
+<div id="content">
+<main>
+<div class="img_margin main">
+<picture>
+<source srcset="/img/main.avif" type="image/avif">
+<source srcset="/img/main.webp" type="image/webp">
+<img src="/img/main.jpg" alt="2級ファイナンシャルプランニング技能士検定 過去問題を徹底解説" width="730" height="220" fetchpriority="high">
+</picture>
+<!--<a href="/moshi/free_moshi/" style="display:block;position:relative"><img src="/moshi/banner.png" alt="2024年9月試験対策/実力判定フリー模試" width="580" loading="eager"><img src="/moshi/click.png" alt="click" style="position:absolute;width:22%;right:12px;bottom:12px"></a>-->
+</div>
+<div class="topMessage">FP2級試験はCBT方式により通年実施されています。</div>
+<h2>最新情報</h2>
+<p class="info" id="countdown2"><span>　</span></p>
+<p class="info bbs update"><b data-update="1791207540"></b><a rel="ugc" href="./bbs/2459.html">[2459]&nbsp;【2026年10月】FP2級&nbsp;試験結果報告専用スレッド</a>が更新されました。<br>最終投稿：<b>メンデス</b>さん　<img src="/img/bbs_comment.svg" width="12" height="12"> 6</p>
+<p class="info bbs new"><b data-update="1791206322"></b><a rel="ugc" href="./bbs/2462.html">[2462]&nbsp;基礎控除について</a>が新規作成されました。<br>投稿者：<b>りんご</b>さん　<img src="/img/bbs_comment.svg" width="12" height="12"> 1</p>
+<p class="info bbs update"><b data-update="1791201233"></b><a rel="ugc" href="./bbs/2461.html">[2461]&nbsp;【勉強方法相談】いつもギリギリ受かりません。。。。</a>が更新されました。<br>最終投稿：<b>きゃぴー</b>さん　<img src="/img/bbs_comment.svg" width="12" height="12"> 5</p>
+
+<p class="info update"><b>9月30日</b>過去問道場における復習・パス・チェック問題の出題設定が細目単位で選択できるようになりました。</p>
+<p class="info update"><b>9月7日</b>画面上で簡単なメモが描ける「画面メモツール」をリリースしました。</p>
+<p class="info update"><b>8月21日</b>一問一答道場の出題設定に未出題モードを追加しました。</p>
+<p class="info update"><b>7月15日</b><a href="/law.html">法令・制度の改正情報</a>に2026年度の改正点を追加しました。</p>
+<p class="info new"><b>5月25日</b>5/25公開の<a href="/kakomon/2026_5/">2026年5月試験</a>（CBT公開問題）の問題と解答をアップしました。</p>
+<h3 class="divider">2025年</h3>
+<p class="info update"><b>11月14日</b>PC表示のサイドメニューを開閉できる仕組みに変更しました。</p>
+<p class="info new"><b>6月1日</b>目に優しく、眼精疲労の軽減効果が期待できるベージュ系のテーマカラーを追加しました。<a href="/config.html">サイト設定</a>のページから端末ごとに設定できます。</p>
+<p class="info new"><b>5月26日</b>5/26公開の<a href="/kakomon/2025_5/">2025年5月試験</a>（CBT公開問題）の問題と解答をアップしました。</p>
+<p class="info update"><b>3月24日</b>パスワードの文字種を増やし、最大32文字に拡張するセキュリティ強化を実施しました。</p>
+<p class="info new"><b>3月16日</b>CBT試験シミュレータの実技版を公開しました。</p>
+<p class="info new"><b>1月27日</b>1/26実施の<a href="/kakomon/2025_1/">2025年1月試験</a>の問題と解答をアップしました。</p>
+<h3 class="divider">2024年</h3>
+<p class="info new"><b>12月5日</b>CBT試験をシミュレーションした学習ソフトウェアをリリースしました。過去問道場の模擬試験モードで「CBT試験シミュレータで実施する」にチェックを入れることで利用可能です。</p>
+<p class="info new"><b>9月9日</b>9/8実施の<a href="/kakomon/2024_9/">2024年9月試験</a>の問題と解答をアップしました。</p>
+<p class="info news"><b>7月11日</b>SNSボタンの表示・非表示を選択できるようになりました。<a href="/config.html">サイト設定</a>のページから端末ごとに設定できます。</p>
+<p class="info new"><b>5月27日</b>5/26実施の<a href="/kakomon/2024_5/">2024年5月試験</a>の問題と解答をアップしました。</p>
+<p class="info news"><b>2月4日</b>ダークテーマ（黒基調のデザイン）を選択できるようになりました。<a href="/config.html">サイト設定</a>のページから端末ごとに設定できます。</p>
+<p class="info new"><b>1月29日</b>1/28実施の<a href="/kakomon/2024_1/">2024年1月試験</a>の問題と解答をアップしました。</p>
+<h3 class="divider">2023年</h3>
+<p class="info new"><b>9月11日</b>9/10実施の<a href="/kakomon/2023_9/">2023年9月試験</a>の問題と解答をアップしました。</p>
+<p class="info new"><b>5月29日</b>5/28実施の<a href="/kakomon/2023_5/">2023年5月試験</a>の問題と解答をアップしました。</p>
+<p class="info new"><b>4月27日</b>Webサイトの動作をカスタマイズできる<a href="/config.html">サイト設定</a>ページを追加しました。</p>
+<p class="info new"><b>1月23日</b>1/22実施の<a href="/kakomon/2023_1/">2023年1月試験</a>の問題と解答をアップしました。</p>
+<p class="info news"><b>1月17日</b>過去問道場の登録ユーザー数が50,000人を突破しました！</p>
+<h3 class="divider">2022年</h3>
+<p class="info new"><b>9月12日</b>9/11実施の<a href="/kakomon/2022_9">2022年9月試験</a>の問題と解答をアップしました。</p>
+<p class="info new"><b>5月23日</b>5/22実施の<a href="/kakomon/2022_5">2022年5月試験</a>の問題と解答をアップしました。</p>
+<p class="info new"><b>1月24日</b>1/23実施の<a href="/kakomon/2022_1/">2022年1月試験</a>の問題と解答をアップしました。</p>
+<h3 class="divider">2021年</h3>
+<p class="info update"><b>11月15日</b>3/14実施（鹿児島会場再試験分）の<a href="/kakomon/2021_3/">2021年3月試験</a>の解説が完成しました。</p>
+<p class="info new"><b>9月13日</b>9/12実施の<a href="/kakomon/2021_9/">2021年9月試験</a>の問題と解答をアップしました。</p>
+<p class="info update"><b>8月5日</b><a href="/userterms.html">利用規約</a>の改定を行いました。</p>
+<p class="info new"><b>5月24日</b>5/23実施の<a href="/kakomon/2021_5/">2021年5月試験</a>の問題と解答をアップしました。</p>
+<p class="info update"><b>4月22日</b><a href="/marubatu.php">一問一答クイズ</a>を大幅にパワーアップさせました。</p>
+<p class="info update"><b>3月6日</b>金財の実技試験（個人、生保）を最新法令に対応させました。</p>
+<p class="info new"><b>1月25日</b>1/24実施の<a href="/kakomon/2021_1/">2021年1月試験</a>の問題と解答をアップしました。</p>
+<p class="info news"><b>1月22日</b>過去問道場の登録ユーザー数が15,000人を突破しました！</p>
+<h3 class="divider">2020年</h3>
+<p class="info update"><b>10月15日</b>2020年9月の実技試験（<a href="/kakomon/2020_9/#kojin">金財：個人</a>、<a href="/kakomon/2020_9/#seiho">金財：生保</a>、<a href="/kakomon/2020_9/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info new"><b>10月4日</b>「FP検定9月試験での法令改正点一覧」の情報を<a href="/law.html">法令・制度改正情報のページ</a>に移しました。</p>
+<p class="info new"><b>9月14日</b>9/13実施の<a href="/kakomon/2020_9/">2020年9月試験</a>の問題と解答をアップしました。解説も完成済みです。</p>
+<p class="info news"><b>9月10日</b>過去問道場の登録ユーザー数が10,000人を突破しました！</p>
+<p class="info new"><b>8月28日</b>過去問道場に模擬試験の印刷＆ダウンロード機能を追加しました。</p>
+<p class="info news"><b>4月23日</b>過去問道場の登録ユーザー数が7,000人を突破しました！</p>
+<p class="info update"><b>3月11日</b>2016年5月の実技試験（<a href="/kakomon/2016_5/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info update"><b>2月18日</b>2016年1月の実技試験（<a href="/kakomon/2016_1/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info update"><b>2月14日</b>2020年1月の実技試験（<a href="/kakomon/2020_1/#kojin">金財：個人</a>、<a href="/kakomon/2020_1/#seiho">金財：生保</a>、<a href="/kakomon/2020_1/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info new"><b>1月27日</b>1/26実施の<a href="/kakomon/2020_1/">2020年1月試験</a>の問題と解答をアップしました。学科問題の解説が完成しています。</p>
+<p class="info update"><b>1月25日</b>2016年9月の実技試験（<a href="/kakomon/2016_9/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info news"><b>1月18日</b>過去問道場の登録ユーザー数が5,000人を突破しました！</p>
+<p class="info update"><b>1月17日</b>2016年1月の実技試験（<a href="/kakomon/2016_1/#kojin">金財：個人</a>、<a href="/kakomon/2016_1/#seiho">金財：生保</a>）の解説が完成しました。</p>
+<h3 class="divider">2019年</h3>
+<p class="info update"><b>12月26日</b>1月試験に向けて<a href="/law.html">法令・制度改正情報</a>を更新しました。</p>
+<p class="info update"><b>12月18日</b>2016年5月の実技試験（<a href="/kakomon/2016_5/#kojin">金財：個人</a>、<a href="/kakomon/2016_5/#seiho">金財：生保</a>）の解説が完成しました。</p>
+<p class="info news"><b>12月16日</b>過去問道場の登録ユーザー数が4,000人を突破しました！(11/29付)</p>
+<p class="info update"><b>12月15日</b>2017年5月の実技試験（<a href="/kakomon/2017_5/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info update"><b>12月3日</b>2017年1月の実技試験（<a href="/kakomon/2017_1/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info update"><b>11月20日</b>2016年9月の実技試験（<a href="/kakomon/2016_9/#kojin">金財：個人</a>、<a href="/kakomon/2017_1/#seiho">金財：生保</a>）の解説が完成しました。</p>
+<p class="info update"><b>11月19日</b>2017年1月の実技試験（<a href="/kakomon/2017_1/#kojin">金財：個人</a>、<a href="/kakomon/2017_1/#seiho">金財：生保</a>）の解説が完成しました。</p>
+<p class="info update"><b>11月16日</b>2017年9月の実技試験（<a href="/kakomon/2017_9/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info update"><b>10月18日</b>2018年1月の実技試験（<a href="/kakomon/2018_1/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info update"><b>10月16日</b>2019年9月の実技試験（<a href="/kakomon/2019_9/#kojin">金財：個人</a>、<a href="/kakomon/2019_9/#seiho">金財：生保</a>）の解説をアップしました。</p>
+<p class="info new"><b>10月9日</b>学習成績をSNSで簡単にシェアできる新機能を過去問道場に追加しました。</p>
+<p class="info update"><b>9月27日</b>2017年5月の実技試験（<a href="/kakomon/2017_5/#kojin">金財：個人</a>、<a href="/kakomon/2017_5/#seiho">金財：生保</a>）の解説をアップしました。</p>
+<p class="info new"><b>9月9日</b>9/8実施の<a href="/kakomon/2019_9/">2019年9月試験</a>の問題と解答をアップしました。学科の解説は完成済みです。</p>
+<p class="info update"><b>9月2日</b>2018年1月の実技試験（<a href="/kakomon/2018_1/#kojin">金財：個人</a>、<a href="/kakomon/2018_1/#seiho">金財：生保</a>）の解説をアップしました。</p>
+<p class="info update"><b>8月28日</b>2018年9月の実技試験（<a href="/kakomon/2018_9/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info news"><b>8月25日</b>過去問道場の登録ユーザー数が3,000人を突破しました！</p>
+<p class="info update"><b>8月20日</b>2017年9月の実技試験（<a href="/kakomon/2017_9/#kojin">金財：個人</a>、<a href="/kakomon/2017_9/#seiho">金財：生保</a>）の解説をアップしました。</p>
+<p class="info update"><b>8月19日</b>2019年5月の実技試験（<a href="/kakomon/2019_5/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info new"><b>7月30日</b>FP検定（2級と3級）に関連する過去数年の法令や制度の改正情報をまとめたページを公開しました（<a href="/law.html">法令・制度改正情報</a>）。</p>
+<p class="info update"><b>7月26日</b>2019年1月の実技試験（<a href="/kakomon/2019_1/#fp">FP協会</a>）の解説が完成しました。</p>
+<p class="info update"><b>7月15日</b>2019年5月の実技試験（<a href="/kakomon/2019_5/#kojin">金財：個人</a>、<a href="/kakomon/2019_5/#seiho">金財：生保</a>）の解説をアップしました。</p>
+<p class="info update"><b>7月10日</b>2018年5月の実技試験（<a href="/kakomon/2018_5/#kojin">金財：個人</a>、<a href="/kakomon/2018_5/#seiho">金財：生保</a>、<a href="/kakomon/2018_5/#fp">FP協会</a>）の解説をアップしました。</p>
+<p class="info update"><b>6月13日</b>実技版の過去問道場をリリースしました。</p>
+<p class="info update"><b>6月7日</b>2019年5月実技試験の問題及び解答をWebページ化しました。</p>
+<p class="info new"><b>5月27日</b>5/26実施の<a href="/kakomon/2019_5/">2019年5月試験</a>の問題と解答をアップしました。学科問題の解説が完成済みです。</p>
+<p class="info news"><b>5月22日</b>過去問道場の登録ユーザー数が2,000人を突破しました！およそ100日で登録者数が2倍に増加したことになります。</p>
+<p class="info update"><b>5月17日</b>2018年9月の実技試験（<a href="/kakomon/2018_9/#kojin">金財：個人</a>、<a href="/kakomon/2018_9/#seiho">金財：生保</a>）の解説をアップしました。</p>
+<p class="info update"><b>5月16日</b>2019年1月の実技試験（<a href="/kakomon/2019_1/#kojin">金財：個人</a>、<a href="/kakomon/2019_1/#seiho">金財：生保</a>）の解説をアップしました。</p>
+<p class="info update"><b>4月19日</b>2016年1月・5月・9月の実技試験（FP協会）の問題と解答をWebページ化しました。</p>
+<p class="info update"><b>4月17日</b>2016年1月・5月・9月の実技試験（金財：個人、金財：生保）の問題と解答をWebページ化しました。</p>
+<p class="info update"><b>4月16日</b>2013年1月学科試験の解説が完成しました。これで学科1,200問の解説が完成しました。次は実技試験に注力していきまます！</p>
+<p class="info new"><b>4月6日</b>PCでの利用時に、問題文や設例内の図表をクリックで拡大表示できるようにしました。</p>
+<p class="info update"><b>3月29日</b>2017年1月・5月・9月の実技試験（FP協会）の問題と解答をWebページ化しました。</p>
+<p class="info update"><b>3月27日</b>2013年5月学科試験の解説が完成しました。</p>
+<p class="info news"><b>3月26日</b>○×クイズ(仮称)の名称を「一問一答クイズ」に変更しました。</p>
+<p class="info update"><b>3月21日</b>2018年1月・5月・9月の実技試験（FP協会）の問題と解答をWebページ化しました。</p>
+<p class="info update"><b>3月16日</b>2017年1月・5月・9月の実技試験（金財：個人、金財：生保）の問題と解答をWebページ化しました。</p>
+<p class="info update"><b>3月15日</b>2018年1月・5月・9月の実技試験（金財：個人、金財：生保）の問題と解答をWebページ化しました。</p>
+<p class="info update"><b>2月26日</b>2019年1月学科試験の解説が完成しました。</p>
+<p class="info update"><b>2月9日</b>2013年9月学科試験の解説が完成しました。</p>
+<p class="info update"><b>1月31日</b>2014年1月学科試験の解説が完成しました。</p>
+<p class="info news"><b>1月28日</b>サイト開設から1年で過去問道場の登録ユーザー数が1,000人を突破しました。</p>
+<p class="info new"><b>1月28日</b>1/27実施の<a href="/kakomon/2019_1/">2019年1月試験</a>の問題と解答をアップしました。</p>
+<p class="info update"><b>1月9日</b>2014年5月学科試験の解説が完成しました。</p>
+<h3 class="divider">2018年</h3>
+<p class="info update"><b>12月31日</b>2015年1月学科試験の解説が完成しました。</p>
+<p class="info update"><b>12月16日</b>過去問道場に問題チェック機能を追加しました。</p>
+<p class="info update"><b>12月6日</b>2014年9月学科試験の解説が完成しました。</p>
+<p class="info new"><b>11月29日</b>サイトのトップページに<a href="#graph1">受検者数と合格率の推移グラフ</a>を追加しました。</p>
+<p class="info update"><b>11月16日</b>2015年5月学科試験の解説が完成しました。</p>
+<p class="info update"><b>11月14日</b>2015年9月学科試験の解説が完成しました。</p>
+<p class="info update"><b>10月5日</b>2018年9月学科試験の解説が完成しました。</p>
+<p class="info update"><b>9月19日</b>2015年10月学科試験の解説が完成しました。</p>
+<p class="info new"><b>9月11日</b>9/9実施の<a href="/kakomon/2018_9/">2018年9月試験</a>の問題と解答をアップしました。</p>
+<p class="info update"><b>8月30日</b>2016年1月学科試験の解説が完成しました。</p>
+<p class="info update"><b>8月17日</b>2016年5月学科試験の解説が完成しました。</p>
+<p class="info update"><b>7月20日</b>2016年9月学科試験の解説が完成しました。</p>
+<p class="info update"><b>6月29日</b>2018年5月学科試験の解説が完成しました。</p>
+<p class="info new"><b>6月9日</b>過去問題の各選択肢の正誤を○×形式で出題する「<a href="/marubatu.php">○×クイズ(仮称)</a>」をリリースしました。</p>
+<p class="info update"><b>6月5日</b>2017年1月学科試験の解説が完成しました。</p>
+<p class="info new"><b>5月28日</b>5/27実施の<a href="/kakomon/2018_5/">2018年5月試験</a>の問題と解答をアップしました。解説も全て無料公開しています。</p>
+<p class="info update"><b>5月17日</b>2017年9月学科試験の解説が完成しました。</p>
+<p class="info update"><b>4月28日</b>2018年1月学科試験の解説が完成しました。</p>
+<p class="info new"><b>2月19日</b>2級ファイナンシャルプランニング技能検定2013年1月、5月、9月の過去問題を追加しました。</p>
+<p class="info update"><b>2月14日</b>PC環境で電卓を任意の位置に移動できるようにしました。解答ボタンのクリック時に押したボタンが目立つようにしました。ボタンクリックでの解答時に正解表示部分に"あなたの解答"が併記されるようになりました。</p>
+<p class="info new"><b>2月9日</b>FP3級のサイト（FP3級ドットコム）に続き、ファイナンシャルプランナー2級の解説サイトを新しく公開しました。</p>
+<p id="showMore">▼すべて表示する</p>
+<h2>FP2級 過去問題にチャレンジ</h2>
+<section class="content mondai">贈与に関する次の記述のうち、最も不適切なものはどれか。
+<div class="grayText">2015年1月試験 問51　[相続・事業承継]</div>
+</section>
+
+<section class="content"><ol class="selectList"><li>定期贈与とは、贈与者が受贈者に対して定期的に金銭等を給付することを目的とする贈与をいう。<li>負担付贈与とは、贈与者が受贈者に対して一定の給付をなすべき義務を負わせる贈与をいう。<li>死因贈与とは、贈与者の死亡によって効力を生ずる贈与をいう。<li data-answer="t">贈与者が贈与の目的物に契約内容に適合しない事実があることを知らずに贈与した場合であっても、贈与者はその契約不適合について責任を負わなければならない。<!--贈与者が贈与の目的物に瑕疵があることを知らずに贈与した場合であっても、贈与者はその瑕疵について責任を負わなければならない。--></ol></section>
+
+<div class="selectBtn"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#" data-answer="t">4</a></div>
+
+<section class="content kaisetsu"><ol class="kaisetsuList"><li>適切。定期贈与は、贈与者が受贈者に対し、定期的に金銭等の財産を給付することを約束する契約です。定期贈与は、贈与者または受贈者の死亡によりその効力を失います。</li><li>適切。負担付贈与とは、贈与者が受贈者に対して一定の債務を負担させることを条件にした贈与です。もし受贈者がその負担である債務の履行をしない場合、贈与者は贈与契約を解除することができます。</li><li>適切。死因贈与とは、贈与者の死亡によって効力を生ずる贈与です。死因贈与で受けとった財産は、相続税の課税対象になります。</li><li>[不適切]。贈与契約では、贈与の目的物が特定したときの（契約時の）状態で引き渡すことを約束したとみなされます。契約時の現状引渡しで足りるのですから、原則として贈与契約では知る・知らないにかかわらず担保責任を負いません。ただし、負担付贈与は双務契約として扱われるので、契約内容に適合しない事実があった場合には原則として担保責任を負います。</li></ol>したがって不適切な記述は[4]です。</section><a href="/kakomon.php" class="submit hover">🥋過去問道場に挑戦</a>
+<div id="tabs">
+<ul><li class="active"><a href="#tab1">試験制度</a></li><li><a href="#tab2">FP2級過去問題</a></li></ul>
+<div id="tab1">
+<section class="content">
+<h3>ファイナンシャル・プランナーとは</h3>
+<p>
+ファイナンシャル・プランニング検定は2002年度から国家資格となった検定です。ファイナンシャルプランナーと言っても知らない人にとってはピンと来ないかもしれません。
+各語を日本語にすると、ファイナンシャル（financial）は「金融」、プランナー(planner)には「立案者」や「計画者」という意味があります。簡単に言ってしまえば、資金計画の立案人ということになります。
+試験を実施する「金融財政事情研究会（以下、金財）」のWebサイトには、FP技能検定について次のように説明しています。
+<small>顧客の資産に応じた貯蓄・投資等のプランの立案・相談に必要な技能の程度を検定します</small>
+この説明からもわかるようにファイナンシャルプランナーの役割は、社会保障・税制・不動産・金融などの金銭に係る横断的な知識を活かして顧客の目的達成を支援することです。</p>
+<p>
+FP2級では3級の範囲を更に掘り下げた論点が出題されるのはもちろんですが、FP3級では学習範囲外であった、法人に対するFP業務を行う際に必要な知識を学習することになります。これらの内容は基礎的な部分ではありますが、FPを専業とする方のみならず、保険の外交員や銀行の渉外担当の方、あるいは証券会社の営業担当が法人顧客と対するときに必須の知識です。</p>
+</section>
+<section class="content">
+<h3>試験の概要</h3>
+<p>
+試験には級ごとに学科と実技の2つがあり、両方に合格することでファイナンシャルプランニング技能士の資格を取得できます。学科試験と実技試験は同日開催なので、一度に受検可能です。<br>
+「学科」は、計60問で全て四肢択一式（四択のマークシート）で解答します。出題構成は、ライフプランニング、リスク管理、金融資産運用、タックスプランニング、不動産、相続・事業承継の6分野から均等に出題されます。6割が合格基準なので36点以上を獲得すれば合格です。
+「実技」は、設例を読んでそれに対するいくつかの設問に答える実践的な内容です。実施団体によって出題数が異なり、金財は15問、FP協会は40問となっています。こちらも学科と同様に全体の6割以上の得点で合格となります。
+FP2級の実技試験に関しては、四択問題、肢ごとの○×問題、語句群から選択する問題、計算した金額を記述式で回答する問題など多様な回答形式が混在しています。
+学科が業務に必要な知識を問うものならば、実技は実務における応用力を問うものです。</p>
+</section>
+<section class="content">
+<h3>受検者数、合格率の推移</h3>
+<div class="chartWrap">
+<canvas id="graph1"></canvas>
+</div>
+<div class="chartWrap">
+<canvas id="graph2"></canvas>
+</div>
+<p>
+年間で<em class="r">100,000</em>人以上が受検する人気資格です。コロナ禍によるお家時間の増加による特需が落ち着き、近年の受検者数はコロナ前と同じ水準に戻ってきています。<br>
+合格率を見ると、選べる状況であれば金財とFP協会のどちらで受験しようか迷うと思います。合格率だけ見るとFP協会の方が高く合格しやすいように見えますが、共通問題である学科試験でも20ポイント近い差が付いていることを踏まえると、決してFP協会の方が簡単というわけではないので注意しましょう。
+金財は金融機関等にお勤めの方が強制受検となり、さほど勉強をしないまま受検していることがある一方、FP協会は強い目的意識を持って受検する一般の方が多いことが合格率の差の一因になっているのでしょう。
+</p>
+</section>
+<section class="content">
+<h3>2025年度試験日程</h3>
+<p>
+FP2級技能検定は、2025年4月よりCBT方式（コンピュータを使って試験を受ける方式）で通年実施されています。毎年3月と年末年始および一定の配信停止日を除き、1年を通して受験者が希望する時間を予約して受験することができます。
+</p>
+<ul>
+<li><b>CBT試験　随時</b>　※受検申請（試験予約）：試験日3日前まで
+</ul>
+また当日の試験時間は以下のようになっています。
+</p>
+<ul>
+<li>学科試験：120分
+<li>実技試験：90分
+</ul>
+
+</section>
+<section class="content">
+<h3>受検手数料</h3>
+<p>
+FP2級の受検手数料は、学科5,700円、実技6,000円です（非課税）。同日に両方を受検する場合は2つを合わせた<em class="r">11,700</em>円になります。ただし、銀行振り込みやコンビニ支払いに伴う支払い手数料は各個人の負担になります。
+</p>
+</section>
+<section class="content">
+<h3>受検資格</h3>
+<p>
+FP3級は誰でも受検できますが、FP2級には受検資格が設けられています。受検申請時には該当する受検資格を申告することになります。
+</p>
+<ul>
+<li>3級技能検定の合格者
+<li>FP業務に関し2年以上の実務経験を有する者
+<li>日本FP協会が認定するAFP認定研修を修了した者
+<li>厚生労働省認定金融渉外技能審査3級の合格者
+</ul>
+</section>
+<section class="content">
+<h3>試験範囲</h3>
+<p>
+学科試験はすべて四肢択一式です。出題構成は以下のようにライフプランニングと資金計画、リスク管理、金融資産運用、タックスプランニング、不動産、相続・事業承継の6分野から均等に出題されます。
+</p>
+<dl>
+<dd>
+問１～10　ライフプランニング<br>
+問11～20　リスク管理<br>
+問21～30　金融資産運用<br>
+問31～40　タックスプランニング<br>
+問41～50　不動産<br>
+問51～60　相続・事業承継
+</dl>
+<p>
+実技試験は実施団体によって取り扱い分野が異なり、2級においては金財は「個人資産相談業務」「生保顧客資産相談業務」（1・5・9月）、「中小事業主資産相談業務」（1・9月）、「損保顧客資産相談業務」（9月）の4区分から選択できます。なおFP協会は「資産設計提案業務」のみです。
+</p>
+
+<table id="jitugi_nittei"><colgroup span="2"></colgroup><tbody>
+<tr><th colspan="2"><th>CBT試験（通年）
+<tr><td rowspan="4">金財<td>個人資産<td>〇
+<tr><td>生保顧客<td>〇
+<tr><td>損保顧客<td>〇
+<tr><td>中小事業主<td>〇
+<tr><td>FP協会<td>資産設計<td>〇
+</tbody></table>
+</section>
+<section class="content">
+<h3>法令基準日</h3>
+<p>
+毎年4月1日現在で施行されている法令が、同年6月から翌年5月までの適用対象となります。法令基準日の切り替わりは毎年6月です。例えば、2025年6月～2026年5月は2025年4月1日時点の法令、2026年6月から2027年5月は2026年4月1日時点の法令に基づいて出題されます。
+</p>
+</section>
+<section class="content">
+<h3>受検申込み方法</h3>
+<p>
+株式会社シー・ビー・ティ・ソリューションズ（CBTS）のWebサイトで、受検者登録を行い、マイページから受検予約を行います（変更は試験日3日前まで可能です）。受検申込みはいつでもできますが、申込可能な試験日は当月から3カ月先の月末までの試験日時までとなります。なお、同一試験で複数の受験日を予約することはできません。<br>
+<a href="https://cbt-s.com/examinee/examination/kinzai_FP">&#8689;金融財政事情研究会の申込みページ</a><br>
+<a href="https://cbt-s.com/examinee/examination/jafp_3">&#8689;FP協会の申込みページ</a><br>
+<a href="https://www.kinzai.or.jp/ginou/fp/cbt/juken.html">&#8689;CBT方式による受検申請手順（金財）</a><br>
+<a href="https://www.jafp.or.jp/exam/outline/3fp.shtml">&#8689;CBT方式による試験要綱（FP協会）</a></p>
+</section>
+<section class="content">
+<h3>一部合格と試験免除</h3>
+<p>
+ファイナンシャル・プランニング検定には一部合格の制度があります。一部合格した人が所定の申請を行うことによって、一度合格した科目の受検が免除されるようになっています。<br>
+このため1回目の受検で学科（または実技）試験に合格すれば、次回は不合格になってしまった方だけの受検で済みます。試験対策や受検料の面から考えると、とてもありがたい仕組みですね。
+</p>
+</section>
+<section class="content">
+<h3>実施団体について</h3>
+<p>
+ファイナンシャル・プランニング技能検定は実施団体が2団体あり、国家資格としては珍しい相互認定という形態で運用されています。
+1つは「金融財政事情研究会」、もう1つは「日本FP協会」です。
+以前から、金融財政事情研究会は金融渉外技能審査（金財FP）の資格認定を、日本FP協会はCFP、AFPの資格認定を、それぞれ独自に実施していました。2002年度にファイナンシャル・プランニングが技能検定の職種に追加され、ファイナンシャル・プランニング技能士が国家資格化されるに際し、それまでFPに関する資格認定の実績を有していた２団体が、厚生労働省から指定試験機関として指定を受けました。
+ちなみに、どちらの団体が実施するものを受検しても、取得できる資格に違いはありません。また金財での学科合格した実績をもって、FP協会の学科試験を免除するといったことができるようになっています。
+</p>
+</section>
+</div>
+<div id="tab2">
+<ul class="kakomonlist">
+<li><div>2026年</div><a href="/kakomon/2026_5/">5月（CBT公開問題）</a>
+<li><div>2025年</div><a href="/kakomon/2025_1/">1月試験</a><a href="/kakomon/2025_5/">5月（CBT公開問題）</a>
+<li><div>2024年</div><a href="/kakomon/2024_1/">1月試験</a><a href="/kakomon/2024_5/">5月試験</a><a href="/kakomon/2024_9/">9月試験</a>
+<li><div>2023年</div><a href="/kakomon/2023_1/">1月試験</a><a href="/kakomon/2023_5/">5月試験</a><a href="/kakomon/2023_9/">9月試験</a>
+<li><div>2022年</div><a href="/kakomon/2022_1/">1月試験</a><a href="/kakomon/2022_5/">5月試験</a><a href="/kakomon/2022_9/">9月試験</a>
+<li><div>2021年</div><a href="/kakomon/2021_1/">1月試験</a><a href="/kakomon/2021_3/">3月試験</a><a href="/kakomon/2021_5/">5月試験</a><a href="/kakomon/2021_9/">9月試験</a>
+<li><div>2020年</div><a href="/kakomon/2020_1/">1月試験</a><a>(5月中止)</a><a href="/kakomon/2020_9/">9月試験</a>
+<li><div>2019年</div><a href="/kakomon/2019_1/">1月試験</a><a href="/kakomon/2019_5/">5月試験</a><a href="/kakomon/2019_9/">9月試験</a>
+<li><div>2018年</div><a href="/kakomon/2018_1/">1月試験</a><a href="/kakomon/2018_5/">5月試験</a><a href="/kakomon/2018_9/">9月試験</a>
+<li><div>2017年</div><a href="/kakomon/2017_1/">1月試験</a><a href="/kakomon/2017_5/">5月試験</a><a href="/kakomon/2017_9/">9月試験</a>
+<li><div>2016年</div><a href="/kakomon/2016_1/">1月試験</a><a href="/kakomon/2016_5/">5月試験</a><a href="/kakomon/2016_9/">9月試験</a>
+<li><div>2015年</div><a href="/kakomon/2015_1/">1月試験</a><a href="/kakomon/2015_5/">5月試験</a><a href="/kakomon/2015_9/">9月試験</a><a href="/kakomon/2015_10/">10月試験</a>
+<li><div>2014年</div><a href="/kakomon/2014_1/">1月試験</a><a href="/kakomon/2014_5/">5月試験</a><a href="/kakomon/2014_9/">9月試験</a>
+<li><div>2013年</div><a href="/kakomon/2013_1/">1月試験</a><a href="/kakomon/2013_5/">5月試験</a><a href="/kakomon/2013_9/">9月試験</a>
+</ul>
+</div>
+</div>
+</main>
+
+<nav>
+<h3>FP2級過去問アプリ</h3>
+<a href="/kakomon.php" class="doujou submit" title="FP2級クイズアプリ過去問道場(学科)">過去問道場(学科)</a>
+<a href="/kakomon_j.php" class="doujou_j submit" title="FP2級クイズアプリ過去問道場(実技)">過去問道場(実技)</a>
+<a href="/marubatu.php" class="marubatu submit" title="FP2級一問一答">一問一答道場</a>
+<h3>質問・相談はこちら</h3>
+<a href="/bbs.php" class="bbs submit hover" title="FP2級掲示板" data-text="BBS">FP2級掲示板</a>
+<h3>FP2級過去問題</h3>
+<ul id="test_menu">
+<li>2026年<li><a href="/kakomon/2026_5/" title="2026年5月分" class="new">5月（CBT）</a>
+<li>2025年<li><a href="/kakomon/2025_1/" title="2025年1月試験">1月</a><a href="/kakomon/2025_5/" title="2025年5月分">5月（CBT）</a>
+<li>2024年<li><a href="/kakomon/2024_1/" title="2024年1月試験">1月</a><a href="/kakomon/2024_5/" title="2024年5月試験">5月</a><a href="/kakomon/2024_9/" title="2024年9月試験">9月</a>
+<li>2023年<li><a href="/kakomon/2023_1/" title="2023年1月試験">1月</a><a href="/kakomon/2023_5/" title="2023年5月試験">5月</a><a href="/kakomon/2023_9/" title="2023年9月試験">9月</a>
+<li>2022年<li><a href="/kakomon/2022_1/" title="2022年1月試験">1月</a><a href="/kakomon/2022_5/" title="2022年5月試験">5月</a><a href="/kakomon/2022_9/" title="2022年9月試験">9月</a>
+<li>2021年<li><a href="/kakomon/2021_1/" title="2021年1月試験">1月</a><a href="/kakomon/2021_3/" title="2021年3月試験">3月</a><a href="/kakomon/2021_5/" title="2021年5月試験">5月</a><a href="/kakomon/2021_9/" title="2021年9月試験">9月</a>
+<li>2020年<li><a href="/kakomon/2020_1/" title="2020年1月試験">1月</a><a>(5月中止)</a><a href="/kakomon/2020_9/" title="2020年9月試験">9月</a>
+<li>2019年<li><a href="/kakomon/2019_1/" title="2019年1月試験">1月</a><a href="/kakomon/2019_5/" title="2019年5月試験">5月</a><a href="/kakomon/2019_9/" title="2019年9月試験">9月</a>
+<li>2018年<li><a href="/kakomon/2018_1/" title="2018年1月試験">1月</a><a href="/kakomon/2018_5/" title="2018年5月試験">5月</a><a href="/kakomon/2018_9/" title="2018年9月試験">9月</a>
+<li>2017年<li><a href="/kakomon/2017_1/" title="2017年1月試験">1月</a><a href="/kakomon/2017_5/" title="2017年5月試験">5月</a><a href="/kakomon/2017_9/" title="2017年9月試験">9月</a>
+<li>2016年<li><a href="/kakomon/2016_1/" title="2016年1月試験">1月</a><a href="/kakomon/2016_5/" title="2016年5月試験">5月</a><a href="/kakomon/2016_9/" title="2016年9月試験">9月</a>
+<li>2015年<li><a href="/kakomon/2015_1/" title="2015年1月試験">1月</a><a href="/kakomon/2015_5/" title="2015年5月試験">5月</a><a href="/kakomon/2015_9/" title="2015年9月試験">9月</a><a href="/kakomon/2015_10/" title="2015年10月試験">10月</a>
+<li>2014年<li><a href="/kakomon/2014_1/" title="2014年1月試験">1月</a><a href="/kakomon/2014_5/" title="2014年5月試験">5月</a><a href="/kakomon/2014_9/" title="2014年9月試験">9月</a>
+<li>2013年<li><a href="/kakomon/2013_1/" title="2013年1月試験">1月</a><a href="/kakomon/2013_5/" title="2013年5月試験">5月</a><a href="/kakomon/2013_9/" title="2013年9月試験">9月</a>
+</ul>
+<h3>分野別過去問題</h3>
+<a href="/lifeplan.html" title="ライフプランニングの過去問題">ライフプランニング</a><a href="/risk.html" title="リスク管理の過去問題">リスク管理</a><a href="/finance.html" title="金融資産運用の過去問題">金融資産運用</a><a href="/tax.html" title="タックスプランニングの過去問題">タックスプランニング</a><a href="/estate.html" title="不動産の過去問題">不動産</a><a href="/succession.html" title="相続事業承継の過去問題">相続・事業承継</a>
+<h3>FP2級試験情報</h3>
+<ul>
+<li><a href="/law.html">法令・制度改正情報</a>
+<li><a href="/kakomon-free-pdf.html">FP2級過去問PDF一覧</a>
+</ul>
+<div class="menuCloseBtn">×　メニューを閉じる</div>
+</nav>
+
+</div>
+
+<footer>
+<script async src="https://cse.google.com/cse.js?cx=2a0a0aae8124eb637"></script>
+<div class="gcse-search"></div>
+<div class="minilogo"></div>
+<a href="/userterms.html">このサイトの利用について</a>
+<a href="/privacypolicy.html">プライバシーポリシー</a>
+<a href="/tokushouhou.html">特商法に基づく表記</a>
+<a href="/faq.html">よくある質問とその答え</a>
+<a href="/contact.html">お問い合わせ</a>
+<a href="/config.html">サイト設定</a>
+<br>
+<a href="https://fp3-siken.com/" class="mutualLink">FP3級ドットコム<img src="https://fp3-siken.com/img/icon_fp3.png" width="32" height="32" alt="FP3級ドットコム" loading="lazy"></a>
+<a href="https://fp1-siken.com/" class="mutualLink">FP1級ドットコム<img src="https://fp3-siken.com/img/icon_fp1.png" width="32" height="32" alt="FP1級ドットコム" loading="lazy"></a>
+<a href="https://takken-siken.com/" class="mutualLink">宅建試験ドットコム<img src="https://fp3-siken.com/img/icon_tk.png" width="32" height="32" alt="宅建試験ドットコム" loading="lazy"></a>
+<a href="https://chintaikanrishi-siken.com/" class="mutualLink">賃貸管理士試験ドットコム<img src="https://fp3-siken.com/img/icon_ck.png" width="32" height="32" alt="賃貸管理士試験ドットコム" loading="lazy"></a>
+<a href="https://kangyou-siken.com/" class="mutualLink">管理業務主任者試験ドットコム<img src="https://fp3-siken.com/img/icon_kg.png" width="32" height="32" alt="管理業務主任者試験ドットコム" loading="lazy"></a>
+<a href="https://denkou2-siken.com/" class="mutualLink">第二種電気工事士ドットコム<img src="https://fp3-siken.com/img/icon_dk2.png" width="32" height="32" alt="第二種電気工事士ドットコム" loading="lazy"></a>
+<div class="copyright">&copy; 2018-<script>document.write(new Date().getFullYear());</script> <b>fp2-siken.com</b> All Rights Reserved.</div>
+</footer>
+<!--MAINCONTENT END-->
+</div>
+<div id="canvas_answer_back"></div>
+<canvas id="canvas_answer_front" width="200" height="260"></canvas>
+
+<!-- SCRIPT START -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script>
+$(function(){
+const countdownMessage = $('#countdown').html() + '</div>';
+$('#countdown2').html(countdownMessage.replace('　', '<div class="countdown-message">'));
+$('#showMore').click(function(){
+	$(this).hide();
+	$('p.info:not("#countdown2"), .divider').show();
+})
+$('.selectBtn>a').click(function(){
+	$('.kaisetsu').show();
+})
+$('[data-update]').each(function(){
+	var day_timeStamp = 86400 * 1000;
+	var diff = Date.now() - ($(this).attr('data-update') * 1000);
+	if (diff < (day_timeStamp / 24)) {
+		$(this).html(Math.ceil(diff / (day_timeStamp / 24 / 60))+'分前');
+	} else if (diff < day_timeStamp){
+		$(this).html(Math.ceil(diff / (day_timeStamp / 24))+'時間前');
+	} else {
+		$(this).html(Math.floor(diff / day_timeStamp)+'日前');
+	}
+})
+
+})
+</script>
+<script>
+var script1 = document.createElement('script');
+script1.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
+script1.defer = true;
+script1.onload = function() {
+	var script2 = document.createElement('script');
+	script2.defer = true;
+	script2.src = 'https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js';
+	script2.onload = function() {
+		drawChart();
+	}
+	document.body.appendChild(script2);
+}
+document.body.appendChild(script1);
+
+var styles;
+function getStyleValue(name) {
+	if (!styles) {
+		styles = getComputedStyle(document.body);
+	}
+	return styles.getPropertyValue(name);
+}
+
+var ctx1 = document.getElementById('graph1').getContext('2d');
+var ctx2 = document.getElementById('graph2').getContext('2d');
+var labelArray = ["2014.1","2014.5","2014.9","2015.1","2015.5","2015.9","2016.1","2016.5","2016.9","2017.1","2017.5","2017.9","2018.1","2018.5","2018.9","2019.1","2019.5","2019.9","2020.1","2020.9","2021.1","2021.5","2021.9","2022.1","2022.5","2022.9","2023.1","2023.5","2023.9","2024.1","2024.5","2024.9","2025.1","25上期"].slice(-10);
+
+ctx1.canvas.height = 200;
+ctx2.canvas.height = 200;
+
+const COLORS = [
+  'rgba(255, 99, 132, .8)',
+  'rgba(255, 161, 130, .8)',
+  'rgba(162, 211, 26, .8)',
+  'rgba(87, 211, 190, .8)',
+];
+
+var drawChart = function(){
+
+var bar_datalabels = {
+	color: getStyleValue('--color-444'),
+	font: {size: 10},
+	padding: 2,
+	anchor: 'end',
+	align: 'end',
+	offset: 0,
+	formatter: function (value) {
+		return (value/10000).toFixed(1)+'万';
+	}
+};
+
+var chart1 = new Chart(ctx1, {
+	plugins: [ChartDataLabels],
+	type : 'bar',
+	data: {
+		labels: labelArray,
+		datasets: [{
+			label: "学科",
+			backgroundColor: COLORS[0],
+			borderColor: COLORS[0],
+			data: [59393, 50031, 50994, 57908, 50273, 52464, 57558, 51367, 53526, 62481, 53062, 54560, 60440, 48484, 50926, 58250, 46338, 52306, 64078, 88858, 77302, 71535, 69851, 69692, 64541, 61137, 66179, 51966, 52011, 55789, 50228, 43074, 45140, 38834].slice(-10)
+		},
+		{
+			label: "実技",
+			backgroundColor: COLORS[1],
+			borderColor: COLORS[1],
+			data: [46429, 35755, 39538, 46316, 35859, 37151, 41817, 37718, 42154, 46707, 36889, 41667, 47883, 38035, 42844, 49099, 40204, 43124, 51474, 76902, 63212, 51242, 53388, 54292, 46509, 44908, 47907, 41106, 39582, 44009, 36308, 33950, 33961, 30600].slice(-10)
+		}]
+	},
+	options : {
+		scales: {
+			y: {
+				min: 0,
+				max: 80000,
+				ticks:{
+					color: getStyleValue('--color-666'),
+					callback: function(value) {
+						return (value / 10000)+'万人';
+					},
+				},
+			},
+			x: {
+				ticks: {
+					color: getStyleValue('--color-666'),
+					autoSkip: false,
+				},
+				grid: {display: false},
+			},
+		},
+		title : {
+			display : true,
+			text : '受検者数の推移（金財・FP協会合計）'
+		},
+		layout: {
+			padding: { right: 20 }
+		},
+		responsive: true,
+		maintainAspectRatio: false,
+		plugins: {
+			datalabels: bar_datalabels,
+		}
+	}
+});
+
+var line_datalabels = {
+	font: {size: 10},
+	borderRadius: 4,
+	backgroundColor: function(ctx){
+		return COLORS[ctx.datasetIndex];
+	},
+	color: '#fff',
+	borderRadius: 4,
+	padding: 2,
+	align: 'center',
+	formatter: function(value) {
+		return value.toFixed(0)+'%';
+	},
+	/*配置する位置をコントロール
+	display: function(ctx) {
+		return ctx.dataIndex % 2 ? false : true;
+	},*/
+};
+
+var chart2 = new Chart(ctx2, {
+	plugins: [ChartDataLabels],
+	type : 'line',
+	data: {
+		labels: labelArray,
+ 		datasets: [{
+			label: "金財 学科",
+			backgroundColor : 'transparent',
+			pointBackgroundColor : COLORS[0],
+			borderColor: COLORS[0],
+			lineTension: 0,
+			fill: false,
+			data: [16.0, 26.8, 23.4, 20.0, 22.0, 20.8, 20.2, 21.9, 23.8, 23.1, 24.9, 30.2, 28.5, 28.2, 21.5, 31.1, 20.9, 21.0, 28.8, 33.1, 23.4, 33.8, 25.46, 19.50, 22.11, 15.75, 29.07, 17.51, 22.75, 13.27, 29.70, 15.95, 19.79, 24.24].slice(-10)
+		},
+		{
+			label: "金財 実技",
+			backgroundColor : 'transparent',
+			pointBackgroundColor : COLORS[1],
+			borderColor: COLORS[1],
+			lineTension: 0,
+			fill: false,
+			data: [28.8, 36.3, 30.9, 39.2, 52.2, 30.4, 26.5, 24.7, 54.6, 41.3, 36.7, 47.5, 38.0, 30.5, 26.7, 37.5, 34.7, 39.0, 38.5, 48.1, 45.6, 44.8, 40.03, 45.34, 32.80, 38.05, 35.14, 39.49, 40.80, 41.52, 45.17, 40.45, 43.16, 52.89].slice(-10)
+		},
+		{
+			label: "FP協会 学科",
+			backgroundColor : 'transparent',
+			pointBackgroundColor : COLORS[2],
+			borderColor: COLORS[2],
+			lineTension: 0,
+			fill: false,
+			data: [31.5, 43.4, 41.8, 34.0, 40.2, 35.4, 34.8, 39.0, 40.1, 39.4, 41.4, 47.8, 45.6, 42.9, 39.5, 48.3, 40.2, 43.3, 41.9, 49.2, 44.0, 55.6, 50.56, 41.51, 49.20, 42.16, 56.12, 48.82, 53.54, 39.00, 59.29, 47.1, 44.4, 54.8].slice(-10)
+		},
+		{
+			label: "FP協会 実技",
+			backgroundColor : 'transparent',
+			pointBackgroundColor : COLORS[3],
+			borderColor: COLORS[3],
+			lineTension: 0,
+			fill: false,
+			data: [59.9, 62.3, 53.3, 62.4, 63.7, 60.1, 45.9, 58.7, 50.6, 63.9, 46.8, 58.3, 57.5, 51.7, 50.5, 50.3, 62.7, 62.6, 62.6, 57.8, 71.0, 66.7, 60.26, 56.33, 62.11, 56.55, 59.53, 58.61, 52.02, 61.12, 54.87, 56.5, 48.8, 69.7].slice(-10)
+		}]
+	},
+	options : {
+		scales: {
+			y: {
+				min: 0,
+				max: 100,
+				ticks:{
+					color: getStyleValue('--color-666'),
+					callback: function(value) {
+						return value+'%';
+					},
+				},
+			},
+			x: {
+				ticks: {
+					color: getStyleValue('--color-666'),
+					autoSkip: false,
+				},
+				grid: {display: false},
+			}
+		},
+		title : {
+			display : true,
+			text : '合格率の推移（％）'
+		},
+		layout: {
+			padding: { right: 20}
+		},
+		responsive: true,
+		maintainAspectRatio: false,
+		plugins: {
+			datalabels: line_datalabels,
+		}
+	}
+});
+}
+
+</script>
+<!--SCRIPT END-->
+</body>
+</html>

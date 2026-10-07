@@ -1,0 +1,2230 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS SAA-C03 原创练习卷 第09份</title><style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;
+ padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.toolbar button.primary:hover{background:#0a5d33}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.stem p{margin:0 0 6px}
+.en{color:var(--en)}
+.zh{color:var(--zh);font-size:14px}
+.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}
+.opts{list-style:none;margin:12px 0 0;padding:0}
+.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}
+.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}
+details.ans .correct{font-size:14px;margin:4px 0 8px}
+details.ans .correct b{color:#047857;font-size:16px}
+details.ans .expl{padding-bottom:12px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:15px 18px;
+ margin-bottom:10px;text-decoration:none;color:#111827}
+a.card:hover{border-color:#93c5fd;background:#f8fbff}
+a.card .n{font-weight:700}
+a.card .r{color:#6b7280;font-size:13px;margin-top:3px}
+@media print{
+ body{background:#fff}
+ .toolbar{display:none}
+ .wrap{max-width:none;padding:0}
+ .q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}
+ details.ans{border:1px solid #ccc;background:#fff;display:block}
+ details.ans .expl{display:block}
+}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+</style></head><body>
+<div class="wrap">
+<h1>AWS SAA-C03 原创练习卷 · 第 09 份</h1>
+<p class="sub">题目 401–450 · 每份 50 题 · 中英对照 · 点选项后按「确认作答」即刻判对错 · 来源：Ditectrev 原创题库（非真题 dump）</p>
+<div class="toolbar"><div class="btns">
+<button class="primary" id="btn-sheet" type="button">答题卡</button>
+<button id="btn-wrong" type="button">只看错题</button>
+<button id="btn-expand" type="button">展开全部解析</button>
+<button id="btn-report" type="button">交卷</button>
+<button id="btn-reset" type="button">重置</button>
+<button onclick="window.print()" type="button">打印 / 存 PDF</button>
+</div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>50</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<div class="q" id="q401" data-n="401" data-ans="C">
+  <div class="qhead"><span class="qno">Question 401</span></div>
+  <div class="stem">
+    <p class="en">You are running a successful multitier web application on AWS and your marketing department has asked you to add a reporting tier to the application. The reporting tier will aggregate and publish status reports every 30 minutes from user-generated information that is being stored in your web application s database. You are currently running a Multi-AZ RDS MySQL instance for the database tier. You also have implemented Elasticache as a database caching layer between the application tier and database tier. Please select the answer that will allow you to successful ly implement the reporting tier with as little impact as possible to your database.</p>
+    <p class="zh">您正在 AWS 上成功运行多层 Web 应用程序，并且您的营销部门要求您向该应用程序添加报告层。报告层将每 30 分钟根据存储在 Web 应用程序数据库中的用户生成信息汇总和发布状态报告。您当前正在为数据库层运行多可用区 RDS MySQL 实例。您还实现了 Elasticache 作为应用程序层和数据库层之间的数据库缓存层。请选择允许您成功实施报告层且对数据库影响尽可能小的答案。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Continually send transaction logs from your master database to an S3 bucket and generate the reports off the S3 bucket using S3 byte range requests.</p>
+        <p class="zh">持续将事务日志从主数据库发送到 S3 存储桶，并使用 S3 字节范围请求生成 S3 存储桶的报告。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Generate the reports by querying the synchronously replicated standby RDS MySQL instance maintained through Multi-AZ.</p>
+        <p class="zh">通过查询通过多可用区维护的同步复制备用 RDS MySQL 实例来生成报告。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Launch a RDS Read Replica connected to your Multi-AZ master database and generate reports by querying the Read Replica.</p>
+        <p class="zh">启动连接到多可用区主数据库的 RDS 只读副本，并通过查询只读副本生成报告。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Generate the reports by querying the ElastiCache database caching tier.</p>
+        <p class="zh">通过查询 ElastiCache 数据库缓存层生成报告。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q402" data-n="402" data-ans="C">
+  <div class="qhead"><span class="qno">Question 402</span></div>
+  <div class="stem">
+    <p class="en">Can I delete a snapshot of the root device of an EBS volume used by a registered AMI?</p>
+    <p class="zh">我可以删除已注册 AMI 使用的 EBS 卷的根设备快照吗？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Only via API.</p>
+        <p class="zh">只能通过 API。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Only via Console.</p>
+        <p class="zh">仅通过控制台。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Yes.</p>
+        <p class="zh">是的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">No.</p>
+        <p class="zh">不。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q403" data-n="403" data-ans="A">
+  <div class="qhead"><span class="qno">Question 403</span></div>
+  <div class="stem">
+    <p class="en">MySQL installations default to port [...].</p>
+    <p class="zh">MySQL 安装默认端口 [...]。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">3306.</p>
+        <p class="zh">3306.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">443.</p>
+        <p class="zh">443.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">80.</p>
+        <p class="zh">80.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">1158.</p>
+        <p class="zh">1158.</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+  </details>
+</div>
+<div class="q" id="q404" data-n="404" data-ans="C">
+  <div class="qhead"><span class="qno">Question 404</span></div>
+  <div class="stem">
+    <p class="en">In the &#x27;Detailed &#x27; monitoring data available for your Amazon EBS volumes, Provisioned IOPS volumes automatically send [...] minute metrics to Amazon CloudWatch.</p>
+    <p class="zh">在可用于 Amazon EBS 卷的“详细”监控数据中，预配置 IOPS 卷会自动将分钟指标发送到 Amazon CloudWatch。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">5.</p>
+        <p class="zh">5.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">2.</p>
+        <p class="zh">2.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">1.</p>
+        <p class="zh">1.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">3.</p>
+        <p class="zh">3.</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q405" data-n="405" data-ans="B">
+  <div class="qhead"><span class="qno">Question 405</span></div>
+  <div class="stem">
+    <p class="en">A user has deployed an application on his private cloud. The user is using his own monitoring tool. He wants to configure it so that whenever there is an error, the monitoring tool will notify him via SMS. Which of the below mentioned AWS services will help in this scenario?</p>
+    <p class="zh">用户在他的私有云上部署了一个应用程序。用户正在使用自己的监控工具。他想对其进行配置，以便每当出现错误时，监控工具都会通过短信通知他。下面提到的哪些 AWS 服务在这种情况下会有所帮助？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS SES.</p>
+        <p class="zh">AWS SES。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">AWS SNS.</p>
+        <p class="zh">AWS 社交网络服务。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">None because the user infrastructure is in the private cloud.</p>
+        <p class="zh">没有，因为用户基础设施位于私有云中。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS SMS.</p>
+        <p class="zh">AWS 短信。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q406" data-n="406" data-ans="C">
+  <div class="qhead"><span class="qno">Question 406</span></div>
+  <div class="stem">
+    <p class="en">What does Amazon Route 53 provide?</p>
+    <p class="zh">Amazon Route 53 提供什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">A global Content Delivery Network.</p>
+        <p class="zh">全球内容交付网络。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">None of these.</p>
+        <p class="zh">这些都没有。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">A scalable Domain Name System.</p>
+        <p class="zh">可扩展的域名系统。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">An SSH endpoint for Amazon EC2.</p>
+        <p class="zh">Amazon EC2 的 SSH 端点。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q407" data-n="407" data-ans="B">
+  <div class="qhead"><span class="qno">Question 407</span></div>
+  <div class="stem">
+    <p class="en">The AWS CloudHSM service defines a resource known as a high-availability (HA) [...], which is a virtual partition that represents a group of partitions, typically distributed between several physical HSMs for high-availability.</p>
+    <p class="zh">AWS CloudHSM 服务定义了一种称为高可用性 (HA) 的资源，它是代表一组分区的虚拟分区，通常分布在多个物理 HSM 之间以实现高可用性。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">proxy group.</p>
+        <p class="zh">代理组。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">partition group.</p>
+        <p class="zh">分区组。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">functional group.</p>
+        <p class="zh">功能组。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">relational group.</p>
+        <p class="zh">关系组。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q408" data-n="408" data-ans="D">
+  <div class="qhead"><span class="qno">Question 408</span></div>
+  <div class="stem">
+    <p class="en">In Amazon EC2, partial instance-hours are billed [...].</p>
+    <p class="zh">在 Amazon EC2 中，按部分实例小时计费 [...]。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">per second used in the hour.</p>
+        <p class="zh">一小时内使用的每秒。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">per minute used.</p>
+        <p class="zh">每分钟使用。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">by combining partial segments into full hours.</p>
+        <p class="zh">通过将部分时间段合并为完整时间。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">as full hours.</p>
+        <p class="zh">作为完整的时间。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+  </details>
+</div>
+<div class="q" id="q409" data-n="409" data-ans="B">
+  <div class="qhead"><span class="qno">Question 409</span></div>
+  <div class="stem">
+    <p class="en">In Amazon EC2, what is the limit of Reserved Instances per Availability Zone each month?</p>
+    <p class="zh">在 Amazon EC2 中，每个可用区每月的预留实例限制是多少？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">5.</p>
+        <p class="zh">5.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">20.</p>
+        <p class="zh">20.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">50.</p>
+        <p class="zh">50.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">10.</p>
+        <p class="zh">10.</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q410" data-n="410" data-ans="B">
+  <div class="qhead"><span class="qno">Question 410</span></div>
+  <div class="stem">
+    <p class="en">True or False: When using IAM to control access to your RDS resources, the key names that can be used are case sensitive. For example, aws: CurrentTime is NOT equivalent to AWS: currenttime.</p>
+    <p class="zh">对或错：使用 IAM 控制对 RDS 资源的访问时，可以使用的键名称区分大小写。例如，aws: CurrentTime 不等于 AWS: currenttime。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">True.</p>
+        <p class="zh">真的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">False.</p>
+        <p class="zh">错误的。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q411" data-n="411" data-ans="C">
+  <div class="qhead"><span class="qno">Question 411</span></div>
+  <div class="stem">
+    <p class="en">You need to create a JSON-formatted text file for AWS CloudFormation. This is your first template and the only thing you know is that the templates include several major sections but there is only one that is required for it to work. What is the only section required?</p>
+    <p class="zh">您需要为 AWS CloudFormation 创建 JSON 格式的文本文件。这是您的第一个模板，您唯一知道的是模板包含几个主要部分，但只有一个部分需要它才能工作。唯一需要的部分是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Mappings.</p>
+        <p class="zh">映射。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Outputs.</p>
+        <p class="zh">输出。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Resources.</p>
+        <p class="zh">资源。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Conditions.</p>
+        <p class="zh">状况。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q412" data-n="412" data-ans="C">
+  <div class="qhead"><span class="qno">Question 412</span></div>
+  <div class="stem">
+    <p class="en">A user wants to use an EBS-backed Amazon EC2 instance for a temporary job. Based on the input data, the job is most likely to finish within a week. Which of the following steps should be followed to terminate the instance automatically once the job is finished?</p>
+    <p class="zh">用户想要使用 EBS 支持的 Amazon EC2 实例来执行临时作业。根据输入数据，这项工作最有可能在一周内完成。作业完成后应遵循以下哪个步骤来自动终止实例？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Configure the EC2 instance with a stop instance to terminate it.</p>
+        <p class="zh">使用停止实例配置 EC2 实例以终止它。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Configure the EC2 instance with ELB to terminate the instance when it remains idle.</p>
+        <p class="zh">使用 ELB 配置 EC2 实例，以在实例空闲时终止该实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Configure the Cloud Watch alarm on the instance that should perform the termination action once the instance is idle.</p>
+        <p class="zh">在实例上配置 Cloud Watch 警报，一旦实例空闲，该警报应执行终止操作。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Configure the Auto Scaling schedule activity that terminates the instance after 7 days.</p>
+        <p class="zh">配置在 7 天后终止实例的 Auto Scaling 计划活动。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q413" data-n="413" data-ans="C">
+  <div class="qhead"><span class="qno">Question 413</span></div>
+  <div class="stem">
+    <p class="en">You are building an automated transcription service in which Amazon EC2 worker instances process an uploaded audio file and generate a text file. You must store both of these files in the same durable storage until the text file is retrieved. You do not know what the storage capacity requirements are. Which storage option is both cost-efficient and scalable?</p>
+    <p class="zh">您正在构建一个自动转录服务，其中 Amazon EC2 工作实例处理上传的音频文件并生成文本文件。您必须将这两个文件存储在同一个持久存储中，直到检索到文本文件。您不知道存储容量要求是多少。哪种存储选项既经济高效又可扩展？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Multiple Amazon EBS volume with snapshots.</p>
+        <p class="zh">具有快照的多个 Amazon EBS 卷。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">A single Amazon Glacier vault.</p>
+        <p class="zh">单个 Amazon Glacier 保险库。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">A single Amazon S3 bucket.</p>
+        <p class="zh">单个 Amazon S3 桶。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Multiple instance stores.</p>
+        <p class="zh">多个实例存储。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q414" data-n="414" data-ans="D">
+  <div class="qhead"><span class="qno">Question 414</span></div>
+  <div class="stem">
+    <p class="en">Your company has recently extended its datacenter into a VPC on AWS to add burst computing capacity as needed Members of your Network Operations Center need to be able to go to the AWSManagement Console and administer Amazon EC2 instances as necessary You don&#x27;t want to create new IAM users for each NOC member and make those users sign in again to the AWS Management Console Which option below will meet the needs for your NOC members?</p>
+    <p class="zh">您的公司最近将其数据中心扩展到 AWS 上的 VPC，以根据需要添加突发计算能力 您的网络运营中心的成员需要能够访问 AWS 管理控制台并根据需要管理 Amazon EC2 实例 您不希望为每个 NOC 成员创建新的 IAM 用户并让这些用户再次登录 AWS 管理控制台 以下哪个选项可以满足您的 NOC 成员的需求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use OAuth 2 0 to retrieve temporary AWS security credentials to enable your NOC members to sign in to the AWS Management Console.</p>
+        <p class="zh">使用 OAuth 2 0 检索临时 AWS 安全凭证，以使您的 NOC 成员能够登录 AWS 管理控制台。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use web Identity Federation to retrieve AWS temporary security credentials to enable your NOC members to sign in to the AWS Management Console.</p>
+        <p class="zh">使用 Web Identity Federation 检索 AWS 临时安全凭证，以使您的 NOC 成员能够登录 AWS 管理控制台。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use your on-premises SAML 2.0-compliant identity provider (IOP) to grant the NOC members federated access to the AWS Management Console via the AWS sing le sign-on (550) endpoint.</p>
+        <p class="zh">使用本地 SAML 2.0 兼容身份提供商 (IOP) 授予 NOC 成员通过 AWS 单点登录 (550) 终端节点对 AWS 管理控制台的联合访问权限。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use your on-premises SAML2.0-compliam identity provider (IOP) to retrieve temporary security credentials to enable NOC members to sign in to the AWS Management Console.</p>
+        <p class="zh">使用本地 SAML2.0 兼容身份提供商 (IOP) 检索临时安全凭证，以使 NOC 成员能够登录 AWS 管理控制台。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+  </details>
+</div>
+<div class="q" id="q415" data-n="415" data-ans="C">
+  <div class="qhead"><span class="qno">Question 415</span></div>
+  <div class="stem">
+    <p class="en">You have just set up your first Elastic Load Balancer (ELB) but it does not seem to be configured properly. You discover that before you start using ELB, you have to configure the listeners for your load balancer. Which protocols does ELB use to support the load balancing of applications?</p>
+    <p class="zh">您刚刚设置了第一个 Elastic Load Balancer (ELB)，但它似乎配置不正确。您发现在开始使用 ELB 之前，必须为负载均衡器配置侦听器。 ELB 使用哪些协议来支持应用程序的负载均衡？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">HTTP and HTTPS.</p>
+        <p class="zh">HTTP 和 HTTPS。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">HTTP, HTTPS, TCP, SSL and SSH.</p>
+        <p class="zh">HTTP、HTTPS、TCP、SSL 和 SSH。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">HTTP, HTTPS, TCP, and SSL.</p>
+        <p class="zh">HTTP、HTTPS、TCP 和 SSL。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">HTTP, HTTPS, TCP, SSL and SFTP.</p>
+        <p class="zh">HTTP、HTTPS、TCP、SSL 和 SFTP。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q416" data-n="416" data-ans="C">
+  <div class="qhead"><span class="qno">Question 416</span></div>
+  <div class="stem">
+    <p class="en">A t2.medium EC2 instance type must be launched with what type of Amazon Machine Image (AMI)?</p>
+    <p class="zh">t2.medium EC2 实例类型必须使用什么类型的 Amazon 系统映像 (AMI) 启动？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">An Instance store Hardware Virtual Machine AMI.</p>
+        <p class="zh">实例存储硬件虚拟机 AMI。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">An Instance store Paravirtual AMI.</p>
+        <p class="zh">实例存储准虚拟 AMI。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">An Amazon EBS-backed Hardware Virtual Machine AMI.</p>
+        <p class="zh">Amazon EBS 支持的硬件虚拟机 AMI。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">An Amazon EBS-backed Paravirtual AMI.</p>
+        <p class="zh">Amazon EBS 支持的准虚拟 AMI。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q417" data-n="417" data-ans="D">
+  <div class="qhead"><span class="qno">Question 417</span></div>
+  <div class="stem">
+    <p class="en">A user has created a subnet in VPC and launched an EC2 instance within it. The user has not selected the option to assign the IP address while launching the instance. The user has 3 elastic IPs and is trying to assign one of the Elastic IPs to the VPC instance from the console. The console does not show any instance in the IP assignment screen. What is a possible reason that the instance is unavailable in the assigned IP console?</p>
+    <p class="zh">用户已在 VPC 中创建子网并在其中启动 EC2 实例。用户在启动实例时未选择分配 IP 地址的选项。用户拥有 3 个弹性 IP，并尝试从控制台将其中一个弹性 IP 分配给 VPC 实例。控制台的 IP 分配屏幕中不显示任何实例。实例在分配的 IP 控制台中不可用的可能原因是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">The IP address may be attached to one of the instances.</p>
+        <p class="zh">IP 地址可能附加到其中一个实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">The IP address belongs to a different zone than the subnet zone.</p>
+        <p class="zh">IP 地址属于与子网区域不同的区域。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">The user has not created an internet gateway.</p>
+        <p class="zh">用户尚未创建 Internet 网关。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">The IP addresses belong to EC2 Classic; so they cannot be assigned to VPC.</p>
+        <p class="zh">IP 地址属于 EC2 Classic；所以不能分配到 VPC。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+  </details>
+</div>
+<div class="q" id="q418" data-n="418" data-ans="B">
+  <div class="qhead"><span class="qno">Question 418</span></div>
+  <div class="stem">
+    <p class="en">Will I be alerted when automatic fail over occurs?</p>
+    <p class="zh">发生自动故障转移时我会收到警报吗？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Only if SNS configured.</p>
+        <p class="zh">仅当配置了 SNS 时。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Yes.</p>
+        <p class="zh">是的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">No.</p>
+        <p class="zh">不。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Only if Cloud watch configured.</p>
+        <p class="zh">仅当配置了云监视时。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q419" data-n="419" data-ans="C">
+  <div class="qhead"><span class="qno">Question 419</span></div>
+  <div class="stem">
+    <p class="en">Amazon EC2 provides a [...]. It is an HTTP or HTTPS request that uses the HTTP verbs GET or POST.</p>
+    <p class="zh">Amazon EC2 提供了一个[...]。它是使用 HTTP 动词 GET 或 POST 的 HTTP 或 HTTPS 请求。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">web database.</p>
+        <p class="zh">网络数据库。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">.NET framework.</p>
+        <p class="zh">.NET 框架。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Query API.</p>
+        <p class="zh">查询 API。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">C library.</p>
+        <p class="zh">C 库。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q420" data-n="420" data-ans="C">
+  <div class="qhead"><span class="qno">Question 420</span></div>
+  <div class="stem">
+    <p class="en">Which of the following requires a custom Cloud Watch metric to monitor?</p>
+    <p class="zh">以下哪一项需要自定义 Cloud Watch 指标来监控？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Memory Utilization of an EC2 instance.</p>
+        <p class="zh">EC2 实例的内存利用率。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">CPU Utilization of an EC2 instance.</p>
+        <p class="zh">EC2 实例的 CPU 利用率。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Disk usage activity of an EC2 instance.</p>
+        <p class="zh">EC2 实例的磁盘使用活动。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Data transfer of an EC2 instance.</p>
+        <p class="zh">EC2 实例的数据传输。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q421" data-n="421" data-ans="A">
+  <div class="qhead"><span class="qno">Question 421</span></div>
+  <div class="stem">
+    <p class="en">An International company has deployed a multi-tier web application that relies on DynamoDB in a single region. For regulatory reasons they need disaster recovery capability in a separate region with a Recovery Time Objective of 2 hours and a Recovery Point Objective of 24 hours. They should synchronize their data on a regular basis and be able to provision the web application rapidly using CloudFormation. The objective is to minimize changes to the existing web application, control the throughput of DynamoDB used for the synchronization of data and synchronize only the modified elements. Which design would you choose to meet these requirements?</p>
+    <p class="zh">一家国际公司在单个区域部署了依赖于 DynamoDB 的多层 Web 应用程序。出于监管原因，他们需要在单独区域提供灾难恢复能力，恢复时间目标为 2 小时，恢复点目标为 24 小时。他们应该定期同步数据，并能够使用 CloudFormation 快速配置 Web 应用程序。目标是最大限度地减少对现有 Web 应用程序的更改、控制用于数据同步的 DynamoDB 的吞吐量并仅同步修改的元素。您会选择哪种设计来满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use AWS data Pipeline to schedule a DynamoDB cross region copy once a day. Create a &#x27;Last updated&#x27; attribute in your DynamoDB table that would represent the timestamp of the last update and use it as a filter.</p>
+        <p class="zh">使用 AWS data Pipeline 安排每天一次 DynamoDB 跨区域复制。在 DynamoDB 表中创建一个“上次更新”属性，该属性代表上次更新的时间戳，并将其用作过滤器。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use EMR and write a custom script to retrieve data from DynamoDB in the current region using a SCAN operation and push it to DynamoDB in the second region.</p>
+        <p class="zh">使用 EMR 并编写自定义脚本，使用 SCAN 操作从当前区域中的 DynamoDB 检索数据，并将其推送到第二个区域中的 DynamoDB。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use AWS data Pipeline to schedule an export of the DynamoDB table to S3 in the current region once a day, then schedule another task immediately after it that will import data from S3 to DynamoDB in the other region.</p>
+        <p class="zh">使用 AWS data Pipeline 安排每天一次将 DynamoDB 表导出到当前区域中的 S3，然后立即安排另一个任务，将数据从 S3 导入到其他区域中的 DynamoDB。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Send also each item into an SQS queue in the second region; use an auto-scaling group behind the SQS queue to replay the write in the second region.</p>
+        <p class="zh">将每个项目发送到第二个区域的 SQS 队列中；在 SQS 队列后面使用自动缩放组来重播第二个区域中的写入。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+  </details>
+</div>
+<div class="q" id="q422" data-n="422" data-ans="B">
+  <div class="qhead"><span class="qno">Question 422</span></div>
+  <div class="stem">
+    <p class="en">An Elastic IP address (EIP) is a static IP address designed for dynamic cloud computing. With an EIP, you can mask the failure of an instance or software by rapidly remapping the address to another instance in your account. Your EIP is associated with your AWS account, not a particular EC2 instance, and it remains associated with your account until you choose to explicitly release it. By default how many EIPs is each AWS account limited to on a per region basis?</p>
+    <p class="zh">弹性 IP 地址（EIP）是专为动态云计算而设计的静态 IP 地址。使用 EIP，您可以通过快速将地址重新映射到帐户中的另一个实例来掩盖实例或软件的故障。您的 EIP 与您的 AWS 账户相关联，而不是与特定的 EC2 实例相关联，并且它会一直与您的账户相关联，直到您选择显式释放它为止。默认情况下，每个 AWS 账户在每个区域限制有多少个 EIP？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">1.</p>
+        <p class="zh">1.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">5.</p>
+        <p class="zh">5.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Unlimited.</p>
+        <p class="zh">无限。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">10.</p>
+        <p class="zh">10.</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q423" data-n="423" data-ans="C">
+  <div class="qhead"><span class="qno">Question 423</span></div>
+  <div class="stem">
+    <p class="en">Which Amazon Storage behaves like raw, unformatted, external block devices that you can attach to your instances?</p>
+    <p class="zh">哪些 Amazon Storage 的行为类似于可以附加到实例的原始、未格式化的外部块设备？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">None of these.</p>
+        <p class="zh">这些都没有。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon Instance Storage</p>
+        <p class="zh">亚马逊实例存储</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon EBS</p>
+        <p class="zh">Amazon EBS</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">All of these.</p>
+        <p class="zh">所有这些。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q424" data-n="424" data-ans="A">
+  <div class="qhead"><span class="qno">Question 424</span></div>
+  <div class="stem">
+    <p class="en">You currently operate a web application in the AWS US-East region. The application runs on an autoscaled layer of EC2 instances and an RDS Multi-AZ database. Your IT security compliance officer has tasked you to develop a reliable and durable logging solution to track changes made to your EC2, IAM, and RDS resources. The solution must ensure the integrity and confidentiality of your log data. Which of these solutions would you recommend?</p>
+    <p class="zh">您目前在 AWS 美国东部区域运营一个 Web 应用程序。该应用程序在 EC2 实例的自动缩放层和 RDS 多可用区数据库上运行。您的 IT 安全合规官要求您开发可靠且持久的日志记录解决方案，以跟踪对 EC2、IAM 和 RDS 资源所做的更改。该解决方案必须确保日志数据的完整性和机密性。您会推荐以下哪些解决方案？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Create a new CloudTrail trail with one new S3 bucket to store the logs and with the global services option selected. Use IAM roles, S3 bucket policies, and Multi Factor Authentication (MFA) Delete on the S3 bucket that stores your logs.</p>
+        <p class="zh">使用一个新的 S3 存储桶来存储日志并选择全局服务选项，创建一个新的 CloudTrail 跟踪。在存储日志的 S3 存储桶上使用 IAM 角色、S3 存储桶策略和多重身份验证 (MFA) 删除。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Create a new CloudTrail with one new S3 bucket to store the logs. Configure SNS to send log file delivery notifications to your management system. Use IAM roles and S3 bucket policies on the S3 bucket that stores your logs.</p>
+        <p class="zh">使用一个新的 S3 存储桶创建一个新的 CloudTrail 来存储日志。配置 SNS 以将日志文件传送通知发送到您的管理系统。在存储日志的 S3 存储桶上使用 IAM 角色和 S3 存储桶策略。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Create a new CloudTrail trail with an existing S3 bucket to store the logs and with the global services option selected. Use S3 ACLs and Multi Factor Authentication (MFA) Delete on the S3 bucket that stores your logs.</p>
+        <p class="zh">使用现有 S3 存储桶创建新的 CloudTrail 跟踪来存储日志并选择全局服务选项。在存储日志的 S3 存储桶上使用 S3 ACL 和多重身份验证 (MFA) 删除。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Create three new CloudTrail trails with three new S3 buckets to store the logs: one for the AWS Management console, one for AWS SDKs, and one for command line tools. Use IAM roles and S3 bucket policies on the S3 buckets that store your logs.</p>
+        <p class="zh">使用三个新的 S3 存储桶创建三个新的 CloudTrail 跟踪来存储日志：一个用于 AWS 管理控制台，一个用于 AWS 开发工具包，一个用于命令行工具。在存储日志的 S3 存储桶上使用 IAM 角色和 S3 存储桶策略。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+  </details>
+</div>
+<div class="q" id="q425" data-n="425" data-ans="A">
+  <div class="qhead"><span class="qno">Question 425</span></div>
+  <div class="stem">
+    <p class="en">Does DynamoDB support in-place atomic updates?</p>
+    <p class="zh">DynamoDB 是否支持就地原子更新？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Yes.</p>
+        <p class="zh">是的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">No.</p>
+        <p class="zh">不。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">It does support in-place non-atomic updates.</p>
+        <p class="zh">它确实支持就地非原子更新。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">It is not defined.</p>
+        <p class="zh">它没有被定义。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+  </details>
+</div>
+<div class="q" id="q426" data-n="426" data-ans="D">
+  <div class="qhead"><span class="qno">Question 426</span></div>
+  <div class="stem">
+    <p class="en">Which of the following is true of Amazon EC2 security group?</p>
+    <p class="zh">关于 Amazon EC2 安全组，以下哪一项是正确的？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">You can modify the outbound rules for EC2-Classic.</p>
+        <p class="zh">您可以修改 EC2-Classic 的出站规则。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">You can modify the rules for a security group only if the security group controls the traffic for just one instance.</p>
+        <p class="zh">仅当安全组仅控制一个实例的流量时，您才可以修改该安全组的规则。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">You can modify the rules for a security group only when a new instance is created.</p>
+        <p class="zh">只有在创建新实例时才可以修改安全组的规则。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">You can modify the rules for a security group at any time.</p>
+        <p class="zh">您可以随时修改安全组的规则。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+  </details>
+</div>
+<div class="q" id="q427" data-n="427" data-ans="B">
+  <div class="qhead"><span class="qno">Question 427</span></div>
+  <div class="stem">
+    <p class="en">You need to set up security for your VPC and you know that Amazon VPC provides two features that you can use to increase security for your VPC: security groups and network access control lists (ACLs). You have already looked into security groups and you are now trying to understand ACLs. Which statement below is incorrect in relation to ACLs?</p>
+    <p class="zh">您需要为 VPC 设置安全性，并且您知道 Amazon VPC 提供了两个可用于提高 VPC 安全性的功能：安全组和网络访问控制列表 (ACL)。您已经研究过安全组，现在正在尝试了解 ACL。以下关于 ACL 的哪项表述不正确？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Supports allow rules and deny rules.</p>
+        <p class="zh">支持允许规则和拒绝规则。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Is stateful: Return traffic is automatically allowed, regardless of any rules.</p>
+        <p class="zh">是有状态的：无论任何规则如何，都会自动允许返回流量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Processes rules in number order when deciding whether to allow traffic.</p>
+        <p class="zh">在决定是否允许流量时按编号顺序处理规则。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Operates at the subnet level (second layer of defense).</p>
+        <p class="zh">在子网级别运行（第二层防御）。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q428" data-n="428" data-ans="D">
+  <div class="qhead"><span class="qno">Question 428</span></div>
+  <div class="stem">
+    <p class="en">A user is trying to launch a similar EC2 instance from an existing instance with the option &#x27;Launch More like this&#x27;. The AMI of the selected instance is deleted. What will happen in this case?</p>
+    <p class="zh">用户尝试使用“启动更多类似的”选项从现有实例启动类似的 EC2 实例。所选实例的 AMI 将被删除。在这种情况下会发生什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS does not need an AMI for the &#x27;Launch more like this&#x27; option.</p>
+        <p class="zh">AWS 不需要 AMI 来实现“启动更多类似功能”选项。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">AWS will launch the instance but will not create a new AMI.</p>
+        <p class="zh">AWS 将启动实例，但不会创建新的 AMI。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS will create a new AMI and launch the instance.</p>
+        <p class="zh">AWS 将创建一个新的 AMI 并启动该实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS will throw an error saying that the AMI is deregistered.</p>
+        <p class="zh">AWS 将抛出错误，指出 AMI 已取消注册。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+  </details>
+</div>
+<div class="q" id="q429" data-n="429" data-ans="C">
+  <div class="qhead"><span class="qno">Question 429</span></div>
+  <div class="stem">
+    <p class="en">True or False: When you use the AWS Management Console to delete an IAM user, IAM also deletes any signing certificates and any access keys belonging to the user.</p>
+    <p class="zh">对或错：当您使用 AWS 管理控制台删除 IAM 用户时，IAM 还会删除属于该用户的所有签名证书和所有访问密钥。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">False.</p>
+        <p class="zh">错误的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">This is configurable.</p>
+        <p class="zh">这是可配置的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">True.</p>
+        <p class="zh">真的。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q430" data-n="430" data-ans="D">
+  <div class="qhead"><span class="qno">Question 430</span></div>
+  <div class="stem">
+    <p class="en">You are working with a customer who is using Chef configuration management in their data center. Which service is designed to let the customer leverage existing Chef recipes in AWS?</p>
+    <p class="zh">您正在与一位在其数据中心使用 Chef 配置管理的客户合作。哪种服务旨在让客户利用 AWS 中现有的 Chef 食谱？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Amazon Simple Workflow Service.</p>
+        <p class="zh">亚马逊简单工作流程服务。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">AWS Elastic Beanstalk.</p>
+        <p class="zh">AWS Elastic Beanstalk。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS CloudFormation.</p>
+        <p class="zh">AWS CloudFormation。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS OpsWorks.</p>
+        <p class="zh">AWS OpsWorks。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+  </details>
+</div>
+<div class="q" id="q431" data-n="431" data-ans="B">
+  <div class="qhead"><span class="qno">Question 431</span></div>
+  <div class="stem">
+    <p class="en">Does Amazon RDS for SQL Server currently support importing data into the msdb database?</p>
+    <p class="zh">Amazon RDS for SQL Server 目前支持将数据导入 msdb 数据库吗？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Yes.</p>
+        <p class="zh">是的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">No.</p>
+        <p class="zh">不。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q432" data-n="432" data-ans="C">
+  <div class="qhead"><span class="qno">Question 432</span></div>
+  <div class="stem">
+    <p class="en">How can an EBS volume that is currently attached to an EC2 instance be migrated from one Availability Zone to another?</p>
+    <p class="zh">如何将当前附加到 EC2 实例的 EBS 卷从一个可用区迁移到另一个可用区？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Detach the volume and attach it to another EC2 instance in the other AZ.</p>
+        <p class="zh">分离该卷并将其附加到另一个可用区中的另一个 EC2 实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Simply create a new volume in the other AZ and specify the original volume as the source.</p>
+        <p class="zh">只需在其他可用区创建一个新卷并将原始卷指定为源即可。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Create a snapshot of the volume, and create a new volume from the snapshot in the other AZ.</p>
+        <p class="zh">创建卷的快照，并从其他可用区中的快照创建新卷。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Detach the volume, then use the ec2-migrate-voiume command to move it to another AZ.</p>
+        <p class="zh">分离该卷，然后使用 ec2-migrate-voiume 命令将其移动到另一个可用区。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q433" data-n="433" data-ans="A">
+  <div class="qhead"><span class="qno">Question 433</span></div>
+  <div class="stem">
+    <p class="en">Having set up a website to automatically be redirected to a backup website if it fails, you realize that there are different types of failovers that are possible. You need all your resources to be available the majority of the time. Using Amazon Route 53 which configuration would best suit this requirement?</p>
+    <p class="zh">将网站设置为在出现故障时自动重定向到备份网站后，您会意识到可能存在不同类型的故障转移。您需要所有资源在大部分时间都可用。使用 Amazon Route 53 哪种配置最适合此要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Active-active failover.</p>
+        <p class="zh">主动-主动故障转移。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">None. Route 53 can&#x27;t failover.</p>
+        <p class="zh">没有任何。 Route 53 无法进行故障转移。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Active-passive failover.</p>
+        <p class="zh">主动-被动故障转移。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Active-active-passive and other mixed configurations.</p>
+        <p class="zh">主动-主动-被动等混合配置。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+  </details>
+</div>
+<div class="q" id="q434" data-n="434" data-ans="D">
+  <div class="qhead"><span class="qno">Question 434</span></div>
+  <div class="stem">
+    <p class="en">A client application requires operating system privileges on a relational database server. What is an appropriate configuration for a highly available database architecture?</p>
+    <p class="zh">客户端应用程序需要关系数据库服务器上的操作系统权限。高可用数据库架构的合适配置是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">A standalone Amazon EC2 instance.</p>
+        <p class="zh">独立的 Amazon EC2 实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon RDS in a Multi-AZ configuration.</p>
+        <p class="zh">多可用区配置中的 Amazon RDS。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon EC2 instances in a replication configuration utilizing a single Availability Zone.</p>
+        <p class="zh">使用单个可用区的复制配置中的 Amazon EC2 实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Amazon EC2 instances in a replication configuration utilizing two different Availability Zones.</p>
+        <p class="zh">复制配置中的 Amazon EC2 实例利用两个不同的可用区。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+  </details>
+</div>
+<div class="q" id="q435" data-n="435" data-ans="B">
+  <div class="qhead"><span class="qno">Question 435</span></div>
+  <div class="stem">
+    <p class="en">Is decreasing the storage size of a DB Instance permitted?</p>
+    <p class="zh">是否允许减少数据库实例的存储大小？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Depends on the ROMS used.</p>
+        <p class="zh">取决于所使用的 ROM。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Yes.</p>
+        <p class="zh">是的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">No.</p>
+        <p class="zh">不。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q436" data-n="436" data-ans="A">
+  <div class="qhead"><span class="qno">Question 436</span></div>
+  <div class="stem">
+    <p class="en">Can you encrypt EBS volumes?</p>
+    <p class="zh">您可以加密 EBS 卷吗？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Yes, you can enable encryption when you create a new EBS volume using the AWS Management Console, API, or CLI.</p>
+        <p class="zh">是的，您可以在使用 AWS 管理控制台、API 或 CLI 创建新的 EBS 卷时启用加密。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">No, you should use a third-party software to perform raw block-level encryption of an EBS volume.</p>
+        <p class="zh">不可以，您应该使用第三方软件对 EBS 卷执行原始块级加密。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Yes, but you must use a third-party API for encrypting data before it&#x27;s loaded on EBS.</p>
+        <p class="zh">是的，但您必须使用第三方 API 来加密数据，然后才能将数据加载到 EBS 上。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Yes, you can encrypt with the special &#x27;ebs_encrypt&#x27; command through Amazon APIs.</p>
+        <p class="zh">是的，您可以通过 Amazon API 使用特殊的“ebs_encrypt”命令进行加密。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+  </details>
+</div>
+<div class="q" id="q437" data-n="437" data-ans="D">
+  <div class="qhead"><span class="qno">Question 437</span></div>
+  <div class="stem">
+    <p class="en">You must assign each server to at least [...] security group.</p>
+    <p class="zh">您必须将每台服务器至少分配给 [...] 安全组。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">3.</p>
+        <p class="zh">3.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">2.</p>
+        <p class="zh">2.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">4.</p>
+        <p class="zh">4.</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">1.</p>
+        <p class="zh">1.</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+  </details>
+</div>
+<div class="q" id="q438" data-n="438" data-ans="A">
+  <div class="qhead"><span class="qno">Question 438</span></div>
+  <div class="stem">
+    <p class="en">Is the encryption of connections between my application and my DB Instance using SSL for the MySQL server engines available?</p>
+    <p class="zh">是否可以使用 MySQL 服务器引擎的 SSL 对我的应用程序和数据库实例之间的连接进行加密？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Yes.</p>
+        <p class="zh">是的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Only in VPC.</p>
+        <p class="zh">仅在 VPC 中。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Only in certain regions.</p>
+        <p class="zh">仅在某些地区。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">No.</p>
+        <p class="zh">不。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+  </details>
+</div>
+<div class="q" id="q439" data-n="439" data-ans="B">
+  <div class="qhead"><span class="qno">Question 439</span></div>
+  <div class="stem">
+    <p class="en">Your manager has come to you saying that he is very confused about the bills he is receiving from AWS as he is getting different bills for every user and needs you to look into making it more understandable. Which of the following would be the best solution to meet his request?</p>
+    <p class="zh">您的经理来找您说，他对从 AWS 收到的账单感到非常困惑，因为他为每个用户收到了不同的账单，需要您进行研究，使其更容易理解。以下哪项是满足他的要求的最佳解决方案？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS Billing Aggregation.</p>
+        <p class="zh">AWS 账单聚合。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Consolidated Billing.</p>
+        <p class="zh">合并账单。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Deferred Billing.</p>
+        <p class="zh">延期计费。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Aggregated Billing.</p>
+        <p class="zh">汇总计费。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q440" data-n="440" data-ans="B">
+  <div class="qhead"><span class="qno">Question 440</span></div>
+  <div class="stem">
+    <p class="en">Regarding Amazon Route 53, if your application is running on Amazon EC2 instances in two or more Amazon EC2 regions and if you have more than one Amazon EC2 instance in one or more regions, you can use [...] to route traffic to the correct region and then use [...] route traffic to instances within the region, based on probabilities that you specify.</p>
+    <p class="zh">关于 Amazon Route 53，如果您的应用程序在两个或多个 Amazon EC2 区域中的 Amazon EC2 实例上运行，并且您在一个或多个区域中拥有多个 Amazon EC2 实例，则您可以使用 [...] 将流量路由到正确的区域，然后根据您指定的概率使用 [...] 将流量路由到该区域内的实例。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">weighted-based routing; alias resource record sets.</p>
+        <p class="zh">基于加权的路由；别名资源记录集。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">latency-based routing; weighted resource record sets.</p>
+        <p class="zh">基于延迟的路由；加权资源记录集。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">weighted-based routing; weighted resource record sets.</p>
+        <p class="zh">基于加权的路由；加权资源记录集。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">latency-based routing; alias resource record sets.</p>
+        <p class="zh">基于延迟的路由；别名资源记录集。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q441" data-n="441" data-ans="B">
+  <div class="qhead"><span class="qno">Question 441</span></div>
+  <div class="stem">
+    <p class="en">If I scale the storage capacity provisioned to my DB Instance by mid of a billing month, how will I be charged?</p>
+    <p class="zh">如果我在账单月中旬之前扩展为数据库实例配置的存储容量，我将如何付费？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">You will be charged for the highest storage capacity you have used.</p>
+        <p class="zh">您将按照您使用的最高存储容量付费。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">On a proration basis.</p>
+        <p class="zh">按比例分配。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q442" data-n="442" data-ans="B, C">
+  <div class="qhead"><span class="qno">Question 442</span></div>
+  <div class="stem">
+    <p class="en">When using the following AWS services, which should be implemented in multiple Availability Zones for high availability solutions? (Choose 2 answers)</p>
+    <p class="zh">使用以下 AWS 服务时，哪些应该在多个可用区实施以获得高可用性解决方案？ （选择 2 个答案）</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Amazon Dynamo DB.</p>
+        <p class="zh">亚马逊 Dynamo 数据库。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon Elastic Compute Cloud (EC2).</p>
+        <p class="zh">亚马逊弹性计算云（EC2）。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon Elastic Load Balancing.</p>
+        <p class="zh">亚马逊弹性负载平衡。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Amazon Simple Notification Service (SNS).</p>
+        <p class="zh">亚马逊简单通知服务（SNS）。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Amazon Simple Storage Service (S3).</p>
+        <p class="zh">亚马逊简单存储服务（S3）。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B, C</b></p>
+  </details>
+</div>
+<div class="q" id="q443" data-n="443" data-ans="C">
+  <div class="qhead"><span class="qno">Question 443</span></div>
+  <div class="stem">
+    <p class="en">A customer is hosting their company website on a cluster of web servers that are behind a public facing load balancer. The customer also uses Amazon Route 53 to manage their public DNS. How should the customer configure the DNS zone apex record to point to the load balancer?</p>
+    <p class="zh">客户将其公司网站托管在一组 Web 服务器上，这些服务器位于面向公众的负载均衡器后面。客户还使用 Amazon Route 53 来管理其公共 DNS。客户应如何配置 DNS 区域顶点记录以指向负载均衡器？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Create an A record pointing to the IP address of the load balancer.</p>
+        <p class="zh">创建指向负载均衡器 IP 地址的 A 记录。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Create a CNAME record pointing to the load balancer DNS name.</p>
+        <p class="zh">创建指向负载均衡器 DNS 名称的 CNAME 记录。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Create a CNAME record aliased to the load balancer DNS name.</p>
+        <p class="zh">创建一个别名为负载均衡器 DNS 名称的 CNAME 记录。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Create an A record aliased to the load balancer DNS name.</p>
+        <p class="zh">创建一个别名为负载均衡器 DNS 名称的 A 记录。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+  </details>
+</div>
+<div class="q" id="q444" data-n="444" data-ans="B">
+  <div class="qhead"><span class="qno">Question 444</span></div>
+  <div class="stem">
+    <p class="en">True or False: REST or Query requests are HTTP or HTTPS requests that use an HTTP verb (such as GET or POST) and a parameter named Action or Operation that specifies the API you are calling.</p>
+    <p class="zh">对或错：REST 或查询请求是使用 HTTP 动词（例如 GET 或 POST）以及名为 Action 或 Operation（指定您正在调用的 API）的参数的 HTTP 或 HTTPS 请求。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">True.</p>
+        <p class="zh">真的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">False.</p>
+        <p class="zh">错误的。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q445" data-n="445" data-ans="A">
+  <div class="qhead"><span class="qno">Question 445</span></div>
+  <div class="stem">
+    <p class="en">Which of the following features ensures even distribution of traffic to Amazon EC2 instances in multiple Availability Zones registered with a load balancer?</p>
+    <p class="zh">以下哪项功能可确保将流量均匀分配到向负载均衡器注册的多个可用区中的 Amazon EC2 实例？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Elastic Load Balancing request routing.</p>
+        <p class="zh">Elastic Load Balancing 请求路由。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">An Amazon Route 53 weighted routing policy.</p>
+        <p class="zh">Amazon Route 53 加权路由策略。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Elastic Load Balancing cross-zone load balancing.</p>
+        <p class="zh">Elastic Load Balancing 跨区域负载均衡。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">An Amazon Route 53 latency routing policy.</p>
+        <p class="zh">Amazon Route 53 延迟路由策略。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+  </details>
+</div>
+<div class="q" id="q446" data-n="446" data-ans="B">
+  <div class="qhead"><span class="qno">Question 446</span></div>
+  <div class="stem">
+    <p class="en">Groups can&#x27;t [...].</p>
+    <p class="zh">团体不能[...]。</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">be nested more than 3 levels.</p>
+        <p class="zh">嵌套超过 3 层。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">be nested at all.</p>
+        <p class="zh">完全可以嵌套。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">be nested more than 4 levels.</p>
+        <p class="zh">嵌套超过 4 层。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">be nested more than 2 levels.</p>
+        <p class="zh">嵌套超过 2 层。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q447" data-n="447" data-ans="B">
+  <div class="qhead"><span class="qno">Question 447</span></div>
+  <div class="stem">
+    <p class="en">You have been using T2 instances as your CPU requirements have not been that intensive. However you now start to think about larger instance types and start looking at M1 and M3 instances. You are a little confused as to the differences between them as they both seem to have the same ratio of CPU and memory. Which statement below is incorrect as to why you would use one over the other?</p>
+    <p class="zh">您一直在使用 T2 实例，因为您的 CPU 要求并不那么密集。但是，您现在开始考虑更大的实例类型并开始考虑 M1 和 M3 实例。您对它们之间的差异有点困惑，因为它们似乎都具有相同的 CPU 和内存比例。关于为什么要使用其中一种而不是另一种，以下哪项陈述是不正确的？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">M3 instances are less expensive than M1 instances.</p>
+        <p class="zh">M3 实例比 M1 实例便宜。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">M3 instances are configured with more swap memory than M1 instances.</p>
+        <p class="zh">M3 实例配置的交换内存多于 M1 实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">M3 instances provide better, more consistent performance that M1 instances for most use-cases.</p>
+        <p class="zh">对于大多数用例，M3 实例比 M1 实例提供更好、更一致的性能。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">M3 instances also offer SSD-based instance storage that delivers higher I/O performance.</p>
+        <p class="zh">M3 实例还提供基于 SSD 的实例存储，可提供更高的 I/O 性能。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q448" data-n="448" data-ans="B">
+  <div class="qhead"><span class="qno">Question 448</span></div>
+  <div class="stem">
+    <p class="en">Do the system resources on the Micro instance meet the recommended configuration for Oracle?</p>
+    <p class="zh">Micro 实例的系统资源是否满足 Oracle 推荐配置？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Yes, completely.</p>
+        <p class="zh">是的，完全如此。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Yes, but only for certain situations.</p>
+        <p class="zh">是的，但仅适用于某些情况。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+  </details>
+</div>
+<div class="q" id="q449" data-n="449" data-ans="C, D, E">
+  <div class="qhead"><span class="qno">Question 449</span></div>
+  <div class="stem">
+    <p class="en">Which of the following are true regarding AWS CloudTrail? (Choose 3 answers)</p>
+    <p class="zh">关于 AWS CloudTrail，以下哪项描述是正确的？ （选择 3 个答案）</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">CloudTrail is enabled globally.</p>
+        <p class="zh">CloudTrail 已在全球范围内启用。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">CloudTrail is enabled by default.</p>
+        <p class="zh">CloudTrail 默认启用。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">CloudTrail is enabled on a per-region basis.</p>
+        <p class="zh">CloudTrail 按区域启用。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">CloudTrail is enabled on a per-service basis.</p>
+        <p class="zh">CloudTrail 是按服务启用的。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Logs can be delivered to a single Amazon S3 bucket for aggregation.</p>
+        <p class="zh">日志可以传送到单个 Amazon S3 存储桶进行聚合。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="F">
+      <span class="letter">F</span><div class="otext">
+        <p class="en">CloudTrail is enabled for all available services within a region.</p>
+        <p class="zh">CloudTrail 已针对区域内的所有可用服务启用。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="G">
+      <span class="letter">G</span><div class="otext">
+        <p class="en">Logs can only be processed and delivered to the region in which they are generated.</p>
+        <p class="zh">日志只能在其产生的区域进行处理和传送。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 3 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>C, D, E</b></p>
+  </details>
+</div>
+<div class="q" id="q450" data-n="450" data-ans="D">
+  <div class="qhead"><span class="qno">Question 450</span></div>
+  <div class="stem">
+    <p class="en">If you&#x27;re unable to connect via SSH to your EC2 instance, which of the following should you check and possibly correct to restore connectivity?</p>
+    <p class="zh">如果您无法通过 SSH 连接到 EC2 实例，您应该检查并可能纠正以下哪一项来恢复连接？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Adjust Security Group to permit egress traffic over TCP port 443 from your IP.</p>
+        <p class="zh">调整安全组以允许来自您的 IP 通过 TCP 端口 443 的传出流量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Configure the JAM role to permit changes to security group settings.</p>
+        <p class="zh">配置 JAM 角色以允许更改安全组设置。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Modify the instance security group to allow ingress of ICMP packets from your IP.</p>
+        <p class="zh">修改实例安全组以允许来自您的 IP 的 ICMP 数据包进入。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Adjust the instance&#x27;s Security Group to permit ingress traffic over port 22 from your IP.</p>
+        <p class="zh">调整实例的安全组以允许来自您的 IP 通过端口 22 的入口流量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Apply the most recently released Operating System security patches.</p>
+        <p class="zh">应用最新发布的操作系统安全补丁。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+  </details>
+</div>
+</div><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:aws:compliance:09";
+var TOTAL=50;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(",").map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok)
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q);
+  var ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script></body></html>

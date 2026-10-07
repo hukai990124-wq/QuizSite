@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TOEIC Reading Practice Test 03</title><style>
+:root{--ink:#1b1b1b;--muted:#5b6570;--line:#e2e6ea;--green:#0b6b3a;--paper:#f6f8f9}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font:16px/1.55 -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Microsoft YaHei",sans-serif;color:var(--ink);background:#eceff1}
+.wrap{max-width:880px;margin:0 auto;background:#fff;padding:30px 42px 90px;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+h1{font-size:26px;margin:0 0 8px}
+.meta{color:var(--muted);font-size:14px;margin:2px 0}
+.toolbar{position:sticky;top:0;background:#fff;padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px;z-index:5}
+.toolbar .btns{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 13px;border-radius:7px;border:1px solid var(--line);background:#fff;color:#334155;cursor:pointer}
+.toolbar button:hover{background:#f3f6f8}
+.toolbar button.primary{background:var(--green);border-color:var(--green);color:#fff}
+.toolbar button.primary:hover{background:#0a5d33}
+h2{margin:38px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--green);font-size:20px}
+h3{font-size:15px;color:var(--green);margin:18px 0 8px}
+.dirs{background:#eef5f0;border-left:4px solid var(--green);padding:9px 13px;font-size:13.5px;color:#33413a;border-radius:0 5px 5px 0;margin:8px 0 16px}
+.ref{font-weight:600;margin:20px 0 8px;color:#222}
+.q{margin:16px 0 0;padding-bottom:14px;border-bottom:1px solid #f0f3f5;scroll-margin-top:96px}
+.q:last-child{border-bottom:none}
+.q .stem{margin-bottom:2px}
+.q .n{font-weight:700;margin-right:5px}
+.opts{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:9px 0 0;padding:0}
+@media (max-width:680px){.opts{grid-template-columns:1fr}}
+.opts li{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fcfcfd;font-size:15px}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px;margin-top:1px}
+.otext{flex:1 1 auto}
+.passage{white-space:pre-wrap;background:var(--paper);border:1px solid #e6eaed;border-left:4px solid #c6cdd3;padding:13px 16px;border-radius:5px;font-size:14.5px;line-height:1.5;margin:6px 0 12px;color:#20303a}
+.passage .ttl{font-weight:700;display:block;margin-bottom:6px;color:#111}
+details.ans{margin-top:10px;border:1px solid #dfe8e2;background:#f7faf8;border-radius:9px}
+details.ans summary{cursor:pointer;padding:8px 13px;font-weight:600;font-size:13px;color:#0b6b3a}
+details.ans .expl{padding:0 14px 12px;font-size:14px;color:#3d4650;line-height:1.6}
+details.ans .expl .k{font-weight:700;color:var(--green)}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0;display:block;text-decoration:none;color:inherit}
+.card:hover{border-color:#9db3c4;background:#fafcfd}
+.card .t{font-weight:600}
+.card .s{color:var(--muted);font-size:13px}
+@media print{
+  body{background:#fff}
+  .wrap{box-shadow:none;max-width:none;padding:0 6mm}
+  .toolbar{display:none}
+  h2{page-break-after:avoid}
+  .q,.opts,.passage{page-break-inside:avoid}
+  details.ans{display:block}
+  details.ans .expl{display:block}
+}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+</style></head><body><div class="wrap"><div class="toolbar"><div class="btns"><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button><button onclick="window.print()" type="button">打印 / 存 PDF</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>100</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<h1>TOEIC® Reading Practice Test 03</h1>
+<p class="meta">来源：TOEIC Mock Tests — Reading Practice Test 3（toeicmocktests.com，官方 2026 格式）</p>
+<p class="meta">100 题 · Part 5（30）+ Part 6（16）+ Part 7（54）· 建议用时 75 分钟 · 点选项后按「确认作答」即可判对错，进度自动保存在本机</p>
+<h2>PART 5 — Incomplete Sentences（101–130）</h2>
+<div class="dirs"><b>Directions:</b> A word or phrase is missing in each of the sentences below. Four answer choices are given below each sentence. Select the best answer to complete the sentence. Then mark the letter (A), (B), (C), or (D) on your answer sheet.</div>
+<div class="q" id="q101" data-n="101" data-ans="B">
+<div class="stem"><span class="n">101.</span>The manager reviewed the proposal carefully ____ approving the additional funding.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">while</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">before</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">during</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">since</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;Before&#x27; + gerund shows the review happens prior to the approval.</div></details>
+</div>
+
+<div class="q" id="q102" data-n="102" data-ans="B">
+<div class="stem"><span class="n">102.</span>The customer service team responded ____ to every complaint it received.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">prompt</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">promptly</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">promptness</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">prompted</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> An adverb is needed to modify the verb &#x27;responded&#x27;, so &#x27;promptly&#x27; is correct.</div></details>
+</div>
+
+<div class="q" id="q103" data-n="103" data-ans="C">
+<div class="stem"><span class="n">103.</span>Mr. Ito, ____ team won the innovation award, will lead the new division.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">who</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">whom</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">whose</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">which</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The possessive relative pronoun &#x27;whose&#x27; is needed before the noun &#x27;team&#x27;.</div></details>
+</div>
+
+<div class="q" id="q104" data-n="104" data-ans="C">
+<div class="stem"><span class="n">104.</span>Sales in the online store have risen ____ since the website was redesigned.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">sharp</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">sharper</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">sharply</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">sharpness</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> An adverb is needed to modify &#x27;have risen&#x27;, so &#x27;sharply&#x27; is correct.</div></details>
+</div>
+
+<div class="q" id="q105" data-n="105" data-ans="C">
+<div class="stem"><span class="n">105.</span>Neither the director nor the board members ____ aware of the delay until yesterday.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">is</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">was</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">are</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">has</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> With &#x27;neither...nor&#x27;, the verb agrees with the nearer subject &#x27;board members&#x27;, which is plural, so &#x27;are&#x27;.</div></details>
+</div>
+
+<div class="q" id="q106" data-n="106" data-ans="A">
+<div class="stem"><span class="n">106.</span>The new privacy policy will ____ all employees, so please read it carefully.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">affect</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">effect</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">effective</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">affection</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The verb &#x27;affect&#x27; means &#x27;to influence&#x27;; &#x27;effect&#x27; as a noun and the others do not fit here.</div></details>
+</div>
+
+<div class="q" id="q107" data-n="107" data-ans="D">
+<div class="stem"><span class="n">107.</span>The store will reopen ____ Monday, once the holiday weekend is over.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">in</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">by</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">at</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">on</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The preposition &#x27;on&#x27; is used with a day, so &#x27;on Monday&#x27;.</div></details>
+</div>
+
+<div class="q" id="q108" data-n="108" data-ans="C">
+<div class="stem"><span class="n">108.</span>By the time the manager called, the team ____ the presentation.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">finished</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">have finished</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">had finished</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">finish</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The past perfect &#x27;had finished&#x27; shows the action was completed before another past event.</div></details>
+</div>
+
+<div class="q" id="q109" data-n="109" data-ans="D">
+<div class="stem"><span class="n">109.</span>Applications must be received ____ the end of the month to be considered.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">for</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">until</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">since</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">by</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;By&#x27; marks the deadline meaning &#x27;no later than&#x27;.</div></details>
+</div>
+
+<div class="q" id="q110" data-n="110" data-ans="C">
+<div class="stem"><span class="n">110.</span>The guest lecture was so ____ that no one wanted it to end.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">interest</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">interested</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">interesting</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">interestingly</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The &#x27;-ing&#x27; adjective &#x27;interesting&#x27; describes something that causes interest, which fits the lecture.</div></details>
+</div>
+
+<div class="q" id="q111" data-n="111" data-ans="B">
+<div class="stem"><span class="n">111.</span>Each of the regional offices ____ submitted its annual report on time.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">have</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">has</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">were</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">are</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The subject &#x27;Each&#x27; is singular, so the singular verb &#x27;has&#x27; is correct.</div></details>
+</div>
+
+<div class="q" id="q112" data-n="112" data-ans="D">
+<div class="stem"><span class="n">112.</span>The firm hired an experienced ____ to oversee the construction project.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">manage</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">managed</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">managing</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">manager</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> A noun naming a person is needed after &#x27;an experienced&#x27;, so &#x27;manager&#x27; is correct.</div></details>
+</div>
+
+<div class="q" id="q113" data-n="113" data-ans="A">
+<div class="stem"><span class="n">113.</span>The outdoor concert was cancelled ____ a severe storm over the region.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">because of</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">although</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">despite</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">even though</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;Because of&#x27; introduces a noun phrase giving the reason for the cancellation.</div></details>
+</div>
+
+<div class="q" id="q114" data-n="114" data-ans="B">
+<div class="stem"><span class="n">114.</span>Employees who complete the survey ____ entered into a prize draw.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">is</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">are</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">was</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">being</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The plural subject &#x27;Employees&#x27; takes the plural passive verb &#x27;are entered&#x27;.</div></details>
+</div>
+
+<div class="q" id="q115" data-n="115" data-ans="B">
+<div class="stem"><span class="n">115.</span>The second design was received far more ____ than the first by the review panel.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">favorable</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">favorably</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">favorabler</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">favor</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> With &#x27;more...than&#x27;, the base adverb &#x27;favorably&#x27; is required to modify &#x27;was received&#x27;.</div></details>
+</div>
+
+<div class="q" id="q116" data-n="116" data-ans="C">
+<div class="stem"><span class="n">116.</span>The documents ____ during the meeting will be circulated to all staff tomorrow.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">discuss</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">discusses</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">discussed</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">discussing</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The reduced passive clause &#x27;the documents (that were) discussed&#x27; requires the past participle &#x27;discussed&#x27;.</div></details>
+</div>
+
+<div class="q" id="q117" data-n="117" data-ans="B">
+<div class="stem"><span class="n">117.</span>Please ensure the machine is ____ shut down at the end of each working day.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">complete</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">completely</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">completion</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">completed</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> An adverb is needed to modify &#x27;shut down&#x27;, so &#x27;completely&#x27; is correct.</div></details>
+</div>
+
+<div class="q" id="q118" data-n="118" data-ans="A">
+<div class="stem"><span class="n">118.</span>The launch date depends ____ the results of the final round of tests.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">on</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">of</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">at</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">to</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The verb &#x27;depend&#x27; is followed by the preposition &#x27;on&#x27;.</div></details>
+</div>
+
+<div class="q" id="q119" data-n="119" data-ans="D">
+<div class="stem"><span class="n">119.</span>____ the report was thorough, it arrived a full week after the deadline.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">So</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Because</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Since</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Although</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The contrast between a thorough report and its lateness calls for the concession word &#x27;Although&#x27;.</div></details>
+</div>
+
+<div class="q" id="q120" data-n="120" data-ans="B">
+<div class="stem"><span class="n">120.</span>This supplier&#x27;s service is far more dependable than ____ we used before.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">one</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">the one</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">that ones</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">those one</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;The one&#x27; refers back to a single supplier, matching &#x27;this supplier&#x27;.</div></details>
+</div>
+
+<div class="q" id="q121" data-n="121" data-ans="A">
+<div class="stem"><span class="n">121.</span>All staff must ____ with the updated fire-safety rules without exception.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">comply</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">adhere</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">observe</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">follow</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;Comply&#x27; pairs with &#x27;with&#x27;; &#x27;adhere&#x27; would take &#x27;to&#x27;, and the others take a direct object.</div></details>
+</div>
+
+<div class="q" id="q122" data-n="122" data-ans="D">
+<div class="stem"><span class="n">122.</span>The booth will be ____ by the marketing team before the trade show opens.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">set</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">setting</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">to set</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">set up</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The phrasal verb &#x27;set up&#x27; completes the passive structure &#x27;will be set up&#x27;.</div></details>
+</div>
+
+<div class="q" id="q123" data-n="123" data-ans="A">
+<div class="stem"><span class="n">123.</span>Our flagship store earns more revenue than ____ branch in the country.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">any other</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">other any</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">the other any</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">any others</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;Any other&#x27; correctly compares the flagship store against every remaining branch.</div></details>
+</div>
+
+<div class="q" id="q124" data-n="124" data-ans="D">
+<div class="stem"><span class="n">124.</span>There has been a noticeable ____ in customer inquiries since the campaign began.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">rises</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">risen</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">rising</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">rise</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> A singular noun is needed after &#x27;a noticeable&#x27;, so &#x27;rise&#x27; is correct.</div></details>
+</div>
+
+<div class="q" id="q125" data-n="125" data-ans="C">
+<div class="stem"><span class="n">125.</span>The new app allows users ____ their orders in real time from any device.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">track</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">tracking</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">to track</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">tracked</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The pattern &#x27;allow + object + to-infinitive&#x27; requires &#x27;to track&#x27;.</div></details>
+</div>
+
+<div class="q" id="q126" data-n="126" data-ans="A">
+<div class="stem"><span class="n">126.</span>No one may access the server room ____ proper authorization from IT.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">without</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">unless</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">despite</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">except</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;Without&#x27; + noun means lacking authorization; &#x27;unless&#x27; would need a clause.</div></details>
+</div>
+
+<div class="q" id="q127" data-n="127" data-ans="B">
+<div class="stem"><span class="n">127.</span>The two teams collaborated ____ to finish the project ahead of schedule.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">close</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">closely</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">closer</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">closest</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> An adverb is needed to modify &#x27;collaborated&#x27;, so &#x27;closely&#x27; is correct.</div></details>
+</div>
+
+<div class="q" id="q128" data-n="128" data-ans="D">
+<div class="stem"><span class="n">128.</span>____ receiving your confirmation, we will ship your order the same day.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Since</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">During</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">While</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Upon</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;Upon receiving&#x27; means immediately after receiving, which fits the promise.</div></details>
+</div>
+
+<div class="q" id="q129" data-n="129" data-ans="C">
+<div class="stem"><span class="n">129.</span>Of all the proposals submitted, hers was the ____ practical and well researched.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">much</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">more</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">most</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">many</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Comparing one proposal against the whole group requires the superlative, so &#x27;the most&#x27;.</div></details>
+</div>
+
+<div class="q" id="q130" data-n="130" data-ans="A">
+<div class="stem"><span class="n">130.</span>We will contact you ____ a decision has been made about your application.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">as soon as</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">in order to</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">so that</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">in case</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;As soon as&#x27; introduces the time at which the contact will happen.</div></details>
+</div>
+
+<h2>PART 6 — Text Completion（131–146）</h2>
+<div class="dirs"><b>Directions:</b> Read the texts that follow. A word, phrase, or sentence is missing in parts of each text. Four answer choices for each question are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D) on your answer sheet.</div>
+<div class="ref">Questions 131–134 refer to the following passage.</div>
+<div class="passage">To: All Employees
+From: Building Security
+Re: New Visitor Check-In Procedure
+
+Starting Monday, May 5, all visitors to our offices (1)____ to sign in using the new tablet at the reception desk. The tablet will print a temporary badge that must be worn at all times.
+
+(2)____ This means employees no longer need to fill out paper visitor logs. Instead, you will receive an automatic email the moment your guest checks in.
+
+Please remind any visitors to bring a photo ID, as it is required (3)____ the sign-in process. If you are expecting a large group, contact reception ahead of time so they can prepare the badges (4)____.
+
+Thank you for helping us keep the building secure.</div>
+<div class="q" id="q131" data-n="131" data-ans="A">
+<div class="stem"><span class="n">131.</span>Blank (1)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">will be required</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">were required</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">have required</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">requiring</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The future marker &#x27;Starting Monday, May 5&#x27; requires &#x27;will be required&#x27;.</div></details>
+</div>
+
+<div class="q" id="q132" data-n="132" data-ans="B">
+<div class="stem"><span class="n">132.</span>Blank (2)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The parking garage will be closed on May 5.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The new system replaces our old paper-based process.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Several visitors have complained about long waits.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The reception desk will move to the second floor.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Introducing the new system as a replacement leads into the next sentence about no longer using paper logs.</div></details>
+</div>
+
+<div class="q" id="q133" data-n="133" data-ans="C">
+<div class="stem"><span class="n">133.</span>Blank (3)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">between</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">among</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">during</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">along</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The ID is required &#x27;during the sign-in process&#x27;, meaning within that procedure.</div></details>
+</div>
+
+<div class="q" id="q134" data-n="134" data-ans="B">
+<div class="stem"><span class="n">134.</span>Blank (4)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">prompt</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">promptly</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">promptness</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">prompted</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> An adverb is needed to modify &#x27;prepare&#x27;, so &#x27;promptly&#x27; is correct.</div></details>
+</div>
+
+<div class="ref">Questions 135–138 refer to the following passage.</div>
+<div class="passage">NOTICE: New Secure Bike Storage
+
+We are pleased to announce that a secure bicycle storage room (1)____ on the ground floor next month. The room will hold up to forty bikes and can be accessed with your employee key card.
+
+To use the facility, staff must first register their bicycle (2)____ the building manager. Registration is free and takes only a few minutes. (3)____ Unregistered bikes may be removed without notice.
+
+We hope this new facility will encourage more of you to cycle to work. Helmets and locks (4)____ available for purchase at a discount from the reception desk.
+
+For questions, please contact building services.</div>
+<div class="q" id="q135" data-n="135" data-ans="B">
+<div class="stem"><span class="n">135.</span>Blank (1)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">opens</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">will open</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">opened</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">has opened</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The future marker &#x27;next month&#x27; requires &#x27;will open&#x27;.</div></details>
+</div>
+
+<div class="q" id="q136" data-n="136" data-ans="C">
+<div class="stem"><span class="n">136.</span>Blank (2)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">of</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">to</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">with</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">at</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Staff &#x27;register their bicycle with the building manager&#x27;, the person handling registration.</div></details>
+</div>
+
+<div class="q" id="q137" data-n="137" data-ans="A">
+<div class="stem"><span class="n">137.</span>Blank (3)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Only registered bikes are permitted in the room.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The room will also store electric scooters.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Cycling to work reduces downtown traffic.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The building manager works part-time.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> A rule that only registered bikes are allowed explains why unregistered bikes may be removed.</div></details>
+</div>
+
+<div class="q" id="q138" data-n="138" data-ans="D">
+<div class="stem"><span class="n">138.</span>Blank (4)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">is</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">being</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">was</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">are</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The plural subject &#x27;Helmets and locks&#x27; takes the plural verb &#x27;are&#x27;.</div></details>
+</div>
+
+<div class="ref">Questions 139–142 refer to the following passage.</div>
+<div class="passage">FOR IMMEDIATE RELEASE
+
+Lumina Labs Launches Smart Desk Lamp
+
+Lumina Labs today announced the release of the Aura, a smart desk lamp that adjusts its brightness automatically to match the surrounding light. (1)____ The lamp can also be controlled by a smartphone app and set to gradually brighten in the morning.
+
+The company says the Aura (2)____ a common complaint from remote workers about eye strain during long hours at the screen. &quot;Good lighting makes a real difference to comfort and focus,&quot; said designer Priya Anand.
+
+The Aura will be (3)____ available online next month, priced at ninety dollars. Early reviewers have praised the company (4)____ its clean, simple design.</div>
+<div class="q" id="q139" data-n="139" data-ans="B">
+<div class="stem"><span class="n">139.</span>Blank (1)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The company plans to open a second office abroad.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The Aura is the company&#x27;s first product aimed at home offices.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Sales of desk lamps have declined this year.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The launch was delayed by supply problems.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Introducing the Aura as the company&#x27;s first home-office product leads into the following details about its features.</div></details>
+</div>
+
+<div class="q" id="q140" data-n="140" data-ans="A">
+<div class="stem"><span class="n">140.</span>Blank (2)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">addresses</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">address</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">addressing</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">to address</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The singular subject &#x27;the Aura&#x27; takes the singular verb &#x27;addresses&#x27;.</div></details>
+</div>
+
+<div class="q" id="q141" data-n="141" data-ans="C">
+<div class="stem"><span class="n">141.</span>Blank (3)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">wide</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">wider</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">widely</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">widest</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> An adverb is needed to modify &#x27;available&#x27;, so &#x27;widely&#x27; is correct.</div></details>
+</div>
+
+<div class="q" id="q142" data-n="142" data-ans="A">
+<div class="stem"><span class="n">142.</span>Blank (4)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">for</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">with</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">to</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">of</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The pattern &#x27;praise someone for something&#x27; requires &#x27;for&#x27;.</div></details>
+</div>
+
+<div class="ref">Questions 143–146 refer to the following passage.</div>
+<div class="passage">Dear Mr. Nguyen,
+
+Thank you for reaching out about the wireless headphones you ordered last week. We are sorry to hear that the left earpiece (1)____ any sound.
+
+From what you describe, the headphones may simply need to be re-paired with your device. We have included a short guide that (2)____ you through the process, which usually takes just a minute or two.
+
+If the issue persists after re-pairing, we will gladly send you a replacement pair at no (3)____ to you. Just reply to this email with your order number and we will ship it the same day. (4)____
+
+Kind regards,
+Customer Support Team</div>
+<div class="q" id="q143" data-n="143" data-ans="D">
+<div class="stem"><span class="n">143.</span>Blank (1)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">produces</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">is producing</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">has produced</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">is not producing</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The apology signals a fault, so &#x27;is not producing any sound&#x27; is correct.</div></details>
+</div>
+
+<div class="q" id="q144" data-n="144" data-ans="D">
+<div class="stem"><span class="n">144.</span>Blank (2)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">walk</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">walked</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">walking</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">walks</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The singular subject &#x27;a short guide that&#x27; takes the singular verb &#x27;walks&#x27;.</div></details>
+</div>
+
+<div class="q" id="q145" data-n="145" data-ans="D">
+<div class="stem"><span class="n">145.</span>Blank (3)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">charge</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">price</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">fee</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">cost</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;At no cost to you&#x27; is the fixed phrase meaning free of charge.</div></details>
+</div>
+
+<div class="q" id="q146" data-n="146" data-ans="C">
+<div class="stem"><span class="n">146.</span>Blank (4)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Unfortunately, the item is out of stock.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Your subscription will renew automatically.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">We appreciate your patience and want to resolve this quickly.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Please return the headphones to your nearest store.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> A reassuring closing best follows the offer to send a replacement pair.</div></details>
+</div>
+
+<h2>PART 7 — Reading Comprehension（147–200）</h2>
+<div class="dirs"><b>Directions:</b> In this part you will read a selection of texts, such as magazine and newspaper articles, e-mails, and instant messages. Each text or set of texts is followed by several questions. Select the best answer for each question and mark the letter (A), (B), (C), or (D) on your answer sheet.</div>
+<div class="ref">Questions 147–148 refer to the following Notice.</div>
+<div class="passage">NOTICE TO ALL TENANTS
+Kingsway Business Center
+
+Please be advised that the main lobby will undergo renovation from Monday, October 5, through Friday, October 9. During this time, the front entrance on Kingsway will be closed, and all tenants and visitors should use the side entrance on Palmer Lane.
+
+The elevators and stairwells will remain fully operational throughout the work. Deliveries should be directed to the loading area at the rear of the building. We expect some noise between 9:00 A.M. and 4:00 P.M. and appreciate your understanding.
+
+Thank you for your cooperation.
+— Property Management</div>
+<div class="q" id="q147" data-n="147" data-ans="B">
+<div class="stem"><span class="n">147.</span>What is the main purpose of the notice?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To announce a rent increase</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To inform tenants about a lobby renovation</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To introduce a new security team</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To advertise available office space</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The notice states the main lobby &#x27;will undergo renovation,&#x27; informing tenants of the work.</div></details>
+</div>
+
+<div class="q" id="q148" data-n="148" data-ans="C">
+<div class="stem"><span class="n">148.</span>Which entrance should tenants use during the work?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The front entrance on Kingsway</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The loading area at the rear</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The side entrance on Palmer Lane</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The parking garage entrance</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> With the front entrance closed, tenants &#x27;should use the side entrance on Palmer Lane.&#x27;</div></details>
+</div>
+
+<div class="ref">Questions 149–150 refer to the following Advertisement.</div>
+<div class="passage">FRESH &amp; READY
+Home-cooked meals, minus the shopping.
+
+Fresh &amp; Ready delivers a box of pre-measured ingredients and easy recipe cards straight to your door every week. Choose from vegetarian, seafood, or family menus, and cook a restaurant-quality dinner in about thirty minutes.
+
+Sign up this week and get 40% off your first three boxes. There is no long-term contract — pause or cancel anytime. Delivery is always free.
+
+Visit www.freshandready.com to pick your first menu today.</div>
+<div class="q" id="q149" data-n="149" data-ans="D">
+<div class="stem"><span class="n">149.</span>What is being advertised?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A grocery store</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A cooking class</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A restaurant</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A meal-kit delivery service</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> Fresh &amp; Ready &#x27;delivers a box of pre-measured ingredients and easy recipe cards,&#x27; a meal-kit service.</div></details>
+</div>
+
+<div class="q" id="q150" data-n="150" data-ans="C">
+<div class="stem"><span class="n">150.</span>What is true of the service?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It requires a one-year contract</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Delivery costs extra</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Customers can cancel anytime</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Only family menus are available</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The ad says &#x27;there is no long-term contract — pause or cancel anytime.&#x27;</div></details>
+</div>
+
+<div class="ref">Questions 151–152 refer to the following Text-message chain.</div>
+<div class="passage">Rosa Marin (9:12 A.M.): Morning! Are the samples ready for the 11:00 buyer visit?
+Neil Patel (9:14 A.M.): Almost — the fabric swatches are packed, but the catalog didn&#x27;t print. Toner&#x27;s out.
+Rosa Marin (9:15 A.M.): We can&#x27;t meet a buyer without the catalog. Any way to get toner fast?
+Neil Patel (9:17 A.M.): The shop on Beckett Street stocks it. I can be there and back in 40 minutes.
+Rosa Marin (9:18 A.M.): Cutting it close but doable. Go now — I&#x27;ll finish packing the swatches.
+Neil Patel (9:19 A.M.): On my way.</div>
+<div class="q" id="q151" data-n="151" data-ans="D">
+<div class="stem"><span class="n">151.</span>At 9:19 A.M., what does Mr. Patel most likely mean when he writes, &#x27;On my way&#x27;?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">He has finished the catalog.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">He is packing the swatches.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">He is meeting the buyer now.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">He is leaving to buy toner.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> He writes this after agreeing to go to the shop for toner, so he is leaving to get it.</div></details>
+</div>
+
+<div class="q" id="q152" data-n="152" data-ans="C">
+<div class="stem"><span class="n">152.</span>What problem do the speakers have?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The swatches were lost.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The buyer canceled the visit.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The printer is out of toner.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The meeting was moved earlier.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Mr. Patel says the catalog &#x27;didn&#x27;t print&#x27; because the &#x27;toner&#x27;s out.&#x27;</div></details>
+</div>
+
+<div class="ref">Questions 153–155 refer to the following Email.</div>
+<div class="passage">To: Daniel Ortega
+From: Ruth Kimani, Conference Organizer
+Subject: Confirmation — Riverside Tech Forum
+Date: May 3
+
+Dear Mr. Ortega,
+
+Thank you for agreeing to moderate a panel at the Riverside Tech Forum on June 5. I am writing to confirm the details and to ask for one item.
+
+Your panel, &quot;The Future of Remote Work,&quot; will run from 2:00 to 3:00 P.M. in the Maple Room. Four panelists have confirmed, and I will send you their biographies next week so you can prepare your questions. Could you please send me a short description of the panel, no more than 80 words, for our printed program by May 20?
+
+We will provide water and microphones for all panelists, and a technician will be on hand throughout. Please arrive by 1:30 to test the equipment.
+
+We look forward to a lively discussion.
+
+Best regards,
+Ruth Kimani</div>
+<div class="q" id="q153" data-n="153" data-ans="D">
+<div class="stem"><span class="n">153.</span>Why did Ms. Kimani write the email?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To invite Mr. Ortega to attend as a guest</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To change the date of the forum</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To cancel a panel discussion</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To confirm details and request a panel description</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> She writes &#x27;to confirm the details and to ask for one item,&#x27; the panel description.</div></details>
+</div>
+
+<div class="q" id="q154" data-n="154" data-ans="C">
+<div class="stem"><span class="n">154.</span>What is Mr. Ortega asked to send by May 20?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">His biography</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A list of his questions</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A short description of the panel</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A copy of his slides</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> She asks for &#x27;a short description of the panel, no more than 80 words.&#x27;</div></details>
+</div>
+
+<div class="q" id="q155" data-n="155" data-ans="A">
+<div class="stem"><span class="n">155.</span>What is Mr. Ortega asked to do at 1:30?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Arrive to test the equipment</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Meet the panelists for lunch</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Submit the program</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Introduce the keynote speaker</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;Please arrive by 1:30 to test the equipment.&#x27;</div></details>
+</div>
+
+<div class="ref">Questions 156–158 refer to the following Article.</div>
+<div class="passage">MARLOW — Tideline Kayaks, a small outfitter that has rented kayaks on the Marlow waterfront for eight years, will begin offering guided evening paddling tours starting in June, owner Grace Bell confirmed.
+
+The idea came from repeated requests by visitors. &quot;People kept asking if we ran tours, not just rentals,&quot; Ms. Bell said. &quot;The sunset paddles are something we&#x27;d been wanting to try for a while.&quot;
+
+Each tour will take no more than ten guests and will be led by a certified guide who points out local wildlife along the shoreline. Ms. Bell said the regular daytime rental business will continue as usual.
+
+The first several tours are already fully booked, and the company plans to add weekend dates if demand stays strong.</div>
+<div class="q" id="q156" data-n="156" data-ans="A">
+<div class="stem"><span class="n">156.</span>What is the article mainly about?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A kayak business adding guided tours</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A new waterfront restaurant</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The closing of a rental shop</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A change in rental prices</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The article reports that Tideline Kayaks &#x27;will begin offering guided evening paddling tours.&#x27;</div></details>
+</div>
+
+<div class="q" id="q157" data-n="157" data-ans="B">
+<div class="stem"><span class="n">157.</span>Why did the company decide to offer tours?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To reduce rental costs</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Because of repeated visitor requests</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To train new guides</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Because the rental business slowed</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;The idea came from repeated requests by visitors.&#x27;</div></details>
+</div>
+
+<div class="q" id="q158" data-n="158" data-ans="A">
+<div class="stem"><span class="n">158.</span>What is suggested about the tours?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">They are popular.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">They are free of charge.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">They last all day.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">They are for experts only.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The first several tours are &#x27;already fully booked,&#x27; implying they are in demand.</div></details>
+</div>
+
+<div class="ref">Questions 159–161 refer to the following Memo.</div>
+<div class="passage">MEMORANDUM
+
+To: All Café Staff
+From: Leila Haddad, Store Manager
+Date: April 6
+Re: New opening-shift checklist
+
+Beginning Monday, April 13, all staff on the opening shift must complete a short checklist before we unlock the doors to customers. The goal is to make sure the café is fully ready when we open at 7:00 A.M.
+
+Before opening, please: turn on and calibrate the espresso machines, stock the pastry case from the morning delivery, and check that the outdoor seating is wiped down. The shift lead will initial the checklist, which is posted by the register.
+
+Please note that the floors are now cleaned by our overnight contractor, so opening staff no longer need to mop. If you have questions, speak with me before Friday.</div>
+<div class="q" id="q159" data-n="159" data-ans="A">
+<div class="stem"><span class="n">159.</span>What is the purpose of the memo?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To introduce a new opening-shift checklist</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To change the café&#x27;s opening time</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To hire additional staff</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To announce a new menu</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The memo introduces &#x27;a short checklist&#x27; for opening staff to complete.</div></details>
+</div>
+
+<div class="q" id="q160" data-n="160" data-ans="C">
+<div class="stem"><span class="n">160.</span>What is NOT part of the opening tasks?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Calibrating the espresso machines</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Stocking the pastry case</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Mopping the floors</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Wiping the outdoor seating</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The floors are cleaned overnight, so &#x27;opening staff no longer need to mop.&#x27;</div></details>
+</div>
+
+<div class="q" id="q161" data-n="161" data-ans="D">
+<div class="stem"><span class="n">161.</span>Who initials the checklist?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Every staff member</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The overnight contractor</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The store manager</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The shift lead</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;The shift lead will initial the checklist.&#x27;</div></details>
+</div>
+
+<div class="ref">Questions 162–164 refer to the following Web page.</div>
+<div class="passage">www.hollowaygardens.org/visit
+
+Plan Your Visit — Holloway Botanic Gardens
+
+Hours: Open daily, 8 A.M.–7 P.M. in summer and 8 A.M.–5 P.M. in winter.
+
+Admission: Adults $10, seniors and students $7, children under six free. Annual members enjoy unlimited entry and a 10 percent discount in the gift shop. On the last Sunday of every month, admission is free for all visitors.
+
+Getting Here: The gardens are a ten-minute walk from Holloway Station. On-site parking is limited, so we strongly recommend arriving by public transport when possible.
+
+Facilities: A café and gift shop are located near the main gate. Guided tours depart from the visitor center at 11 A.M. and 2 P.M. and are included with admission.</div>
+<div class="q" id="q162" data-n="162" data-ans="C">
+<div class="stem"><span class="n">162.</span>For whom is this web page most likely intended?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Garden staff</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Plant suppliers</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">People planning to visit the gardens</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Professional gardeners</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The page gives hours, admission, directions, and facilities for prospective visitors.</div></details>
+</div>
+
+<div class="q" id="q163" data-n="163" data-ans="A">
+<div class="stem"><span class="n">163.</span>How can a visitor enter the gardens for free?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">By visiting on the last Sunday of the month</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">By becoming a member</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">By arriving before 8 A.M.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">By taking a guided tour</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;On the last Sunday of every month, admission is free for all visitors.&#x27;</div></details>
+</div>
+
+<div class="q" id="q164" data-n="164" data-ans="D">
+<div class="stem"><span class="n">164.</span>The word &#x27;recommend&#x27; in the &#x27;Getting Here&#x27; section is closest in meaning to</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">require</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">permit</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">forbid</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">advise</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;We strongly recommend arriving by public transport&#x27; means the gardens advise it, so &#x27;advise&#x27; is closest.</div></details>
+</div>
+
+<div class="ref">Questions 165–167 refer to the following Review.</div>
+<div class="passage">Reviewed by Priya S.  ★★★★☆
+Two nights at the Cliffside Lodge
+
+The Cliffside Lodge was a wonderful base for our weekend hiking trip. Our room was cozy and clean, with a small balcony that looked straight out over the forest. The staff went out of their way to help, even lending us a detailed trail map and packing us a breakfast to go when we set out early.
+
+The only downside was the restaurant, which closes at 8 P.M. — earlier than we expected — so we missed dinner one night after a long hike. Fortunately, there&#x27;s a small town nearby with a couple of late options.
+
+Despite that, I&#x27;d happily return. For nature lovers, the location can&#x27;t be beaten.</div>
+<div class="q" id="q165" data-n="165" data-ans="B">
+<div class="stem"><span class="n">165.</span>What is the main purpose of the review?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To warn readers against staying there</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To share a mostly positive experience</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To compare two lodges</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To complain about the staff</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The reviewer praises the room, staff, and location and says she&#x27;d return, giving a positive account.</div></details>
+</div>
+
+<div class="q" id="q166" data-n="166" data-ans="C">
+<div class="stem"><span class="n">166.</span>What problem does the reviewer mention?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The room was not clean.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The staff were unhelpful.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The restaurant closed earlier than expected.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The location was too noisy.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> She notes the restaurant &#x27;closes at 8 P.M. — earlier than we expected,&#x27; causing them to miss dinner.</div></details>
+</div>
+
+<div class="q" id="q167" data-n="167" data-ans="D">
+<div class="stem"><span class="n">167.</span>What is suggested about the reviewer?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">She was on a business trip.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">She will not return.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">She stayed for a week.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">She traveled to go hiking.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> She calls the lodge &#x27;a wonderful base for our weekend hiking trip,&#x27; implying she traveled to hike.</div></details>
+</div>
+
+<div class="ref">Questions 168–171 refer to the following Letter.</div>
+<div class="passage">Cedar Grove Book Club
+88 Larkspur Road, Aldon
+
+March 15
+
+Dear Ms. Whitfield,
+
+As a longtime member of the Cedar Grove Book Club, you are among the first to learn about an exciting update to our program. Starting in April, we are introducing a monthly author event, where a guest writer will discuss their work and answer members&#x27; questions.
+
+Because you have been a member for more than three years, we are pleased to offer you a reserved seat at the first three events at no extra charge. Simply show your membership card at the door.
+
+There is no need to register in advance, and your membership benefits remain otherwise unchanged. You can view the full schedule of guest authors on our website.
+
+We are grateful for your continued support and look forward to seeing you there.
+
+Warm regards,
+Owen Castellano
+Membership Coordinator</div>
+<div class="q" id="q168" data-n="168" data-ans="B">
+<div class="stem"><span class="n">168.</span>Why was the letter sent to Ms. Whitfield?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To collect an overdue membership fee</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To announce a new monthly author event</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To cancel her membership</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To request a book donation</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The letter announces &#x27;a monthly author event&#x27; starting in April.</div></details>
+</div>
+
+<div class="q" id="q169" data-n="169" data-ans="C">
+<div class="stem"><span class="n">169.</span>Why is Ms. Whitfield offered reserved seats at no charge?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">She recommended a new member.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">She renewed her membership early.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">She has been a member for more than three years.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">She wrote a book review.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> &#x27;Because you have been a member for more than three years,&#x27; she is offered reserved seats.</div></details>
+</div>
+
+<div class="q" id="q170" data-n="170" data-ans="A">
+<div class="stem"><span class="n">170.</span>The word &#x27;reserved&#x27; in paragraph 2 is closest in meaning to</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">set aside</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">quiet</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">paid for</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">limited</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> A &#x27;reserved seat&#x27; is one set aside for her, so &#x27;set aside&#x27; is closest.</div></details>
+</div>
+
+<div class="q" id="q171" data-n="171" data-ans="C">
+<div class="stem"><span class="n">171.</span>What must Ms. Whitfield do to attend the events?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Register on the website</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Pay an event fee</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Show her membership card at the door</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Reply to the letter</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The letter says to &#x27;simply show your membership card at the door.&#x27;</div></details>
+</div>
+
+<div class="ref">Questions 172–175 refer to the following Article.</div>
+<div class="passage">Northgate Mall to Add Rooftop Solar Panels
+
+NORTHGATE (July 2) — Northgate Mall announced that it will install solar panels across its entire rooftop beginning this autumn. — [1] —. The panels are expected to supply about a third of the mall&#x27;s electricity once fully operational.
+
+Center manager Dana Cole said the decision was driven by both cost and environmental concerns. — [2] —. &quot;Energy is one of our biggest expenses, and this puts some of that back in our control,&quot; she said.
+
+The work will be carried out by SolAura Energy, a regional firm that has fitted panels on several shopping centers. — [3] —. The mall estimates the system will pay for itself in about eight years.
+
+Shoppers will see little disruption, as most of the work will take place overnight. — [4] —. A viewing area explaining how the system works is planned for the main concourse.</div>
+<div class="q" id="q172" data-n="172" data-ans="A">
+<div class="stem"><span class="n">172.</span>What is the article mainly about?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A mall installing solar panels</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A new store opening at the mall</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Rising energy prices</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A change in mall hours</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The article reports that Northgate Mall &#x27;will install solar panels across its entire rooftop.&#x27;</div></details>
+</div>
+
+<div class="q" id="q173" data-n="173" data-ans="B">
+<div class="stem"><span class="n">173.</span>What does the mall expect the system to do in about eight years?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Double its size</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Pay for itself</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Power the entire mall</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Be replaced with a newer system</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;The mall estimates the system will pay for itself in about eight years.&#x27;</div></details>
+</div>
+
+<div class="q" id="q174" data-n="174" data-ans="A">
+<div class="stem"><span class="n">174.</span>The word &#x27;driven&#x27; in paragraph 2 is closest in meaning to</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">motivated</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">reduced</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">delayed</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">stopped</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> A decision &#x27;driven by&#x27; cost and concerns is motivated by them, so &#x27;motivated&#x27; is closest.</div></details>
+</div>
+
+<div class="q" id="q175" data-n="175" data-ans="C">
+<div class="stem"><span class="n">175.</span>In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? &#x27;That experience was a major factor in the mall&#x27;s choice of contractor.&#x27;</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">[1]</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">[2]</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">[3]</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">[4]</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> &#x27;That experience&#x27; refers to SolAura Energy&#x27;s fitting panels on several centers, mentioned just before [3].</div></details>
+</div>
+
+<div class="ref">Questions 176–180 refer to the following Email.</div>
+<div class="passage">To: hello@partyplus-rentals.com
+From: m.donovan@brightstepschool.org
+Subject: Rentals for school open day
+Date: August 2
+
+Hello,
+
+I&#x27;m organizing Bright Steps School&#x27;s open day on Saturday, September 13, and would like a quote for some rentals. The event runs from 10:00 A.M. to 3:00 P.M. on our school field.
+
+We&#x27;ll need twelve folding tables, sixty chairs, and one large marquee tent in case of rain, for about 200 visitors throughout the day. Everything must be set up and ready by 9:00 A.M., as families start arriving early.
+
+Our budget is around $700, including delivery, setup, and collection afterward. Could you tell me what you can offer within that range, and confirm whether your team handles the marquee assembly?
+
+Thank you,
+Maria Donovan</div>
+<div class="passage">To: m.donovan@brightstepschool.org
+From: hello@partyplus-rentals.com
+Subject: RE: Rentals for school open day
+Date: August 3
+
+Dear Ms. Donovan,
+
+Thank you for thinking of Party Plus Rentals. We can meet your needs for September 13 and stay comfortably within your budget.
+
+Our School Event bundle at $640 includes twelve tables, sixty chairs, and a six-by-nine-meter marquee — ample for 200 guests over the day. The price covers delivery, setup, and same-evening collection. Importantly, our crew fully assembles and secures the marquee for you; you won&#x27;t need to lift a thing.
+
+We can arrive at 7:30 A.M. to have everything ready well before 9:00. To reserve the date, we ask for a signed order form and a 20 percent deposit.
+
+Do let me know if you&#x27;d like to go ahead.
+
+Kind regards,
+Theo Marsh
+Party Plus Rentals</div>
+<div class="q" id="q176" data-n="176" data-ans="D">
+<div class="stem"><span class="n">176.</span>Why did Ms. Donovan write the first email?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To confirm an existing booking</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To cancel an order</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To complain about a delivery</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To request a quote for event rentals</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> She writes that she &#x27;would like a quote for some rentals&#x27; for the school open day.</div></details>
+</div>
+
+<div class="q" id="q177" data-n="177" data-ans="B">
+<div class="stem"><span class="n">177.</span>What does Ms. Donovan say is necessary?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A stage for performances</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">That everything be set up by 9:00 A.M.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Catering for 200 guests</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Overnight storage of the equipment</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> She states &#x27;everything must be set up and ready by 9:00 A.M.&#x27;</div></details>
+</div>
+
+<div class="q" id="q178" data-n="178" data-ans="B">
+<div class="stem"><span class="n">178.</span>How does the reply address Ms. Donovan&#x27;s question about the marquee?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It provides assembly instructions.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Its crew fully assembles and secures the marquee.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It offers a smaller tent instead.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It asks the school to set it up.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> She asked whether the team handles marquee assembly, and the reply confirms &#x27;our crew fully assembles and secures the marquee.&#x27;</div></details>
+</div>
+
+<div class="q" id="q179" data-n="179" data-ans="A">
+<div class="stem"><span class="n">179.</span>When will Party Plus arrive on the day of the event?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">At 7:30 A.M.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">At 9:00 A.M.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">At 10:00 A.M.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">At 3:00 P.M.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> Mr. Marsh says &#x27;we can arrive at 7:30 A.M.&#x27;</div></details>
+</div>
+
+<div class="q" id="q180" data-n="180" data-ans="B">
+<div class="stem"><span class="n">180.</span>What does Mr. Marsh ask for to reserve the date?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A final headcount</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A signed order form and a deposit</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Full payment upfront</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A copy of the school&#x27;s insurance</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> To reserve, he asks for &#x27;a signed order form and a 20 percent deposit.&#x27;</div></details>
+</div>
+
+<div class="ref">Questions 181–185 refer to the following Web page.</div>
+<div class="passage">www.brightorchard.com/careers
+
+Bright Orchard — Marketing Assistant (Downtown Office)
+
+Bright Orchard is a growing organic-juice brand looking for a Marketing Assistant to support our small, energetic team.
+
+Responsibilities:
+• Schedule and post content across our social media channels
+• Help plan in-store tasting events
+• Track campaign results and prepare simple monthly reports
+
+Requirements:
+• At least one year of experience in marketing or communications
+• Strong writing skills and attention to detail
+• Comfortable using spreadsheets to organize data
+• Experience with graphic-design software such as Canva is a plus but not required
+
+We offer a friendly workplace, health coverage, and a monthly product allowance. This is a full-time, in-office role.
+
+To apply, send your résumé and a short cover letter to careers@brightorchard.com by May 10.</div>
+<div class="passage">To: careers@brightorchard.com
+From: lena.fischer@mail.com
+Subject: Application for Marketing Assistant
+Date: April 29
+
+Dear Hiring Team,
+
+I&#x27;m excited to apply for the Marketing Assistant role. My résumé and cover letter are attached.
+
+Since graduating two years ago, I have worked as a communications assistant at a local nonprofit, where I managed our social media calendar and wrote our monthly email newsletter. I&#x27;m very comfortable with spreadsheets, having tracked all of our campaign results in one. Although it wasn&#x27;t part of my job, I taught myself Canva and now design most of our simple graphics.
+
+I love the idea of working for a food-and-drink brand and would be thrilled to help plan your tasting events. Thank you for your consideration.
+
+Best,
+Lena Fischer</div>
+<div class="q" id="q181" data-n="181" data-ans="B">
+<div class="stem"><span class="n">181.</span>What is the purpose of the web page?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To promote a new juice product</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To advertise a job opening</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To announce a tasting event</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To request customer feedback</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The page seeks a Marketing Assistant, so it advertises a job opening.</div></details>
+</div>
+
+<div class="q" id="q182" data-n="182" data-ans="C">
+<div class="stem"><span class="n">182.</span>What benefit does Bright Orchard offer employees?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A company car</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Remote work</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A monthly product allowance</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Free gym membership</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The posting lists &#x27;a monthly product allowance&#x27; among its benefits.</div></details>
+</div>
+
+<div class="q" id="q183" data-n="183" data-ans="D">
+<div class="stem"><span class="n">183.</span>Does Ms. Fischer appear to meet the experience requirement?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">No, she has no experience.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Yes, but only part-time.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">No, her field is unrelated.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Yes, her two years exceeds the one-year minimum.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The posting requires one year, and she has worked as a communications assistant for two years, which meets it.</div></details>
+</div>
+
+<div class="q" id="q184" data-n="184" data-ans="D">
+<div class="stem"><span class="n">184.</span>Which preferred &#x27;plus&#x27; qualification does Ms. Fischer mention having?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A second language</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Event-catering experience</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A design degree</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Experience with Canva</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The posting lists Canva experience as a plus, and she says she &#x27;taught myself Canva.&#x27;</div></details>
+</div>
+
+<div class="q" id="q185" data-n="185" data-ans="B">
+<div class="stem"><span class="n">185.</span>What does Ms. Fischer say she is eager to help with?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Writing press releases</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Planning tasting events</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Managing the budget</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Hiring new staff</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> She writes she &#x27;would be thrilled to help plan your tasting events.&#x27;</div></details>
+</div>
+
+<div class="ref">Questions 186–190 refer to the following Web page.</div>
+<div class="passage">www.meridianhotel.com/meetings
+
+Meridian Hotel — Meeting &amp; Event Packages
+
+Host your next meeting at the Meridian, in the heart of the business district.
+
+Rooms:
+• The Oakes Room — seats up to 20 — $250 per day
+• The Sterling Room — seats up to 50 — $450 per day
+• The Grand Ballroom — seats up to 180 — $850 per day
+
+Catering (per person):
+• Coffee Break: coffee, tea, and biscuits — $9
+• Working Lunch: sandwiches and salad — $18
+• Executive Day: refreshments plus a hot lunch — $24 (save $3)
+
+Every room includes a screen, projector, and complimentary Wi-Fi. Reservations must be made at least one week in advance. A 10 percent discount applies to bookings of three or more days.
+
+To book, e-mail meetings@meridianhotel.com with your date, room, and catering choice.</div>
+<div class="passage">To: meetings@meridianhotel.com
+From: p.osei@vantageconsulting.com
+Subject: Meeting room for September 9
+Date: August 25
+
+Hello,
+
+I&#x27;d like to book a room for a one-day strategy session on Tuesday, September 9. We&#x27;ll have 44 participants, so we need a room that comfortably seats everyone.
+
+Please include the Executive Day package for all attendees, since the session runs from 8:30 A.M. to 5:00 P.M. and we&#x27;d like to keep everyone on-site. We will also need a spare microphone for audience questions.
+
+Would you send an invoice once the booking is confirmed? Our finance department needs it before they can pay.
+
+Thank you,
+Paul Osei
+Vantage Consulting</div>
+<div class="passage">MERIDIAN HOTEL
+INVOICE #MH-5106
+Bill to: Vantage Consulting
+Event date: September 9
+
+Description ............................... Amount
+Sterling Room (1 day) ................... $450.00
+Executive Day — 44 attendees × $24 ..... $1,056.00
+Extra microphone ........................ $30.00
+------------------------------------------------------
+Subtotal ............................... $1,536.00
+Deposit received (25%) ................. –$384.00
+------------------------------------------------------
+Balance due ............................ $1,152.00
+
+Payment due by September 2. Thank you for choosing the Meridian.</div>
+<div class="q" id="q186" data-n="186" data-ans="A">
+<div class="stem"><span class="n">186.</span>What is included with every room at the Meridian?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A screen, projector, and Wi-Fi</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A hot lunch</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Free parking</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A meeting facilitator</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The web page states every room &#x27;includes a screen, projector, and complimentary Wi-Fi.&#x27;</div></details>
+</div>
+
+<div class="q" id="q187" data-n="187" data-ans="D">
+<div class="stem"><span class="n">187.</span>What extra item does Mr. Osei request?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">An extra projector</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A larger screen</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A flip chart</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A spare microphone</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> In his email he asks for &#x27;a spare microphone for audience questions.&#x27;</div></details>
+</div>
+
+<div class="q" id="q188" data-n="188" data-ans="D">
+<div class="stem"><span class="n">188.</span>Why was Mr. Osei most likely assigned the Sterling Room?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It was the least expensive room.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">He requested it by name.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It was the only room available.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It seats his group of 44, while the Oakes Room cannot.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> He has 44 participants; the Oakes Room seats only 20, but the Sterling Room seats up to 50, so it fits.</div></details>
+</div>
+
+<div class="q" id="q189" data-n="189" data-ans="B">
+<div class="stem"><span class="n">189.</span>How does the invoice reflect Mr. Osei&#x27;s catering request?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It charges for coffee only.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It includes the Executive Day package for 44 attendees.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It omits the meal package.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It adds a separate dinner charge.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> He asked for the Executive Day package for all attendees, and the invoice lists it for 44 attendees at $24 each.</div></details>
+</div>
+
+<div class="q" id="q190" data-n="190" data-ans="A">
+<div class="stem"><span class="n">190.</span>What is indicated about the invoice?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A deposit has already been received.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The full balance was paid in advance.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Payment is due in October.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A three-day discount was applied.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The invoice shows a 25 percent deposit received and a balance due, so a deposit has been paid.</div></details>
+</div>
+
+<div class="ref">Questions 191–195 refer to the following Advertisement.</div>
+<div class="passage">HARBORLIGHT COMMUNITY ARTS
+Spring Weekend Workshops
+
+Discover a new creative hobby this spring! Our weekend workshops are led by working artists and meet once a week for five weeks. Groups are kept small for personal attention, so book early.
+
+This season&#x27;s workshops:
+• Introduction to Pottery
+• Portrait Drawing
+• Beginner Guitar
+• Creative Photography
+
+Fees: $100 per workshop, or $180 for any two. All materials are provided except for Creative Photography, for which you must bring your own camera. Arts center members receive a 25 percent discount.
+
+Sign up online at www.harborlightarts.org or at the front desk by March 20.</div>
+<div class="passage">Spring Weekend Workshop Schedule — Harborlight Community Arts
+All sessions run 10:00–11:30 A.M.
+
+Workshop ..................... Day .......... Studio
+Introduction to Pottery ...... Friday ....... Studio A
+Portrait Drawing ............. Saturday ..... Studio B
+Beginner Guitar .............. Sunday ....... Studio C
+Creative Photography ......... Saturday ..... Studio D
+
+Workshops begin the weekend of March 28. Please arrive a few minutes early to your first session to sign in.</div>
+<div class="passage">To: info@harborlightarts.org
+From: t.novak@mail.com
+Subject: Possible schedule conflict
+Date: March 15
+
+Hello,
+
+I signed up for two workshops last week — Portrait Drawing and Creative Photography — and I&#x27;ve just realized they might clash. Could you confirm which days each one meets?
+
+If they are both on the same day, I&#x27;d like to switch Creative Photography to Beginner Guitar instead, since I can only attend one workshop per weekend day.
+
+Also, I&#x27;m an arts center member, so the member discount should apply to my total.
+
+Thank you,
+Tomas Novak</div>
+<div class="q" id="q191" data-n="191" data-ans="B">
+<div class="stem"><span class="n">191.</span>What is true of all the workshops?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">They are free for members.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">They meet once a week for five weeks.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">They are held on weekday evenings.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">They all require a camera.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The advertisement says the workshops &#x27;meet once a week for five weeks.&#x27;</div></details>
+</div>
+
+<div class="q" id="q192" data-n="192" data-ans="D">
+<div class="stem"><span class="n">192.</span>Which workshop requires participants to bring their own equipment?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Introduction to Pottery</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Portrait Drawing</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Beginner Guitar</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Creative Photography</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The ad notes Creative Photography requires you &#x27;to bring your own camera.&#x27;</div></details>
+</div>
+
+<div class="q" id="q193" data-n="193" data-ans="B">
+<div class="stem"><span class="n">193.</span>Do Mr. Novak&#x27;s two workshops meet on the same day?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">No, they meet on different days.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Yes, both meet on Saturday.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">No, one is on Friday.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The schedule does not say.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The schedule lists both Portrait Drawing and Creative Photography on Saturday, so they clash.</div></details>
+</div>
+
+<div class="q" id="q194" data-n="194" data-ans="C">
+<div class="stem"><span class="n">194.</span>If Mr. Novak switches to Beginner Guitar, on which day would it meet?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Friday</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Saturday</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Sunday</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Monday</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> He asks to switch into Beginner Guitar, which the schedule lists as meeting on Sunday.</div></details>
+</div>
+
+<div class="q" id="q195" data-n="195" data-ans="A">
+<div class="stem"><span class="n">195.</span>What discount is Mr. Novak entitled to?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A 25 percent member discount</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A 10 percent early-registration discount</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A free additional workshop</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">No discount</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The ad gives members a 25 percent discount, and Mr. Novak states that he is a center member.</div></details>
+</div>
+
+<div class="ref">Questions 196–200 refer to the following Article.</div>
+<div class="passage">Peak Fitness Opens Riverside Branch
+
+Peak Fitness, the regional gym chain, opened its newest branch on Riverside Drive this month — its largest yet and the first to offer a 24-hour swimming pool. The club features a spacious weights floor, a dozen studios for group classes, and childcare during morning sessions.
+
+To celebrate, Peak Fitness is waiving the joining fee for anyone who signs up before the end of the month. The chain also launched a new app that lets members book classes in advance and track their workouts, awarding a free guest pass for every twenty visits.
+
+&quot;Members told us the hardest part was getting a spot in popular classes,&quot; said manager Ivan Petrov. &quot;The app fixes that.&quot;</div>
+<div class="passage">★★★☆☆  Reviewed by Grace O.
+
+I joined the new Riverside branch mainly for the pool, and I&#x27;ve been really happy with the facilities — clean, spacious, and never too crowded early in the morning. The staff are friendly and the classes are excellent.
+
+My one gripe is the app. I tried to book a spin class through it, but it kept logging me out, and my visit count never updated toward the guest pass. I ended up booking at the front desk instead. The staff were helpful and apologized. I&#x27;ll stay for the pool and the classes, but the app needs work.</div>
+<div class="passage">To: grace.o@mail.com
+From: i.petrov@peakfitness.com
+Subject: Thanks for your feedback
+Date: February 8
+
+Dear Grace,
+
+Thank you for joining our Riverside branch and for taking the time to review it. I&#x27;m thrilled you&#x27;re enjoying the pool and the classes, but I&#x27;m sorry the app caused you trouble.
+
+Our technical team has now fixed the log-out problem you described, and the visit-tracking feature is working correctly again. As an apology, I&#x27;ve added two guest passes to your account, which you&#x27;ll see the next time you open the app.
+
+Feedback like yours is genuinely helpful, and it makes us better. I hope to see you at the pool soon.
+
+Best regards,
+Ivan Petrov
+Manager, Peak Fitness</div>
+<div class="q" id="q196" data-n="196" data-ans="A">
+<div class="stem"><span class="n">196.</span>What is the article mainly about?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The opening of a new gym branch</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A rise in membership fees</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The closing of a pool</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A fitness competition</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The article reports that Peak Fitness &#x27;opened its newest branch,&#x27; so it is about a new branch opening.</div></details>
+</div>
+
+<div class="q" id="q197" data-n="197" data-ans="B">
+<div class="stem"><span class="n">197.</span>According to the article, why did Peak Fitness create the app?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To sell fitness equipment</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To help members book spots in popular classes</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To replace its website</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To reduce staffing</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Manager Ivan Petrov says members struggled &#x27;getting a spot in popular classes,&#x27; and &#x27;the app fixes that.&#x27;</div></details>
+</div>
+
+<div class="q" id="q198" data-n="198" data-ans="C">
+<div class="stem"><span class="n">198.</span>Which feature highlighted in the article did Grace most appreciate?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The booking app</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The childcare service</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The swimming pool</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The guest-pass program</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The article highlights the 24-hour pool, and Grace says she joined &#x27;mainly for the pool.&#x27;</div></details>
+</div>
+
+<div class="q" id="q199" data-n="199" data-ans="C">
+<div class="stem"><span class="n">199.</span>How did Mr. Petrov respond to Grace&#x27;s complaint?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">He offered a full refund.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">He invited her to a free class.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">He fixed the app and added guest passes to her account.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">He asked her to visit another branch.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Grace&#x27;s app logged her out and lost her visit count; Mr. Petrov says the problem was fixed and he added two guest passes.</div></details>
+</div>
+
+<div class="q" id="q200" data-n="200" data-ans="D">
+<div class="stem"><span class="n">200.</span>In the email, the word &#x27;genuinely&#x27; in paragraph 3 is closest in meaning to</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">barely</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">possibly</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">rarely</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">truly</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> Feedback that is &#x27;genuinely helpful&#x27; is truly helpful, so &#x27;truly&#x27; is closest.</div></details>
+</div>
+</div><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:toeic:t03";
+var TOTAL=100;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(",").map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok)
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q);
+  var ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script></body></html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMBNXLN4SY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FMBNXLN4SY');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1">
+<link rel="preconnect" href="https://ajax.googleapis.com">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta property="og:site_name" content="FP2級ドットコム">
+<meta property="og:title" content="FP2級 過去問道場🥋 (学科)【完全解説付】">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://fp2-siken.com/img/ogimage_doujou.png">
+<meta property="og:url" content="https://fp2-siken.com/kakomon.php">
+<link rel="canonical" href="https://fp2-siken.com/kakomon.php">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css?20260907a">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200&icon_names=event_note,download,calculate,note_alt,delete,print,call_made,circle,close,ink_eraser,ink_pen,pen_size_1,square,title,undo&display=block">
+<title>FP2級 過去問道場🥋 (学科)【完全解説付】｜FP2級ドットコム</title>
+<!-- Geniee Wrapper Head Tag -->
+<script>
+  window.gnshbrequest = window.gnshbrequest || {cmd:[]};
+  gnshbrequest.cmd.push(function(){
+    gnshbrequest.registerPassback("1521539");
+    gnshbrequest.registerPassback("1521540");
+    gnshbrequest.registerPassback("1521456");
+    gnshbrequest.registerPassback("1521457");
+    gnshbrequest.forceInternalRequest();
+  });
+</script>
+<script async src="https://cpt.geniee.jp/hb/v1/214997/593/wrapper.min.js"></script>
+<!-- /Geniee Wrapper Head Tag -->
+<link rel="manifest" href="manifest.json">
+<script>
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('./js/service-worker.js');
+</script>
+</head>
+<body>
+
+<script>
+if (typeof localStorage !== undefined) {
+const theme = localStorage.getItem('DARK') || 0;
+if (theme == 1) document.body.className += ' dark';
+if (theme == 2) document.body.className += ' beige';
+}
+</script>
+
+<div id="main_contents">
+<!--MAINCONTENT START-->
+<header>
+<h1>
+<a href="/">
+<picture>
+<source srcset="/img/title.avif">
+<source srcset="/img/title.webp">
+<img src="/img/title.png" alt="FP2級ドットコムトップページへ" title="FP2級ドットコムトップページへ" id="logo" width="273" height="42">
+</picture>
+</a>
+</h1>
+<div class="header_right">
+<div id="countdown"></div>
+<ul id="header_menu">
+<li><a href="/kakomon.php">過去問道場(学科)</a></li>
+<li><a href="/kakomon_j.php">過去問道場(実技)</a></li>
+<li><a href="/marubatu.php">一問一答道場</a></li>
+<li><a href="/bbs.php">掲示板</a></li>
+</ul>
+</div>
+<div id="loginBtn">ログイン・ユーザー登録</div><div id="userPanel"></div><div id="menuBtn"></div>
+</header>
+
+<div id="content">
+<!-- MAINCOL START -->
+<main>
+<ul class="pan"><li><a href="/">Home</a><li><b>過去問道場(学科)</b></ul>
+<h2>FP2級 過去問道場🥋 (学科)</h2>
+<a href="/membership/">
+<picture>
+<source srcset="/membership/img/member_banner_sp.png" media="(max-width:600px)">
+<img src="/membership/img/member_banner.png" alt="メンバーシップ制度の紹介" class="fullBanner" decoding="sync" fetchpriority="high" loading="eager">
+</picture>
+</a>
+<section class="content">
+<div style="text-align:center"><img src="./img/doujoulogo.png" id="doujoulogo" alt="過去問道場ロゴ" decoding="sync" fetchpriority="high" loading="eager"></div>
+「FP2級過去問道場(学科)」は、FP2級過去問題集の決定版を目指す学習アプリです。<em class="m">最新法令対応済</em>の学科問題2,340問を様々な形式で出題でき、学習履歴も記録されるため市販の問題集は買わなくてもOK！徹底したアウトプット学習でFP2級の短期合格を目指しましょう。ユーザー登録者数111,100人を突破しました！<br><a href="/kakomon_j.php" title="過去問道場(実技)"><u>【実技試験】の過去問道場</u></a>もあります。
+</section>
+<button class="submit sendConfigform" data-text="START">出題開始</button>
+<form action="/kakomon.php" method="post" id="configform">
+<h4>出題設定</h4>
+<div id="tabs">
+<ul><li class="active"><a href="#tab1">試験回指定</a><li><a href="#tab2">分野指定</a><li><a href="#tab3">模擬試験</a></ul>
+<p class="error"></p>
+<div id="tab1">
+<div class="checkall"><span>全項目チェック</span> <button type="button" name="check_all" value="tab1">ON</button> <button type="button" name="check_all" value="tab1">OFF</button> <button type="button" name="recommend" style="line-height:1.2">過去12回分</button></div>
+<ul class="input_times"><li><div>2026年</div><label></label><label><input type="checkbox" name="times[]" value="26_5" checked>5月試験</label><label></label><li><div>2025年</div><label><input type="checkbox" name="times[]" value="25_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="25_5" checked>5月試験</label><label></label><li><div>2024年</div><label><input type="checkbox" name="times[]" value="24_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="24_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="24_9" checked>9月試験</label><li><div>2023年</div><label><input type="checkbox" name="times[]" value="23_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="23_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="23_9" checked>9月試験</label><li><div>2022年</div><label><input type="checkbox" name="times[]" value="22_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="22_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="22_9" checked>9月試験</label><li><div>2021年</div><label><input type="checkbox" name="times[]" value="21_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="21_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="21_9" checked>9月試験</label><li><div>2020年</div><label><input type="checkbox" name="times[]" value="20_1" checked>1月試験</label><label>(5月中止)</label><label><input type="checkbox" name="times[]" value="20_9" checked>9月試験</label><li><div>2019年</div><label><input type="checkbox" name="times[]" value="19_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="19_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="19_9" checked>9月試験</label><li><div>2018年</div><label><input type="checkbox" name="times[]" value="18_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="18_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="18_9" checked>9月試験</label><li><div>2017年</div><label><input type="checkbox" name="times[]" value="17_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="17_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="17_9" checked>9月試験</label><li><div>2016年</div><label><input type="checkbox" name="times[]" value="16_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="16_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="16_9" checked>9月試験</label><li><div>2015年</div><label><input type="checkbox" name="times[]" value="15_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="15_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="15_9" checked>9月試験</label><label><input type="checkbox" name="times[]" value="15_10" checked>10月試験</label><li><div>2014年</div><label><input type="checkbox" name="times[]" value="14_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="14_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="14_9" checked>9月試験</label><li><div>2013年</div><label><input type="checkbox" name="times[]" value="13_1" checked>1月試験</label><label><input type="checkbox" name="times[]" value="13_5" checked>5月試験</label><label><input type="checkbox" name="times[]" value="13_9" checked>9月試験</label></ul>
+
+<div class="options">
+<label><input type="checkbox" name="options[]" value="random">選択肢をランダムに並べ替える</label>
+<label data-text="メンバー限定"><input type="checkbox" name="options[]" value="nocalc">計算問題を出題しない</label>
+<label data-text="メンバー限定"><input type="checkbox" name="options[]" value="onlycalc">計算問題だけを出題する</label>
+<label><input type="checkbox" name="options[]" value="deprecated">法令改正で古くなった問題も出題する</label>
+<div><label><input type="checkbox" name="level[]" value="1" checked><i class="level1"></i></label><label><input type="checkbox" name="level[]" value="2" checked><i class="level2"></i></label><label><input type="checkbox" name="level[]" value="3" checked><i class="level3"></i></label><label><input type="checkbox" name="level[]" value="4" checked><i class="level4"></i></label><label><input type="checkbox" name="level[]" value="5" checked><i class="level5"></i></label></div>
+</div>
+
+</div>
+<div id="tab2">
+<div class="checkall"><span>全項目チェック</span> <button type="button" name="check_all" value="tab2">ON</button> <button type="button" name="check_all" value="tab2">OFF</button></div>
+<dl class="input_categories accordion"><dt><input type="checkbox" name="fields[]" value="1" checked>ライフプランニングと資金計画<span class="count">390</span><dd><ul class="index"><li><label><input type="checkbox" name="categories[]" value="1_1" data-count="000011000000000000000000000000000000010" checked>1. <span class="font0">ファイナンシャル・プランニング</span><span>FP</span>と倫理<span class="count">3</span></label><li><label><input type="checkbox" name="categories[]" value="1_2" data-count="011101111211111111111111111111111111100" checked>2. <span class="font0">ファイナンシャル・プランニング</span><span>FP</span>と関連法規<span class="count">36</span></label><li><label><input type="checkbox" name="categories[]" value="1_3" data-count="100110101010121111112101121101101112111" checked>3. ライフプランニングの考え方・手法<span class="count">34</span></label><li><label><input type="checkbox" name="categories[]" value="1_4" data-count="222133332222222212212222121113232212222" checked>4. 社会保険<span class="count">76</span></label><li><label><input type="checkbox" name="categories[]" value="1_5" data-count="313221212122322243342233323432432331233" checked>5. 公的年金<span class="count">96</span></label><li><label><input type="checkbox" name="categories[]" value="1_6" data-count="231112111121111111111112112121111111112" checked>6. 企業年金・個人年金等<span class="count">48</span></label><li><label><input type="checkbox" name="categories[]" value="1_7" data-count="001100011002000000000000000000000000100" checked>7. 年金と税金<span class="count">7</span></label><li><label><input type="checkbox" name="categories[]" value="1_8" data-count="121121111211112211111220111111102122211" checked>8. ライフプラン策定上の資金計画<span class="count">48</span></label><li><label><input type="checkbox" name="categories[]" value="1_9" data-count="010101010100001000000000101010010000000" checked>9. ローンとカード<span class="count">10</span></label><li><label><input type="checkbox" name="categories[]" value="1_10" data-count="101100111111110111111111110111011111011" checked>10. 中小法人の資金計画<span class="count">32</span></label></ul><dt><input type="checkbox" name="fields[]" value="2" checked>リスク管理<span class="count">390</span><dd><ul class="index"><li><label><input type="checkbox" class="dummy" disabled>1. リスクマネジメント<span class="count none">0</span></label><li><label><input type="checkbox" name="categories[]" value="2_2" data-count="110101101100110010001100111010101101100" checked>2. 保険制度全般<span class="count">21</span></label><li><label><input type="checkbox" name="categories[]" value="2_3" data-count="455454455446435446544345544544444444345" checked>3. 生命保険<span class="count">168</span></label><li><label><input type="checkbox" name="categories[]" value="2_4" data-count="323333332342443432242342242233333333333" checked>4. 損害保険<span class="count">114</span></label><li><label><input type="checkbox" name="categories[]" value="2_5" data-count="111111111111111111111111101111111111111" checked>5. 第三分野の保険<span class="count">38</span></label><li><label><input type="checkbox" name="categories[]" value="2_6" data-count="111111111111011111212212112212121121221" checked>6. リスク管理と保険<span class="count">49</span></label></ul><dt><input type="checkbox" name="fields[]" value="3" checked>金融資産運用<span class="count">390</span><dd><ul class="index"><li><label><input type="checkbox" name="categories[]" value="3_1" data-count="111110011011111111011011111010101011111" checked>1. マーケット環境の理解<span class="count">30</span></label><li><label><input type="checkbox" name="categories[]" value="3_2" data-count="111111100110111010110110001110100111111" checked>2. 預貯金・金融類似商品<span class="count">27</span></label><li><label><input type="checkbox" name="categories[]" value="3_3" data-count="101111111111111111112111112111122211111" checked>3. 投資信託<span class="count">43</span></label><li><label><input type="checkbox" name="categories[]" value="3_4" data-count="121121111212111102111111120212121222222" checked>4. 債券投資<span class="count">52</span></label><li><label><input type="checkbox" name="categories[]" value="3_5" data-count="222212222212211221211212211112112111212" checked>5. 株式投資<span class="count">60</span></label><li><label><input type="checkbox" name="categories[]" value="3_6" data-count="101010111010001101001101001111000101010" checked>6. 外貨建て商品<span class="count">20</span></label><li><label><input type="checkbox" class="dummy" disabled>7. 保険商品<span class="count none">0</span></label><li><label><input type="checkbox" name="categories[]" value="3_8" data-count="010111001011011010101110010100111011000" checked>8. 金融派生商品<span class="count">21</span></label><li><label><input type="checkbox" name="categories[]" value="3_9" data-count="111111121211111112111111111211111111120" checked>9. ポートフォリオ運用<span class="count">43</span></label><li><label><input type="checkbox" name="categories[]" value="3_10" data-count="111101111111110111121121112012110120101" checked>10. 金融商品と税金<span class="count">38</span></label><li><label><input type="checkbox" name="categories[]" value="3_11" data-count="011101101011001110110010110111111000011" checked>11. セーフティネット<span class="count">24</span></label><li><label><input type="checkbox" name="categories[]" value="3_12" data-count="100011110100110111011101101010111101101" checked>12. 関連法規<span class="count">25</span></label><li><label><input type="checkbox" name="categories[]" value="3_13" data-count="000000000000111000100001110000000000000" checked>13. 金融資産運用の最新動向<span class="count">7</span></label></ul><dt><input type="checkbox" name="fields[]" value="4" checked>タックスプランニング<span class="count">390</span><dd><ul class="index"><li><label><input type="checkbox" name="categories[]" value="4_1" data-count="001001010100001000010000000000000000000" checked>1. わが国の税制<span class="count">6</span></label><li><label><input type="checkbox" name="categories[]" value="4_2" data-count="110110101010101112111111110111211001111" checked>2. 所得税の仕組み<span class="count">32</span></label><li><label><input type="checkbox" name="categories[]" value="4_3" data-count="111111111111111111111212122112112121222" checked>3. 各種所得の内容<span class="count">49</span></label><li><label><input type="checkbox" name="categories[]" value="4_4" data-count="111111111111111111111010112111111211111" checked>4. 損益通算<span class="count">39</span></label><li><label><input type="checkbox" name="categories[]" value="4_5" data-count="111110111111111101111111211111120111111" checked>5. 所得控除<span class="count">38</span></label><li><label><input type="checkbox" name="categories[]" value="4_6" data-count="111011110111111111111111011111112212111" checked>6. 税額控除<span class="count">39</span></label><li><label><input type="checkbox" name="categories[]" value="4_7" data-count="111101101101110110110111101111111011111" checked>7. 所得税の申告と納付<span class="count">31</span></label><li><label><input type="checkbox" name="categories[]" value="4_8" data-count="000000000010000000000000000000000000000" checked>8. 個人住民税<span class="count">1</span></label><li><label><input type="checkbox" name="categories[]" value="4_9" data-count="000000000000010000000000000000000000000" checked>9. 個人事業税<span class="count">1</span></label><li><label><input type="checkbox" name="categories[]" value="4_10" data-count="112222122112122122212111211212222222222" checked>10. 法人税<span class="count">64</span></label><li><label><input type="checkbox" class="dummy" disabled>11. 法人住民税<span class="count none">0</span></label><li><label><input type="checkbox" class="dummy" disabled>12. 法人事業税<span class="count none">0</span></label><li><label><input type="checkbox" name="categories[]" value="4_13" data-count="111122111111111111111111111211111111111" checked>13. 消費税<span class="count">42</span></label><li><label><input type="checkbox" name="categories[]" value="4_14" data-count="110111111111110111101111111010000100000" checked>14. 会社・役員間及び会社間の税務<span class="count">26</span></label><li><label><input type="checkbox" name="categories[]" value="4_15" data-count="111100111111101110011111010010000010000" checked>15. 決算書と法人税申告書<span class="count">22</span></label><li><label><input type="checkbox" class="dummy" disabled>16. 諸外国の税制度<span class="count none">0</span></label></ul><dt><input type="checkbox" name="fields[]" value="5" checked>不動産<span class="count">390</span><dd><ul class="index"><li><label><input type="checkbox" name="categories[]" value="5_1" data-count="111111212222211221121212112211111211111" checked>1. 不動産の見方<span class="count">53</span></label><li><label><input type="checkbox" name="categories[]" value="5_2" data-count="343232333222223132334333422233323423323" checked>2. 不動産の取引<span class="count">105</span></label><li><label><input type="checkbox" name="categories[]" value="5_3" data-count="323323222223333324222131233233333133243" checked>3. 不動産に関する法令上の規制<span class="count">99</span></label><li><label><input type="checkbox" name="categories[]" value="5_4" data-count="111111111111111211211111111101111110111" checked>4. 不動産の取得・保有に係る税金<span class="count">39</span></label><li><label><input type="checkbox" name="categories[]" value="5_5" data-count="111212111211121111111111111121111112111" checked>5. 不動産の譲渡に係る税金<span class="count">45</span></label><li><label><input type="checkbox" name="categories[]" value="5_6" data-count="000000010000001000000000000000000000000" checked>6. 不動産の賃貸<span class="count">2</span></label><li><label><input type="checkbox" name="categories[]" value="5_7" data-count="011010100111110011010111110111010010110" checked>7. 不動産の有効活用<span class="count">24</span></label><li><label><input type="checkbox" name="categories[]" value="5_8" data-count="100111011010000100101101011100111111101" checked>8. 不動産の証券化<span class="count">23</span></label></ul><dt><input type="checkbox" name="fields[]" value="6" checked>相続・事業承継<span class="count">390</span><dd><ul class="index"><li><label><input type="checkbox" name="categories[]" value="6_1" data-count="011111101221112012111110212112101020101" checked>1. 贈与と法律<span class="count">39</span></label><li><label><input type="checkbox" name="categories[]" value="6_2" data-count="221212212221211413222223121323222212212" checked>2. 贈与と税金<span class="count">73</span></label><li><label><input type="checkbox" name="categories[]" value="6_3" data-count="212144343221221422122122312132223223012" checked>3. 相続と法律<span class="count">81</span></label><li><label><input type="checkbox" name="categories[]" value="6_4" data-count="212211222112013121112222112312240134131" checked>4. 相続と税金<span class="count">66</span></label><li><label><input type="checkbox" name="categories[]" value="6_5" data-count="111101010111101001101200010000001100101" checked>5. 相続財産の評価（不動産以外）<span class="count">21</span></label><li><label><input type="checkbox" name="categories[]" value="6_6" data-count="101110111112221021120120121211200211121" checked>6. 相続財産の評価（不動産）<span class="count">43</span></label><li><label><input type="checkbox" name="categories[]" value="6_7" data-count="111010100100120110211101111010111100212" checked>7. 不動産の相続対策<span class="count">30</span></label><li><label><input type="checkbox" name="categories[]" value="6_8" data-count="010000000000010000000000100000000000100" checked>8. 相続と保険の活用<span class="count">4</span></label><li><label><input type="checkbox" name="categories[]" value="6_9" data-count="001111010001100010110002010000012110120" checked>9. 事業承継対策<span class="count">21</span></label><li><label><input type="checkbox" name="categories[]" value="6_10" data-count="110100001011001000000000000000000000000" checked>10. 事業と経営<span class="count">7</span></label><li><label><input type="checkbox" name="categories[]" value="6_11" data-count="010000000000000000001010001010000000000" checked>11. 相続・事業承継の最新動向<span class="count">5</span></label></ul></dl>
+
+<div class="options">
+<label><input type="checkbox" name="options[]" value="random">選択肢をランダムに並べ替える</label>
+<label data-text="メンバー限定"><input type="checkbox" name="options[]" value="nocalc">計算問題を出題しない</label>
+<label data-text="メンバー限定"><input type="checkbox" name="options[]" value="onlycalc">計算問題だけを出題する</label>
+<label><input type="checkbox" name="options[]" value="deprecated">法令改正で古くなった問題も出題する</label>
+<div><label><input type="checkbox" name="level[]" value="1" checked><i class="level1"></i></label><label><input type="checkbox" name="level[]" value="2" checked><i class="level2"></i></label><label><input type="checkbox" name="level[]" value="3" checked><i class="level3"></i></label><label><input type="checkbox" name="level[]" value="4" checked><i class="level4"></i></label><label><input type="checkbox" name="level[]" value="5" checked><i class="level5"></i></label></div>
+</div>
+
+</div>
+<div id="tab3">
+<ul class="input_times moshi"><li><div>オリジナル</div><label><input type="radio" name="moshi" value="mix_all" checked><span>全問題から作成</span></label><label><input type="radio" name="moshi" value="mix_10"><span>過去10回から作成</span></label><label><input type="radio" name="moshi" value="mix_high"><span>鬼レベル👹</span></label><li><div>2026年</div><label></label><label><input type="radio" name="moshi" value="26_5"><span>5月試験</span></label><label></label><li><div>2025年</div><label><input type="radio" name="moshi" value="25_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="25_5"><span>5月試験</span></label><label></label><li><div>2024年</div><label><input type="radio" name="moshi" value="24_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="24_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="24_9"><span>9月試験</span></label><li><div>2023年</div><label><input type="radio" name="moshi" value="23_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="23_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="23_9"><span>9月試験</span></label><li><div>2022年</div><label><input type="radio" name="moshi" value="22_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="22_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="22_9"><span>9月試験</span></label><li><div>2021年</div><label><input type="radio" name="moshi" value="21_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="21_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="21_9"><span>9月試験</span></label><li><div>2020年</div><label><input type="radio" name="moshi" value="20_1"><span>1月試験</span></label><label><span>(5月中止)</span></label><label><input type="radio" name="moshi" value="20_9"><span>9月試験</span></label><li><div>2019年</div><label><input type="radio" name="moshi" value="19_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="19_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="19_9"><span>9月試験</span></label><li><div>2018年</div><label><input type="radio" name="moshi" value="18_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="18_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="18_9"><span>9月試験</span></label><li><div>2017年</div><label><input type="radio" name="moshi" value="17_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="17_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="17_9"><span>9月試験</span></label><li><div>2016年</div><label><input type="radio" name="moshi" value="16_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="16_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="16_9"><span>9月試験</span></label><li><div>2015年</div><label><input type="radio" name="moshi" value="15_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="15_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="15_9"><span>9月試験</span></label><label><input type="radio" name="moshi" value="15_10"><span>10月試験</span></label><li><div>2014年</div><label><input type="radio" name="moshi" value="14_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="14_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="14_9"><span>9月試験</span></label><li><div>2013年</div><label><input type="radio" name="moshi" value="13_1"><span>1月試験</span></label><label><input type="radio" name="moshi" value="13_5"><span>5月試験</span></label><label><input type="radio" name="moshi" value="13_9"><span>9月試験</span></label></ul>
+<div class="options">
+<style>
+.options [id^="pdf_"]{display:inline-block;width:42%;max-width:250px;border:1px solid currentColor;color:var(--link-color);border-radius:4px;margin:0 3%;font-weight:bold;line-height:35px;transition:.3s;white-space:nowrap;overflow:hidden}
+.options [id^="pdf_"]:hover{background:rgba(255,73,82,0.1)}
+#pdf_print .material-symbols-outlined, #pdf_download .material-symbols-outlined{transform:scale(1.2);font-size:24px;margin-right:4px}
+[href="#tab3"]{position:relative}
+[href="#tab3"]::before{content:"PDF対応";position:absolute;top:0;right:0;font-size:80%;color:#fff;background:var(--link-color);line-height:1.3;padding:0 4px}
+[name="moshi_cnt"]{padding-left:0;padding-right:0;max-width:0;visibility:hidden;font-size:inherit;transition:0.25s}
+[value="harf"]:checked ~ [name="moshi_cnt"]{max-width:65px;padding-left:4px;padding-right:20px;visibility:visible}
+</style>
+<label><input type="checkbox" name="options[]" value="random">選択肢をランダムに並べ替える</label>
+<label data-text="メンバー限定"><input type="checkbox" name="options[]" value="harf">指定の問題数で実施する
+<select name="moshi_cnt"><option value="30" selected>30問<option value="20">20問<option value="10">10問</select></label>
+<label data-text="メンバー限定"><input type="checkbox" name="options[]" value="cbt">CBT試験シミュレーターで実施する</label>
+<label style="text-align:center">
+<div id="pdf_print" onclick="gtag('event','pdf',{'event_category':'print','labelName':'EXAM_NAME'});">
+<span class="material-symbols-outlined">print</span>PDF印刷</div>
+<div id="pdf_download" onclick="gtag('event','pdf',{'event_category':'download','labelName':'EXAM_NAME'});">
+<span class="material-symbols-outlined">download</span>PDFダウンロード</div>
+<br><a href="/pdf/fp2_answer_sheet.pdf" style="color:var(--link-color);text-decoration:underline" target="_blank" onclick="gtag('event','pdf',{'event_category':'answer_sheet','labelName':'EXAM_NAME'});">解答用マークシートはこちら</a>
+</label>
+</div>
+</div>
+
+</div>
+
+<input type="hidden" name="mode" value="1">
+<input type="hidden" name="qno" value="0">
+<input type="hidden" name="q" value="">
+<input type="hidden" name="r" value="">
+<input type="hidden" name="c" value="">
+<button class="submit sendConfigform" data-text="START">出題開始</button>
+</form>
+<div class="img_margin" style="height:90px">
+<a href="doujouManual.html">過去問道場の利用方法</a>
+<br><br>
+<a href="https://twitter.com/kakomon_doujou?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-lang="ja" data-show-count="false">Follow @kakomon_doujou</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<h4>更新履歴</h4>
+<section class="content">
+<dl style="margin:0">
+<dt>2026.9.30<dd>復習・パス・チェック問題の出題設定が細目単位で選択できるようになりました。
+<dt>2026.9.7<dd>「画面メモツール」をリリース。電卓ツールのアイコンも変更しました。
+<dt>2026.5.25<dd>2026年5月公開分の問題を追加しました。
+<dt>2026.4.19<dd>模擬試験のハイレベルを「鬼レベル👹」に改称しました。出題の仕組みは同じです。
+<dt>2026.3.26<dd>達成度分析の概要欄表示を変更（ドーナツグラフ化）するとともに、正解度ごとに復習できる機能を追加しました。試験回別分析のテーブル表示を2段に変更しました。
+<dt>2026.2.22<dd>CBTシミュレータの実施結果が学習履歴に反映されるようになりました。
+<dt>2026.2.15<dd>計算問題だけを出題するオプション機能を追加しました。
+<dt>2026.1.11<dd>スタートページの出題設定に前回終了時のチェック状態が反映されるようになりました。
+<dt>2025.10.1<dd>「選択肢をランダムに並べ替える」オプション機能がCBTシミュレータに反映されるようになりました。
+<dt>2025.5.26<dd>2025年5月試験の問題を追加しました。
+<dt>2025.2.11<dd>選択肢のクリックで○×をマークできる機能をリリースしました。左側のクリックで○、右側のクリックで×の印が付きます。
+<dt>2025.1.27<dd>2025年1月試験の問題を追加しました。
+<dt>2024.12.5<dd>CBT試験シミュレータソフトをリリースしました。模擬試験タブで「CBT試験シミュレータで実施する」のチェックを入れて利用できます。
+<dt>2024.9.23<dd>計算問題を除外するオプション機能を追加しました。
+<dt>2024.9.9<dd>2024年9月試験の問題を追加しました。
+<dt>2024.5.27<dd>2024年5月試験の問題を追加しました。
+<dt>2024.4.17<dd>模擬試験モードについて半数に加えて10問/20問などから選択できるようになりました。
+<dt>2024.1.29<dd>2024年1月試験の問題を追加しました。
+<dt>2023.9.11<dd>2023年9月試験の問題を追加しました。
+<dt>2023.9.2<dd>出題設定において、試験回のチェック状態に応じて各分野ごとの問題数が変わるようにしました。
+<dt>2023.5.29<dd>2023年5月試験の問題を追加しました。
+<dt>2023.3.17<dd>学習の推移を分析するレポート機能を追加しました。
+<dt>2023.1.23<dd>2023年1月試験の問題を追加しました。
+<dt>2022.9.12<dd>2022年9月試験の問題を追加しました。
+<dt>2022.5.23<dd>2022年5月試験の問題を追加しました。
+<dt>2022.1.24<dd>2022年1月試験の問題を追加しました。
+<dt>2021.12.17<dd>5段階の問題難易度で出題範囲をフィルタリングできる機能をリリースしました。
+<dt>2021.9.13<dd>2021年9月試験の問題を追加しました。
+<dt>2021.8.29<dd>学習履歴の自動バックアップ機能＆過去10日分のバックアップから復元できる機能を追加しました。
+<dt>2021.8.12<dd>チェック問題の分野別出題、チェック問題の編集機能を追加しました。
+<dt>2021.5.24<dd>2021年5月試験の問題を追加しました。
+<dt>2021.1.25<dd>2021年1月試験の問題を追加しました。
+<dt>2021.1.10<dd>模擬試験に"ハイレベル(難)"のオプションを追加しました。
+<dt>2020.12.20<dd>問題ごとにレベルと利用者の回答割合のデータを表示する機能を追加しました。
+<dt>2020.9.14<dd>2020年9月試験の問題を追加しました。
+<dt>2020.8.29<dd>選択肢ランダムオプションの内部動作を改善しました。
+<dt>2020.8.28<dd>模擬試験のPDF印刷＆ダウンロード機能を追加しました。
+<dt>2020.5.27<dd>出題中の問題をSNSでシェアするボタンを追加しました。
+<dt>2020.5.21<dd>民法・所得税法等の改正に伴い、学科全問の見直しを行って現行法令に対応させました。
+<dt>2020.2.24<dd>模擬試験モードに過去10期分から出題するオプションと選択肢ランダムオプションを追加しました。
+<dt>2020.1.27<dd>2020年1月試験の問題を追加しました。
+<dt>2019.10.9<dd>学習成績をSNSでシェアできる機能を追加しました。
+<dt>2019.9.30<dd>選択肢をランダムに並べ替える機能を追加しました。
+<dt>2019.9.16<dd>試験回×分野での絞り込みに対応しました。
+<dt>2019.9.9<dd>2019年9月試験の問題を追加しました。
+<dt>2019.5.27<dd>2019年5月試験の問題を追加しました。
+<dt>2019.3.31<dd>過去問道場をPWA（Progressive Web Apps）に対応させました。
+<dt>2019.2.12<dd>前回の続きから再開できる機能を加えました。過去問道場スタート画面でログインしていれば「続きから再開」ボタンが表示されます。
+<dt>2019.2.8<dd>法令改正で古くなった問題が出題されないようにしました。
+<dt>2019.1.28<dd>2019年1月試験の問題を追加しました。
+<dt>2019.1.26<dd>復習／未回答モードのモードでの出題時に分野指定できるようにしました。
+<dt>2018.12.16<dd>問題にチェックを付けて、後で復習できる機能を追加しました。
+<dt>2018.9.11<dd>2018年9月試験の問題を追加しました。
+<dt>2018.7.2<dd>学習履歴メニュー内に間違えた問題を復習できる機能、未回答の問題のみを出題する機能を追加しました。
+<dt>2018.5.29<dd>過去問道場の利用方法についての<a href="doujouManual.html">ヘルプページ</a>を設置しました。
+<dt>2018.5.28<dd>2018年5月試験の問題を追加しました。
+<dt>2018.4.6<dd>全期間の成績表示時に総合ランキング（順位）を確認できるようになりました。
+<dt>2018.3.22<dd>一定の状況下において無回答の際に正誤が記録されない問題を改善しました。
+<dt>2018.2.9<dd>公開しました。不具合やご要望等ありましたらお問い合わせフォームから連絡いただければ幸いです。
+</dl>
+</section>
+
+
+</main>
+<!-- MAINCOL END -->
+
+<!-- SIDECOL START -->
+<nav>
+<h3>FP2級過去問アプリ</h3>
+<a href="/kakomon.php" class="doujou submit" title="FP2級クイズアプリ過去問道場(学科)">過去問道場(学科)</a>
+<a href="/kakomon_j.php" class="doujou_j submit" title="FP2級クイズアプリ過去問道場(実技)">過去問道場(実技)</a>
+<a href="/marubatu.php" class="marubatu submit" title="FP2級一問一答">一問一答道場</a>
+<h3>質問・相談はこちら</h3>
+<a href="/bbs.php" class="bbs submit hover" title="FP2級掲示板" data-text="BBS">FP2級掲示板</a>
+
+<h3>FP2級過去問題</h3>
+<ul id="test_menu">
+<li>2026年<li><a href="/kakomon/2026_5/" title="2026年5月分" class="new">5月（CBT）</a>
+<li>2025年<li><a href="/kakomon/2025_1/" title="2025年1月試験">1月</a><a href="/kakomon/2025_5/" title="2025年5月分">5月（CBT）</a>
+<li>2024年<li><a href="/kakomon/2024_1/" title="2024年1月試験">1月</a><a href="/kakomon/2024_5/" title="2024年5月試験">5月</a><a href="/kakomon/2024_9/" title="2024年9月試験">9月</a>
+<li>2023年<li><a href="/kakomon/2023_1/" title="2023年1月試験">1月</a><a href="/kakomon/2023_5/" title="2023年5月試験">5月</a><a href="/kakomon/2023_9/" title="2023年9月試験">9月</a>
+<li>2022年<li><a href="/kakomon/2022_1/" title="2022年1月試験">1月</a><a href="/kakomon/2022_5/" title="2022年5月試験">5月</a><a href="/kakomon/2022_9/" title="2022年9月試験">9月</a>
+<li>2021年<li><a href="/kakomon/2021_1/" title="2021年1月試験">1月</a><a href="/kakomon/2021_3/" title="2021年3月試験">3月</a><a href="/kakomon/2021_5/" title="2021年5月試験">5月</a><a href="/kakomon/2021_9/" title="2021年9月試験">9月</a>
+<li>2020年<li><a href="/kakomon/2020_1/" title="2020年1月試験">1月</a><a>(5月中止)</a><a href="/kakomon/2020_9/" title="2020年9月試験">9月</a>
+<li>2019年<li><a href="/kakomon/2019_1/" title="2019年1月試験">1月</a><a href="/kakomon/2019_5/" title="2019年5月試験">5月</a><a href="/kakomon/2019_9/" title="2019年9月試験">9月</a>
+<li>2018年<li><a href="/kakomon/2018_1/" title="2018年1月試験">1月</a><a href="/kakomon/2018_5/" title="2018年5月試験">5月</a><a href="/kakomon/2018_9/" title="2018年9月試験">9月</a>
+<li>2017年<li><a href="/kakomon/2017_1/" title="2017年1月試験">1月</a><a href="/kakomon/2017_5/" title="2017年5月試験">5月</a><a href="/kakomon/2017_9/" title="2017年9月試験">9月</a>
+<li>2016年<li><a href="/kakomon/2016_1/" title="2016年1月試験">1月</a><a href="/kakomon/2016_5/" title="2016年5月試験">5月</a><a href="/kakomon/2016_9/" title="2016年9月試験">9月</a>
+<li>2015年<li><a href="/kakomon/2015_1/" title="2015年1月試験">1月</a><a href="/kakomon/2015_5/" title="2015年5月試験">5月</a><a href="/kakomon/2015_9/" title="2015年9月試験">9月</a><a href="/kakomon/2015_10/" title="2015年10月試験">10月</a>
+<li>2014年<li><a href="/kakomon/2014_1/" title="2014年1月試験">1月</a><a href="/kakomon/2014_5/" title="2014年5月試験">5月</a><a href="/kakomon/2014_9/" title="2014年9月試験">9月</a>
+<li>2013年<li><a href="/kakomon/2013_1/" title="2013年1月試験">1月</a><a href="/kakomon/2013_5/" title="2013年5月試験">5月</a><a href="/kakomon/2013_9/" title="2013年9月試験">9月</a>
+</ul>
+<h3>分野別過去問題</h3>
+<a href="/lifeplan.html" title="ライフプランニングの過去問題">ライフプランニング</a><a href="/risk.html" title="リスク管理の過去問題">リスク管理</a><a href="/finance.html" title="金融資産運用の過去問題">金融資産運用</a><a href="/tax.html" title="タックスプランニングの過去問題">タックスプランニング</a><a href="/estate.html" title="不動産の過去問題">不動産</a><a href="/succession.html" title="相続事業承継の過去問題">相続・事業承継</a>
+<h3>FP2級試験情報</h3>
+<ul>
+<li><a href="/law.html">法令・制度改正情報</a>
+<li><a href="/kakomon-free-pdf.html">FP2級過去問PDF一覧</a>
+</ul>
+<div class="menuCloseBtn">×　メニューを閉じる</div>
+</nav>
+<!-- SIDECOL END -->
+</div>
+<!-- CONTENT END -->
+
+<!-- FOOTER START -->
+<footer>
+<script async src="https://cse.google.com/cse.js?cx=2a0a0aae8124eb637"></script>
+<div class="gcse-search"></div>
+<div class="minilogo"></div>
+<a href="/userterms.html">このサイトの利用について</a>
+<a href="/privacypolicy.html">プライバシーポリシー</a>
+<a href="/tokushouhou.html">特商法に基づく表記</a>
+<a href="/faq.html">よくある質問とその答え</a>
+<a href="/contact.html">お問い合わせ</a>
+<a href="/config.html">サイト設定</a>
+<div class="copyright">&copy; 2018-<script>document.write(new Date().getFullYear());</script> <b>fp2-siken.com</b> All Rights Reserved.</div>
+</footer>
+<!-- FOOTER END -->
+
+</div>
+<!--MAINCONTENT END-->
+
+<div id="canvas_answer_back"></div>
+<canvas id="canvas_answer_front" width="200" height="260"></canvas>
+
+<!-- SCRIPT START -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/main.js?20260907a"></script>
+<script defer src="/js/kakomonApp.js?20260930"></script>
+<script defer src="/js/user.js?20260327"></script>
+<!-- SCRIPT END -->
+</body>
+</html>

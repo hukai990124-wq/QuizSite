@@ -1,0 +1,2580 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS SAA-C03 真题演练卷 第09份</title><style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;
+ padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.toolbar button.primary:hover{background:#0a5d33}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.stem p{margin:0 0 6px}
+.en{color:var(--en)}
+.zh{color:var(--zh);font-size:14px}
+.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}
+.opts{list-style:none;margin:12px 0 0;padding:0}
+.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}
+.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}
+details.ans .correct{font-size:14px;margin:4px 0 8px}
+details.ans .correct b{color:#047857;font-size:16px}
+details.ans .expl{padding-bottom:12px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:15px 18px;
+ margin-bottom:10px;text-decoration:none;color:#111827}
+a.card:hover{border-color:#93c5fd;background:#f8fbff}
+a.card .n{font-weight:700}
+a.card .r{color:#6b7280;font-size:13px;margin-top:3px}
+@media print{
+ body{background:#fff}
+ .toolbar{display:none}
+ .wrap{max-width:none;padding:0}
+ .q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}
+ details.ans{border:1px solid #ccc;background:#fff;display:block}
+ details.ans .expl{display:block}
+}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+</style></head><body>
+<div class="wrap">
+<h1>AWS SAA-C03 真题演练卷 · 第 09 份</h1>
+<p class="sub">题目 401–450 · 每份 50 题 · 中英对照 · 点选项后按「确认作答」即刻判对错 · 来源：HydraNode 免费题库（考生回忆真题，仅供参考）</p>
+<div class="toolbar"><div class="btns">
+<button class="primary" id="btn-sheet" type="button">答题卡</button>
+<button id="btn-wrong" type="button">只看错题</button>
+<button id="btn-expand" type="button">展开全部解析</button>
+<button id="btn-report" type="button">交卷</button>
+<button id="btn-reset" type="button">重置</button>
+<button onclick="window.print()" type="button">打印 / 存 PDF</button>
+</div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>50</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<div class="q" id="q401" data-n="401" data-ans="A, B">
+  <div class="qhead"><span class="qno">Question 401</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">A company processes large amounts of critical data daily and stores it in an Amazon S3 bucket. The company wants to implement a backup strategy to ensure high durability and disaster recovery, while also optimizing costs. Which of the following strategies should the company implement?</p>
+    <p class="zh">某公司每天处理大量关键数据并将其存储在 Amazon S3 存储桶中。该公司希望实施备份策略以确保高耐用性和灾难恢复，同时优化成本。公司应实施以下哪些策略？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Enable versioning on the S3 bucket and configure a lifecycle policy to transition previous versions to S3 Glacier.</p>
+        <p class="zh">在 S3 存储桶上启用版本控制并配置生命周期策略以将以前的版本转换为 S3 Glacier。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Set up cross-region replication (CRR) to replicate the S3 bucket to another AWS Region.</p>
+        <p class="zh">设置跨区域复制 (CRR) 以将 S3 存储桶复制到另一个 AWS 区域。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Create a daily backup of the S3 bucket using AWS Backup and store it in Amazon EBS snapshots.</p>
+        <p class="zh">使用 AWS Backup 创建 S3 存储桶的每日备份并将其存储在 Amazon EBS 快照中。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Enable S3 bucket logging and archive the logs to an S3 Glacier storage class.</p>
+        <p class="zh">启用 S3 存储桶日志记录并将日志存档到 S3 Glacier 存储类。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Use AWS DataSync to schedule regular backups of the S3 bucket to on-premises storage.</p>
+        <p class="zh">使用 AWS DataSync 安排将 S3 存储桶定期备份到本地存储。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, B</b></p>
+    <div class="expl">
+      <p class="en">The correct answers involve leveraging built-in S3 features for backup and disaster recovery. Enabling versioning ensures data durability by retaining all versions of objects, and transitioning old versions to S3 Glacier optimizes costs. Cross-region replication provides an additional layer of disaster recovery by replicating data to another Region. The other options either do not apply to S3 backup strategies or do not align with the company&#x27;s requirements for durability, disaster recovery, and cost optimization.</p>
+      <p class="zh">正确答案涉及利用内置 S3 功能进行备份和灾难恢复。启用版本控制通过保留对象的所有版本来确保数据持久性，并将旧版本转换为 S3 Glacier 可优化成本。跨区域复制通过将数据复制到另一个区域来提供额外的灾难恢复层。其他选项要么不适用于 S3 备份策略，要么不符合公司对持久性、灾难恢复和成本优化的要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q402" data-n="402" data-ans="A, C, D">
+  <div class="qhead"><span class="qno">Question 402</span><span class="badge">Select 3</span></div>
+  <div class="stem">
+    <p class="en">A company runs a critical e-commerce application on Amazon RDS for PostgreSQL. To ensure the application&#x27;s data can be quickly recovered in case of accidental deletion or a regional disaster, they want to implement a backup strategy. Which of the following are appropriate actions to meet their requirements?</p>
+    <p class="zh">一家公司在 Amazon RDS for PostgreSQL 上运行关键的电子商务应用程序。为了确保应用程序的数据在意外删除或区域灾难的情况下能够快速恢复，他们希望实施备份策略。以下哪项是满足他们要求的适当行动？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Enable automated backups for the RDS instance and configure a backup retention period.</p>
+        <p class="zh">为 RDS 实例启用自动备份并配置备份保留期限。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Set up an RDS Read Replica in another AWS Region and enable backups on the replica.</p>
+        <p class="zh">在另一个 AWS 区域中设置 RDS 只读副本并在副本上启用备份。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Regularly export RDS snapshots to Amazon S3 and replicate the data to another AWS Region.</p>
+        <p class="zh">定期将 RDS 快照导出到 Amazon S3 并将数据复制到另一个 AWS 区域。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use AWS Backup to take application-consistent backups of the RDS database.</p>
+        <p class="zh">使用 AWS Backup 对 RDS 数据库进行应用程序一致的备份。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Enable Multi-AZ on the RDS instance to ensure data durability.</p>
+        <p class="zh">在 RDS 实例上启用多可用区，以保证数据的持久性。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 3 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, C, D</b></p>
+    <div class="expl">
+      <p class="en">To implement a robust backup strategy for Amazon RDS for PostgreSQL, it is essential to enable automated backups for point-in-time recovery and protect against regional disasters by exporting snapshots to another region or using AWS Backup for cross-region backup capabilities. Multi-AZ primarily addresses high availability within the same region and is not a substitute for backups.</p>
+      <p class="zh">要为 PostgreSQL 的 Amazon RDS 实施强大的备份策略，必须启用自动备份以进行时间点恢复，并通过将快照导出到另一个区域或使用 AWS Backup 实现跨区域备份功能来防止区域灾难。多可用区主要解决同一区域内的高可用性问题，不能替代备份。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q403" data-n="403" data-ans="A">
+  <div class="qhead"><span class="qno">Question 403</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company needs to back up its Amazon RDS database to ensure minimal data loss in the event of a failure. They require point-in-time recovery for up to 7 days and want to automate the backup process. What is the most cost-effective backup strategy to achieve this?</p>
+    <p class="zh">公司需要备份其 Amazon RDS 数据库，以确保在发生故障时将数据丢失降至最低。他们需要长达 7 天的时间点恢复，并希望自动化备份过程。实现这一目标最经济有效的备份策略是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Enable automated backups for the RDS instance.</p>
+        <p class="zh">为 RDS 实例启用自动备份。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Create manual snapshots of the RDS instance daily.</p>
+        <p class="zh">每天创建 RDS 实例的手动快照。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Set up Amazon S3 Lifecycle Policies to archive the backups.</p>
+        <p class="zh">设置 Amazon S3 生命周期策略以存档备份。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use AWS Backup to schedule daily backups for the RDS instance.</p>
+        <p class="zh">使用 AWS Backup 安排 RDS 实例的每日备份。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Enabling automated backups on an Amazon RDS instance is the most cost-effective and straightforward solution for providing daily backups and point-in-time recovery capabilities. Automated backups store snapshots and transaction logs, ensuring that data can be restored to any point in time within the retention period, which aligns perfectly with the company&#x27;s requirements.</p>
+      <p class="zh">在 Amazon RDS 实例上启用自动备份是提供每日备份和时间点恢复功能的最具成本效益且最简单的解决方案。自动备份存储快照和事务日志，确保数据可以恢复到保留期内的任何时间点，这完全符合公司的要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q404" data-n="404" data-ans="B, C">
+  <div class="qhead"><span class="qno">Question 404</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">A company is running a critical application on Amazon EC2 instances in a single Availability Zone. They want to implement a backup strategy to ensure that their application data is protected and recoverable in case of unexpected failures or disasters. Which of the following strategies will provide the most comprehensive and reliable backup solution?</p>
+    <p class="zh">一家公司正在单个可用区的 Amazon EC2 实例上运行关键应用程序。他们希望实施备份策略，以确保其应用程序数据受到保护并在发生意外故障或灾难时可恢复。以下哪种策略将提供最全面、最可靠的备份解决方案？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Create snapshots of the Amazon EBS volumes attached to the EC2 instances and store them in the same region.</p>
+        <p class="zh">创建附加到 EC2 实例的 Amazon EBS 卷的快照并将它们存储在同一区域中。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Enable AWS Backup to manage and automate backups for EBS volumes and configure cross-region backup replication.</p>
+        <p class="zh">启用 AWS Backup 来管理和自动执行 EBS 卷的备份并配置跨区域备份复制。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use an Amazon S3 Lifecycle policy to transition older backups to Amazon S3 Glacier for long-term storage.</p>
+        <p class="zh">使用 Amazon S3 生命周期策略将较旧的备份转移到 Amazon S3 Glacier 进行长期存储。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Configure an Amazon RDS Multi-AZ deployment for the application database to ensure high availability.</p>
+        <p class="zh">配置应用数据库 Amazon RDS 多 AZ 部署，保证高可用。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Use AWS Storage Gateway to replicate application data to an on-premises data center for additional redundancy.</p>
+        <p class="zh">使用 AWS Storage Gateway 将应用程序数据复制到本地数据中心以获得额外冗余。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B, C</b></p>
+    <div class="expl">
+      <p class="en">A reliable backup strategy should include automated and managed solutions like AWS Backup with cross-region replication to protect against region-wide failures. Additionally, transitioning older backups to cost-effective storage like S3 Glacier helps manage long-term storage costs efficiently. These strategies together provide robust and comprehensive backup coverage.</p>
+      <p class="zh">可靠的备份策略应包括自动化和托管解决方案，例如具有跨区域复制功能的 AWS Backup，以防止区域范围内的故障。此外，将旧备份过渡到 S3 Glacier 等经济高效的存储有助于有效管理长期存储成本。这些策略共同提供了强大且全面的备份覆盖范围。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q405" data-n="405" data-ans="A, C">
+  <div class="qhead"><span class="qno">Question 405</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">An e-commerce company is running a high-transactional web application on Amazon EC2 instances. The application requires low latency and high IOPS for its database, while log files for audit purposes need a cost-effective storage solution. Which combination of Amazon Elastic Block Store (EBS) volume types should the company choose?</p>
+    <p class="zh">一家电子商务公司正在 Amazon EC2 实例上运行高事务性 Web 应用程序。该应用程序的数据库需要低延迟和高 IOPS，而用于审计目的的日志文件需要经济高效的存储解决方案。公司应选择哪种 Amazon Elastic Block Store (EBS) 卷类型组合？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Provisioned IOPS SSD (io2) for the database and Cold HDD (sc1) for the logs</p>
+        <p class="zh">为数据库预配置 IOPS SSD (io2)，为日志预配置冷 HDD (sc1)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">General Purpose SSD (gp3) for the database and Throughput Optimized HDD (st1) for the logs</p>
+        <p class="zh">用于数据库的通用 SSD (gp3) 和用于日志的吞吐量优化 HDD (st1)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Provisioned IOPS SSD (io1) for the database and Throughput Optimized HDD (st1) for the logs</p>
+        <p class="zh">为数据库配置 IOPS SSD (io1)，为日志配置吞吐量优化 HDD (st1)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">General Purpose SSD (gp2) for the database and Cold HDD (sc1) for the logs</p>
+        <p class="zh">用于数据库的通用 SSD (gp2) 和用于日志的冷 HDD (sc1)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Provisioned IOPS SSD (io2) for the database and General Purpose SSD (gp3) for the logs</p>
+        <p class="zh">用于数据库的预配置 IOPS SSD (io2) 和用于日志的通用 SSD (gp3)</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, C</b></p>
+    <div class="expl">
+      <p class="en">For a high-transactional database, Provisioned IOPS SSD volumes (io1 or io2) are the best choice due to their ability to deliver high performance and low latency. For log files, which require high throughput and are write-intensive, Throughput Optimized HDD (st1) is a cost-effective solution. This combination ensures optimal performance for critical database operations while keeping costs low for log storage.</p>
+      <p class="zh">对于高事务性数据库，预配置 IOPS SSD 卷（io1 或 io2）是最佳选择，因为它们能够提供高性能和低延迟。对于需要高吞吐量且写入密集型的日志文件，吞吐量优化 HDD (st1) 是一种经济高效的解决方案。这种组合可确保关键数据库操作的最佳性能，同时保持日志存储的低成本。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q406" data-n="406" data-ans="C">
+  <div class="qhead"><span class="qno">Question 406</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is running a batch processing workload that requires high throughput for large, sequential data transfers. The workload is not latency-sensitive, and cost optimization is a key priority. Which Amazon EBS volume type is the MOST suitable for this use case?</p>
+    <p class="zh">一家公司正在运行批处理工作负载，需要高吞吐量来进行大型顺序数据传输。工作负载对延迟不敏感，成本优化是一个关键优先事项。哪种 Amazon EBS 卷类型最适合此用例？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">General Purpose SSD (gp3)</p>
+        <p class="zh">通用 SSD (gp3)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Provisioned IOPS SSD (io2)</p>
+        <p class="zh">预配置 IOPS SSD (io2)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Throughput Optimized HDD (st1)</p>
+        <p class="zh">吞吐量优化 HDD (st1)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Cold HDD (sc1)</p>
+        <p class="zh">冷硬盘 (sc1)</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">The workload described in the scenario requires high throughput for large, sequential data transfers, which is a key characteristic of Throughput Optimized HDD (st1) volumes. Additionally, the cost-sensitive nature of the workload makes st1 a better fit than SSD volumes, which are generally more expensive. Cold HDD (sc1) is not suitable due to its lower performance characteristics, even though it is cost-effective.</p>
+      <p class="zh">该场景中描述的工作负载需要高吞吐量来进行大型顺序数据传输，这是吞吐量优化 HDD (st1) 卷的关键特征。此外，工作负载对成本敏感的性质使得 st1 比 SSD 卷更适合，后者通常更昂贵。尽管冷 HDD (sc1) 具有成本效益，但由于其性能特征较低，因此不适合。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q407" data-n="407" data-ans="B">
+  <div class="qhead"><span class="qno">Question 407</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is running a high-performance database workload on Amazon EC2 instances and requires consistent high IOPS with low latency. Additionally, the solution must support a volume size of up to 16 TiB. Which Amazon EBS volume type is the most appropriate for this use case?</p>
+    <p class="zh">一家公司在 Amazon EC2 实例上运行高性能数据库工作负载，需要一致的高 IOPS 和低延迟。此外，该解决方案必须支持高达 16 TiB 的卷大小。哪种 Amazon EBS 卷类型最适合此用例？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">General Purpose SSD (gp3)</p>
+        <p class="zh">通用 SSD (gp3)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Provisioned IOPS SSD (io2)</p>
+        <p class="zh">预配置 IOPS SSD (io2)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Provisioned IOPS SSD (io1)</p>
+        <p class="zh">预配置 IOPS SSD (io1)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Throughput Optimized HDD (st1)</p>
+        <p class="zh">吞吐量优化 HDD (st1)</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">For high-performance database workloads requiring consistent high IOPS and low latency, the Provisioned IOPS SSD (io2) volume type is the most appropriate choice. It is specifically designed for such use cases, offering higher reliability and durability compared to io1, and it supports the required volume size of up to 16 TiB. Other volume types like gp3 or st1 are not optimized for such demanding workloads.</p>
+      <p class="zh">对于需要一致的高 IOPS 和低延迟的高性能数据库工作负载，预配置 IOPS SSD (io2) 卷类型是最合适的选择。它专为此类用例而设计，与 io1 相比，提供更高的可靠性和耐用性，并且支持高达 16 TiB 的所需卷大小。其他卷类型（例如 gp3 或 st1）并未针对如此苛刻的工作负载进行优化。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q408" data-n="408" data-ans="B">
+  <div class="qhead"><span class="qno">Question 408</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is running a database workload on an Amazon EC2 instance and requires a storage solution that provides low latency and high IOPS for frequent read and write operations. The database also needs to handle high transaction volumes efficiently. Which Amazon EBS volume type is the most suitable for this workload?</p>
+    <p class="zh">某公司在 Amazon EC2 实例上运行数据库工作负载，需要一个能够为频繁读写操作提供低延迟和高 IOPS 的存储解决方案。数据库还需要有效地处理大量事务。哪种 Amazon EBS 卷类型最适合此工作负载？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">General Purpose SSD (gp3)</p>
+        <p class="zh">通用 SSD (gp3)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Provisioned IOPS SSD (io2)</p>
+        <p class="zh">预配置 IOPS SSD (io2)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Throughput Optimized HDD (st1)</p>
+        <p class="zh">吞吐量优化 HDD (st1)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Cold HDD (sc1)</p>
+        <p class="zh">冷硬盘 (sc1)</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Provisioned IOPS SSD (io2) volumes are specifically designed for high-performance transactional workloads that require high IOPS and low latency, such as databases. While General Purpose SSD (gp3) is versatile, it does not match the performance levels of io2 for high-transaction workloads. Throughput-optimized and cold HDD volumes are tailored for sequential workloads and infrequent access, respectively, and do not meet the performance needs of the database in this scenario.</p>
+      <p class="zh">预配置 IOPS SSD (io2) 卷专为需要高 IOPS 和低延迟的高性能事务工作负载（例如数据库）而设计。虽然通用 SSD (gp3) 用途广泛，但它无法与 io2 对于高事务工作负载的性能水平相匹配。吞吐量优化卷和冷 HDD 卷分别针对顺序工作负载和不频繁访问而定制，无法满足此场景中数据库的性能需求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q409" data-n="409" data-ans="B, C">
+  <div class="qhead"><span class="qno">Question 409</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">A company is using Amazon S3 to store large volumes of data. Some of the data needs to be retained for regulatory compliance, while other data becomes infrequently accessed after 30 days and should be cost-optimized. The company also wants to ensure automatic deletion of data that is no longer needed after 5 years. How should the company design its S3 lifecycle policy to meet these requirements?</p>
+    <p class="zh">一家公司正在使用 Amazon S3 来存储大量数据。某些数据需要保留以符合法规要求，而其他数据在 30 天后就不再经常访问，应进行成本优化。该公司还希望确保自动删除 5 年后不再需要的数据。公司应如何设计其 S3 生命周期策略来满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Move infrequently accessed data to S3 Intelligent-Tiering after 30 days.</p>
+        <p class="zh">30 天后将不经常访问的数据移至 S3 智能分层。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Move infrequently accessed data to S3 Standard-IA after 30 days.</p>
+        <p class="zh">30 天后将不常访问的数据移至 S3 Standard-IA。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Delete data that is no longer needed after 5 years.</p>
+        <p class="zh">删除 5 年后不再需要的数据。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Enable S3 Glacier Deep Archive for compliance data after 30 days.</p>
+        <p class="zh">30 天后启用 S3 Glacier 深度存档以获取合规性数据。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Use object versioning to retain all versions of data for compliance purposes.</p>
+        <p class="zh">使用对象版本控制保留数据的所有版本以实现合规性目的。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B, C</b></p>
+    <div class="expl">
+      <p class="en">The correct approach involves transitioning infrequently accessed data to S3 Standard-IA after 30 days to optimize costs and setting a lifecycle policy to delete unneeded data after 5 years. S3 Intelligent-Tiering is not ideal here because access patterns are predictable. Glacier Deep Archive and versioning are not required to meet the specified requirements in this scenario.</p>
+      <p class="zh">正确的方法是在 30 天后将不经常访问的数据转换为 S3 Standard-IA 以优化成本，并设置生命周期策略以在 5 年后删除不需要的数据。 S3 智能分层在这里并不理想，因为访问模式是可预测的。 Glacier Deep Archive 和版本控制不需要满足此场景中的指定要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q410" data-n="410" data-ans="A">
+  <div class="qhead"><span class="qno">Question 410</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">Your company is using Amazon S3 to store vast amounts of data, including logs that are no longer actively accessed after 30 days. However, due to compliance requirements, these logs must be retained for seven years. You want to optimize storage costs while ensuring that the data is automatically managed throughout its lifecycle. Which approach should you take?</p>
+    <p class="zh">您的公司正在使用 Amazon S3 存储大量数据，包括 30 天后不再主动访问的日志。但是，由于合规性要求，这些日志必须保留七年。您希望优化存储成本，同时确保数据在其整个生命周期中得到自动管理。您应该采取哪种方法？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Create an S3 Lifecycle policy to transition objects to S3 Glacier after 30 days and expire them after seven years.</p>
+        <p class="zh">创建 S3 生命周期策略以在 30 天后将对象过渡到 S3 Glacier，并在 7 年后过期。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Manually move objects to S3 Glacier after 30 days and delete them after seven years.</p>
+        <p class="zh">30 天后手动将对象移动到 S3 Glacier，并在 7 年后将其删除。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use Amazon S3 Intelligent-Tiering to automatically manage the storage class and delete objects after seven years.</p>
+        <p class="zh">使用 Amazon S3 智能分层自动管理存储类别并在七年后删除对象。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Create an S3 Lifecycle policy to transition objects to S3 Standard-Infrequent Access (S3 Standard-IA) after 30 days and then to S3 Glacier after 60 days, expiring them after seven years.</p>
+        <p class="zh">创建 S3 生命周期策略，以在 30 天后将对象转换为 S3 标准-不频繁访问 (S3 标准-IA)，然后在 60 天后转换为 S3 Glacier，并在七年后过期。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">S3 Lifecycle policies are ideal for managing data lifecycles in Amazon S3. In this scenario, transitioning objects to S3 Glacier after 30 days minimizes storage costs, and expiring them after seven years ensures compliance while automatically managing data retention. This eliminates manual effort and optimizes cost efficiency.</p>
+      <p class="zh">S3 生命周期策略非常适合管理 Amazon S3 中的数据生命周期。在此场景中，30 天后将对象转换为 S3 Glacier 可最大限度地降低存储成本，并在 7 年后使对象过期可确保合规性，同时自动管理数据保留。这消除了手动工作并优化了成本效率。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q411" data-n="411" data-ans="A">
+  <div class="qhead"><span class="qno">Question 411</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company stores large volumes of log data in an Amazon S3 bucket. The data is frequently accessed for the first 30 days, after which it is rarely accessed but must be retained for compliance purposes for at least 7 years. Which solution is the MOST cost-effective for managing the data lifecycle while ensuring compliance?</p>
+    <p class="zh">某公司在 Amazon S3 桶中存储大量日志数据。数据在前 30 天内经常被访问，此后很少被访问，但出于合规目的必须保留至少 7 年。哪种解决方案在管理数据生命周期同时确保合规性方面最具成本效益？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Configure an S3 Lifecycle policy to transition objects to S3 Glacier Instant Retrieval after 30 days and delete them after 7 years.</p>
+        <p class="zh">配置 S3 生命周期策略以在 30 天后将对象过渡到 S3 Glacier 即时检索，并在 7 年后删除它们。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Manually move objects to S3 Glacier after 30 days and delete them after 7 years.</p>
+        <p class="zh">30 天后手动将对象移动到 S3 Glacier，并在 7 年后将其删除。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Configure an S3 Lifecycle policy to transition objects to S3 Standard-IA after 30 days and then to S3 Glacier Deep Archive after 7 years.</p>
+        <p class="zh">配置 S3 生命周期策略以在 30 天后将对象转换为 S3 Standard-IA，然后在 7 年后将对象转换为 S3 Glacier Deep Archive。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Configure an S3 Lifecycle policy to transition objects to S3 Standard-IA after 30 days and then to S3 Glacier Deep Archive after 1 year.</p>
+        <p class="zh">配置 S3 生命周期策略以在 30 天后将对象转换为 S3 Standard-IA，然后在 1 年后将对象转换为 S3 Glacier Deep Archive。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">S3 Lifecycle policies are designed to optimize cost and automate data management. In this scenario, transitioning data to S3 Glacier Instant Retrieval after 30 days ensures cost savings while maintaining fast access for compliance checks. Configuring the policy to automatically delete data after 7 years meets the compliance requirement without manual intervention.</p>
+      <p class="zh">S3 生命周期策略旨在优化成本和自动化数据管理。在这种情况下，30 天后将数据转换到 S3 Glacier 即时检索可确保节省成本，同时保持快速访问以进行合规性检查。配置 7 年后自动删除数据的策略，满足合规要求，无需人工干预。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q412" data-n="412" data-ans="A">
+  <div class="qhead"><span class="qno">Question 412</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">Your company stores critical data in an Amazon S3 bucket for analytics. Compliance requirements mandate that data older than 90 days must be archived to reduce costs, and data older than 1 year must be deleted. How can you implement this requirement efficiently while minimizing management overhead?</p>
+    <p class="zh">您的公司将关键数据存储在 Amazon S3 存储桶中以进行分析。合规性要求规定，必须归档超过 90 天的数据以降低成本，并且必须删除超过 1 年的数据。如何有效地实现这一要求，同时最大限度地减少管理开销？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use Amazon S3 Lifecycle policies to transition data to Amazon S3 Glacier after 90 days and delete it after 1 year.</p>
+        <p class="zh">使用 Amazon S3 生命周期策略在 90 天后将数据传输到 Amazon S3 Glacier，并在 1 年后将其删除。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Manually move data older than 90 days to Amazon S3 Glacier and delete objects older than 1 year using an AWS CLI script.</p>
+        <p class="zh">使用 AWS CLI 脚本手动将超过 90 天的数据移动到 Amazon S3 Glacier 并删除超过 1 年的对象。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use Amazon S3 Lifecycle policies to transition data to Amazon S3 Standard-IA after 90 days and delete it after 1 year.</p>
+        <p class="zh">使用 Amazon S3 生命周期策略在 90 天后将数据转换为 Amazon S3 Standard-IA，并在 1 年后将其删除。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Configure an AWS Lambda function to monitor object age and move data to Amazon S3 Glacier after 90 days, and delete it after 1 year.</p>
+        <p class="zh">配置 AWS Lambda 函数来监控对象年龄，并在 90 天后将数据移至 Amazon S3 Glacier，并在 1 年后将其删除。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Amazon S3 Lifecycle policies are a native feature designed to manage object lifecycles efficiently. By configuring a policy, you can automatically transition data to lower-cost storage classes like S3 Glacier and delete objects after a specified period, meeting both cost-optimization and compliance requirements without manual intervention. This is the most efficient and reliable solution for the given scenario.</p>
+      <p class="zh">Amazon S3 生命周期策略是旨在高效管理对象生命周期的本机功能。通过配置策略，您可以自动将数据迁移到 S3 Glacier 等成本较低的存储类别，并在指定时间后删除对象，无需人工干预即可满足成本优化和合规性要求。对于给定场景，这是最有效、最可靠的解决方案。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q413" data-n="413" data-ans="A">
+  <div class="qhead"><span class="qno">Question 413</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company has an on-premises file storage system used for application data and wants to migrate to AWS while maintaining low latency access for some of its on-premises applications. The company also requires seamless integration with its on-premises environment and the ability to transfer large datasets periodically to AWS for long-term archiving. Which solution best meets these requirements?</p>
+    <p class="zh">一家公司拥有用于应用程序数据的本地文件存储系统，并且希望迁移到 AWS，同时保持某些本地应用程序的低延迟访问。该公司还需要与其本地环境无缝集成，并能够定期将大型数据集传输到 AWS 进行长期存档。哪种解决方案最能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use AWS Storage Gateway in File Gateway mode to provide access to S3 storage and integrate with on-premises applications.</p>
+        <p class="zh">在文件网关模式下使用 AWS Storage Gateway 提供对 S3 存储的访问并与本地应用程序集成。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use AWS DataSync to continuously replicate data from the on-premises storage system to Amazon S3 and provide low latency access.</p>
+        <p class="zh">使用 AWS DataSync 将数据从本地存储系统持续复制到 Amazon S3 并提供低延迟访问。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use Amazon S3 Transfer Acceleration to upload data to an S3 bucket for archiving, and configure applications to access the data directly from S3.</p>
+        <p class="zh">使用 Amazon S3 传输加速将数据上传到 S3 存储桶进行存档，并将应用程序配置为直接从 S3 访问数据。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use AWS Storage Gateway in Tape Gateway mode to emulate a tape library for archiving and provide low latency access to on-premises applications.</p>
+        <p class="zh">在磁带网关模式下使用 AWS Storage Gateway 模拟磁带库进行归档，并提供对本地应用程序的低延迟访问。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">The AWS Storage Gateway in File Gateway mode is the best solution for hybrid storage scenarios where on-premises applications require low latency access to files while utilizing Amazon S3 for scalable and durable storage. File Gateway caches frequently accessed data locally, ensuring high performance for on-premises applications, and seamlessly transfers data to AWS for long-term archiving. Other options, such as DataSync or Transfer Acceleration, are more suitable for data migration or upload optimization rather than hybrid storage with local application integration.</p>
+      <p class="zh">文件网关模式下的 AWS Storage Gateway 是混合存储场景的最佳解决方案，在混合存储场景中，本地应用程序需要对文件进行低延迟访问，同时利用 Amazon S3 进行可扩展且持久的存储。文件网关在本地缓存经常访问的数据，确保本地应用程序的高性能，并将数据无缝传输到 AWS 进行长期存档。其他选项（例如 DataSync 或传输加速）更适合数据迁移或上传优化，而不是与本地应用程序集成的混合存储。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q414" data-n="414" data-ans="B">
+  <div class="qhead"><span class="qno">Question 414</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company has an on-premises file storage system that needs to be integrated with AWS to provide low-latency access to frequently used data and seamless access to the full dataset stored in Amazon S3. Which hybrid storage solution should they use to meet this requirement?</p>
+    <p class="zh">一家公司拥有一个本地文件存储系统，需要与 AWS 集成，以提供对常用数据的低延迟访问以及对 Amazon S3 中存储的完整数据集的无缝访问。他们应该使用哪种混合存储解决方案来满足此要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS DataSync</p>
+        <p class="zh">AWS 数据同步</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">AWS Storage Gateway - File Gateway</p>
+        <p class="zh">AWS Storage Gateway - 文件网关</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS Transfer Family</p>
+        <p class="zh">AWS 传输系列</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Amazon S3 Glacier</p>
+        <p class="zh">Amazon S3 Glacier</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">AWS Storage Gateway - File Gateway is specifically designed for hybrid storage scenarios where low-latency access is required for frequently used data while providing seamless access to the full dataset stored in Amazon S3. It caches frequently accessed data locally, which meets the company’s requirements. Other options like AWS DataSync, AWS Transfer Family, and Amazon S3 Glacier serve different purposes and do not address the need for low-latency access or hybrid storage integration.</p>
+      <p class="zh">AWS Storage Gateway - 文件网关专为混合存储场景而设计，其中需要对常用数据进行低延迟访问，同时提供对 Amazon S3 中存储的完整数据集的无缝访问。将经常访问的数据缓存在本地，满足公司的需求。 AWS DataSync、AWS Transfer Family 和 Amazon S3 Glacier 等其他选项具有不同的用途，不能满足低延迟访问或混合存储集成的需求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q415" data-n="415" data-ans="A">
+  <div class="qhead"><span class="qno">Question 415</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company runs a hybrid cloud architecture where a critical on-premises application requires low-latency access to frequently used data stored in the AWS Cloud. The company also wants to archive infrequently accessed data to Amazon S3 Glacier for cost efficiency. Which AWS service should the company use to meet these requirements?</p>
+    <p class="zh">一家公司运行混合云架构，其中关键的本地应用程序需要低延迟地访问存储在 AWS 云中的常用数据。该公司还希望将不常访问的数据存档到 Amazon S3 Glacier 以提高成本效率。公司应该使用哪种 AWS 服务来满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS Storage Gateway, File Gateway</p>
+        <p class="zh">AWS Storage Gateway，文件网关</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">AWS DataSync</p>
+        <p class="zh">AWS 数据同步</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS Transfer Family</p>
+        <p class="zh">AWS 传输系列</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS Storage Gateway, Tape Gateway</p>
+        <p class="zh">AWS Storage Gateway，磁带网关</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">AWS Storage Gateway, File Gateway is the correct choice because it enables low-latency access to frequently used cloud data by caching it locally, while also supporting the archiving of less frequently accessed data to cost-efficient storage tiers like Amazon S3 Glacier. The other options do not meet the requirements of providing low-latency access alongside efficient archiving.</p>
+      <p class="zh">AWS Storage Gateway 文件网关是正确的选择，因为它通过在本地缓存常用云数据来实现对常用云数据的低延迟访问，同时还支持将不常访问的数据归档到 Amazon S3 Glacier 等经济高效的存储层。其他选项无法满足提供低延迟访问和高效归档的要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q416" data-n="416" data-ans="C">
+  <div class="qhead"><span class="qno">Question 416</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A large enterprise wants to migrate its on-premises file storage to AWS while maintaining low-latency access for its on-premises applications. The company also needs a solution to periodically archive cold data to Amazon S3 for cost-effectiveness. Which hybrid storage solution would best meet these requirements?</p>
+    <p class="zh">一家大型企业希望将其本地文件存储迁移到 AWS，同时保持其本地应用程序的低延迟访问。该公司还需要一种解决方案来定期将冷数据存档到 Amazon S3，以实现成本效益。哪种混合存储解决方案最能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS DataSync</p>
+        <p class="zh">AWS 数据同步</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">AWS Transfer Family</p>
+        <p class="zh">AWS 传输系列</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS Storage Gateway - File Gateway</p>
+        <p class="zh">AWS Storage Gateway - 文件网关</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Amazon S3 Glacier</p>
+        <p class="zh">Amazon S3 Glacier</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">AWS Storage Gateway - File Gateway is the ideal solution for this scenario because it allows on-premises applications to access files stored in Amazon S3 using standard file protocols, while providing low-latency performance. Additionally, it seamlessly integrates with Amazon S3 for storing and archiving data, meeting the company&#x27;s requirements for cost-effective archival storage.</p>
+      <p class="zh">AWS Storage Gateway - 文件网关是此场景的理想解决方案，因为它允许本地应用程序使用标准文件协议访问存储在 Amazon S3 中的文件，同时提供低延迟性能。此外，它还与 Amazon S3 无缝集成，用于数据存储和归档，满足公司对经济高效的归档存储的要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q417" data-n="417" data-ans="B">
+  <div class="qhead"><span class="qno">Question 417</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is building a data lake on AWS to store large amounts of structured and unstructured data. The data is accessed daily for the first 30 days and then infrequently thereafter. The company wants to minimize storage costs while ensuring that the data is still accessible with low latency when needed. Which storage solution and access pattern combination should the company use?</p>
+    <p class="zh">一家公司正在 AWS 上构建数据湖来存储大量结构化和非结构化数据。前 30 天每天都会访问数据，此后则很少访问。该公司希望最大限度地降低存储成本，同时确保在需要时仍然可以低延迟地访问数据。公司应使用哪种存储解决方案和访问模式组合？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Store the data in Amazon S3 Standard and transition it to S3 Glacier after 30 days</p>
+        <p class="zh">将数据存储在 Amazon S3 Standard 中，并在 30 天后将其转换为 S3 Glacier</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Store the data in Amazon S3 Intelligent-Tiering and allow automatic tier transitions based on access patterns</p>
+        <p class="zh">将数据存储在 Amazon S3 智能分层中，并允许根据访问模式自动进行层转换</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Store the data in Amazon S3 Standard-IA and transition it to S3 Glacier Deep Archive after 30 days</p>
+        <p class="zh">将数据存储在 Amazon S3 Standard-IA 中，并在 30 天后将其转换到 S3 Glacier Deep Archive</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Store the data in Amazon S3 One Zone-IA to minimize costs and manually manage data transitions</p>
+        <p class="zh">将数据存储在 Amazon S3 One Zone-IA 中，以最大限度地降低成本并手动管理数据转换</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">The best solution for the given scenario is Amazon S3 Intelligent-Tiering. It optimizes storage costs by automatically tiering data based on changing access patterns and ensures low latency access. This eliminates the need for manual transitions and ensures the data is stored cost-effectively while being readily accessible, meeting the company&#x27;s requirements for both cost efficiency and low latency access.</p>
+      <p class="zh">针对给定场景的最佳解决方案是 Amazon S3 智能分层。它通过根据不断变化的访问模式自动分层数据来优化存储成本，并确保低延迟访问。这消除了手动转换的需要，并确保数据以经济高效的方式存储，同时易于访问，满足公司对成本效率和低延迟访问的要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q418" data-n="418" data-ans="C">
+  <div class="qhead"><span class="qno">Question 418</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is building a data analytics application that ingests large volumes of data and processes it to generate daily reports. The application has two distinct access patterns: (1) frequently accessed data for the last 7 days and (2) infrequently accessed historical data older than 7 days. Which storage solution provides the most cost-effective yet performant architecture for this use case?</p>
+    <p class="zh">一家公司正在构建一个数据分析应用程序，该应用程序摄取大量数据并对其进行处理以生成每日报告。该应用程序具有两种不同的访问模式：(1) 最近 7 天频繁访问的数据和 (2) 7 天以上不经常访问的历史数据。哪种存储解决方案可为该用例提供最具成本效益且高性能的架构？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Store all data in Amazon S3 Standard storage class.</p>
+        <p class="zh">将所有数据存储在 Amazon S3 标准存储类中。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Store data for the last 7 days in Amazon S3 Standard and move older data to S3 Glacier Deep Archive using lifecycle policies.</p>
+        <p class="zh">将过去 7 天的数据存储在 Amazon S3 Standard 中，并使用生命周期策略将旧数据移动到 S3 Glacier Deep Archive。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Store data for the last 7 days in Amazon S3 Intelligent-Tiering and move older data to S3 Glacier using lifecycle policies.</p>
+        <p class="zh">将过去 7 天的数据存储在 Amazon S3 智能分层中，并使用生命周期策略将旧数据移动到 S3 Glacier。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Store all data in Amazon S3 One Zone-IA to lower costs.</p>
+        <p class="zh">将所有数据存储在 Amazon S3 One Zone-IA 中以降低成本。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">The most effective solution leverages Amazon S3 Intelligent-Tiering for the frequently accessed data (last 7 days), as it automatically moves data between access tiers to optimize costs. For older, infrequently accessed data, S3 Glacier provides a balance of low storage costs and reasonable retrieval times, which is ideal for the historical data in this use case. Lifecycle policies automate the transition of data between these storage classes.</p>
+      <p class="zh">最有效的解决方案利用 Amazon S3 智能分层来处理频繁访问的数据（最近 7 天），因为它会自动在访问层之间移动数据以优化成本。对于较旧的、不经常访问的数据，S3 Glacier 提供了低存储成本和合理检索时间的平衡，这对于该用例中的历史数据来说是理想的选择。生命周期策略自动在这些存储类别之间进行数据转换。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q419" data-n="419" data-ans="B">
+  <div class="qhead"><span class="qno">Question 419</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company runs a web application that stores user-uploaded images in an Amazon S3 bucket. The application has two distinct access patterns: (1) frequent access for the first 30 days after an image is uploaded and (2) infrequent access after the initial 30 days. The company wants to optimize storage costs without impacting application performance. What is the BEST solution?</p>
+    <p class="zh">一家公司运行一个 Web 应用程序，将用户上传的图像存储在 Amazon S3 存储桶中。该应用程序有两种不同的访问模式：(1) 上传图像后的前 30 天内频繁访问；(2) 最初 30 天后不频繁访问。该公司希望在不影响应用程序性能的情况下优化存储成本。最好的解决方案是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Configure an S3 Lifecycle policy to transition objects to S3 Intelligent-Tiering after 30 days.</p>
+        <p class="zh">配置 S3 生命周期策略以在 30 天后将对象过渡到 S3 智能分层。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Configure an S3 Lifecycle policy to transition objects to S3 Standard-IA after 30 days.</p>
+        <p class="zh">配置 S3 生命周期策略以在 30 天后将对象过渡到 S3 Standard-IA。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Configure an S3 Lifecycle policy to transition objects to S3 Glacier Deep Archive after 30 days.</p>
+        <p class="zh">配置 S3 生命周期策略以在 30 天后将对象过渡到 S3 Glacier Deep Archive。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Store all objects in S3 Standard and manually move them to the appropriate storage class after 30 days.</p>
+        <p class="zh">将所有对象存储在 S3 Standard 中，并在 30 天后手动将它们移动到适当的存储类别。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">The S3 Standard-IA storage class is optimized for objects that are accessed less frequently but still require quick retrieval, and it provides cost savings compared to S3 Standard. By configuring an S3 Lifecycle policy, objects can be automatically transitioned to Standard-IA after 30 days, aligning with the application&#x27;s predictable access pattern while minimizing costs.</p>
+      <p class="zh">S3 Standard-IA 存储类针对访问频率较低但仍需要快速检索的对象进行了优化，与 S3 Standard 相比，它可以节省成本。通过配置 S3 生命周期策略，对象可以在 30 天后自动转换为 Standard-IA，与应用程序的可预测访问模式保持一致，同时最大限度地降低成本。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q420" data-n="420" data-ans="C">
+  <div class="qhead"><span class="qno">Question 420</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is designing a photo-sharing application where users can upload images. The application stores images in Amazon S3. The images are accessed frequently for the first 30 days after upload but are rarely accessed after that. The company wants to minimize storage costs while ensuring the images remain available for download when requested. What is the MOST cost-efficient storage solution?</p>
+    <p class="zh">一家公司正在设计一款照片共享应用程序，用户可以在其中上传图像。应用程序将图像存储在 Amazon S3 中。图片上传后的前 30 天内访问频繁，但此后很少访问。该公司希望最大限度地降低存储成本，同时确保图像在需要时仍可供下载。什么是最具成本效益的存储解决方案？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Store the images in the S3 Standard storage class for the first 30 days, then transition them to the S3 Glacier Flexible Retrieval storage class.</p>
+        <p class="zh">前 30 天将图像存储在 S3 标准存储类中，然后将其转换为 S3 Glacier 灵活检索存储类。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Store the images in the S3 Intelligent-Tiering storage class.</p>
+        <p class="zh">将图像存储在 S3 智能分层存储类中。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Store the images in the S3 Standard storage class for the first 30 days, then transition them to the S3 Standard-Infrequent Access (S3 Standard-IA) storage class.</p>
+        <p class="zh">前 30 天将图像存储在 S3 标准存储类中，然后将其转换为 S3 标准-不频繁访问 (S3 标准-IA) 存储类。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Store all images in the S3 Standard storage class permanently.</p>
+        <p class="zh">将所有图像永久存储在 S3 标准存储类中。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">The company&#x27;s access pattern indicates that images are frequently accessed for the first 30 days and then infrequently accessed afterward. Using S3 Standard for the first 30 days ensures low-latency access during the frequent-access period. Transitioning to S3 Standard-IA after 30 days reduces storage costs for the infrequently accessed images while maintaining quick retrieval times. This approach strikes the best balance between cost and performance for the given scenario.</p>
+      <p class="zh">该公司的访问模式表明，图像在前 30 天内访问频率较高，之后访问频率较低。前 30 天使用 S3 标准可确保频繁访问期间的低延迟访问。 30 天后过渡到 S3 Standard-IA 可降低不常访问图像的存储成本，同时保持快速检索时间。这种方法在给定场景的成本和性能之间取得了最佳平衡。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q421" data-n="421" data-ans="B">
+  <div class="qhead"><span class="qno">Question 421</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is migrating its on-premises data to Amazon S3 and wants to minimize costs for storing infrequently accessed data. The company also requires immediate access to data when needed without waiting for retrieval. Which S3 storage class should the company choose?</p>
+    <p class="zh">一家公司正在将其本地数据迁移到 Amazon S3，并希望最大限度地降低存储不经常访问的数据的成本。该公司还要求在需要时立即访问数据，而无需等待检索。公司应该选择哪种 S3 存储类别？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">S3 Standard</p>
+        <p class="zh">S3 标准</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">S3 Standard-IA (Infrequent Access)</p>
+        <p class="zh">S3 标准-IA（不频繁访问）</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">S3 Intelligent-Tiering</p>
+        <p class="zh">S3 智能分层</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">S3 Glacier Instant Retrieval</p>
+        <p class="zh">S3 Glacier 即时检索</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">S3 Standard-IA is the appropriate choice for storing infrequently accessed data while maintaining immediate access. It provides a cost-effective solution by offering lower storage costs compared to S3 Standard, while still delivering the required rapid access to the data. Other options like S3 Intelligent-Tiering and S3 Glacier Instant Retrieval are either unsuitable or introduce unnecessary complexity or costs for this specific use case.</p>
+      <p class="zh">S3 Standard-IA 是存储不经常访问的数据同时保持即时访问的适当选择。与 S3 标准相比，它提供了更低的存储成本，同时仍然提供所需的数据快速访问，从而提供了一种经济高效的解决方案。 S3 智能分层和 S3 Glacier 即时检索等其他选项要么不适合，要么为此特定用例带来不必要的复杂性或成本。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q422" data-n="422" data-ans="B">
+  <div class="qhead"><span class="qno">Question 422</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A media company stores large volumes of video files in Amazon S3. These files are infrequently accessed after the first 30 days but must be retained for at least five years for compliance purposes. The company wants to optimize storage costs while ensuring the files remain easily accessible when needed. What is the MOST cost-effective solution?</p>
+    <p class="zh">一家媒体公司在 Amazon S3 中存储大量视频文件。这些文件在前 30 天后很少被访问，但出于合规性目的必须保留至少五年。该公司希望优化存储成本，同时确保在需要时轻松访问文件。最具成本效益的解决方案是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use Amazon S3 Intelligent-Tiering for all files.</p>
+        <p class="zh">对所有文件使用 Amazon S3 智能分层。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Move the files to the S3 Standard-IA storage class after 30 days.</p>
+        <p class="zh">30 天后将文件移至 S3 Standard-IA 存储类别。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use S3 Lifecycle policies to transition the files to S3 Glacier Flexible Retrieval after 30 days.</p>
+        <p class="zh">使用 S3 生命周期策略在 30 天后将文件转换为 S3 Glacier 灵活检索。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use S3 Lifecycle policies to transition the files to S3 Glacier Deep Archive after 30 days.</p>
+        <p class="zh">使用 S3 生命周期策略在 30 天后将文件转换到 S3 Glacier Deep Archive。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">The media company&#x27;s files are accessed infrequently after 30 days but must remain accessible on-demand for compliance. S3 Standard-IA provides a cost-effective solution for this use case by reducing storage costs while still allowing fast retrieval when needed. The other options either fail to meet the access requirements or are not the most cost-effective choice for the given access pattern.</p>
+      <p class="zh">媒体公司的文件在 30 天后很少被访问，但必须保持按需访问以确保合规性。 S3 Standard-IA 通过降低存储成本，同时仍允许在需要时快速检索，为此用例提供了一种经济高效的解决方案。其他选项要么无法满足访问要求，要么不是给定访问模式的最具成本效益的选择。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q423" data-n="423" data-ans="C">
+  <div class="qhead"><span class="qno">Question 423</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company uses Amazon S3 to store large volumes of log files that are rarely accessed but must be retained for compliance purposes for 7 years. The company needs a cost-effective storage solution while ensuring that files can be retrieved within hours if needed. Which S3 storage class should the company use to meet these requirements?</p>
+    <p class="zh">一家公司使用 Amazon S3 存储大量很少访问但出于合规目的必须保留 7 年的日志文件。该公司需要一种经济高效的存储解决方案，同时确保可以在需要时在数小时内检索文件。公司应该使用哪种 S3 存储类别来满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">S3 Standard</p>
+        <p class="zh">S3 标准</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">S3 Intelligent-Tiering</p>
+        <p class="zh">S3 智能分层</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">S3 Glacier Flexible Retrieval</p>
+        <p class="zh">S3 Glacier 灵活检索</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">S3 Glacier Deep Archive</p>
+        <p class="zh">S3 Glacier 深度存档</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">S3 Glacier Flexible Retrieval is the best choice for this scenario because it balances cost-effectiveness with relatively fast retrieval times (within hours). This makes it ideal for rarely accessed data that must be retained for compliance purposes but may occasionally need to be retrieved quickly. Other options either do not meet the cost or retrieval time requirements.</p>
+      <p class="zh">S3 Glacier 灵活检索是这种场景的最佳选择，因为它平衡了成本效益和相对较快的检索时间（数小时内）。这使得它非常适合那些很少访问的数据，这些数据必须出于合规性目的而保留，但有时可能需要快速检索。其他选项要么不满足成本或检索时间要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q424" data-n="424" data-ans="C">
+  <div class="qhead"><span class="qno">Question 424</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">An e-commerce company needs to store large amounts of customer transaction logs for compliance purposes. These logs are rarely accessed but must be retained for 10 years. The company wants to minimize storage costs while ensuring that the data remains accessible when needed. Which Amazon S3 storage class should the company use?</p>
+    <p class="zh">出于合规性目的，电子商务公司需要存储大量客户交易日志。这些日志很少被访问，但必须保留 10 年。该公司希望最大限度地降低存储成本，同时确保数据在需要时仍可访问。公司应该使用哪种 Amazon S3 存储类？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">S3 Standard</p>
+        <p class="zh">S3 标准</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">S3 Intelligent-Tiering</p>
+        <p class="zh">S3 智能分层</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">S3 Glacier Flexible Retrieval</p>
+        <p class="zh">S3 Glacier 灵活检索</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">S3 One Zone-IA</p>
+        <p class="zh">S3 一区-IA</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">The scenario requires a storage class optimized for long-term retention of rarely accessed data at the lowest possible cost. S3 Glacier Flexible Retrieval is purpose-built for such use cases, providing low-cost storage for archival data while ensuring durability and accessibility when needed. Other options like S3 Standard and S3 Intelligent-Tiering are costlier and more suited for different use cases, while S3 One Zone-IA lacks the durability required for compliance purposes.</p>
+      <p class="zh">该场景需要一种经过优化的存储类，以便以尽可能低的成本长期保留很少访问的数据。 S3 Glacier 灵活检索专为此类用例而设计，为归档数据提供低成本存储，同时确保需要时的耐用性和可访问性。 S3 标准和 S3 智能分层等其他选项成本更高，更适合不同的用例，而 S3 One Zone-IA 缺乏合规性所需的耐用性。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q425" data-n="425" data-ans="A">
+  <div class="qhead"><span class="qno">Question 425</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is building a new application that requires a scalable, durable, and cost-effective storage solution for storing log files. The logs need to be accessed occasionally for analysis but are not frequently modified. Which AWS storage service is the most suitable for this use case?</p>
+    <p class="zh">一家公司正在构建一个新应用程序，需要一个可扩展、耐用且经济高效的存储解决方案来存储日志文件。日志需要偶尔访问进行分析，但不经常修改。哪种 AWS 存储服务最适合此用例？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Amazon S3</p>
+        <p class="zh">Amazon S3</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon EBS</p>
+        <p class="zh">Amazon EBS</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon EFS</p>
+        <p class="zh">Amazon EFS</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS Snowball</p>
+        <p class="zh">AWS Snowball</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Amazon S3 is the best choice for this scenario because it is designed for object storage, which is ideal for storing unstructured data such as log files. It offers high durability, scalability, and cost-effectiveness, making it a perfect fit for this use case. Other options like Amazon EBS and Amazon EFS are better suited for different types of workloads, while AWS Snowball is not a storage service.</p>
+      <p class="zh">Amazon S3 是这种场景的最佳选择，因为它是为对象存储而设计的，非常适合存储日志文件等非结构化数据。它具有高耐用性、可扩展性和成本效益，非常适合此用例。其他选项（例如 Amazon EBS 和 Amazon EFS）更适合不同类型的工作负载，而 AWS Snowball 不是存储服务。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q426" data-n="426" data-ans="A">
+  <div class="qhead"><span class="qno">Question 426</span><span class="badge">Select 1</span></div>
+  <div class="stem">
+    <p class="en">A company is designing a new application that requires high-performance storage for a database, shared access to files from multiple instances, and a scalable solution for storing backups and logs. Which combination of storage types should the company use to meet these requirements?</p>
+    <p class="zh">一家公司正在设计一种新应用程序，该应用程序需要高性能的数据库存储、对多个实例的文件的共享访问以及用于存储备份和日志的可扩展解决方案。公司应该使用哪种存储类型组合来满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Amazon S3 for backups and logs, Amazon EBS for the database, Amazon EFS for shared file access</p>
+        <p class="zh">Amazon S3 用于备份和日志，Amazon EBS 用于数据库，Amazon EFS 用于共享文件访问</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon EFS for backups and logs, Amazon EBS for the database, Amazon FSx for shared file access</p>
+        <p class="zh">Amazon EFS 用于备份和日志，Amazon EBS 用于数据库，Amazon FSx 用于共享文件访问</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon S3 for backups and logs, Amazon FSx for the database, Amazon EFS for shared file access</p>
+        <p class="zh">Amazon S3 用于备份和日志，Amazon FSx 用于数据库，Amazon EFS 用于共享文件访问</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Amazon S3 for backups and logs, Amazon EBS for the database, Amazon FSx for shared file access</p>
+        <p class="zh">Amazon S3 用于备份和日志，Amazon EBS 用于数据库，Amazon FSx 用于共享文件访问</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Amazon Glacier for backups and logs, Amazon EBS for the database, Amazon EFS for shared file access</p>
+        <p class="zh">Amazon Glacier 用于备份和日志，Amazon EBS 用于数据库，Amazon EFS 用于共享文件访问</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">The correct combination of storage types addresses the specific requirements of the application. Amazon S3 offers scalable object storage for backups and logs. Amazon EBS provides high-performance block storage for the database. Amazon EFS is ideal for shared file access, as it is a managed file system accessible from multiple instances. This combination ensures the application meets its performance, scalability, and accessibility needs.</p>
+      <p class="zh">存储类型的正确组合可以满足应用程序的特定要求。 Amazon S3 为备份和日志提供可扩展的对象存储。 Amazon EBS 为数据库提供高性能的块存储。 Amazon EFS 非常适合共享文件访问，因为它是可从多个实例访问的托管文件系统。这种组合可确保应用程序满足其性能、可扩展性和可访问性需求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q427" data-n="427" data-ans="A">
+  <div class="qhead"><span class="qno">Question 427</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is building a data lake to store large volumes of unstructured data, such as images and videos. The data must be highly durable, and there is a need for scalable storage that can handle high throughput. Which AWS storage type is the most appropriate for this use case?</p>
+    <p class="zh">一家公司正在构建一个数据湖来存储大量非结构化数据，例如图像和视频。数据必须高度耐用，并且需要能够处理高吞吐量的可扩展存储。哪种 AWS 存储类型最适合此用例？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Amazon S3 (Object Storage)</p>
+        <p class="zh">Amazon S3（对象存储）</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon EBS (Block Storage)</p>
+        <p class="zh">Amazon EBS（块存储）</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon EFS (File Storage)</p>
+        <p class="zh">Amazon EFS（文件存储）</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS Snowball Edge (Edge Storage)</p>
+        <p class="zh">AWS Snowball 边缘（边缘存储）</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Amazon S3 is the most appropriate choice for this use case because it is an object storage service designed to handle unstructured data at scale. It offers high durability, scalability, and supports high throughput, all of which are essential for building a data lake. In contrast, Amazon EBS and Amazon EFS are designed for different use cases, and AWS Snowball Edge is not an online storage solution.</p>
+      <p class="zh">Amazon S3 是此用例的最合适选择，因为它是一种对象存储服务，旨在大规模处理非结构化数据。它提供高耐用性、可扩展性并支持高吞吐量，所有这些对于构建数据湖都是至关重要的。相比之下，Amazon EBS 和 Amazon EFS 是针对不同的用例而设计的，而 AWS Snowball Edge 不是在线存储解决方案。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q428" data-n="428" data-ans="A, D">
+  <div class="qhead"><span class="qno">Question 428</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">A company is designing a new cloud-based application that requires high-speed, low-latency access to data for its database system. The application will also need to store large amounts of unstructured data, such as images and videos, for long-term access. Which combination of storage solutions should the company use to meet these requirements?</p>
+    <p class="zh">一家公司正在设计一种新的基于云的应用程序，需要对其数据库系统的数据进行高速、低延迟的访问。该应用程序还需要存储大量非结构化数据，例如图像和视频，以供长期访问。公司应该使用哪种存储解决方案组合来满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Amazon EBS for the database and Amazon S3 for storing unstructured data</p>
+        <p class="zh">Amazon EBS 用于数据库，Amazon S3 用于存储非结构化数据</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon EFS for the database and Amazon S3 for storing unstructured data</p>
+        <p class="zh">Amazon EFS 用于数据库，Amazon S3 用于存储非结构化数据</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon S3 for the database and Amazon Glacier for storing unstructured data</p>
+        <p class="zh">Amazon S3 用于数据库，Amazon Glacier 用于存储非结构化数据</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Amazon EBS for the database and Amazon Glacier for storing unstructured data</p>
+        <p class="zh">Amazon EBS 用于数据库，Amazon Glacier 用于存储非结构化数据</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Amazon EFS for the database and Amazon EBS for storing unstructured data</p>
+        <p class="zh">Amazon EFS 用于数据库，Amazon EBS 用于存储非结构化数据</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, D</b></p>
+    <div class="expl">
+      <p class="en">To meet the requirements, the company should use Amazon EBS for the database as it provides high-speed, low-latency block storage suitable for database workloads. For storing large amounts of unstructured data like images and videos, Amazon S3 is an ideal choice due to its scalability, durability, and cost-effectiveness. Amazon Glacier can also be used for archiving unstructured data that is infrequently accessed. Using the right storage types ensures performance, durability, and cost optimization.</p>
+      <p class="zh">为了满足要求，公司应该使用 Amazon EBS 作为数据库，因为它提供适合数据库工作负载的高速、低延迟块存储。对于存储图像和视频等大量非结构化数据，Amazon S3 因其可扩展性、耐用性和成本效益而成为理想选择。 Amazon Glacier 还可用于归档不经常访问的非结构化数据。使用正确的存储类型可确保性能、耐用性和成本优化。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q429" data-n="429" data-ans="C">
+  <div class="qhead"><span class="qno">Question 429</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company runs a web application that experiences unpredictable spikes in traffic. The application is currently hosted on an On-Demand Amazon EC2 instance, but the company is looking for a more cost-optimized compute solution while maintaining performance during traffic spikes. What should the Solutions Architect recommend?</p>
+    <p class="zh">一家公司运行的 Web 应用程序会遇到不可预测的流量峰值。该应用程序目前托管在按需 Amazon EC2 实例上，但该公司正在寻找成本更加优化的计算解决方案，同时在流量高峰期间保持性能。解决方案架构师应该推荐什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use Amazon EC2 Spot Instances to handle the web application traffic.</p>
+        <p class="zh">使用 Amazon EC2 Spot 实例来处理 Web 应用程序流量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Migrate the application to AWS Lambda and use Amazon API Gateway to handle requests.</p>
+        <p class="zh">将应用程序迁移到 AWS Lambda 并使用 Amazon API Gateway 来处理请求。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use EC2 Auto Scaling with a mix of On-Demand and Spot Instances.</p>
+        <p class="zh">将 EC2 Auto Scaling 与按需实例和 Spot 实例混合使用。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Switch to a Reserved Instance for the application.</p>
+        <p class="zh">切换到应用程序的预留实例。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">The correct answer is to use EC2 Auto Scaling with a mix of On-Demand and Spot Instances. This approach allows the application to dynamically scale to handle traffic spikes while optimizing costs by utilizing Spot Instances for non-critical tasks and On-Demand Instances for critical, stable workloads. This balances cost and performance, which is ideal for the given scenario.</p>
+      <p class="zh">正确的答案是将 EC2 Auto Scaling 与按需实例和 Spot 实例混合使用。这种方法允许应用程序动态扩展以处理流量峰值，同时通过将 Spot 实例用于非关键任务并使用按需实例来处理关键、稳定的工作负载来优化成本。这平衡了成本和性能，这对于给定场景来说是理想的。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q430" data-n="430" data-ans="B">
+  <div class="qhead"><span class="qno">Question 430</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A startup is building a web application that experiences variable traffic patterns. During peak hours, the application requires additional compute resources, but during off-peak hours, the usage drops significantly. The company wants to minimize costs while ensuring the application is highly available and can scale automatically with demand. Which compute solution should the startup use?</p>
+    <p class="zh">一家初创公司正在构建一个经历可变流量模式的 Web 应用程序。在高峰时段，应用程序需要额外的计算资源，但在非高峰时段，使用量会大幅下降。该公司希望最大限度地降低成本，同时确保应用程序具有高可用性，并且可以根据需求自动扩展。初创公司应该使用哪种计算解决方案？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Launch On-Demand EC2 instances with Auto Scaling enabled.</p>
+        <p class="zh">启动启用 Auto Scaling 的按需 EC2 实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use EC2 Spot Instances with Auto Scaling enabled.</p>
+        <p class="zh">使用启用了 Auto Scaling 的 EC2 Spot 实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Deploy the application on AWS Elastic Beanstalk with an EC2 Auto Scaling group using Reserved Instances.</p>
+        <p class="zh">使用预留实例通过 EC2 Auto Scaling 组在 AWS Elastic Beanstalk 上部署应用程序。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use AWS Fargate with an Application Load Balancer for the application.</p>
+        <p class="zh">将 AWS Fargate 与 Application Load Balancer 结合使用用于该应用。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">EC2 Spot Instances with Auto Scaling enabled provide the best balance of cost optimization and the ability to scale with variable traffic. Spot Instances are ideal for fault-tolerant workloads and can significantly reduce costs compared to On-Demand Instances. Auto Scaling ensures that the application can handle peak traffic while minimizing resource usage during off-peak periods.</p>
+      <p class="zh">启用 Auto Scaling 的 EC2 Spot 实例可在成本优化和可变流量扩展能力之间实现最佳平衡。 Spot 实例非常适合容错工作负载，与按需实例相比可以显着降低成本。 Auto Scaling 可确保应用程序能够处理高峰流量，同时最大限度地减少非高峰期间的资源使用。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q431" data-n="431" data-ans="C">
+  <div class="qhead"><span class="qno">Question 431</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company runs a web application that experiences unpredictable traffic patterns. During peak times, the application requires additional compute capacity to handle the load, but during off-peak hours, the compute usage drops significantly. The company wants to optimize costs while ensuring the application remains highly available and can scale automatically. Which solution best meets these requirements?</p>
+    <p class="zh">一家公司运行的 Web 应用程序会遇到不可预测的流量模式。在高峰时段，应用程序需要额外的计算能力来处理负载，但在非高峰时段，计算使用量会显着下降。该公司希望优化成本，同时确保应用程序保持高可用性并可以自动扩展。哪种解决方案最能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use On-Demand Instances for all compute needs to ensure flexibility and high availability.</p>
+        <p class="zh">使用按需实例来满足所有计算需求，以确保灵活性和高可用性。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use Reserved Instances for all compute needs to reduce costs.</p>
+        <p class="zh">使用预留实例来满足所有计算需求以降低成本。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use a combination of On-Demand Instances and Spot Instances with an Auto Scaling group to handle traffic changes.</p>
+        <p class="zh">将按需实例和 Spot 实例与 Auto Scaling 组结合使用来处理流量变化。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use a combination of Reserved Instances and Dedicated Hosts for predictable performance.</p>
+        <p class="zh">结合使用预留实例和专用主机来实现可预测的性能。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">The combination of On-Demand Instances and Spot Instances with an Auto Scaling group is the most cost-optimized solution for handling unpredictable traffic patterns. Spot Instances provide significant cost savings, while On-Demand Instances ensure the application remains highly available. The Auto Scaling group dynamically adjusts the number of instances based on traffic, ensuring efficient use of resources.</p>
+      <p class="zh">按需实例和 Spot 实例与 Auto Scaling 组的组合是处理不可预测的流量模式的成本最优化的解决方案。竞价型实例可显着节省成本，而按需实例可确保应用程序保持高可用性。 Auto Scaling 组根据流量动态调整实例数量，保证资源的高效利用。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q432" data-n="432" data-ans="D">
+  <div class="qhead"><span class="qno">Question 432</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A startup is running a web application on Amazon EC2 instances. The application has variable traffic patterns, with high traffic during the day and minimal usage at night. Cost optimization is a top priority for the startup. Which compute solution should you recommend?</p>
+    <p class="zh">一家初创公司正在 Amazon EC2 实例上运行 Web 应用程序。该应用程序具有可变的流量模式，白天流量较高，夜间使用量最少。成本优化是初创公司的首要任务。您应该推荐哪种计算解决方案？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use On-Demand instances for all application traffic.</p>
+        <p class="zh">对所有应用程序流量使用按需实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use Reserved Instances for all application traffic.</p>
+        <p class="zh">对所有应用程序流量使用预留实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use Spot Instances for all application traffic.</p>
+        <p class="zh">对所有应用程序流量使用 Spot 实例。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use Auto Scaling with a mix of On-Demand and Spot Instances.</p>
+        <p class="zh">将 Auto Scaling 与按需实例和 Spot 实例混合使用。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl">
+      <p class="en">The best solution for the startup is to use Auto Scaling with a mix of On-Demand and Spot Instances. Auto Scaling dynamically adjusts the number of running instances based on traffic, ensuring cost efficiency during low-usage periods. Spot Instances provide significant cost savings for non-critical workloads, while On-Demand Instances ensure reliability for critical components. This approach balances cost optimization with application reliability.</p>
+      <p class="zh">初创公司的最佳解决方案是将 Auto Scaling 与按需实例和 Spot 实例结合使用。 Auto Scaling 根据流量动态调整运行实例数量，确保低使用率期间的成本效率。竞价型实例可以为非关键工作负载显着节省成本，而按需实例则可以确保关键组件的可靠性。这种方法平衡了成本优化和应用程序可靠性。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q433" data-n="433" data-ans="B, C, D">
+  <div class="qhead"><span class="qno">Question 433</span><span class="badge">Select 3</span></div>
+  <div class="stem">
+    <p class="en">A company is running a critical web application on Amazon EC2 instances behind an Elastic Load Balancer (ELB). The application stores user-uploaded files in an Amazon S3 bucket and uses Amazon RDS for its database. The company has recently experienced a regional outage, and they want to ensure that the application is highly available and can withstand regional failures in the future. What is the best solution to achieve this?</p>
+    <p class="zh">一家公司正在 Elastic Load Balancer (ELB) 后面的 Amazon EC2 实例上运行关键 Web 应用程序。该应用程序将用户上传的文件存储在 Amazon S3 存储桶中，并使用 Amazon RDS 作为其数据库。该公司最近经历了区域性中断，他们希望确保应用程序具有高可用性，并且能够承受未来的区域性故障。实现这一目标的最佳解决方案是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Set up an Auto Scaling group for EC2 instances across multiple Availability Zones within the same region.</p>
+        <p class="zh">为同一区域内多个可用区的 EC2 实例设置 Auto Scaling 组。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Enable cross-region replication for the Amazon S3 bucket to replicate data to another region.</p>
+        <p class="zh">为 Amazon S3 存储桶启用跨区域复制，将数据复制到另一个区域。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Deploy the application in a separate region and configure Route 53 with a failover routing policy.</p>
+        <p class="zh">在单独的区域中部署应用程序，并使用故障转移路由策略配置 Route 53。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Enable Multi-AZ deployments for the Amazon RDS database.</p>
+        <p class="zh">为 Amazon RDS 数据库启用多可用区部署。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Configure the Elastic Load Balancer to span multiple regions.</p>
+        <p class="zh">配置 Elastic Load Balancer 跨越多个区域。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 3 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B, C, D</b></p>
+    <div class="expl">
+      <p class="en">To ensure high availability across regions, the solution must address both data replication and failover mechanisms. Cross-region replication for Amazon S3 ensures that data is available in another region, while deploying the application in a separate region and configuring Route 53 with a failover routing policy provides the ability to switch traffic to the secondary region during a regional failure. Enabling Multi-AZ for Amazon RDS ensures high availability within a region and is essential for minimizing downtime during localized failures.</p>
+      <p class="zh">为了确保跨区域的高可用性，解决方案必须解决数据复制和故障转移机制。 Amazon S3 的跨区域复制可确保数据在另一个区域中可用，同时在单独的区域中部署应用程序并使用故障转移路由策略配置 Route 53，从而能够在区域故障期间将流量切换到辅助区域。为 Amazon RDS 启用多可用区可确保区域内的高可用性，对于最大限度地减少局部故障期间的停机时间至关重要。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q434" data-n="434" data-ans="A">
+  <div class="qhead"><span class="qno">Question 434</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is running a highly available web application in a VPC. The application is hosted on Amazon EC2 instances behind an Application Load Balancer (ALB) and uses an Amazon RDS database for persistence. The company wants to ensure that the database is highly available and can automatically failover in case of an instance failure. Which solution meets these requirements?</p>
+    <p class="zh">一家公司正在 VPC 中运行高度可用的 Web 应用程序。该应用程序托管在 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上，并使用 Amazon RDS 数据库进行持久化。该公司希望确保数据库具有高可用性，并且能够在实例发生故障时自动进行故障转移。哪种解决方案满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use a Multi-AZ deployment for the Amazon RDS database.</p>
+        <p class="zh">对 Amazon RDS 数据库使用多可用区部署。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Deploy the database on Amazon EC2 instances with replication configured between instances.</p>
+        <p class="zh">在 Amazon EC2 实例上部署数据库，并在实例之间配置复制。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use Amazon RDS Read Replicas to provide high availability.</p>
+        <p class="zh">使用 Amazon RDS 只读副本来提供高可用性。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Configure the database in a single Availability Zone and back it up using AWS Backup.</p>
+        <p class="zh">在单个可用区中配置数据库并使用 AWS Backup 进行备份。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">The best way to ensure high availability and automatic failover for an Amazon RDS database is to use a Multi-AZ deployment. This setup replicates the database to a standby instance in another Availability Zone and provides automatic failover capabilities. Other options, such as using read replicas or EC2-based databases, do not meet the high availability and failover requirements as effectively.</p>
+      <p class="zh">确保 Amazon RDS 数据库高可用性和自动故障转移的最佳方法是使用多可用区部署。此设置将数据库复制到另一个可用区中的备用实例，并提供自动故障转移功能。其他选项（例如使用只读副本或基于 EC2 的数据库）无法有效满足高可用性和故障转移要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q435" data-n="435" data-ans="C">
+  <div class="qhead"><span class="qno">Question 435</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">An e-commerce company is hosting its web application on Amazon EC2 instances and stores product images in an Amazon S3 bucket. The company wants to ensure that the images are only accessible through the web application and not directly via the S3 bucket URL. How can you achieve this requirement?</p>
+    <p class="zh">一家电子商务公司在 Amazon EC2 实例上托管其 Web 应用程序，并将产品图像存储在 Amazon S3 存储桶中。该公司希望确保只能通过 Web 应用程序访问图像，而不是直接通过 S3 存储桶 URL 访问。如何才能达到这个要求呢？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use an S3 bucket policy to allow access only from the web application&#x27;s public IP address.</p>
+        <p class="zh">使用 S3 存储桶策略仅允许从 Web 应用程序的公共 IP 地址进行访问。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Enable server-side encryption on the S3 bucket to restrict direct access.</p>
+        <p class="zh">在 S3 存储桶上启用服务器端加密以限制直接访问。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use an S3 bucket policy that denies all public access and allows access only through an Amazon CloudFront origin access control.</p>
+        <p class="zh">使用拒绝所有公共访问并仅允许通过 Amazon CloudFront 源访问控制进行访问的 S3 存储桶策略。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Configure Amazon S3 Transfer Acceleration to restrict direct access to the S3 bucket.</p>
+        <p class="zh">配置 Amazon S3 传输加速以限制对 S3 存储桶的直接访问。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">To restrict direct access to an S3 bucket while still allowing access through a web application, you can use Amazon CloudFront with an origin access control (OAC) or origin access identity (OAI). This setup ensures that the S3 bucket is only accessible through CloudFront, and direct access to the bucket URL is denied using an S3 bucket policy. This method is secure and follows best practices for content delivery in AWS.</p>
+      <p class="zh">要限制对 S3 存储桶的直接访问，同时仍允许通过 Web 应用程序进行访问，您可以将 Amazon CloudFront 与源访问控制 (OAC) 或源访问身份 (OAI) 结合使用。此设置可确保只能通过 CloudFront 访问 S3 存储桶，并且使用 S3 存储桶策略拒绝直接访问存储桶 URL。此方法非常安全，并且遵循 AWS 中内容交付的最佳实践。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q436" data-n="436" data-ans="C">
+  <div class="qhead"><span class="qno">Question 436</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is running a web application on Amazon EC2 instances behind an Application Load Balancer (ALB). The application stores user-uploaded images in Amazon S3. The company wants to ensure that only the ALB can access the S3 bucket to retrieve the images. How can this be achieved?</p>
+    <p class="zh">一家公司正在 Application Load Balancer (ALB) 后面的 Amazon EC2 实例上运行 Web 应用程序。该应用程序将用户上传的图像存储在 Amazon S3 中。该公司希望确保只有 ALB 可以访问 S3 存储桶来检索图像。如何才能实现这一目标？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Create an S3 bucket policy that allows access only from the ALB&#x27;s security group.</p>
+        <p class="zh">创建仅允许从 ALB 的安全组进行访问的 S3 存储桶策略。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Create an S3 bucket policy that restricts access based on the ALB&#x27;s IP address.</p>
+        <p class="zh">创建一个 S3 存储桶策略，根据 ALB 的 IP 地址限制访问。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Create an S3 bucket policy that allows access only from the ALB&#x27;s AWS Service Principal.</p>
+        <p class="zh">创建仅允许从 ALB 的 AWS 服务主体进行访问的 S3 存储桶策略。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Create an S3 bucket policy that allows access based on the ALB&#x27;s VPC endpoint.</p>
+        <p class="zh">创建允许基于 ALB 的 VPC 终端节点进行访问的 S3 存储桶策略。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">To restrict access to an S3 bucket so that only an ALB can access it, a bucket policy must be configured to allow access from the ALB&#x27;s AWS Service Principal. This ensures that requests are validated as coming from the ALB, providing a secure mechanism to control access. Other methods, like using security groups or IP addresses, are not supported or practical for this use case.</p>
+      <p class="zh">要限制对 S3 存储桶的访问，以便只有 ALB 可以访问它，必须将存储桶策略配置为允许来自 ALB 的 AWS 服务主体的访问。这可确保请求被验证为来自 ALB，从而提供安全机制来控制访问。此用例不支持或不实用其他方法，例如使用安全组或 IP 地址。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q437" data-n="437" data-ans="A, C">
+  <div class="qhead"><span class="qno">Question 437</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">A company uses AWS Organizations to manage multiple AWS accounts. They want to allocate costs for specific projects across accounts and generate detailed billing reports for each project. Which combination of AWS features should they use to achieve this?</p>
+    <p class="zh">某公司使用 AWS Organizations 管理多个 AWS 账户。他们希望跨账户分配特定项目的成本，并为每个项目生成详细的计费报告。他们应该使用哪种 AWS 功能组合来实现这一目标？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Enable and use Cost Allocation Tags to assign project-specific tags to resources.</p>
+        <p class="zh">启用并使用成本分配标签将项目特定的标签分配给资源。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use AWS Cost Explorer to create custom dashboards for project-based cost analysis.</p>
+        <p class="zh">使用 AWS Cost Explorer 创建自定义仪表板以进行基于项目的成本分析。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Enable Consolidated Billing in AWS Organizations to manage costs across all accounts.</p>
+        <p class="zh">在 AWS Organizations 中启用合并计费以管理所有帐户的成本。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use Reserved Instance Sharing to allocate costs for reserved resources across accounts.</p>
+        <p class="zh">使用预留实例共享来跨账户分配预留资源的成本。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Activate the AWS Budgets feature to automatically allocate costs to specific projects.</p>
+        <p class="zh">激活 AWS 预算功能以自动将成本分配到特定项目。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, C</b></p>
+    <div class="expl">
+      <p class="en">To allocate costs for projects across multiple accounts, you need both Cost Allocation Tags and Consolidated Billing. Cost Allocation Tags allow you to tag resources with project-specific metadata, while Consolidated Billing provides a unified view of costs across accounts managed in AWS Organizations, enabling efficient cost tracking and reporting for specific projects.</p>
+      <p class="zh">要跨多个账户分配项目成本，您需要成本分配标签和合并账单。成本分配标签允许您使用特定于项目的元数据来标记资源，而整合计费提供了 AWS Organizations 中管理的各个帐户的统一成本视图，从而实现了特定项目的高效成本跟踪和报告。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q438" data-n="438" data-ans="A, B, D, E">
+  <div class="qhead"><span class="qno">Question 438</span><span class="badge">Select 4</span></div>
+  <div class="stem">
+    <p class="en">A company uses AWS Organizations to manage multiple AWS accounts. They want to allocate costs to different teams within the organization and ensure each team has visibility into its spending. Which combination of AWS cost management features should they use?</p>
+    <p class="zh">某公司使用 AWS Organizations 管理多个 AWS 账户。他们希望将成本分配给组织内的不同团队，并确保每个团队都能了解其支出。他们应该使用哪种 AWS 成本管理功能组合？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Enable cost allocation tags to categorize resources by team and track their costs.</p>
+        <p class="zh">启用成本分配标签以按团队对资源进行分类并跟踪其成本。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use multi-account consolidated billing to manage costs across all accounts.</p>
+        <p class="zh">使用多帐户合并计费来管理所有帐户的成本。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Create a Resource Access Manager (RAM) share to allocate costs to specific teams.</p>
+        <p class="zh">创建资源访问管理器 (RAM) 共享以将成本分配给特定团队。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Set up AWS Budgets to monitor spending and notify teams when they approach their budget limits.</p>
+        <p class="zh">设置 AWS 预算来监控支出并在团队接近预算限额时通知团队。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Activate the AWS Cost and Usage Report (CUR) to analyze detailed cost and usage data.</p>
+        <p class="zh">激活 AWS 成本和使用情况报告 (CUR) 以分析详细的成本和使用情况数据。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 4 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, B, D, E</b></p>
+    <div class="expl">
+      <p class="en">To ensure proper cost allocation and visibility for each team, the company should: 1) enable cost allocation tags to categorize resources, 2) use multi-account consolidated billing to manage costs across accounts, 3) set up AWS Budgets to monitor and control spending, and 4) activate the AWS Cost and Usage Report (CUR) to analyze detailed cost and usage data. AWS Resource Access Manager (RAM) is unrelated to cost management and does not help in this scenario.</p>
+      <p class="zh">为了确保每个团队正确的成本分配和可见性，公司应该：1) 启用成本分配标签来对资源进行分类，2) 使用多账户合并计费来管理跨账户的成本，3) 设置 AWS 预算来监控和控制支出，4) 激活 AWS 成本和使用情况报告 (CUR) 来分析详细的成本和使用情况数据。 AWS Resource Access Manager (RAM) 与成本管理无关，在这种情况下没有帮助。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q439" data-n="439" data-ans="A, C, D">
+  <div class="qhead"><span class="qno">Question 439</span><span class="badge">Select 3</span></div>
+  <div class="stem">
+    <p class="en">A company has a multi-account setup in AWS Organizations and wants to track the costs incurred by each department within the organization. They also want to allocate costs for shared services, such as a central logging system, to the respective departments. Which combination of AWS features can help the company achieve this goal?</p>
+    <p class="zh">一家公司在 AWS Organizations 中设置了多账户，并希望跟踪组织内每个部门产生的成本。他们还希望将共享服务（例如中央日志记录系统）的成本分配给各个部门。哪种 AWS 功能组合可以帮助公司实现这一目标？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Enable cost allocation tags and set up tag-based cost reports in AWS Cost Explorer.</p>
+        <p class="zh">在 AWS Cost Explorer 中启用成本分配标签并设置基于标签的成本报告。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use AWS Budgets to automatically split shared costs across accounts.</p>
+        <p class="zh">使用 AWS Budgets 自动分摊跨账户的共享成本。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Enable consolidated billing in AWS Organizations to combine usage and get a single bill for all accounts.</p>
+        <p class="zh">在 AWS Organizations 中启用合并计费，以合并使用情况并为所有帐户获取单一账单。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Create linked accounts for each department in AWS Organizations and track costs at the linked account level.</p>
+        <p class="zh">为 AWS Organizations 中的每个部门创建链接帐户，并在链接帐户级别跟踪成本。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Use the AWS Pricing Calculator to estimate costs and allocate shared services accordingly.</p>
+        <p class="zh">使用 AWS 定价计算器来估算成本并相应地分配共享服务。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 3 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, C, D</b></p>
+    <div class="expl">
+      <p class="en">To track costs for each department and allocate shared service costs effectively, the company should enable cost allocation tags to categorize resources, use consolidated billing to combine account usage into a single bill, and create linked accounts for each department to track costs at a detailed level. These features work together to provide comprehensive cost management and allocation capabilities.</p>
+      <p class="zh">为了跟踪每个部门的成本并有效地分配共享服务成本，公司应该启用成本分配标签来对资源进行分类，使用合并计费将帐户使用情况合并到单个账单中，并为每个部门创建链接帐户以详细跟踪成本。这些功能共同提供全面的成本管理和分配功能。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q440" data-n="440" data-ans="A, C, E">
+  <div class="qhead"><span class="qno">Question 440</span><span class="badge">Select 3</span></div>
+  <div class="stem">
+    <p class="en">A company uses multiple AWS accounts for different departments and wants to accurately assign costs to each department for better financial management. They also want to generate detailed cost reports and ensure costs are allocated correctly based on usage. Which combination of AWS cost management features should they use?</p>
+    <p class="zh">一家公司为不同部门使用多个 AWS 账户，并希望准确地将成本分配给每个部门以实现更好的财务管理。他们还希望生成详细的成本报告并确保根据使用情况正确分配成本。他们应该使用哪种 AWS 成本管理功能组合？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Enable cost allocation tags and tag resources appropriately</p>
+        <p class="zh">适当启用成本分配标签并标记资源</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Set up an AWS Budgets report for each department</p>
+        <p class="zh">为每个部门设置 AWS 预算报告</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use consolidated billing in AWS Organizations to manage accounts</p>
+        <p class="zh">使用 AWS Organizations 中的合并计费来管理帐户</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Create a Savings Plan to reduce costs across all accounts</p>
+        <p class="zh">创建储蓄计划以降低所有账户的成本</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Use the Cost Explorer to filter costs by tags and generate reports</p>
+        <p class="zh">使用 Cost Explorer 按标签过滤成本并生成报告</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 3 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, C, E</b></p>
+    <div class="expl">
+      <p class="en">To accurately assign costs to departments and generate detailed reports, the company should use cost allocation tags to categorize resources, consolidated billing in AWS Organizations to manage accounts centrally, and the Cost Explorer to filter and analyze costs by tags. These features work together to provide a clear and detailed view of departmental costs.</p>
+      <p class="zh">为了准确地将成本分配到部门并生成详细的报告，公司应该使用成本分配标签对资源进行分类，使用 AWS Organizations 中的合并计费来集中管理帐户，并使用成本浏览器按标签过滤和分析成本。这些功能共同作用，提供部门成本的清晰详细的视图。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q441" data-n="441" data-ans="A, B, C">
+  <div class="qhead"><span class="qno">Question 441</span><span class="badge">Select 3</span></div>
+  <div class="stem">
+    <p class="en">A company wants to monitor and manage its AWS costs effectively. They need a solution to forecast future costs based on historical usage, set alerts for cost thresholds, and analyze detailed cost and usage data. Which combination of AWS cost management tools should they use to meet these requirements?</p>
+    <p class="zh">一家公司希望有效监控和管理其 AWS 成本。他们需要一种解决方案来根据历史使用情况预测未来成本、设置成本阈值警报以及分析详细的成本和使用数据。他们应该使用哪种 AWS 成本管理工具组合来满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS Budgets for setting cost threshold alerts</p>
+        <p class="zh">用于设置成本阈值警报的 AWS 预算</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Cost Explorer for forecasting future costs based on historical usage</p>
+        <p class="zh">Cost Explorer 用于根据历史使用情况预测未来成本</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS Cost and Usage Report for analyzing detailed cost and usage data</p>
+        <p class="zh">AWS 成本和使用情况报告，用于分析详细的成本和使用情况数据</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS Trusted Advisor for monitoring and managing costs</p>
+        <p class="zh">AWS Trusted Advisor 用于监控和管理成本</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">AWS Pricing Calculator for forecasting future costs</p>
+        <p class="zh">用于预测未来成本的 AWS 定价计算器</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 3 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, B, C</b></p>
+    <div class="expl">
+      <p class="en">To effectively monitor and manage costs, the company can use AWS Budgets to set cost threshold alerts, Cost Explorer to forecast future costs based on historical data, and AWS Cost and Usage Report for detailed analysis of cost and usage. Each tool addresses a specific aspect of the company&#x27;s requirements.</p>
+      <p class="zh">为了有效监控和管理成本，公司可以使用 AWS Budgets 设置成本阈值警报，使用 Cost Explorer 根据历史数据预测未来成本，并使用 AWS 成本和使用情况报告详细分析成本和使用情况。每个工具都满足公司需求的特定方面。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q442" data-n="442" data-ans="B">
+  <div class="qhead"><span class="qno">Question 442</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company wants to manage its AWS costs effectively. They need a tool to analyze historical spend patterns, forecast future costs, and visualize cost trends over time. Which AWS cost management tool should they use?</p>
+    <p class="zh">一家公司希望有效管理其 AWS 成本。他们需要一种工具来分析历史支出模式、预测未来成本并可视化随时间变化的成本趋势。他们应该使用哪种 AWS 成本管理工具？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS Budgets</p>
+        <p class="zh">AWS 预算</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">AWS Cost Explorer</p>
+        <p class="zh">AWS 成本管理器</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS Cost Anomaly Detection</p>
+        <p class="zh">AWS 成本异常检测</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS Cost and Usage Report</p>
+        <p class="zh">AWS 成本和使用情况报告</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">AWS Cost Explorer is the appropriate tool for analyzing historical spending patterns, visualizing cost trends, and forecasting future costs. While other tools like AWS Budgets and AWS Cost and Usage Report can help with cost management, they are not designed for in-depth analysis and forecasting as described in the scenario.</p>
+      <p class="zh">AWS Cost Explorer 是分析历史支出模式、可视化成本趋势和预测未来成本的合适工具。虽然 AWS 预算和 AWS 成本和使用情况报告等其他工具可以帮助进行成本管理，但它们并不是为场景中所述的深入分析和预测而设计的。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q443" data-n="443" data-ans="A, B">
+  <div class="qhead"><span class="qno">Question 443</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">A company wants to monitor and control its AWS costs proactively. The finance team needs to set up alerts when monthly spending exceeds a certain threshold. Additionally, they want to analyze historical cost trends and forecast future costs for better planning. Which combination of AWS cost management tools should they use?</p>
+    <p class="zh">一家公司希望主动监控和控制其 AWS 成本。当每月支出超过一定阈值时，财务团队需要设置警报。此外，他们希望分析历史成本趋势并预测未来成本，以便更好地规划。他们应该使用哪种 AWS 成本管理工具组合？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS Budgets to set spending thresholds and receive alerts when limits are breached.</p>
+        <p class="zh">AWS 预算用于设置支出阈值并在超出限制时接收警报。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">AWS Cost Explorer to visualize historical spending and forecast future costs.</p>
+        <p class="zh">AWS Cost Explorer 可可视化历史支出并预测未来成本。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS Cost and Usage Report to generate detailed billing reports for every service.</p>
+        <p class="zh">AWS 成本和使用情况报告可为每项服务生成详细的计费报告。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS Trusted Advisor to optimize costs by providing recommendations on unused or underutilized resources.</p>
+        <p class="zh">AWS Trusted Advisor 通过提供有关未使用或未充分利用的资源的建议来优化成本。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, B</b></p>
+    <div class="expl">
+      <p class="en">To monitor and control AWS costs, the company should use AWS Budgets for setting spending thresholds and receiving alerts, and AWS Cost Explorer for analyzing historical spending and forecasting future costs. These tools complement each other and address the company&#x27;s requirements of proactive monitoring and cost trend analysis.</p>
+      <p class="zh">为了监控和控制 AWS 成本，公司应使用 AWS Budgets 来设置支出阈值和接收警报，并使用 AWS Cost Explorer 来分析历史支出和预测未来成本。这些工具相辅相成，可满足公司主动监控和成本趋势分析的要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q444" data-n="444" data-ans="A, B">
+  <div class="qhead"><span class="qno">Question 444</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">A company wants to monitor and control its AWS cloud spending. The finance team needs a tool to set up monthly cost thresholds for different accounts and receive notifications if spending exceeds these thresholds. Additionally, the team wants to analyze historical spending trends to optimize future budgets. Which combination of AWS cost management tools should they use?</p>
+    <p class="zh">一家公司希望监控其 AWS 云支出。财务团队需要一个工具来为不同账户设置每月成本阈值，并在支出超过这些阈值时收到通知。此外，该团队希望分析历史支出趋势以优化未来预算。他们应该使用哪种 AWS 成本管理工具组合？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS Budgets for setting cost thresholds and receiving alerts</p>
+        <p class="zh">用于设置成本阈值和接收警报的 AWS 预算</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Cost Explorer for analyzing historical spending trends and forecasting future costs</p>
+        <p class="zh">Cost Explorer 用于分析历史支出趋势并预测未来成本</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS Cost and Usage Report for setting automated alerts on cost thresholds</p>
+        <p class="zh">AWS 成本和使用情况报告，用于设置成本阈值自动警报</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS Trusted Advisor for detailed cost optimization recommendations</p>
+        <p class="zh">AWS Trusted Advisor 提供详细的成本优化建议</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">AWS Cost Anomaly Detection for identifying unusual billing patterns</p>
+        <p class="zh">AWS 成本异常检测用于识别异常计费模式</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, B</b></p>
+    <div class="expl">
+      <p class="en">To meet the finance team&#x27;s requirements, AWS Budgets should be used for setting cost thresholds and receiving alerts, while Cost Explorer is ideal for analyzing historical spending trends and forecasting future costs. These tools work together to effectively monitor, control, and optimize AWS cloud spending.</p>
+      <p class="zh">为了满足财务团队的要求，应使用 AWS Budgets 设置成本阈值和接收警报，而 Cost Explorer 非常适合分析历史支出趋势和预测未来成本。这些工具协同工作，可以有效监控、控制和优化 AWS 云支出。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q445" data-n="445" data-ans="A, B">
+  <div class="qhead"><span class="qno">Question 445</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">Your company is planning to deploy a highly available web application on AWS. The application must run in multiple locations to ensure low latency for global users and should remain operational even if an entire data center fails. Which AWS infrastructure components should you use to meet these requirements?</p>
+    <p class="zh">您的公司计划在 AWS 上部署高度可用的 Web 应用程序。该应用程序必须在多个位置运行，以确保全球用户的低延迟，并且即使整个数据中心发生故障也应保持运行。您应该使用哪些 AWS 基础设施组件来满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Deploy the application across multiple Availability Zones within a single AWS Region</p>
+        <p class="zh">跨单个 AWS 区域内的多个可用区部署应用程序</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Deploy the application across multiple AWS Regions</p>
+        <p class="zh">跨多个 AWS 区域部署应用程序</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Deploy the application in a single Availability Zone for cost efficiency</p>
+        <p class="zh">将应用程序部署在单个可用区中以提高成本效率</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use Amazon CloudFront to cache content at edge locations</p>
+        <p class="zh">使用 Amazon CloudFront 在边缘位置缓存内容</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Use a single AWS Region with a backup in an on-premises data center</p>
+        <p class="zh">使用单个 AWS 区域并在本地数据中心进行备份</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, B</b></p>
+    <div class="expl">
+      <p class="en">To meet the requirements of high availability and low latency for global users, you need to deploy the application across multiple Availability Zones within a Region and across multiple AWS Regions. This architecture ensures resilience against both data center and regional failures while providing a better experience for users worldwide.</p>
+      <p class="zh">为了满足全球用户高可用性和低延迟的需求，您需要跨区域内的多个可用区以及跨多个 AWS 区域部署应用程序。该架构可确保针对数据中心和区域故障的恢复能力，同时为全球用户提供更好的体验。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q446" data-n="446" data-ans="A, B, D">
+  <div class="qhead"><span class="qno">Question 446</span><span class="badge">Select 3</span></div>
+  <div class="stem">
+    <p class="en">You are designing a highly available web application hosted on AWS. The application must handle unpredictable traffic spikes and ensure low latency for users across multiple geographic locations. Which of the following design choices will best meet these requirements?</p>
+    <p class="zh">您正在设计一个托管在 AWS 上的高度可用的 Web 应用程序。应用程序必须处理不可预测的流量峰值，并确保跨多个地理位置的用户的低延迟。以下哪种设计选择最能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Deploy the application across multiple Availability Zones within a single AWS Region.</p>
+        <p class="zh">跨单个 AWS 区域内的多个可用区部署应用程序。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Distribute the application across multiple AWS Regions and use Route 53 for routing traffic based on latency.</p>
+        <p class="zh">跨多个 AWS 区域分发应用程序，并使用 Route 53 根据延迟路由流量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Deploy the application in a single Availability Zone with an Auto Scaling group configured for high availability.</p>
+        <p class="zh">将应用程序部署在单个可用区中，并配置 Auto Scaling 组以实现高可用性。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use CloudFront to cache content at AWS Edge locations to reduce latency for users worldwide.</p>
+        <p class="zh">使用 CloudFront 在 AWS 边缘站点缓存内容，以减少全球用户的延迟。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Deploy the application across multiple AWS Regions but use Elastic Load Balancing to distribute traffic only within one Region.</p>
+        <p class="zh">跨多个 AWS 区域部署应用程序，但使用 Elastic Load Balancing 仅在一个区域内分配流量。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 3 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, B, D</b></p>
+    <div class="expl">
+      <p class="en">To handle unpredictable traffic spikes and ensure low latency for a geographically distributed user base, the optimal solution is to deploy your application across multiple AWS Regions, use latency-based routing with Route 53, and leverage CloudFront to cache content at Edge locations worldwide. Deploying across multiple Availability Zones within a single Region is also critical for fault tolerance but does not optimize for global reach. A single Availability Zone or Region-limited design will not meet the requirements for high availability and low latency globally.</p>
+      <p class="zh">为了处理不可预测的流量峰值并确保地理上分散的用户群的低延迟，最佳解决方案是跨多个 AWS 区域部署应用程序，使用基于延迟的 Route 53 路由，并利用 CloudFront 在全球边缘站点缓存内容。在单个区域内跨多个可用区进行部署对于容错也至关重要，但并不能针对全球覆盖范围进行优化。单一可用区或区域限制的设计无法满足全球高可用性和低延迟的要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q447" data-n="447" data-ans="B, D">
+  <div class="qhead"><span class="qno">Question 447</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">A company is deploying a global application with users in North America, Europe, and Asia. The application requires low-latency access for users in all regions and must remain highly available even if an entire AWS Region becomes unavailable. Which design approach aligns with these requirements?</p>
+    <p class="zh">一家公司正在部署一个全球应用程序，用户遍布北美、欧洲和亚洲。该应用程序要求所有区域的用户都能进行低延迟访问，并且即使整个 AWS 区域不可用，也必须保持高可用性。哪种设计方法符合这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Deploy the application across multiple Availability Zones within a single AWS Region to ensure low latency and high availability.</p>
+        <p class="zh">跨单个 AWS 区域内的多个可用区部署应用程序，以确保低延迟和高可用性。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Deploy the application in multiple AWS Regions and configure latency-based routing in Amazon Route 53.</p>
+        <p class="zh">在多个 AWS 区域中部署应用程序并在 Amazon Route 53 中配置基于延迟的路由。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Deploy the application in a single AWS Region with Amazon CloudFront to cache content globally.</p>
+        <p class="zh">使用 Amazon CloudFront 在单个 AWS 区域中部署应用程序以在全球范围内缓存内容。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Deploy the application across multiple AWS Regions and use AWS Global Accelerator to route traffic for optimal performance.</p>
+        <p class="zh">跨多个 AWS 区域部署应用程序并使用 AWS Global Accelerator 路由流量以获得最佳性能。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Use a single AWS Region with Multi-AZ deployments and enable AWS Direct Connect for global users.</p>
+        <p class="zh">使用具有多可用区部署的单个 AWS 区域，并为全球用户启用 AWS Direct Connect。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B, D</b></p>
+    <div class="expl">
+      <p class="en">Meeting the requirements of low latency for global users and high availability in the event of a regional failure requires deploying the application in multiple AWS Regions. Latency-based routing in Amazon Route 53 ensures that users are directed to the nearest Region, while AWS Global Accelerator optimizes performance and provides failover capabilities. Deploying in a single Region, even with advanced features like Multi-AZ or CloudFront, does not fully meet the requirements.</p>
+      <p class="zh">要满足全球用户的低延迟要求以及区域故障时的高可用性要求，需要在多个 AWS 区域中部署应用程序。 Amazon Route 53 中基于延迟的路由可确保用户被定向到最近的区域，而 AWS Global Accelerator 则优化性能并提供故障转移功能。在单个区域中部署，即使具有多可用区或 CloudFront 等高级功能，也不能完全满足要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q448" data-n="448" data-ans="B">
+  <div class="qhead"><span class="qno">Question 448</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A company is designing a highly available application that will be deployed in AWS. The application must minimize downtime and ensure data redundancy. Which design approach should the company take to achieve this goal?</p>
+    <p class="zh">一家公司正在设计一个将部署在 AWS 中的高度可用的应用程序。应用程序必须最大限度地减少停机时间并确保数据冗余。公司应该采取哪种设计方法来实现这一目标？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Deploy the application in a single Availability Zone within an AWS Region.</p>
+        <p class="zh">将应用程序部署在 AWS 区域内的单个可用区中。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Distribute the application across multiple Availability Zones within an AWS Region.</p>
+        <p class="zh">将应用程序分布到 AWS 区域内的多个可用区。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Deploy the application in a single AWS Region but across multiple edge locations.</p>
+        <p class="zh">在单个 AWS 区域但跨多个边缘站点部署应用程序。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Distribute the application across multiple AWS Regions and Availability Zones.</p>
+        <p class="zh">跨多个 AWS 区域和可用区分发应用程序。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Deploying an application across multiple Availability Zones within a single AWS Region is a best practice for achieving high availability and fault tolerance. Availability Zones are physically separated data centers within a Region, and they provide low-latency connectivity. By distributing the application across multiple Availability Zones, the company can ensure that even if one Availability Zone fails, the application remains operational.</p>
+      <p class="zh">在单个 AWS 区域内的多个可用区部署应用程序是实现高可用性和容错能力的最佳实践。可用区是区域内物理上分离的数据中心，它们提供低延迟连接。通过将应用程序分布到多个可用区，公司可以确保即使一个可用区发生故障，应用程序仍保持运行。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q449" data-n="449" data-ans="A">
+  <div class="qhead"><span class="qno">Question 449</span><span class="badge">Single answer</span></div>
+  <div class="stem">
+    <p class="en">A financial services company is running a batch processing workload that is extremely cost-sensitive and can tolerate interruptions. The workload is currently running on On-Demand Instances, but the company wants to reduce costs further. Which AWS purchasing option would be the most cost-effective for this workload?</p>
+    <p class="zh">一家金融服务公司正在运行批处理工作负载，该工作负载对成本极其敏感并且可以容忍中断。该工作负载目前在按需实例上运行，但该公司希望进一步降低成本。对于此工作负载，哪种 AWS 购买选项最具成本效益？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Spot Instances</p>
+        <p class="zh">现货实例</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Reserved Instances</p>
+        <p class="zh">预留实例</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Savings Plans</p>
+        <p class="zh">储蓄计划</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Dedicated Hosts</p>
+        <p class="zh">专用主机</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Spot Instances are ideal for workloads that are flexible with interruptions, like batch processing, and they offer the highest cost savings compared to other purchasing options. Reserved Instances and Savings Plans are more suited for predictable, long-term workloads, and Dedicated Hosts are used for compliance requirements rather than cost optimization.</p>
+      <p class="zh">Spot 实例非常适合能够灵活应对中断的工作负载（例如批处理），并且与其他购买选项相比，它们可以实现最高的成本节省。预留实例和节省计划更适合可预测的长期工作负载，而专用主机则用于满足合规性要求而不是成本优化。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q450" data-n="450" data-ans="A, C">
+  <div class="qhead"><span class="qno">Question 450</span><span class="badge">Select 2</span></div>
+  <div class="stem">
+    <p class="en">A company runs a web application on a fleet of Amazon EC2 instances. The application experiences predictable spikes in traffic during the holiday season, and the company wants to minimize costs while ensuring sufficient compute capacity during these high-traffic periods. What is the MOST cost-effective purchasing strategy the company should use?</p>
+    <p class="zh">一家公司在一组 Amazon EC2 实例上运行 Web 应用程序。该应用程序在假期期间会出现可预测的流量高峰，该公司希望最大限度地降低成本，同时确保在这些高流量期间有足够的计算能力。公司应采用的最具成本效益的采购策略是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Purchase Reserved Instances for the baseline traffic and use Spot Instances for the additional capacity during high-traffic periods.</p>
+        <p class="zh">为基准流量购买预留实例，并在高流量期间使用 Spot 实例以获得额外容量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use On-Demand Instances for the entire workload to handle both baseline and peak traffic.</p>
+        <p class="zh">对整个工作负载使用按需实例来处理基准流量和峰值流量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Purchase Reserved Instances for the baseline traffic and use On-Demand Instances for the additional capacity during high-traffic periods.</p>
+        <p class="zh">为基准流量购买预留实例，并在高流量期间使用按需实例以获得额外容量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use Savings Plans for all EC2 instances to cover both baseline and peak traffic.</p>
+        <p class="zh">对所有 EC2 实例使用 Savings Plans 以涵盖基准流量和峰值流量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Use Auto Scaling with Spot Instances to handle the entire workload.</p>
+        <p class="zh">将 Auto Scaling 与 Spot 实例结合使用来处理整个工作负载。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A, C</b></p>
+    <div class="expl">
+      <p class="en">To achieve cost optimization, a mix of purchasing options is often the best approach. Reserved Instances are well-suited for predictable baseline workloads because of their cost savings, while On-Demand or Spot Instances provide flexibility for handling spikes in traffic. Spot Instances are highly cost-effective but should only be used for workloads that can tolerate interruptions, making them suitable for additional capacity during spikes. On-Demand Instances, while more expensive, are a reliable option for unpredictable or temporary needs.</p>
+      <p class="zh">为了实现成本优化，混合购买选项通常是最好的方法。预留实例非常适合可预测的基准工作负载，因为它们可以节省成本，而按需实例或 Spot 实例可以灵活地处理流量峰值。 Spot 实例具有很高的成本效益，但只能用于可以容忍中断的工作负载，使其适合在高峰期间提供额外容量。按需实例虽然价格更高，但却是满足不可预测或临时需求的可靠选择。</p>
+    </div>
+  </details>
+</div>
+</div><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:aws:real:09";
+var TOTAL=50;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(",").map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok)
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q);
+  var ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script></body></html>

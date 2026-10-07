@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS SAA-C03 原创练习卷 · 目录</title>
+<style>body{margin:0;background:#f5f6f8;font:15px/1.7 -apple-system,"Segoe UI","PingFang SC",sans-serif;color:#111827}
+.wrap{max-width:720px;margin:0 auto;padding:44px 22px 70px}h1{font-size:26px;margin:0 0 6px}
+.sub{color:#6b7280;margin:0 0 26px;font-size:13px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;
+border-radius:12px;padding:15px 18px;margin-bottom:10px;text-decoration:none;color:#111827}
+a.card:hover{border-color:#93c5fd;background:#f8fbff}
+a.card .n{font-weight:700}.r{color:#6b7280;font-size:13px;margin-top:3px}
+</style>
+<style>
+a.card .pg{height:5px;background:#e9eef2;border-radius:99px;overflow:hidden;margin-top:8px}
+a.card .pg i{display:block;height:100%;width:0;background:#0b6b3a;transition:width .25s}
+a.card .pg span{display:block;font-size:12px;color:#8b95a1;margin-top:5px}
+a.card .pg.on span{color:#0b6b3a;font-weight:600}
+</style></head><body><div class="wrap">
+<h1>AWS SAA-C03 原创练习卷</h1>
+<p class="sub">共 10 份 · 每份 50 题 · 中英对照 · 点选项后按「确认作答」判对错，正确率自动保存在本机<br>来源：Ditectrev 原创题库（非真题 dump）</p>
+<a class="card" href="part01.html" data-quiz-key="aws:compliance:01" data-quiz-total="50"><div class="n">第 01 份</div><div class="r">题目 1–50</div><div class="pg"><i></i><span>未开始</span></div></a>
+<a class="card" href="part02.html" data-quiz-key="aws:compliance:02" data-quiz-total="50"><div class="n">第 02 份</div><div class="r">题目 51–100</div><div class="pg"><i></i><span>未开始</span></div></a>
+<a class="card" href="part03.html" data-quiz-key="aws:compliance:03" data-quiz-total="50"><div class="n">第 03 份</div><div class="r">题目 101–150</div><div class="pg"><i></i><span>未开始</span></div></a>
+<a class="card" href="part04.html" data-quiz-key="aws:compliance:04" data-quiz-total="50"><div class="n">第 04 份</div><div class="r">题目 151–200</div><div class="pg"><i></i><span>未开始</span></div></a>
+<a class="card" href="part05.html" data-quiz-key="aws:compliance:05" data-quiz-total="50"><div class="n">第 05 份</div><div class="r">题目 201–250</div><div class="pg"><i></i><span>未开始</span></div></a>
+<a class="card" href="part06.html" data-quiz-key="aws:compliance:06" data-quiz-total="50"><div class="n">第 06 份</div><div class="r">题目 251–300</div><div class="pg"><i></i><span>未开始</span></div></a>
+<a class="card" href="part07.html" data-quiz-key="aws:compliance:07" data-quiz-total="50"><div class="n">第 07 份</div><div class="r">题目 301–350</div><div class="pg"><i></i><span>未开始</span></div></a>
+<a class="card" href="part08.html" data-quiz-key="aws:compliance:08" data-quiz-total="50"><div class="n">第 08 份</div><div class="r">题目 351–400</div><div class="pg"><i></i><span>未开始</span></div></a>
+<a class="card" href="part09.html" data-quiz-key="aws:compliance:09" data-quiz-total="50"><div class="n">第 09 份</div><div class="r">题目 401–450</div><div class="pg"><i></i><span>未开始</span></div></a>
+<a class="card" href="part10.html" data-quiz-key="aws:compliance:10" data-quiz-total="50"><div class="n">第 10 份</div><div class="r">题目 451–500</div><div class="pg"><i></i><span>未开始</span></div></a>
+</div><script>
+(function(){
+"use strict";
+function qa(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+qa("[data-quiz-key]").forEach(function(el){
+  var key="quiz:"+el.getAttribute("data-quiz-key");
+  var total=parseInt(el.getAttribute("data-quiz-total")||"0",10);
+  var S={};
+  try{S=JSON.parse(localStorage.getItem(key)||"{}")||{}}catch(e){S={}}
+  var d=0,o=0;
+  Object.keys(S).forEach(function(k){
+    var r=S[k];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  var bar=el.querySelector(".pg i"),txt=el.querySelector(".pg span");
+  if(bar)bar.style.width=(total?d/total*100:0)+"%";
+  if(txt)txt.textContent=d?(d+"/"+total+" · 正确率 "+Math.round(o/d*100)+"%"):"未开始";
+  if(d){var c=el.querySelector(".pg");if(c)c.classList.add("on")}
+});
+})();
+</script></body></html>

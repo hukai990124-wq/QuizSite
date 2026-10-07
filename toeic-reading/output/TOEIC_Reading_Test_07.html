@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TOEIC Reading Practice Test 07</title><style>
+:root{--ink:#1b1b1b;--muted:#5b6570;--line:#e2e6ea;--green:#0b6b3a;--paper:#f6f8f9}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font:16px/1.55 -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Microsoft YaHei",sans-serif;color:var(--ink);background:#eceff1}
+.wrap{max-width:880px;margin:0 auto;background:#fff;padding:30px 42px 90px;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+h1{font-size:26px;margin:0 0 8px}
+.meta{color:var(--muted);font-size:14px;margin:2px 0}
+.toolbar{position:sticky;top:0;background:#fff;padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px;z-index:5}
+.toolbar .btns{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 13px;border-radius:7px;border:1px solid var(--line);background:#fff;color:#334155;cursor:pointer}
+.toolbar button:hover{background:#f3f6f8}
+.toolbar button.primary{background:var(--green);border-color:var(--green);color:#fff}
+.toolbar button.primary:hover{background:#0a5d33}
+h2{margin:38px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--green);font-size:20px}
+h3{font-size:15px;color:var(--green);margin:18px 0 8px}
+.dirs{background:#eef5f0;border-left:4px solid var(--green);padding:9px 13px;font-size:13.5px;color:#33413a;border-radius:0 5px 5px 0;margin:8px 0 16px}
+.ref{font-weight:600;margin:20px 0 8px;color:#222}
+.q{margin:16px 0 0;padding-bottom:14px;border-bottom:1px solid #f0f3f5;scroll-margin-top:96px}
+.q:last-child{border-bottom:none}
+.q .stem{margin-bottom:2px}
+.q .n{font-weight:700;margin-right:5px}
+.opts{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:9px 0 0;padding:0}
+@media (max-width:680px){.opts{grid-template-columns:1fr}}
+.opts li{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fcfcfd;font-size:15px}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px;margin-top:1px}
+.otext{flex:1 1 auto}
+.passage{white-space:pre-wrap;background:var(--paper);border:1px solid #e6eaed;border-left:4px solid #c6cdd3;padding:13px 16px;border-radius:5px;font-size:14.5px;line-height:1.5;margin:6px 0 12px;color:#20303a}
+.passage .ttl{font-weight:700;display:block;margin-bottom:6px;color:#111}
+details.ans{margin-top:10px;border:1px solid #dfe8e2;background:#f7faf8;border-radius:9px}
+details.ans summary{cursor:pointer;padding:8px 13px;font-weight:600;font-size:13px;color:#0b6b3a}
+details.ans .expl{padding:0 14px 12px;font-size:14px;color:#3d4650;line-height:1.6}
+details.ans .expl .k{font-weight:700;color:var(--green)}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0;display:block;text-decoration:none;color:inherit}
+.card:hover{border-color:#9db3c4;background:#fafcfd}
+.card .t{font-weight:600}
+.card .s{color:var(--muted);font-size:13px}
+@media print{
+  body{background:#fff}
+  .wrap{box-shadow:none;max-width:none;padding:0 6mm}
+  .toolbar{display:none}
+  h2{page-break-after:avoid}
+  .q,.opts,.passage{page-break-inside:avoid}
+  details.ans{display:block}
+  details.ans .expl{display:block}
+}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+</style></head><body><div class="wrap"><div class="toolbar"><div class="btns"><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button><button onclick="window.print()" type="button">打印 / 存 PDF</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>100</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<h1>TOEIC® Reading Practice Test 07</h1>
+<p class="meta">来源：TOEIC Mock Tests — Reading Practice Test 7（toeicmocktests.com，官方 2026 格式）</p>
+<p class="meta">100 题 · Part 5（30）+ Part 6（16）+ Part 7（54）· 建议用时 75 分钟 · 点选项后按「确认作答」即可判对错，进度自动保存在本机</p>
+<h2>PART 5 — Incomplete Sentences（101–130）</h2>
+<div class="dirs"><b>Directions:</b> A word or phrase is missing in each of the sentences below. Four answer choices are given below each sentence. Select the best answer to complete the sentence. Then mark the letter (A), (B), (C), or (D) on your answer sheet.</div>
+<div class="q" id="q101" data-n="101" data-ans="C">
+<div class="stem"><span class="n">101.</span>Your travel coordinator will send you a detailed ____ listing all flight times and hotel addresses.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">inventory</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">agenda</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">itinerary</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">invoice</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> An itinerary is a travel plan that lists flights and hotels, so (C) is correct. (A) &#x27;inventory&#x27; is a list of stock, (B) &#x27;agenda&#x27; is a list of topics for a meeting, and (D) &#x27;invoice&#x27; is a bill.</div></details>
+</div>
+
+<div class="q" id="q102" data-n="102" data-ans="A">
+<div class="stem"><span class="n">102.</span>Ms. Oyelaran ____ the hospital&#x27;s volunteer program since it was founded in 2019.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">has coordinated</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">coordinates</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">coordinated</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">will coordinate</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;Since it was founded&#x27; describes a period that continues up to now, which requires the present perfect (A) &#x27;has coordinated&#x27;. (B) &#x27;coordinates&#x27; and (C) &#x27;coordinated&#x27; cannot be used with &#x27;since&#x27; in this way, and (D) &#x27;will coordinate&#x27; is future.</div></details>
+</div>
+
+<div class="q" id="q103" data-n="103" data-ans="D">
+<div class="stem"><span class="n">103.</span>Employees who have worked at Kestrel Logistics for at least six months are ____ for the tuition assistance program.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">capable</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">considerable</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">entitled</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">eligible</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;Eligible for&#x27; means meeting the conditions to take part, so (D) is correct. (A) &#x27;capable&#x27; is followed by &#x27;of&#x27;, (C) &#x27;entitled&#x27; is followed by &#x27;to&#x27;, and (B) &#x27;considerable&#x27; means large in amount.</div></details>
+</div>
+
+<div class="q" id="q104" data-n="104" data-ans="B">
+<div class="stem"><span class="n">104.</span>To ____ the printer&#x27;s deadline, the design team divided the catalog pages among three editors.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">obey</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">meet</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">attend</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">comply</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;Meet a deadline&#x27; is the standard collocation, so (B) is correct. (A) &#x27;obey&#x27; is used with rules or orders, (C) &#x27;attend&#x27; is used with events, and (D) &#x27;comply&#x27; needs &#x27;with&#x27;.</div></details>
+</div>
+
+<div class="q" id="q105" data-n="105" data-ans="A">
+<div class="stem"><span class="n">105.</span>The owner of the food truck has applied for a ____ to serve customers along the riverside promenade on weekends.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">permit</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">permitted</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">permissive</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">permissible</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> After the article &#x27;a&#x27;, a noun is needed, and (A) &#x27;permit&#x27; is an official document that allows an activity. (B) &#x27;permitted&#x27; is a verb form, and (C) &#x27;permissive&#x27; and (D) &#x27;permissible&#x27; are adjectives with no noun to describe.</div></details>
+</div>
+
+<div class="q" id="q106" data-n="106" data-ans="C">
+<div class="stem"><span class="n">106.</span>____ the client approves the revised layout by this afternoon, the brochures can still be printed before the trade fair.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Unless</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Although</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Provided that</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Whereas</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> (C) &#x27;Provided that&#x27; means &#x27;on the condition that&#x27;: if approval comes today, printing is still possible. (A) &#x27;Unless&#x27; reverses this logic, and (B) &#x27;Although&#x27; and (D) &#x27;Whereas&#x27; express contrast, which does not fit.</div></details>
+</div>
+
+<div class="q" id="q107" data-n="107" data-ans="D">
+<div class="stem"><span class="n">107.</span>Every runner who completes the half-marathon will receive a ____ T-shirt and a finisher&#x27;s medal.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">complicated</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">competent</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">compulsory</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">complimentary</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;Complimentary&#x27; means given free of charge, which suits a gift for every finisher, so (D) is correct. (A) &#x27;complicated&#x27; means difficult, (B) &#x27;competent&#x27; means skilled, and (C) &#x27;compulsory&#x27; means required.</div></details>
+</div>
+
+<div class="q" id="q108" data-n="108" data-ans="B">
+<div class="stem"><span class="n">108.</span>The storage facility, ____ is located just off the ring road, offers climate-controlled units for artwork and wine.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">who</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">which</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">where</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">what</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> A relative pronoun for a thing that is also the subject of &#x27;is located&#x27; is needed, so (B) &#x27;which&#x27; is correct. (A) &#x27;who&#x27; refers to people, (C) &#x27;where&#x27; cannot act as a subject, and (D) &#x27;what&#x27; cannot refer back to a noun.</div></details>
+</div>
+
+<div class="q" id="q109" data-n="109" data-ans="D">
+<div class="stem"><span class="n">109.</span>Because the delay was caused by the bank&#x27;s own error, it has agreed to ____ the late-payment fee.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">impose</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">collect</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">accrue</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">waive</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> To &#x27;waive&#x27; a fee is to cancel it, which is a fair response to the bank&#x27;s own mistake, so (D) is correct. (A) &#x27;impose&#x27; and (B) &#x27;collect&#x27; would mean charging the fee, and (C) &#x27;accrue&#x27; means to build up over time.</div></details>
+</div>
+
+<div class="q" id="q110" data-n="110" data-ans="A">
+<div class="stem"><span class="n">110.</span>The clinic&#x27;s new poster campaign aims to ____ awareness of the importance of regular eye examinations.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">raise</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">rise</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">arise</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">gather</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;Raise awareness&#x27; is a fixed collocation, so (A) is correct. (B) &#x27;rise&#x27; and (C) &#x27;arise&#x27; are intransitive verbs that cannot take an object, and (D) &#x27;gather&#x27; is not used with &#x27;awareness&#x27;.</div></details>
+</div>
+
+<div class="q" id="q111" data-n="111" data-ans="C">
+<div class="stem"><span class="n">111.</span>Hotel guests have found the new self-service check-in kiosks surprisingly ____ to use.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">intuition</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">intuitively</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">intuitive</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">intuit</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> In the pattern &#x27;find + object + adjective&#x27;, an adjective is needed, so (C) &#x27;intuitive&#x27; is correct. (B) &#x27;intuitively&#x27; is an adverb (the adverb &#x27;surprisingly&#x27; already modifies the adjective), (A) &#x27;intuition&#x27; is a noun, and (D) &#x27;intuit&#x27; is a verb.</div></details>
+</div>
+
+<div class="q" id="q112" data-n="112" data-ans="B">
+<div class="stem"><span class="n">112.</span>The number of passengers using the airport&#x27;s express rail link ____ doubled since the fares were reduced.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">have</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">has</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">are</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">were</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;The number of&#x27; is a singular subject, so (B) &#x27;has&#x27; is correct, forming the present perfect &#x27;has doubled&#x27;. (A) &#x27;have&#x27; wrongly agrees with &#x27;passengers&#x27;, and (C) &#x27;are&#x27; and (D) &#x27;were&#x27; do not form the needed tense.</div></details>
+</div>
+
+<div class="q" id="q113" data-n="113" data-ans="A">
+<div class="stem"><span class="n">113.</span>The renovated city hall was designed to ____ wheelchair users, with ramps and wide doorways on every floor.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">accommodate</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">accompany</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">acquire</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">accumulate</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> To &#x27;accommodate&#x27; wheelchair users is to provide for their needs, so (A) is correct. (B) &#x27;accompany&#x27; means to go with someone, (C) &#x27;acquire&#x27; means to obtain, and (D) &#x27;accumulate&#x27; means to collect gradually.</div></details>
+</div>
+
+<div class="q" id="q114" data-n="114" data-ans="D">
+<div class="stem"><span class="n">114.</span>Ms. Takahashi prefers to review the supplier contracts ____ rather than assign the task to an assistant.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">she</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">her</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">hers</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">herself</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The reflexive pronoun (D) &#x27;herself&#x27; shows that Ms. Takahashi does the review personally. (A) &#x27;she&#x27; is a subject pronoun, and (B) &#x27;her&#x27; and (C) &#x27;hers&#x27; cannot be added after a complete clause to give this meaning.</div></details>
+</div>
+
+<div class="q" id="q115" data-n="115" data-ans="C">
+<div class="stem"><span class="n">115.</span>The dates for the regional sales summit are still ____ and may change once the venue is confirmed.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">definite</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">punctual</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">tentative</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">reluctant</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Dates that &#x27;may change&#x27; are not final, so (C) &#x27;tentative&#x27; is correct. (A) &#x27;definite&#x27; means the opposite, (B) &#x27;punctual&#x27; means on time, and (D) &#x27;reluctant&#x27; describes people who are unwilling.</div></details>
+</div>
+
+<div class="q" id="q116" data-n="116" data-ans="A">
+<div class="stem"><span class="n">116.</span>The free downtown shuttle bus runs every twenty minutes ____ 7:00 A.M. and 11:00 P.M.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">between</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">among</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">within</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">throughout</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The pattern &#x27;between ... and ...&#x27; marks a period with two end points, so (A) is correct. (B) &#x27;among&#x27; is used with groups, and (C) &#x27;within&#x27; and (D) &#x27;throughout&#x27; are not paired with &#x27;and&#x27; in this way.</div></details>
+</div>
+
+<div class="q" id="q117" data-n="117" data-ans="B">
+<div class="stem"><span class="n">117.</span>The research firm will ____ a series of interviews with frequent business travelers to learn how they choose hotels.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">reserve</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">conduct</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">admit</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">book</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Researchers &#x27;conduct&#x27; interviews, meaning they carry them out, so (B) is correct. (A) &#x27;reserve&#x27; and (D) &#x27;book&#x27; are used for rooms, seats, or tickets, and (C) &#x27;admit&#x27; means to let in or to confess.</div></details>
+</div>
+
+<div class="q" id="q118" data-n="118" data-ans="D">
+<div class="stem"><span class="n">118.</span>Pre-orders for the folding electric scooter have already ____ the manufacturer&#x27;s forecast for the entire year.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">excelled</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">exited</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">extended</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">exceeded</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> Numbers that go beyond a forecast have &#x27;exceeded&#x27; it, so (D) is correct. (A) &#x27;excelled&#x27; means performed very well and does not take this object, (B) &#x27;exited&#x27; means left, and (C) &#x27;extended&#x27; means made longer.</div></details>
+</div>
+
+<div class="q" id="q119" data-n="119" data-ans="C">
+<div class="stem"><span class="n">119.</span>The board is considering ____ a second warehouse closer to the port to reduce delivery times.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">lease</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">to lease</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">leasing</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">leased</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The verb &#x27;consider&#x27; is followed by a gerund, so (C) &#x27;leasing&#x27; is correct. (B) &#x27;to lease&#x27; is a common error after &#x27;consider&#x27;, and (A) &#x27;lease&#x27; and (D) &#x27;leased&#x27; cannot follow &#x27;considering&#x27;.</div></details>
+</div>
+
+<div class="q" id="q120" data-n="120" data-ans="D">
+<div class="stem"><span class="n">120.</span>The architects&#x27; revised floor plan is ____ similar to the version they presented in March.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">remark</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">remarkable</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">remarked</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">remarkably</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> An adverb is needed to modify the adjective &#x27;similar&#x27;, so (D) &#x27;remarkably&#x27; is correct. (B) &#x27;remarkable&#x27; is an adjective, (A) &#x27;remark&#x27; is a noun or verb, and (C) &#x27;remarked&#x27; is a past verb form.</div></details>
+</div>
+
+<div class="q" id="q121" data-n="121" data-ans="B">
+<div class="stem"><span class="n">121.</span>Ms. Kowalczyk accepted the sustainability award ____ the entire logistics department.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">in charge of</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">on behalf of</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">in favor of</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">regardless of</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Accepting an award &#x27;on behalf of&#x27; a group means doing so as its representative, so (B) is correct. (A) &#x27;in charge of&#x27; means managing, (C) &#x27;in favor of&#x27; means supporting, and (D) &#x27;regardless of&#x27; means without considering.</div></details>
+</div>
+
+<div class="q" id="q122" data-n="122" data-ans="A">
+<div class="stem"><span class="n">122.</span>The winners of this year&#x27;s young chefs&#x27; competition ____ at a ceremony in Lisbon next month.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">will be announced</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">will announce</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">are announcing</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">announced</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The winners do not announce anything; they are announced, so a passive verb is needed, and &#x27;next month&#x27; requires the future: (A) &#x27;will be announced&#x27;. (B) and (C) are active, and (D) is past.</div></details>
+</div>
+
+<div class="q" id="q123" data-n="123" data-ans="C">
+<div class="stem"><span class="n">123.</span>Audience members are asked to ____ from using their phones while the performance is in progress.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">avoid</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">prevent</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">refrain</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">prohibit</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Only &#x27;refrain&#x27; is followed directly by &#x27;from&#x27; + -ing with no object, so (C) is correct. (A) &#x27;avoid&#x27; takes a gerund without &#x27;from&#x27;, and (B) &#x27;prevent&#x27; and (D) &#x27;prohibit&#x27; need an object before &#x27;from&#x27;.</div></details>
+</div>
+
+<div class="q" id="q124" data-n="124" data-ans="D">
+<div class="stem"><span class="n">124.</span>The building manager has requested that each tenant ____ the updated fire-safety checklist before Friday.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">completes</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">completed</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">completing</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">complete</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> After &#x27;request that&#x27;, the base form of the verb is used for every subject, so (D) &#x27;complete&#x27; is correct. (A) &#x27;completes&#x27; is a common error here, (B) &#x27;completed&#x27; is past tense, and (C) &#x27;completing&#x27; is not a finite verb.</div></details>
+</div>
+
+<div class="q" id="q125" data-n="125" data-ans="A">
+<div class="stem"><span class="n">125.</span>____ at the free lunchtime concerts in Bellmont Square has risen every summer since the series began.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Attendance</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Attention</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Attendant</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Appearance</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The number of people who go to an event is its &#x27;attendance&#x27;, so (A) is correct. (C) &#x27;Attendant&#x27; is a person who helps others, (B) &#x27;Attention&#x27; means focus, and (D) &#x27;Appearance&#x27; refers to being seen or to how something looks.</div></details>
+</div>
+
+<div class="q" id="q126" data-n="126" data-ans="C">
+<div class="stem"><span class="n">126.</span>The new meeting room on the fifth floor holds twice as many people ____ the old one did.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">than</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">so</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">as</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">like</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The structure &#x27;twice as many ... as&#x27; requires (C) &#x27;as&#x27;. (A) &#x27;than&#x27; follows comparative forms such as &#x27;more&#x27;, and (B) &#x27;so&#x27; and (D) &#x27;like&#x27; cannot complete this comparison.</div></details>
+</div>
+
+<div class="q" id="q127" data-n="127" data-ans="B">
+<div class="stem"><span class="n">127.</span>Restaurants that ____ an order with Delvaux Produce by 9 P.M. receive their delivery the next morning.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">fill</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">place</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">set</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">hand</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Customers &#x27;place&#x27; an order with a supplier, so (B) is correct. (A) &#x27;fill&#x27; an order is what the supplier does, and (C) &#x27;set&#x27; and (D) &#x27;hand&#x27; are not used with &#x27;order&#x27; in this sense.</div></details>
+</div>
+
+<div class="q" id="q128" data-n="128" data-ans="D">
+<div class="stem"><span class="n">128.</span>Before choosing a contractor, the manager of the climbing gym requested a written ____ for resurfacing the entrance ramp.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">receipt</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">statement</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">refund</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">estimate</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> A written &#x27;estimate&#x27; states the expected cost of work before it begins, so (D) is correct. (A) &#x27;receipt&#x27; is given after payment, (B) &#x27;statement&#x27; summarizes an account, and (C) &#x27;refund&#x27; is money paid back.</div></details>
+</div>
+
+<div class="q" id="q129" data-n="129" data-ans="B">
+<div class="stem"><span class="n">129.</span>If an applicant&#x27;s forms are incomplete, the registration office will return ____ with a checklist of the missing items.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">they</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">them</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">their</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">themselves</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> An object pronoun is needed after &#x27;return&#x27; to replace &#x27;forms&#x27;, so (B) &#x27;them&#x27; is correct. (A) &#x27;they&#x27; is a subject pronoun, (C) &#x27;their&#x27; must be followed by a noun, and (D) &#x27;themselves&#x27; would refer back to the subject.</div></details>
+</div>
+
+<div class="q" id="q130" data-n="130" data-ans="A">
+<div class="stem"><span class="n">130.</span>The east entrance will be ____ closed while the new revolving door is installed.</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">temporarily</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">formerly</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">previously</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">eventually</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The entrance is closed only for as long as the installation takes, so (A) &#x27;temporarily&#x27; is correct. (B) &#x27;formerly&#x27; and (C) &#x27;previously&#x27; refer to the past, and (D) &#x27;eventually&#x27; means in the end, which does not match &#x27;while&#x27;.</div></details>
+</div>
+
+<h2>PART 6 — Text Completion（131–146）</h2>
+<div class="dirs"><b>Directions:</b> Read the texts that follow. A word, phrase, or sentence is missing in parts of each text. Four answer choices for each question are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D) on your answer sheet.</div>
+<div class="ref">Questions 131–134 refer to the following passage.</div>
+<div class="passage">To: Tobias Lindqvist &lt;t.lindqvist@quillmail.com&gt;
+From: Subscriber Services, Vellacourt Concert Hall
+Date: August 14
+Subject: Your seats for the new season
+
+Dear Mr. Lindqvist,
+
+Thank you for renewing your subscription for our new concert season, which (1)____ on September 6 with the opening gala. We are writing to let you know about a change to your usual seats in Row F.
+
+This summer, the hall is installing a new acoustic canopy above the stage. The canopy will greatly improve the sound throughout the auditorium, but the equipment needed to complete the work will occupy the first six rows of seating until the end of September. (2)____, your seats for the September concerts have been moved to Row K, directly behind your usual location. (3)____
+
+From October onward, you will return to your regular seats in Row F. If the temporary location is not suitable, please contact us before August 31, and we will issue a full (4)____ for the September concerts.
+
+Sincerely,
+Helena Marsh
+Subscriber Services</div>
+<div class="q" id="q131" data-n="131" data-ans="B">
+<div class="stem"><span class="n">131.</span>Blank (1)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">began</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">will begin</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">has begun</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">had begun</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The email is dated August 14 and the season opens on September 6, a future date, so (B) &#x27;will begin&#x27; is correct. (A) &#x27;began&#x27;, (C) &#x27;has begun&#x27;, and (D) &#x27;had begun&#x27; all describe the season as having already started.</div></details>
+</div>
+
+<div class="q" id="q132" data-n="132" data-ans="D">
+<div class="stem"><span class="n">132.</span>Blank (2)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Even so</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">In contrast</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">For instance</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Therefore</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> Moving the seats to Row K is a result of the front rows being occupied, so (D) &#x27;Therefore&#x27; is correct. (A) &#x27;Even so&#x27; and (B) &#x27;In contrast&#x27; signal contrast, and (C) &#x27;For instance&#x27; introduces an example.</div></details>
+</div>
+
+<div class="q" id="q133" data-n="133" data-ans="A">
+<div class="stem"><span class="n">133.</span>Blank (3)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Your new seats offer an equally good view of the stage.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The opening gala will feature a guest conductor from Vienna.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Tickets for individual concerts went on sale last week.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">We regret that your subscription could not be renewed.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> Right after the seats are moved to Row K, a reassuring comment about the new seats fits naturally, so (A) is correct. (B) and (C) change the topic, and (D) contradicts the opening line, which thanks Mr. Lindqvist for renewing.</div></details>
+</div>
+
+<div class="q" id="q134" data-n="134" data-ans="C">
+<div class="stem"><span class="n">134.</span>Blank (4)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">receipt</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">deposit</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">refund</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">discount</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> If the new seats are unsuitable, the hall offers to return the money for those concerts, a full &#x27;refund&#x27;, so (C) is correct. (A) &#x27;receipt&#x27; is proof of payment, (B) &#x27;deposit&#x27; is a partial payment made in advance, and (D) &#x27;discount&#x27; is a price reduction, which would not be called &#x27;full&#x27;.</div></details>
+</div>
+
+<div class="ref">Questions 135–138 refer to the following passage.</div>
+<div class="passage">Bring Your Rooftop to Life with Canopy Hive Partners
+
+Is the roof of your office building an empty, unused space? (1)____ Canopy Hive Partners installs and manages beehives on commercial rooftops throughout the Dunmore region, allowing your company to support local wildlife without doing any of the work.
+
+Our certified beekeepers visit every two weeks during the warmer months to inspect the hives and keep the colonies healthy. (2)____, they give short lunchtime talks so that your employees can learn how bees live and why they matter to local farms and gardens.
+
+Each autumn, the honey from your hives is harvested, (3)____ in jars carrying your company logo, and delivered to your office. Many of our clients give these jars to customers and visitors as gifts.
+
+Installation takes less than a day, and our team handles every safety requirement. To arrange a free rooftop (4)____, call 555-0182 or visit www.canopyhive.com.</div>
+<div class="q" id="q135" data-n="135" data-ans="C">
+<div class="stem"><span class="n">135.</span>Blank (1)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Most roof repairs are covered by standard building insurance.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Honey prices have fallen sharply across the region this year.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It could be home to thousands of honeybees.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Our beekeepers will train your staff to look after the hives themselves.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The sentence answers the opening question about an empty roof and leads into the description of the beehive service, so (C) is correct. (A) and (B) are unrelated to the service, and (D) contradicts the promise that the company does all the work.</div></details>
+</div>
+
+<div class="q" id="q136" data-n="136" data-ans="A">
+<div class="stem"><span class="n">136.</span>Blank (2)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">In addition</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Nevertheless</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Instead</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Otherwise</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The lunchtime talks are an extra service on top of the hive inspections, so (A) &#x27;In addition&#x27; is correct. (B) &#x27;Nevertheless&#x27; signals contrast, (C) &#x27;Instead&#x27; signals replacement, and (D) &#x27;Otherwise&#x27; introduces a different result.</div></details>
+</div>
+
+<div class="q" id="q137" data-n="137" data-ans="D">
+<div class="stem"><span class="n">137.</span>Blank (3)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">pack</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">packing</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">to pack</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">packed</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The blank is part of a list of passive actions, &#x27;is harvested, ____, and delivered&#x27;, so the past participle (D) &#x27;packed&#x27; keeps the list parallel. (A) &#x27;pack&#x27;, (B) &#x27;packing&#x27;, and (C) &#x27;to pack&#x27; break the parallel structure.</div></details>
+</div>
+
+<div class="q" id="q138" data-n="138" data-ans="B">
+<div class="stem"><span class="n">138.</span>Blank (4)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">admission</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">assessment</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">attendance</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">allowance</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Before hives are installed, the roof must be checked, so a free rooftop &#x27;assessment&#x27; (B) is correct. (A) &#x27;admission&#x27; means entry, (C) &#x27;attendance&#x27; means being present, and (D) &#x27;allowance&#x27; is an amount of money given regularly.</div></details>
+</div>
+
+<div class="ref">Questions 139–142 refer to the following passage.</div>
+<div class="passage">FolioScan Go: Portable Document Scanner
+
+Weighing just 400 grams, the FolioScan Go is small enough to carry in a briefcase yet powerful enough to scan a ten-page contract in under a minute. Simply feed a page into the slot, and the scanner (1)____ a sharp digital copy straight to your phone or laptop.
+
+The FolioScan Go runs on a rechargeable battery that lasts for up to 300 pages on a single charge. (2)____, it can be powered directly from a laptop through the included USB cable, so you will never be left without a working scanner on a long business trip.
+
+Every purchase comes with a soft carrying case, a cleaning cloth, and a two-year warranty. The free companion app also lets you rename, sort, and share files in seconds, making the FolioScan Go (3)____ for professionals who handle large amounts of paperwork.
+
+Price: $129, with free shipping on all orders. (4)____</div>
+<div class="q" id="q139" data-n="139" data-ans="A">
+<div class="stem"><span class="n">139.</span>Blank (1)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">sends</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">sent</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">was sending</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">has been sent</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The product page describes what the scanner normally does, so the simple present (A) &#x27;sends&#x27; is correct. (B) &#x27;sent&#x27; and (C) &#x27;was sending&#x27; refer to the past, and (D) &#x27;has been sent&#x27; is passive and cannot take the object &#x27;a sharp digital copy&#x27;.</div></details>
+</div>
+
+<div class="q" id="q140" data-n="140" data-ans="C">
+<div class="stem"><span class="n">140.</span>Blank (2)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Consequently</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">For example</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Alternatively</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Likewise</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The sentence offers a second way to power the scanner instead of the battery, so (C) &#x27;Alternatively&#x27; is correct. (A) &#x27;Consequently&#x27; signals a result, (B) &#x27;For example&#x27; introduces an example, and (D) &#x27;Likewise&#x27; signals similarity.</div></details>
+</div>
+
+<div class="q" id="q141" data-n="141" data-ans="B">
+<div class="stem"><span class="n">141.</span>Blank (3)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">eager</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">ideal</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">fond</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">capable</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;Ideal for&#x27; means perfectly suited to, which fits a tool for people who handle a lot of paperwork, so (B) is correct. (A) &#x27;eager&#x27; and (C) &#x27;fond&#x27; describe people&#x27;s feelings, and (D) &#x27;capable&#x27; is followed by &#x27;of&#x27;, not &#x27;for&#x27;.</div></details>
+</div>
+
+<div class="q" id="q142" data-n="142" data-ans="D">
+<div class="stem"><span class="n">142.</span>Blank (4)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The scanner was discontinued last year.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Shipping charges depend on the weight of your order.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Please bring your receipt when you collect your repaired scanner.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Orders placed before 2 P.M. are dispatched the same day.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> After the price and free shipping, a detail about fast dispatch completes the ordering information, so (D) is correct. (A) contradicts the product being on sale, (B) contradicts the free shipping, and (C) is about repairs, not new orders.</div></details>
+</div>
+
+<div class="ref">Questions 143–146 refer to the following passage.</div>
+<div class="passage">Old Grain Store Reborn as Riverside Food Hall
+
+After sitting empty for almost two decades, the Calder Street Grain Store in Port Ellis reopened last Saturday as a food hall with twenty-six independent vendors. The brick warehouse, built in 1911 to store wheat (1)____ arrived by barge, now houses stalls selling everything from Ethiopian coffee to Korean street food.
+
+The building&#x27;s new owners, Nora Abernathy and Kofi Mensah, spent three years restoring the structure. (2)____ &quot;We wanted visitors to feel the history of the place the moment they walk in,&quot; said Ms. Abernathy.
+
+Opening day drew more than 5,000 people, far more than the owners had expected. (3)____, several vendors sold out of food by mid-afternoon. The owners plan to (4)____ the hall&#x27;s opening hours on weekends once vendors have hired additional staff.</div>
+<div class="q" id="q143" data-n="143" data-ans="D">
+<div class="stem"><span class="n">143.</span>Blank (1)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">what</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">who</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">where</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">that</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> A relative pronoun is needed to refer to &#x27;wheat&#x27; and act as the subject of &#x27;arrived&#x27;, so (D) &#x27;that&#x27; is correct. (A) &#x27;what&#x27; cannot follow a noun, (B) &#x27;who&#x27; refers to people, and (C) &#x27;where&#x27; refers to places.</div></details>
+</div>
+
+<div class="q" id="q144" data-n="144" data-ans="B">
+<div class="stem"><span class="n">144.</span>Blank (2)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Parking near the waterfront is limited on weekends.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">They kept the original iron beams and wooden floors wherever possible.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Most of the vendors have never run a restaurant before.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The warehouse is scheduled to be demolished next spring.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> A detail about keeping the original beams and floors describes the restoration and leads into Ms. Abernathy&#x27;s comment about the building&#x27;s history, so (B) is correct. (A) and (C) do not connect to her quote, and (D) contradicts the reopening.</div></details>
+</div>
+
+<div class="q" id="q145" data-n="145" data-ans="C">
+<div class="stem"><span class="n">145.</span>Blank (3)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">In contrast</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Otherwise</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">As a result</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">For instance</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Vendors selling out early was a consequence of the unexpectedly large crowd, so (C) &#x27;As a result&#x27; is correct. (A) &#x27;In contrast&#x27; signals contrast, (B) &#x27;Otherwise&#x27; introduces an alternative, and (D) &#x27;For instance&#x27; introduces an example.</div></details>
+</div>
+
+<div class="q" id="q146" data-n="146" data-ans="A">
+<div class="stem"><span class="n">146.</span>Blank (4)</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">extend</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">explore</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">exceed</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">expose</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> To &#x27;extend&#x27; opening hours is to make them longer, which suits a popular hall, so (A) is correct. (B) &#x27;explore&#x27; means to investigate, (C) &#x27;exceed&#x27; means to go beyond a limit, and (D) &#x27;expose&#x27; means to uncover.</div></details>
+</div>
+
+<h2>PART 7 — Reading Comprehension（147–200）</h2>
+<div class="dirs"><b>Directions:</b> In this part you will read a selection of texts, such as magazine and newspaper articles, e-mails, and instant messages. Each text or set of texts is followed by several questions. Select the best answer for each question and mark the letter (A), (B), (C), or (D) on your answer sheet.</div>
+<div class="ref">Questions 147–148 refer to the following Text-message chain.</div>
+<div class="passage">Ana Ribeiro (3:02 P.M.): Viktor, the labels on the Montrose Foods pallets show the Westport depot code. That order is supposed to go to Eastbrook.
+Viktor Sandberg (3:04 P.M.): All of them? The truck for that order arrives at 4:30.
+Ana Ribeiro (3:05 P.M.): Twenty-two pallets. And the label printer at my station is jammed, so I can&#x27;t print new ones here.
+Viktor Sandberg (3:06 P.M.): Use the printer in the returns area. I&#x27;ll send Chidera over to help you relabel them.
+Ana Ribeiro (3:08 P.M.): Thanks. Even with two of us, it will take a little over an hour.
+Viktor Sandberg (3:09 P.M.): That&#x27;ll be tight. I&#x27;ll let the driver know he may have to wait a few minutes.</div>
+<div class="q" id="q147" data-n="147" data-ans="C">
+<div class="stem"><span class="n">147.</span>What problem does Ms. Ribeiro report?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A truck has arrived earlier than scheduled.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Some pallets were damaged during loading.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Some pallets have labels with the wrong destination.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A client has canceled part of an order.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Ms. Ribeiro writes that the labels on the Montrose Foods pallets show the Westport depot code although the order should go to Eastbrook, so (C) is correct. The truck is not due until 4:30 (A), and nothing is said about damage (B) or a cancellation (D).</div></details>
+</div>
+
+<div class="q" id="q148" data-n="148" data-ans="A">
+<div class="stem"><span class="n">148.</span>At 3:09 P.M., what does Mr. Sandberg most likely mean when he writes, &#x27;That&#x27;ll be tight&#x27;?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">There will be very little time to spare before the pickup.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The pallets will be difficult to fit on the truck.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The returns area does not have enough space.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The new labels must be attached very firmly.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> Ms. Ribeiro says that relabeling will take a little over an hour, and the truck arrives at 4:30, so Mr. Sandberg means the work will barely be finished in time, which is why he plans to warn the driver (A). He is not talking about space on the truck (B) or in the returns area (C), or about how the labels are attached (D).</div></details>
+</div>
+
+<div class="ref">Questions 149–150 refer to the following Notice.</div>
+<div class="passage">CITY OF MERRITON
+Planning Department
+
+NOTICE OF PUBLIC HEARING
+
+The Merriton Planning Commission will hold a public hearing on Tuesday, March 10, at 6:30 P.M. in the Council Chamber of City Hall, 200 Ordway Street. The commission will consider an application from Velmont Distribution to build a storage and distribution center on the vacant lot at the corner of Kilbride Road and Station Lane.
+
+Under the proposal, a new access road would connect the site directly to Route 9 so that delivery trucks would not need to travel through the residential streets east of the lot. The full plans may be viewed at the Planning Department counter on weekdays from 8:30 A.M. to 4:30 P.M. or online at www.merriton.gov/planning.
+
+Residents who are unable to attend the hearing may submit written comments to planning@merriton.gov. Comments must be received by noon on Monday, March 9, to be shared with commission members before the hearing.</div>
+<div class="q" id="q149" data-n="149" data-ans="A">
+<div class="stem"><span class="n">149.</span>What is the purpose of the notice?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To inform the public about a meeting on a building proposal</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To announce the opening of a distribution center</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To request bids for the construction of a road</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To report that the city has sold a vacant lot</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The notice announces a public hearing at which the Planning Commission will consider Velmont Distribution&#x27;s application to build a facility, so (A) is correct. The center has not been built, so nothing is opening (B), no bids are requested (C), and nothing says the city has sold the lot (D).</div></details>
+</div>
+
+<div class="q" id="q150" data-n="150" data-ans="D">
+<div class="stem"><span class="n">150.</span>What is indicated about Velmont Distribution&#x27;s plan?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It has already been approved by the commission.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It would replace an older building on Station Lane.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Its details are available only at City Hall.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It is designed to keep trucks off residential streets.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The notice explains that a new access road would connect the site to Route 9 so that delivery trucks would not travel through the residential streets east of the lot, so (D) is correct. The hearing has not happened yet, so the plan is not approved (A); the lot is vacant, so no building would be replaced (B); and the plans can also be viewed online (C).</div></details>
+</div>
+
+<div class="ref">Questions 151–152 refer to the following Information card.</div>
+<div class="passage">HOTEL SOLENNE
+Express Check-Out
+
+Leaving early? There is no need to wait in line at the front desk.
+
+1. Review the statement of charges delivered to your room on the evening before your departure.
+2. If everything is correct, simply drop your key cards into the Express Check-Out box beside the main elevators.
+3. Within one hour, a final receipt will be sent to the e-mail address you provided at check-in.
+
+If you find an error on your statement or need a printed receipt, please dial 0 from your room phone to reach the front desk before you leave. Your receipt will be ready for you when you come down.
+
+Check-out time is 11:00 A.M. Guests may leave their luggage with the concierge until 6:00 P.M. on the day of departure at no charge.</div>
+<div class="q" id="q151" data-n="151" data-ans="B">
+<div class="stem"><span class="n">151.</span>What is the purpose of the information?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To announce a change in check-out time</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To explain a quicker way to check out</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To explain how to arrange a late check-out</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To request feedback about the hotel&#x27;s staff</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The card explains how guests can leave without waiting in line at the front desk by using the Express Check-Out box, so (B) is correct. The 11:00 A.M. check-out time is stated but not changed (A), late check-out is not discussed (C), and guests are not asked for feedback (D).</div></details>
+</div>
+
+<div class="q" id="q152" data-n="152" data-ans="C">
+<div class="stem"><span class="n">152.</span>What should a guest who needs a printed receipt do?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Pick it up from the Express Check-Out box</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Ask the concierge on the day of departure</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Call the front desk before leaving the room</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Reply to the e-mail sent by the hotel</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Guests who need a printed receipt are told to dial 0 from the room phone to reach the front desk before they leave, so (C) is correct. The box is only for key cards (A), the concierge looks after luggage (B), and replying to the e-mail is not mentioned (D).</div></details>
+</div>
+
+<div class="ref">Questions 153–155 refer to the following Email.</div>
+<div class="passage">To: Siobhan Gallagher, Hotel Marisco
+From: Piotr Wierzbicki, Brantwood Furniture Works
+Date: April 2
+Subject: Order 5521 (bedside tables)
+
+Dear Ms. Gallagher,
+
+I am writing about your order of 140 bedside tables for the guest rooms at the Hotel Marisco. Our supplier of walnut veneer has just informed us that its next shipment will reach our factory two weeks later than planned. As a result, we will not be able to complete the full order by your requested delivery date of May 4.
+
+We can, however, deliver 80 tables on May 4 as scheduled, with the remaining 60 following by May 18. Since I understand that your renovation is proceeding one floor at a time, I hope this arrangement will still suit your timeline. Please let me know by Friday which floors should receive the first delivery so that our warehouse can label the cartons accordingly.
+
+To make up for the inconvenience, there will be no charge for the second delivery. I apologize for this change and thank you for your understanding.
+
+Sincerely,
+Piotr Wierzbicki
+Customer Accounts</div>
+<div class="q" id="q153" data-n="153" data-ans="D">
+<div class="stem"><span class="n">153.</span>Why did Mr. Wierzbicki send the e-mail?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To confirm that an order has been canceled</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To request payment for a recent shipment</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To recommend a different type of wood</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To explain that an order will be delivered in two parts</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> Mr. Wierzbicki explains that because of a delay in materials, 80 tables will arrive on May 4 and the remaining 60 by May 18, so (D) is correct. The order is not canceled (A), no payment is requested (B), and he does not suggest another kind of wood (C).</div></details>
+</div>
+
+<div class="q" id="q154" data-n="154" data-ans="B">
+<div class="stem"><span class="n">154.</span>What is suggested about the Hotel Marisco?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It is preparing to open a second location.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It is being renovated in stages.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It has bought furniture from Brantwood before.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It has requested a discount on its order.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Mr. Wierzbicki notes that the hotel&#x27;s renovation is proceeding one floor at a time, which suggests the work is being done in stages (B). A second location (A) and earlier purchases (C) are not mentioned, and the free second delivery is Brantwood&#x27;s own offer, not a discount the hotel requested (D).</div></details>
+</div>
+
+<div class="q" id="q155" data-n="155" data-ans="C">
+<div class="stem"><span class="n">155.</span>What is Ms. Gallagher asked to do?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Pay a fee for the second delivery</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Choose a different finish for the tables</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Indicate where the first tables should go</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Be present when the cartons are labeled</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Ms. Gallagher is asked to say by Friday which floors should receive the first delivery, so (C) is correct. The second delivery will be free (A), no change of finish is mentioned (B), and Brantwood&#x27;s warehouse will label the cartons without her (D).</div></details>
+</div>
+
+<div class="ref">Questions 156–158 refer to the following Web page.</div>
+<div class="passage">www.lockwellparcel.com/lockers
+
+Lockwell Parcel | Collect at a Locker
+
+Not at home during the day? Have your parcels delivered to one of our 300 self-service lockers in train stations, supermarkets, and community centers across the region. Lockers are open 24 hours a day, so you can pick up your items whenever it suits you.
+
+How It Works
+1. When shopping online, choose &quot;Lockwell Locker&quot; as your delivery option and select a location.
+2. As soon as your parcel has been placed in a locker, we will send you a six-digit code by text message.
+3. Enter the code on the locker&#x27;s touch screen, and the door will open.
+
+Collection Time
+Parcels are held for five days. Any parcel that has not been collected by the end of the fifth day will be returned to the sender, who may charge a fee to send it again. Lockers accept parcels up to 60 centimeters on the longest side and up to 15 kilograms in weight.
+
+For Businesses
+Our new Locker Plus plan allows small online sellers to drop off up to 50 outgoing parcels a day at any locker location. Visit our Business page to learn more.</div>
+<div class="q" id="q156" data-n="156" data-ans="A">
+<div class="stem"><span class="n">156.</span>What is the main purpose of the web page?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To explain how a parcel pickup service works</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To announce the opening of new locker locations</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To advertise jobs at a delivery company</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To describe changes to shipping rates</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The page explains how customers can have parcels delivered to self-service lockers and open them with a code sent by text message, so (A) is correct. It does not announce new locations (B), job openings (C), or changes to rates (D).</div></details>
+</div>
+
+<div class="q" id="q157" data-n="157" data-ans="D">
+<div class="stem"><span class="n">157.</span>According to the web page, what happens to a parcel that is not picked up within five days?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It is moved to a larger locker.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It is delivered to the customer&#x27;s home.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It is stored for an additional fee.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It is sent back to the sender.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The &#x27;Collection Time&#x27; section says that any parcel not collected by the end of the fifth day is returned to the sender, so (D) is correct. Moving parcels to another locker (A) and home delivery (B) are not mentioned, and the only fee is one the sender may charge to send the item again, not a storage fee (C).</div></details>
+</div>
+
+<div class="q" id="q158" data-n="158" data-ans="B">
+<div class="stem"><span class="n">158.</span>The word &#x27;held&#x27; in the &#x27;Collection Time&#x27; section is closest in meaning to</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">hosted</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">kept</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">gripped</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">considered</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Parcels that are &#x27;held for five days&#x27; are kept in the locker for that period, so (B) is correct. &#x27;Hosted&#x27; (A) fits events, as in &#x27;a meeting was held&#x27;, &#x27;gripped&#x27; (C) means held tightly in the hand, and &#x27;considered&#x27; (D) matches &#x27;held&#x27; only when it refers to opinions.</div></details>
+</div>
+
+<div class="ref">Questions 159–161 refer to the following Memo.</div>
+<div class="passage">MEMORANDUM
+
+To: All Production Staff, Wardle Glassworks
+From: Mattias Ekholm, Plant Manager
+Date: August 3
+Re: Furnace 2 maintenance week
+
+As announced at last month&#x27;s staff meeting, Furnace 2 will be shut down from Monday, August 17, to Friday, August 21, so that its worn interior lining can be replaced. During this period, the bottle line that the furnace supplies will not operate.
+
+Employees who normally work on the bottle line will be given other duties that week. Some will assist our contractor, Arkell Refractory Services, with the relining work, while others will join the packing team or complete their annual safety refresher course. Supervisors will post individual assignments on the notice board by August 10.
+
+Please also note that the north gate on Bellfield Road will be closed for the entire week, as the contractor will be using the yard behind it to store equipment and materials. Staff who normally use that gate should enter through the main entrance on Wardle Way instead.
+
+If you have any questions, please speak to your shift supervisor.</div>
+<div class="q" id="q159" data-n="159" data-ans="D">
+<div class="stem"><span class="n">159.</span>What is the purpose of the memo?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To announce the purchase of a new furnace</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To introduce a new shift supervisor</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To ask for volunteers to work overtime</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To explain arrangements for a maintenance period</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The memo explains what will happen while Furnace 2 is shut down to replace its worn lining, including staff duties and access to the site, so (D) is correct. The existing furnace is being repaired rather than replaced by a new one (A), and no new supervisor (B) or request for overtime (C) is mentioned.</div></details>
+</div>
+
+<div class="q" id="q160" data-n="160" data-ans="C">
+<div class="stem"><span class="n">160.</span>What is NOT mentioned as a possible task for bottle-line employees during the shutdown?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Helping an outside company with repairs</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Working with the packing team</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Training newly hired workers</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Taking a safety course</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The memo says bottle-line employees will assist the contractor with the relining (A), join the packing team (B), or complete their annual safety refresher course (D). Training new workers is never mentioned, so (C) is the answer.</div></details>
+</div>
+
+<div class="q" id="q161" data-n="161" data-ans="A">
+<div class="stem"><span class="n">161.</span>Why will the north gate be closed?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The yard behind it will hold a contractor&#x27;s equipment.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The gate itself needs to be repaired.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It will be reserved for visitors.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It will be used for bottle deliveries.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> According to the memo, the contractor will use the yard behind the north gate to store equipment and materials, so (A) is correct. No repairs to the gate (B) or use by visitors (C) are mentioned, and no deliveries are planned through it (D); in fact, the bottle line will not operate that week.</div></details>
+</div>
+
+<div class="ref">Questions 162–164 refer to the following Press release.</div>
+<div class="passage">FOR IMMEDIATE RELEASE
+March 18
+Contact: Margaux Lefèvre, Communications Director, (555) 0172
+
+Saltmere Hotels to Welcome Guests&#x27; Dogs
+
+Saltmere Hotels announced today that, beginning June 1, guests traveling with dogs will be welcome at all fourteen of its properties. — [1] —. The decision follows a survey in which nearly a third of the company&#x27;s regular guests said they had stayed elsewhere because they could not bring their pets.
+
+Dogs will be allowed only in designated rooms on the first two floors of each hotel, close to the exits. — [2] —. Each of these rooms will be supplied with a dog bed, food and water bowls, and a small welcome package of treats. A cleaning fee of $30 per stay will apply.
+
+Saltmere has also partnered with local dog-walking businesses in every city where it operates, so guests attending meetings or dining out can arrange a walk through the front desk. — [3] —.
+
+&quot;Many of our guests consider their dogs part of the family,&quot; said Saltmere chief executive Adebayo Fashola. &quot;We want both of them to feel at home with us.&quot; — [4] —. Pet-friendly rooms can be reserved on the Saltmere website or by telephone.</div>
+<div class="q" id="q162" data-n="162" data-ans="C">
+<div class="stem"><span class="n">162.</span>What is the press release mainly about?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The opening of a new hotel</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A partnership with a pet supply company</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A new policy that allows guests to bring dogs</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The results of a survey on hotel prices</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The press release announces that, from June 1, guests traveling with dogs will be welcome at all of Saltmere&#x27;s hotels, so (C) is correct. No new hotel is opening (A), the partnership is with dog-walking businesses, not a supply company (B), and the survey mentioned was about pets, not prices (D).</div></details>
+</div>
+
+<div class="q" id="q163" data-n="163" data-ans="A">
+<div class="stem"><span class="n">163.</span>What is indicated about Saltmere Hotels?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It recently conducted a survey of its regular guests.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It will charge a fee for each night a dog stays.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It plans to open its fourteenth hotel in June.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It will allow dogs on every floor of its hotels.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The release says the decision follows a survey of the company&#x27;s regular guests, nearly a third of whom had stayed elsewhere because of their pets, so (A) is correct. The $30 cleaning fee is charged per stay, not per night (B); Saltmere already has fourteen properties (C); and dogs will be allowed only on the first two floors (D).</div></details>
+</div>
+
+<div class="q" id="q164" data-n="164" data-ans="B">
+<div class="stem"><span class="n">164.</span>In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? &#x27;Guests with allergies can instead request rooms on the higher floors, which will remain pet-free.&#x27;</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">[1]</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">[2]</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">[3]</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">[4]</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The new sentence offers guests with allergies rooms on &#x27;the higher floors&#x27; &#x27;instead&#x27;, so it must follow the statement that dogs will be allowed only on the first two floors of each hotel. That statement comes just before [2], so (B) is correct. None of the other positions follows a mention of particular floors.</div></details>
+</div>
+
+<div class="ref">Questions 165–167 refer to the following Advertisement.</div>
+<div class="passage">FRESHFOLD LINEN SERVICES
+Clean linens, delivered on your schedule
+
+Running a hotel, guesthouse, or restaurant leaves little time for laundry. Let Freshfold handle it for you. We collect sheets, towels, tablecloths, and staff uniforms from your premises and return them cleaned, pressed, and folded within 48 hours.
+
+Why choose Freshfold?
+• Pickups seven days a week, including early mornings
+• Rental linens available, so you never need to buy or replace your own
+• Every item tracked by barcode, so nothing goes missing
+• Same-day service for urgent orders at a small additional charge
+
+New customers who sign a six-month service agreement before April 30 will receive their first two weeks of service free. To arrange a no-obligation consultation, call our business team at (555) 0186 or visit www.freshfoldlinen.com.</div>
+<div class="q" id="q165" data-n="165" data-ans="A">
+<div class="stem"><span class="n">165.</span>For whom is the advertisement most likely intended?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Owners of hospitality businesses</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">People shopping for home furnishings</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Job seekers interested in laundry work</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Manufacturers of cleaning products</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The advertisement speaks to people running hotels, guesthouses, and restaurants and offers to launder their linens and uniforms, so (A) is correct. It does not sell furnishings (B), advertise jobs (C), or target manufacturers (D).</div></details>
+</div>
+
+<div class="q" id="q166" data-n="166" data-ans="D">
+<div class="stem"><span class="n">166.</span>What is NOT mentioned as a feature of Freshfold&#x27;s service?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Weekend collection</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Item tracking</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Linen rental</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Repair of damaged items</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The ad mentions pickups seven days a week, which include weekends (A), barcode tracking (B), and rental linens (C). Repairing damaged items is not mentioned, so (D) is the answer.</div></details>
+</div>
+
+<div class="q" id="q167" data-n="167" data-ans="C">
+<div class="stem"><span class="n">167.</span>How can a business receive two weeks of free service?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">By scheduling a consultation before April 30</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">By renting linens instead of buying them</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">By signing a six-month agreement by a certain date</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">By trying the same-day service</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> New customers who sign a six-month service agreement before April 30 receive their first two weeks free, so (C) is correct. The consultation is free but does not earn the offer by itself (A), and renting linens (B) or using the same-day service (D) is not connected to the offer.</div></details>
+</div>
+
+<div class="ref">Questions 168–171 refer to the following Online chat discussion.</div>
+<div class="passage">Livia Bellini (9:02 A.M.): Morning, everyone. Harlan Marine has asked whether we could ship their 6,000 hatch hinges on the 14th instead of the 21st. They&#x27;ve moved up the launch of their new sailboat.
+Selim Demir (9:04 A.M.): Line 2 is spoken for through the 12th.
+Livia Bellini (9:05 A.M.): By the Fairbairn order?
+Selim Demir (9:05 A.M.): Right, and that one can&#x27;t slip. They&#x27;re our biggest customer.
+Karthik Iyer (9:06 A.M.): Also keep in mind that every batch needs two days in inspection before it can leave the building.
+Livia Bellini (9:08 A.M.): What if we sent part of the order on the 14th and the rest on the 21st? They mainly need enough hinges for the first few boats.
+Selim Demir (9:09 A.M.): That could work. If I add a Saturday shift on the 7th, we could have about 2,500 hinges ready for inspection by Monday the 9th.
+Karthik Iyer (9:10 A.M.): Then my team can have them cleared by the 11th.
+Ewa Szymańska (9:12 A.M.): Just confirm the final quantity with me by Thursday. The carrier needs two days&#x27; notice to add a pickup.
+Livia Bellini (9:13 A.M.): Great. I&#x27;ll check with Harlan Marine whether 2,500 will be enough and get back to you all before lunch.</div>
+<div class="q" id="q168" data-n="168" data-ans="A">
+<div class="stem"><span class="n">168.</span>Why did Ms. Bellini start the online chat discussion?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To ask whether a delivery could be made earlier</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To report a problem with a recent shipment</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To announce that a client has canceled an order</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To propose adding a new production line</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> Ms. Bellini writes that Harlan Marine wants its hinges shipped on the 14th instead of the 21st, so she starts the discussion to ask whether an earlier delivery is possible (A). No problem with a shipment (B) or cancellation (C) is mentioned, and the team later discusses adding a shift, not a new line (D).</div></details>
+</div>
+
+<div class="q" id="q169" data-n="169" data-ans="B">
+<div class="stem"><span class="n">169.</span>At 9:04 A.M., what does Mr. Demir most likely mean when he writes, &#x27;Line 2 is spoken for through the 12th&#x27;?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A production line will be closed for repairs.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A production line is already committed to other work.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A machine operator has requested time off.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A client has already approved a new schedule.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Mr. Demir then confirms that Line 2 is busy with the Fairbairn order until the 12th and that the order cannot be delayed, so he means the line is already committed to other work (B). Repairs (A), staff leave (C), and a client&#x27;s approval (D) are never mentioned.</div></details>
+</div>
+
+<div class="q" id="q170" data-n="170" data-ans="D">
+<div class="stem"><span class="n">170.</span>Who most likely is Ms. Szymańska?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A sales representative</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A quality inspector</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A production scheduler</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A shipping coordinator</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> Ms. Szymańska asks for the final quantity because the carrier needs two days&#x27; notice to add a pickup, so she most likely arranges shipments (D). Ms. Bellini deals with the client (A), Mr. Iyer&#x27;s team inspects the hinges (B), and Mr. Demir plans production (C).</div></details>
+</div>
+
+<div class="q" id="q171" data-n="171" data-ans="C">
+<div class="stem"><span class="n">171.</span>What will Ms. Bellini most likely do next?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Add a shift to the production schedule</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Arrange an extra pickup with a carrier</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Contact a client about the size of a shipment</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Inspect the first batch of hinges</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Ms. Bellini says she will check with Harlan Marine whether 2,500 hinges will be enough, so she will contact the client about the size of the first shipment (C). Adding a shift is Mr. Demir&#x27;s task (A), the pickup is Ms. Szymańska&#x27;s (B), and the inspection is done by Mr. Iyer&#x27;s team (D).</div></details>
+</div>
+
+<div class="ref">Questions 172–175 refer to the following Article.</div>
+<div class="passage">Linmouth to Test On-Demand Minibus Service
+By Ifeoma Nwankwo, Staff Writer
+
+Starting July 1, residents of Linmouth&#x27;s northern neighborhoods will be able to request a ride on a city-run minibus through a smartphone app or by telephone. The six-month trial, approved by the city council on Tuesday, will replace Bus Route 14, which runs once an hour and carries an average of only nine passengers per trip. — [1] —.
+
+Unlike a regular bus, the new service will not follow a fixed route. Instead, riders will be picked up within a short walk of their homes and taken to any destination inside the service zone, which includes the North Linmouth train station, Eastmoor Medical Center, and the Castlegate Shopping Arcade. — [2] —. Fares will be the same as on regular city buses, and monthly passes will be accepted.
+
+&quot;Route 14 was costly to run and inconvenient for many of the people who rely on it,&quot; said Thandiwe Dube, the city&#x27;s director of transportation. — [3] —. &quot;With this approach, we can offer more frequent and flexible service for roughly the same cost.&quot;
+
+Five minibuses, each seating twelve passengers, will be leased for the trial. — [4] —. If the results are positive, the council may extend the service to the eastern districts next year.</div>
+<div class="q" id="q172" data-n="172" data-ans="B">
+<div class="stem"><span class="n">172.</span>What is the article mainly about?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The opening of a new train station</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A trial of a flexible public transportation service</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">An increase in city bus fares</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The appointment of a new transportation director</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The article reports that Linmouth will run a six-month trial of an on-demand minibus service that does not follow a fixed route, so (B) is correct. The train station is only one destination (A), fares will stay the same as on regular buses (C), and Ms. Dube is simply quoted as the city&#x27;s director of transportation; nothing says she was newly appointed (D).</div></details>
+</div>
+
+<div class="q" id="q173" data-n="173" data-ans="A">
+<div class="stem"><span class="n">173.</span>What is stated about Bus Route 14?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It carries relatively few passengers.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It will be extended to the eastern districts.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It runs every half hour.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It stops only at the train station.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The article says Route 14 carries an average of only nine passengers per trip, so (A) is correct. It is the new minibus service, not Route 14, that may be extended east (B); Route 14 runs once an hour (C); and nothing says it stops only at the station (D).</div></details>
+</div>
+
+<div class="q" id="q174" data-n="174" data-ans="C">
+<div class="stem"><span class="n">174.</span>What is suggested about the minibus service?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It will operate only on weekday mornings.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It was proposed by local business owners.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It may later be offered in other parts of the city.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It will cost much more to run than Route 14.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The article states that the council may extend the service to the eastern districts next year if the results are positive, so (C) is correct. Operating hours (A) and business owners (B) are not mentioned, and Ms. Dube says the cost will be roughly the same as before (D).</div></details>
+</div>
+
+<div class="q" id="q175" data-n="175" data-ans="D">
+<div class="stem"><span class="n">175.</span>In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? &#x27;Each of them will have a ramp so that riders who use wheelchairs can board easily.&#x27;</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">[1]</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">[2]</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">[3]</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">[4]</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;Each of them&#x27; must refer to a plural noun, and &#x27;board&#x27; shows that the noun is a vehicle. Position [4] comes right after the sentence about the five minibuses leased for the trial, so (D) is correct. No vehicles are mentioned just before [1], [2], or [3].</div></details>
+</div>
+
+<div class="ref">Questions 176–180 refer to the following Article.</div>
+<div class="passage">Skerry Line to Add Overnight Freight Sailing
+
+Businesses on Kilbrannan Island will soon have a faster way to get their goods to the mainland. Beginning on Monday, May 4, Skerry Line will operate a freight-only sailing from Kilbrannan to the port of Ardmore every night except Sunday. The ship will leave at 11:30 P.M. and arrive at 4:00 A.M., in time for goods to reach the mainland&#x27;s early-morning markets and the Ardmore rail freight terminal.
+
+At present, all freight travels on Skerry Line&#x27;s three daily passenger ferries. During the busy summer months, these ferries are often full, and trucks are sometimes left on the pier to wait for the next sailing.
+
+The freight ship can carry up to 40 trucks and trailers. Businesses that book space on the same night each week for at least three months will receive a 15 percent discount. All bookings must be made at least 48 hours before departure, either online or at the freight office on Kilbrannan Pier.
+
+&quot;Island producers have been asking for a service like this for years,&quot; said Skerry Line freight manager Aurelio Batista.</div>
+<div class="passage">To: freight@skerryline.com
+From: Fenella Rourke, Kilbrannan Woolen Mill
+Date: April 20
+Subject: Bookings on the new freight sailing
+
+Hello,
+
+I read about your new overnight sailing in last week&#x27;s Island Gazette, and I would like to book space for our delivery truck. At present, our blankets and knitwear travel on the 6:00 P.M. passenger ferry, but last summer our truck was left behind three times, and we missed deliveries to several of our mainland customers as a result.
+
+We would like to reserve space for one truck every Tuesday and Thursday night from May 5 until the end of September. As this will be a regular weekly booking, I assume we will qualify for the discount mentioned in the article. In December, our busiest month, we would also like to add a sailing on Sunday nights.
+
+Finally, could you tell me whether our driver may travel with the truck, or whether he should collect it in Ardmore the next morning?
+
+Best regards,
+Fenella Rourke
+Logistics Coordinator</div>
+<div class="q" id="q176" data-n="176" data-ans="B">
+<div class="stem"><span class="n">176.</span>What is the article mainly about?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The opening of a rail freight terminal</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A new shipping service for island businesses</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">An increase in passenger ferry fares</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The purchase of a passenger ferry</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The article announces that Skerry Line will start an overnight freight-only sailing so that Kilbrannan businesses can get goods to the mainland faster, so (B) is correct. The rail freight terminal is mentioned only as a destination for goods (A), fares are not discussed (C), and the new sailing carries freight, not passengers (D).</div></details>
+</div>
+
+<div class="q" id="q177" data-n="177" data-ans="A">
+<div class="stem"><span class="n">177.</span>According to the article, what problem do island businesses currently have?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Their trucks cannot always get on a ferry.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">They must book freight space in person.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Ferries do not operate during the summer.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Freight charges have risen sharply.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The article explains that freight now travels on passenger ferries that are often full in summer, so trucks are sometimes left on the pier to wait for the next sailing (A). Booking in person is not described as a current problem (B), the ferries clearly run in summer (C), and no price increase is mentioned (D).</div></details>
+</div>
+
+<div class="q" id="q178" data-n="178" data-ans="D">
+<div class="stem"><span class="n">178.</span>Why will Kilbrannan Woolen Mill most likely receive a discount?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It has used Skerry Line&#x27;s ferries for many years.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It is booking space before the service begins.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It will ship more than one truck on each sailing.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It will book the same nights every week for several months.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> According to the article, businesses that book space on the same night each week for at least three months receive a 15 percent discount. Ms. Rourke wants space every Tuesday and Thursday from May 5 until the end of September, so (D) is correct. Being a long-time customer (A) or booking early (B) is not a condition, and she is booking only one truck (C).</div></details>
+</div>
+
+<div class="q" id="q179" data-n="179" data-ans="B">
+<div class="stem"><span class="n">179.</span>Which of Ms. Rourke&#x27;s requests will Skerry Line most likely be unable to meet?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Carrying her company&#x27;s delivery truck</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Providing a sailing on Sunday nights</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Starting her bookings in early May</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Continuing her bookings through September</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The article says the freight ship sails every night except Sunday, so the Sunday sailings Ms. Rourke wants in December cannot be provided (B). The ship carries trucks and trailers (A), the service starts on May 4, before her first booking (C), and nothing limits the service to certain months (D).</div></details>
+</div>
+
+<div class="q" id="q180" data-n="180" data-ans="C">
+<div class="stem"><span class="n">180.</span>What is indicated about Kilbrannan Woolen Mill?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It plans to open a store in Ardmore.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It currently sends its goods on an overnight sailing.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It has missed some deliveries to customers.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It ships its products to customers by rail.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Ms. Rourke writes that the mill&#x27;s truck was left behind three times last summer and that it missed deliveries to several mainland customers as a result, so (C) is correct. No store is mentioned (A), the mill now uses the 6:00 P.M. passenger ferry (B), and rail is mentioned only in the article, not in connection with the mill (D).</div></details>
+</div>
+
+<div class="ref">Questions 181–185 refer to the following Letter.</div>
+<div class="passage">Brackwater District Council
+Economic Development Office
+45 Guildhall Square, Brackwater
+
+February 2
+
+Dear Business Owner,
+
+We are pleased to announce the return of the Storefront Improvement Grant, which helps small businesses in the Old Market area improve the outside of their premises. Last year, the program funded 32 projects, from new signs to restored windows, and the results can be seen throughout the district.
+
+This year, grants will cover 50 percent of eligible costs, up to a maximum of $4,000 per business. Eligible projects include signs, exterior lighting, awnings, painting, and window or door repairs. Interior work and equipment purchases are not eligible.
+
+To apply, complete the enclosed form and return it with written quotes from two licensed contractors and at least one photograph of your current storefront. Applications must be received by March 15. Because funds are limited, grants will be awarded in the order in which complete applications are received.
+
+If you have any questions, please contact Vikram Sethi at (555) 0127.
+
+Sincerely,
+Defne Arslan
+Director of Economic Development</div>
+<div class="passage">STOREFRONT IMPROVEMENT GRANT: APPLICATION FORM
+Brackwater District Council, Economic Development Office
+
+Business name: The Juniper Tearoom
+Owner: Joaquín Herrera
+Business address: 17 Cooper&#x27;s Row, Old Market, Brackwater
+Telephone: (555) 0164
+
+Description of project: Replace the faded wooden sign above the entrance, install two outdoor wall lamps, and repaint the front of the building.
+
+Estimated total cost: $9,600
+
+Documents enclosed (check all that apply):
+[X] Contractor quote (Lindell &amp; Daughters Signs)
+[ ] Second contractor quote
+[X] Photograph(s) of current storefront
+
+Date: February 20
+Signature: Joaquín Herrera</div>
+<div class="q" id="q181" data-n="181" data-ans="C">
+<div class="stem"><span class="n">181.</span>What is the main purpose of the letter?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To request payment of a business license fee</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To share the results of a district survey</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To announce a funding program for local businesses</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To invite business owners to a council meeting</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The letter announces the return of the Storefront Improvement Grant, which helps Old Market businesses pay for exterior improvements, so (C) is correct. No license fee (A), survey (B), or council meeting (D) is mentioned.</div></details>
+</div>
+
+<div class="q" id="q182" data-n="182" data-ans="D">
+<div class="stem"><span class="n">182.</span>In the letter, the word &#x27;cover&#x27; in paragraph 2, line 1, is closest in meaning to</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">protect</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">hide</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">report on</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">pay for</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> Grants that &#x27;cover 50 percent of eligible costs&#x27; pay for half of those costs, so (D) is correct. &#x27;Protect&#x27; (A) and &#x27;hide&#x27; (B) describe covering something physically, and &#x27;report on&#x27; (C) is the meaning used in news reporting.</div></details>
+</div>
+
+<div class="q" id="q183" data-n="183" data-ans="A">
+<div class="stem"><span class="n">183.</span>Why might Mr. Herrera&#x27;s application be considered incomplete?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It includes only one contractor quote.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It was submitted after the deadline.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It does not include a photograph.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It describes interior work.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The letter asks for written quotes from two licensed contractors, but Mr. Herrera&#x27;s form shows that only one quote is enclosed, so (A) is correct. He applied on February 20, before the March 15 deadline (B); he enclosed photographs (C); and a new sign, outdoor lamps, and painting are all exterior work (D).</div></details>
+</div>
+
+<div class="q" id="q184" data-n="184" data-ans="A">
+<div class="stem"><span class="n">184.</span>What is the largest grant that Mr. Herrera&#x27;s project could receive?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">$4,000</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">$4,800</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">$5,600</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">$9,600</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> Grants cover 50 percent of costs up to a maximum of $4,000. Half of Mr. Herrera&#x27;s $9,600 estimate is $4,800, which is above the limit, so the most he could receive is $4,000 (A). (B) ignores the maximum, (C) is the amount he would still pay himself, and (D) is the full cost of the project.</div></details>
+</div>
+
+<div class="q" id="q185" data-n="185" data-ans="B">
+<div class="stem"><span class="n">185.</span>What is indicated about the Storefront Improvement Grant?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It is open to businesses throughout Brackwater.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It was also offered last year.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It can be used to buy equipment.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It is awarded to the best-designed projects.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The letter announces the &#x27;return&#x27; of the grant and says the program funded 32 projects last year, so (B) is correct. It is limited to the Old Market area (A), equipment purchases are not eligible (C), and grants are awarded in the order complete applications arrive, not by design quality (D).</div></details>
+</div>
+
+<div class="ref">Questions 186–190 refer to the following Catalog page.</div>
+<div class="passage">TORSVIK SHELVING SYSTEMS
+Product Catalog, Page 12: Steel Storage Shelving
+
+All Torsvik units are manufactured at our plant in Rennick from recycled steel and come with a ten-year warranty. Orders over $1,000 ship free within seven business days.
+
+Model | Size (W x D x H) | Shelves | Maximum load per shelf | Price
+HS-200 | 120 x 45 x 180 cm | 4 | 150 kg | $129
+HS-300 | 120 x 60 x 200 cm | 5 | 250 kg | $189
+HS-400 | 150 x 60 x 200 cm | 5 | 350 kg | $249
+HS-500 | 180 x 75 x 240 cm | 6 | 500 kg | $339
+
+Assembly service is available in most areas for $35 per unit. Registered charities receive 10 percent off the price of all shelving units. To order, contact our sales team at orders@torsvikshelving.com.</div>
+<div class="passage">PURCHASE ORDER No. 1187
+Ravelston Community Food Bank, 9 Wharf Street, Ravelston
+Date: June 2
+Supplier: Torsvik Shelving Systems
+
+Item | Quantity | Unit price | Amount
+HS-400 shelving unit | 6 | $249 | $1,494
+HS-200 shelving unit | 4 | $129 | $516
+Assembly service | 10 | $35 | $350
+Subtotal: $2,360
+Charity discount (10% of shelving): -$201
+Order total: $2,159
+
+Requested delivery date: June 20
+Note: The larger units will hold heavy canned goods, so each of their shelves must support at least 300 kg.</div>
+<div class="passage">Nkechi Adeyinka (10:12 A.M.): Lars from Torsvik just called about our shelving order. The HS-400 is out of stock until early July.
+Malia Fonoti (10:14 A.M.): July? We open the new warehouse on June 22. Did he offer any alternatives?
+Nkechi Adeyinka (10:15 A.M.): Two. They can send HS-300 units right away, or upgrade us to the HS-500 at no extra cost and deliver by June 18.
+Malia Fonoti (10:17 A.M.): The HS-300 won&#x27;t work for the canned goods. And I measured the storage room yesterday. The ceiling is only 2.3 meters high under the beams.
+Nkechi Adeyinka (10:18 A.M.): Then the upgrade is out, too. I&#x27;ll ask Lars to send the HS-200 units now and the rest as soon as they&#x27;re available.
+Malia Fonoti (10:20 A.M.): Good plan. We can use the smaller units for dry goods in the meantime.</div>
+<div class="q" id="q186" data-n="186" data-ans="D">
+<div class="stem"><span class="n">186.</span>What is stated about Torsvik shelving units?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">They are made from aluminum.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">They are delivered fully assembled.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">They are sold only to charities.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">They come with a ten-year warranty.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The catalog states that all Torsvik units come with a ten-year warranty, so (D) is correct. They are made from recycled steel, not aluminum (A); assembly is an optional paid service (B); and charities simply receive a discount (C).</div></details>
+</div>
+
+<div class="q" id="q187" data-n="187" data-ans="C">
+<div class="stem"><span class="n">187.</span>What is suggested about the Ravelston Community Food Bank?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It has ordered from Torsvik before.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It will assemble the shelving itself.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It is a registered charity.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It must pay a shipping charge.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The purchase order includes a 10 percent charity discount, which the catalog offers only to registered charities, so (C) is correct. No earlier orders are mentioned (A), the food bank ordered the assembly service for all ten units (B), and orders over $1,000 ship free, so there is no shipping charge on its $2,159 order (D).</div></details>
+</div>
+
+<div class="q" id="q188" data-n="188" data-ans="A">
+<div class="stem"><span class="n">188.</span>Why is the HS-300 not suitable for the food bank?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Its shelves cannot hold enough weight.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It is more expensive than the HS-400.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It cannot be delivered by June 20.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It is not covered by the warranty.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The purchase order says each shelf of the larger units must support at least 300 kg, but the catalog lists the HS-300 at only 250 kg per shelf, so (A) is correct. It costs less than the HS-400 (B), Torsvik can send it right away (C), and the warranty covers all units (D).</div></details>
+</div>
+
+<div class="q" id="q189" data-n="189" data-ans="B">
+<div class="stem"><span class="n">189.</span>Why does Ms. Adeyinka decide against the HS-500?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It costs more than the food bank can afford.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It is too tall for the storage room.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It would arrive after the warehouse opens.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It has fewer shelves than the HS-400.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Ms. Fonoti reports that the ceiling is only 2.3 meters high under the beams, and the catalog shows that the HS-500 is 240 cm tall, so it would not fit (B). The upgrade costs nothing extra (A), it would arrive by June 18, before the June 22 opening (C), and it has six shelves, one more than the HS-400 (D).</div></details>
+</div>
+
+<div class="q" id="q190" data-n="190" data-ans="C">
+<div class="stem"><span class="n">190.</span>What will Ms. Adeyinka most likely ask Torsvik to do?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Cancel the purchase order</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Replace the HS-200 units with HS-300 units</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Deliver the order in two separate shipments</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Send someone to measure the storage room</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Ms. Adeyinka says she will ask Torsvik to send the HS-200 units now and the rest when they are available, which means two separate deliveries (C). She is not canceling the order (A) or changing the HS-200 units (B), and Ms. Fonoti has already measured the storage room (D).</div></details>
+</div>
+
+<div class="ref">Questions 191–195 refer to the following Schedule.</div>
+<div class="passage">HAVERLY TOWNSHIP SANITATION DEPARTMENT
+Holiday Collection Schedule: Week of October 12
+
+Because of the Harvest Day holiday on Monday, October 12, trash and recycling collection in every zone will take place one day later than usual that week. Regular schedules resume on Monday, October 19.
+
+Zone | Neighborhood | Regular day | Week of October 12
+A | North End | Monday | Tuesday
+B | Canal Side | Tuesday | Wednesday
+C | Mill Green | Wednesday | Thursday
+D | Stonecroft | Thursday | Friday
+E | Westfield | Friday | Saturday
+
+Reminders: Bins must be at the curb by 7:00 A.M. with their lids fully closed. Extra cardboard that does not fit in your bin may be dropped off free of charge at the Cobb Lane Recycling Center, which is open Tuesday through Saturday from 8:00 A.M. to 4:00 P.M.</div>
+<div class="passage">HAVERLY TOWNSHIP SANITATION DEPARTMENT
+Collection Notice
+
+Address: 52 Orchard Crescent
+Date: October 14
+
+We&#x27;re sorry, but we could not empty your recycling bin today for the reason checked below:
+[ ] Bin was not at the curb by 7:00 A.M.
+[X] Lid was not fully closed
+[ ] Bin contained items that cannot be recycled
+[ ] Bin was too heavy to lift safely
+
+Please correct the problem before your next collection day. Questions? Call (555) 0110.</div>
+<div class="passage">To: sanitation@haverlytownship.gov
+From: Takumi Hayashi
+Date: October 15
+Subject: Recycling at 52 Orchard Crescent
+
+Hello,
+
+Yesterday I found a notice on my recycling bin explaining that it could not be emptied because the lid was not closed. That was fair. We had just received a delivery of new furniture, and the packaging would not fit inside the bin.
+
+I have since flattened the boxes, but there is still far more cardboard than the bin can hold, so I would like to take it to the recycling center myself. Since I work long hours during the week, the weekend would be best for me. Could you tell me whether I need to bring proof that I live in the township?
+
+Also, one of my neighbors mentioned that collection on our street will move to a different day next year. Is that correct?
+
+Thank you,
+Takumi Hayashi</div>
+<div class="q" id="q191" data-n="191" data-ans="D">
+<div class="stem"><span class="n">191.</span>What is the main purpose of the schedule?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To announce new zone boundaries</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To introduce a new recycling center</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To list fees for collecting extra cardboard</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To explain a temporary change to collection days</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The schedule explains that, because of the Harvest Day holiday, collection in every zone will be one day later than usual during the week of October 12, so (D) is correct. The zones themselves are unchanged (A), the recycling center is mentioned only as a drop-off point (B), and dropping off cardboard is free (C).</div></details>
+</div>
+
+<div class="q" id="q192" data-n="192" data-ans="B">
+<div class="stem"><span class="n">192.</span>In which zone does Mr. Hayashi most likely live?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Zone A</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Zone B</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Zone C</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Zone D</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The notice was left on October 14. Since Monday was October 12, that date was the Wednesday of the holiday week, when collection was for Zone B, whose regular day is Tuesday. So (B) is correct. Zone C (C) is normally collected on Wednesdays but was moved to Thursday that week.</div></details>
+</div>
+
+<div class="q" id="q193" data-n="193" data-ans="A">
+<div class="stem"><span class="n">193.</span>Why was Mr. Hayashi&#x27;s recycling bin not emptied?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Packaging kept the lid from closing.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It was placed at the curb too late.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It contained items that cannot be recycled.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It was too heavy to lift safely.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The notice shows that the lid was not fully closed, and Mr. Hayashi explains that packaging from a furniture delivery would not fit inside the bin, so (A) is correct. The other reasons listed on the notice, (B), (C), and (D), were not checked.</div></details>
+</div>
+
+<div class="q" id="q194" data-n="194" data-ans="C">
+<div class="stem"><span class="n">194.</span>When will Mr. Hayashi most likely take his cardboard to the recycling center?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">On a Sunday</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">On a Monday morning</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">On a Saturday</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">On a weekday evening</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Mr. Hayashi says the weekend would be best for him, and the schedule shows the recycling center is open Tuesday through Saturday, so Saturday is the only weekend day he can go (C). The center is closed on Sundays (A) and Mondays (B), and it closes at 4:00 P.M., before most weekday evenings (D).</div></details>
+</div>
+
+<div class="q" id="q195" data-n="195" data-ans="D">
+<div class="stem"><span class="n">195.</span>What is one thing Mr. Hayashi asks about?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The cost of a larger recycling bin</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The location of the recycling center</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The reason his bin was not emptied</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A possible change to his collection day</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> Mr. Hayashi asks whether it is true that collection on his street will move to a different day next year, so (D) is correct. He does not ask about a larger bin (A) or where the center is (B), and he already understands why his bin was not emptied (C).</div></details>
+</div>
+
+<div class="ref">Questions 196–200 refer to the following Web page.</div>
+<div class="passage">www.aldmoorhotel.com/lost-and-found
+
+The Aldmoor Hotel | Lost and Found
+
+Did you leave something behind? Items found in guest rooms and public areas are recorded by our housekeeping team and stored securely for 60 days. Valuable items, such as jewelry, laptops, and passports, are kept in the hotel safe. Items that are not claimed within 60 days are donated to local charities.
+
+To report a missing item, please e-mail lostandfound@aldmoorhotel.com with a description of the item, the dates of your stay, and where you think you left it. We will reply within two business days.
+
+Items may be collected in person at the front desk at any time, or we can send them to you by courier. Shipping charges are billed to the guest when the parcel is sent:
+• Within the country: $15 (up to 2 kg) or $25 (over 2 kg)
+• International: $40 (up to 2 kg) or $65 (over 2 kg)</div>
+<div class="passage">To: lostandfound@aldmoorhotel.com
+From: Francesca Moretti
+Date: March 9
+Subject: Items left behind
+
+Hello,
+
+I stayed at the Aldmoor from March 3 to 6 in Room 512, and I believe I left two items behind. The first is a phone charger with a white cable, which I think is still plugged in beside the bed. The second is a gray wool scarf that I wore to dinner in your restaurant on the evening of March 5.
+
+Could you please send whatever you find to my home address, 14 Fairlie Row, Dunstan Bay? I am happy to pay the shipping charges. Alternatively, I will be back in the city for the Westmarch Tourism Forum in April, so I could also pick the items up then.
+
+Thank you for your help.
+
+Francesca Moretti</div>
+<div class="passage">To: Francesca Moretti
+From: Noriko Ishikawa, Housekeeping Manager
+Date: March 10
+Subject: RE: Items left behind
+
+Dear Ms. Moretti,
+
+Thank you for contacting us. I am pleased to report that our housekeeping staff found your phone charger when they cleaned your room on March 6. Unfortunately, we have not been able to locate your scarf. I have checked with the staff who worked on the evening of March 5, and no scarf was turned in. We will contact you right away if it is found.
+
+We can send the charger to you this week, and a fee of $15 will be charged to the credit card you used during your stay. However, since you mentioned that you will be returning to the city soon, you may prefer to collect it from the front desk then and avoid the charge. Please let me know which option you would like.
+
+Best regards,
+Noriko Ishikawa</div>
+<div class="q" id="q196" data-n="196" data-ans="A">
+<div class="stem"><span class="n">196.</span>According to the web page, what happens to items that are not claimed within 60 days?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">They are donated to charities.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">They are mailed to the guest&#x27;s home address.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">They are moved to the hotel safe.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">They are sold at a public auction.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The web page states that items not claimed within 60 days are donated to local charities, so (A) is correct. Items are sent to guests only on request (B), the safe is used for valuable items from the start (C), and no auction is mentioned (D).</div></details>
+</div>
+
+<div class="q" id="q197" data-n="197" data-ans="C">
+<div class="stem"><span class="n">197.</span>Why did Ms. Moretti write to the hotel?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To extend her reservation at the hotel</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To complain about a meal in the restaurant</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To ask for help recovering some belongings</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To book a room for a conference in April</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Ms. Moretti writes that she left two items behind and asks the hotel to send whatever it finds, so (C) is correct. Her stay has already ended (A), she mentions the restaurant only as the place she wore her scarf (B), and she does not ask to book a room (D).</div></details>
+</div>
+
+<div class="q" id="q198" data-n="198" data-ans="B">
+<div class="stem"><span class="n">198.</span>Where was the item that has not been found most likely left?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">In Room 512</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">In the hotel restaurant</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">At the front desk</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">At the Westmarch Tourism Forum</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Ms. Ishikawa says the scarf has not been found, and Ms. Moretti wrote that she wore it to dinner in the hotel restaurant on March 5, so (B) is correct. The charger, which was found, was left in Room 512 (A), and neither the front desk (C) nor the forum (D) is connected with the scarf.</div></details>
+</div>
+
+<div class="q" id="q199" data-n="199" data-ans="D">
+<div class="stem"><span class="n">199.</span>Why would Ms. Moretti be charged $15 to have her charger sent to her?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It will be sent by an express courier service.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It is being shipped to an address abroad.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It had to be kept in the hotel safe.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It is a small parcel being sent within the country.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> According to the web page, $15 is the fee for a parcel of up to 2 kg sent within the country, which matches the charge in Ms. Ishikawa&#x27;s e-mail, so (D) is correct. No express service is mentioned (A), international parcels cost at least $40 (B), and storage in the safe has nothing to do with the fee (C).</div></details>
+</div>
+
+<div class="q" id="q200" data-n="200" data-ans="B">
+<div class="stem"><span class="n">200.</span>If Ms. Moretti follows Ms. Ishikawa&#x27;s suggestion, when will she most likely get her charger?</div>
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Within two business days</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">During a trip to the city in April</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">On March 10</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">After 60 days</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Ms. Ishikawa suggests collecting the charger at the front desk when Ms. Moretti returns to the city, and Ms. Moretti wrote that she will be back for the Westmarch Tourism Forum in April, so (B) is correct. Two business days is the hotel&#x27;s reply time (A), March 10 is the date of the reply (C), and unclaimed items are donated after 60 days (D).</div></details>
+</div>
+</div><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:toeic:t07";
+var TOTAL=100;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(",").map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok)
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q);
+  var ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script></body></html>

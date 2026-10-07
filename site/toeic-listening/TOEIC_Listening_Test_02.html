@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TOEIC Listening Practice Test 02</title><style>
+:root{--ink:#1b1b1b;--muted:#5b6570;--line:#e2e6ea;--green:#0b6b3a;--paper:#f6f8f9}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font:16px/1.55 -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Microsoft YaHei",sans-serif;color:var(--ink);background:#eceff1}
+.wrap{max-width:880px;margin:0 auto;background:#fff;padding:30px 42px 90px;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+h1{font-size:26px;margin:0 0 8px}
+.meta{color:var(--muted);font-size:14px;margin:2px 0}
+.toolbar{position:sticky;top:0;background:#fff;padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px;z-index:5}
+.toolbar .btns{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 13px;border-radius:7px;border:1px solid var(--line);background:#fff;color:#334155;cursor:pointer}
+.toolbar button:hover{background:#f3f6f8}
+h2{margin:38px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--green);font-size:20px}
+.dirs{background:#eef5f0;border-left:4px solid var(--green);padding:9px 13px;font-size:13.5px;color:#33413a;border-radius:0 5px 5px 0;margin:8px 0 16px}
+.set{border:1px solid #e8ecef;border-radius:10px;padding:14px 16px;margin:14px 0;background:#fff}
+.set>.shd{font-size:13px;color:var(--muted);font-weight:600;margin-bottom:9px}
+.media{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.photo{width:100%;max-width:340px;border-radius:8px;border:1px solid var(--line);display:block}
+.player{flex:1 1 240px;min-width:210px}
+.player audio{width:100%;max-width:440px}
+.player .tag{font-size:12.5px;color:var(--muted);display:block;margin-top:6px;line-height:1.45}
+.graphic{background:#f7f9fa;border:1px solid #e6eaed;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:14px;overflow:auto}
+.graphic table{border-collapse:collapse;font-size:13.5px}
+.graphic th,.graphic td{border:1px solid #dbe2e7;padding:4px 10px;text-align:left}
+.graphic .gl{font-weight:700;font-size:13px;display:block;margin-bottom:6px;color:#33413a}
+.q{margin:14px 0 0;padding-bottom:14px;border-bottom:1px solid #f0f3f5;scroll-margin-top:96px}
+.q:last-child{border-bottom:none;padding-bottom:0}
+.q .stem{margin-bottom:2px}
+.q .n{font-weight:700;margin-right:5px}
+.opts{list-style:none;display:grid;grid-template-columns:1fr;gap:6px;margin:9px 0 0;padding:0}
+.opts li{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fcfcfd;font-size:15px}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px;margin-top:1px}
+.otext{flex:1 1 auto}
+/* Part 1 / Part 2 默认隐藏选项文本（对齐真考试：只听到，不印出来） */
+.opts.hide-text .otext{display:none}
+.opts.hide-text li.opt{max-width:120px}
+.q.done .opts.hide-text li.opt{max-width:none}
+.q.done .opts.hide-text .otext{display:inline}
+body.all-text .opts.hide-text .otext{display:inline}
+body.all-text .opts.hide-text li.opt{max-width:none}
+details.ans{margin-top:10px;border:1px solid #dfe8e2;background:#f7faf8;border-radius:9px}
+details.ans summary{cursor:pointer;padding:8px 13px;font-weight:600;font-size:13px;color:#0b6b3a}
+details.ans .expl{padding:0 14px 12px;font-size:14px;color:#3d4650;line-height:1.65}
+details.ans .expl .k{font-weight:700;color:var(--green)}
+details.ans .expl .tr{white-space:pre-wrap}
+details.ans .expl .sp{font-weight:700;color:#0b6b3a;margin-right:6px}
+.hint{font-size:12.5px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px;display:inline-block}
+a.card{display:block;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0;text-decoration:none;color:inherit}
+a.card:hover{border-color:#9db3c4;background:#fafcfd}
+a.card .t{font-weight:600}
+a.card .s{color:var(--muted);font-size:13px}
+@media (max-width:560px){.wrap{padding:22px 16px 80px}.photo{max-width:100%}}
+@media print{
+  body{background:#fff}.wrap{box-shadow:none;max-width:none;padding:0 6mm}
+  .toolbar,audio{display:none}
+  h2{page-break-after:avoid}.q,.set{page-break-inside:avoid}
+  details.ans{display:block}details.ans .expl{display:block}
+  .opts.hide-text .otext{display:inline}
+}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+</style></head><body><div class="wrap"><div class="toolbar"><div class="btns"><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-text" type="button">显示选项文本</button><button id="btn-expand" type="button">展开全部原文/解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button><button onclick="window.print()" type="button">打印 / 存 PDF</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>100</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<h1>TOEIC® Listening Practice Test 02</h1>
+<p class="meta">100 题 · Part 1（6）+ Part 2（25）+ Part 3（39）+ Part 4（30）· 约 45 分钟 · 音频为电脑合成（非真人录音）</p>
+<p class="meta">点「▶」听录音 → 选答案 →「确认作答」判对错；Part 1/2 的选项文本默认隐藏（跟真考试一样只靠听），答题后可看到。进度自动存本机。</p>
+<h2>PART 1 — Photographs（1–6）</h2>
+<div class="dirs"><b>Directions:</b> For each question, you will listen to four short statements about a photograph. Select the statement that best describes what is happening in the picture.</div>
+<div class="set"><div class="shd">Question 1</div><div class="media"><img class="photo" src="img/lrp1-m2-1.jpg" alt="Part 1 photograph 1" loading="lazy"><div class="player"><audio controls preload="none" src="audio/m2/p1-1.mp3"></audio><span class="tag">听 4 句陈述，选出最符合照片的一句（只读一遍）</span></div></div><div class="q" id="q1" data-n="1" data-ans="D">
+<div class="stem"><span class="n">1.</span>Choose the statement that best describes the photograph.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">She&#x27;s watering the plants in the window.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">She&#x27;s sweeping the floor of the shop.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">She&#x27;s paying for a purchase at the register.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">She&#x27;s arranging a bouquet of flowers.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / 参考描述</summary><div class="expl"><div class="tr"><b>照片内容：</b>Inside a flower shop, a woman wearing an apron stands at the counter arranging a bouquet of roses and greenery; metal buckets full of cut flowers line the wall behind her.</div><div class="tr"><span class="sp">A:</span>She&#x27;s watering the plants in the window.</div><div class="tr"><span class="sp">B:</span>She&#x27;s sweeping the floor of the shop.</div><div class="tr"><span class="sp">C:</span>She&#x27;s paying for a purchase at the register.</div><div class="tr"><span class="sp">D:</span>She&#x27;s arranging a bouquet of flowers.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The woman is arranging a bouquet at the counter, so (D) is correct. She is not watering plants, paying, or sweeping.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 2</div><div class="media"><img class="photo" src="img/lrp1-m2-2.jpg" alt="Part 1 photograph 2" loading="lazy"><div class="player"><audio controls preload="none" src="audio/m2/p1-2.mp3"></audio><span class="tag">听 4 句陈述，选出最符合照片的一句（只读一遍）</span></div></div><div class="q" id="q2" data-n="2" data-ans="A">
+<div class="stem"><span class="n">2.</span>Choose the statement that best describes the photograph.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">They&#x27;re loading boxes into a van.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">They&#x27;re unloading furniture from a truck.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">They&#x27;re repairing the engine of the vehicle.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">They&#x27;re washing the side of the van.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / 参考描述</summary><div class="expl"><div class="tr"><b>照片内容：</b>Two men in matching uniforms stand at the open rear doors of a delivery van parked at the curb, lifting cardboard boxes from the sidewalk into the vehicle.</div><div class="tr"><span class="sp">A:</span>They&#x27;re loading boxes into a van.</div><div class="tr"><span class="sp">B:</span>They&#x27;re unloading furniture from a truck.</div><div class="tr"><span class="sp">C:</span>They&#x27;re repairing the engine of the vehicle.</div><div class="tr"><span class="sp">D:</span>They&#x27;re washing the side of the van.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The men are lifting boxes into the van, so (A) is correct. They are not unloading furniture, repairing the engine, or washing the van.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 3</div><div class="media"><img class="photo" src="img/lrp1-m2-3.jpg" alt="Part 1 photograph 3" loading="lazy"><div class="player"><audio controls preload="none" src="audio/m2/p1-3.mp3"></audio><span class="tag">听 4 句陈述，选出最符合照片的一句（只读一遍）</span></div></div><div class="q" id="q3" data-n="3" data-ans="C">
+<div class="stem"><span class="n">3.</span>Choose the statement that best describes the photograph.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The chef is washing dishes in the sink.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The chef is chopping vegetables on a board.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The chef is arranging food on a plate.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The chef is reading from a recipe book.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / 参考描述</summary><div class="expl"><div class="tr"><b>照片内容：</b>A chef in a white uniform carefully places slices of vegetables onto a plate at a stainless-steel kitchen counter, while pots steam on the stove behind him.</div><div class="tr"><span class="sp">A:</span>The chef is washing dishes in the sink.</div><div class="tr"><span class="sp">B:</span>The chef is chopping vegetables on a board.</div><div class="tr"><span class="sp">C:</span>The chef is arranging food on a plate.</div><div class="tr"><span class="sp">D:</span>The chef is reading from a recipe book.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The chef is plating the food, so (C) is correct. He is not washing dishes, chopping, or reading a recipe.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 4</div><div class="media"><img class="photo" src="img/lrp1-m2-4.jpg" alt="Part 1 photograph 4" loading="lazy"><div class="player"><audio controls preload="none" src="audio/m2/p1-4.mp3"></audio><span class="tag">听 4 句陈述，选出最符合照片的一句（只读一遍）</span></div></div><div class="q" id="q4" data-n="4" data-ans="B">
+<div class="stem"><span class="n">4.</span>Choose the statement that best describes the photograph.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">He&#x27;s reading a book at a desk.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">He&#x27;s returning a book to the shelf.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">He&#x27;s carrying a stack of chairs.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">He&#x27;s switching off the lights.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / 参考描述</summary><div class="expl"><div class="tr"><b>照片内容：</b>In a library, a young man stands beside a tall bookshelf, sliding a book into an empty gap on the shelf while a small cart of books rests next to him.</div><div class="tr"><span class="sp">A:</span>He&#x27;s reading a book at a desk.</div><div class="tr"><span class="sp">B:</span>He&#x27;s returning a book to the shelf.</div><div class="tr"><span class="sp">C:</span>He&#x27;s carrying a stack of chairs.</div><div class="tr"><span class="sp">D:</span>He&#x27;s switching off the lights.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> He is placing a book back on the shelf, so (B) is correct. He is not reading, carrying chairs, or turning off lights.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 5</div><div class="media"><img class="photo" src="img/lrp1-m2-5.jpg" alt="Part 1 photograph 5" loading="lazy"><div class="player"><audio controls preload="none" src="audio/m2/p1-5.mp3"></audio><span class="tag">听 4 句陈述，选出最符合照片的一句（只读一遍）</span></div></div><div class="q" id="q5" data-n="5" data-ans="A">
+<div class="stem"><span class="n">5.</span>Choose the statement that best describes the photograph.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">She&#x27;s giving a presentation to an audience.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">She&#x27;s handing out documents to the crowd.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">She&#x27;s arranging rows of empty chairs.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">She&#x27;s watching a film in a theater.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / 参考描述</summary><div class="expl"><div class="tr"><b>照片内容：</b>A woman in a business suit stands at a podium addressing a large audience seated in rows; behind her, a projection screen displays a bar chart.</div><div class="tr"><span class="sp">A:</span>She&#x27;s giving a presentation to an audience.</div><div class="tr"><span class="sp">B:</span>She&#x27;s handing out documents to the crowd.</div><div class="tr"><span class="sp">C:</span>She&#x27;s arranging rows of empty chairs.</div><div class="tr"><span class="sp">D:</span>She&#x27;s watching a film in a theater.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The woman is presenting to a seated audience, so (A) is correct. She is not distributing documents, arranging chairs, or watching a film.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 6</div><div class="media"><img class="photo" src="img/lrp1-m2-6.jpg" alt="Part 1 photograph 6" loading="lazy"><div class="player"><audio controls preload="none" src="audio/m2/p1-6.mp3"></audio><span class="tag">听 4 句陈述，选出最符合照片的一句（只读一遍）</span></div></div><div class="q" id="q6" data-n="6" data-ans="D">
+<div class="stem"><span class="n">6.</span>Choose the statement that best describes the photograph.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">He&#x27;s driving the car out of the garage.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">He&#x27;s filling the tank with fuel.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">He&#x27;s inflating one of the tires.</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">He&#x27;s inspecting the engine of the car.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / 参考描述</summary><div class="expl"><div class="tr"><b>照片内容：</b>A mechanic in overalls leans over the open hood of a car in a garage, holding a wrench as he inspects the engine.</div><div class="tr"><span class="sp">A:</span>He&#x27;s driving the car out of the garage.</div><div class="tr"><span class="sp">B:</span>He&#x27;s filling the tank with fuel.</div><div class="tr"><span class="sp">C:</span>He&#x27;s inflating one of the tires.</div><div class="tr"><span class="sp">D:</span>He&#x27;s inspecting the engine of the car.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The mechanic is examining the engine with a wrench, so (D) is correct. He is not driving, refueling, or inflating a tire.</div></details>
+</div>
+</div>
+<h2>PART 2 — Question-Response（7–31）</h2>
+<div class="dirs"><b>Directions:</b> You will hear a question or statement followed by three responses. Select the best response to the question or statement.</div>
+<div class="set"><div class="shd">Question 7</div><div class="player"><audio controls preload="none" src="audio/m2/p2-1.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q7" data-n="7" data-ans="C">
+<div class="stem"><span class="n">7.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Next Tuesday afternoon.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Yes, they were helpful.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">In the cabinet by the door.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Where are the training manuals kept?</div><div class="tr">Next Tuesday afternoon.</div><div class="tr">Yes, they were helpful.</div><div class="tr">In the cabinet by the door.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> &#x27;Where&#x27; asks for a place, so &#x27;In the cabinet by the door&#x27; (C) is correct. (A) gives a time and (B) answers a yes/no question.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 8</div><div class="player"><audio controls preload="none" src="audio/m2/p2-2.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q8" data-n="8" data-ans="B">
+<div class="stem"><span class="n">8.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">At the print shop downtown.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">By the end of next week.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">About five hundred copies.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">When will the new catalog be printed?</div><div class="tr">At the print shop downtown.</div><div class="tr">By the end of next week.</div><div class="tr">About five hundred copies.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;When&#x27; calls for a time, so &#x27;By the end of next week&#x27; (B) is correct. (A) gives a place and (C) gives a quantity.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 9</div><div class="player"><audio controls preload="none" src="audio/m2/p2-3.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q9" data-n="9" data-ans="A">
+<div class="stem"><span class="n">9.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Ms. Delgado in Human Resources.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">On the second floor.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It starts in June.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Who&#x27;s in charge of the summer internship program?</div><div class="tr">Ms. Delgado in Human Resources.</div><div class="tr">On the second floor.</div><div class="tr">It starts in June.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;Who&#x27; asks for a person, so &#x27;Ms. Delgado in Human Resources&#x27; (A) is correct. (B) answers &#x27;where&#x27; and (C) answers &#x27;when&#x27;.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 10</div><div class="player"><audio controls preload="none" src="audio/m2/p2-4.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q10" data-n="10" data-ans="C">
+<div class="stem"><span class="n">10.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Until about two o&#x27;clock.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">On the ground floor.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">They&#x27;re replacing the ovens.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Why is the cafeteria closed today?</div><div class="tr">Until about two o&#x27;clock.</div><div class="tr">On the ground floor.</div><div class="tr">They&#x27;re replacing the ovens.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> &#x27;Why&#x27; asks for a reason, so &#x27;They&#x27;re replacing the ovens&#x27; (C) is correct. (A) gives a time and (B) gives a location.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 11</div><div class="player"><audio controls preload="none" src="audio/m2/p2-5.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q11" data-n="11" data-ans="B">
+<div class="stem"><span class="n">11.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It&#x27;s a very strong password.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Call the help desk at extension 300.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">About twice a month.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">How can I reset my email password?</div><div class="tr">It&#x27;s a very strong password.</div><div class="tr">Call the help desk at extension 300.</div><div class="tr">About twice a month.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;How&#x27; asks for a method, so &#x27;Call the help desk at extension 300&#x27; (B) is correct. (A) describes the password and (C) gives a frequency.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 12</div><div class="player"><audio controls preload="none" src="audio/m2/p2-6.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q12" data-n="12" data-ans="A">
+<div class="stem"><span class="n">12.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Yes, please, for eight o&#x27;clock.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It was a long flight.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">At the main terminal.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Would you like me to book a taxi to the airport?</div><div class="tr">Yes, please, for eight o&#x27;clock.</div><div class="tr">It was a long flight.</div><div class="tr">At the main terminal.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The offer is accepted with &#x27;Yes, please, for eight o&#x27;clock&#x27; (A). (B) refers to a past flight and (C) gives a place.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 13</div><div class="player"><audio controls preload="none" src="audio/m2/p2-7.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q13" data-n="13" data-ans="B">
+<div class="stem"><span class="n">13.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A free sample.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Yes, they went out yesterday.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">In the storage room.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">You&#x27;ve sent the samples to the client, haven&#x27;t you?</div><div class="tr">A free sample.</div><div class="tr">Yes, they went out yesterday.</div><div class="tr">In the storage room.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The tag question checks whether the samples were sent, so &#x27;Yes, they went out yesterday&#x27; (B) is correct. (A) and (C) don&#x27;t address the shipment.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 14</div><div class="player"><audio controls preload="none" src="audio/m2/p2-8.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q14" data-n="14" data-ans="A">
+<div class="stem"><span class="n">14.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Sure, just give me a second.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It&#x27;s a comfortable chair.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">In the main hall.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Could you help me move these chairs into the hall?</div><div class="tr">Sure, just give me a second.</div><div class="tr">It&#x27;s a comfortable chair.</div><div class="tr">In the main hall.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The request is met with agreement, so &#x27;Sure, just give me a second&#x27; (A) is correct. (B) and (C) reuse words without helping.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 15</div><div class="player"><audio controls preload="none" src="audio/m2/p2-9.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q15" data-n="15" data-ans="B">
+<div class="stem"><span class="n">15.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A very detailed review.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Video is easier for everyone.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">In the boardroom.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Should we meet in person or hold the review over video?</div><div class="tr">A very detailed review.</div><div class="tr">Video is easier for everyone.</div><div class="tr">In the boardroom.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The choice question is answered by picking video, so &#x27;Video is easier for everyone&#x27; (B) is correct. (A) echoes &#x27;review&#x27; and (C) gives a place.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 16</div><div class="player"><audio controls preload="none" src="audio/m2/p2-10.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q16" data-n="16" data-ans="B">
+<div class="stem"><span class="n">16.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">In the break room.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">At six thirty sharp.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It&#x27;s a twelve-hour shift.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">What time does the morning shift start?</div><div class="tr">In the break room.</div><div class="tr">At six thirty sharp.</div><div class="tr">It&#x27;s a twelve-hour shift.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;What time&#x27; asks for a start time, so &#x27;At six thirty sharp&#x27; (B) is correct. (A) gives a place and (C) gives a duration.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 17</div><div class="player"><audio controls preload="none" src="audio/m2/p2-11.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q17" data-n="17" data-ans="B">
+<div class="stem"><span class="n">17.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It ships out tonight.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Around thirty-five dollars.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To the branch office.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">How much does overnight shipping cost?</div><div class="tr">It ships out tonight.</div><div class="tr">Around thirty-five dollars.</div><div class="tr">To the branch office.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> &#x27;How much&#x27; asks for a price, so &#x27;Around thirty-five dollars&#x27; (B) is correct. (A) gives a time and (C) gives a destination.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 18</div><div class="player"><audio controls preload="none" src="audio/m2/p2-12.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q18" data-n="18" data-ans="C">
+<div class="stem"><span class="n">18.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A very thorough audit.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">In the finance office.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Actually, it&#x27;s been moved to next month.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Isn&#x27;t the annual audit scheduled for this month?</div><div class="tr">A very thorough audit.</div><div class="tr">In the finance office.</div><div class="tr">Actually, it&#x27;s been moved to next month.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The negative question checks the timing, so &#x27;Actually, it&#x27;s been moved to next month&#x27; (C) is correct. (A) and (B) don&#x27;t address the date.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 19</div><div class="player"><audio controls preload="none" src="audio/m2/p2-13.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q19" data-n="19" data-ans="A">
+<div class="stem"><span class="n">19.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Yes, but there&#x27;s still space on level three.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It&#x27;s a large garage.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">On the corner of Fifth Street.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Do you know whether the parking garage is full?</div><div class="tr">Yes, but there&#x27;s still space on level three.</div><div class="tr">It&#x27;s a large garage.</div><div class="tr">On the corner of Fifth Street.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The embedded yes/no question is answered by &#x27;Yes, but there&#x27;s still space on level three&#x27; (A). (B) and (C) describe the garage but not its status.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 20</div><div class="player"><audio controls preload="none" src="audio/m2/p2-14.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q20" data-n="20" data-ans="B">
+<div class="stem"><span class="n">20.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">She presented very well.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Good idea, I&#x27;ll open the file now.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The lunch menu looks great.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Let&#x27;s go over the presentation slides before lunch.</div><div class="tr">She presented very well.</div><div class="tr">Good idea, I&#x27;ll open the file now.</div><div class="tr">The lunch menu looks great.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The suggestion is accepted with &#x27;Good idea, I&#x27;ll open the file now&#x27; (B). (A) and (C) reuse words without responding.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 21</div><div class="player"><audio controls preload="none" src="audio/m2/p2-15.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q21" data-n="21" data-ans="C">
+<div class="stem"><span class="n">21.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">We&#x27;re low on toner.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Sometime last month.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The one near the copy room.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Which printer should I use for the color brochures?</div><div class="tr">We&#x27;re low on toner.</div><div class="tr">Sometime last month.</div><div class="tr">The one near the copy room.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> &#x27;Which printer&#x27; asks you to identify one, so &#x27;The one near the copy room&#x27; (C) is correct. (A) is off-topic and (B) gives a time.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 22</div><div class="player"><audio controls preload="none" src="audio/m2/p2-16.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q22" data-n="22" data-ans="B">
+<div class="stem"><span class="n">22.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A very bright projector.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Try checking the power cable.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">We&#x27;re out of markers.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">I can&#x27;t get the projector to turn on.</div><div class="tr">A very bright projector.</div><div class="tr">Try checking the power cable.</div><div class="tr">We&#x27;re out of markers.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The problem invites a helpful suggestion, so &#x27;Try checking the power cable&#x27; (B) is correct. (A) and (C) don&#x27;t solve the problem.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 23</div><div class="player"><audio controls preload="none" src="audio/m2/p2-17.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q23" data-n="23" data-ans="A">
+<div class="stem"><span class="n">23.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">No, I&#x27;m still waiting to hear.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A lovely venue.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It seats two hundred people.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Has the venue confirmed our reservation yet?</div><div class="tr">No, I&#x27;m still waiting to hear.</div><div class="tr">A lovely venue.</div><div class="tr">It seats two hundred people.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The yes/no question about the confirmation is answered by &#x27;No, I&#x27;m still waiting to hear&#x27; (A). (B) and (C) describe the venue instead.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 24</div><div class="player"><audio controls preload="none" src="audio/m2/p2-18.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q24" data-n="24" data-ans="C">
+<div class="stem"><span class="n">24.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">They&#x27;re emptied on Fridays.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">About a dozen bottles.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Down the hall by the exit.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Where should I put the recycling bins?</div><div class="tr">They&#x27;re emptied on Fridays.</div><div class="tr">About a dozen bottles.</div><div class="tr">Down the hall by the exit.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> &#x27;Where&#x27; asks for a place, so &#x27;Down the hall by the exit&#x27; (C) is correct. (A) gives a schedule and (B) gives a quantity.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 25</div><div class="player"><audio controls preload="none" src="audio/m2/p2-19.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q25" data-n="25" data-ans="A">
+<div class="stem"><span class="n">25.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Yes, I&#x27;ll ask maintenance to adjust it.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">In about five minutes.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A very pleasant lobby.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">The air conditioning in the lobby is too cold, isn&#x27;t it?</div><div class="tr">Yes, I&#x27;ll ask maintenance to adjust it.</div><div class="tr">In about five minutes.</div><div class="tr">A very pleasant lobby.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The tag question seeks agreement, so &#x27;Yes, I&#x27;ll ask maintenance to adjust it&#x27; (A) is correct. (B) gives a time and (C) is unrelated.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 26</div><div class="player"><audio controls preload="none" src="audio/m2/p2-20.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q26" data-n="26" data-ans="B">
+<div class="stem"><span class="n">26.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It was very useful.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">I&#x27;ll catch the express.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">At platform six.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Are you taking the early train or the express to the conference?</div><div class="tr">It was very useful.</div><div class="tr">I&#x27;ll catch the express.</div><div class="tr">At platform six.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The choice question is answered by &#x27;I&#x27;ll catch the express&#x27; (B). (A) refers to a past event and (C) gives a place.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 27</div><div class="player"><audio controls preload="none" src="audio/m2/p2-21.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q27" data-n="27" data-ans="C">
+<div class="stem"><span class="n">27.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">He met the deadline.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A tight schedule.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">That would give us more time.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Why don&#x27;t we push the deadline to Friday?</div><div class="tr">He met the deadline.</div><div class="tr">A tight schedule.</div><div class="tr">That would give us more time.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> &#x27;Why don&#x27;t we&#x27; is a suggestion, so &#x27;That would give us more time&#x27; (C) is correct. (A) repeats &#x27;deadline&#x27; and (B) is a fragment.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 28</div><div class="player"><audio controls preload="none" src="audio/m2/p2-22.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q28" data-n="28" data-ans="A">
+<div class="stem"><span class="n">28.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It went very smoothly.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">By the sales team.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Next month, I think.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">How was the product demonstration this morning?</div><div class="tr">It went very smoothly.</div><div class="tr">By the sales team.</div><div class="tr">Next month, I think.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;How was&#x27; asks for an evaluation, so &#x27;It went very smoothly&#x27; (A) is correct. (B) answers &#x27;who&#x27; and (C) gives a future time.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 29</div><div class="player"><audio controls preload="none" src="audio/m2/p2-23.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q29" data-n="29" data-ans="C">
+<div class="stem"><span class="n">29.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The trip was wonderful.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">In the spreadsheet.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">I believe it&#x27;s still pending.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Didn&#x27;t we already approve the travel budget?</div><div class="tr">The trip was wonderful.</div><div class="tr">In the spreadsheet.</div><div class="tr">I believe it&#x27;s still pending.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The negative question is answered by &#x27;I believe it&#x27;s still pending&#x27; (C). (A) refers to a trip and (B) gives a location.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 30</div><div class="player"><audio controls preload="none" src="audio/m2/p2-24.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q30" data-n="30" data-ans="A">
+<div class="stem"><span class="n">30.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A freelance artist did.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It looks very modern.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Sometime in the spring.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">Who designed the new company logo?</div><div class="tr">A freelance artist did.</div><div class="tr">It looks very modern.</div><div class="tr">Sometime in the spring.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> &#x27;Who&#x27; asks for a person, so &#x27;A freelance artist did&#x27; (A) is correct. (B) evaluates the logo and (C) gives a time.</div></details>
+</div>
+</div>
+<div class="set"><div class="shd">Question 31</div><div class="player"><audio controls preload="none" src="audio/m2/p2-25.mp3"></audio><span class="tag">听一句问话/陈述 + 三个回应，选出最恰当的回答</span></div><div class="q" id="q31" data-n="31" data-ans="C">
+<div class="stem"><span class="n">31.</span>Select the best response.</div>
+
+<ol class="opts hide-text"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It&#x27;s on sale this week.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">She walked in late.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">That would be a big help, thanks.</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript（问句 + 三个回应）</summary><div class="expl"><div class="tr">I&#x27;d be glad to walk you through the new software.</div><div class="tr">It&#x27;s on sale this week.</div><div class="tr">She walked in late.</div><div class="tr">That would be a big help, thanks.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The friendly offer is accepted with &#x27;That would be a big help, thanks&#x27; (C). (A) is unrelated and (B) reuses &#x27;walk&#x27; without answering.</div></details>
+</div>
+</div>
+<h2>PART 3 — Conversations（32–70）</h2>
+<div class="dirs"><b>Directions:</b> You will hear several conversations between two or more people. You will be asked to answer three questions about what the speakers say. Select the best response.</div>
+<div class="set"><div class="shd">Questions 32–34</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-1.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+<aside class="graphic"><span class="gl">Courier rate sheet</span><table><tr><th>Service</th><th>Delivery time</th><th>Cost</th></tr><tr><td>Standard</td><td>5 business days</td><td>$10</td></tr><tr><td>Two-Day</td><td>2 business days</td><td>$20</td></tr><tr><td>Overnight</td><td>Next business day</td><td>$35</td></tr></table></aside>
+<div class="q" id="q32" data-n="32" data-ans="A">
+<div class="stem"><span class="n">32.</span>What does the man need to send?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A signed contract</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A product sample</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">An invoice</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A laptop</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">M:</span>Dana, this signed contract has to reach our Boston office by Wednesday. It&#x27;s Monday now — what are our shipping options?</div><div class="tr"><span class="sp">W:</span>I&#x27;ve got the courier&#x27;s rate sheet right here. Standard takes five business days, so that&#x27;s far too slow. Overnight would work, but it&#x27;s the most expensive option.</div><div class="tr"><span class="sp">M:</span>Wednesday is two days away. Is there something in between that still gets it there on time?</div><div class="tr"><span class="sp">W:</span>There is — the two-day service would have it there right on schedule, and it&#x27;s much cheaper than overnight.</div><div class="tr"><span class="sp">M:</span>Perfect. Let&#x27;s go with that one, then, and I&#x27;ll hand you the envelope in a minute.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> He says &#x27;this signed contract has to reach our Boston office by Wednesday.&#x27;</div></details>
+</div>
+
+<div class="q" id="q33" data-n="33" data-ans="B">
+<div class="stem"><span class="n">33.</span>Why do the speakers reject standard shipping?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It is too expensive</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It takes too long to arrive</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It requires a signature</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It is not available on Mondays</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The woman says standard &#x27;takes five business days, so that&#x27;s far too slow.&#x27;</div></details>
+</div>
+
+<div class="q" id="q34" data-n="34" data-ans="C">
+<div class="stem"><span class="n">34.</span>Look at the graphic. Which service will they most likely choose?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Standard</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Overnight</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Two-Day</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">None of them</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> They need it in two days but want to avoid the priciest option, so the Two-Day service ($20) fits best.</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 35–37</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-2.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q35" data-n="35" data-ans="D">
+<div class="stem"><span class="n">35.</span>Why is the woman calling?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To cancel her subscription</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To ask for a receipt</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To upgrade her plan</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To report being charged twice</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">W:</span>Hello, I&#x27;m calling about my account. I was charged twice this month for my design software subscription — there are two identical payments of forty-nine dollars on my statement.</div><div class="tr"><span class="sp">M:</span>I&#x27;m sorry about that. Let me pull up your account. Yes, I can see the duplicate charge. It looks like our system processed the renewal twice by mistake.</div><div class="tr"><span class="sp">W:</span>I&#x27;d like the extra charge removed. I only ever signed up for one plan.</div><div class="tr"><span class="sp">M:</span>Of course. I&#x27;ll refund the duplicate payment today, and it should appear on your statement within three to five business days.</div><div class="tr"><span class="sp">W:</span>That&#x27;s fine, as long as it doesn&#x27;t happen again next month.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> She says she &#x27;was charged twice this month&#x27; with two identical payments.</div></details>
+</div>
+
+<div class="q" id="q36" data-n="36" data-ans="C">
+<div class="stem"><span class="n">36.</span>What does the man say caused the problem?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The woman signed up twice</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The price recently increased</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The system processed the renewal twice</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A payment was declined</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> He explains that &#x27;our system processed the renewal twice by mistake.&#x27;</div></details>
+</div>
+
+<div class="q" id="q37" data-n="37" data-ans="C">
+<div class="stem"><span class="n">37.</span>What does the woman imply when she says, &quot;as long as it doesn&#x27;t happen again next month&quot;?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">She wants to cancel immediately</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">She thinks the refund is too slow</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">She accepts the refund but is concerned about future billing</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">She needs the money right away</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> She accepts his solution while signaling worry that the double charge could recur.</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 38–40</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-3.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q38" data-n="38" data-ans="D">
+<div class="stem"><span class="n">38.</span>What does the man want to change about his booking?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The type of car</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The rental price</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The drop-off location</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The pickup day and time</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">M:</span>Good morning. I have a car booked for pickup this Friday, but my meeting was moved up, so I&#x27;d like to collect it Thursday evening instead, if that&#x27;s possible.</div><div class="tr"><span class="sp">W:</span>Let me check availability. Yes, we have a vehicle ready from six o&#x27;clock on Thursday, and the daily rate stays the same.</div><div class="tr"><span class="sp">M:</span>Great. One more thing — could I get a car with built-in navigation? I&#x27;ll be driving to several towns I don&#x27;t know well.</div><div class="tr"><span class="sp">W:</span>Of course. I&#x27;ll reserve one of our models with a satellite navigation system and note the change on your booking.</div><div class="tr"><span class="sp">M:</span>Perfect. I&#x27;ll be there around half past six on Thursday, then.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> He asks to collect the car Thursday evening instead of Friday.</div></details>
+</div>
+
+<div class="q" id="q39" data-n="39" data-ans="B">
+<div class="stem"><span class="n">39.</span>Why does the man request navigation?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">He dislikes using his phone</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">He will drive to unfamiliar towns</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The roads are often closed</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">He gets carsick</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> He says he&#x27;ll be &#x27;driving to several towns I don&#x27;t know well.&#x27;</div></details>
+</div>
+
+<div class="q" id="q40" data-n="40" data-ans="D">
+<div class="stem"><span class="n">40.</span>What does the woman say she will do?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Lower the daily rate</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Add a second driver</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Cancel the Friday booking fee</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Reserve a car with navigation</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> She says she&#x27;ll &#x27;reserve one of our models with a satellite navigation system.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 41–43</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-4.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q41" data-n="41" data-ans="A">
+<div class="stem"><span class="n">41.</span>What are the speakers mainly planning?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A company anniversary party</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A product launch</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A staff training day</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A client dinner</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">M:</span>Thanks for meeting. The company&#x27;s twentieth anniversary is two months away, and I want us to plan something memorable. Fiona, have you looked into venues?</div><div class="tr"><span class="sp">W:</span>I have. The riverside hall is available and holds two hundred, but it&#x27;s at the very top of our budget. The community center is cheaper, but it only fits a hundred and twenty.</div><div class="tr"><span class="sp">M:</span>We&#x27;re expecting about a hundred and eighty guests, so the community center would be too small. Declan, what about catering?</div><div class="tr"><span class="sp">M2:</span>I&#x27;ve got two quotes. Honestly, if we book the bigger venue, we&#x27;ll have to keep the catering simple to stay on budget. I&#x27;d rather cut back on the food than cram everyone into a small room.</div><div class="tr"><span class="sp">M:</span>Agreed. Let&#x27;s book the riverside hall and go with the simpler menu.</div><div class="tr"><span class="sp">W:</span>I&#x27;ll confirm the hall this afternoon before someone else takes the date.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> They are planning something memorable for the company&#x27;s twentieth anniversary.</div></details>
+</div>
+
+<div class="q" id="q42" data-n="42" data-ans="B">
+<div class="stem"><span class="n">42.</span>Why would the community center not work?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It is too expensive</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It is too small for the expected guests</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It is too far away</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It is already booked</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> It fits only 120, but about 180 guests are expected.</div></details>
+</div>
+
+<div class="q" id="q43" data-n="43" data-ans="A">
+<div class="stem"><span class="n">43.</span>What does Declan mean when he says he&#x27;d &quot;rather cut back on the food than cram everyone into a small room&quot;?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">He prefers the larger venue even with a simpler menu</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">He wants to cancel the event</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">He thinks the food is more important than the space</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">He would like a smaller guest list</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> He favors booking the bigger hall and economizing on catering to fit everyone comfortably.</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 44–46</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-5.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q44" data-n="44" data-ans="D">
+<div class="stem"><span class="n">44.</span>What problem are the speakers discussing?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A broken coffee machine</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A blocked drain in the restroom</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A power outage</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A leak under the kitchen sink</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">W:</span>Thanks for coming out so fast. There&#x27;s a leak under the sink in the second-floor kitchen — water&#x27;s been pooling on the floor since this morning.</div><div class="tr"><span class="sp">M:</span>Let me take a look. Ah, I see it — the connector under the basin has cracked. I&#x27;ll need to shut off the water to this floor while I replace it.</div><div class="tr"><span class="sp">W:</span>How long will that take? A lot of people rely on that kitchen for their coffee.</div><div class="tr"><span class="sp">M:</span>About an hour. I&#x27;ve got the part on the van, so I can do it right now. I&#x27;d just ask everyone to keep the cabinet clear until it dries out.</div><div class="tr"><span class="sp">W:</span>No problem. I&#x27;ll put up a sign and let the floor know the water will be off for an hour.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;There&#x27;s a leak under the sink in the second-floor kitchen.&#x27;</div></details>
+</div>
+
+<div class="q" id="q45" data-n="45" data-ans="A">
+<div class="stem"><span class="n">45.</span>What does the man say caused the problem?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A cracked connector under the basin</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A loose faucet handle</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A clogged pipe</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A worn-out seal on the dishwasher</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> He says &#x27;the connector under the basin has cracked.&#x27;</div></details>
+</div>
+
+<div class="q" id="q46" data-n="46" data-ans="C">
+<div class="stem"><span class="n">46.</span>What will the woman do?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Turn off the water herself</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Order a replacement part</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Put up a sign and notify the floor</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Move the coffee machine</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> She says &#x27;I&#x27;ll put up a sign and let the floor know the water will be off.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 47–49</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-6.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q47" data-n="47" data-ans="D">
+<div class="stem"><span class="n">47.</span>What does the woman offer the man?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A pay raise</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Time off on Friday</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A new computer</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A different desk</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">W:</span>Sam, I wanted to ask — would you be open to moving to the corner desk by the window? The one you&#x27;re at now is right next to the printers.</div><div class="tr"><span class="sp">M:</span>Honestly, that would be a relief. The printer noise makes it hard to concentrate when I&#x27;m on the phone with clients.</div><div class="tr"><span class="sp">W:</span>That&#x27;s exactly what I thought. The corner desk is much quieter, and it gets more natural light too. We could move you this Friday after work.</div><div class="tr"><span class="sp">M:</span>Friday works for me. I don&#x27;t have much to pack — mostly my monitor and a few files.</div><div class="tr"><span class="sp">W:</span>Great. I&#x27;ll let facilities know so they can help you carry the monitor over.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> She asks if he would move to &#x27;the corner desk by the window.&#x27;</div></details>
+</div>
+
+<div class="q" id="q48" data-n="48" data-ans="B">
+<div class="stem"><span class="n">48.</span>Why does the man want to move?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">His chair is uncomfortable</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The printer noise makes it hard to concentrate</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">He wants to sit near his team</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">His current desk is too small</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> He says &#x27;the printer noise makes it hard to concentrate&#x27; on client calls.</div></details>
+</div>
+
+<div class="q" id="q49" data-n="49" data-ans="A">
+<div class="stem"><span class="n">49.</span>What is suggested about the corner desk?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It is quieter and brighter</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It is closer to the printers</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It has a larger monitor</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It is only temporary</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The woman notes it is &#x27;much quieter&#x27; and &#x27;gets more natural light too.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 50–52</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-7.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q50" data-n="50" data-ans="D">
+<div class="stem"><span class="n">50.</span>Why is the man at the shop?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To buy a new laptop</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To ask about warranties</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To return a purchase</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To pick up a repaired laptop</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">M:</span>Hi, I dropped off my laptop last week — the screen had gone completely black. I&#x27;m here to check on it. The name&#x27;s Brennan.</div><div class="tr"><span class="sp">W:</span>Let me find your ticket. Here we are. Good news — it turned out to be the display cable, not the screen itself, so the repair was far cheaper than we first quoted.</div><div class="tr"><span class="sp">M:</span>Oh, that&#x27;s a relief. I was worried I&#x27;d need a whole new screen.</div><div class="tr"><span class="sp">W:</span>Not at all. It&#x27;s ready to go, and we tested it this morning. The total comes to eighty dollars instead of the two hundred we estimated.</div><div class="tr"><span class="sp">M:</span>Brilliant. I&#x27;ll take it now — thank you so much.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> He came &#x27;to check on&#x27; the laptop he dropped off for repair.</div></details>
+</div>
+
+<div class="q" id="q51" data-n="51" data-ans="C">
+<div class="stem"><span class="n">51.</span>What was actually wrong with the laptop?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The screen was broken</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The battery had failed</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The display cable was faulty</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">The keyboard was damaged</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The technician says &#x27;it turned out to be the display cable, not the screen itself.&#x27;</div></details>
+</div>
+
+<div class="q" id="q52" data-n="52" data-ans="A">
+<div class="stem"><span class="n">52.</span>What does the woman say about the cost?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It is lower than the original estimate</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It is higher than expected</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It is covered by warranty</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It has not been calculated yet</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The total is &#x27;eighty dollars instead of the two hundred we estimated.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 53–55</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-8.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q53" data-n="53" data-ans="B">
+<div class="stem"><span class="n">53.</span>Who most likely is the woman?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A delivery driver</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A storage rental agent</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A product supplier</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A warehouse packer</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">W:</span>So this is the storage unit I mentioned — about fifteen hundred square feet, ground floor, with a loading door wide enough for a delivery truck.</div><div class="tr"><span class="sp">M:</span>That&#x27;s a good size. We&#x27;ve been running out of room at our current place — stock is stacked in the hallways at this point.</div><div class="tr"><span class="sp">W:</span>A lot of growing businesses have that exact problem. This unit is climate-controlled, too, which matters if you store anything sensitive to heat.</div><div class="tr"><span class="sp">M:</span>We do, actually — some of our products can&#x27;t sit in a hot warehouse all summer. And that wide loading door would make our deliveries much easier.</div><div class="tr"><span class="sp">W:</span>Would you like to take some measurements before you decide?</div><div class="tr"><span class="sp">M:</span>Yes. Let me bring my operations manager by tomorrow to measure up properly.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> She is showing a storage unit and discussing its features to a prospective renter.</div></details>
+</div>
+
+<div class="q" id="q54" data-n="54" data-ans="C">
+<div class="stem"><span class="n">54.</span>Why does the man&#x27;s business need more space?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It is relocating downtown</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Its current unit was damaged</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It is growing and running out of room</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Its rent has increased</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> He says they&#x27;ve &#x27;been running out of room&#x27; with stock &#x27;stacked in the hallways.&#x27;</div></details>
+</div>
+
+<div class="q" id="q55" data-n="55" data-ans="C">
+<div class="stem"><span class="n">55.</span>What will the man most likely do next?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Sign a lease today</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Look at a different unit</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Bring his operations manager to measure the unit</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Cancel the appointment</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> He plans to &#x27;bring my operations manager by tomorrow to measure up.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 56–58</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-9.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q56" data-n="56" data-ans="A">
+<div class="stem"><span class="n">56.</span>What are the speakers planning?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A company newsletter</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A press conference</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A training manual</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A product catalog</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">W:</span>Right, the spring newsletter goes out in three weeks, so I wanted the three of us to nail down the content today. Ravi, how are the articles coming along?</div><div class="tr"><span class="sp">M:</span>The main feature&#x27;s finished, and I&#x27;ve got two shorter pieces drafted. I just need the interview with our new director, which I&#x27;m doing on Thursday.</div><div class="tr"><span class="sp">W2:</span>Once the text is final, I&#x27;ll need at least four days to lay everything out and add the graphics. So Thursday is cutting it a bit close for me.</div><div class="tr"><span class="sp">W:</span>Understood. Ravi, could you write up the interview by Friday morning so Beatrice has the full week?</div><div class="tr"><span class="sp">M:</span>I can turn it around Friday morning, no problem.</div><div class="tr"><span class="sp">W2:</span>That works perfectly. A full week is plenty of time for the layout.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> They are nailing down the content for &#x27;the spring newsletter.&#x27;</div></details>
+</div>
+
+<div class="q" id="q57" data-n="57" data-ans="B">
+<div class="stem"><span class="n">57.</span>What does Ravi still need to do?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Design the cover</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Interview the new director</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Print the copies</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Choose the photographs</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> He says he &#x27;just need[s] the interview with our new director.&#x27;</div></details>
+</div>
+
+<div class="q" id="q58" data-n="58" data-ans="C">
+<div class="stem"><span class="n">58.</span>Why is the designer concerned about Thursday?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">She will be on vacation</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The printer is unavailable</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">She needs several days to lay out the newsletter after the text is final</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">She has another deadline that day</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> She says she needs &#x27;at least four days&#x27; once the text is final, so a Thursday interview is tight.</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 59–61</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-10.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q59" data-n="59" data-ans="D">
+<div class="stem"><span class="n">59.</span>What problem is the man experiencing?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">His laptop will not start</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">His screen keeps freezing</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">His email is not loading</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">His Wi-Fi keeps disconnecting in a conference room</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">M:</span>Hi, my laptop keeps dropping off the Wi-Fi in the east conference room. It&#x27;s fine at my desk, but in there it disconnects every few minutes.</div><div class="tr"><span class="sp">W:</span>That room&#x27;s been a known dead spot. We actually installed a new wireless access point in there yesterday, but your laptop may still be connecting to the old, weaker signal.</div><div class="tr"><span class="sp">M:</span>That would explain it. I&#x27;ve got a video call scheduled in that room at three.</div><div class="tr"><span class="sp">W:</span>Let me fix it now. If you forget the old network on your laptop and reconnect, it&#x27;ll latch onto the stronger access point. It takes about a minute.</div><div class="tr"><span class="sp">M:</span>Great, I&#x27;ll do that before my call starts.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> His laptop &#x27;disconnects every few minutes&#x27; in the east conference room.</div></details>
+</div>
+
+<div class="q" id="q60" data-n="60" data-ans="B">
+<div class="stem"><span class="n">60.</span>What does the woman say is causing the problem?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A virus on his laptop</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">His laptop connecting to the old, weaker signal</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A broken network cable</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">An expired account</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> She explains the laptop &#x27;may still be connecting to the old, weaker signal.&#x27;</div></details>
+</div>
+
+<div class="q" id="q61" data-n="61" data-ans="C">
+<div class="stem"><span class="n">61.</span>What does the woman tell the man to do?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Restart his laptop</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Move to another room</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Forget the old network and reconnect</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Buy a new laptop</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> She says to &#x27;forget the old network on your laptop and reconnect.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 62–64</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-11.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+<aside class="graphic"><span class="gl">Weekly posting schedule</span><table><tr><th>Day</th><th>Post</th></tr><tr><td>Monday</td><td>Product photo</td></tr><tr><td>Tuesday</td><td>Customer review</td></tr><tr><td>Thursday</td><td>Behind the scenes</td></tr><tr><td>Friday</td><td>Special offer</td></tr></table></aside>
+<div class="q" id="q62" data-n="62" data-ans="A">
+<div class="stem"><span class="n">62.</span>What is the conversation mainly about?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Their social media content strategy</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Hiring a video editor</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Redesigning the website</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Lowering advertising costs</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">W:</span>I&#x27;ve been reviewing our social media numbers, and our short how-to videos are getting far more engagement than the product photos we usually post.</div><div class="tr"><span class="sp">M:</span>That makes sense. People love learning something quickly. A photo just sits there, but a thirty-second tip actually teaches them something.</div><div class="tr"><span class="sp">W:</span>Exactly. So for the autumn push, I want to lean into tutorials and post fewer static images. What do you think?</div><div class="tr"><span class="sp">M:</span>I&#x27;m on board. I&#x27;d film a weekly series of quick tips and post them in the slot where our product photo usually goes. I can storyboard the first month by next week.</div><div class="tr"><span class="sp">W:</span>Do it. Send the storyboard over when it&#x27;s ready and I&#x27;ll run it past the rest of the team.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> They discuss leaning into video tutorials for the autumn social media push.</div></details>
+</div>
+
+<div class="q" id="q63" data-n="63" data-ans="C">
+<div class="stem"><span class="n">63.</span>Why does the man think videos work better than photos?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">They are cheaper to make</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">They are easier to share</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">They quickly teach people something</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">They reach older customers</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> He says a photo &#x27;just sits there,&#x27; but a short tip &#x27;actually teaches them something.&#x27;</div></details>
+</div>
+
+<div class="q" id="q64" data-n="64" data-ans="A">
+<div class="stem"><span class="n">64.</span>Look at the graphic. On which day will the tip videos most likely be posted?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Monday</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Tuesday</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Thursday</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Friday</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The man will post the tips &#x27;in the slot where our product photo usually goes.&#x27; The schedule shows the product photo goes out on Monday, so the answer is (A). Tuesday, Thursday and Friday are used for customer reviews, behind-the-scenes posts and special offers, which he does not mention replacing.</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 65–67</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-12.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+<aside class="graphic"><span class="gl">Staff parking permits</span><table><tr><th>Permit</th><th>Monthly fee</th></tr><tr><td>Standard car</td><td>$40</td></tr><tr><td>Electric car</td><td>$30</td></tr><tr><td>Motorcycle</td><td>$15</td></tr><tr><td>Carpool (two or more staff)</td><td>$20</td></tr></table></aside>
+<div class="q" id="q65" data-n="65" data-ans="A">
+<div class="stem"><span class="n">65.</span>What is the man asking about?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Where staff should park</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">How to get a train pass</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The location of reception</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">When his shift starts</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">M:</span>Sorry to bother you — I just started on Monday. Do you know where staff are meant to park? The main lot had a sign saying &#x27;permit holders only.&#x27;</div><div class="tr"><span class="sp">W:</span>Ah, yes. You&#x27;ll need a parking permit for that lot, and it takes about a week to process. In the meantime, there&#x27;s free parking in the lot behind the library across the street.</div><div class="tr"><span class="sp">M:</span>Oh, that&#x27;s handy. How do I apply for the permit? My neighbour works here too, so we&#x27;ll be driving in together.</div><div class="tr"><span class="sp">W:</span>Reception handles it — just fill in a short form and bring your license plate number. I&#x27;d do it today; the sooner you apply, the sooner you can use the main lot.</div><div class="tr"><span class="sp">M:</span>Thanks. I&#x27;ll pop down at lunch and sort it out.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> He asks &#x27;where staff are meant to park.&#x27;</div></details>
+</div>
+
+<div class="q" id="q66" data-n="66" data-ans="D">
+<div class="stem"><span class="n">66.</span>What does the woman suggest the man do in the meantime?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Take the bus</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Work from home</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Ask his manager for a space</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Park in the lot behind the library</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> She points him to &#x27;free parking in the lot behind the library across the street.&#x27;</div></details>
+</div>
+
+<div class="q" id="q67" data-n="67" data-ans="D">
+<div class="stem"><span class="n">67.</span>Look at the graphic. What is the monthly fee for the permit the man will most likely get?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">$40</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">$30</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">$15</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">$20</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The man says his neighbour also works there and they&#x27;ll be &#x27;driving in together,&#x27; so he needs the carpool permit for two or more staff. The graphic lists it at $20 a month, so the answer is (D). $40 is the standard car fee, and $30 and $15 are for electric cars and motorcycles.</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 68–70</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p3-13.mp3"></audio><span class="tag">听一段对话，回答下面 3 题</span></div>
+
+<div class="q" id="q68" data-n="68" data-ans="D">
+<div class="stem"><span class="n">68.</span>What is mainly happening in the conversation?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A job interview</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A safety inspection</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A customer complaint</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">An orientation for new employees</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr"><span class="sp">W:</span>Welcome aboard, both of you. This morning I&#x27;ll cover our safety procedures, and this afternoon you&#x27;ll get a full tour of the floor. Marco, you&#x27;re joining the packing team, correct?</div><div class="tr"><span class="sp">M:</span>That&#x27;s right. I&#x27;m mainly wondering about the equipment — I&#x27;ve never used the label scanners before.</div><div class="tr"><span class="sp">W:</span>No worries, we&#x27;ll train you on those step by step this week. Liam, you&#x27;re on receiving, so you&#x27;ll spend more time with the forklifts, which need a separate certification.</div><div class="tr"><span class="sp">M2:</span>Right — do I get that certification here, or do I need it beforehand?</div><div class="tr"><span class="sp">W:</span>We provide it on-site. There&#x27;s a half-day forklift course on Wednesday, and you can&#x27;t operate one until you&#x27;ve passed it. Any other questions? No? Then let&#x27;s start with the safety video.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The trainer welcomes two new hires and outlines safety training and a floor tour.</div></details>
+</div>
+
+<div class="q" id="q69" data-n="69" data-ans="B">
+<div class="stem"><span class="n">69.</span>What is Marco concerned about?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Meeting his team</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Using the unfamiliar label scanners</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The length of his shift</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Finding the warehouse</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> He says he&#x27;s &#x27;never used the label scanners before.&#x27;</div></details>
+</div>
+
+<div class="q" id="q70" data-n="70" data-ans="B">
+<div class="stem"><span class="n">70.</span>What must Liam do before he can operate a forklift?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Buy his own safety gear</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Pass a forklift certification course</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Work on the packing team first</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Get approval from Marco</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The trainer says &#x27;you can&#x27;t operate one until you&#x27;ve passed&#x27; the forklift course.</div></details>
+</div>
+
+</div>
+<h2>PART 4 — Talks（71–100）</h2>
+<div class="dirs"><b>Directions:</b> You will hear several talks given by a single speaker. You will be asked to answer three questions about what the speaker says. Select the best response.</div>
+<div class="set"><div class="shd">Questions 71–73 · Factory tour welcome</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-1.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+<aside class="graphic"><span class="gl">Today&#x27;s tour stops</span><table><tr><th>Stop</th><th>Time</th></tr><tr><td>Assembly Line</td><td>10:00</td></tr><tr><td>Packaging</td><td>10:30</td></tr><tr><td>Quality Lab</td><td>11:00</td></tr><tr><td>Gift Shop</td><td>11:30</td></tr></table></aside>
+<div class="q" id="q71" data-n="71" data-ans="D">
+<div class="stem"><span class="n">71.</span>Where does the talk most likely take place?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">At a bakery</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">At a farm</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">At a supermarket</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">At a chocolate factory</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Good morning, everyone, and welcome to the Crestwood chocolate factory. I&#x27;m Maria, and I&#x27;ll be leading your tour today. Before we set off, there&#x27;s one small change to the schedule in your handout. The packaging area, which we were due to visit at ten thirty, is being deep-cleaned this morning, so we&#x27;ll swap it with the quality lab. That means we&#x27;ll see the quality lab first, at ten thirty, and come back to packaging at eleven. Everything else stays exactly the same. Please stay behind the yellow lines at all times, and feel free to ask questions as we go.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The speaker welcomes the group &#x27;to the Crestwood chocolate factory.&#x27;</div></details>
+</div>
+
+<div class="q" id="q72" data-n="72" data-ans="B">
+<div class="stem"><span class="n">72.</span>Why has the schedule changed?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A machine broke down</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">The packaging area is being cleaned</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A guide is unavailable</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A group arrived late</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The packaging area &#x27;is being deep-cleaned this morning,&#x27; so it is swapped with the quality lab.</div></details>
+</div>
+
+<div class="q" id="q73" data-n="73" data-ans="D">
+<div class="stem"><span class="n">73.</span>Look at the graphic. Which stop will the group now visit at 11:00?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Assembly Line</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Gift Shop</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Quality Lab</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Packaging</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The packaging visit is moved from 10:30 to 11:00, so the group will now visit Packaging at 11:00.</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 74–76 · Train station announcement</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-2.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+
+<div class="q" id="q74" data-n="74" data-ans="B">
+<div class="stem"><span class="n">74.</span>What change is being announced?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A cancelled service</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A change of platform</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A lower ticket price</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A new destination</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Attention, passengers on platform four. The ten-fifteen express service to Central City has been moved to platform seven due to a signalling problem on this side of the station. Passengers should make their way to platform seven, using the footbridge at the far end of the concourse. The service is now expected to depart six minutes late, at ten twenty-one. Please listen for further announcements, and mind the gap between the train and the platform edge as you board. We apologise for the disruption to your journey this morning.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The express service &#x27;has been moved to platform seven.&#x27;</div></details>
+</div>
+
+<div class="q" id="q75" data-n="75" data-ans="D">
+<div class="stem"><span class="n">75.</span>Why has the change occurred?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A security alert</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Bad weather</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A staff shortage</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A signalling problem</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The change is &#x27;due to a signalling problem on this side of the station.&#x27;</div></details>
+</div>
+
+<div class="q" id="q76" data-n="76" data-ans="D">
+<div class="stem"><span class="n">76.</span>How can passengers reach platform seven?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">By taking a shuttle bus</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">By exiting the station</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">By waiting for staff assistance</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">By using the footbridge</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> Passengers should go to platform seven &#x27;using the footbridge at the far end of the concourse.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 77–79 · Podcast excerpt</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-3.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+
+<div class="q" id="q77" data-n="77" data-ans="A">
+<div class="stem"><span class="n">77.</span>What is the main topic of today&#x27;s episode?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">How to price products for a profit</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">How to hire retail staff</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">How to design a store layout</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">How to reduce shipping costs</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Welcome back to The Corner Office, the show where we talk about running a small business, and I&#x27;m your host, Daniel Cho. Today we&#x27;re diving into something every shop owner struggles with: how to price your products so you actually make a profit without scaring customers away. My guest is Elena Marsh, who has helped hundreds of independent retailers set their prices. And a quick note before we begin — you can grab the free pricing worksheet Elena put together from our website. All right, let&#x27;s take a short break, and when we come back, Elena will walk us through her three-step method.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The host says today&#x27;s topic is &#x27;how to price your products so you actually make a profit.&#x27;</div></details>
+</div>
+
+<div class="q" id="q78" data-n="78" data-ans="C">
+<div class="stem"><span class="n">78.</span>Who is the guest?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A retail store owner</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A bank manager</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A pricing consultant</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A radio producer</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Elena Marsh &#x27;has helped hundreds of independent retailers set their prices.&#x27;</div></details>
+</div>
+
+<div class="q" id="q79" data-n="79" data-ans="D">
+<div class="stem"><span class="n">79.</span>What will listeners most likely hear next?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">An interview</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A listener call</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A news update</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A commercial break</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The host says &#x27;let&#x27;s take a short break,&#x27; so an advertisement will play next.</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 80–82 · Advertisement</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-4.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+
+<div class="q" id="q80" data-n="80" data-ans="A">
+<div class="stem"><span class="n">80.</span>What is being advertised?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A furniture sale</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A home-cleaning service</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">An interior design class</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A moving company</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Tired of the same old living room? This month, Maple and Oak Furniture is clearing out its entire winter collection to make room for spring. Every sofa, armchair, and dining set on our floor is at least forty percent off, and if you spend over eight hundred dollars, we&#x27;ll deliver and assemble your furniture absolutely free. Our design team is on hand seven days a week to help you find the perfect fit for your space. Visit us on Weaver Street, just opposite the train station. Hurry, though — once this collection is gone, it&#x27;s gone for good.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The ad promotes a clearance of &#x27;every sofa, armchair, and dining set.&#x27;</div></details>
+</div>
+
+<div class="q" id="q81" data-n="81" data-ans="B">
+<div class="stem"><span class="n">81.</span>What do customers who spend over eight hundred dollars receive?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A second item free</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Free delivery and assembly</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">An extended warranty</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A gift card</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Spending over eight hundred dollars means &#x27;we&#x27;ll deliver and assemble your furniture absolutely free.&#x27;</div></details>
+</div>
+
+<div class="q" id="q82" data-n="82" data-ans="C">
+<div class="stem"><span class="n">82.</span>Why does the speaker tell listeners to hurry?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">The store closes early</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Prices rise next week</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">The collection is limited and won&#x27;t be restocked</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Parking is limited</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> He warns that &#x27;once this collection is gone, it&#x27;s gone for good.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 83–85 · Garden tour guide</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-5.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+
+<div class="q" id="q83" data-n="83" data-ans="A">
+<div class="stem"><span class="n">83.</span>Where does the talk most likely take place?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">At a botanical garden</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">At a farmers&#x27; market</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">At a park playground</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">At a flower shop</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Welcome, everyone, to the Ashford Botanical Gardens. My name is Colin, and I&#x27;ll be showing you around for the next ninety minutes. We&#x27;ll start in the tropical glasshouse, which is kept warm and humid, so do take off your coats if you get too warm. From there we&#x27;ll walk through the rose garden and finish at the water-lily pond. I must ask that you stay on the marked paths, as some of the beds have been newly planted and are quite delicate. Photography is encouraged, and at the end of the tour, our gift shop offers seeds and plants you can grow at home. Now, if you&#x27;ll follow me.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The guide welcomes visitors &#x27;to the Ashford Botanical Gardens.&#x27;</div></details>
+</div>
+
+<div class="q" id="q84" data-n="84" data-ans="A">
+<div class="stem"><span class="n">84.</span>What are the listeners asked to do?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Stay on the marked paths</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Leave their bags at the entrance</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Remain silent during the tour</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Wear protective gloves</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> He asks visitors to &#x27;stay on the marked paths,&#x27; as the beds are delicate.</div></details>
+</div>
+
+<div class="q" id="q85" data-n="85" data-ans="C">
+<div class="stem"><span class="n">85.</span>What can the listeners do at the end of the tour?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Attend a lecture</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Have a free lunch</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Buy seeds and plants at the gift shop</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Take a boat ride</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> At the end, &#x27;our gift shop offers seeds and plants you can grow at home.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 86–88 · Meeting excerpt</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-6.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+
+<div class="q" id="q86" data-n="86" data-ans="A">
+<div class="stem"><span class="n">86.</span>What is the main purpose of the announcement?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To introduce a new recycling program</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To announce a company merger</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To report on quarterly sales</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To schedule a staff party</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Before we finish today, I want to introduce a change that starts next Monday. We&#x27;re rolling out a new recycling program across all three floors. You&#x27;ll notice we&#x27;ve removed the individual bins from under everyone&#x27;s desks and replaced them with central sorting stations near the elevators — one for paper, one for plastics, and one for general waste. I know walking a few extra steps is an adjustment, but this should cut our landfill waste roughly in half. Amara from the facilities team has placed a quick guide by each station, and she&#x27;ll be around all week if you have any questions.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The speaker describes &#x27;rolling out a new recycling program across all three floors.&#x27;</div></details>
+</div>
+
+<div class="q" id="q87" data-n="87" data-ans="C">
+<div class="stem"><span class="n">87.</span>What change will employees notice?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">New desks throughout the office</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Longer working hours</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Desk bins replaced with central sorting stations</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A new elevator</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> Individual desk bins are removed and &#x27;replaced with central sorting stations near the elevators.&#x27;</div></details>
+</div>
+
+<div class="q" id="q88" data-n="88" data-ans="B">
+<div class="stem"><span class="n">88.</span>What is one expected benefit of the change?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Lower rent</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Cutting landfill waste in half</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Faster deliveries</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">More parking</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The speaker says the change &#x27;should cut our landfill waste roughly in half.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 89–91 · Traffic and weather report</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-7.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+
+<div class="q" id="q89" data-n="89" data-ans="A">
+<div class="stem"><span class="n">89.</span>What kind of report is this?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A traffic and weather report</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A financial report</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A sports report</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A local news interview</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Here&#x27;s your morning drive-time update. If you&#x27;re heading into the city on the Harbor Bridge, brace yourself — that earlier stalled truck has now cleared, but traffic is still crawling, so allow yourself an extra twenty minutes. The Route 12 underpass remains closed due to flooding, so use Grand Avenue as your detour. As for the weather, the fog you&#x27;re seeing will burn off by mid-morning, giving way to plenty of sunshine and a comfortable high of twenty-two degrees. It&#x27;s shaping up to be a lovely afternoon. We&#x27;ll check the roads again at the bottom of the hour. Back to you in the studio.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The speaker gives a &#x27;morning drive-time update&#x27; on roads and weather.</div></details>
+</div>
+
+<div class="q" id="q90" data-n="90" data-ans="C">
+<div class="stem"><span class="n">90.</span>Why is the Route 12 underpass closed?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A traffic accident</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Road repairs</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Flooding</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">A public event</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The underpass &#x27;remains closed due to flooding.&#x27;</div></details>
+</div>
+
+<div class="q" id="q91" data-n="91" data-ans="C">
+<div class="stem"><span class="n">91.</span>What does the speaker say about the afternoon weather?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">It will rain heavily</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">It will turn cold</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">It will be sunny and comfortable</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">It will stay foggy</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> The fog will burn off, &#x27;giving way to plenty of sunshine and a comfortable high.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 92–94 · Recorded instructions</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-8.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+
+<div class="q" id="q92" data-n="92" data-ans="D">
+<div class="stem"><span class="n">92.</span>Who is the message most likely intended for?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Sales customers</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">New job applicants</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Delivery drivers</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">People with computer or device problems</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Thank you for calling the IT help line. Before you speak to an agent, you may be able to solve your issue using our self-service options. To reset a forgotten password, please press one, and a temporary code will be sent to you by text message. To report a broken device, such as a laptop or monitor, press two, and a repair ticket will be created automatically. For help connecting to the office network from home, press three to hear step-by-step instructions. If you would still like to speak with a member of our team, please stay on the line and the next available agent will be with you shortly.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> It is a recorded message on the &#x27;IT help line&#x27; for people with technical issues.</div></details>
+</div>
+
+<div class="q" id="q93" data-n="93" data-ans="D">
+<div class="stem"><span class="n">93.</span>What should a caller do to reset a password?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Stay on the line</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Press two</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Press three</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Press one</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> &#x27;To reset a forgotten password, please press one.&#x27;</div></details>
+</div>
+
+<div class="q" id="q94" data-n="94" data-ans="B">
+<div class="stem"><span class="n">94.</span>What happens if a caller presses two?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">They hear network instructions</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A repair ticket is created</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">They are transferred to sales</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Their password is reset</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> Pressing two reports a broken device, and &#x27;a repair ticket will be created automatically.&#x27;</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 95–97 · Introduction of a speaker</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-9.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+<aside class="graphic"><span class="gl">ReadOn libraries by region</span><table><tr><th>Region</th><th>Libraries</th></tr><tr><td>North</td><td>24</td></tr><tr><td>East</td><td>9</td></tr><tr><td>South</td><td>31</td></tr><tr><td>West</td><td>18</td></tr></table></aside>
+<div class="q" id="q95" data-n="95" data-ans="A">
+<div class="stem"><span class="n">95.</span>What is the purpose of the talk?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To introduce a guest speaker</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To present an award</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To open a new library</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To thank donors</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Good evening, everyone, and thank you for coming. It gives me great pleasure to introduce our guest of honour. Rosa Ibarra started out as a schoolteacher, but she is known today as the founder of ReadOn, a charity that has opened more than eighty free libraries in rural communities. She&#x27;s here tonight to tell us how a single donated bookshelf grew into a nationwide movement. She&#x27;ll also explain why her next goal is the region with the fewest ReadOn libraries so far. After her talk, she&#x27;ll be happy to answer your questions, and signed copies of her memoir will be available at the table by the entrance. Please join me in giving a warm welcome to Rosa Ibarra.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> The speaker says it is his pleasure &#x27;to introduce our guest of honour,&#x27; Rosa Ibarra.</div></details>
+</div>
+
+<div class="q" id="q96" data-n="96" data-ans="B">
+<div class="stem"><span class="n">96.</span>What is Rosa Ibarra known for today?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Teaching at a school</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Founding a charity that opens free libraries</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Writing children&#x27;s textbooks</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Hosting a radio show</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> She is &#x27;known today as the founder of ReadOn,&#x27; which opens free libraries.</div></details>
+</div>
+
+<div class="q" id="q97" data-n="97" data-ans="B">
+<div class="stem"><span class="n">97.</span>Look at the graphic. Which region does Rosa Ibarra plan to focus on next?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">North</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">East</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">South</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">West</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">B.</span> The speaker says her next goal is &#x27;the region with the fewest ReadOn libraries so far.&#x27; The graphic shows the East has only 9, the lowest figure, so the answer is (B). The South has the most (31), and the North (24) and West (18) both have more libraries than the East.</div></details>
+</div>
+
+</div>
+<div class="set"><div class="shd">Questions 98–100 · Store announcement</div>
+<div class="player"><audio controls preload="none" src="audio/m2/p4-10.mp3"></audio><span class="tag">听一段独白，回答下面 3 题</span></div>
+
+<div class="q" id="q98" data-n="98" data-ans="D">
+<div class="stem"><span class="n">98.</span>Why is the announcement being made?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">To report a lost item</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">To introduce a loyalty card</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">To announce a new product</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">To tell shoppers the store is closing soon</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>录音原文 / Transcript</summary><div class="expl"><div class="tr">Attention, shoppers. Greenmarket will be closing in fifteen minutes, at eight o&#x27;clock this evening. Please make your way to the checkouts, where all tills are now open to serve you as quickly as possible. A reminder that our fresh bakery items are now half price for the last hour of trading, so do stop by the bakery aisle before you leave. Tomorrow we open at seven in the morning with a fresh delivery of fruit and vegetables. Thank you for shopping with us, and please take care in the car park, as the ground is wet after this evening&#x27;s rain.</div></div></details><details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">D.</span> The store &#x27;will be closing in fifteen minutes,&#x27; and shoppers are directed to the checkouts.</div></details>
+</div>
+
+<div class="q" id="q99" data-n="99" data-ans="C">
+<div class="stem"><span class="n">99.</span>What is now half price?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">Fresh fruit</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">Frozen goods</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">Fresh bakery items</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Household products</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">C.</span> &#x27;Our fresh bakery items are now half price for the last hour of trading.&#x27;</div></details>
+</div>
+
+<div class="q" id="q100" data-n="100" data-ans="A">
+<div class="stem"><span class="n">100.</span>What are shoppers warned about?</div>
+
+<ol class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otext">A wet car park</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otext">A road closure</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otext">A power cut</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otext">Limited parking</span></li></ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary><div class="expl"><span class="k">A.</span> Shoppers are asked to &#x27;take care in the car park, as the ground is wet.&#x27;</div></details>
+</div>
+
+</div></div><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:toeic-l:t02";
+var TOTAL=100;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(",").map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok)
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q);
+  var ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script>
+<script>
+(function(){
+"use strict";
+function openSet(q){
+  var s=q&&q.closest?q.closest(".set"):null;
+  if(s){Array.prototype.forEach.call(s.querySelectorAll("details.ans"),function(d){d.open=true});}
+}
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  if(t.closest(".js-submit")||t.closest(".js-reveal")){openSet(t.closest(".q"));}
+},true);
+var bt=document.getElementById("btn-text");
+if(bt)bt.addEventListener("click",function(){
+  document.body.classList.toggle("all-text");
+  var on=document.body.classList.contains("all-text");
+  this.textContent=on?"隐藏选项文本":"显示选项文本";
+  this.classList.toggle("on",on);
+});
+})();
+</script>
+</body></html>
