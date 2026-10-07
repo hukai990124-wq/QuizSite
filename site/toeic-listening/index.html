@@ -20,6 +20,10 @@ footer .lang-switch{margin-top:14px}
  transition:background .12s,border-color .12s,color .12s}
 .lang-switch button:hover{background:#f1f5f9}
 .lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
 html[data-i18n-wait] body{visibility:hidden}
 @media print{.lang-foot,footer .lang-switch{display:none!important}}
 </style>
