@@ -1211,5 +1211,37 @@
  "AWS SAA-C03 原创练习卷 · 第 10 份": {
   "en": "AWS SAA-C03 Original Practice Set 10",
   "ja": "AWS SAA-C03 オリジナル練習セット 10"
+ },
+ "人在线": {
+  "en": "online",
+  "ja": "オンライン"
+ },
+ "正在连接…": {
+  "en": "Connecting…",
+  "ja": "接続中…"
+ },
+ "已连接": {
+  "en": "Connected",
+  "ja": "接続済み"
+ },
+ "已断开": {
+  "en": "Disconnected",
+  "ja": "切断されました"
+ },
+ "个位置·点击收起": {
+  "en": "locations · tap to close",
+  "ja": "箇所 · タップで閉じる"
+ },
+ "有人在浏览，位置未公开": {
+  "en": "Someone is browsing · location hidden",
+  "ja": "誰かが閲覧中 · 位置は非公開"
+ },
+ "还没有其他人": {
+  "en": "No one else here yet",
+  "ja": "まだ他の人はいません"
+ },
+ "在线人数": {
+  "en": "People online",
+  "ja": "オンライン人数"
  }
 }

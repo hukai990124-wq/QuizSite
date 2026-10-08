@@ -1,0 +1,25 @@
+# 「做法 B」用的配置：把在线人数服务单独部署成一个小 Worker，完全不碰题库站。
+#
+# 部署步骤
+#   1. Cloudflare 后台 → Workers & Pages → Create → Workers → Connect to Git
+#   2. 选本仓库，Root directory 填 worker
+#   3. 部署完拿到形如 https://quizbank-presence.<账号>.workers.dev 的地址
+#   4. 前端把 endpoint 指向 <该地址>/api/presence
+#
+# 注意：本服务只提供 /api/presence，不发静态文件（所以这里没有 [assets]）。
+
+name = "quizbank-presence"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[[durable_objects.bindings]]
+name = "PRESENCE"
+class_name = "Presence"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Presence"]
+
+[observability]
+enabled = true
