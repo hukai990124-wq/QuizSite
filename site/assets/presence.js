@@ -212,7 +212,11 @@
     function later() {
       if (closed) return;
       retry++;
-      if (retry >= HIDE_AFTER) ui.show(false);       // 后端不可用 → 不留残疾 UI
+      if (retry >= HIDE_AFTER) {
+        // 后端不可用：收起小窗并彻底停手，不再反复打扰（刷新页面会重新尝试）
+        ui.show(false);
+        return;
+      }
       var wait = Math.min(30000, 900 * Math.pow(1.7, Math.min(retry, 6)));
       setTimeout(connect, wait);
     }
