@@ -1,0 +1,1425 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS CLF-C02 练习卷 · 第 01 套</title>
+<style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.stem p{margin:0 0 6px}.en{color:var(--en)}.zh{color:var(--zh);font-size:14px}.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}
+.opts{list-style:none;margin:12px 0 0;padding:0}.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}details.ans .correct{font-size:14px;margin:4px 0 8px}details.ans .correct b{color:#047857;font-size:16px}details.ans .expl{padding-bottom:12px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:15px 18px;margin-bottom:10px;text-decoration:none;color:#111827}
+a.card:hover{border-color:#93c5fd;background:#f8fbff}a.card .n{font-weight:700}.r{color:#6b7280;font-size:13px;margin-top:3px}
+.pg{position:relative;margin-top:9px}.pg::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:#e9eef2;border-radius:99px}
+.pg i{position:relative;display:block;height:5px;width:0;background:#0b6b3a;border-radius:99px;transition:width .3s}.pg span{display:block;font-size:12px;color:#8b95a1;margin-top:6px}.pg.on span{color:#0b6b3a;font-weight:600}
+@media print{body{background:#fff}.toolbar{display:none}.wrap{max-width:none;padding:0}.q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}details.ans{border:1px solid #ccc;background:#fff;display:block}details.ans .expl{display:block}}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* ===================== 手写填空（fill） ===================== */
+.q[data-kind="fill"] .fillrow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.q[data-kind="fill"] input.fill{font:inherit;font-size:15px;padding:8px 13px;border:1px solid #cbd5e1;
+ border-radius:8px;min-width:230px;max-width:100%;background:#fff;color:#0f172a}
+.q[data-kind="fill"] input.fill:focus{outline:none;border-color:#4a7fb5;box-shadow:0 0 0 3px rgba(74,127,181,.15)}
+.q[data-kind="fill"].done input.fill{background:#f1f5f9;color:#334155}
+.q[data-kind="fill"] input.fill.ok{border-color:#0b7a44;background:#eaf7ef;color:#0b5130;font-weight:600}
+.q[data-kind="fill"] input.fill.bad{border-color:#c0392b;background:#fdeeed;color:#8f2c20}
+.q[data-kind="fill"] .flabel{font-size:12px;color:#8b95a1}
+@media (max-width:560px){.q[data-kind="fill"] input.fill{min-width:0;width:100%}}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+</style><!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--></head><body>
+<a href="index.html" title="返回 CLF-C02 目录" style="position:fixed;right:14px;top:14px;z-index:99;background:rgba(255,255,255,.95);border:1px solid #d8dee5;border-radius:99px;padding:6px 14px;font:12.5px/1.4 -apple-system,Segoe UI,Microsoft YaHei,sans-serif;color:#334155;text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.10)">← 题库目录</a>
+<div class="wrap">
+<h1>AWS CLF-C02 练习卷 · 第 01 套</h1>
+<p class="sub">50 题 · 中英对照 · 点选项后按「确认作答」判分 · 官方考试 65 题（含 15 道不计分题），本卷为 50 题练习 · 非官方题目 · 中文为机器翻译</p>
+<div class="toolbar"><div class="btns">
+<button class="primary" id="btn-sheet" type="button">答题卡</button>
+<button id="btn-wrong" type="button">只看错题</button>
+<button id="btn-expand" type="button">展开全部解析</button>
+<button id="btn-report" type="button">交卷</button>
+<button id="btn-reset" type="button">重置</button>
+<button onclick="window.print()" type="button">打印 / 存 PDF</button>
+</div>
+<div class="qbar"><span>已答 <b id="s-done">0</b>/<b>50</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div>
+</div>
+<div class="q" id="q1" data-n="1" data-ans="B">
+<div class="qhead"><span class="qno">Question 1</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">A characteristic of edge locations is that they:</p><p class="zh">边缘位置的一个特征是：</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Host Amazon EC2 instances closer to users</p><p class="zh">将 Amazon EC2 实例托管在更靠近用户的位置</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Help lower latency and improve performance for users</p><p class="zh">帮助用户降低延迟并提高性能</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Cache frequently changing data without reaching the origin server</p><p class="zh">缓存频繁变化的数据，无需到达源服务器</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Refresh data changes daily</p><p class="zh">每日刷新数据变化</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">Edge locations cache content geographically close to end users, reducing round-trip distance and lowering latency to improve performance for global applications.<br>Host Amazon EC2 instances closer to users. EC2 instances run in Regions and AZs, not at edge locations. Cache frequently changing data without reaching the origin server. Edge locations cache static or infrequently changing content, not frequently changing data. Refresh data changes daily. Edge locations serve cached content based on TTL settings, not on a fixed daily refresh cycle.</p><p class="zh">边缘站点在地理位置上缓存靠近最终用户的内容，减少往返距离并降低延迟，从而提高全球应用程序的性能。<br>将 Amazon EC2 实例托管在更靠近用户的位置。 EC2 实例在区域和可用区中运行，而不是在边缘位置运行。缓存频繁更改的数据，而无需到达源服务器。边缘位置缓存静态或不经常更改的内容，而不是经常更改的数据。每天刷新数据变化。边缘站点根据 TTL 设置而不是固定的每日刷新周期提供缓存内容。</p></div>
+</details></div>
+<div class="q" id="q2" data-n="2" data-ans="C">
+<div class="qhead"><span class="qno">Question 2</span><span class="badge">Content Domain 1</span></div>
+<div class="stem"><p class="en">How can a user protect against AWS service disruptions if a natural disaster affects an entire geographic area?</p><p class="zh">如果自然灾害影响整个地理区域，用户如何防止 AWS 服务中断？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Deploy applications across multiple Availability Zones within an AWS Region</p><p class="zh">跨 AWS 区域内的多个可用区部署应用程序</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Use a hybrid cloud computing deployment model within the geographic area</p><p class="zh">在地理区域内使用混合云计算部署模型</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Deploy applications across multiple AWS Regions</p><p class="zh">跨多个 AWS 区域部署应用程序</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Store application artifacts using AWS Artifact and replicate them across multiple AWS Regions</p><p class="zh">使用 AWS Artifact 存储应用程序工件并跨多个 AWS 区域复制它们</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C</b></p>
+<div class="expl"><p class="en">A natural disaster affecting an entire geographic area could take down a whole AWS Region, so deploying across multiple Regions in different geographies ensures the application remains operational even if one Region becomes completely unavailable.<br>Deploying across multiple Availability Zones within a single Region protects against isolated data center failures but does not provide protection if the entire Region and its surrounding geographic area is affected by a natural disaster. Using a hybrid cloud deployment model within the same geographic area keeps infrastructure in the affected zone, meaning a regional natural disaster would still disrupt both the on-premises and cloud components simultaneously. AWS Artifact is a portal for accessing AWS compliance reports and security documentation, not a storage or replication service, making this option factually incorrect as a disaster recovery strategy.</p><p class="zh">影响整个地理区域的自然灾害可能会导致整个 AWS 区域瘫痪，因此跨不同地理位置的多个区域进行部署可确保应用程序保持运行，即使一个区域完全不可用。<br>跨单个区域内的多个可用区进行部署可以防止孤立的数据中心故障，但如果整个区域及其周边地理区域受到自然灾害的影响，则无法提供保护。在同一地理区域内使用混合云部署模型可以将基础设施保留在受影响的区域，这意味着区域性自然灾害仍会同时破坏本地和云组件。 AWS Artifact 是用于访问 AWS 合规性报告和安全文档的门户，而不是存储或复制服务，这使得此选项作为灾难恢复策略实际上是不正确的。</p></div>
+</details></div>
+<div class="q" id="q3" data-n="3" data-ans="B">
+<div class="qhead"><span class="qno">Question 3</span><span class="badge">Content Domain 1</span></div>
+<div class="stem"><p class="en">According to best practices, how should an application be designed to run in the AWS Cloud?</p><p class="zh">根据最佳实践，应如何设计应用程序以在 AWS 云中运行？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Use tightly coupled components</p><p class="zh">使用紧密耦合的组件</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Use loosely coupled components</p><p class="zh">使用松散耦合的组件</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Use monolithic components</p><p class="zh">使用单体组件</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Use stateful components</p><p class="zh">使用有状态组件</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">Using loosely coupled components means each part of an application can scale, fail, and be updated independently without cascading failures to other components, which is the foundational AWS best practice for building resilient and scalable architectures.<br>Using tightly coupled components creates direct dependencies between parts of an application so that a failure or change in one component directly affects others, increasing the risk of cascading failures and making the system harder to scale and maintain independently. A monolithic design combines all components into a single unit that is difficult to scale or update independently, which is the opposite of the modular approach AWS recommends. Stateful components store session data locally on a specific instance, which prevents requests from being distributed freely across instances and undermines horizontal scaling and resilience.</p><p class="zh">使用松散耦合的组件意味着应用程序的每个部分都可以独立扩展、失败和更新，而不会导致其他组件发生级联故障，这是构建弹性和可扩展架构的基本 AWS 最佳实践。<br>使用紧密耦合的组件会在应用程序的各个部分之间创建直接依赖关系，因此一个组件的故障或更改会直接影响其他组件，从而增加级联故障的风险，并使系统更难以独立扩展和维护。整体设计将所有组件组合成一个单元，很难独立扩展或更新，这与 AWS 推荐的模块化方法相反。有状态组件将会话数据本地存储在特定实例上，这会阻止请求在实例之间自由分发，并破坏水平扩展和弹性。</p></div>
+</details></div>
+<div class="q" id="q4" data-n="4" data-ans="D">
+<div class="qhead"><span class="qno">Question 4</span><span class="badge">Content Domain 1</span></div>
+<div class="stem"><p class="en">A company has business critical workloads hosted on AWS and they are unwilling to accept any downtime. Which of the following is a recommended best practice to protect their workloads in the event of an unexpected natural disaster?</p><p class="zh">一家公司在 AWS 上托管关键业务工作负载，他们不愿意接受任何停机。以下哪项是在发生意外自然灾害时保护其工作负载的建议最佳实践？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Replicate data across multiple Edge Locations worldwide and use Amazon CloudFront to perform automatic failover in the event of an outage</p><p class="zh">在全球多个边缘站点之间复制数据，并使用 Amazon CloudFront 在发生中断时执行自动故障转移</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Deploy AWS resources across multiple Availability Zones within the same AWS Region</p><p class="zh">在同一 AWS 区域内的多个可用区部署 AWS 资源</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Create point-in-time backups in another subnet and recover this data when a disaster occurs</p><p class="zh">在另一个子网中创建时间点备份并在发生灾难时恢复此数据</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Deploy AWS resources to another AWS Region and implement an Active-Active disaster recovery strategy</p><p class="zh">将 AWS 资源部署到另一个 AWS 区域并实施 Active-Active 灾难恢复策略</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>D</b></p>
+<div class="expl"><p class="en">Deploying AWS resources to a second AWS Region and running an Active-Active disaster recovery strategy means both Regions serve live production traffic simultaneously, so if a natural disaster eliminates one Region entirely, the other continues serving users without any downtime.<br>Amazon CloudFront distributes and caches content at edge locations to reduce latency for end users, but it is a content delivery service and does not replicate workloads or perform automatic failover of application infrastructure in the event of a regional disaster. Deploying resources across multiple Availability Zones within a single Region improves resilience against isolated failures, but a large-scale natural disaster can affect an entire Region simultaneously, making Multi-AZ alone insufficient when zero downtime is required. Creating point-in-time backups in another subnet stores recovery data within the same Region and requires manual restoration time, which directly conflicts with the requirement to accept no downtime. Subnets are also intra-Region constructs that offer no geographic separation.</p><p class="zh">将 AWS 资源部署到第二个 AWS 区域并运行主动-主动灾难恢复策略意味着两个区域同时为实时生产流量提供服务，因此，如果自然灾害完全消除了一个区域，另一个区域将继续为用户提供服务，而不会造成任何停机。<br>Amazon CloudFront 在边缘位置分发和缓存内容，以减少最终用户的延迟，但它是一种内容交付服务，不会在发生区域灾难时复制工作负载或执行应用程序基础设施的自动故障转移。在单个区域内跨多个可用区部署资源可以提高针对孤立故障的恢复能力，但大规模自然灾害可能会同时影响整个区域，因此在需要零停机时间时，仅靠多可用区是不够的。在另一个子网中创建时间点备份将恢复数据存储在同一区域内，并且需要手动恢复时间，这与接受不停机的要求直接冲突。子网也是区域内构造，不提供地理隔离。</p></div>
+</details></div>
+<div class="q" id="q5" data-n="5" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 5</span><span class="badge">Content Domain 3 · Select 2</span></div>
+<div class="stem"><p class="en">What should you do in order to keep the data on EBS volumes safe?</p><p class="zh">为了确保 EBS 卷上的数据安全，您应该做什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Create EBS snapshots</p><p class="zh">创建 EBS 快照</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Ensure that EBS data is encrypted at rest</p><p class="zh">确保 EBS 数据静态加密</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Replicate EBS volumes across multiple Availability Zones</p><p class="zh">跨多个可用区复制 EBS 卷</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Use AWS Backup to automate and manage backup schedules</p><p class="zh">使用 AWS Backup 自动化和管理备份计划</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Increase the size of the EBS volume regularly</p><p class="zh">定期增加 EBS 卷的大小</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en">EBS snapshots create point-in-time backups of your volume stored durably in Amazon S3, allowing data to be restored if a volume is lost or corrupted. Enabling encryption at rest protects the data stored on EBS volumes from unauthorised access using AWS KMS managed keys.<br>Replicating EBS volumes across multiple Availability Zones improves availability but does not protect against accidental deletion or data corruption, as a replicated volume would reflect the same corrupted state. Using AWS Backup automates backup management across multiple AWS services but is not itself a direct method of keeping EBS data safe without also taking snapshots. Increasing the size of an EBS volume adds storage capacity but has no effect on data protection or security.</p><p class="zh">EBS 快照为持久存储在 Amazon S3 中的卷创建时间点备份，允许在卷丢失或损坏时恢复数据。启用静态加密可保护 EBS 卷上存储的数据免遭使用 AWS KMS 托管密钥的未经授权的访问。<br>跨多个可用区复制 EBS 卷可以提高可用性，但不能防止意外删除或数据损坏，因为复制的卷将反映相同的损坏状态。使用 AWS Backup 可以跨多个 AWS 服务自动执行备份管理，但它本身并不是在不拍摄快照的情况下保持 EBS 数据安全的直接方法。增加 EBS 卷的大小会增加存储容量，但不会影响数据保护或安全性。</p></div>
+</details></div>
+<div class="q" id="q6" data-n="6" data-ans="B,E">
+<div class="qhead"><span class="qno">Question 6</span><span class="badge">Content Domain 1 · Task 1.2 · Select 2</span></div>
+<div class="stem"><p class="en">Which of the following options are related to the reliability of AWS?</p><p class="zh">以下哪些选项与 AWS 的可靠性相关？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Applying the principle of least privilege to all AWS resources</p><p class="zh">将最小权限原则应用于所有 AWS 资源</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Automatically provisioning new resources to meet demand</p><p class="zh">自动配置新资源以满足需求</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">All AWS services are considered Global Services, and this design helps customers serve their international users</p><p class="zh">所有 AWS 服务都被视为全球服务，这种设计可帮助客户为其国际用户提供服务</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Providing compensation to customers if issues occur</p><p class="zh">出现问题时向客户提供赔偿</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Ability to recover quickly from failures</p><p class="zh">从失败中快速恢复的能力</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B,E</b></p>
+<div class="expl"><p class="en">Automatically provisioning new resources to meet demand and the ability to recover quickly from failures are both core reliability principles, ensuring the system continues operating correctly under varying conditions and after failure events.<br>Applying the principle of least privilege is a security practice related to access control, not a reliability principle. All AWS services being considered global services is false, as many services are regional, and global reach is a separate concept from reliability. Providing compensation to customers if issues occur describes an SLA remediation mechanism and is not a design principle that contributes to system reliability.</p><p class="zh">自动配置新资源以满足需求以及从故障中快速恢复的能力都是核心可靠性原则，确保系统在变化的条件下和故障事件发生后继续正确运行。<br>应用最小权限原则是与访问控制相关的安全实践，而不是可靠性原则。所有 AWS 服务都被视为全球服务是错误的，因为许多服务都是区域性的，而全球覆盖范围与可靠性是不同的概念。如果出现问题，向客户提供补偿描述了 SLA 补救机制，而不是有助于系统可靠性的设计原则。</p></div>
+</details></div>
+<div class="q" id="q7" data-n="7" data-ans="B">
+<div class="qhead"><span class="qno">Question 7</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">What time-savings advantage is offered with the use of Amazon Rekognition?</p><p class="zh">使用 Amazon Rekognition 可以节省哪些时间？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon Rekognition provides automatic watermarking of images</p><p class="zh">Amazon Rekognition 提供图像自动水印功能</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon Rekognition provides automatic detection of objects appearing in pictures</p><p class="zh">Amazon Rekognition 可自动检测图片中出现的对象</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon Recognition provides the ability to resize millions of images automatically</p><p class="zh">Amazon Recognition 提供自动调整数百万张图像大小的功能</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon Rekognition uses Amazon Mechanical Turk to allow humans to bid on object detection jobs</p><p class="zh">Amazon Rekognition 使用 Amazon Mechanical Turk 允许人类对物体检测作业进行投标</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">Amazon Rekognition automatically analyzes images and videos to detect objects, scenes, faces, text, and activities using machine learning, eliminating the time that would otherwise be spent on manual image review or building custom ML pipelines.<br>Automatic watermarking of images is not a feature of Amazon Rekognition, which is an analysis and detection service rather than an image editing or rights management tool. Resizing millions of images automatically is not a Rekognition capability and describes an image processing task better suited to a custom solution or a service like AWS Lambda with an image library. Amazon Rekognition does not use Amazon Mechanical Turk or involve human bidding on jobs, as its detection capabilities are fully automated through deep learning models without human intervention.</p><p class="zh">Amazon Rekognition 使用机器学习自动分析图像和视频，以检测对象、场景、人脸、文本和活动，从而消除了手动图像审查或构建自定义 ML 管道所花费的时间。<br>图像的自动水印不是 Amazon Rekognition 的功能，Amazon Rekognition 是一种分析和检测服务，而不是图像编辑或权限管理工具。自动调整数百万张图像的大小并不是 Rekognition 的功能，而是描述了更适合自定义解决方案或带有图像库的 AWS Lambda 等服务的图像处理任务。 Amazon Rekognition 不使用 Amazon Mechanical Turk 或涉及人工竞标工作，因为其检测功能通过深度学习模型完全自动化，无需人工干预。</p></div>
+</details></div>
+<div class="q" id="q8" data-n="8" data-ans="D">
+<div class="qhead"><span class="qno">Question 8</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">What technology enables compute capacity to adjust as loads change?</p><p class="zh">什么技术可以使计算容量随着负载变化而调整？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Load balancing</p><p class="zh">负载均衡</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Automatic failover</p><p class="zh">自动故障转移</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Round robin</p><p class="zh">循环赛</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Auto Scaling</p><p class="zh">自动缩放</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>D</b></p>
+<div class="expl"><p class="en">Auto Scaling monitors load and automatically adjusts the number of compute instances to match demand, ensuring capacity scales up during peak periods and scales back down when demand drops, without any manual intervention.<br>Load balancing distributes incoming traffic across existing compute instances to prevent any single instance from being overwhelmed, but does not add or remove capacity in response to changing load. Automatic failover redirects traffic to a healthy instance or resource when a failure is detected, which addresses availability rather than capacity adjustment. Round robin is a traffic distribution method that cycles requests evenly across a set of servers, and like load balancing, manages traffic distribution rather than adjusting the number of available compute instances.</p><p class="zh">Auto Scaling 监控负载并自动调整计算实例的数量以满足需求，确保容量在高峰期扩大并在需求下降时缩小，无需任何手动干预。<br>负载均衡在现有计算实例之间分配传入流量，以防止任何单个实例不堪重负，但不会根据负载变化而添加或删除容量。当检测到故障时，自动故障转移会将流量重定向到运行状况良好的实例或资源，这解决了可用性问题，而不是容量调整问题。循环法是一种流量分配方法，它在一组服务器之间均匀地循环请求，并且与负载平衡一样，管理流量分配而不是调整可用计算实例的数量。</p></div>
+</details></div>
+<div class="q" id="q9" data-n="9" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 9</span><span class="badge">Content Domain 2 · Select 2</span></div>
+<div class="stem"><p class="en">A company has moved to AWS recently. Which of the following AWS Services will help ensure that they have the proper security settings?</p><p class="zh">一家公司最近迁移到了 AWS。以下哪些 AWS 服务将有助于确保他们拥有正确的安全设置？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">AWS Trusted Advisor</p><p class="zh">AWS Trusted Advisor</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon Inspector</p><p class="zh">Amazon Inspector</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon SNS</p><p class="zh">Amazon SNS</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon CloudWatch</p><p class="zh">Amazon CloudWatch</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Concierge Support Team</p><p class="zh">礼宾支持团队</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en">AWS Trusted Advisor provides automated security checks identifying vulnerabilities such as unrestricted security group access and missing MFA, and Amazon Inspector performs automated security assessments of EC2 instances to identify vulnerabilities and unintended network access. Both help ensure proper security settings.<br>Amazon SNS is a fully managed publish/subscribe messaging service for sending notifications to subscribers, and does not evaluate or ensure AWS security settings or configurations. Amazon CloudWatch monitors operational metrics and logs for observability and alerting, and while it can trigger notifications on specific metrics or log patterns, it does not actively assess or validate AWS resource security configurations. The Concierge Support Team assists Enterprise support plan customers with billing and account management, and does not perform technical security assessments or review resource security settings.</p><p class="zh">AWS Trusted Advisor 提供自动安全检查，识别漏洞，例如不受限制的安全组访问和缺少 MFA，而 Amazon Inspector 对 EC2 实例执行自动安全评估，以识别漏洞和意外网络访问。两者都有助于确保正确的安全设置。<br>Amazon SNS 是一项完全托管的发布/订阅消息服务，用于向订阅者发送通知，并且不评估或确保 AWS 安全设置或配置。 Amazon CloudWatch 监控操作指标和日志以实现可观察性和警报，虽然它可以触发有关特定指标或日志模式的通知，但它不会主动评估或验证 AWS 资源安全配置。礼宾支持团队协助企业支持计划客户进行计费和帐户管理，但不执行技术安全评估或审查资源安全设置。</p></div>
+</details></div>
+<div class="q" id="q10" data-n="10" data-ans="B">
+<div class="qhead"><span class="qno">Question 10</span><span class="badge">Content Domain 1</span></div>
+<div class="stem"><p class="en">What is an advantage of deploying an application across multiple Availability Zones?</p><p class="zh">跨多个可用区部署应用程序有什么优势？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">There is a lower risk of service failure if a natural disaster causes a service disruption in a given AWS Region</p><p class="zh">如果自然灾害导致给定 AWS 区域的服务中断，则服务失败的风险会降低</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">The application will have higher availability because it can withstand a service disruption in one Availability Zone</p><p class="zh">应用程序将具有更高的可用性，因为它可以承受一个可用区的服务中断</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">There will be better coverage as Availability Zones are geographically distant and can serve a wider area</p><p class="zh">由于可用区地理位置较远，可以服务更广泛的区域，因此覆盖范围会更好</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">There will be decreased application latency that will improve the user experience</p><p class="zh">应用程序延迟将会减少，从而改善用户体验</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">Deploying across multiple Availability Zones keeps an application running when one AZ experiences an outage, as traffic fails over to instances in the remaining AZs, directly increasing availability.<br>Multiple AZs within a single Region do not protect against a natural disaster affecting the entire Region, as all AZs in a Region share the same geographic area and would be exposed to the same regional disruption. Availability Zones within a Region are intentionally close together with low-latency links between them, so they do not provide wider geographic coverage or serve users in distant locations. Deploying across multiple AZs redistributes existing resources rather than reducing the distance between the application and its users, so it does not decrease latency.</p><p class="zh">跨多个可用区部署可以在一个可用区发生中断时保持应用程序运行，因为流量会故障转移到其余可用区中的实例，从而直接提高可用性。<br>单个区域内的多个可用区无法防范影响整个区域的自然灾害，因为一个区域内的所有可用区共享相同的地理区域，并且会遭受相同的区域破坏。区域内的可用区故意紧密相连，并在它们之间建立低延迟链接，因此它们不会提供更广泛的地理覆盖范围或为遥远位置的用户提供服务。跨多个可用区部署会重新分配现有资源，而不是缩短应用程序与其用户之间的距离，因此不会减少延迟。</p></div>
+</details></div>
+<div class="q" id="q11" data-n="11" data-ans="C,E">
+<div class="qhead"><span class="qno">Question 11</span><span class="badge">Content Domain 1 · Select 2</span></div>
+<div class="stem"><p class="en">Why would an organization decide to use AWS over an on-premises data center?</p><p class="zh">为什么组织会决定使用 AWS 而不是本地数据中心？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Free commercial software licenses</p><p class="zh">免费商业软件许可证</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Free technical support</p><p class="zh">免费技术支持</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Elastic resources</p><p class="zh">弹性资源</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">On-site visits for auditing</p><p class="zh">实地考察审核</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Cost Savings</p><p class="zh">节省成本</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C,E</b></p>
+<div class="expl"><p class="en">AWS provides elastic resources that scale up and down with demand, eliminating the need to over-provision capacity, and offers cost savings through pay-as-you-go pricing that avoids large upfront capital investments required by on-premises data centers.<br>AWS does not provide free commercial software licenses, as third-party software costs are separate from AWS infrastructure pricing and must be purchased independently or through AWS Marketplace. AWS does not provide free technical support, as support is available through paid tiers and basic support only covers account and billing queries without technical assistance. AWS does not offer on-site visits for auditing, as customers requiring compliance evidence use AWS audit reports, certifications, and the AWS Artifact portal rather than physical site access.</p><p class="zh">AWS 提供可根据需求伸缩的弹性资源，无需过度配置容量，并通过即用即付定价方式节省成本，避免了本地数据中心所需的大量前期资本投资。<br>AWS 不提供免费的商业软件许可证，因为第三方软件成本与 AWS 基础设施定价分开，必须单独购买或通过 AWS Marketplace 购买。 AWS 不提供免费技术支持，因为可以通过付费级别提供支持，并且基本支持仅涵盖账户和账单查询，无需技术帮助。 AWS 不提供现场审计服务，因为需要合规证据的客户使用 AWS 审计报告、认证和 AWS Artifact 门户，而不是物理站点访问。</p></div>
+</details></div>
+<div class="q" id="q12" data-n="12" data-ans="B">
+<div class="qhead"><span class="qno">Question 12</span><span class="badge">Content Domain 4</span></div>
+<div class="stem"><p class="en">You have set up consolidated billing for several AWS accounts. One of the accounts has purchased a number of reserved instances for 3 years. Which of the following is true regarding this scenario?</p><p class="zh">您已为多个 AWS 账户设置合并账单。其中一个账户购买了一定数量的预留实例，期限为 3 年。关于此场景，以下哪项描述是正确的？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">The Reserved Instance discounts can only be shared with the master account</p><p class="zh">预留实例折扣只能与主账户共享</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">All accounts can receive the hourly cost benefit of the Reserved Instances</p><p class="zh">所有账户均可享受预留实例的每小时成本效益</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">The purchased instances will have better performance than On-demand instances</p><p class="zh">购买的实例将比按需实例具有更好的性能</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">There are no cost benefits from using consolidated billing; It is for informational purposes only</p><p class="zh">使用合并计费没有成本效益；仅供参考</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">With consolidated billing, Reserved Instance discounts are automatically shared across all accounts in the organization, so any account can benefit from the hourly cost savings.<br>The Reserved Instance discounts applying only to the master account is incorrect because consolidated billing specifically shares RI benefits across all member accounts in the organization, not just the account that purchased them. The claim that reserved instances have better performance than On-Demand instances is false because both run on the same underlying AWS infrastructure, and the Reserved Instance pricing model is a billing commitment rather than a different hardware tier. Consolidated billing does provide real cost benefits beyond purely organizational purposes, combining usage for volume discounts and sharing Reserved Instance savings across accounts, so the claim that it is for informational purposes only is incorrect.</p><p class="zh">通过合并计费，预留实例折扣会自动在组织中的所有账户之间共享，因此任何账户都可以从每小时的成本节省中受益。<br>仅适用于主账户的预留实例折扣是不正确的，因为合并计费专门在组织中的所有成员账户（而不仅仅是购买它们的账户）之间共享 RI 权益。预留实例比按需实例具有更好性能的说法是错误的，因为两者都在相同的底层 AWS 基础设施上运行，并且预留实例定价模型是一种计费承诺，而不是不同的硬件层。整合计费确实提供了超越纯粹组织目的的实际成本效益，结合了批量折扣的使用和跨账户共享预留实例节省，因此其仅供参考的说法是不正确的。</p></div>
+</details></div>
+<div class="q" id="q13" data-n="13" data-ans="C">
+<div class="qhead"><span class="qno">Question 13</span><span class="badge">Content Domain 1</span></div>
+<div class="stem"><p class="en">Which of the following is one of the benefits of moving infrastructure from an on-premises data center to AWS?</p><p class="zh">以下哪一项是将基础设施从本地数据中心迁移到 AWS 的好处之一？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Free support for all enterprise customers</p><p class="zh">为所有企业客户提供免费支持</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Automatic data protection</p><p class="zh">自动数据保护</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Reduced Capital Expenditure (CapEx)</p><p class="zh">减少资本支出 (CapEx)</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">AWS holds responsibility for managing customer applications</p><p class="zh">AWS 负责管理客户应用程序</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C</b></p>
+<div class="expl"><p class="en">Migrating from on-premises to AWS converts large upfront capital expenditures such as purchasing and maintaining physical hardware into smaller variable operational expenses, directly reducing CapEx and improving financial flexibility.<br>AWS does not provide free support to all enterprise customers, as support is available through paid tiers ranging from Developer to Enterprise, with costs varying by plan. AWS does not automatically protect data on behalf of customers, as data protection responsibilities such as encryption and backup configuration remain with the customer under the Shared Responsibility Model. AWS does not manage customer applications, as application-layer responsibilities including code, configuration, and runtime management remain with the customer regardless of which infrastructure services they use.</p><p class="zh">从本地迁移到 AWS 可以将购买和维护物理硬件等大量前期资本支出转化为较小的可变运营支出，从而直接降低资本支出并提高财务灵活性。<br>AWS 并不向所有企业客户提供免费支持，因为可以通过从开发人员到企业的付费级别提供支持，但费用因计划而异。 AWS 不会代表客户自动保护数据，因为根据共享责任模型，加密和备份配置等数据保护责任仍由客户承担。 AWS 不管理客户应用程序，因为无论客户使用哪种基础设施服务，包括代码、配置和运行时管理在内的应用程序层责任仍由客户承担。</p></div>
+</details></div>
+<div class="q" id="q14" data-n="14" data-ans="B">
+<div class="qhead"><span class="qno">Question 14</span><span class="badge">Content Domain 2</span></div>
+<div class="stem"><p class="en">Which AWS IAM feature allows developers to access AWS services through the AWS CLI?</p><p class="zh">AWS IAM 的哪些功能允许开发人员通过 AWS CLI 访问 AWS 服务？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">API keys</p><p class="zh">API 密钥</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Access keys</p><p class="zh">访问键</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">User names/Passwords</p><p class="zh">用户名/密码</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">SSH keys</p><p class="zh">SSH 密钥</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">IAM access keys, consisting of an access key ID and a secret access key, are the credentials used to authenticate programmatic requests to AWS services through the AWS CLI and SDKs.<br>API keys is an informal term not specific to AWS IAM; AWS programmatic access uses access keys consisting of an access key ID and secret access key, and this informal label does not accurately describe the credential type. User names and passwords are used to log in to the AWS Management Console interactively, and are not the credentials used for CLI or SDK programmatic access, which requires access keys. SSH keys are used to connect securely to EC2 instances via Secure Shell and are not the credentials that authenticate developers&#x27; CLI requests to AWS services.</p><p class="zh">IAM 访问密钥由访问密钥 ID 和秘密访问密钥组成，是用于通过 AWS CLI 和开发工具包对 AWS 服务的编程请求进行身份验证的凭证。<br>API 密钥是一个非正式术语，并非特定于 AWS IAM； AWS 编程访问使用由访问密钥 ID 和秘密访问密钥组成的访问密钥，并且此非正式标签无法准确描述凭证类型。用户名和密码用于以交互方式登录 AWS 管理控制台，而不是用于 CLI 或 SDK 编程访问的凭证，后者需要访问密钥。 SSH 密钥用于通过 Secure Shell 安全地连接到 EC2 实例，而不是验证开发人员对 AWS 服务的 CLI 请求的凭证。</p></div>
+</details></div>
+<div class="q" id="q15" data-n="15" data-ans="D">
+<div class="qhead"><span class="qno">Question 15</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">AWS allows users to manage their resources using a web based user interface. What is the name of this interface?</p><p class="zh">AWS 允许用户使用基于 Web 的用户界面来管理其资源。这个接口的名称是什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">AWS CLI</p><p class="zh">AWS CLI</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">AWS API</p><p class="zh">AWS API</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">AWS SDK</p><p class="zh">AWS 软件开发工具包</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">AWS Management Console</p><p class="zh">AWS 管理控制台</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>D</b></p>
+<div class="expl"><p class="en">The AWS Management Console is the web-based graphical interface used to manage and interact with AWS resources directly from a browser.<br>The AWS CLI is a command-line tool that allows users to interact with AWS services through typed commands in a terminal, not through a web-based graphical interface. The AWS API provides programmatic access to AWS services through HTTP requests made directly by applications or scripts, and has no graphical user interface. The AWS SDK provides libraries and tools for interacting with AWS services through application code in languages such as Python, Java, and JavaScript, and is not a user-facing interface for managing resources.</p><p class="zh">AWS 管理控制台是基于 Web 的图形界面，用于直接从浏览器管理 AWS 资源并与之交互。<br>AWS CLI 是一种命令行工具，允许用户通过在终端中键入命令（而不是通过基于 Web 的图形界面）与 AWS 服务交互。 AWS API 通过应用程序或脚本直接发出的 HTTP 请求提供对 AWS 服务的编程访问，并且没有图形用户界面。 AWS 开发工具包提供了用于通过 Python、Java 和 JavaScript 等语言的应用程序代码与 AWS 服务交互的库和工具，而不是用于管理资源的面向用户的界面。</p></div>
+</details></div>
+<div class="q" id="q16" data-n="16" data-ans="D">
+<div class="qhead"><span class="qno">Question 16</span><span class="badge">Content Domain 1</span></div>
+<div class="stem"><p class="en">Which of the following is a benefit of running an application in multiple Availability Zones?</p><p class="zh">以下哪项是在多个可用区中运行应用程序的好处？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Allows you to exceed AWS service limits</p><p class="zh">允许您超出 AWS 服务限制</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Reduces application response time between servers and global users</p><p class="zh">减少服务器和全局用户之间的应用程序响应时间</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Increases available compute capacity</p><p class="zh">增加可用计算能力</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Increases the availability of your application</p><p class="zh">提高应用程序的可用性</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>D</b></p>
+<div class="expl"><p class="en">Deploying an application across multiple Availability Zones ensures it continues running from the remaining AZs if one experiences an outage, directly increasing availability by eliminating single points of failure within a Region.<br>AWS service limits are account and resource quotas set by AWS that can be increased through a support request, and are entirely unrelated to how many Availability Zones an application is deployed across. Reducing application response time for global users requires deploying across multiple Regions or using a content delivery network such as CloudFront, as AZs within a single Region are geographically close together and do not reduce latency for distant users. Increasing available compute capacity requires provisioning additional instances or enabling Auto Scaling, as spreading existing resources across multiple AZs redistributes capacity rather than adding to it.</p><p class="zh">跨多个可用区部署应用程序可确保在遇到中断时该应用程序可以继续从其余可用区运行，从而通过消除区域内的单点故障来直接提高可用性。<br>AWS 服务限制是 AWS 设置的账户和资源配额，可以通过支持请求来增加，并且与应用程序部署的可用区数量完全无关。减少全球用户的应用程序响应时间需要跨多个区域部署或使用 CloudFront 等内容交付网络，因为单个区域内的可用区在地理上靠近，并且不会减少远程用户的延迟。增加可用计算容量需要配置更多实例或启用 Auto Scaling，因为将现有资源分散到多个可用区会重新分配容量，而不是增加容量。</p></div>
+</details></div>
+<div class="q" id="q17" data-n="17" data-ans="A">
+<div class="qhead"><span class="qno">Question 17</span><span class="badge">Content Domain 4</span></div>
+<div class="stem"><p class="en">Which is the minimum AWS Support plan that includes Infrastructure Event Management without additional costs?</p><p class="zh">哪个是包含基础设施事件管理且无需额外费用的最低 AWS Support 计划？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Enterprise</p><p class="zh">企业</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Business</p><p class="zh">商业</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Developer</p><p class="zh">开发商</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Basic</p><p class="zh">基本的</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en">Infrastructure Event Management is included at no extra cost only with the AWS Enterprise Support plan, providing architectural guidance and real-time support during planned events such as product launches and traffic spikes.<br>Business Support customers can access Infrastructure Event Management but must pay an additional fee for each event engagement, making it not included as a standard benefit at no extra cost. Developer Support provides business-hours email access to Cloud Support Engineers for general technical questions and does not include Infrastructure Event Management at any price point. Basic Support provides access to documentation, whitepapers, and the seven core Trusted Advisor checks, and does not include any form of event management support.</p><p class="zh">仅 AWS 企业支持计划包含基础设施事件管理，无需额外付费，可在产品发布和流量高峰等计划事件期间提供架构指导和实时支持。<br>业务支持客户可以访问基础设施事件管理，但必须为每次活动支付额外费用，因此不包含在免费的标准权益中。开发人员支持为云支持工程师提供工作时间电子邮件访问，以解答一般技术问题，并且不包括任何价位的基础设施事件管理。基本支持提供对文档、白皮书和七个核心 Trusted Advisor 检查的访问，但不包括任何形式的事件管理支持。</p></div>
+</details></div>
+<div class="q" id="q18" data-n="18" data-ans="C">
+<div class="qhead"><span class="qno">Question 18</span><span class="badge">Content Domain 2</span></div>
+<div class="stem"><p class="en">What are the default security credentials that are required to access the AWS management console for an IAM user account?</p><p class="zh">IAM 用户账户访问 AWS 管理控制台需要哪些默认安全凭证？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">MFA</p><p class="zh">艺术硕士</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Security tokens</p><p class="zh">安全令牌</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">A user name and password</p><p class="zh">用户名和密码</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Access keys</p><p class="zh">访问键</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C</b></p>
+<div class="expl"><p class="en">IAM user console access is secured with a user name and password combination as the default credentials, providing the basic authentication required to access the AWS Management Console.<br>MFA is an optional additional authentication factor that can be layered on top of a username and password to require a one-time code from a device, but it is not the default credential requirement and is configured separately from the primary user name and password. Security tokens are temporary credentials consisting of an access key ID, secret access key, and session token that are issued when an IAM role is assumed, and are used for programmatic and role-based access rather than as default console credentials for IAM user accounts. Access keys consisting of an access key ID and secret access key are the credentials used for programmatic API and CLI access, not for logging into the AWS Management Console, which uses user name and password.</p><p class="zh">IAM 用户控制台访问通过用户名和密码组合作为默认凭证进行保护，提供访问 AWS 管理控制台所需的基本身份验证。<br>MFA 是一种可选的附加身份验证因素，可以叠加在用户名和密码之上，以要求设备提供一次性代码，但它不是默认的凭据要求，而是与主用户名和密码分开配置。安全令牌是临时凭证，由访问密钥 ID、秘密访问密钥和会话令牌组成，在承担 IAM 角色时颁发，用于编程和基于角色的访问，而不是用作 IAM 用户帐户的默认控制台凭证。由访问密钥 ID 和秘密访问密钥组成的访问密钥是用于编程 API 和 CLI 访问的凭证，而不是用于登录使用用户名和密码的 AWS 管理控制台的凭证。</p></div>
+</details></div>
+<div class="q" id="q19" data-n="19" data-ans="A,C">
+<div class="qhead"><span class="qno">Question 19</span><span class="badge">Content Domain 2 · Select 2</span></div>
+<div class="stem"><p class="en">Which of the following common IT tasks can AWS cover to free up company IT resources?</p><p class="zh">AWS 可以承担以下哪些常见 IT 任务以释放公司 IT 资源？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Patching database software</p><p class="zh">修补数据库软件</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Testing application releases</p><p class="zh">测试应用程序版本</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Backing up databases</p><p class="zh">备份数据库</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Creating database schema</p><p class="zh">创建数据库模式</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Running penetration tests</p><p class="zh">运行渗透测试</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,C</b></p>
+<div class="expl"><p class="en">Patching database software and backing up databases are maintenance tasks that AWS handles automatically for managed services such as RDS, freeing up customers&#x27; IT resources from these time-consuming operational responsibilities.<br>Testing application releases is the customer&#x27;s responsibility as it requires knowledge of the specific application logic, acceptance criteria, and business requirements that only the customer possesses, making it a task AWS cannot cover on the customer&#x27;s behalf. Creating database schema requires understanding of the customer&#x27;s data model and application requirements, and is a design and development activity that the customer must perform rather than a managed service task AWS provides. Running penetration tests is a security activity that customers perform on their own applications and infrastructure, and is not an operational burden AWS covers as part of its managed service offerings.</p><p class="zh">修补数据库软件和备份数据库是 AWS 为 RDS 等托管服务自动处理的维护任务，从而将客户的 IT 资源从这些耗时的操作职责中解放出来。<br>测试应用程序版本是客户的责任，因为它需要了解只有客户拥有的特定应用程序逻辑、验收标准和业务要求，这使得 AWS 无法代表客户完成这项任务。创建数据库架构需要了解客户的数据模型和应用程序需求，并且是客户必须执行的设计和开发活动，而不是 AWS 提供的托管服务任务。运行渗透测试是客户在自己的应用程序和基础设施上执行的一项安全活动，而不是 AWS 作为其托管服务产品的一部分涵盖的运营负担。</p></div>
+</details></div>
+<div class="q" id="q20" data-n="20" data-ans="C">
+<div class="qhead"><span class="qno">Question 20</span><span class="badge">Content Domain 2</span></div>
+<div class="stem"><p class="en">Where are AWS compliance documents, such as an SOC 1 report, located?</p><p class="zh">AWS 合规性文档（例如 SOC 1 报告）位于哪里？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon Inspector</p><p class="zh">Amazon Inspector</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">AWS CloudTrail</p><p class="zh">AWS CloudTrail</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">AWS Artifact</p><p class="zh">AWS Artifact</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">AWS Certificate Manager</p><p class="zh">AWS 证书管理器</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C</b></p>
+<div class="expl"><p class="en">AWS Artifact is the dedicated self-service portal for accessing AWS compliance documentation, including SOC 1, SOC 2, ISO 27001, and PCI DSS reports, allowing customers to download these documents for their own audit and compliance purposes.<br>Amazon Inspector is an automated security assessment service that scans EC2 instances and container images for software vulnerabilities and network exposure risks, and does not provide or store AWS compliance certifications or SOC reports. AWS CloudTrail logs all API calls and management events in an AWS account for auditing purposes, and produces customer-specific activity logs rather than AWS compliance certifications or third-party audit reports. AWS Certificate Manager provisions and manages SSL/TLS certificates for use with AWS services to encrypt data in transit, and is a certificate management service rather than a repository of compliance reports.</p><p class="zh">AWS Artifact 是用于访问 AWS 合规性文档（包括 SOC 1、SOC 2、ISO 27001 和 PCI DSS 报告）的专用自助服务门户，允许客户下载这些文档以用于自己的审计和合规性目的。<br>Amazon Inspector 是一项自动化安全评估服务，可扫描 EC2 实例和容器映像是否有软件漏洞和网络暴露风险，并且不提供或存储 AWS 合规性认证或 SOC 报告。 AWS CloudTrail 将所有 API 调用和管理事件记录在 AWS 账户中以用于审计目的，并生成特定于客户的活动日志，而不是 AWS 合规性认证或第三方审计报告。 AWS Certificate Manager 预置和管理 SSL/TLS 证书，以便与 AWS 服务一起使用以加密传输中的数据，并且它是一项证书管理服务，而不是合规性报告存储库。</p></div>
+</details></div>
+<div class="q" id="q21" data-n="21" data-ans="A,D">
+<div class="qhead"><span class="qno">Question 21</span><span class="badge">Content Domain 2 · Select 2</span></div>
+<div class="stem"><p class="en">Hundreds of thousands of DDoS attacks are recorded every month worldwide. What service does AWS provide to help protect AWS Customers from these attacks?</p><p class="zh">全球每个月都会记录数十万起 DDoS 攻击。 AWS 提供哪些服务来帮助保护 AWS 客户免受这些攻击？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">AWS Shield</p><p class="zh">AWS Shield</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">AWS Config</p><p class="zh">AWS Config</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon Cognito</p><p class="zh">Amazon Cognito</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">AWS WAF</p><p class="zh">AWS WAF</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">AWS KMS</p><p class="zh">AWS KMS</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,D</b></p>
+<div class="expl"><p class="en">AWS Shield provides managed DDoS protection at the network and transport layers, and AWS WAF lets you create rules that filter malicious web traffic at the application layer. Together they defend against the full spectrum of DDoS attacks.<br>AWS Config continuously monitors and records AWS resource configurations to evaluate compliance, and is a configuration management and auditing service with no capability to block or mitigate DDoS traffic. Amazon Cognito is a user identity and authentication service for web and mobile applications, providing sign-up and sign-in functionality and federated identity, and has no DDoS mitigation capabilities. AWS KMS is a key management service for creating and controlling encryption keys used to protect data, and is not involved in network traffic filtering or DDoS defense.</p><p class="zh">AWS Shield 在网络和传输层提供托管 DDoS 保护，AWS WAF 允许您创建在应用程序层过滤恶意 Web 流量的规则。它们共同防御全方位的 DDoS 攻击。<br>AWS Config 持续监控和记录 AWS 资源配置以评估合规性，并且是一种配置管理和审核服务，无法阻止或缓解 DDoS 流量。 Amazon Cognito 是一种针对 Web 和移动应用程序的用户身份和身份验证服务，提供注册和登录功能以及联合身份，并且不具有 DDoS 缓解功能。 AWS KMS 是一种密钥管理服务，用于创建和控制用于保护数据的加密密钥，不参与网络流量过滤或 DDoS 防御。</p></div>
+</details></div>
+<div class="q" id="q22" data-n="22" data-ans="B,E">
+<div class="qhead"><span class="qno">Question 22</span><span class="badge">Content Domain 3 · Select 2</span></div>
+<div class="stem"><p class="en">Which AWS services should be used for read/write of constantly changing data?</p><p class="zh">应使用哪些 AWS 服务来读取/写入不断变化的数据？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon S3 GLACIER</p><p class="zh">Amazon S3 冰川</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon RDS</p><p class="zh">Amazon RDS</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">AWS Snowball</p><p class="zh">AWS Snowball</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon Redshift</p><p class="zh">Amazon Redshift</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Amazon EFS</p><p class="zh">Amazon EFS</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B,E</b></p>
+<div class="expl"><p class="en">Amazon RDS supports frequent read/write operations on relational data with full ACID transaction support, making it well suited for applications with constantly changing structured data. Amazon EFS provides a shared network file system with concurrent read/write access for multiple EC2 instances, making it appropriate for workloads that require continuous file-level changes.<br>Amazon S3 Glacier is an archival storage service designed for data that is rarely accessed and does not support the frequent read/write operations that constantly changing data requires. AWS Snowball is a physical device used to transfer large volumes of data into or out of AWS and has no capability to serve as a read/write data store for active workloads. Amazon Redshift is a data warehouse service optimized for running complex analytical queries across large datasets, not for handling frequent transactional read/write operations on constantly changing data.</p><p class="zh">Amazon RDS 支持对关系数据进行频繁的读/写操作，并具有完整的 ACID 事务支持，非常适合结构化数据不断变化的应用程序。 Amazon EFS 为多个 EC2 实例提供具有并发读/写访问的共享网络文件系统，使其适合需要连续文件级更改的工作负载。<br>Amazon S3 Glacier 是一种归档存储服务，专为很少访问的数据而设计，不支持不断变化的数据所需的频繁读/写操作。 AWS Snowball 是一种物理设备，用于将大量数据传入或传出 AWS，无法充当活动工作负载的读/写数据存储。 Amazon Redshift 是一种数据仓库服务，针对跨大型数据集运行复杂的分析查询进行了优化，而不是针对不断变化的数据处理频繁的事务性读/写操作。</p></div>
+</details></div>
+<div class="q" id="q23" data-n="23" data-ans="D">
+<div class="qhead"><span class="qno">Question 23</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">A company is looking for a scalable data warehouse solution. Which of the following AWS solutions would meet the company&#x27;s needs?</p><p class="zh">一家公司正在寻找可扩展的数据仓库解决方案。以下哪些 AWS 解决方案可以满足该公司的需求？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon Simple Storage Service (Amazon S3)</p><p class="zh">亚马逊简单存储服务 (Amazon S3)</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon DynamoDB</p><p class="zh">Amazon DynamoDB</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon Kinesis</p><p class="zh">Amazon Kinesis</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon Redshift</p><p class="zh">Amazon Redshift</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>D</b></p>
+<div class="expl"><p class="en">Amazon Redshift is a fully managed, petabyte-scale data warehouse service designed for running complex analytical queries across large datasets, making it the purpose-built solution for scalable data warehousing.<br>Amazon S3 is an object storage service for storing and retrieving any type of data, not a data warehouse for running analytical queries. Amazon DynamoDB is a NoSQL key-value and document database optimized for high-speed transactional workloads, not for complex analytical queries across large datasets. Amazon Kinesis is a service for collecting, processing, and analyzing real-time streaming data, not for warehousing and querying historical datasets.</p><p class="zh">Amazon Redshift 是一种完全托管的 PB 级数据仓库服务，旨在跨大型数据集运行复杂的分析查询，使其成为可扩展数据仓库的专用解决方案。<br>Amazon S3 是一种用于存储和检索任何类型数据的对象存储服务，而不是用于运行分析查询的数据仓库。 Amazon DynamoDB 是一个 NoSQL 键值和文档数据库，针对高速事务工作负载进行了优化，而不是针对跨大型数据集的复杂分析查询。 Amazon Kinesis 是一个用于收集、处理和分析实时流数据的服务，而不是用于仓储和查询历史数据集的服务。</p></div>
+</details></div>
+<div class="q" id="q24" data-n="24" data-ans="A,E">
+<div class="qhead"><span class="qno">Question 24</span><span class="badge">Content Domain 3 · Select 2</span></div>
+<div class="stem"><p class="en">What does the AWS Health Dashboard provide?</p><p class="zh">AWS Health Dashboard 提供什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Detailed troubleshooting guidance to address AWS events impacting your resources</p><p class="zh">详细的故障排除指南，用于解决影响您的资源的 AWS 事件</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Health checks for Auto Scaling instances</p><p class="zh">Auto Scaling 实例的健康检查</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Recommendations for Cost Optimization</p><p class="zh">成本优化建议</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">A dashboard detailing vulnerabilities in your applications</p><p class="zh">详细说明应用程序中的漏洞的仪表板</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Personalized view of AWS service health</p><p class="zh">AWS 服务运行状况的个性化视图</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,E</b></p>
+<div class="expl"><p class="en">AWS Health Dashboard provides a personalized view of how AWS service events affect your specific resources, and detailed troubleshooting guidance to help you respond to and resolve those events.<br>Health checks for Auto Scaling instances are a feature of Amazon EC2 Auto Scaling that monitors instance health and replaces unhealthy instances automatically, and are not a capability of the AWS Health Dashboard. Recommendations for cost optimization are provided by AWS Trusted Advisor, which inspects your environment and suggests ways to reduce spending, and are not a feature of the AWS Health Dashboard. A dashboard detailing vulnerabilities in applications describes Amazon Inspector, which scans for software vulnerabilities and unintended network exposure, and is not a function of the AWS Health Dashboard.</p><p class="zh">AWS Health Dashboard 提供有关 AWS 服务事件如何影响您的特定资源的个性化视图，以及帮助您响应和解决这些事件的详细故障排除指南。<br>Auto Scaling 实例的运行状况检查是 Amazon EC2 Auto Scaling 的一项功能，用于监控实例运行状况并自动替换不运行状况的实例，而不是 AWS Health Dashboard 的功能。成本优化建议由 AWS Trusted Advisor 提供，它会检查您的环境并提出减少支出的方法，这不是 AWS Health Dashboard 的功能。详细说明应用程序中的漏洞的仪表板描述了 Amazon Inspector，它扫描软件漏洞和意外的网络暴露，并且不是 AWS Health Dashboard 的功能。</p></div>
+</details></div>
+<div class="q" id="q25" data-n="25" data-ans="A">
+<div class="qhead"><span class="qno">Question 25</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">What is the AWS database service that allows you to upload data structured in key-value format?</p><p class="zh">允许您上传键值格式结构化数据的 AWS 数据库服务是什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon DynamoDB</p><p class="zh">Amazon DynamoDB</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon Aurora</p><p class="zh">Amazon Aurora</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon Redshift</p><p class="zh">Amazon Redshift</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon RDS</p><p class="zh">Amazon RDS</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en">Amazon DynamoDB is a fully managed NoSQL database that natively supports key-value and document data models, making it ideal for uploading and retrieving data structured as key-value pairs.<br>Amazon Aurora is a fully managed relational database engine compatible with MySQL and PostgreSQL that uses structured SQL schemas, and does not support the flexible key-value data model that DynamoDB provides. Amazon Redshift is a fully managed data warehouse service designed for running complex analytical queries across large volumes of structured data, and is not a key-value database. Amazon RDS is a managed relational database service supporting multiple SQL engines, and uses structured table-based schemas rather than the key-value data model.</p><p class="zh">Amazon DynamoDB 是一个完全托管的 NoSQL 数据库，本身支持键值和文档数据模型，非常适合上传和检索结构化为键值对的数据。<br>Amazon Aurora 是一个完全托管的关系数据库引擎，兼容 MySQL 和 PostgreSQL，使用结构化 SQL 模式，不支持 DynamoDB 提供的灵活的键值数据模型。 Amazon Redshift 是一项完全托管的数据仓库服务，旨在跨大量结构化数据运行复杂的分析查询，并且不是键值数据库。 Amazon RDS 是一种支持多个 SQL 引擎的托管关系数据库服务，并使用基于结构化表的模式而不是键值数据模型。</p></div>
+</details></div>
+<div class="q" id="q26" data-n="26" data-ans="D">
+<div class="qhead"><span class="qno">Question 26</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">In your on-premises environment, you can create as many virtual servers as you need from a single template. What can you use to perform the same in AWS?</p><p class="zh">在本地环境中，您可以根据需要从单个模板创建任意数量的虚拟服务器。您可以使用什么在 AWS 中执行相同的操作？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">IAM</p><p class="zh">IAM</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">An internet gateway</p><p class="zh">互联网网关</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">EBS Snapshot</p><p class="zh">EBS 快照</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">AMI</p><p class="zh">急性心肌梗死</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>D</b></p>
+<div class="expl"><p class="en">An Amazon Machine Image is a template containing the operating system, application software, and configuration needed to launch an EC2 instance, directly equivalent to the on-premises practice of spinning up multiple virtual servers from a single template.<br>IAM is an identity and access management service that controls permissions and user access within AWS, and has no role in creating or launching virtual server instances. An internet gateway is a VPC component that enables communication between resources inside a VPC and the public internet, and is unrelated to server provisioning or templating. An EBS snapshot is a point-in-time backup of a storage volume used for data recovery purposes, not a template for launching new instances with a defined operating system and configuration.</p><p class="zh">Amazon 系统映像是一个模板，其中包含启动 EC2 实例所需的操作系统、应用程序软件和配置，直接相当于从单个模板启动多个虚拟服务器的本地实践。<br>IAM 是一种身份和访问管理服务，用于控制 AWS 内的权限和用户访问，并且在创建或启动虚拟服务器实例方面没有作用。互联网网关是一个 VPC 组件，它支持 VPC 内的资源与公共互联网之间的通信，并且与服务器配置或模板无关。 EBS 快照是用于数据恢复目的的存储卷的时间点备份，而不是用于启动具有定义的操作系统和配置的新实例的模板。</p></div>
+</details></div>
+<div class="q" id="q27" data-n="27" data-ans="A,E">
+<div class="qhead"><span class="qno">Question 27</span><span class="badge">Content Domain 1 · Task 1.1 · Select 2</span></div>
+<div class="stem"><p class="en">What are the benefits of having infrastructure hosted in AWS?</p><p class="zh">在 AWS 中托管基础设施有哪些好处？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Increasing speed and agility</p><p class="zh">提高速度和敏捷性</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Gaining unlimited free storage for all data</p><p class="zh">获得所有数据的无限免费存储空间</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Gaining complete control over the physical infrastructure</p><p class="zh">获得对物理基础设施的完全控制</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Operating applications on behalf of customers</p><p class="zh">代表客户操作应用程序</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">All of the physical security and most of the data and network security are taken care of for you</p><p class="zh">所有物理安全以及大部分数据和网络安全均已为您处理好</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,E</b></p>
+<div class="expl"><p class="en">AWS increases speed and agility by allowing customers to provision resources in minutes rather than weeks, and handles physical security along with most data and network security so customers can focus on building applications rather than managing infrastructure.<br>Unlimited free storage is not an AWS benefit, as storage services such as Amazon S3 and EBS are billed based on the amount of data stored and retrieved. Complete control over physical infrastructure is not available to AWS customers, as AWS owns and manages all physical hardware, data centers, and networking equipment on the customer&#x27;s behalf. Operating applications on behalf of customers is not an AWS benefit, as customers remain responsible for building, deploying, and managing their own applications under the shared responsibility model.</p><p class="zh">AWS 允许客户在几分钟而不是几周内配置资源，从而提高速度和敏捷性，并处理物理安全以及大多数数据和网络安全，以便客户可以专注于构建应用程序而不是管理基础设施。<br>无限免费存储并不是 AWS 的一项优势，因为 Amazon S3 和 EBS 等存储服务是根据存储和检索的数据量计费的。 AWS 客户无法完全控制物理基础设施，因为 AWS 代表客户拥有并管理所有物理硬件、数据中心和网络设备。代表客户操作应用程序并不是 AWS 的优势，因为客户仍然负责在共担责任模型下构建、部署和管理自己的应用程序。</p></div>
+</details></div>
+<div class="q" id="q28" data-n="28" data-ans="B,D">
+<div class="qhead"><span class="qno">Question 28</span><span class="badge">Content Domain 2 · Select 2</span></div>
+<div class="stem"><p class="en">How can a customer increase security to AWS account logons?</p><p class="zh">客户如何提高 AWS 账户登录的安全性？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Configure AWS Certificate Manager</p><p class="zh">配置 AWS 证书管理器</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Enable Multi-Factor Authentication (MFA)</p><p class="zh">启用多重身份验证 (MFA)</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Use Amazon Cognito to manage access</p><p class="zh">使用 Amazon Cognito 来管理访问</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Configure a strong password policy</p><p class="zh">配置强密码策略</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Enable AWS Organizations</p><p class="zh">启用 AWS Organizations</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B,D</b></p>
+<div class="expl"><p class="en">Enabling MFA requires a second factor beyond the password to complete sign-in, and configuring a strong password policy enforces complexity, length, and rotation requirements. Both directly strengthen AWS account logon security.<br>AWS Certificate Manager provisions and manages SSL/TLS certificates for encrypting data in transit between applications and users, and has no role in controlling or securing account logon processes. Amazon Cognito manages user authentication and access for customer-facing applications through user pools and identity pools, and is designed for application-level user management rather than securing AWS account logons directly. AWS Organizations is an account management service for centrally governing and consolidating multiple AWS accounts, and does not itself provide logon security features for individual account access.</p><p class="zh">启用 MFA 需要密码之外的第二个因素才能完成登录，并且配置强密码策略会强制执行复杂性、长度和轮换要求。两者都直接加强了 AWS 账户登录的安全性。<br>AWS Certificate Manager 预置和管理 SSL/TLS 证书，用于加密应用程序和用户之间传输的数据，并且在控制或保护账户登录过程中不发挥作用。 Amazon Cognito 通过用户池和身份池管理面向客户的应用程序的用户身份验证和访问，专为应用程序级用户管理而设计，而不是直接保护 AWS 账户登录。 AWS Organizations 是一项用于集中管理和整合多个 AWS 账户的账户管理服务，其本身并不为个人账户访问提供登录安全功能。</p></div>
+</details></div>
+<div class="q" id="q29" data-n="29" data-ans="C">
+<div class="qhead"><span class="qno">Question 29</span><span class="badge">Content Domain 2</span></div>
+<div class="stem"><p class="en">Which of the following AWS security features is associated with an EC2 instance and functions to filter incoming traffic requests?</p><p class="zh">以下哪些 AWS 安全功能与 EC2 实例和过滤传入流量请求的功能相关？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">AWS X-Ray</p><p class="zh">AWS X 射线</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Network ACL</p><p class="zh">网络访问控制列表</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Security Groups</p><p class="zh">安全组</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">VPC Flow logs</p><p class="zh">VPC 流日志</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C</b></p>
+<div class="expl"><p class="en">Security groups act as a stateful virtual firewall directly associated with EC2 instances, evaluating and filtering inbound and outbound traffic based on protocol, port, and source or destination rules defined by the customer.<br>AWS X-Ray is an application tracing and debugging service that analyzes requests as they flow through distributed applications to identify performance bottlenecks and errors, and has no capability to filter or control network traffic to EC2 instances. Network ACLs are stateless firewalls that operate at the subnet level rather than the EC2 instance level, applying rules to all traffic entering or leaving a subnet without tracking connection state, and are not directly associated with individual instances. VPC Flow Logs capture metadata about the IP traffic flowing to and from network interfaces within a VPC, providing visibility for analysis and troubleshooting, but they record traffic information rather than filter or block incoming requests.</p><p class="zh">安全组充当与 EC2 实例直接关联的状态虚拟防火墙，根据客户定义的协议、端口以及源或目标规则评估和过滤入站和出站流量。<br>AWS X-Ray 是一项应用程序跟踪和调试服务，可在请求流经分布式应用程序时对其进行分析，以识别性能瓶颈和错误，并且无法过滤或控制流向 EC2 实例的网络流量。网络 ACL 是在子网级别而不是 EC2 实例级别运行的无状态防火墙，将规则应用于进入或离开子网的所有流量，而不跟踪连接状态，并且不与各个实例直接关联。 VPC 流日志捕获有关 VPC 内流入和流出网络接口的 IP 流量的元数据，为分析和故障排除提供可见性，但它们记录流量信息，而不是过滤或阻止传入请求。</p></div>
+</details></div>
+<div class="q" id="q30" data-n="30" data-ans="D,E">
+<div class="qhead"><span class="qno">Question 30</span><span class="badge">Content Domain 2 · Select 2</span></div>
+<div class="stem"><p class="en">In the AWS Shared responsibility Model, which of the following are the responsibility of the customer?</p><p class="zh">在 AWS 责任共担模型中，以下哪些是客户的责任？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Disk disposal</p><p class="zh">磁盘处置</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Controlling physical access to compute resources</p><p class="zh">控制对计算资源的物理访问</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Patching the Network infrastructure</p><p class="zh">修补网络基础设施</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Setting password complexity rules</p><p class="zh">设置密码复杂度规则</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Configuring network access rules</p><p class="zh">配置网络访问规则</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>D,E</b></p>
+<div class="expl"><p class="en">Setting password complexity rules and configuring network access rules such as security groups and NACLs are both customer responsibilities, as customers control their own identity policies and network configuration within their AWS environment.<br>Disk disposal is AWS&#x27;s responsibility, as AWS manages the secure decommissioning and destruction of physical storage hardware. Controlling physical access to compute resources is AWS&#x27;s responsibility, as customers have no access to the underlying physical infrastructure. Patching the network infrastructure is AWS&#x27;s responsibility, covering the managed networking layer beneath the customer&#x27;s virtual network.</p><p class="zh">设置密码复杂性规则和配置网络访问规则（例如安全组和 NACL）都是客户的责任，因为客户在其 AWS 环境中控制自己的身份策略和网络配置。<br>磁盘处置是 AWS 的责任，因为 AWS 管理物理存储硬件的安全退役和销毁。控制对计算资源的物理访问是 AWS 的责任，因为客户无法访问底层物理基础设施。修补网络基础设施是 AWS 的责任，涵盖客户虚拟网络下的托管网络层。</p></div>
+</details></div>
+<div class="q" id="q31" data-n="31" data-ans="A">
+<div class="qhead"><span class="qno">Question 31</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">What does Amazon Elastic Beanstalk provide?</p><p class="zh">Amazon Elastic Beanstalk 提供什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">A PaaS solution to automate application deployment</p><p class="zh">用于自动化应用程序部署的 PaaS 解决方案</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">A compute engine for Amazon ECS</p><p class="zh">Amazon ECS 的计算引擎</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">A scalable file storage solution for use with AWS and on-premises servers</p><p class="zh">可与 AWS 和本地服务器配合使用的可扩展文件存储解决方案</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">A NoSQL database service</p><p class="zh">NoSQL 数据库服务</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en">AWS Elastic Beanstalk is a Platform as a Service offering that automatically handles deployment, capacity provisioning, load balancing, auto-scaling, and application health monitoring, allowing developers to upload their application code and have the platform manage the infrastructure.<br>Amazon ECS is the container orchestration service that runs Docker containers and is the compute engine for containerised workloads, but it is not an abstraction that automatically manages deployment and infrastructure for general applications in the way Beanstalk does. A scalable file storage solution describes Amazon EFS, which provides shared NFS storage for EC2 instances; Elastic Beanstalk is a deployment and management platform, not a storage service. A NoSQL database service describes Amazon DynamoDB, which provides fully managed key-value and document storage; Elastic Beanstalk is a deployment platform rather than a database.</p><p class="zh">AWS Elastic Beanstalk 是一种平台即服务产品，可自动处理部署、容量配置、负载平衡、自动扩展和应用程序运行状况监控，允许开发人员上传其应用程序代码并让平台管理基础设施。<br>Amazon ECS 是运行 Docker 容器的容器编排服务，也是容器化工作负载的计算引擎，但它并不是像 Beanstalk 那样自动管理一般应用程序的部署和基础设施的抽象。可扩展的文件存储解决方案描述了 Amazon EFS，它为 EC2 实例提供共享 NFS 存储； Elastic Beanstalk 是一个部署和管理平台，而不是存储服务。 NoSQL 数据库服务描述了 Amazon DynamoDB，它提供完全托管的键值和文档存储； Elastic Beanstalk 是一个部署平台而不是数据库。</p></div>
+</details></div>
+<div class="q" id="q32" data-n="32" data-ans="C">
+<div class="qhead"><span class="qno">Question 32</span><span class="badge">Content Domain 2</span></div>
+<div class="stem"><p class="en">Which of the following is equivalent to a username and password and is used to authenticate your programmatic access to AWS services and APIs?</p><p class="zh">以下哪项相当于用户名和密码，用于验证您对 AWS 服务和 API 的编程访问？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Instance Password</p><p class="zh">实例密码</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Key pairs</p><p class="zh">密钥对</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Access Keys</p><p class="zh">访问键</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">MFA</p><p class="zh">艺术硕士</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C</b></p>
+<div class="expl"><p class="en">AWS Access Keys, consisting of an access key ID and a secret access key, are the credentials used to authenticate programmatic API calls, functioning like a username and password for AWS SDKs and CLI.<br>An instance password refers to the Windows administrator password generated for EC2 Windows instances to enable RDP access, which is a server login credential rather than an API authentication mechanism equivalent to a username and password. Key pairs are RSA public/private key combinations used to authenticate SSH connections to Linux EC2 instances, and while they serve an authentication purpose, they are for instance-level SSH access rather than AWS API and service authentication. MFA is an additional authentication factor added on top of primary credentials such as a username and password, requiring a one-time code from a device, and is a supplementary mechanism rather than a standalone credential pair equivalent to a username and password.</p><p class="zh">AWS 访问密钥由访问密钥 ID 和秘密访问密钥组成，是用于验证编程 API 调用的凭证，其功能类似于 AWS 开发工具包和 CLI 的用户名和密码。<br>实例密码是指为 EC2 Windows 实例启用 RDP 访问而生成的 Windows 管理员密码，它是服务器登录凭据，而不是相当于用户名和密码的 API 身份验证机制。密钥对是 RSA 公钥/私钥组合，用于验证与 Linux EC2 实例的 SSH 连接，虽然它们用于身份验证目的，但它们用于实例级 SSH 访问，而不是 AWS API 和服务身份验证。 MFA 是在用户名和密码等主要凭据之上添加的附加身份验证因素，需要设备提供一次性代码，并且是一种补充机制，而不是相当于用户名和密码的独立凭据对。</p></div>
+</details></div>
+<div class="q" id="q33" data-n="33" data-ans="A,C">
+<div class="qhead"><span class="qno">Question 33</span><span class="badge">Content Domain 2 · Select 2</span></div>
+<div class="stem"><p class="en">What credential components are required to gain programmatic access to an AWS account?</p><p class="zh">需要哪些凭证组件才能以编程方式访问 AWS 账户？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">An access key ID</p><p class="zh">访问密钥 ID</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">A primary key</p><p class="zh">主键</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">A secret access key</p><p class="zh">秘密访问密钥</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">A user ID</p><p class="zh">用户 ID</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">A secondary key</p><p class="zh">辅助钥匙</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,C</b></p>
+<div class="expl"><p class="en">Programmatic AWS access requires an access key ID to identify the calling entity and a secret access key to sign requests, together authenticating API calls made via the CLI or SDKs.<br>A primary key is not a valid AWS IAM credential component; it is a database term for a unique row identifier and has no role in AWS programmatic authentication. A user ID is an internal AWS identifier assigned to IAM users for tracking purposes but cannot be supplied as a credential to authenticate programmatic API requests. A secondary key is not a recognized AWS IAM credential type, and no such concept exists in the AWS authentication model for programmatic access.</p><p class="zh">编程式 AWS 访问需要一个访问密钥 ID 来识别调用实体，还需要一个秘密访问密钥来签署请求，同时验证通过 CLI 或 SDK 进行的 API 调用。<br>主键不是有效的 AWS IAM 凭证组件；它是唯一行标识符的数据库术语，在 AWS 编程身份验证中没有作用。用户 ID 是分配给 IAM 用户用于跟踪目的的内部 AWS 标识符，但不能作为凭证提供以验证编程 API 请求。辅助密钥不是公认的 AWS IAM 凭证类型，并且用于编程访问的 AWS 身份验证模型中不存在此类概念。</p></div>
+</details></div>
+<div class="q" id="q34" data-n="34" data-ans="C">
+<div class="qhead"><span class="qno">Question 34</span><span class="badge">Content Domain 4</span></div>
+<div class="stem"><p class="en">What does AWS provide to deploy popular technologies such as IBM MQ on AWS with the least amount of effort and time?</p><p class="zh">AWS 提供什么来以最少的精力和时间在 AWS 上部署 IBM MQ 等流行技术？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon Aurora</p><p class="zh">Amazon Aurora</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon CloudWatch</p><p class="zh">Amazon CloudWatch</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">AWS Quick Start reference deployments</p><p class="zh">AWS 快速入门参考部署</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">AWS OpsWorks</p><p class="zh">AWS OpsWorks</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C</b></p>
+<div class="expl"><p class="en">AWS Quick Start reference deployments provide automated gold-standard templates that deploy popular IT solutions on AWS in minutes, giving administrators a fast path to production-ready environments built on AWS best practices.<br>Amazon Aurora is a fully managed relational database compatible with MySQL and PostgreSQL, and is a database service with no capability to deploy or provision third-party technologies or solutions. Amazon CloudWatch collects metrics, logs, and event data from AWS services and resources to provide operational monitoring and alerting, and is a monitoring service with no deployment or provisioning capability. AWS OpsWorks (deprecated) was a configuration management service that used Chef and Puppet to automate server configuration, and while it could automate some infrastructure tasks it is not a pre-built deployment resource for rapidly deploying popular third-party technologies with minimal effort. Note: AWS OpsWorks was deprecated in 2024.</p><p class="zh">AWS 快速入门参考部署提供了自动化的黄金标准模板，可在几分钟内在 AWS 上部署流行的 IT 解决方案，从而为管理员提供一条快速途径，实现基于 AWS 最佳实践构建的生产就绪环境。<br>Amazon Aurora 是完全托管的关系型数据库，兼容 MySQL 和 PostgreSQL，是一种数据库服务，无法部署或提供第三方技术或解决方案。 Amazon CloudWatch 从 AWS 服务和资源收集指标、日志和事件数据以提供操作监控和警报，并且是一种没有部署或预置功能的监控服务。 AWS OpsWorks（已弃用）是一种配置管理服务，它使用 Chef 和 Puppet 来自动执行服务器配置，虽然它可以自动执行某些基础设施任务，但它并不是一种预构建的部署资源，无法轻松快速部署流行的第三方技术。注意：AWS OpsWorks 已于 2024 年弃用。</p></div>
+</details></div>
+<div class="q" id="q35" data-n="35" data-ans="A">
+<div class="qhead"><span class="qno">Question 35</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">A customer needs to run a MySQL database that easily scales. Which AWS service should they use?</p><p class="zh">客户需要运行易于扩展的 MySQL 数据库。他们应该使用哪种 AWS 服务？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon Aurora</p><p class="zh">Amazon Aurora</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon Redshift</p><p class="zh">Amazon Redshift</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon DynamoDB</p><p class="zh">Amazon DynamoDB</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon ElastiCache</p><p class="zh">Amazon ElastiCache</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en">Amazon Aurora is a MySQL and PostgreSQL-compatible relational database built for the cloud that automatically scales storage and can handle high throughput, making it the purpose-built choice for a MySQL workload that needs to scale easily.<br>Amazon Redshift is a managed data warehouse service optimized for running analytical SQL queries across large datasets, and is not a relational database engine compatible with MySQL workloads. Amazon DynamoDB is a fully managed NoSQL key-value and document database, and does not support MySQL or relational data models. Amazon ElastiCache is a managed in-memory caching service designed to accelerate application performance by storing frequently accessed data in memory, and is not a relational database capable of running MySQL workloads.</p><p class="zh">Amazon Aurora 是一款专为云构建的与 MySQL 和 PostgreSQL 兼容的关系数据库，可自动扩展存储并可处理高吞吐量，使其成为需要轻松扩展的 MySQL 工作负载的专用选择。<br>Amazon Redshift 是一种托管数据仓库服务，针对跨大型数据集运行分析 SQL 查询进行了优化，并且不是与 MySQL 工作负载兼容的关系数据库引擎。 Amazon DynamoDB 是完全托管的 NoSQL 键值和文档数据库，不支持 MySQL 或关系数据模型。 Amazon ElastiCache 是一种托管内存缓存服务，旨在通过将频繁访问的数据存储在内存中来提高应用程序性能，并且不是能够运行 MySQL 工作负载的关系数据库。</p></div>
+</details></div>
+<div class="q" id="q36" data-n="36" data-ans="A,C">
+<div class="qhead"><span class="qno">Question 36</span><span class="badge">Content Domain 2 · Select 2</span></div>
+<div class="stem"><p class="en">Under the shared responsibility model, which of the following tasks are the responsibility of the AWS customer?</p><p class="zh">在共担责任模型下，以下哪些任务是 AWS 客户的责任？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Ensuring that application data is encrypted at rest</p><p class="zh">确保应用程序数据静态加密</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Ensuring that AWS NTP servers are set to the correct time</p><p class="zh">确保 AWS NTP 服务器设置为正确的时间</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Ensuring that users have received security training in the use of AWS services</p><p class="zh">确保用户接受过使用 AWS 服务的安全培训</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Ensuring that access to data centers is restricted</p><p class="zh">确保对数据中心的访问受到限制</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Ensuring that hardware is disposed of properly</p><p class="zh">确保正确处置硬件</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,C</b></p>
+<div class="expl"><p class="en">Customers are responsible for encrypting their application data at rest and for training their users on proper security practices when using AWS services, both sitting on the customer side of the model.<br>Ensuring that AWS NTP servers are set to the correct time is entirely AWS&#x27;s responsibility, as customers have no access to or control over the underlying infrastructure components that provide time synchronisation. Ensuring that access to data centers is restricted is entirely AWS&#x27;s responsibility, covering physical access controls, surveillance, and protection of the facilities that house AWS infrastructure. Ensuring that hardware is disposed of properly is entirely AWS&#x27;s responsibility, as customers never take possession of physical hardware and AWS manages all end-of-life processes for its own equipment.</p><p class="zh">客户负责对其静态应用程序数据进行加密，并在使用 AWS 服务时对用户进行适当的安全实践培训，两者都位于模型的客户端。<br>确保 AWS NTP 服务器设置为正确的时间完全是 AWS 的责任，因为客户无法访问或控制提供时间同步的底层基础设施组件。确保对数据中心的访问受到限制完全是 AWS 的责任，包括对 AWS 基础设施所在设施的物理访问控制、监视和保护。确保正确处置硬件完全是 AWS 的责任，因为客户永远不会拥有物理硬件，并且 AWS 管理自己设备的所有报废流程。</p></div>
+</details></div>
+<div class="q" id="q37" data-n="37" data-ans="C">
+<div class="qhead"><span class="qno">Question 37</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">Your company is designing a new application that will store and retrieve photos and videos. Which of the following services should you recommend as the underlying storage mechanism?</p><p class="zh">您的公司正在设计一个新的应用程序，用于存储和检索照片和视频。您应该推荐以下哪些服务作为底层存储机制？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon EBS</p><p class="zh">亚马逊 EBS</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon SQS</p><p class="zh">Amazon SQS</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon S3</p><p class="zh">Amazon S3</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon EC2 Instance Store</p><p class="zh">Amazon EC2 实例存储</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C</b></p>
+<div class="expl"><p class="en">Amazon S3 is designed for storing and retrieving any amount of unstructured data, including photos and videos, with high durability and scalability, making it the purpose-built object storage solution for this use case.<br>Amazon EBS provides persistent block storage volumes that attach directly to EC2 instances, and is designed for low-latency disk access rather than storing and serving large volumes of unstructured media objects. Amazon SQS is a fully managed message queuing service for decoupling application components, and is a messaging service with no capability to store or retrieve files. Amazon EC2 Instance Store provides temporary block storage physically attached to the host machine running an EC2 instance, and is ephemeral storage that is lost when the instance stops, making it entirely unsuitable for persistent photo and video storage.</p><p class="zh">Amazon S3 专为存储和检索任意数量的非结构化数据（包括照片和视频）而设计，具有高耐用性和可扩展性，使其成为为此用例专门构建的对象存储解决方案。<br>Amazon EBS 提供直接连接到 EC2 实例的持久块存储卷，专为低延迟磁盘访问而设计，而不是存储和服务大量非结构化媒体对象。 Amazon SQS 是一种完全托管的消息队列服务，用于解耦应用程序组件，并且是一种不具备存储或检索文件功能的消息传递服务。 Amazon EC2 实例存储提供物理连接到运行 EC2 实例的主机的临时块存储，并且是临时存储，当实例停止时会丢失，因此完全不适合持久照片和视频存储。</p></div>
+</details></div>
+<div class="q" id="q38" data-n="38" data-ans="A">
+<div class="qhead"><span class="qno">Question 38</span><span class="badge">Content Domain 1</span></div>
+<div class="stem"><p class="en">How can the AWS Cloud increase user workforce productivity after migration from an on-premises data center?</p><p class="zh">从本地数据中心迁移后，AWS 云如何提高用户的员工生产力？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Users do not have to wait for infrastructure provisioning</p><p class="zh">用户无需等待基础设施配置</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">The AWS Cloud infrastructure is much faster than an on-premises data center infrastructure</p><p class="zh">AWS 云基础设施比本地数据中心基础设施快得多</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">AWS takes over application configuration management on behalf of users</p><p class="zh">AWS 代表用户接管应用程序配置管理</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Users do not need to address security and compliance issues</p><p class="zh">用户无需解决安全和合规问题</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en">With AWS, developers and engineers can self-provision infrastructure in minutes through the console or APIs, eliminating the waiting time associated with traditional hardware procurement and setup.<br>The AWS Cloud infrastructure is much faster than an on-premises data center infrastructure is misleading. The productivity gain comes from removing provisioning delays, not from raw infrastructure speed. AWS takes over application configuration management on behalf of users is false. Application configuration remains the customer&#x27;s responsibility under the Shared Responsibility Model. Users do not need to address security and compliance issues is false. Customers remain responsible for security in the cloud, including their applications, data, and access controls.</p><p class="zh">借助 AWS，开发人员和工程师可以通过控制台或 API 在几分钟内自行配置基础设施，从而消除与传统硬件采购和设置相关的等待时间。<br>AWS 云基础设施比本地数据中心基础设施快得多，这是一种误导。生产力的提高来自于消除配置延迟，而不是来自原始基础设施速度。 AWS 代表用户接管应用程序配置管理是错误的。在责任共担模型下，应用程序配置仍然是客户的责任。用户不需要解决安全性和合规性问题是错误的。客户仍然对云中的安全负责，包括其应用程序、数据和访问控制。</p></div>
+</details></div>
+<div class="q" id="q39" data-n="39" data-ans="B">
+<div class="qhead"><span class="qno">Question 39</span><span class="badge">Content Domain 2</span></div>
+<div class="stem"><p class="en">You have AWS Basic support, and you have discovered that some AWS resources are being used maliciously, and those resources could potentially compromise your data. What should you do?</p><p class="zh">您拥有 AWS 基本支持，并且发现某些 AWS 资源被恶意使用，这些资源可能会损害您的数据。你应该做什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Contact the AWS Customer Service team</p><p class="zh">联系 AWS 客户服务团队</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Contact the AWS Abuse Team</p><p class="zh">联系 AWS 滥用团队</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Contact the AWS Concierge team</p><p class="zh">联系 AWS 礼宾团队</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Contact the AWS Security team</p><p class="zh">联系 AWS 安全团队</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">The AWS Abuse Team handles reports of AWS infrastructure being used for malicious activity such as hacking, spam, or unauthorised use, and this channel is available to all customers regardless of their support tier.<br>The AWS Customer Service team handles general account and billing enquiries, and is not the designated contact for reporting malicious use of AWS infrastructure. The AWS Concierge team is a dedicated support resource available exclusively to Enterprise support plan customers for billing and account assistance, and does not handle abuse or malicious activity reports. The AWS Security team manages AWS&#x27;s own internal security posture and vulnerability disclosure program, and is not the correct channel for customers to report malicious use of AWS resources within their own accounts.</p><p class="zh">AWS 滥用团队负责处理有关 AWS 基础设施被用于恶意活动（例如黑客攻击、垃圾邮件或未经授权的使用）的报告，并且所有客户都可以使用此渠道，无论其支持级别如何。<br>AWS 客户服务团队负责处理一般账户和账单查询，并且不是报告恶意使用 AWS 基础设施的指定联系人。 AWS Concierge 团队是专门为企业支持计划客户提供计费和账户协助的专用支持资源，并且不处理滥用或恶意活动报告。 AWS 安全团队负责管理 AWS 自己的内部安全状况和漏洞披露计划，并不是客户举报其账户内恶意使用 AWS 资源的正确渠道。</p></div>
+</details></div>
+<div class="q" id="q40" data-n="40" data-ans="B">
+<div class="qhead"><span class="qno">Question 40</span><span class="badge">Content Domain 4</span></div>
+<div class="stem"><p class="en">Which is the MINIMUM AWS Support plan that allows for one-hour target response time for support cases?</p><p class="zh">哪一个 MINIMUM AWS Support 计划可以为支持案例提供一小时的目标响应时间？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Enterprise</p><p class="zh">企业</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Business</p><p class="zh">商业</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Developer</p><p class="zh">开发商</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Basic</p><p class="zh">基本的</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">AWS Business Support guarantees a one-hour response time for production system-down cases and provides 24/7 phone, email, and chat access. Developer Support offers business-hours email only; Basic has no case support; Enterprise offers faster response but at higher cost.<br>Enterprise Support provides faster response times including a 15-minute SLA for business-critical system failures, and also meets the one-hour production system-down SLA, but it is a higher-cost plan than Business Support and therefore not the minimum required. Developer Support provides business-hours email access to Cloud Support Engineers with response times measured in hours rather than one hour, and does not include 24/7 access or a one-hour production system-down SLA. Basic Support provides access to documentation and the seven core Trusted Advisor checks but includes no technical case support and no defined response time SLAs.</p><p class="zh">AWS 业务支持保证对生产系统停机案例的一小时响应时间，并提供 24/7 电话、电子邮件和聊天访问。开发者支持仅在工作时间提供电子邮件；基本没有案例支持；企业提供更快的响应，但成本更高。<br>企业支持提供更快的响应时间，包括针对关键业务系统故障的 15 分钟 SLA，并且还满足一小时生产系统停机 SLA，但它是比业务支持成本更高的计划，因此不是最低要求。开发人员支持为云支持工程师提供工作时间电子邮件访问，响应时间以小时而不是一小时为单位，并且不包括 24/7 访问或一小时生产系统停机 SLA。基本支持提供对文档和七个核心 Trusted Advisor 检查的访问，但不包括技术案例支持，也没有定义的响应时间 SLA。</p></div>
+</details></div>
+<div class="q" id="q41" data-n="41" data-ans="A">
+<div class="qhead"><span class="qno">Question 41</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">What is the lowest-cost, durable storage option for retaining database backups for immediate retrieval?</p><p class="zh">用于保留数据库备份以便立即检索的成本最低、持久的存储选项是什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon S3</p><p class="zh">Amazon S3</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon S3 Glacier Flexible Retrieval</p><p class="zh">Amazon S3 冰川灵活检索</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon EBS</p><p class="zh">亚马逊 EBS</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon EC2 Instance Store</p><p class="zh">Amazon EC2 实例存储</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en">Amazon S3 Standard provides durable, highly available object storage with immediate millisecond retrieval, and is more cost-effective than EBS for backup storage while meeting the immediate retrieval requirement.<br>Amazon S3 Glacier Flexible Retrieval is designed for long-term archival storage at very low cost, and retrieval takes from minutes to hours, making it unsuitable for backups that require immediate access. Amazon EBS provides persistent block storage volumes attached directly to EC2 instances for low-latency disk access, and is significantly more expensive per gigabyte than S3 for storing backup data. Amazon EC2 Instance Store provides temporary block storage physically attached to the host machine, and is ephemeral storage that is lost when the instance stops, making it entirely unsuitable for durable backup storage.</p><p class="zh">Amazon S3 标准版提供持久、高可用的对象存储，毫秒级即时检索，在满足即时检索需求的同时，备份存储比 EBS 更具成本效益。<br>Amazon S3 Glacier 灵活检索专为以非常低的成本进行长期存档存储而设计，检索时间从几分钟到几小时不等，因此不适合需要立即访问的备份。 Amazon EBS 提供直接附加到 EC2 实例的持久块存储卷以实现低延迟磁盘访问，并且每 GB 的成本比存储备份数据的 S3 贵得多。 Amazon EC2 实例存储提供物理连接到主机的临时块存储，并且是临时存储，当实例停止时就会丢失，因此完全不适合持久备份存储。</p></div>
+</details></div>
+<div class="q" id="q42" data-n="42" data-ans="B,E">
+<div class="qhead"><span class="qno">Question 42</span><span class="badge">Content Domain 3 · Select 2</span></div>
+<div class="stem"><p class="en">Which AWS services can be used to improve the performance of a global application and reduce latency for its users?</p><p class="zh">哪些 AWS 服务可用于提高全球应用程序的性能并减少用户的延迟？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">AWS KMS</p><p class="zh">AWS KMS</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">AWS Global Accelerator</p><p class="zh">AWS 全球加速器</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">AWS Direct Connect</p><p class="zh">AWS Direct Connect</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">AWS Glue</p><p class="zh">AWS Glue</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Amazon CloudFront</p><p class="zh">Amazon CloudFront</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B,E</b></p>
+<div class="expl"><p class="en">AWS Global Accelerator improves global application performance by routing user traffic through the AWS private backbone network to the nearest healthy endpoint, reducing internet latency, and Amazon CloudFront caches and serves content from edge locations worldwide, bringing content closer to users and reducing latency for global audiences.<br>AWS KMS is an encryption key management service for creating and controlling cryptographic keys used to protect data, and has no capability to improve application performance or reduce latency. AWS Direct Connect establishes a dedicated private network connection between on-premises infrastructure and AWS, and is designed for hybrid connectivity rather than improving performance for global end users. AWS Glue is a managed ETL service for discovering, preparing, and transforming data for analytics workloads, and is a data integration service with no application performance or latency capability.</p><p class="zh">AWS Global Accelerator 通过 AWS 私有骨干网络将用户流量路由到最近的健康端点，减少互联网延迟，从而提高全球应用程序性能，而 Amazon CloudFront 缓存并提供来自全球边缘站点的内容，使内容更贴近用户并减少全球受众的延迟。<br>AWS KMS 是一种加密密钥管理服务，用于创建和控制用于保护数据的加密密钥，并且无法提高应用程序性能或减少延迟。 AWS Direct Connect 在本地基础设施和 AWS 之间建立专用的专用网络连接，专为混合连接而设计，而不是为全球最终用户提高性能。 AWS Glue 是一种托管 ETL 服务，用于发现、准备和转换分析工作负载的数据，并且是一种不具有应用程序性能或延迟功能的数据集成服务。</p></div>
+</details></div>
+<div class="q" id="q43" data-n="43" data-ans="C">
+<div class="qhead"><span class="qno">Question 43</span><span class="badge">Content Domain 4</span></div>
+<div class="stem"><p class="en">How should a customer forecast the future costs for running a new web application?</p><p class="zh">客户应如何预测运行新 Web 应用程序的未来成本？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon Aurora Backtrack</p><p class="zh">Amazon Aurora 原路返回</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon CloudWatch Billing Alarms</p><p class="zh">Amazon CloudWatch 计费报警器</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">AWS Pricing Calculator</p><p class="zh">AWS Pricing Calculator</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">AWS Cost and Usage Report</p><p class="zh">AWS 成本和使用情况报告</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>C</b></p>
+<div class="expl"><p class="en">The AWS Pricing Calculator allows customers to model AWS service configurations and estimate future costs before deploying them, making it the purpose-built tool for forecasting the cost of a new application.<br>Amazon Aurora Backtrack is a feature that allows an Aurora database to be rewound to a previous point in time without restoring from a backup, and is a database recovery feature with no connection to cost forecasting. Amazon CloudWatch Billing Alarms trigger notifications when actual AWS spending exceeds a defined threshold, and are a cost alerting tool for active workloads rather than a forecasting tool for new applications. AWS Cost and Usage Reports provide the most detailed breakdown of actual AWS charges already incurred, and are a historical cost analysis tool rather than a future cost estimation service.</p><p class="zh">AWS Pricing Calculator 允许客户对 AWS 服务配置进行建模并在部署之前估算未来成本，使其成为预测新应用程序成本的专用工具。<br>Amazon Aurora 回溯功能允许 Aurora 数据库回退到之前的时间点，而无需从备份进行恢复，并且是一种与成本预测无关的数据库恢复功能。当实际 AWS 支出超过定义的阈值时，Amazon CloudWatch 计费警报会触发通知，并且是活动工作负载的成本警报工具，而不是新应用程序的预测工具。 AWS 成本和使用情况报告提供了已产生的实际 AWS 费用的最详细明细，并且是历史成本分析工具，而不是未来成本估算服务。</p></div>
+</details></div>
+<div class="q" id="q44" data-n="44" data-ans="D">
+<div class="qhead"><span class="qno">Question 44</span><span class="badge">Content Domain 4</span></div>
+<div class="stem"><p class="en">Which Amazon EC2 instance pricing model can provide discounts of up to 90%?</p><p class="zh">哪种 Amazon EC2 实例定价模型可以提供高达 90%的折扣？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Reserved Instances</p><p class="zh">预留实例</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">On-Demand</p><p class="zh">一经请求</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Dedicated Hosts</p><p class="zh">专用主机</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Spot Instances</p><p class="zh">现货实例</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>D</b></p>
+<div class="expl"><p class="en">Spot Instances use spare AWS capacity and can offer discounts of up to 90% compared to On-Demand prices. Reserved Instances offer up to approximately 72% discount; On-Demand is the baseline price; Dedicated Hosts typically cost more than standard options.<br>Reserved Instances offer savings of up to approximately 72% compared to On-Demand pricing in exchange for a 1 or 3-year commitment, which is a significant discount but substantially less than the up to 90% available through Spot Instances. On-Demand Instances are charged at the standard AWS rate with no discount, as they are the baseline pricing model against which all other purchasing options are measured. Dedicated Hosts are priced at a premium over standard EC2 pricing to account for the dedicated physical infrastructure, making them more expensive rather than cheaper than standard purchasing options.</p><p class="zh">Spot 实例使用备用 AWS 容量，与按需价格相比可提供高达 90% 的折扣。预留实例提供高达约 72% 的折扣；按需价格是基准价格；专用主机的成本通常高于标准选项。<br>与以 1 或 3 年承诺为代价的按需定价相比，预留实例可节省高达约 72%，这是一个很大的折扣，但远低于通过 Spot 实例实现的高达 90% 的节省。按需实例按标准 AWS 费率收费，无折扣，因为它们是衡量所有其他购买选项的基准定价模型。考虑到专用物理基础设施，专用主机的定价高于标准 EC2 定价，这使得它们比标准购买选项更昂贵而不是更便宜。</p></div>
+</details></div>
+<div class="q" id="q45" data-n="45" data-ans="B">
+<div class="qhead"><span class="qno">Question 45</span><span class="badge">Content Domain 1</span></div>
+<div class="stem"><p class="en">What is a value proposition of the AWS Cloud?</p><p class="zh">AWS 云的价值主张是什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">AWS is responsible for security in the AWS Cloud</p><p class="zh">AWS 负责 AWS 云中的安全</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">No long-term contract is required</p><p class="zh">无需签订长期合同</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Provision new servers in days</p><p class="zh">在几天内配置新服务器</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">AWS manages user applications in the AWS Cloud</p><p class="zh">AWS 管理 AWS 云中的用户应用程序</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">No long-term contract is required because AWS uses a pay-as-you-go model, allowing customers to use services on demand and stop at any time without upfront commitments or termination penalties.<br>AWS is responsible for security in the cloud is a partial truth that misrepresents the Shared Responsibility Model. Security is shared, with AWS responsible for the infrastructure and customers responsible for their data and configurations. Provision new servers in days is inaccurate. One of AWS&#x27;s key advantages is provisioning resources in minutes, not days, which is the reality that distinguishes cloud from traditional procurement. AWS manages user applications in the AWS Cloud is false. Application management remains the customer&#x27;s responsibility under the Shared Responsibility Model.</p><p class="zh">不需要长期合同，因为 AWS 采用即用即付模式，允许客户按需使用服务并随时停止，无需预先承诺或终止罚款。<br>AWS 负责云中的安全性是部分事实，歪曲了共享责任模型。安全性是共享的，AWS 负责基础设施，客户负责其数据和配置。在几天内配置新服务器是不准确的。 AWS 的主要优势之一是在几分钟而不是几天内配置资源，这就是云与传统采购的区别。 AWS 在 AWS 云中管理用户应用程序是错误的。在责任共担模型下，应用程序管理仍然是客户的责任。</p></div>
+</details></div>
+<div class="q" id="q46" data-n="46" data-ans="B,C">
+<div class="qhead"><span class="qno">Question 46</span><span class="badge">Content Domain 2 · Select 2</span></div>
+<div class="stem"><p class="en">Which of the following security-related services does AWS offer?</p><p class="zh">AWS 提供以下哪些与安全相关的服务？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Multi-factor authentication physical tokens</p><p class="zh">多重身份验证物理令牌</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">AWS Trusted Advisor security checks</p><p class="zh">AWS Trusted Advisor 安全检查</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Data encryption</p><p class="zh">数据加密</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Automated penetration testing</p><p class="zh">自动化渗透测试</p></div></li>
+<li class="opt" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en">Amazon S3 copyrighted content detection</p><p class="zh">Amazon S3 版权内容检测</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B,C</b></p>
+<div class="expl"><p class="en">AWS Trusted Advisor includes security checks that flag vulnerabilities such as open security groups, and AWS provides data encryption capabilities through services like KMS and native encryption across storage and database services. Both are genuine AWS security-related offerings.<br>Multi-factor authentication physical tokens are hardware MFA devices that customers purchase independently rather than a service provided by AWS; customers configure them with their accounts but AWS does not supply or manufacture the hardware tokens. Automated penetration testing is not an AWS service offering; AWS permits customers to conduct their own penetration testing on permitted services, but AWS does not perform automated penetration testing on customer workloads as a service. Amazon S3 copyrighted content detection is not an AWS service; Amazon Macie detects sensitive data categories such as PII in S3, but copyright detection is not within the scope of available AWS security services.</p><p class="zh">AWS Trusted Advisor 包括标记开放安全组等漏洞的安全检查，AWS 通过 KMS 等服务以及跨存储和数据库服务的本机加密提供数据加密功能。两者都是真正的 AWS 安全相关产品。<br>多重身份验证物理令牌是客户独立购买的硬件 MFA 设备，而不是 AWS 提供的服务；客户使用自己的帐户配置它们，但 AWS 不提供或制造硬件令牌。自动渗透测试不是 AWS 服务产品； AWS 允许客户对允许的服务进行自己的渗透测试，但 AWS 不会对作为服务的客户工作负载执行自动渗透测试。 Amazon S3 受版权保护的内容检测不是 AWS 服务； Amazon Macie 检测 S3 中的 PII 等敏感数据类别，但版权检测不在可用的 AWS 安全服务的范围内。</p></div>
+</details></div>
+<div class="q" id="q47" data-n="47" data-ans="B">
+<div class="qhead"><span class="qno">Question 47</span><span class="badge">Content Domain 1</span></div>
+<div class="stem"><p class="en">Jessica is managing an e-commerce web application in AWS. The application is hosted on six EC2 instances. One day, three of the instances crashed; but none of her customers were affected. What has Jessica done correctly in this scenario?</p><p class="zh">Jessica 正在 AWS 中管理一个电子商务 Web 应用程序。该应用程序托管在六个 EC2 实例上。有一天，其中三个实例崩溃了；但她的顾客都没有受到影响。在这种情况下，杰西卡做对了什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">She has properly built an elastic system</p><p class="zh">她正确地建立了一个弹性系统</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">She has properly built a fault tolerant system</p><p class="zh">她已经正确建立了容错系统</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">She has properly built an encrypted system</p><p class="zh">她已经正确建立了一个加密系统</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">She has properly built a scalable system</p><p class="zh">她正确地构建了一个可扩展的系统</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">A fault-tolerant system is designed to continue operating correctly even when some of its components fail, which is exactly what the scenario describes: three of six instances crashed but no customers were affected.<br>An elastic system automatically scales capacity up or down in response to changes in demand, but elasticity does not address continued operation during component failure. An encrypted system protects data from unauthorised access through cryptographic controls, which is a security property unrelated to maintaining availability when instances crash. A scalable system is designed to handle growth in workload or users by adding resources, but scalability does not ensure the application keeps running when existing instances fail.</p><p class="zh">容错系统的设计目的是，即使某些组件出现故障，也能继续正常运行，这正是场景所描述的：六个实例中的三个崩溃，但没有客户受到影响。<br>弹性系统会根据需求的变化自动扩大或缩小容量，但弹性并不能解决组件故障期间的持续运行问题。加密系统通过加密控制来保护数据免遭未经授权的访问，这是一种与在实例崩溃时保持可用性无关的安全属性。可扩展的系统旨在通过添加资源来处理工作负载或用户的增长，但可扩展性并不能确保应用程序在现有实例发生故障时保持运行。</p></div>
+</details></div>
+<div class="q" id="q48" data-n="48" data-ans="B">
+<div class="qhead"><span class="qno">Question 48</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">Your company has a data store application that requires access to a NoSQL database. Which AWS database offering would meet this requirement?</p><p class="zh">您的公司有一个需要访问 NoSQL 数据库的数据存储应用程序。哪种 AWS 数据库产品可以满足此要求？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon Aurora</p><p class="zh">Amazon Aurora</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon DynamoDB</p><p class="zh">Amazon DynamoDB</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon Elastic Block Store</p><p class="zh">亚马逊弹性块商店</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon Redshift</p><p class="zh">Amazon Redshift</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">Amazon DynamoDB is a fully managed NoSQL key-value and document database designed for applications that need fast, flexible, schema-less data storage.<br>Amazon Aurora is a fully managed relational database compatible with MySQL and PostgreSQL that uses structured schemas and SQL, and does not support NoSQL data models. Amazon Elastic Block Store provides block storage volumes that attach to EC2 instances for use as persistent disks, and is a storage service with no database capability of any kind. Amazon Redshift is a managed data warehouse service optimized for running analytical SQL queries across large datasets, and is not a NoSQL database.</p><p class="zh">Amazon DynamoDB 是一个完全托管的 NoSQL 键值和文档数据库，专为需要快速、灵活、无模式数据存储的应用程序而设计。<br>Amazon Aurora 是一款完全托管的关系数据库，兼容 MySQL 和 PostgreSQL，使用结构化模式和 SQL，不支持 NoSQL 数据模型。 Amazon Elastic Block Store 提供附加到 EC2 实例以用作永久性磁盘的块存储卷，并且是一种不具有任何类型数据库功能的存储服务。 Amazon Redshift 是一项针对跨大型数据集运行分析 SQL 查询而优化的托管数据仓库服务，它不是 NoSQL 数据库。</p></div>
+</details></div>
+<div class="q" id="q49" data-n="49" data-ans="B">
+<div class="qhead"><span class="qno">Question 49</span><span class="badge">Content Domain 2</span></div>
+<div class="stem"><p class="en">You have noticed that several critical Amazon EC2 instances have been terminated. Which of the following AWS services would help you determine who took this action?</p><p class="zh">您已经注意到，几个关键的 Amazon EC2 实例已被终止。以下哪些 AWS 服务可以帮助您确定谁执行了此操作？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon Inspector</p><p class="zh">Amazon Inspector</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">AWS CloudTrail</p><p class="zh">AWS CloudTrail</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">AWS Trusted Advisor</p><p class="zh">AWS Trusted Advisor</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">EC2 Instance Usage Report</p><p class="zh">EC2 实例使用情况报告</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">AWS CloudTrail records all API calls and account activity across an AWS environment, capturing who performed each action, from which IP address, and at what time, making it the definitive source for identifying who terminated EC2 instances.<br>Amazon Inspector is an automated security assessment service that scans EC2 instances and container images for software vulnerabilities and unintended network exposure, and does not record who performed API actions or management events. AWS Trusted Advisor inspects your AWS environment and provides recommendations across security, cost, performance, and fault tolerance, and is an advisory tool rather than an audit log of account activity. EC2 Instance Usage Report provides billing and usage data about EC2 instances and does not contain API call logs or identity information about who terminated instances.</p><p class="zh">AWS CloudTrail 记录 AWS 环境中的所有 API 调用和账户活动，捕获执行每个操作的人员、IP 地址以及时间，使其成为识别谁终止 EC2 实例的最终来源。<br>Amazon Inspector 是一项自动化安全评估服务，可扫描 EC2 实例和容器映像中的软件漏洞和意外网络暴露，并且不记录谁执行了 API 操作或管理事件。 AWS Trusted Advisor 检查您的 AWS 环境并提供安全性、成本、性能和容错方面的建议，它是一种咨询工具，而不是帐户活动的审核日志。 EC2 实例使用情况报告提供有关 EC2 实例的计费和使用数据，不包含 API 调用日志或有关谁终止实例的身份信息。</p></div>
+</details></div>
+<div class="q" id="q50" data-n="50" data-ans="B">
+<div class="qhead"><span class="qno">Question 50</span><span class="badge">Content Domain 3</span></div>
+<div class="stem"><p class="en">What is the primary storage service used by Amazon RDS database instances?</p><p class="zh">Amazon RDS 数据库实例使用的主存储服务是什么？</p></div>
+<ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en">Amazon S3 Glacier</p><p class="zh">Amazon S3 冰川</p></div></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en">Amazon EBS</p><p class="zh">亚马逊 EBS</p></div></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en">Amazon EFS</p><p class="zh">Amazon EFS</p></div></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en">Amazon S3</p><p class="zh">Amazon S3</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>B</b></p>
+<div class="expl"><p class="en">Amazon RDS database instances use Amazon EBS volumes as their primary storage layer, providing persistent block-level storage that persists independently of the database instance lifecycle.<br>Amazon S3 Glacier is an archival storage service designed for long-term data retention at low cost and is not used as active storage for running database instances. Amazon EFS is a shared file system service mountable across multiple EC2 instances and is not the primary storage layer for RDS. Amazon S3 is an object storage service accessed via API and is not used as block-level storage for database instances.</p><p class="zh">Amazon RDS 数据库实例使用 Amazon EBS 卷作为其主存储层，提供独立于数据库实例生命周期持续存在的持久块级存储。<br>Amazon S3 Glacier 是一种归档存储服务，旨在以低成本长期保留数据，不用作运行数据库实例的主动存储。 Amazon EFS 是可跨多个 EC2 实例安装的共享文件系统服务，不是 RDS 的主存储层。 Amazon S3 是通过 API 访问的对象存储服务，不用作数据库实例的块级存储。</p></div>
+</details></div>
+<footer class="sub">题目来源：<a href="https://github.com/nastaso/cloudcertprep/tree/9367b00d9f5b39676f4ec3413304d91a7dccbbfb/src/data/clf-c02">CloudCertPrep CLF-C02</a>（MIT License）。<a href="LICENSE-CloudCertPrep.txt">查看许可证</a>。不代表 AWS 官方内容。<!--i18n:sw-->
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+<!--/i18n:sw--></footer>
+</div>
+<div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div>
+<script>
+(function(){
+"use strict";
+var KEY="quiz:aws:clf:01";
+var TOTAL=50;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+/* 答案分隔：多选用 ","，填空的等价写法用 "|"（两种都支持） */
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(/[,|]/).map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+function norm(s){return String(s==null?"":s).replace(/\s+/g," ").trim().toUpperCase()}
+function isFill(q){return q.getAttribute("data-kind")==="fill"}
+function fillInput(q){return q1("input.fill",q)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  /* 填空题：复原/锁定输入框 */
+  var inp=q1("input.fill",q);
+  if(inp){
+    if(locked){ if(inp.value!==(sel[0]||""))inp.value=sel[0]||""; }
+    inp.disabled=locked;
+    inp.classList.remove("ok","bad");
+    if(judged)inp.classList.add(rec.ok?"ok":"bad");
+  }
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = isFill(q) ? !norm(sel[0]||"") : sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok&&!isFill(q))
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q),ok;
+  if(isFill(q)){var v=norm(sel[0]||"");ok=(v!==""&&A.indexOf(v)>=0);}
+  else{ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});}
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+/* 填空题输入：只存值、点亮"确认作答"，不重绘以免打断光标 */
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(!el||!el.classList||!el.classList.contains("fill"))return;
+  var q=el.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  S[nOf(q)]={s:[el.value],ok:null,revealed:false};
+  save();
+  var sub=q1(".js-submit",q);if(sub)sub.disabled=!norm(el.value);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script>
+<script src="../assets/presence.js"></script>
+<!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--></body></html>
