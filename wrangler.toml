@@ -1,0 +1,34 @@
+# 题库站（Cloudflare Workers）—— 根目录配置
+#
+# 「做法 A」：让现有站点这个 Worker 自己带上在线人数后端，同域名、无跨域。
+# push 之后 Cloudflare 会改用 wrangler 部署：静态页面照旧，/api/* 走 Worker 脚本，
+# 并顺带创建 Durable Object（在线人数就存在里面）。
+#
+# 回退：删掉本文件再 push 一次，即回到「纯静态资产」的原状，页面服务方式不变。
+#
+# ⚠️ name 必须与 Cloudflare 后台里现有的 Worker 项目名一致，否则会新建一个 Worker
+#    （现有站点不受影响，但新地址是另一个域名）。本仓库对应的站是
+#    https://quizbank.hukai990124.workers.dev/ ，故 name = "quizbank"。
+
+name = "quizbank"
+main = "worker/worker.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+# 静态页面继续由 Cloudflare 免费无限地发；只有 /api/* 先落到 Worker 脚本上。
+[assets]
+directory = "site"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+[[durable_objects.bindings]]
+name = "PRESENCE"
+class_name = "Presence"
+
+# Durable Object 用 SQLite 存储（免费版可用）
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Presence"]
+
+[observability]
+enabled = true
