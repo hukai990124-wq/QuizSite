@@ -1,5 +1,61 @@
 {
  "_comment": "题库站点 UI 三语字典 · 中文原文 → 英文 / 日文。只覆盖界面文案，题目、选项、解析一律不翻译。key 必须与页面文本节点规范化后（trim + 空白折叠为单空格）完全一致。",
+ "AWS CLF-C02": {
+  "en": "AWS CLF-C02",
+  "ja": "AWS CLF-C02"
+ },
+ "5 个题库 · 共 2710 题 · 可作答判分 · 进度自动保存在本机浏览器": {
+  "en": "5 practice banks · 2,710 questions · answer and score online · progress saved in this browser",
+  "ja": "5 つの問題集・合計 2,710 問・解答と採点が可能・進捗はこのブラウザーに保存"
+ },
+ "AWS CLF-C02 练习题库": {
+  "en": "AWS CLF-C02 Practice Questions",
+  "ja": "AWS CLF-C02 練習問題"
+ },
+ "AWS CLF-C02 练习题库 · 目录": {
+  "en": "AWS CLF-C02 Practice Questions · Index",
+  "ja": "AWS CLF-C02 練習問題 · 目次"
+ },
+ "4 套练习卷，每套 50 题，中英日对照，附答案与解析；中文和日文为机器翻译，题目来自 MIT 许可公开题库。": {
+  "en": "Four 50-question English/Chinese/Japanese practice sets with answers and explanations, sourced from an MIT-licensed question bank; Chinese and Japanese are machine-translated.",
+  "ja": "MIT ライセンスの問題集を使用した、各 50 問・全 4 セットの英中日対訳練習問題。解答と解説付き。中国語と日本語は機械翻訳です。"
+ },
+ "AWS CLF-C02 备考练习": {
+  "en": "AWS CLF-C02 Exam Practice",
+  "ja": "AWS CLF-C02 試験対策"
+ },
+ "4 套 · 每套 50 题 · 中英对照 · 答案与解析 · 进度保存在本机浏览器": {
+  "en": "4 sets · 50 questions each · English + Chinese · answers and explanations · progress saved in this browser",
+  "ja": "全 4 セット・各 50 問・英中対訳・解答と解説付き・進捗はこのブラウザーに保存"
+ },
+ "4 套 · 每套 50 题 · 中英日对照 · 答案与解析 · 官方考试 65 题（含 15 道不计分题）": {
+  "en": "4 sets · 50 questions each · English, Chinese, and Japanese · answers and explanations · the official exam has 65 questions including 15 unscored",
+  "ja": "全 4 セット・各 50 問・英中日対訳・解答と解説付き・公式試験は採点対象外 15 問を含む 65 問"
+ },
+ "50 题 · 中英日对照 · 点选项后按「确认作答」判分 · MIT 许可练习题，非官方题目 · 中文和日文为机器翻译": {
+  "en": "50 questions · English, Chinese, and Japanese · select an option and check your answer · MIT-licensed practice questions, not official exam questions · Chinese and Japanese are machine-translated",
+  "ja": "50 問・英中日対訳・選択肢を選んで回答を確認・MIT ライセンスの練習問題（公式試験問題ではありません）・中国語と日本語は機械翻訳"
+ },
+ "50 题 · 中英日对照 · 点选项后按「确认作答」判分 · 官方考试 65 题（含 15 道不计分题），本卷为 50 题练习 · 非官方题目 · 中文和日文为机器翻译": {
+  "en": "50 questions · English, Chinese, and Japanese · select an option and check your answer · the official exam has 65 questions including 15 unscored; this is a 50-question practice set · not official exam questions · Chinese and Japanese are machine-translated",
+  "ja": "50 問・英中日対訳・選択肢を選んで回答を確認・公式試験は採点対象外 15 問を含む 65 問。本セットは 50 問の練習用です・公式問題ではありません・中国語と日本語は機械翻訳"
+ },
+ "AWS CLF-C02 练习卷 · 第 01 套": {
+  "en": "AWS CLF-C02 Practice Set 01",
+  "ja": "AWS CLF-C02 練習セット 01"
+ },
+ "AWS CLF-C02 练习卷 · 第 02 套": {
+  "en": "AWS CLF-C02 Practice Set 02",
+  "ja": "AWS CLF-C02 練習セット 02"
+ },
+ "AWS CLF-C02 练习卷 · 第 03 套": {
+  "en": "AWS CLF-C02 Practice Set 03",
+  "ja": "AWS CLF-C02 練習セット 03"
+ },
+ "AWS CLF-C02 练习卷 · 第 04 套": {
+  "en": "AWS CLF-C02 Practice Set 04",
+  "ja": "AWS CLF-C02 練習セット 04"
+ },
  "只看错题": {
   "en": "Wrong only",
   "ja": "誤答のみ"
