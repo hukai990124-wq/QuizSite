@@ -12,8 +12,11 @@
  * 表现
  *   - 左下角常驻一枚小地球：自转、有经纬网与陆地点阵；地球上的金点就是正在浏览的人。
  *   - 地球下方一行「● N 人在线」，点一下展开城市列表，再点收起。
+ *   - 卡片右上角有一枚「－」按钮，点了整个小窗会缩成左下角一枚 44px 圆钮（只显示人数）；
+ *     再点圆钮即展开。选择记在 localStorage（presence:fold），全站各页共用。
+ *     —— 答题卡在窄屏（<1080px）是底部通栏抽屉，会和小地球重叠，用这个按钮给它让位。
  *   - 连不上后端：连续失败几次后整个小窗自动隐藏，并彻底停止重试（刷新页面才会再试）。
- *   - 省电：页面切到后台时暂停渲染；系统开启「减少动态效果」时不自转。
+ *   - 省电：页面切到后台时暂停渲染；系统开启「减少动态效果」时不自转；收起时不渲染。
  *   - 文案是中文，交给站内既有的 i18n 运行时翻译（词条已收录在词典里）。
  */
 (function (global) {
@@ -25,6 +28,7 @@
   var HEARTBEAT = 15000;        // 心跳间隔；服务端借此机会同步人数
   var HIDE_AFTER = 4;           // 连续失败多少次后自动收起
   var MAX_CITIES = 8;
+  var FOLD_KEY = "presence:fold";   // 收起状态存这里，全站共用
   var FPS = 30;                 // 渲染帧率上限（这么小的球，30 帧足够）
   var TILT = 16;                // 地轴倾斜（度）
   var SPIN = 0.11;              // 每个渲染帧自转的角度
@@ -57,7 +61,9 @@
   /* ------------------------------------------------------------------ 样式 */
   var CSS = [
     ".pc-win,.pc-win *{box-sizing:border-box}",
-    ".pc-win{position:fixed;left:16px;bottom:16px;z-index:900;overflow:hidden;width:138px;",
+    /* z-index 35：高于各页顶部工具条（5/9/20/30），但低于答题卡 .sheet(40) 与成绩单遮罩 .mask(60)。
+       这样答题卡抽屉一拉开就把小地球盖住，不会挡住底部的题号格。 */
+    ".pc-win{position:fixed;left:16px;bottom:16px;z-index:35;overflow:hidden;width:138px;",
     "background:rgba(255,255,255,.95);border:1px solid #e3e9ee;border-radius:14px;",
     "box-shadow:0 8px 24px rgba(16,24,40,.13);color:#0f172a;",
     "font:13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;",
@@ -85,6 +91,27 @@
     "padding:3px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}",
     ".pc-tip{font-size:11.5px;color:#8b95a1;margin-top:7px}",
     ".pc-tip b{color:#0b6b3a;font-variant-numeric:tabular-nums;margin-right:3px}",
+    /* 收起按钮：停在卡片右上角。触屏没有 hover，所以常驻显示，只用透明度压低存在感 */
+    ".pc-fold{position:absolute;top:5px;right:5px;z-index:2;width:21px;height:21px;padding:0;",
+    "border:0;border-radius:99px;background:rgba(15,23,42,.06);color:#8492a3;cursor:pointer;",
+    "display:flex;align-items:center;justify-content:center;opacity:.72;",
+    "transition:opacity .15s,background .15s,color .15s;-webkit-tap-highlight-color:transparent}",
+    ".pc-win:hover .pc-fold,.pc-fold:focus-visible{opacity:1}",
+    ".pc-fold:hover{background:rgba(15,23,42,.13);color:#42566b}",
+    ".pc-fold svg{width:11px;height:11px;display:block}",
+    /* 收起态：整个小窗缩成左下角一枚圆钮，只留「● N」。
+       注意：选择器带 [data-fold]，优先级高于下面的 @media，窄屏也能正确缩小。 */
+    ".pc-win[data-fold='1']{width:44px;height:44px;border-radius:99px;cursor:pointer}",
+    ".pc-win[data-fold='1'] .pc-globe,",
+    ".pc-win[data-fold='1'] .pc-panel,",
+    ".pc-win[data-fold='1'] .pc-lbl,",
+    ".pc-win[data-fold='1'] .pc-caret,",
+    ".pc-win[data-fold='1'] .pc-fold{display:none}",
+    ".pc-win[data-fold='1'] .pc-hd{height:44px;padding:0;border-top:0;border-radius:99px;",
+    "justify-content:center;gap:5px}",
+    ".pc-win[data-fold='1'] .pc-num{font-size:15px;min-width:0;text-align:center;margin:0}",
+    ".pc-win[data-fold='1'] .pc-dot{width:6px;height:6px}",
+    ".pc-win[data-fold='1']:hover{border-color:#cbd5e1}",
     "@media (max-width:640px){.pc-win{left:10px;bottom:10px;width:106px}.pc-globe{height:104px}.pc-num{font-size:15px}.pc-hd{padding:7px 10px 8px;gap:6px}}",
     "@media print{.pc-win{display:none!important}}",
     "@media (prefers-reduced-motion:reduce){.pc-dot.on{animation:none}}"
@@ -354,7 +381,12 @@
       '<div class="pc-panel"><div class="pc-in">' +
       '<div class="pc-cities"></div>' +
       '<div class="pc-tip">正在连接…</div>' +
-      '</div></div>';
+      '</div></div>' +
+      // 放在最后：绝对定位下 DOM 越靠后越在上层，这样不会被地球画布吞掉点击
+      '<button class="pc-fold" type="button" title="收起在线人数" aria-label="收起在线人数">' +
+      '<svg viewBox="0 0 12 12" aria-hidden="true" focusable="false">' +
+      '<path d="M2.4 6h7.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
+      '</svg></button>';
 
     document.body.appendChild(win);
 
@@ -363,11 +395,42 @@
     var num = win.querySelector(".pc-num");
     var cities = win.querySelector(".pc-cities");
     var tip = win.querySelector(".pc-tip");
+    var foldBtn = win.querySelector(".pc-fold");
     var globe = new Globe(win.querySelector(".pc-globe canvas"));
 
     var lastNum = -1, lastTip = "", lastCities = "";
 
+    /* ------------------------------------------------------------ 收起 / 展开
+       选择记在 localStorage（键 presence:fold），全站各页共用，不会每翻一页又弹出来。
+       收起时停掉 canvas 自转（省电），展开时再续上。 */
+    var visible = false, folded = false;
+
+    function syncGlobe() {
+      if (visible && !folded) globe.start();
+      else globe.stop();
+    }
+
+    function setFold(on, save) {
+      folded = !!on;
+      win.setAttribute("data-fold", folded ? "1" : "0");
+      hd.setAttribute("aria-label", folded ? "展开在线人数" : "在线人数");
+      hd.setAttribute("title", folded ? "展开在线人数" : "在线人数");
+      if (folded) {                      // 收起时顺手把展开的城市列表也收掉
+        win.setAttribute("data-open", "0");
+        hd.setAttribute("aria-expanded", "false");
+      }
+      if (save) { try { localStorage.setItem(FOLD_KEY, folded ? "1" : "0"); } catch (e) { } }
+      syncGlobe();
+      if (visible && !folded) globe.resize();   // 收起期间量不到尺寸，展开后重量一次
+    }
+
+    foldBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setFold(true, true);
+    });
+
     hd.addEventListener("click", function () {
+      if (folded) { setFold(false, true); return; }   // 收起态：点圆钮＝展开
       var open = win.getAttribute("data-open") === "1";
       win.setAttribute("data-open", open ? "0" : "1");
       hd.setAttribute("aria-expanded", open ? "false" : "true");
@@ -412,11 +475,17 @@
     }
 
     function show(v) {
-      win.style.display = v ? "" : "none";
-      if (v) globe.resize();
+      visible = !!v;
+      win.style.display = visible ? "" : "none";
+      syncGlobe();
+      if (visible && !folded) globe.resize();
     }
 
-    return { apply: apply, setStatus: setStatus, show: show, globe: globe, el: win };
+    return {
+      apply: apply, setStatus: setStatus, show: show, globe: globe, el: win,
+      setFold: setFold, sync: syncGlobe,
+      isFolded: function () { return folded; }
+    };
   }
 
   /* ---------------------------------------------------------------- 网络层 */
@@ -438,7 +507,7 @@
         retry = 0;
         ui.show(true);
         ui.setStatus("已连接", true);
-        ui.globe.start();
+        ui.sync();                       // 收起态下不要偷偷把地球重新转起来
         hb = setInterval(function () {
           if (ws && ws.readyState === 1) { try { ws.send("ping"); } catch (e) { } }
         }, HEARTBEAT);
@@ -471,7 +540,7 @@
 
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) { ui.globe.stop(); return; }
-      ui.globe.start();
+      ui.sync();
       if (ws && ws.readyState > 1) connect();
     });
     global.addEventListener("pagehide", function () {
@@ -488,7 +557,10 @@
   function boot() {
     if (!document.body) return;
     var ui = buildUI();
-    ui.show(false);                 // 先藏起来，连上再出现，避免闪一下
+    var saved = "0";
+    try { saved = localStorage.getItem(FOLD_KEY) || "0"; } catch (e) { }
+    ui.setFold(saved === "1", false);   // 先按上次的选择摆好，再决定显不显示，避免闪一下
+    ui.show(false);                     // 先藏起来，连上再出现
     if (DEMO) { startDemo(ui); return; }
     startNetwork(ui);
   }

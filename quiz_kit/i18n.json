@@ -1989,5 +1989,7 @@
  "逐题核对；如发现个别拼写差异以官方原件为准。": {"en": " question by question; if you spot a spelling difference, the official original prevails.", "ja": " と一問ずつ照合しています。表記の違いがある場合は公式原本を優先してください。"},
  "DELE A2 阅读 + 写作 + 听力 · 官方样卷练习册": {"en": "DELE A2 Reading + Writing + Listening · Official sample papers", "ja": "DELE A2 読解＋作文＋リスニング · 公式サンプル問題集"},
  "官方样卷 Modelo 0（2020 版） · DELE A2 阅读+写作+听力": {"en": "Official sample paper Modelo 0 (2020 edition) · DELE A2 Reading + Writing + Listening", "ja": "公式サンプル Modelo 0（2020年版） · DELE A2 読解＋作文＋リスニング"},
- "官方样卷 Modelo 0（旧版） · DELE A2 阅读+写作+听力": {"en": "Official sample paper Modelo 0 (older format) · DELE A2 Reading + Writing + Listening", "ja": "公式サンプル Modelo 0（旧形式） · DELE A2 読解＋作文＋リスニング"}
+ "官方样卷 Modelo 0（旧版） · DELE A2 阅读+写作+听力": {"en": "Official sample paper Modelo 0 (older format) · DELE A2 Reading + Writing + Listening", "ja": "公式サンプル Modelo 0（旧形式） · DELE A2 読解＋作文＋リスニング"},
+ "收起在线人数": {"en": "Collapse the online panel", "ja": "オンライン人数をたたむ"},
+ "展开在线人数": {"en": "Expand the online panel", "ja": "オンライン人数を展開する"}
 }
