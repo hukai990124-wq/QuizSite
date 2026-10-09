@@ -61,9 +61,13 @@ def main():
         return r.returncode
 
     # 4) 在线人数控件
+    #    前缀必须相对【站点根 site/】算，不能相对本套目录（site/dele-a1/）：
+    #    assets/ 位于站点根，页面在下一层，相对 DST 算会得出空前缀，
+    #    写出 site/dele-a1/assets/presence.js 这种不存在的路径（线上 404）。
     n = 0
+    SITE = os.path.join(ROOT, "site")
     for dp, dn, fn in os.walk(DST):
-        rel = os.path.relpath(dp, DST).replace("\\", "/")
+        rel = os.path.relpath(dp, SITE).replace("\\", "/")
         depth = 0 if rel == "." else len(rel.split("/"))
         prefix = "../" * depth
         for f in sorted(fn):
