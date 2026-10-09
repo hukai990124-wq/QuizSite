@@ -1,9 +1,1827 @@
 {
   "attribution": "© 独立行政法人情報処理推進機構 (IPA)",
   "sets": {
+    "2022-a": {
+      "year": 2022,
+      "subject": "A",
+      "kind": "sample",
+      "sourceAttribution": "出典：基本情報技術者試験（科目A試験） サンプル問題セット",
+      "sourcePage": "https://www.ipa.go.jp/shiken/syllabus/henkou/2022/20221226.html",
+      "questionPdf": "https://www.ipa.go.jp/shiken/syllabus/henkou/2022/ssf7ph000000h5tb-att/fe_kamoku_a_set_sample_qs.pdf",
+      "answerPdf": "https://www.ipa.go.jp/shiken/syllabus/henkou/2022/ssf7ph000000h5tb-att/fe_kamoku_a_set_sample_ans.pdf",
+      "questions": [
+        {
+          "number": 1,
+          "pages": [
+            4
+          ],
+          "images": [
+            "images/2022-a-p04.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 2,
+          "pages": [
+            4
+          ],
+          "images": [
+            "images/2022-a-p04.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 3,
+          "pages": [
+            5
+          ],
+          "images": [
+            "images/2022-a-p05.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 4,
+          "pages": [
+            5
+          ],
+          "images": [
+            "images/2022-a-p05.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 5,
+          "pages": [
+            6
+          ],
+          "images": [
+            "images/2022-a-p06.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 6,
+          "pages": [
+            7
+          ],
+          "images": [
+            "images/2022-a-p07.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 7,
+          "pages": [
+            8
+          ],
+          "images": [
+            "images/2022-a-p08.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 8,
+          "pages": [
+            8
+          ],
+          "images": [
+            "images/2022-a-p08.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 9,
+          "pages": [
+            9
+          ],
+          "images": [
+            "images/2022-a-p09.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 10,
+          "pages": [
+            9
+          ],
+          "images": [
+            "images/2022-a-p09.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 11,
+          "pages": [
+            9
+          ],
+          "images": [
+            "images/2022-a-p09.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 12,
+          "pages": [
+            10
+          ],
+          "images": [
+            "images/2022-a-p10.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 13,
+          "pages": [
+            10
+          ],
+          "images": [
+            "images/2022-a-p10.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 14,
+          "pages": [
+            11
+          ],
+          "images": [
+            "images/2022-a-p11.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 15,
+          "pages": [
+            12
+          ],
+          "images": [
+            "images/2022-a-p12.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 16,
+          "pages": [
+            12
+          ],
+          "images": [
+            "images/2022-a-p12.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 17,
+          "pages": [
+            13
+          ],
+          "images": [
+            "images/2022-a-p13.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 18,
+          "pages": [
+            13
+          ],
+          "images": [
+            "images/2022-a-p13.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 19,
+          "pages": [
+            13
+          ],
+          "images": [
+            "images/2022-a-p13.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 20,
+          "pages": [
+            14
+          ],
+          "images": [
+            "images/2022-a-p14.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 21,
+          "pages": [
+            14
+          ],
+          "images": [
+            "images/2022-a-p14.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 22,
+          "pages": [
+            14
+          ],
+          "images": [
+            "images/2022-a-p14.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 23,
+          "pages": [
+            15
+          ],
+          "images": [
+            "images/2022-a-p15.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 24,
+          "pages": [
+            15
+          ],
+          "images": [
+            "images/2022-a-p15.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 25,
+          "pages": [
+            16
+          ],
+          "images": [
+            "images/2022-a-p16.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 26,
+          "pages": [
+            16
+          ],
+          "images": [
+            "images/2022-a-p16.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 27,
+          "pages": [
+            16
+          ],
+          "images": [
+            "images/2022-a-p16.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 28,
+          "pages": [
+            16
+          ],
+          "images": [
+            "images/2022-a-p16.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 29,
+          "pages": [
+            17
+          ],
+          "images": [
+            "images/2022-a-p17.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 30,
+          "pages": [
+            17
+          ],
+          "images": [
+            "images/2022-a-p17.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 31,
+          "pages": [
+            18
+          ],
+          "images": [
+            "images/2022-a-p18.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 32,
+          "pages": [
+            18
+          ],
+          "images": [
+            "images/2022-a-p18.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 33,
+          "pages": [
+            18
+          ],
+          "images": [
+            "images/2022-a-p18.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 34,
+          "pages": [
+            19
+          ],
+          "images": [
+            "images/2022-a-p19.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 35,
+          "pages": [
+            19
+          ],
+          "images": [
+            "images/2022-a-p19.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 36,
+          "pages": [
+            20
+          ],
+          "images": [
+            "images/2022-a-p20.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 37,
+          "pages": [
+            20
+          ],
+          "images": [
+            "images/2022-a-p20.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 38,
+          "pages": [
+            20
+          ],
+          "images": [
+            "images/2022-a-p20.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 39,
+          "pages": [
+            20
+          ],
+          "images": [
+            "images/2022-a-p20.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 40,
+          "pages": [
+            21
+          ],
+          "images": [
+            "images/2022-a-p21.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 41,
+          "pages": [
+            21
+          ],
+          "images": [
+            "images/2022-a-p21.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 42,
+          "pages": [
+            21
+          ],
+          "images": [
+            "images/2022-a-p21.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 43,
+          "pages": [
+            22
+          ],
+          "images": [
+            "images/2022-a-p22.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 44,
+          "pages": [
+            22
+          ],
+          "images": [
+            "images/2022-a-p22.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 45,
+          "pages": [
+            23
+          ],
+          "images": [
+            "images/2022-a-p23.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 46,
+          "pages": [
+            23
+          ],
+          "images": [
+            "images/2022-a-p23.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 47,
+          "pages": [
+            23
+          ],
+          "images": [
+            "images/2022-a-p23.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 48,
+          "pages": [
+            24
+          ],
+          "images": [
+            "images/2022-a-p24.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 49,
+          "pages": [
+            24
+          ],
+          "images": [
+            "images/2022-a-p24.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 50,
+          "pages": [
+            25
+          ],
+          "images": [
+            "images/2022-a-p25.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 51,
+          "pages": [
+            25
+          ],
+          "images": [
+            "images/2022-a-p25.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 52,
+          "pages": [
+            26
+          ],
+          "images": [
+            "images/2022-a-p26.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 53,
+          "pages": [
+            26
+          ],
+          "images": [
+            "images/2022-a-p26.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 54,
+          "pages": [
+            27
+          ],
+          "images": [
+            "images/2022-a-p27.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 55,
+          "pages": [
+            27
+          ],
+          "images": [
+            "images/2022-a-p27.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 56,
+          "pages": [
+            28
+          ],
+          "images": [
+            "images/2022-a-p28.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 57,
+          "pages": [
+            28
+          ],
+          "images": [
+            "images/2022-a-p28.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 58,
+          "pages": [
+            28
+          ],
+          "images": [
+            "images/2022-a-p28.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 59,
+          "pages": [
+            29
+          ],
+          "images": [
+            "images/2022-a-p29.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 60,
+          "pages": [
+            29
+          ],
+          "images": [
+            "images/2022-a-p29.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        }
+      ]
+    },
+    "2022-b": {
+      "year": 2022,
+      "subject": "B",
+      "kind": "sample",
+      "sourceAttribution": "出典：基本情報技術者試験（科目B試験） サンプル問題セット",
+      "sourcePage": "https://www.ipa.go.jp/shiken/syllabus/henkou/2022/20221226.html",
+      "questionPdf": "https://www.ipa.go.jp/shiken/syllabus/henkou/2022/ssf7ph000000h5tb-att/fe_kamoku_b_set_sample_qs.pdf",
+      "answerPdf": "https://www.ipa.go.jp/shiken/syllabus/henkou/2022/ssf7ph000000h5tb-att/fe_kamoku_b_set_sample_ans.pdf",
+      "questions": [
+        {
+          "number": 1,
+          "pages": [
+            4
+          ],
+          "images": [
+            "images/2022-b-p04.jpg"
+          ],
+          "answer": "カ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ"
+          ]
+        },
+        {
+          "number": 2,
+          "pages": [
+            5
+          ],
+          "images": [
+            "images/2022-b-p05.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ"
+          ]
+        },
+        {
+          "number": 3,
+          "pages": [
+            6
+          ],
+          "images": [
+            "images/2022-b-p06.jpg"
+          ],
+          "answer": "カ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ",
+            "キ"
+          ]
+        },
+        {
+          "number": 4,
+          "pages": [
+            7
+          ],
+          "images": [
+            "images/2022-b-p07.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 5,
+          "pages": [
+            8
+          ],
+          "images": [
+            "images/2022-b-p08.jpg"
+          ],
+          "answer": "オ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ",
+            "キ"
+          ]
+        },
+        {
+          "number": 6,
+          "pages": [
+            9
+          ],
+          "images": [
+            "images/2022-b-p09.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 7,
+          "pages": [
+            10
+          ],
+          "images": [
+            "images/2022-b-p10.jpg"
+          ],
+          "answer": "カ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ"
+          ]
+        },
+        {
+          "number": 8,
+          "pages": [
+            12,
+            13
+          ],
+          "images": [
+            "images/2022-b-p12.jpg",
+            "images/2022-b-p13.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 9,
+          "pages": [
+            14,
+            15
+          ],
+          "images": [
+            "images/2022-b-p14.jpg",
+            "images/2022-b-p15.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 10,
+          "pages": [
+            16,
+            17
+          ],
+          "images": [
+            "images/2022-b-p16.jpg",
+            "images/2022-b-p17.jpg"
+          ],
+          "answer": "カ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ"
+          ]
+        },
+        {
+          "number": 11,
+          "pages": [
+            18
+          ],
+          "images": [
+            "images/2022-b-p18.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 12,
+          "pages": [
+            20,
+            21
+          ],
+          "images": [
+            "images/2022-b-p20.jpg",
+            "images/2022-b-p21.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 13,
+          "pages": [
+            22
+          ],
+          "images": [
+            "images/2022-b-p22.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 14,
+          "pages": [
+            23
+          ],
+          "images": [
+            "images/2022-b-p23.jpg"
+          ],
+          "answer": "ク",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ",
+            "キ",
+            "ク"
+          ]
+        },
+        {
+          "number": 15,
+          "pages": [
+            24,
+            25
+          ],
+          "images": [
+            "images/2022-b-p24.jpg",
+            "images/2022-b-p25.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 16,
+          "pages": [
+            26,
+            27
+          ],
+          "images": [
+            "images/2022-b-p26.jpg",
+            "images/2022-b-p27.jpg"
+          ],
+          "answer": "ク",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ",
+            "キ",
+            "ク",
+            "ケ"
+          ]
+        },
+        {
+          "number": 17,
+          "pages": [
+            28,
+            29
+          ],
+          "images": [
+            "images/2022-b-p28.jpg",
+            "images/2022-b-p29.jpg"
+          ],
+          "answer": "カ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ",
+            "キ",
+            "ク",
+            "ケ",
+            "コ"
+          ]
+        },
+        {
+          "number": 18,
+          "pages": [
+            30,
+            31
+          ],
+          "images": [
+            "images/2022-b-p30.jpg",
+            "images/2022-b-p31.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ",
+            "キ",
+            "ク",
+            "ケ",
+            "コ"
+          ]
+        },
+        {
+          "number": 19,
+          "pages": [
+            32,
+            33
+          ],
+          "images": [
+            "images/2022-b-p32.jpg",
+            "images/2022-b-p33.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ"
+          ]
+        },
+        {
+          "number": 20,
+          "pages": [
+            34,
+            35
+          ],
+          "images": [
+            "images/2022-b-p34.jpg",
+            "images/2022-b-p35.jpg"
+          ],
+          "answer": "カ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ",
+            "キ"
+          ]
+        }
+      ]
+    },
+    "2023-a": {
+      "year": 2023,
+      "subject": "A",
+      "kind": "public",
+      "sourceAttribution": "出典：2023年度 基本情報技術者試験 科目A 公開問題",
+      "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/2023r05.html",
+      "questionPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/t6hhco0000003zx0-att/2023r05_fe_kamoku_a_qs.pdf",
+      "answerPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/t6hhco0000003zx0-att/2023r05_fe_kamoku_a_ans.pdf",
+      "questions": [
+        {
+          "number": 1,
+          "pages": [
+            2
+          ],
+          "images": [
+            "images/2023-a-p02.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 2,
+          "pages": [
+            2
+          ],
+          "images": [
+            "images/2023-a-p02.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 3,
+          "pages": [
+            3
+          ],
+          "images": [
+            "images/2023-a-p03.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 4,
+          "pages": [
+            3
+          ],
+          "images": [
+            "images/2023-a-p03.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 5,
+          "pages": [
+            4
+          ],
+          "images": [
+            "images/2023-a-p04.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 6,
+          "pages": [
+            4
+          ],
+          "images": [
+            "images/2023-a-p04.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 7,
+          "pages": [
+            5
+          ],
+          "images": [
+            "images/2023-a-p05.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 8,
+          "pages": [
+            5
+          ],
+          "images": [
+            "images/2023-a-p05.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 9,
+          "pages": [
+            5
+          ],
+          "images": [
+            "images/2023-a-p05.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 10,
+          "pages": [
+            6
+          ],
+          "images": [
+            "images/2023-a-p06.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 11,
+          "pages": [
+            7
+          ],
+          "images": [
+            "images/2023-a-p07.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 12,
+          "pages": [
+            7
+          ],
+          "images": [
+            "images/2023-a-p07.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 13,
+          "pages": [
+            8
+          ],
+          "images": [
+            "images/2023-a-p08.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 14,
+          "pages": [
+            8
+          ],
+          "images": [
+            "images/2023-a-p08.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 15,
+          "pages": [
+            9
+          ],
+          "images": [
+            "images/2023-a-p09.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 16,
+          "pages": [
+            9
+          ],
+          "images": [
+            "images/2023-a-p09.jpg"
+          ],
+          "answer": "イ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 17,
+          "pages": [
+            10
+          ],
+          "images": [
+            "images/2023-a-p10.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 18,
+          "pages": [
+            10
+          ],
+          "images": [
+            "images/2023-a-p10.jpg"
+          ],
+          "answer": "ウ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 19,
+          "pages": [
+            11
+          ],
+          "images": [
+            "images/2023-a-p11.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 20,
+          "pages": [
+            11
+          ],
+          "images": [
+            "images/2023-a-p11.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        }
+      ]
+    },
+    "2023-b": {
+      "year": 2023,
+      "subject": "B",
+      "kind": "public",
+      "sourceAttribution": "出典：2023年度 基本情報技術者試験 科目B 公開問題",
+      "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/2023r05.html",
+      "questionPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/t6hhco0000003zx0-att/2023r05_fe_kamoku_b_qs.pdf",
+      "answerPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/t6hhco0000003zx0-att/2023r05_fe_kamoku_b_ans.pdf",
+      "questions": [
+        {
+          "number": 1,
+          "pages": [
+            4
+          ],
+          "images": [
+            "images/2023-b-p04.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 2,
+          "pages": [
+            5
+          ],
+          "images": [
+            "images/2023-b-p05.jpg"
+          ],
+          "answer": "ク",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ",
+            "キ",
+            "ク"
+          ]
+        },
+        {
+          "number": 3,
+          "pages": [
+            6,
+            7
+          ],
+          "images": [
+            "images/2023-b-p06.jpg",
+            "images/2023-b-p07.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        },
+        {
+          "number": 4,
+          "pages": [
+            8,
+            9
+          ],
+          "images": [
+            "images/2023-b-p08.jpg",
+            "images/2023-b-p09.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ"
+          ]
+        },
+        {
+          "number": 5,
+          "pages": [
+            10,
+            11
+          ],
+          "images": [
+            "images/2023-b-p10.jpg",
+            "images/2023-b-p11.jpg"
+          ],
+          "answer": "エ",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ",
+            "オ",
+            "カ",
+            "キ",
+            "ク",
+            "ケ"
+          ]
+        },
+        {
+          "number": 6,
+          "pages": [
+            12,
+            13
+          ],
+          "images": [
+            "images/2023-b-p12.jpg",
+            "images/2023-b-p13.jpg"
+          ],
+          "answer": "ア",
+          "options": [
+            "ア",
+            "イ",
+            "ウ",
+            "エ"
+          ]
+        }
+      ]
+    },
     "2024-a": {
       "year": 2024,
       "subject": "A",
+      "kind": "public",
+      "sourceAttribution": "出典：2024年度 基本情報技術者試験 科目A 公開問題",
       "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/2024r06.html",
       "questionPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/eid2eo0000007g1d-att/2024r06_fe_kamoku_a_qs.pdf",
       "answerPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/eid2eo0000007g1d-att/2024r06_fe_kamoku_a_ans.pdf",
@@ -333,6 +2151,8 @@
     "2024-b": {
       "year": 2024,
       "subject": "B",
+      "kind": "public",
+      "sourceAttribution": "出典：2024年度 基本情報技術者試験 科目B 公開問題",
       "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/2024r06.html",
       "questionPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/eid2eo0000007g1d-att/2024r06_fe_kamoku_b_qs.pdf",
       "answerPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/eid2eo0000007g1d-att/2024r06_fe_kamoku_b_ans.pdf",
@@ -455,6 +2275,8 @@
     "2025-a": {
       "year": 2025,
       "subject": "A",
+      "kind": "public",
+      "sourceAttribution": "出典：2025年度 基本情報技術者試験 科目A 公開問題",
       "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/2025r07.html",
       "questionPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/tbl5kb0000005r9r-att/2025r07_fe_kamoku_a_qs.pdf",
       "answerPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/tbl5kb0000005r9r-att/2025r07_fe_kamoku_a_ans.pdf",
@@ -784,6 +2606,8 @@
     "2025-b": {
       "year": 2025,
       "subject": "B",
+      "kind": "public",
+      "sourceAttribution": "出典：2025年度 基本情報技術者試験 科目B 公開問題",
       "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/2025r07.html",
       "questionPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/tbl5kb0000005r9r-att/2025r07_fe_kamoku_b_qs.pdf",
       "answerPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/tbl5kb0000005r9r-att/2025r07_fe_kamoku_b_ans.pdf",
@@ -916,6 +2740,8 @@
     "2026-a": {
       "year": 2026,
       "subject": "A",
+      "kind": "public",
+      "sourceAttribution": "出典：2026年度 基本情報技術者試験 科目A 公開問題",
       "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/2026r08.html",
       "questionPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/rcu1hd0000012qj6-att/2026r08_fe_kamoku_a_qs.pdf",
       "answerPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/rcu1hd0000012qj6-att/2026r08_fe_kamoku_a_ans.pdf",
@@ -1245,6 +3071,8 @@
     "2026-b": {
       "year": 2026,
       "subject": "B",
+      "kind": "public",
+      "sourceAttribution": "出典：2026年度 基本情報技術者試験 科目B 公開問題",
       "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/2026r08.html",
       "questionPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/rcu1hd0000012qj6-att/2026r08_fe_kamoku_b_qs.pdf",
       "answerPdf": "https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/rcu1hd0000012qj6-att/2026r08_fe_kamoku_b_ans.pdf",

@@ -3,7 +3,7 @@
 var subject=document.body.getAttribute("data-subject");
 var params=new URLSearchParams(location.search);
 var requested=Number(params.get("year"));
-var year=[2024,2025,2026].indexOf(requested)>=0?requested:2026;
+var year=[2022,2023,2024,2025,2026].indexOf(requested)>=0?requested:2026;
 var key="quiz:fe:"+subject+":"+year;
 var app=document.getElementById("app");
 var nav=document.getElementById("years");
@@ -23,8 +23,9 @@ function readState(){
 }
 function saveState(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){storageError=true}}
 function yearNav(){
-  [2026,2025,2024].forEach(function(y){
-    var a=node("a","",y+" 年度 · "+(subject==="a"?"20":"6")+" 题");
+  [2026,2025,2024,2023,2022].forEach(function(y){
+    var count=y===2022?(subject==="a"?60:20):(subject==="a"?20:6);
+    var a=node("a","",y+(y===2022?" 官方样题":" 年度公开题")+" · "+count+" 题");
     a.href=subject+".html?year="+y;
     if(y===year)a.setAttribute("aria-current","page");
     nav.appendChild(a);
@@ -42,7 +43,7 @@ function render(){
   var article=node("article","panel");
   var heading=node("div","question-head");
   var titleBox=node("div");
-  titleBox.appendChild(node("h2","","第 "+q.number+" 题 · "+year+" 年度 科目 "+subject.toUpperCase()));
+  titleBox.appendChild(node("h2","","第 "+q.number+" 题 · "+year+(exam.kind==="sample"?" 年官方样题":" 年度")+" 科目 "+subject.toUpperCase()));
   titleBox.appendChild(node("p","","请阅读原题页中的「問"+q.number+"」，再选择答案。"));
   heading.appendChild(titleBox);article.appendChild(heading);
   var sources=node("div","source-links");
@@ -50,6 +51,7 @@ function render(){
   sources.appendChild(link("题目原 PDF ↗",exam.questionPdf+"#page="+q.pages[0]));
   sources.appendChild(link("官方答案 PDF ↗",exam.answerPdf));
   article.appendChild(sources);
+  article.appendChild(node("p","source-credit",exam.sourceAttribution));
   q.images.forEach(function(src,i){
     var fig=node("figure","sheet");fig.style.margin="0 0 12px";
     var enlarged=link("",src);enlarged.setAttribute("aria-label","在新标签放大第 "+q.pages[i]+" 页题面");
@@ -108,6 +110,15 @@ yearNav();
 fetch("data.json").then(function(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}).then(function(data){
   exam=data.sets[year+"-"+subject];if(!exam)throw Error("找不到该卷");
   state=readState();
+  var intro=document.getElementById("exam-intro");
+  var subtitle=document.getElementById("exam-sub");
+  if(exam.kind==="sample"){
+    intro.textContent="这是 IPA 于 2022 年发布的新制科目 "+subject.toUpperCase()+" 官方样题（"+exam.questions.length+" 题），并非 2022 年旧制考试的实考卷。题目为日文原文，按原题号作答。";
+    subtitle.textContent="2022 年官方样题 · "+exam.questions.length+" 题";
+  }else{
+    intro.textContent="这是 IPA "+year+" 年度公开的 "+exam.questions.length+" 道科目 "+subject.toUpperCase()+" 实考题，仅为部分试题；实际考试为 "+(subject==="a"?60:20)+" 题。本卷不是完整考试卷。";
+    subtitle.textContent=year+" 年度公开题 · "+exam.questions.length+" 题";
+  }
   var notation=document.getElementById("notation-link");if(notation)notation.href=exam.questionPdf+"#page=2";
   render();
 }).catch(function(error){

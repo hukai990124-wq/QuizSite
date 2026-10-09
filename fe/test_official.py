@@ -17,7 +17,7 @@ def normal(text):
 
 
 def test_sets():
-    assert len(DATA["sets"]) == 6
+    assert len(DATA["sets"]) == 10
     for key, exam in DATA["sets"].items():
         year, subject = key.split("-")
         raw = ROOT / "fe/raw" / f"{year}-{subject}-qs.pdf"
@@ -29,7 +29,9 @@ def test_sets():
                 for number, label in re.findall(r"問\s*(\d+)\s*([アイウエオカキクケコ])", answer_text)
             }
             questions = exam["questions"]
-            assert len(questions) == (20 if subject == "a" else 6)
+            expected_count = (60 if subject == "a" else 20) if year == "2022" else (20 if subject == "a" else 6)
+            assert len(questions) == expected_count
+            assert exam["kind"] == ("sample" if year == "2022" else "public")
             assert len(expected) == len(questions), key
             for question in questions:
                 number = question["number"]
@@ -45,4 +47,4 @@ def test_sets():
 
 if __name__ == "__main__":
     test_sets()
-    print("6 sets / 78 questions match IPA source PDFs")
+    print("10 sets / 184 questions match IPA source PDFs")
