@@ -8,7 +8,7 @@
     "aws-clf": { title: "AWS CLF-C02", type: "aws", files: files("aws-clf", 4, "part"), quotas: [12, 15, 17, 6] },
     "aws-aif": { title: "AWS AIF-C01", type: "aws", files: [...files("aws-aif/bank", 10, "part"), ...files("aws-aif/practice", 5, "part")] },
     "aws-saa": { title: "AWS SAA-C03", type: "aws", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/compliance", 10, "part")] },
-    "toeic-listening": { title: "TOEIC Listening", type: "listening", files: files("toeic-listening", 6, "TOEIC_Listening_Test_") },
+    "toeic-listening": { title: "TOEIC Listening", type: "listening", files: files("toeic-listening", 10, "TOEIC_Listening_Test_") },
     "toeic-reading": { title: "TOEIC Reading", type: "reading", files: files("toeic-reading", 10, "TOEIC_Reading_Test_") }
   };
   const params = new URLSearchParams(location.search);

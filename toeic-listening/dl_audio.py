@@ -108,10 +108,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--mock', type=int, default=0)
     ap.add_argument('--workers', type=int, default=6)
+    ap.add_argument('--jobs', default=os.path.join('parsed', 'audio_jobs.json'),
+                    help='音频任务清单（默认 parsed/audio_jobs.json）')
     a = ap.parse_args()
 
     os.makedirs(SEG, exist_ok=True)
-    data = json.load(open(os.path.join(PARSED, 'audio_jobs.json'), encoding='utf-8'))
+    jobs_path = a.jobs if os.path.isabs(a.jobs) else os.path.join(ROOT, a.jobs)
+    data = json.load(open(jobs_path, encoding='utf-8'))
     gap = data['gap']
     jobs = data['jobs']
     if a.mock:

@@ -95,8 +95,9 @@ h1{font-size:24px;margin:0 0 6px}
 .toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;
  padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
-.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
-.toolbar button:hover{background:#f3f4f6}
+.toolbar button,.toolbar a.navback{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block}
+.toolbar button:hover,.toolbar a.navback:hover{background:#f3f4f6}
+.toolbar a.navback{font-weight:600;color:#0b6b3a;border-color:#c9e4d6;background:#f2faf6}
 .toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
 .toolbar button.primary:hover{background:#0a5d33}
 .q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
@@ -146,6 +147,7 @@ def render_part_html(part_idx, qs_all, tr):
     b.append(f'<p class="sub">题目 {start+1}–{start+len(chunk)} · 每份 {PER_PART} 题 · 中英对照 · '
              f'点选项后按「确认作答」即刻判对错 · 来源：{cfg["src"]}</p>')
     b.append('<div class="toolbar"><div class="btns">')
+    b.append('<a class="navback" href="index.html">← 返回目录</a>')
     b.append('<button class="primary" id="btn-sheet" type="button">答题卡</button>')
     b.append('<button id="btn-wrong" type="button">只看错题</button>')
     b.append('<button id="btn-expand" type="button">展开全部解析</button>')
@@ -198,6 +200,10 @@ def render_index(qs_all):
          'a.card:hover{border-color:#93c5fd;background:#f8fbff}',
          'a.card .n{font-weight:700}.r{color:#6b7280;font-size:13px;margin-top:3px}',
          '</style>', f'<style>{Q.IDX_CSS}</style></head><body><div class="wrap">',
+         '<a href="../index.html" title="返回题库总览" style="position:fixed;right:14px;top:14px;z-index:99;'
+         'background:rgba(255,255,255,.95);border:1px solid #d8dee5;border-radius:99px;padding:6px 14px;'
+         'font:12.5px/1.4 -apple-system,Segoe UI,Microsoft YaHei,sans-serif;color:#334155;'
+         'text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.10)">← 题库总览</a>',
          f'<h1>AWS SAA-C03 {cfg["name"]}</h1>',
          f'<p class="sub">共 {parts} 份 · 每份 {PER_PART} 题 · 中英对照 · 点选项后按「确认作答」判对错，正确率自动保存在本机<br>来源：{cfg["src"]}</p>']
     for p in range(1, parts + 1):

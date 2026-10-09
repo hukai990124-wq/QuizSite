@@ -1936,5 +1936,11 @@
  "AWS AIF-C01 · AI Practitioner 题库": {
   "en": "AWS AIF-C01 · AI Practitioner Question Bank",
   "ja": "AWS AIF-C01 · AI Practitioner 問題集"
- }
+ },
+ "TOEIC 听力 · 10 套": {"en": "TOEIC Listening · 10 sets", "ja": "TOEIC リスニング · 10セット"},
+ "TOEIC® Listening 练习 · 10 套": {"en": "TOEIC® Listening Practice · 10 sets", "ja": "TOEIC® Listening 練習 · 10セット"},
+ "7 个题库 · 共 4461 题次 · 可作答判分 · 进度自动保存在本机浏览器": {"en": "7 quiz banks · 4,461 questions · Answerable & scored · Progress saved automatically in this browser", "ja": "7つの問題集 · 全4461問 · 解答・採点可 · 進捗はこのブラウザに自動保存"},
+ "来源：toeicmocktests.com · 公开免费练习材料（官方 2026 格式模拟题）· 非 ETS 官方试题。音频由该站公开的 TTS 接口合成，非真人录音。": {"en": "Source: toeicmocktests.com — free public practice material (mock tests in the official 2026 format); not official ETS questions. Audio is synthesized via the site’s public TTS endpoint, not a human recording.", "ja": "出典：toeicmocktests.com — 公開されている無料練習素材（公式2026形式の模擬問題）。ETS 公式問題ではありません。音声は同サイトの公開 TTS で合成したもので、真人の録音ではありません。"},
+ "← 套题列表": {"en": "← All tests", "ja": "← テスト一覧"},
+ "← 返回目录": {"en": "← Back to contents", "ja": "← 目次に戻る"}
 }

@@ -43,8 +43,9 @@ h1{font-size:26px;margin:0 0 8px}
 .meta{color:var(--muted);font-size:14px;margin:2px 0}
 .toolbar{position:sticky;top:0;background:#fff;padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px;z-index:5}
 .toolbar .btns{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px}
-.toolbar button{font:inherit;font-size:13px;padding:6px 13px;border-radius:7px;border:1px solid var(--line);background:#fff;color:#334155;cursor:pointer}
-.toolbar button:hover{background:#f3f6f8}
+.toolbar button,.toolbar a.navback{font:inherit;font-size:13px;padding:6px 13px;border-radius:7px;border:1px solid var(--line);background:#fff;color:#334155;cursor:pointer;text-decoration:none;display:inline-block}
+.toolbar button:hover,.toolbar a.navback:hover{background:#f3f6f8}
+.toolbar a.navback{font-weight:600;color:#1d4e79;border-color:#c7d6e2;background:#f4f8fb}
 h2{margin:38px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--green);font-size:20px}
 .dirs{background:#eef5f0;border-left:4px solid var(--green);padding:9px 13px;font-size:13.5px;color:#33413a;border-radius:0 5px 5px 0;margin:8px 0 16px}
 .set{border:1px solid #e8ecef;border-radius:10px;padding:14px 16px;margin:14px 0;background:#fff}
@@ -169,6 +170,7 @@ def render(t):
     P = t['parts']
     body = []
     body.append('<div class="toolbar"><div class="btns">'
+                '<a class="navback" href="index.html">← 套题列表</a>'
                 '<button class="primary" id="btn-sheet" type="button">答题卡</button>'
                 '<button id="btn-wrong" type="button">只看错题</button>'
                 '<button id="btn-text" type="button">显示选项文本</button>'

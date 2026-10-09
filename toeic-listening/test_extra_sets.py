@@ -100,8 +100,8 @@ class ExtraSetsTest(unittest.TestCase):
     def test_navigation_counts_and_license(self):
         for directory in (LISTENING, ROOT / 'site/toeic-listening'):
             index = (directory / 'index.html').read_text(encoding='utf-8')
-            self.assertIn('练习 · 6 套', index)
-            self.assertEqual(len(re.findall('data-quiz-key="toeic-l:t', index)), 6)
+            self.assertIn('练习 · 10 套', index)
+            self.assertEqual(len(re.findall('data-quiz-key="toeic-l:t', index)), 10)
             self.assertIn('a.card{display:block', index)
             self.assertNotIn('Safari 加到主屏幕即可离线练', index)
             self.assertIn('首次播放需要联网', index)
@@ -109,15 +109,15 @@ class ExtraSetsTest(unittest.TestCase):
             self.assertIn('Copyright (c) 2026 Chun-Hsiung Luo', license_text)
             self.assertIn('Permission is hereby granted', license_text)
         homepage = (ROOT / 'site/index.html').read_text(encoding='utf-8')
-        self.assertIn('TOEIC 听力 · 6 套', homepage)
-        self.assertIn('seq("toeic-l:t",1,6,100)', homepage)
-        self.assertIn('共 3717 题', homepage)
-        self.assertIn('600 题', homepage)
+        self.assertIn('TOEIC 听力 · 10 套', homepage)
+        self.assertIn('seq("toeic-l:t",1,10,100)', homepage)
+        self.assertIn('共 4461 题', homepage)
+        self.assertIn('1000 题', homepage)
         self.assertIn('["dele-a1-a1-2011",50]', homepage)
         dictionary = json.loads((ROOT / 'quiz_kit/i18n.json').read_text(encoding='utf-8'))
-        summary = dictionary['6 个题库 · 共 3717 题 · 可作答判分 · 进度自动保存在本机浏览器']
-        self.assertIn('3,717', summary['en'])
-        self.assertIn('3717', summary['ja'])
+        summary = dictionary['7 个题库 · 共 4461 题次 · 可作答判分 · 进度自动保存在本机浏览器']
+        self.assertIn('4,461', summary['en'])
+        self.assertIn('4461', summary['ja'])
 
 
 if __name__ == '__main__':

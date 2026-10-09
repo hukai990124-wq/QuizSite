@@ -1,4 +1,24 @@
-# TOEIC® Listening 练习 · 6 套（带音频 + 可作答判分）
+# TOEIC® Listening 练习 · 10 套（带音频 + 可作答判分）
+
+## 第 07–10 套：toeicmocktests 追加套
+
+与第 01–04 套**同源**（toeicmocktests.com 免费模拟，官方 2026 格式）、
+**同工艺**（该站公开的 `/api/tts` 接口合成 + ffmpeg 合并），各 100 题：
+Part 1 × 6、Part 2 × 25、Part 3 × 39（13 段）、Part 4 × 30（10 段）。
+
+题源站上共有 9 套 mock，01–04 已用 1–4，本次追加 **mock 5–8**，
+落地为站内第 **07–10 套**（05/06 是 Ocean 套，编号不冲突）。
+
+生成流程（独立脚本，不改动 01–04 的 build/dump/gen_html 原逻辑）：
+
+```bash
+node toeic-listening/dump_extra.js 5 6 7 8          # 汇总 raw content JS
+python toeic-listening/add_tmt_sets.py build        # 生成题目 + 音频任务
+python toeic-listening/dl_audio.py --jobs parsed/tmt-extra-audio-jobs.json
+python toeic-listening/add_tmt_sets.py render       # 渲染 HTML/md 并同步到 site/
+```
+
+（源 mock 号 05–08 → 站内套号 07–10。新增图片 24 张、音频 216 个 mp3。）
 
 ## 第 05 / 06 套：英美混音强化练习
 
@@ -88,11 +108,11 @@ Cloudflare 继续由主分支自动部署，无新增服务或密钥。发布后
 ## 文件清单
 
 ```
-index.html                        ← 总目录（从这里进）
-TOEIC_Listening_Test_01..04.html  ← 4 套（可作答）
-TOEIC_Listening_Test_01..04.md    ← 4 套纯文本版（音频 + 原文 + 答案 + 解析）
-audio/m1..m4/                     ← 每套 54 个音频（P1×6 + P2×25 + P3×13 + P4×10）
-img/                              ← Part 1 的 24 张照片
+index.html                         ← 总目录（从这里进）
+TOEIC_Listening_Test_01..10.html   ← 10 套（可作答）
+TOEIC_Listening_Test_01..10.md     ← 10 套纯文本版（音频 + 原文 + 答案 + 解析）
+audio/m1..m10/                     ← 每套 54 个音频（P1×6 + P2×25 + P3×13 + P4×10）
+img/                               ← Part 1 照片（01–04、07–10 各 6 张；05–06 用 Ocean 原创 AI 图）
 ```
 
 ## 来源
@@ -100,8 +120,10 @@ img/                              ← Part 1 的 24 张照片
 | 套号 | 来源 |
 |---|---|
 | 01–04 | **TOEIC Mock Tests**（toeicmocktests.com）—— 免费模拟，官方 2026 格式，无需注册 |
+| 05–06 | **TOEIC Question Ocean**（MIT 许可原创模拟题，Piper 本地合成音） |
+| 07–10 | **TOEIC Mock Tests**（toeicmocktests.com）—— 与 01–04 同源，追加套 |
 
-- Part 1 照片为该站用 AI 生成的仿真商务场景图。
+- Part 1 照片为该站用 AI 生成的仿真商务场景图（05–06 除外，用 Ocean 的原创图）。
 - 音频通过该站公开的 TTS 接口生成（`/api/tts`）。
 
 ## 版权与使用声明
