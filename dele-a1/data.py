@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-"""DELE A1 官方 4 套 · 结构化数据（阅读 Prueba 1 + 写作 Prueba 3）
+"""DELE A1 官方 5 套 · 结构化数据（阅读 Prueba 1 + 写作 Prueba 3）
 来源：Instituto Cervantes 公开资料（官方样卷 & 往届真题）
+听力（Prueba 2）另见 data_audio.py
 """
 
 SETS = []
@@ -480,5 +481,121 @@ SETS.append({
         {"tarea": 2, "inst": "Usted quiere participar en un concurso de televisión. Escriba un correo electrónico a la dirección del programa para presentarse. En él debe: saludar; explicar cómo es usted físicamente; hablar de las cosas que le gustan; despedirse.",
          "words": "entre 20 y 30 palabras",
          "sample": "Hola: Soy Wang Lei, tengo 24 años. Soy alto y delgado, y tengo el pelo negro. Me gusta la música, viajar y bailar. Un saludo."},
+    ],
+})
+
+# ============================================================
+# 5) A1 · 真题 2011-05-20（Convocatoria de mayo de 2011）
+# ============================================================
+SETS.append({
+    "slug": "a1-2011",
+    "no": 5,
+    "title": "官方真题 · 2011 年 5 月 20 日",
+    "subtitle": "DELE A1 · Convocatoria de mayo de 2011",
+    "badge": "真题",
+    "tareas": [
+        {
+            "no": 1, "kind": "mc", "qfrom": 1, "qto": 5,
+            "inst": "Usted va a leer un correo electrónico. A continuación lea las preguntas (1-5) y seleccione la opción correcta (A, B, C o D).",
+            "source": {"kind": "passage", "label": "Correo electrónico",
+                       "text": "¡Hola María!\n\nTe escribo desde Málaga. Mi empresa necesita un informe sobre el turismo en el sur de España y voy a pasar un mes aquí. Es un trabajo difícil porque no hablo muy bien español y utilizo mucho el diccionario; pero la gente aquí es muy simpática y agradable.\n\n¡Tengo una idea! ¿Por qué no te vienes a pasar la última semana del mes conmigo? Volveré a Francia el día treinta de este mes. ¡Ah! Si quieres, puedes traer a tu pequeño perro, porque en este hotel admiten perros y gatos.\n\nMira, te cuento lo que hago cada día:\n\nVivo en un hotel que está a un minuto de la playa, y no muy lejos del centro de la ciudad. Es muy pequeño y muy agradable.\n\nPor las mañanas, me levanto a las ocho, desayuno en el hotel y, después, salgo a trabajar. Cada día visito una parte diferente de la costa; normalmente viajo en autobús porque no tengo coche. Estoy todo el día fuera y cuando vuelvo al hotel, escribo durante una hora en mi ordenador toda la información del día, la envío por correo electrónico a mi jefe en París y llamo por teléfono a mi casa.\n\nEspero tu respuesta, María; podemos divertirnos mucho. Un beso,\nPierre"},
+            "items": [
+                {"n": 1, "stem": "Pierre escribe un correo electrónico sobre…",
+                 "opts": [["A", "sus vacaciones en la playa."], ["B", "su trabajo en Francia."], ["C", "su curso de español en Málaga."], ["D", "su trabajo en el sur de España."]], "ans": "D"},
+                {"n": 2, "stem": "El hotel de Pierre está…",
+                 "opts": [["A", "al lado de la playa."], ["B", "lejos del mar."], ["C", "en el centro."], ["D", "fuera de la ciudad."]], "ans": "A"},
+                {"n": 3, "stem": "Pierre va a trabajar…",
+                 "opts": [["A", "al mediodía."], ["B", "después de desayunar."], ["C", "cuando se levanta."], ["D", "antes de las ocho."]], "ans": "B"},
+                {"n": 4, "stem": "Pierre, cuando vuelve al hotel, escribe…",
+                 "opts": [["A", "una carta a su amigo."], ["B", "una postal a su familia."], ["C", "un mensaje de móvil."], ["D", "un correo electrónico."]], "ans": "D"},
+                {"n": 5, "stem": "María, la amiga de Pierre, tiene…",
+                 "opts": [["A", ""], ["B", ""], ["C", ""], ["D", ""]], "ans": "A",
+                 "imgs": {"A": "img/a1_2011_read_q5_A.png", "B": "img/a1_2011_read_q5_B.png",
+                          "C": "img/a1_2011_read_q5_C.png", "D": "img/a1_2011_read_q5_D.png"},
+                 "captions": {"A": "Un perro pequeño", "B": "Dos gatos", "C": "Un gato",
+                              "D": "Un perro grande y otro pequeño"},
+                 "why": "El texto dice: «puedes traer a tu pequeño perro», así que María tiene un perro pequeño."},
+            ],
+        },
+        {
+            "no": 2, "kind": "match", "qfrom": 6, "qto": 11,
+            "inst": "Usted va a leer unos mensajes. Debe relacionar los mensajes (A - J) con las frases (6 - 11). Hay diez mensajes, incluido el ejemplo. Seleccione seis.",
+            "example": {"n": 0, "stem": "No puedes pasar con el perro.", "ans": "A", "why": "«Prohibido entrar con animales»."},
+            "pool": [
+                ["A", "PROHIBIDO ENTRAR CON ANIMALES"],
+                ["B", "¿Quiere pasar este verano en la playa? Llámenos, tenemos la casa ideal para usted: 685 30 89 45"],
+                ["C", "Entre en nuestra web supermoda.com y compre directamente."],
+                ["D", "Ahora puede hablar más tiempo y pagar menos. Más información en el 624 34 85 67"],
+                ["E", "Pepe, llámame por teléfono antes del mediodía, es urgente."],
+                ["F", "El tren Madrid - Barcelona tiene su salida a las 16 h"],
+                ["G", "«MUEBLES ESTILO» — Visite nuestra nueva tienda en Alcalá 55."],
+                ["H", "Durante los meses de verano, el nuevo horario de la biblioteca es de 9 a 14 h."],
+                ["I", "Silencio, por favor. Estamos trabajando."],
+                ["J", "María, compra fruta antes de volver a casa, no hay nada en el frigorífico."],
+            ],
+            "items": [
+                {"n": 6, "stem": "Puedes comprar por Internet.", "ans": "C"},
+                {"n": 7, "stem": "Sale por la tarde.", "ans": "F"},
+                {"n": 8, "stem": "Alquilan viviendas cerca del mar.", "ans": "B"},
+                {"n": 9, "stem": "Tiene que llamar por la mañana.", "ans": "E"},
+                {"n": 10, "stem": "Llamadas de teléfono más baratas.", "ans": "D"},
+                {"n": 11, "stem": "Abren por la mañana.", "ans": "H"},
+            ],
+        },
+        {
+            "no": 3, "kind": "match", "qfrom": 12, "qto": 17,
+            "inst": "Usted va a leer unos anuncios de libros. Debe relacionar los anuncios (A - J) con los textos (12 - 17). Hay diez anuncios, incluido el ejemplo. Seleccione seis.",
+            "example": {"n": 0, "stem": "Nunca uso Internet y no sé enviar un correo electrónico. Busco un libro para aprender rápidamente.", "ans": "A", "why": ""},
+            "pool": [
+                ["A", "INFORMÁTICA FÁCIL — Si tiene un ordenador y no sabe nada de informática, este es el libro que necesita. Aprenda en una semana, de manera sencilla."],
+                ["B", "GRAMÁTICA, VOCABULARIO Y EJERCICIOS — El mejor libro para aprender inglés en poco tiempo. Con CD para escuchar diálogos en situaciones reales."],
+                ["C", "LA VIDA DE… — Es una colección sobre la vida de los veinte personajes más famosos del siglo XX: artistas, escritores, científicos… Colección completa: 150 euros."],
+                ["D", "DESPUÉS DE LOS SESENTA — Si es mayor de sesenta años, en este libro tiene consejos prácticos para su cuerpo, su comida, su vida social…"],
+                ["E", "DICCIONARIO PARA NIÑOS — Español-Inglés / Inglés-Español. Más de 2000 palabras. Recomendado para estudiantes de siete a doce años. Precio: 10 euros."],
+                ["F", "LIBROS ANTIGUOS Y DE SEGUNDA MANO — Oferta en todo tipo de libros. Encuentre aquí los libros más baratos. De 3 a 9 euros."],
+                ["G", "ARTE EN ESPAÑA — Con este libro usted puede conocer los monumentos más importantes de nuestro país: iglesias, catedrales… Más de 1000 fotografías en color. Precio: 80 euros."],
+                ["H", "Las historias más simpáticas y actuales para los pequeños de la casa. Libros con CD para aprender con música. Un mundo fantástico para ellos."],
+                ["I", "RECETAS FÁCILES — Con este libro puede preparar en poco tiempo las mejores ensaladas, pescados y carnes. Este libro le va a ayudar."],
+                ["J", "TURISMO EN VIVO — Es un libro con la más completa información de las ciudades españolas: monumentos, hoteles, restaurantes, tiendas… Precio: 12 euros."],
+            ],
+            "items": [
+                {"n": 12, "stem": "Juan y yo tenemos unos días de vacaciones y estamos pensando viajar a alguna ciudad. Buscamos un libro con todo tipo de información turística.", "ans": "J"},
+                {"n": 13, "stem": "Busco libros infantiles, divertidos y modernos para los hijos de mi hermano, que tienen 5 y 6 años.", "ans": "H"},
+                {"n": 14, "stem": "Necesito un buen libro para regalar a mis abuelos. Ellos son mayores, no salen mucho de casa y les gusta leer.", "ans": "D"},
+                {"n": 15, "stem": "Tengo un nuevo jefe, es americano y no le comprendo bien cuando habla. Necesito un libro para aprender rápidamente.", "ans": "B"},
+                {"n": 16, "stem": "Estas Navidades quiero regalar un libro diferente a todos mis amigos. Pero tengo muchos amigos y muy poco dinero.", "ans": "F"},
+                {"n": 17, "stem": "Mi mujer y yo no sabemos cocinar. Buscamos un libro para hacer comidas fáciles.", "ans": "I"},
+            ],
+        },
+        {
+            "no": 4, "kind": "fill", "qfrom": 18, "qto": 25,
+            "inst": "Usted va a leer la publicidad de una agencia de viajes. Complete las frases (18 - 25) con la información del texto. Escriba las palabras en la Hoja de respuestas.",
+            "source": {"kind": "table", "label": "OFERTAS DE VIAJES POR ESPAÑA",
+                       "rows": [
+                           ["VALENCIA", "Salida desde Madrid, en tren de alta velocidad.\nDuración: 2 noches, 3 días.\nPrecio: 190 euros (Tren + Hotel).\nDías de salida: todos los viernes, desde el 1 de mayo hasta el 30 de septiembre."],
+                           ["ISLAS · MALLORCA", "Duración: 8 días, 7 noches.\nPrecio: 465 euros (Avión + Hotel).\n* Niños gratis."],
+                           ["CIUDADES DE EUROPA · PARÍS", "Precio: 650 euros, tres días (Avión + Hotel); cinco días, 900 euros (Avión + Hotel).\n* Museos cerrados los lunes."],
+                           ["ESQUÍ EN LOS PIRINEOS", "Todos los fines de semana de diciembre a abril.\nDía y hora de salida: viernes a las 18.00 h, desde la estación de autobuses.\nDía y hora de vuelta: domingo a las 14.30 h.\nPrecio: 150 euros (Autobús + Habitación doble + Desayuno y cena)."],
+                           ["CRUCEROS", "Visitas a las ciudades más importantes del Mediterráneo.\nSalidas desde el puerto de Barcelona.\nDuración del viaje: 6 días.\nPrecio: 550 euros."],
+                       ]},
+            "items": [
+                {"n": 18, "stem": "Puedes pasar un fin de semana en ______ de ______ a septiembre.", "ans": "VALENCIA"},
+                {"n": 19, "stem": "… de ______ a septiembre.", "ans": "MAYO"},
+                {"n": 20, "stem": "El viaje más caro es a ______.", "ans": "PARÍS|PARIS"},
+                {"n": 21, "stem": "Los niños no ______ en el viaje a Mallorca.", "ans": "PAGAN"},
+                {"n": 22, "stem": "Si vas a París, el lunes no puedes visitar los ______.", "ans": "MUSEOS"},
+                {"n": 23, "stem": "Para hacer el crucero tienes que ir a ______.", "ans": "BARCELONA"},
+                {"n": 24, "stem": "Estás más días en el hotel si vas a ______.", "ans": "MALLORCA"},
+                {"n": 25, "stem": "El día de salida para la nieve es el ______.", "ans": "VIERNES"},
+            ],
+        },
+    ],
+    "writing": [
+        {"tarea": 1, "inst": "Usted quiere hacer un curso de español en una universidad española. Debe completar este formulario.",
+         "fields": "SOLICITUD DE CURSO DE ESPAÑOL\nNombre / Apellido(s) / Lugar de nacimiento / Fecha de nacimiento (día / mes / año) / Nacionalidad / Teléfono / Correo electrónico / Pasaporte nº\nDirección: Calle / Número / Piso / Ciudad / País\nProfesión\n¿Qué mes prefiere? junio / julio / agosto\n¿Conoce España? Sí / No\n¿Por qué estudia español?\n¿Por qué quiere usted hacer este curso en nuestra universidad?\nFecha y firma",
+         "sample": "Nombre: Wang Lei. Apellido(s): Wang. Lugar de nacimiento: Pekín, China.\nFecha de nacimiento: 12 / marzo / 2001. Nacionalidad: china. Teléfono: 600 123 456.\nCorreo electrónico: wanglei@correo.com. Pasaporte nº: G12345678.\nDirección: Calle Mayor, 12, 3º, Pekín, China. Profesión: estudiante.\n¿Qué mes prefiere? julio. ¿Conoce España? No.\n¿Por qué estudia español? Porque me gusta mucho la cultura española y quiero trabajar con empresas de España.\n¿Por qué quiere hacer este curso en su universidad? Porque su universidad es muy famosa y tiene profesores muy buenos."},
+        {"tarea": 2, "inst": "Usted está de vacaciones en la casa de unos amigos. Escriba una postal a su familia. En ella debe: saludar; decir dónde está la casa; describir cómo es; explicar qué hacen todos los días; despedirse.",
+         "words": "entre 30 y 40 palabras",
+         "sample": "¡Hola, mamá!\nEstoy en la casa de mis amigos, en un pueblo pequeño cerca del mar. La casa es grande y muy bonita: tiene un jardín con muchos árboles. Todos los días nos levantamos tarde, desayunamos en el jardín y por la tarde vamos a la playa. ¡Es fantástico!\nUn abrazo,\nLei"},
     ],
 })

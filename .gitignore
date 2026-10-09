@@ -32,3 +32,15 @@ __pycache__/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# ---- 5. 生成过程的中间件（可由 build_audio.py / crop_audio.py 重建）----
+_tts_tmp/
+_imgtest/
+
+# ---- 6. 一次性分析脚本与采集结果（只限仓库根目录的 _ 前缀临时件）----
+/_*.py
+/_*.json
+/_*.txt
+/_*.md
+/_*.png
+/_*.mp3

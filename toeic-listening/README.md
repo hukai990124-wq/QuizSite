@@ -23,7 +23,7 @@
 
 1. 将题源仓库检出到上述固定版本。
 2. `node toeic-listening/import_ocean.cjs ../toeic-question-ocean`
-3. Python 安装 `piper-tts==1.8.0`；Windows 安装 Microsoft Zira Desktop 语音，准备 FFmpeg。
+3. Python 安装 `piper-tts==1.8.0`；Windows 安装 Microsoft Zira Desktop 语音、PowerShell 7（`pwsh`），准备 FFmpeg。
 4. 下载 Piper 的 `en_GB-vctk-medium.onnx` 和同名 `.onnx.json`，执行
    `python toeic-listening/synthesize_accent_audio.py --british-model <模型路径> --ffmpeg <FFmpeg路径>`。
 5. `python toeic-listening/build_extra_sets.py`
@@ -31,6 +31,12 @@
 
 生成器复用 `gen_html.py` / `quiz_kit`，仅写入第 05 / 06 套；
 原四套题目、音频和进度键不会重建或迁移。
+
+### 发布与回退
+
+Cloudflare 继续由主分支自动部署，无新增服务或密钥。发布后检查六套目录、05/06 题页、音频播放和判分。
+如新增题页无法加载、播放或保存进度，停止推广新增入口；回退本次 TOEIC 功能提交及合并中的总数调整，
+保留同时合入的 DELE 更新。旧四套进度键不变，05/06 的本机进度无需删除。
 
 下文是原第 01–04 套的来源说明，相关版权声明仅针对原四套。
 

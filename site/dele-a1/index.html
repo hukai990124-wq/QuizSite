@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DELE A1 阅读 + 写作 · 官方真题练习册</title>
+<title>DELE A1 阅读 + 写作 + 听力 · 官方真题练习册</title>
 <style>
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -37,7 +37,7 @@ button:hover{background:#f1f5f9}
 /* ---------- 主体 ---------- */
 main{padding:22px 0 92px}
 .wrap{max-width:860px;margin:0 auto;padding:0 16px}
-.block{margin:0 0 34px}
+.block{margin:0 0 34px;scroll-margin-top:calc(var(--tb,110px) + 16px)}
 .block>h2{font-size:17px;margin:0 0 6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pill{font-size:11.5px;font-weight:700;color:#0b6b3a;background:#eaf7ef;border:1px solid #bfe3ce;
  border-radius:99px;padding:2px 9px}
@@ -50,6 +50,7 @@ main{padding:22px 0 92px}
  margin-bottom:13px;flex-wrap:wrap}
 .tno{font-weight:800;font-size:15px;color:#1d4e79}
 .tq{font-size:12.5px;color:#5b6570;background:#f1f5f9;border-radius:6px;padding:2px 8px}
+.tq.grey{color:#8b95a1;background:#eef2f5}
 .tkind{font-size:12.5px;color:#8a6d1a;background:#fff8e6;border:1px solid #f0e2b8;border-radius:6px;padding:2px 8px}
 .inst{font-size:13.8px;color:#334155;margin:0 0 13px}
 
@@ -149,6 +150,46 @@ a.card .tags{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
 .howto ol{margin:0;padding-left:20px;font-size:13.8px;color:#334155}
 .howto li{margin:5px 0}
 
+/* ---------- 听力（Prueba 2） ---------- */
+.aud{margin:0 0 12px}
+.aud:last-child{margin-bottom:0}
+.aud audio{display:block;width:100%;height:38px}
+.aud .alab{display:block;font-size:12.4px;color:#5b6570;margin:0 0 5px}
+.q .aud{margin:0 0 11px;background:#f7fafc;border:1px solid #e3e9ee;border-radius:9px;padding:8px 10px}
+.q .aud .alab{margin-bottom:4px}
+
+.spdbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#f4f8fb;
+ border:1px solid #dbe6ef;border-radius:10px;padding:9px 12px;margin:0 0 16px;font-size:12.8px;color:#42607a}
+.spdbar .spd-lbl{font-weight:700}
+.spdbar button.spd{font-size:12.5px;padding:4px 11px;min-height:0;border-radius:99px;border-color:#c9d9e6;color:#42607a}
+.spdbar button.spd.on{background:#1d4e79;border-color:#1d4e79;color:#fff}
+.spdbar .spd-tip{flex:1 1 100%;font-size:12.2px;color:#7d8f9e;line-height:1.6}
+
+ul.pool.imgpool{grid-template-columns:repeat(auto-fill,minmax(152px,1fr))}
+ul.pool.imgpool li{flex-direction:column;align-items:center;gap:7px;padding:9px}
+ul.pool.imgpool img{width:100%;height:106px;object-fit:contain;background:#fff;border-radius:6px}
+ul.pool.imgpool .pl{margin-top:0}
+
+details.trans{margin:14px 0 4px;font-size:13px}
+details.trans summary{cursor:pointer;color:#5b6570;font-size:12.6px}
+details.trans .tbody{margin:9px 0 0;padding:12px 14px;background:#fbfcfd;border:1px dashed #d8e0e8;
+ border-radius:8px;color:#334155}
+details.trans .seg{margin:0 0 11px}
+details.trans .seg:last-child{margin-bottom:0}
+details.trans .stag{display:inline-block;font-size:11px;font-weight:700;color:#1d4e79;background:#eef4fa;
+ border:1px solid #d7e5f1;border-radius:5px;padding:1px 7px;margin:0 0 5px}
+details.trans p{margin:0 0 3px;line-height:1.72}
+details.trans .who{color:#8a6d1a;font-weight:700;margin-right:5px}
+
+.partstat{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:12.6px;color:#5b6570;
+ border-top:1px solid #eef2f5;margin-top:9px;padding-top:9px}
+.partstat b{color:#334155}
+.partstat i{font-style:normal;color:#8b95a1;font-variant-numeric:tabular-nums}
+.partstat i.on{color:#0b6b3a;font-weight:600}
+
+.blind{border:1px dashed #e0b64a;background:#fffdf5;border-radius:9px;padding:10px 13px;
+ font-size:12.9px;color:#6b5310;margin:0 0 14px}
+
 /* 进度条与文字分层：.pg 不设固定高度，否则会裁掉下面的文字 */
 a.card .pg{position:relative;margin-top:9px}
 a.card .pg::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:#e9eef2;border-radius:99px}
@@ -187,6 +228,12 @@ a.card .pg.on span{color:#0b6b3a;font-weight:600}
   .pool{grid-template-columns:1fr}
   ul.opts.imgopts{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
   ul.opts.imgopts img{height:112px}
+  /* 听力：图片池在窄屏压成两列，音频条高度略降 */
+  ul.pool.imgpool{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  ul.pool.imgpool img{height:92px}
+  .aud audio{height:34px}
+  .spdbar{padding:8px 10px;gap:6px}
+  .spdbar button.spd{padding:5px 12px}
   table.src-table{font-size:13px}
   table.src-table td:first-child{width:30%}
   .scroll-hint{display:block;font-size:12px;color:#8b95a1;text-align:center;margin:7px 0 0}
@@ -218,6 +265,7 @@ a.card .pg.on span{color:#0b6b3a;font-weight:600}
   .layout main .wrap{max-width:none;padding:0}
   /* 侧栏不是顶部条了，跳题锚点不该再按 --tb 偏移 */
   .q{scroll-margin-top:18px!important}
+  section.block{scroll-margin-top:18px}
 
   .layout~footer .wrap{max-width:1360px;padding:0 24px}
 
@@ -232,6 +280,12 @@ a.card .pg.on span{color:#0b6b3a;font-weight:600}
    box-shadow:0 14px 44px rgba(16,24,40,.18);transform:translateY(150%)}
   body .sheet.open{transform:translateY(0)}
   body .sheet .grid{max-height:46vh}
+}
+
+/* ================= 打印：音频控件与播放设置不打印 ================= */
+@media print{
+  .aud,.spdbar,.partstat,.blind,.jump{display:none!important}
+  details.trans{break-inside:avoid}
 }
 </style>
 <!--i18n:head-->
@@ -267,8 +321,8 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <body><a href="../index.html" title="返回题库总览" style="position:fixed;right:14px;top:14px;z-index:99;background:rgba(255,255,255,.95);border:1px solid #d8dee5;border-radius:99px;padding:6px 14px;font:12.5px/1.4 -apple-system,'Segoe UI','Microsoft YaHei',sans-serif;color:#334155;text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.10)">← 题库总览</a>
 <header class="idx-hd">
   <div class="wrap">
-    <h1>DELE A1 · 阅读 + 写作练习册</h1>
-    <p>Instituto Cervantes 官方公开的 4 套 A1 试卷 · 阅读 25 题可即时判分 · 写作附参考答案</p>
+    <h1>DELE A1 · 阅读 + 写作 + 听力</h1>
+    <p>Instituto Cervantes 官方公开的 5 套 A1 试卷 · 每套阅读 25 题可即时判分 · 其中 4 套另有听力 25 题（含官方真人录音与合成音频）· 写作附参考答案</p>
   </div>
 </header>
 
@@ -277,13 +331,15 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <div class="howto">
       <h2>怎么用</h2>
       <ol>
-        <li>每套试卷 25 道阅读题，点选项后按「确认作答」立即判定，并显示正确答案与解析。</li>
-        <li>第 4 个 Tarea 是「手写填空」，直接输入单词后按回车即可。</li>
-        <li>顶栏可打开<b>答题卡</b>跳题、<b>交卷看成绩</b>、<b>只看错题</b>；作答进度存在本机浏览器。</li>
-        <li>写作两题不判分，建议先自己写，再展开参考答案对照。</li>
+        <li>每套 <b>阅读 25 题</b>（第 1–25 题）；其中 4 套还有 <b>听力 25 题</b>（第 26–50 题）。点选项后按「确认作答」立即判定。</li>
+        <li><b>听力</b>先点播放键听录音再答题；每个 Tarea 有一段完整音频，每题也能单独重播，侧栏可切 0.75× / 1× / 1.25× / 1.5× 倍速，做完还能展开听力原文核对。</li>
+        <li>第 4 个 Tarea 常是「手写填空」，直接输入单词后按回车即可。</li>
+        <li>侧栏（手机在顶部）可打开<b>答题卡</b>跳题、<b>交卷看成绩</b>、<b>只看错题</b>，并随时看到阅读 / 听力<b>分部正确率</b>；作答进度存在本机浏览器。</li>
+        <li>Prueba 3 写作两题不判分，建议先自己写，再展开参考答案对照。</li>
+        <li>2009 年那套真题，官方从未发布听力录音与原文，因此那套听力只能看题型与答案、无法播放；2020 年 7 月那套官方只公开了阅读与写作，没有听力。</li>
       </ol>
     </div>
-    <div class="cards"><a class="card" href="a1-modelo0-2020.html" data-quiz-key="dele-a1-a1-modelo0-2020" data-quiz-total="25"><div class="no">试卷 1</div><h3>官方样卷 Modelo 0（2020 版）</h3><p class="sd">DELE A1 · 现行题型</p><div class="tags"><span class="tg b">官方</span><span class="tg">阅读 25 题</span><span class="tg">写作 2 题</span></div><div class="pg"><i></i><span>未开始</span></div></a><a class="card" href="a1-modelo0-2008.html" data-quiz-key="dele-a1-a1-modelo0-2008" data-quiz-total="25"><div class="no">试卷 2</div><h3>官方样卷 Modelo 0（2008 旧版）</h3><p class="sd">DELE A1 · Examen 00, Versión 1</p><div class="tags"><span class="tg b">官方</span><span class="tg">阅读 25 题</span><span class="tg">写作 2 题</span></div><div class="pg"><i></i><span>未开始</span></div></a><a class="card" href="a1-0720.html" data-quiz-key="dele-a1-a1-0720" data-quiz-total="25"><div class="no">试卷 3</div><h3>官方真题 · 2020 年 7 月</h3><p class="sd">DELE A1 · Código de examen 85</p><div class="tags"><span class="tg b">真题</span><span class="tg">阅读 25 题</span><span class="tg">写作 2 题</span></div><div class="pg"><i></i><span>未开始</span></div></a><a class="card" href="a1-2009-0516.html" data-quiz-key="dele-a1-a1-2009-0516" data-quiz-total="25"><div class="no">试卷 4</div><h3>官方真题 · 2009 年 5 月 16 日</h3><p class="sd">DELE A1 · Convocatoria de mayo de 2009</p><div class="tags"><span class="tg b">真题</span><span class="tg">阅读 25 题</span><span class="tg">写作 2 题</span></div><div class="pg"><i></i><span>未开始</span></div></a></div>
+    <div class="cards"><a class="card" href="a1-modelo0-2020.html" data-quiz-key="dele-a1-a1-modelo0-2020" data-quiz-total="50"><div class="no">试卷 1</div><h3>官方样卷 Modelo 0（2020 版）</h3><p class="sd">DELE A1 · 现行题型</p><div class="tags"><span class="tg b">官方</span><span class="tg">阅读 25 题</span><span class="tg">听力 25 题</span><span class="tg">写作 2 题</span></div><div class="pg"><i></i><span>未开始</span></div></a><a class="card" href="a1-modelo0-2008.html" data-quiz-key="dele-a1-a1-modelo0-2008" data-quiz-total="50"><div class="no">试卷 2</div><h3>官方样卷 Modelo 0（2008 旧版）</h3><p class="sd">DELE A1 · Examen 00, Versión 1</p><div class="tags"><span class="tg b">官方</span><span class="tg">阅读 25 题</span><span class="tg">听力 25 题</span><span class="tg">写作 2 题</span></div><div class="pg"><i></i><span>未开始</span></div></a><a class="card" href="a1-0720.html" data-quiz-key="dele-a1-a1-0720" data-quiz-total="25"><div class="no">试卷 3</div><h3>官方真题 · 2020 年 7 月</h3><p class="sd">DELE A1 · Código de examen 85</p><div class="tags"><span class="tg b">真题</span><span class="tg">阅读 25 题</span><span class="tg">写作 2 题</span></div><div class="pg"><i></i><span>未开始</span></div></a><a class="card" href="a1-2009-0516.html" data-quiz-key="dele-a1-a1-2009-0516" data-quiz-total="50"><div class="no">试卷 4</div><h3>官方真题 · 2009 年 5 月 16 日</h3><p class="sd">DELE A1 · Convocatoria de mayo de 2009</p><div class="tags"><span class="tg b">真题</span><span class="tg">阅读 25 题</span><span class="tg">听力 25 题 · 无音频</span><span class="tg">写作 2 题</span></div><div class="pg"><i></i><span>未开始</span></div></a><a class="card" href="a1-2011.html" data-quiz-key="dele-a1-a1-2011" data-quiz-total="50"><div class="no">试卷 5</div><h3>官方真题 · 2011 年 5 月 20 日</h3><p class="sd">DELE A1 · Convocatoria de mayo de 2011</p><div class="tags"><span class="tg b">真题</span><span class="tg">阅读 25 题</span><span class="tg">听力 25 题</span><span class="tg">写作 2 题</span></div><div class="pg"><i></i><span>未开始</span></div></a></div>
   </div>
 </main>
 
@@ -331,7 +387,7 @@ s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")}
 document.head.appendChild(s);})();
 </script>
 <!--/i18n:js--><!--pc:js-->
-<script src="../assets/presence.js"></script>
+<script src="assets/presence.js"></script>
 <!--/pc:js-->
 </body>
 </html>

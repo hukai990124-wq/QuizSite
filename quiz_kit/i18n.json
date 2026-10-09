@@ -400,21 +400,9 @@
   "en": "DELE A1 · Current format",
   "ja": "DELE A1 · 現行形式"
  },
- "DELE A1 · 阅读 + 写作": {
-  "en": "DELE A1 · Reading + Writing",
-  "ja": "DELE A1 · 読解＋作文"
- },
  "DELE A1 · 阅读 + 写作练习册": {
   "en": "DELE A1 · Reading + Writing Workbook",
   "ja": "DELE A1 · 読解＋作文ワークブック"
- },
- "Instituto Cervantes 官方 4 套真题。阅读 25 题即时判分，写作附参考答案。": {
-  "en": "4 official papers from Instituto Cervantes. 25 reading questions scored instantly; writing tasks include model answers.",
-  "ja": "Instituto Cervantes 公式問題4セット。読解25問は即時採点、作文には模範解答付き。"
- },
- "Instituto Cervantes 官方公开的 4 套 A1 试卷 · 阅读 25 题可即时判分 · 写作附参考答案": {
-  "en": "4 official A1 papers publicly released by Instituto Cervantes · 25 reading questions with instant scoring · Writing tasks with model answers",
-  "ja": "Instituto Cervantes が公開している公式A1問題4セット · 読解25問は即時採点 · 作文には模範解答付き"
  },
  "试卷 1": {
   "en": "Paper 1",
@@ -1596,10 +1584,6 @@
   "en": "Questions 451–452",
   "ja": "問題 451–452"
  },
- "6 个题库 · 共 3392 题 · 可作答判分 · 进度自动保存在本机浏览器": {
-  "en": "6 quiz banks · 3,392 questions · Answerable & scored · Progress saved automatically in this browser",
-  "ja": "6つの問題集 · 全3392問 · 解答・採点可 · 進捗はこのブラウザに自動保存"
- },
  "重置学习进度": {
   "en": "Reset progress",
   "ja": "学習の進捗をリセット"
@@ -1619,5 +1603,325 @@
  "确定重置": {
   "en": "Reset",
   "ja": "リセット"
+ },
+ "DELE A1 · 阅读 + 写作 + 听力": {
+  "en": "DELE A1 · Reading + Writing + Listening",
+  "ja": "DELE A1 · 読解＋作文＋リスニング"
+ },
+ "Instituto Cervantes 官方公开的 5 套 A1 试卷 · 每套阅读 25 题可即时判分 · 其中 4 套另有听力 25 题（含官方真人录音与合成音频）· 写作附参考答案": {
+  "en": "5 official A1 papers publicly released by Instituto Cervantes · 25 reading questions per set with instant scoring · 4 of them also include 25 listening questions (official human recordings plus synthesized audio) · writing tasks with model answers",
+  "ja": "Instituto Cervantes が公開している公式A1問題5セット · 各セット読解25問は即時採点 · うち4セットはリスニング25問付き（公式の真人音声と合成音声）· 作文には模範解答付き"
+ },
+ "每套 阅读 25 题（第 1–25 题）；其中 4 套还有 听力 25 题（第 26–50 题）。点选项后按「确认作答」立即判定。": {
+  "en": "Each set has <b>25 reading questions</b> (Q1–25); 4 of the sets also have <b>25 listening questions</b> (Q26–50). Pick an option and press “Check answer” for instant scoring.",
+  "ja": "各セットは<b>読解25問</b>（第1–25問）。うち4セットは<b>リスニング25問</b>（第26–50問）付き。選択肢を選んで「回答を確認」で即採点。"
+ },
+ "听力先点播放键听录音再答题；每个 Tarea 有一段完整音频，每题也能单独重播，侧栏可切 0.75× / 1× / 1.25× / 1.5× 倍速，做完还能展开听力原文核对。": {
+  "en": "For <b>listening</b>, press play and hear the recording before answering. Each Tarea has one full-length audio file and every question can also be replayed separately; the sidebar switches between 0.75× / 1× / 1.25× / 1.5× speed, and you can expand the transcript after answering.",
+  "ja": "<b>リスニング</b>は、まず再生ボタンで音声を聞いてから回答します。各 Tarea に完全版の音声があり、各問も単独で再生できます。サイドバーで 0.75× / 1× / 1.25× / 1.5× の速度切替ができ、回答後に音声スクリプトも展開できます。"
+ },
+ "第 4 个 Tarea 常是「手写填空」，直接输入单词后按回车即可。": {
+  "en": "The 4th Tarea is often a handwritten gap-fill — just type the word and press Enter.",
+  "ja": "第4の Tarea は多くの場合「筆記穴埋め」です。語を入力して Enter を押すだけ。"
+ },
+ "侧栏（手机在顶部）可打开答题卡跳题、交卷看成绩、只看错题，并随时看到阅读 / 听力分部正确率；作答进度存在本机浏览器。": {
+  "en": "The sidebar (top bar on phones) opens the <b>answer sheet</b> to jump between questions, <b>submit & see score</b> and <b>wrong only</b>, and always shows your reading / listening <b>section accuracy</b>; progress is saved in this browser.",
+  "ja": "サイドバー（スマホでは上部バー）から<b>解答カード</b>で問題移動、<b>採点</b>、<b>誤答のみ</b>を開け、読解／リスニングの<b>分野別正答率</b>も常に確認できます。進捗はこのブラウザーに保存されます。"
+ },
+ "Prueba 2 · 听力 25 题": {
+  "en": "Prueba 2 · 25 listening questions",
+  "ja": "Prueba 2 · リスニング25問"
+ },
+ "Prueba 2 · 听力（官方未公开）": {
+  "en": "Prueba 2 · Listening (not released officially)",
+  "ja": "Prueba 2 · リスニング（公式未公開）"
+ },
+ "共 25 题可判分": {
+  "en": "25 questions scored in total",
+  "ja": "採点対象は全25問"
+ },
+ "共 50 题可判分": {
+  "en": "50 questions scored in total",
+  "ja": "採点対象は全50問"
+ },
+ "听力 Prueba 2": {
+  "en": "Listening · Prueba 2",
+  "ja": "リスニング · Prueba 2"
+ },
+ "阅读 Prueba 1": {
+  "en": "Reading · Prueba 1",
+  "ja": "読解 · Prueba 1"
+ },
+ "跳到听力 →": {
+  "en": "To listening →",
+  "ja": "リスニングへ →"
+ },
+ "跳到写作 →": {
+  "en": "To writing →",
+  "ja": "作文へ →"
+ },
+ "查看听力原文 Transcript（建议作答后再看）": {
+  "en": "Show the transcript (best read after answering)",
+  "ja": "音声スクリプトを表示（回答後に読むのがおすすめ）"
+ },
+ "听力音频：2020 样卷用官方公开的真人录音；2008 / 2011 官方未发布音频， 按官方 transcripción 用神经语音合成；2009 真题官方从未公布录音与原文，故该套听力无音频。": {
+  "en": "<b>Listening audio:</b> the 2020 sample paper uses the official human recording; no audio was ever released for 2008 / 2011, so those are synthesized with a neural voice from the official transcripción; and for the 2009 past exam Cervantes never published a recording or transcript, so that set has no audio.",
+  "ja": "<b>リスニング音声：</b>2020年のサンプルは公式の真人録音。2008 / 2011 は音声が公開されていないため、公式 transcripción をニューラル音声で合成。2009年の過去問は録音もスクリプトも未公開のため音声はありません。"
+ },
+ "2009 年那套真题，官方从未发布听力录音与原文，因此那套听力只能看题型与答案、无法播放；2020 年 7 月那套官方只公开了阅读与写作，没有听力。": {
+  "en": "Cervantes never released a recording or a transcript for the 2009 past exam, so that set's listening section can only be viewed (question types and answer key) and not played; the July 2020 paper was published without a listening test at all.",
+  "ja": "2009年の過去問は録音もスクリプトも公開されていないため、そのセットのリスニングは出題形式と解答のみで再生できません。2020年7月の回はそもそもリスニングが公開されていません。"
+ },
+ "官方真题 · 2011 年 5 月 20 日": {
+  "en": "Official past exam · 20 May 2011",
+  "ja": "公式過去問 · 2011年5月20日"
+ },
+ "注原卷表格中「31」与「1」两栏都印作 MIÉRCOLES（官方印刷笔误）；官方答案把「去购物」那天记为 MARTES，本练习两种拼写都算对。": {
+  "en": "Note: in the original paper both the “31” and the “1” column are printed as MIÉRCOLES (an official typo); the answer key records the shopping day as MARTES, so this exercise accepts either spelling.",
+  "ja": "注：原卷では「31」と「1」の欄がどちらも MIÉRCOLES と印刷されています（公式の誤植）。公式解答は買い物の日を MARTES としているため、本練習ではどちらの綴りも正解とします。"
+ },
+ "说明：答案依据官方 Clave de respuestas 逐题核对；长文本页因原 PDF 文本层为图片/自定义编码， 由逐页视觉重建，如发现个别拼写差异以官方原件为准。": {
+  "en": "Note: every answer was checked against the official Clave de respuestas. The long-text pages had image / custom-encoded text layers in the original PDF and were rebuilt visually page by page — if you spot a spelling difference, the official original prevails.",
+  "ja": "注：解答は公式の Clave de respuestas と一問ずつ照合しました。長文ページは元PDFのテキスト層が画像／独自エンコードだったため、1ページずつ視覚的に再構築しています。綴りの差異があれば公式原本が優先します。"
+ },
+ "题目来源：Instituto Cervantes 公开发布的 DELE A1 官方样卷与往届真题（Modelo 0 / convocatorias oficiales）， 版权归 Instituto Cervantes 所有，此处仅用于个人学习与自测。": {
+  "en": "Source: the DELE A1 sample papers and past exams published by Instituto Cervantes (Modelo 0 / convocatorias oficiales). Copyright Instituto Cervantes; used here for personal study and self-testing only.",
+  "ja": "出典：Instituto Cervantes が公開している DELE A1 公式サンプルと過去問（Modelo 0 / convocatorias oficiales）。著作権は Instituto Cervantes に帰属し、ここでは個人の学習・自己採点のみに使用しています。"
+ },
+ "听力 25 题 · 无音频": {
+  "en": "25 listening questions · no audio",
+  "ja": "リスニング25問 · 音声なし"
+ },
+ "听力 25 题": {
+  "en": "25 listening questions",
+  "ja": "リスニング25問"
+ },
+ "试卷 5": {
+  "en": "Paper 5",
+  "ja": "第5回"
+ },
+ "官方未公开": {
+  "en": "Not released",
+  "ja": "公式未公開"
+ },
+ "本套无音频": {
+  "en": "No audio for this set",
+  "ja": "このセットは音声なし"
+ },
+ "本套没有听力": {
+  "en": "This set has no listening test",
+  "ja": "このセットはリスニングなし"
+ },
+ "：Instituto Cervantes 只为该场次公开了题目与答案，从未发布录音，也没有听力原文，因此这里只能看题型与答案，无法播放。": {
+  "en": "Cervantes released only the questions and the answer key for that sitting — never a recording, and no transcript — so here you can read the question types and the answers, but nothing can be played.",
+  "ja": "Cervantes が公開したのはその回の問題と解答のみで、録音もスクリプトもありません。ここでは出題形式と解答は見られますが、再生はできません。"
+ },
+ "：Instituto Cervantes 对 2020 年 7 月这场考试 只公开了 Prueba 1（阅读）与 Prueba 3（写作）的原卷，没有公开 Prueba 2 的听力试卷， 也没有配套录音，因此本套无法提供听力。想看听力请回到首页选其它 4 套。": {
+  "en": "For the July 2020 exam Cervantes published only the Prueba 1 (reading) and Prueba 3 (writing) papers — not the Prueba 2 listening paper, and no recording — so this set cannot offer a listening test. To practise listening, go back to the index and pick one of the other 4 sets.",
+  "ja": "2020年7月の試験について Cervantes が公開したのは Prueba 1（読解）と Prueba 3（作文）の原卷のみで、Prueba 2 のリスニング問題も音声も公開されていません。そのためこのセットにはリスニングがありません。リスニングを練習する場合は、目次に戻って他の4セットを選んでください。"
+ },
+ "播放速度": {
+  "en": "Playback speed",
+  "ja": "再生速度"
+ },
+ "音频不点不下载，点播放键即可听。建议先按正常语速做一遍，对答案后再放慢重听；每题都能单独重播。 来源：官方未公开音频，按官方听力原文用神经语音合成": {
+  "en": "Audio streams only when you press play. Work through it once at normal speed, then slow it down and listen again as you check the answers; every question can be replayed separately.　Source: no official audio exists, so this is a neural voice reading the official listening transcript.",
+  "ja": "音声は再生ボタンを押すまで読み込まれません。まず普通の速度で一周し、答え合わせのあと速度を落として聴き直すのがおすすめです。各問は単独でも再生できます。　出典：公式音声が存在しないため、公式のリスニング原文をニューラル音声で読み上げたものです。"
+ },
+ "音频不点不下载，点播放键即可听。建议先按正常语速做一遍，对答案后再放慢重听；每题都能单独重播。 来源：官方真人录音（Instituto Cervantes 公开音频包）": {
+  "en": "Audio streams only when you press play. Work through it once at normal speed, then slow it down and listen again as you check the answers; every question can be replayed separately.　Source: the official human recording released by Instituto Cervantes.",
+  "ja": "音声は再生ボタンを押すまで読み込まれません。まず普通の速度で一周し、答え合わせのあと速度を落として聴き直すのがおすすめです。各問は単独でも再生できます。　出典：Instituto Cervantes が公開した公式の真人録音です。"
+ },
+ "DELE A1 阅读 + 写作 + 听力 · 官方真题练习册": {
+  "en": "DELE A1 Reading + Writing + Listening · Official past-paper workbook",
+  "ja": "DELE A1 読解＋作文＋リスニング · 公式過去問問題集"
+ },
+ "50 道练习题": {
+  "en": "50 practice questions",
+  "ja": "練習問題50問"
+ },
+ "HOTSPOT 拖拽题": {
+  "en": "HOTSPOT drag-and-drop",
+  "ja": "HOTSPOT ドラッグ操作"
+ },
+ "查看许可证": {
+  "en": "View the license",
+  "ja": "ライセンスを表示"
+ },
+ "查看 MIT License": {
+  "en": "View the MIT License",
+  "ja": "MIT License を表示"
+ },
+ "第 01 套": {
+  "en": "Set 01",
+  "ja": "第01回"
+ },
+ "第 02 套": {
+  "en": "Set 02",
+  "ja": "第02回"
+ },
+ "第 03 套": {
+  "en": "Set 03",
+  "ja": "第03回"
+ },
+ "第 04 套": {
+  "en": "Set 04",
+  "ja": "第04回"
+ },
+ "200 题": {
+  "en": "200 questions",
+  "ja": "200問"
+ },
+ "共 230 题 · 分 5 份 · 每份 50 题 · 中英对照覆盖 230 题点选项后按「确认作答」判对错，正确率自动存在本机": {
+  "en": "230 questions · 5 sets · 50 each · English + Chinese; pick an option and press “Check answer” to score instantly, accuracy saved in this browser",
+  "ja": "230問 · 5セット · 各50問 · 英中対訳。選択肢を選んで「回答を確認」で即採点、正答率はこのブラウザに自動保存"
+ },
+ "共 452 题 · 分 10 份 · 每份 50 题 · 中英对照覆盖 452 题点选项后按「确认作答」判对错，正确率自动存在本机": {
+  "en": "452 questions · 10 sets · 50 each · English + Chinese; pick an option and press “Check answer” to score instantly, accuracy saved in this browser",
+  "ja": "452問 · 10セット · 各50問 · 英中対訳。選択肢を選んで「回答を確認」で即採点、正答率はこのブラウザに自動保存"
+ },
+ "两条线共": {
+  "en": "Across the two tracks,",
+  "ja": "2ライン合計"
+ },
+ "题 · 中英对照 · 可作答判分 · 进度存在本机浏览器": {
+  "en": "questions · English + Chinese · answerable & scored · progress saved in this browser",
+  "ja": "問 · 英中対訳 · 解答・採点可 · 進捗はこのブラウザーに保存"
+ },
+ "领域分布（每套）：": {
+  "en": "Domain breakdown (each set):",
+  "ja": "分野別の出題数（各セット）："
+ },
+ "云概念 12 题；安全与合规 15 题；云技术与服务 17 题；账单、定价与支持 6 题。按官方 CLF-C02 领域权重安排。": {
+  "en": "Cloud concepts 12 · Security and compliance 15 · Cloud technology and services 17 · Billing, pricing and support 6 — weighted to the official CLF-C02 domains.",
+  "ja": "クラウドの概念 12問 · セキュリティとコンプライアンス 15問 · クラウド技術とサービス 17問 · 請求・料金・サポート 6問。公式 CLF-C02 の分野比重に合わせています。"
+ },
+ "来源与使用：": {
+  "en": "Source and use:",
+  "ja": "出典と利用："
+ },
+ "题目来源于 MIT 许可的": {
+  "en": "The questions come from the MIT-licensed ",
+  "ja": "問題は MIT ライセンスの "
+ },
+ "；本页附完整许可证。中文和日文为机器翻译。练习题非 AWS 官方题目或考题预测；AWS 与本题库无关联。": {
+  "en": "; the full license is included on this page. Chinese and Japanese are machine-translated. These practice questions are not official AWS questions or exam predictions; this site is not affiliated with AWS.",
+  "ja": "；完全なライセンスはこのページに掲載しています。中国語と日本語は機械翻訳です。本練習問題は AWS 公式の問題でも試験予想でもありません。本サイトは AWS と無関係です。"
+ },
+ "。": {
+  "en": ".",
+  "ja": "。"
+ },
+ "题目来源：": {
+  "en": "Source: ",
+  "ja": "出典："
+ },
+ "（MIT License）。": {
+  "en": " (MIT License).",
+  "ja": "（MIT License）。"
+ },
+ "。不代表 AWS 官方内容。": {
+  "en": " Not official AWS content.",
+  "ja": " AWS 公式の内容ではありません。"
+ },
+ "返回 CLF-C02 目录": {
+  "en": "Back to the CLF-C02 index",
+  "ja": "CLF-C02 目次に戻る"
+ },
+ "仅供个人备考自用，请勿再分发": {
+  "en": "for personal exam prep only — please do not redistribute",
+  "ja": "個人の受験対策用です。再配布はご遠慮ください"
+ },
+ "进度按网址隔离，换域名或换设备不会跟过来。": {
+  "en": "Progress is isolated per URL — switching domain or device will not carry it over.",
+  "ja": "進捗は URL ごとに分かれます。ドメインや端末を変えても引き継がれません。"
+ },
+ "← 题库目录": {
+  "en": "Question bank index",
+  "ja": "問題集の目次"
+ },
+ "PART 1 — Photographs（1–6）": {
+  "en": "PART 1 — Photographs (1–6)",
+  "ja": "PART 1 — Photographs（1–6）"
+ },
+ "PART 2 — Question-Response（7–31）": {
+  "en": "PART 2 — Question-Response (7–31)",
+  "ja": "PART 2 — Question-Response（7–31）"
+ },
+ "PART 3 — Conversations（32–70）": {
+  "en": "PART 3 — Conversations (32–70)",
+  "ja": "PART 3 — Conversations（32–70）"
+ },
+ "PART 4 — Talks（71–100）": {
+  "en": "PART 4 — Talks (71–100)",
+  "ja": "PART 4 — Talks（71–100）"
+ },
+ "PART 5 — Incomplete Sentences（101–130）": {
+  "en": "PART 5 — Incomplete Sentences (101–130)",
+  "ja": "PART 5 — Incomplete Sentences（101–130）"
+ },
+ "PART 6 — Text Completion（131–146）": {
+  "en": "PART 6 — Text Completion (131–146)",
+  "ja": "PART 6 — Text Completion（131–146）"
+ },
+ "PART 7 — Reading Comprehension（147–200）": {
+  "en": "PART 7 — Reading Comprehension (147–200)",
+  "ja": "PART 7 — Reading Comprehension（147–200）"
+ },
+ "225 题": {
+  "en": "225 questions",
+  "ja": "225問"
+ },
+ "6 个题库 · 共 3717 题 · 可作答判分 · 进度自动保存在本机浏览器": {
+  "en": "6 quiz banks · 3,717 questions · Answerable & scored · Progress saved automatically in this browser",
+  "ja": "6つの問題集 · 全3717問 · 解答・採点可 · 進捗はこのブラウザに自動保存"
+ },
+ "Instituto Cervantes 官方 5 套真题。阅读 25 题即时判分，4 套另有听力 25 题，写作附参考答案。": {
+  "en": "5 official papers from Instituto Cervantes. 25 reading questions scored instantly; 4 sets add 25 listening questions; writing tasks include model answers.",
+  "ja": "Instituto Cervantes 公式問題5セット。読解25問は即時採点、うち4セットはリスニング25問付き、作文には模範解答付き。"
+ },
+ "示例录音": {
+  "en": "Sample audio",
+  "ja": "例の音声"
+ },
+ "听力音频 · 本 Tarea 全部题目（可反复播放）": {
+  "en": "Audio · every question in this Tarea (replayable)",
+  "ja": "音声 · この Tarea の全問（何度でも再生可）"
+ },
+ "Prueba 3 写作两题不判分，建议先自己写，再展开参考答案对照。": {
+  "en": "<b>Prueba 3</b> has two writing tasks that are not auto-scored — write them yourself first, then expand the model answers to compare.",
+  "ja": "<b>Prueba 3</b> の作文2題は自動採点されません。まず自分で書き、そのあと模範解答を開いて見比べてください。"
+ },
+ "个人学习自测用。题目来源与许可证见各题库说明；未经许可的题目请勿再分发。AWS 与相关标志归其所有者所有，本网站与 AWS 无关联或背书。": {
+  "en": "For personal study and self-testing. Sources and licences are noted on each quiz bank's pages; do not redistribute these questions without permission. AWS and related marks belong to their owners; this site is not affiliated with or endorsed by AWS.",
+  "ja": "個人の学習・自己採点用です。出典とライセンスは各問題集のページに記載しています。許諾なく問題を再配布しないでください。AWS および関連する標章は各所有者に帰属します。本サイトは AWS と提携・推奨関係にありません。"
+ },
+ "题目版权归 Amazon Web Services 及各原始来源所有，": {
+  "en": "The questions are copyright Amazon Web Services and their original sources — ",
+  "ja": "問題の著作権は Amazon Web Services および各原典に帰属します — "
+ },
+ "官方样卷 Modelo 0（2008 旧版） · DELE A1 阅读+写作+听力": {
+  "en": "Official sample paper Modelo 0 (2008, older format) · DELE A1 Reading + Writing + Listening",
+  "ja": "公式サンプル Modelo 0（2008・旧形式） · DELE A1 読解＋作文＋リスニング"
+ },
+ "官方样卷 Modelo 0（2020 版） · DELE A1 阅读+写作+听力": {
+  "en": "Official sample paper Modelo 0 (2020 edition) · DELE A1 Reading + Writing + Listening",
+  "ja": "公式サンプル Modelo 0（2020年版） · DELE A1 読解＋作文＋リスニング"
+ },
+ "官方真题 · 2009 年 5 月 16 日 · DELE A1 阅读+写作+听力": {
+  "en": "Official past exam · 16 May 2009 · DELE A1 Reading + Writing + Listening",
+  "ja": "公式過去問 · 2009年5月16日 · DELE A1 読解＋作文＋リスニング"
+ },
+ "官方真题 · 2011 年 5 月 20 日 · DELE A1 阅读+写作+听力": {
+  "en": "Official past exam · 20 May 2011 · DELE A1 Reading + Writing + Listening",
+  "ja": "公式過去問 · 2011年5月20日 · DELE A1 読解＋作文＋リスニング"
+ },
+ "官方真题 · 2020 年 7 月 · DELE A1 阅读+写作+听力": {
+  "en": "Official past exam · July 2020 · DELE A1 Reading + Writing + Listening",
+  "ja": "公式過去問 · 2020年7月 · DELE A1 読解＋作文＋リスニング"
+ },
+ "AWS AIF-C01 · AI Practitioner 题库": {
+  "en": "AWS AIF-C01 · AI Practitioner Question Bank",
+  "ja": "AWS AIF-C01 · AI Practitioner 問題集"
  }
 }

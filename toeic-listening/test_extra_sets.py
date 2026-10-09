@@ -103,6 +103,13 @@ class ExtraSetsTest(unittest.TestCase):
         homepage = (ROOT / 'site/index.html').read_text(encoding='utf-8')
         self.assertIn('TOEIC 听力 · 6 套', homepage)
         self.assertIn('seq("toeic-l:t",1,6,100)', homepage)
+        self.assertIn('共 3717 题', homepage)
+        self.assertIn('600 题', homepage)
+        self.assertIn('["dele-a1-a1-2011",50]', homepage)
+        dictionary = json.loads((ROOT / 'quiz_kit/i18n.json').read_text(encoding='utf-8'))
+        summary = dictionary['6 个题库 · 共 3717 题 · 可作答判分 · 进度自动保存在本机浏览器']
+        self.assertIn('3,717', summary['en'])
+        self.assertIn('3717', summary['ja'])
 
 
 if __name__ == '__main__':
