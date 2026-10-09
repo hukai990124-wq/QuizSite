@@ -1,0 +1,59 @@
+Tarea 1
+Ejemplo
+Conversación 0
+MUJER: ¿A qué hora comemos hoy?
+HOMBRE: A las dos y media, como siempre.
+
+Conversación 1
+CHICA: ¿Qué vas a hacer esta tarde, Carlos?
+CHICO: Voy al ensayo de la orquesta. Mi amiga toca el violín y quiero escucharla.
+CHICA: ¡Qué bien! ¿Vas a volver tarde?
+CHICO: No, después tomamos algo cerca de casa.
+
+Conversación 2
+CHICA: ¿Cómo vas a clase cuando llueve?
+CHICO: Voy en metro. La estación está al lado de mi casa y llego muy rápido.
+CHICA: ¿No prefieres ir en autobús?
+CHICO: No, el metro es más cómodo.
+
+Conversación 3
+CHICA: ¿Qué haces los sábados y los domingos?
+CHICO: Juego al fútbol con mis amigos en el polideportivo.
+CHICA: ¿También juegas al tenis?
+CHICO: No, solo fútbol. El domingo por la tarde descanso.
+
+Conversación 4
+HOMBRE: ¿Qué va a tomar?
+CHICA: Un zumo de naranja, por favor.
+HOMBRE: ¿Y para comer?
+CHICA: Nada, gracias. Solo tengo un poco de sed.
+
+Conversación 5
+CHICA: ¿Sabes dónde está Juan? Lo he llamado varias veces.
+CHICO: Está de vacaciones en una ciudad de la costa. Ayer me mandó una foto del puerto.
+CHICA: ¡Qué suerte! ¿Vuelve el lunes?
+CHICO: Sí, por la mañana.
+
+Tarea 2
+Ejemplo
+NARRADOR: Tiene un mensaje nuevo de su hermana. Llámela al ciento veintitrés; la llamada es gratis.
+Mensaje 1: Atención, alumnos. La profesora de español ya está en el aula. Entren, por favor, y abran el libro por la página veinte.
+Mensaje 2: Buenas tardes. Ya pueden pasar al comedor. La mesa está preparada. Esta noche recomendamos la sopa de verduras y el pescado del día.
+Mensaje 3: Señora, no puede dejar el coche delante de esta entrada. Es una zona reservada. Por favor, mueva el vehículo ahora.
+Mensaje 4: Atención, pasajeros. El tren con destino a Madrid sale en cinco minutos. Suban ahora, por favor. El acceso está al final del andén.
+Mensaje 5: Buenas tardes. Mañana tendremos cielos despejados en gran parte del país. Un anticiclón traerá sol y temperaturas agradables.
+
+Tarea 3
+Ejemplo
+NARRADOR: Barcelona es una ciudad maravillosa para ir de compras. Tiene tiendas pequeñas, mercados y centros comerciales para todos los gustos.
+Mensaje 1: En La Habana me encantó la música y, sobre todo, la gente: siempre está alegre y habla con todo el mundo.
+Mensaje 2: Madrid tiene una vida cultural increíble. Hay museos, teatros y edificios históricos que puedes visitar durante todo el año.
+Mensaje 3: Cancún tiene unas playas fantásticas. El agua es muy clara y se puede nadar casi todos los días.
+Mensaje 4: Salamanca es conocida por su universidad. Muchos estudiantes vienen de otros países para estudiar allí.
+Mensaje 5: En Buenos Aires se habla mucho de fútbol. La gente va al estadio y anima a su equipo con pasión.
+Mensaje 6: Desde Granada es fácil ir a esquiar porque la estación de Sierra Nevada está muy cerca.
+Mensaje 7: Los mercados de Lima son maravillosos. Me gusta pasear entre los puestos y probar frutas diferentes.
+Mensaje 8: Valencia está al este de España, junto al mar Mediterráneo. Tiene un puerto muy importante.
+
+Tarea 4
+TERESA: Hola, amigos. Me llamo Teresa, tengo veintinueve años y estoy soltera. Vivo con mi hermana; nuestra casa es muy pequeña, pero cómoda, en una calle tranquila. Soy profesora de literatura y me gusta mucho correr, viajar y leer novelas. No me gusta la ciudad porque hay demasiado tráfico y ruido. Los viernes por la tarde tengo clase de baile. Busco conocer a un chico simpático, alegre y con sentido del humor. Si te gusta hablar de libros y viajar, puedes llamarme a la radio. ¡Hasta pronto!
