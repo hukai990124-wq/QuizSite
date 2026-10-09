@@ -143,7 +143,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">6 个题库 · 共 3717 题 · 可作答判分 · 进度自动保存在本机浏览器</p>
+      <p class="sub">8 个题库 · 共 3795 题 · 可作答判分 · 进度自动保存在本机浏览器</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <ul class="meta">
@@ -153,6 +153,8 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
       <li>AWS SAA-C03</li>
       <li>AWS CLF-C02</li>
       <li>AWS AIF-C01</li>
+      <li>基本情報技術者 · 科目 A</li>
+      <li>基本情報技術者 · 科目 B</li>
     </ul>
   </div>
 </header>
@@ -183,7 +185,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 3717</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 3795</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -228,6 +230,18 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <p class="sd">真题库 452 题 + 练习卷 230 题，中英对照，每题带答案与解析。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
+      <a class="card" href="fe/a.html?year=2026" data-site="fe-a">
+        <div class="top"><span class="tg g">日本 IT · 科目 A</span><span class="cnt">60 题</span></div>
+        <h3>基本情報技術者 · 科目 A</h3>
+        <p class="sd">IPA 2024–2026 年度官方公开题，每年 20 题；日文原题，按年度练习、判分。</p>
+        <div class="pg"><i></i><span>未开始</span></div>
+      </a>
+      <a class="card" href="fe/b.html?year=2026" data-site="fe-b">
+        <div class="top"><span class="tg g">日本 IT · 科目 B</span><span class="cnt">18 题</span></div>
+        <h3>基本情報技術者 · 科目 B</h3>
+        <p class="sd">IPA 2024–2026 年度官方公开题，每年 6 题；含算法、伪代码与信息安全。</p>
+        <div class="pg"><i></i><span>未开始</span></div>
+      </a>
     </div>
 
     <div class="howto">
@@ -245,7 +259,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <footer>
   <div class="wrap">
     <div>个人学习自测用。题目来源与许可证见各题库说明；未经许可的题目请勿再分发。AWS 与相关标志归其所有者所有，本网站与 AWS 无关联或背书。</div>
-    <div class="build">最后更新：2026-10-09 17:58 JST</div>
+    <div class="build">最后更新：2026-10-09 JST</div>
   </div>
 <!--i18n:sw-->
 <div class="lang-switch i18n-noloc" role="group" aria-label="Language">
@@ -334,7 +348,9 @@ var SITES={
   "toeic-reading":{keys:seq("toeic:t",1,10,100)},
   "aws-saa":{keys:awsKeys()},
   "aws-clf":{keys:seq("aws:clf:",1,4,50)},
-  "aws-aif":{keys:aifKeys()}
+  "aws-aif":{keys:aifKeys()},
+  "fe-a":{keys:[["fe:a:2024",20],["fe:a:2025",20],["fe:a:2026",20]]},
+  "fe-b":{keys:[["fe:b:2024",6],["fe:b:2025",6],["fe:b:2026",6]]}
 };
 function read(keys){
   var d=0,o=0;
