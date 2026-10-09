@@ -1,4 +1,13 @@
 {
+ "随机出题": {"en": "Random practice", "ja": "ランダム出題"},
+ "随机 50 题": {"en": "Random 50 questions", "ja": "ランダム50問"},
+ "随机 100 题": {"en": "Random 100 questions", "ja": "ランダム100問"},
+ "再随机一套": {"en": "Generate another set", "ja": "別のセットを作る"},
+ "从 4 套题中抽取，保留考试领域比例": {"en": "Drawn from four sets, keeping the domain balance", "ja": "4セットから分野別の比率を保って抽出"},
+ "从 AI 真题库与练习卷中抽取": {"en": "Drawn from the AI question bank and practice sets", "ja": "AI問題集と練習セットから抽出"},
+ "从两条题库中抽取": {"en": "Drawn from both question banks", "ja": "2つの問題集から抽出"},
+ "按 Part 比例抽题，录音题组完整保留": {"en": "Part proportions preserved; audio groups stay intact", "ja": "Partの比率を維持し、音声付き問題グループを保持"},
+ "按 Part 比例抽题，阅读篇章完整保留": {"en": "Part proportions preserved; reading passages stay intact", "ja": "Partの比率を維持し、読解文章を保持"},
  "音频为电脑合成（TTS），非真人录音。手机可用，网页加载和首次播放需要联网；完整下载 HTML 与资源目录后可离线使用。": {
   "en": "Audio is synthesized (TTS), not a human recording. Works on phones. Loading the page and first playback require a connection; offline use requires downloading the complete HTML and asset folders.",
   "ja": "音声は合成音声（TTS）で、人による録音ではありません。スマホでも利用可能です。ページの読み込みと初回再生にはネット接続が必要です。HTMLとリソースフォルダをすべてダウンロードすればオフラインで利用できます。"
