@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>官方样卷 Modelo 0（旧版） · DELE A2 阅读+写作+听力</title>
+<style>
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#f5f7f9;color:#0f172a;font-size:15px;line-height:1.7;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif}
+a{color:#1d4e79}
+img{max-width:100%}
+
+/* ---------- 顶部 ---------- */
+.hero{background:linear-gradient(135deg,#123c5e,#1d4e79 55%,#2a6ca0);color:#fff;padding:24px 0 22px}
+.hero .in{max-width:860px;margin:0 auto;padding:0 16px}
+.hero .top{font-size:13px}
+.hero .top a{color:#cfe4f5;text-decoration:none}
+.hero .top a:hover{text-decoration:underline}
+.hero .badge{display:inline-block;margin:12px 0 8px;font-size:12px;letter-spacing:.6px;
+ background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.38);border-radius:99px;padding:2px 11px}
+.hero h1{margin:0 0 6px;font-size:23px;line-height:1.35}
+.hero .sub{margin:0;color:#c9dcee;font-size:13.5px}
+.hero .meta{margin:13px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.hero .meta li{font-size:12.5px;background:rgba(255,255,255,.13);border-radius:7px;padding:4px 10px}
+
+/* ---------- 工具栏（sticky） ---------- */
+.toolbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);
+ -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-bottom:1px solid #e3e9ee;padding:10px 0 11px}
+.tbin{max-width:860px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-size:13px;padding:6px 13px;border-radius:8px;border:1px solid #cbd5e1;
+ background:#fff;color:#334155;cursor:pointer}
+button:hover{background:#f1f5f9}
+
+/* ---------- 主体 ---------- */
+main{padding:22px 0 92px}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+.block{margin:0 0 34px;scroll-margin-top:calc(var(--tb,110px) + 16px)}
+.block>h2{font-size:17px;margin:0 0 6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pill{font-size:11.5px;font-weight:700;color:#0b6b3a;background:#eaf7ef;border:1px solid #bfe3ce;
+ border-radius:99px;padding:2px 9px}
+.pill.grey{color:#5b6570;background:#eef2f5;border-color:#dfe5ea}
+.lead{color:#5b6570;font-size:13.4px;margin:0 0 16px}
+
+.tarea{background:#fff;border:1px solid #e3e9ee;border-radius:14px;padding:18px 18px 6px;margin:0 0 18px;
+ box-shadow:0 1px 2px rgba(16,24,40,.03)}
+.thd{display:flex;align-items:baseline;gap:10px;border-bottom:1px dashed #e3e9ee;padding-bottom:9px;
+ margin-bottom:13px;flex-wrap:wrap}
+.tno{font-weight:800;font-size:15px;color:#1d4e79}
+.tq{font-size:12.5px;color:#5b6570;background:#f1f5f9;border-radius:6px;padding:2px 8px}
+.tq.grey{color:#8b95a1;background:#eef2f5}
+.tkind{font-size:12.5px;color:#8a6d1a;background:#fff8e6;border:1px solid #f0e2b8;border-radius:6px;padding:2px 8px}
+.inst{font-size:13.8px;color:#334155;margin:0 0 13px}
+
+.source{margin:0 0 14px}
+.src-h{font-size:12.5px;font-weight:700;color:#5b6570;letter-spacing:.3px;text-transform:uppercase;margin:0 0 7px}
+.passage{background:#fbfcfd;border:1px solid #e3e9ee;border-left:4px solid #9dc3e6;border-radius:8px;
+ padding:14px 16px;white-space:pre-line;font-size:14.5px;line-height:1.78}
+/* 独立通告 / 广告（旧版样卷阅读 Tarea 3）：黄色边框，与长篇阅读区分开。
+   注意类名不能叫 .notice —— 那是「注」提示框（display:flex）已经在用的。 */
+.noticebox-body{background:#fffdf5;border:1px solid #efe3c2;border-radius:8px;
+ padding:13px 15px;white-space:pre-line;font-size:14.3px;line-height:1.74}
+.source.noticebox{margin:0 0 12px}
+table.src-table{width:100%;border-collapse:collapse;font-size:13.6px;table-layout:fixed}
+table.src-table th,table.src-table td{border:1px solid #e3e9ee;padding:9px 11px;text-align:left;
+ vertical-align:top;overflow-wrap:anywhere}
+table.src-table th{background:#f1f5f9;font-size:12.8px;color:#334155}
+table.src-table td:first-child{font-weight:700;color:#1d4e79;width:26%}
+table.src-table td{white-space:pre-line}
+.gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #e3e9ee;border-radius:9px}
+table.src-grid{width:100%;min-width:640px;border-collapse:collapse;font-size:12.8px}
+table.src-grid th,table.src-grid td{border:1px solid #e3e9ee;padding:7px 9px;vertical-align:top;text-align:left}
+table.src-grid th{background:#1d4e79;color:#fff;font-size:12px;text-align:center}
+table.src-grid td:first-child{background:#f1f5f9;font-weight:700;text-align:center;width:44px;color:#334155}
+
+.notice{font-size:13px;background:#fff8e6;border:1px solid #f0e2b8;border-radius:9px;
+ padding:10px 13px;margin:0 0 14px;color:#6b5310;display:flex;gap:8px}
+.notice b{flex:0 0 auto}
+
+.ex{font-size:13.4px;background:#fffdf5;border:1px solid #f0e2b8;border-radius:8px;padding:10px 13px;
+ margin:0 0 14px;display:flex;gap:9px;flex-wrap:wrap;align-items:baseline;color:#4a3b0c}
+.ex b{color:#8a6d1a;flex:0 0 auto}
+.ex code{font-family:inherit;font-weight:700;background:#fff;border:1px solid #eadfae;border-radius:5px;padding:0 6px}
+
+.pool{list-style:none;margin:0 0 16px;padding:0;display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:10px}
+.pool li{display:flex;gap:10px;border:1px solid #e3e9ee;border-radius:9px;padding:10px 12px;
+ background:#fbfcfd;font-size:13.3px;white-space:pre-line;line-height:1.6}
+.pool .pl{flex:0 0 auto;width:22px;height:22px;border-radius:6px;background:#1d4e79;color:#fff;
+ font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-top:2px}
+.pool .pimg{flex:0 0 auto;width:58px;height:58px;object-fit:cover;object-position:top center;
+ border-radius:8px;background:#fff;border:1px solid #e3e9ee;margin-top:2px}
+.pool li:has(.pimg){align-items:flex-start}
+
+.qlist{list-style:none;margin:0;padding:0}
+.q{background:#fbfcfd;border:1px solid #e3e9ee;border-radius:12px;padding:15px 16px 6px;margin:0 0 13px}
+.stem{font-size:14.8px;font-weight:600;margin:0 0 11px;display:flex;gap:9px}
+.qn{flex:0 0 auto;min-width:22px;height:22px;padding:0 6px;border-radius:6px;background:#1d4e79;
+ color:#fff;font-size:12px;font-weight:700;display:inline-flex;align-items:center;
+ justify-content:center;margin-top:2px;font-variant-numeric:tabular-nums}
+ul.opts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+ul.opts.letteropts{flex-direction:row;flex-wrap:wrap;gap:7px}
+ul.opts.letteropts li.opt{width:44px;justify-content:center;padding:9px 0}
+ul.opts .opthint{font-size:12px;color:#8b95a1;border:none!important;background:none!important;
+ padding:6px 2px 0;flex:1 1 100%;align-self:center}
+ul.opts.imgopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px}
+ul.opts.imgopts li.opt{flex-direction:column;align-items:stretch;text-align:center;padding:10px}
+ul.opts.imgopts img{width:100%;height:132px;object-fit:contain;background:#fff;border-radius:6px}
+ul.opts.imgopts .cap{font-size:12.4px;color:#5b6570;margin-top:6px}
+li.opt{display:flex;align-items:center;gap:11px;padding:11px 13px;border:1px solid #e3e9ee;
+ border-radius:10px;background:#fff;font-size:14.6px;color:#1f2933}
+.letter{flex:0 0 auto;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;
+ border:1px solid #cbd5e1;border-radius:50%;font-size:12.5px;font-weight:700;color:#475569}
+li.opt .otxt{flex:1 1 auto}
+
+details.ans{margin:10px 0 0;font-size:13.2px;color:#475569}
+details.ans summary{cursor:pointer;color:#5b6570;font-size:12.5px}
+details.ans .anbody{margin:8px 0 0;padding:9px 12px;background:#fff;border:1px dashed #d8e0e8;
+ border-radius:8px;white-space:pre-line;color:#334155}
+details.ans .anbody b{color:#0b6b3a}
+
+/* ---------- 写作 ---------- */
+.wq{background:#fff;border:1px solid #e3e9ee;border-radius:14px;padding:18px;margin:0 0 16px;
+ box-shadow:0 1px 2px rgba(16,24,40,.03)}
+.wq h3{margin:0 0 8px;font-size:15px;color:#1d4e79;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.wq .task{font-size:14.3px;margin:0 0 12px}
+.req{font-size:13.4px;margin:0 0 12px;padding-left:0;list-style:none}
+.req li{padding-left:16px;position:relative}
+.req li::before{content:"·";position:absolute;left:4px;font-weight:800;color:#1d4e79}
+.fields{background:#fbfcfd;border:1px dashed #c8d5e0;border-radius:9px;padding:12px 14px;font-size:13.3px;
+ white-space:pre-line;color:#334155;margin:0 0 12px}
+details.sample{border:1px solid #bfe3ce;background:#f4fbf7;border-radius:9px;padding:10px 14px}
+details.sample summary{cursor:pointer;font-size:13.2px;font-weight:700;color:#0b6b3a}
+details.sample .sbody{margin:9px 0 0;font-size:13.6px;white-space:pre-line;color:#2f3b46}
+
+footer{border-top:1px solid #e3e9ee;background:#fff;padding:18px 0 26px;color:#5b6570;font-size:12.6px}
+footer .wrap{line-height:1.85}
+footer b{color:#334155}
+
+/* ---------- 首页 ---------- */
+.idx-hd{background:linear-gradient(135deg,#123c5e,#1d4e79 55%,#2a6ca0);color:#fff;padding:34px 0 30px}
+.idx-hd h1{margin:0 0 8px;font-size:25px}
+.idx-hd p{margin:0;color:#c9dcee;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:16px}
+a.card{display:block;background:#fff;border:1px solid #e3e9ee;border-radius:14px;padding:16px 17px;
+ text-decoration:none;color:inherit;box-shadow:0 1px 2px rgba(16,24,40,.03);transition:box-shadow .15s,transform .15s}
+a.card:hover{box-shadow:0 8px 22px rgba(16,24,40,.09);transform:translateY(-1px)}
+a.card .no{font-size:12px;color:#8b95a1;font-weight:700;letter-spacing:.5px}
+a.card h3{margin:6px 0 4px;font-size:16px;color:#0f172a;line-height:1.4}
+a.card .sd{margin:0;font-size:13px;color:#5b6570}
+a.card .tags{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.tg{font-size:11.5px;border-radius:99px;padding:2px 9px;background:#eef2f5;color:#5b6570;border:1px solid #dfe5ea}
+.tg.b{background:#eaf7ef;color:#0b6b3a;border-color:#bfe3ce}
+.howto{background:#fff;border:1px solid #e3e9ee;border-radius:14px;padding:18px;margin:0 0 22px}
+.howto h2{margin:0 0 10px;font-size:16px}
+.howto ol{margin:0;padding-left:20px;font-size:13.8px;color:#334155}
+.howto li{margin:5px 0}
+
+/* ---------- 听力（Prueba 2） ---------- */
+.aud{margin:0 0 12px}
+.aud:last-child{margin-bottom:0}
+.aud audio{display:block;width:100%;height:38px}
+.aud .alab{display:block;font-size:12.4px;color:#5b6570;margin:0 0 5px}
+.q .aud{margin:0 0 11px;background:#f7fafc;border:1px solid #e3e9ee;border-radius:9px;padding:8px 10px}
+.q .aud .alab{margin-bottom:4px}
+
+.spdbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#f4f8fb;
+ border:1px solid #dbe6ef;border-radius:10px;padding:9px 12px;margin:0 0 16px;font-size:12.8px;color:#42607a}
+.spdbar .spd-lbl{font-weight:700}
+.spdbar button.spd{font-size:12.5px;padding:4px 11px;min-height:0;border-radius:99px;border-color:#c9d9e6;color:#42607a}
+.spdbar button.spd.on{background:#1d4e79;border-color:#1d4e79;color:#fff}
+.spdbar .spd-tip{flex:1 1 100%;font-size:12.2px;color:#7d8f9e;line-height:1.6}
+
+ul.pool.imgpool{grid-template-columns:repeat(auto-fill,minmax(152px,1fr))}
+ul.pool.imgpool li{flex-direction:column;align-items:center;gap:7px;padding:9px}
+ul.pool.imgpool img{width:100%;height:106px;object-fit:contain;background:#fff;border-radius:6px}
+ul.pool.imgpool .pl{margin-top:0}
+
+details.trans{margin:14px 0 4px;font-size:13px}
+details.trans summary{cursor:pointer;color:#5b6570;font-size:12.6px}
+details.trans .tbody{margin:9px 0 0;padding:12px 14px;background:#fbfcfd;border:1px dashed #d8e0e8;
+ border-radius:8px;color:#334155}
+details.trans .seg{margin:0 0 11px}
+details.trans .seg:last-child{margin-bottom:0}
+details.trans .stag{display:inline-block;font-size:11px;font-weight:700;color:#1d4e79;background:#eef4fa;
+ border:1px solid #d7e5f1;border-radius:5px;padding:1px 7px;margin:0 0 5px}
+details.trans p{margin:0 0 3px;line-height:1.72}
+details.trans .who{color:#8a6d1a;font-weight:700;margin-right:5px}
+
+.partstat{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:12.6px;color:#5b6570;
+ border-top:1px solid #eef2f5;margin-top:9px;padding-top:9px}
+.partstat b{color:#334155}
+.partstat i{font-style:normal;color:#8b95a1;font-variant-numeric:tabular-nums}
+.partstat i.on{color:#0b6b3a;font-weight:600}
+
+.blind{border:1px dashed #e0b64a;background:#fffdf5;border-radius:9px;padding:10px 13px;
+ font-size:12.9px;color:#6b5310;margin:0 0 14px}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* ===================== 手写填空（fill） ===================== */
+.q[data-kind="fill"] .fillrow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.q[data-kind="fill"] input.fill{font:inherit;font-size:15px;padding:8px 13px;border:1px solid #cbd5e1;
+ border-radius:8px;min-width:230px;max-width:100%;background:#fff;color:#0f172a}
+.q[data-kind="fill"] input.fill:focus{outline:none;border-color:#4a7fb5;box-shadow:0 0 0 3px rgba(74,127,181,.15)}
+.q[data-kind="fill"].done input.fill{background:#f1f5f9;color:#334155}
+.q[data-kind="fill"] input.fill.ok{border-color:#0b7a44;background:#eaf7ef;color:#0b5130;font-weight:600}
+.q[data-kind="fill"] input.fill.bad{border-color:#c0392b;background:#fdeeed;color:#8f2c20}
+.q[data-kind="fill"] .flabel{font-size:12px;color:#8b95a1}
+@media (max-width:560px){.q[data-kind="fill"] input.fill{min-width:0;width:100%}}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+
+/* ---------- 表格「可左右滑动」提示（默认隐藏，窄屏才显示） ---------- */
+.scroll-hint{display:none}
+
+/* ================= 手机端专属 UI（≤640px） ================= */
+@media (max-width:640px){
+  .hero{padding:19px 0 17px}
+  .hero .in,.tbin,.wrap{padding-left:14px;padding-right:14px}
+  .hero h1{font-size:20px}
+  .hero .sub{font-size:13px}
+  .hero .badge{margin:9px 0 7px}
+  main{padding:17px 0 84px}
+  .block{margin-bottom:28px}
+  .tarea{padding:15px 13px 4px;border-radius:12px}
+  .wq{padding:15px 14px}
+  /* 引擎在 ≤560px 用 !important 写了 .q padding，这里必须同样 !important 且在后才压得住 */
+  .q{padding:14px 13px 4px!important}
+  .stem{font-size:14.4px}
+  li.opt{padding:12px 13px;font-size:14.4px}
+  /* 触摸目标抬到 iOS 建议的 44px */
+  button{min-height:44px}
+  .qact button{min-height:44px;padding:9px 16px}
+  /* 顶部操作区改为单行横向滑动，比换行省下约 2/3 竖向空间 */
+  .tbin .btns{flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;gap:7px;padding-bottom:3px;
+   -webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x}
+  .tbin .btns::-webkit-scrollbar{display:none}
+  .tbin .btns button{flex:0 0 auto;white-space:nowrap}
+  .tbin{gap:9px}
+  /* 选项区更贴合窄屏 */
+  .pool{grid-template-columns:1fr}
+  ul.opts.imgopts{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  ul.opts.imgopts img{height:112px}
+  /* 听力：图片池在窄屏压成两列，音频条高度略降 */
+  ul.pool.imgpool{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  ul.pool.imgpool img{height:92px}
+  .aud audio{height:34px}
+  .spdbar{padding:8px 10px;gap:6px}
+  .spdbar button.spd{padding:5px 12px}
+  table.src-table{font-size:13px}
+  table.src-table td:first-child{width:30%}
+  .scroll-hint{display:block;font-size:12px;color:#8b95a1;text-align:center;margin:7px 0 0}
+}
+
+/* ================= 桌面端专属 UI（≥1080px）：左侧固定侧栏 + 右侧题目 ================= */
+@media (min-width:1080px){
+  .layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:30px;align-items:start;
+   max-width:1360px;margin:0 auto;padding:0 24px}
+  .hero .in{max-width:1360px;padding:0 24px}
+  .hero{padding:26px 0 24px}
+  .hero h1{font-size:26px}
+
+  /* 原顶部工具栏 → 左侧常驻侧栏 */
+  .toolbar{position:sticky;top:16px;align-self:start;z-index:20;
+   background:#fff;border:1px solid #e3e9ee;border-radius:14px;padding:16px;
+   box-shadow:0 1px 2px rgba(16,24,40,.04);
+   -webkit-backdrop-filter:none;backdrop-filter:none;
+   max-height:calc(100vh - 32px);overflow:auto}
+  .tbin{display:block;max-width:none;margin:0;padding:0}
+  .btns{flex-direction:column;gap:8px;margin-bottom:14px}
+  .btns button{width:100%;text-align:left;min-height:40px;font-size:13.5px;padding:9px 14px}
+  /* 统计条由横排改为竖排（引擎的 .qbar{display:flex} 在后，须提升特异性） */
+  body .qbar{display:block;font-size:13.5px;width:auto}
+  body .qbar>span{display:block;margin:6px 0}
+  body .qbar .pbar{flex:none;display:block;width:100%;height:7px;margin:11px 0 2px}
+
+  .layout main{padding:0 0 40px}
+  .layout main .wrap{max-width:none;padding:0}
+  /* 侧栏不是顶部条了，跳题锚点不该再按 --tb 偏移 */
+  .q{scroll-margin-top:18px!important}
+  section.block{scroll-margin-top:18px}
+
+  .layout~footer .wrap{max-width:1360px;padding:0 24px}
+
+  /* 首页在桌面放宽，卡片摊开成多列 */
+  .idx-hd .wrap,.idx-main>.wrap{max-width:1180px}
+  .idx-main~footer .wrap{max-width:1180px;padding:0 24px}
+  .cards{grid-template-columns:repeat(auto-fill,minmax(266px,1fr))}
+
+  /* 答题卡在桌面改为右下角浮动面板，而非底部通栏 */
+  body .sheet{left:auto;right:24px;bottom:24px;width:352px;
+   border:1px solid #dfe5ea;border-radius:14px;padding:14px 16px 16px;
+   box-shadow:0 14px 44px rgba(16,24,40,.18);transform:translateY(150%)}
+  body .sheet.open{transform:translateY(0)}
+  body .sheet .grid{max-height:46vh}
+}
+
+/* ================= 打印：音频控件与播放设置不打印 ================= */
+@media print{
+  .aud,.spdbar,.partstat,.blind,.jump{display:none!important}
+  details.trans{break-inside:avoid}
+}
+</style>
+<!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--></head>
+<body>
+<header class="hero">
+  <div class="in">
+    <div class="top"><a href="index.html">← 全部试卷</a></div>
+    <div class="badge">官方</div>
+    <h1>官方样卷 Modelo 0（旧版）</h1>
+    <p class="sub">DELE A2 · Modelo 00, Versión 2</p>
+    <ul class="meta">
+      <li>Prueba 1 · 阅读 30 题</li><li>Prueba 2 · 听力 30 题</li><li>Prueba 3 · 写作 3 题</li><li>共 60 题可判分</li>
+    </ul>
+  </div>
+</header>
+
+<div class="layout">
+<div class="toolbar">
+  <div class="tbin">
+    <div class="btns">
+      <button id="btn-sheet" type="button">答题卡</button>
+      <button id="btn-report" type="button">交卷看成绩</button>
+      <button id="btn-wrong" type="button">只看错题</button>
+      <button id="btn-expand" type="button">展开全部解析</button>
+      <button id="btn-jump-l" class="jump" type="button">跳到听力 →</button>
+      <button id="btn-jump-w" class="jump" type="button">跳到写作 →</button>
+      <button id="btn-reset" type="button">清空重做</button>
+    </div>
+    <div class="qbar"><span>已答 <b id="s-done">0</b>/<b>60</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div>
+    <div class="partstat"><span><b>阅读 Prueba 1</b> <i id="ps-r">未开始</i></span><span><b>听力 Prueba 2</b> <i id="ps-l">未开始</i></span></div>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+  <section class="block" id="reading">
+    <h2>Prueba 1 · Comprensión de lectura <span class="pill">30 题 · 即时判分</span></h2>
+    <p class="lead">点选项 → 「确认作答」→ 立即判定并显示正确答案与解析；填空题手写输入后按回车即可。
+      进度自动保存在本机浏览器，随时可继续。</p>
+    <section class="tarea" id="t1"><div class="thd"><span class="tno">Tarea 1</span><span class="tq">题 1 – 7</span><span class="tkind">匹配题 · 从 A–K 的 11 个卡片里为每题选一项</span></div><p class="inst" lang="es">Usted va a leer siete enunciados y once textos (A - K). Seleccione el texto que corresponde a cada enunciado (del 1 al 7). Hay once textos, incluido el ejemplo. Seleccione siete.</p><div class="ex"><b>Ejemplo</b><span lang="es">Se han trasladado de piso.</span><span>→</span><code>A</code><span style="color:#8a6d1a">«las consultas del dentista se han trasladado a la tercera planta».</span></div><ul class="pool"><li><span class="pl">A</span><span lang="es">CENTRO DE SALUD SANTIAGO
+INFORMACIÓN GENERAL PARA LOS PACIENTES
+
+Se comunica que las consultas del dentista se han trasladado a la tercera planta, segunda puerta a la izquierda.</span></li><li><span class="pl">B</span><span lang="es">www.muyimportante/revista.com
+
+Cuando se tiene gripe:
+• quedarse en casa;
+• estar en la cama todo el tiempo posible;
+• tomar muchos líquidos, como sopas, zumos de frutas y verduras para no deshidratarse (especialmente de limón, naranja y zanahoria porque tienen vitaminas y minerales).</span></li><li><span class="pl">C</span><span lang="es">Chocosueños
+
+Para celebraciones y fiestas.
+
+Vale descuento del 10% en bombones y chocolates por compras superiores a 20 euros.
+
+Estamos en la calle Rúa Antigua, 2.
+
+Oferta válida del 1 al 15 de febrero.</span></li><li><span class="pl">D</span><span lang="es">www.electrodomesticosbaratos.com
+Su tienda online
+
+Más de cuarenta años de experiencia en la venta de electrodomésticos (neveras, lavadoras, microondas…)
+Envío gratis para pedidos dentro de la región.
+Otras direcciones: consultar precio en el 96 123 22 44 o en nuestra web.</span></li><li><span class="pl">E</span><span lang="es">Cocina rápida y sencilla.
+
+Atún con naranja
+
+✓ Poner las patatas en agua caliente durante 10 minutos y meterlas después en nevera para enfriar.
+✓ Cortar la lechuga, el tomate, la cebolla y el ajo.
+✓ Pelar la naranja y cortarla.
+✓ Mezclarlo todo y poner encima el atún.</span></li><li><span class="pl">F</span><span lang="es">Clases de inglés online.
+
+Para: estudiantes de secundaria y universitarios.
+Para empresas.
+Nuestras clases particulares online se adaptan a los niveles oficiales europeos (A1_C2).
+Son totalmente personalizadas.
+Ofrecemos una clase gratuita, solo envía un correo con el horario elegido.
+SkypeID: clasedeinglesskype.</span></li><li><span class="pl">G</span><span lang="es">¿Quiere tener un móvil de última generación?
+¿Cómo puede tenerlo?
+¡Participe en nuestro juego!
+Solo debe contestar a unas preguntas sobre salud y alimentación.
+Ahora llevar una vida SANA, tiene REGALO.
+www.revistasalud.com
+Fantásticos regalos todos los meses.</span></li><li><span class="pl">H</span><span lang="es">www.recetasusuarios.com
+
+Pollo con limón
+
+- Echar sal al pollo y cubrirlo con zumo de limón. Esperar media hora.
+- Poner una cebolla cortada en una sartén con un poco de aceite durante diez minutos.
+- Meter el pollo en la sartén y cocinar durante 15 minutos lentamente.</span></li><li><span class="pl">I</span><span lang="es">Juguetodos
+
+¡Ahora puedes ser el primero en informarte de nuestras ofertas!
+Si quieres descubrir todas nuestras novedades, solo tienes que enviar tu correo electrónico a esta dirección: www.juguetodos.com
+Recibirás la revista de nuestra tienda cada mes.</span></li><li><span class="pl">J</span><span lang="es">Publicidad
+
+Felicidades
+
+Felicita a tus familiares y amigos de manera gratuita en el periódico Mallorquín. Envíanos la foto de la persona a la que quieres felicitar. Entra en nuestra web www.mallorquin.es, completa un breve formulario y envíalo quince días antes de la fecha de celebración.</span></li><li><span class="pl">K</span><span lang="es">www.anuncios/clases-online
+
+Publicar anuncio.
+
+Se dan clases de Matemáticas de Secundaria por plataforma online.
+Se pueden colgar los deberes, escribir comentarios y, además, se graba la clase para poder verla de nuevo si lo necesita.
+Clases individuales o en grupo.
+Se ofrece una clase de prueba gratuita.</span></li></ul><ol class="qlist"><li class="q" id="q1" data-n="1" data-ans="J" data-part="read"><div class="stem"><span class="qn">1</span><span lang="es">Hay una fecha límite para enviar la información.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: CENTRO DE SALUD SANTIAGO
+INFORMACIÓN GENERAL PARA LOS PACIENTES
+
+Se comunica que las consultas del dentista se han trasl"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: www.muyimportante/revista.com
+
+Cuando se tiene gripe:
+• quedarse en casa;
+• estar en la cama todo el tiempo posible;
+• t"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Chocosueños
+
+Para celebraciones y fiestas.
+
+Vale descuento del 10% en bombones y chocolates por compras superiores a 20 "><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: www.electrodomesticosbaratos.com
+Su tienda online
+
+Más de cuarenta años de experiencia en la venta de electrodomésticos "><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Cocina rápida y sencilla.
+
+Atún con naranja
+
+✓ Poner las patatas en agua caliente durante 10 minutos y meterlas después "><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Clases de inglés online.
+
+Para: estudiantes de secundaria y universitarios.
+Para empresas.
+Nuestras clases particulares "><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: ¿Quiere tener un móvil de última generación?
+¿Cómo puede tenerlo?
+¡Participe en nuestro juego!
+Solo debe contestar a una"><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: www.recetasusuarios.com
+
+Pollo con limón
+
+- Echar sal al pollo y cubrirlo con zumo de limón. Esperar media hora.
+- Poner"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Juguetodos
+
+¡Ahora puedes ser el primero en informarte de nuestras ofertas!
+Si quieres descubrir todas nuestras novedade"><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Publicidad
+
+Felicidades
+
+Felicita a tus familiares y amigos de manera gratuita en el periódico Mallorquín. Envíanos la f"><span class="letter">J</span></li><li class="opt" data-letter="K" title="K: www.anuncios/clases-online
+
+Publicar anuncio.
+
+Se dan clases de Matemáticas de Secundaria por plataforma online.
+Se pued"><span class="letter">K</span></li><li class="opthint" aria-hidden="true">在上方 A–K 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>J</b>
+Publicidad
+
+Felicidades
+
+Felicita a tus familiares y amigos de manera gratuita en el periódico Mallorquín. Envíanos la foto de la persona a la que quieres felicitar. Entra en nuestra web www.mallorquin.es, completa un breve formulario y envíalo quince días antes de la fecha de celebración.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q2" data-n="2" data-ans="C" data-part="read"><div class="stem"><span class="qn">2</span><span lang="es">Durante unos días, le hacen un descuento en su compra.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: CENTRO DE SALUD SANTIAGO
+INFORMACIÓN GENERAL PARA LOS PACIENTES
+
+Se comunica que las consultas del dentista se han trasl"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: www.muyimportante/revista.com
+
+Cuando se tiene gripe:
+• quedarse en casa;
+• estar en la cama todo el tiempo posible;
+• t"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Chocosueños
+
+Para celebraciones y fiestas.
+
+Vale descuento del 10% en bombones y chocolates por compras superiores a 20 "><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: www.electrodomesticosbaratos.com
+Su tienda online
+
+Más de cuarenta años de experiencia en la venta de electrodomésticos "><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Cocina rápida y sencilla.
+
+Atún con naranja
+
+✓ Poner las patatas en agua caliente durante 10 minutos y meterlas después "><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Clases de inglés online.
+
+Para: estudiantes de secundaria y universitarios.
+Para empresas.
+Nuestras clases particulares "><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: ¿Quiere tener un móvil de última generación?
+¿Cómo puede tenerlo?
+¡Participe en nuestro juego!
+Solo debe contestar a una"><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: www.recetasusuarios.com
+
+Pollo con limón
+
+- Echar sal al pollo y cubrirlo con zumo de limón. Esperar media hora.
+- Poner"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Juguetodos
+
+¡Ahora puedes ser el primero en informarte de nuestras ofertas!
+Si quieres descubrir todas nuestras novedade"><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Publicidad
+
+Felicidades
+
+Felicita a tus familiares y amigos de manera gratuita en el periódico Mallorquín. Envíanos la f"><span class="letter">J</span></li><li class="opt" data-letter="K" title="K: www.anuncios/clases-online
+
+Publicar anuncio.
+
+Se dan clases de Matemáticas de Secundaria por plataforma online.
+Se pued"><span class="letter">K</span></li><li class="opthint" aria-hidden="true">在上方 A–K 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b>
+Chocosueños
+
+Para celebraciones y fiestas.
+
+Vale descuento del 10% en bombones y chocolates por compras superiores a 20 euros.
+
+Estamos en la calle Rúa Antigua, 2.
+
+Oferta válida del 1 al 15 de febrero.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q3" data-n="3" data-ans="B" data-part="read"><div class="stem"><span class="qn">3</span><span lang="es">Le dicen que hacer esto es bueno para la salud.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: CENTRO DE SALUD SANTIAGO
+INFORMACIÓN GENERAL PARA LOS PACIENTES
+
+Se comunica que las consultas del dentista se han trasl"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: www.muyimportante/revista.com
+
+Cuando se tiene gripe:
+• quedarse en casa;
+• estar en la cama todo el tiempo posible;
+• t"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Chocosueños
+
+Para celebraciones y fiestas.
+
+Vale descuento del 10% en bombones y chocolates por compras superiores a 20 "><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: www.electrodomesticosbaratos.com
+Su tienda online
+
+Más de cuarenta años de experiencia en la venta de electrodomésticos "><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Cocina rápida y sencilla.
+
+Atún con naranja
+
+✓ Poner las patatas en agua caliente durante 10 minutos y meterlas después "><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Clases de inglés online.
+
+Para: estudiantes de secundaria y universitarios.
+Para empresas.
+Nuestras clases particulares "><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: ¿Quiere tener un móvil de última generación?
+¿Cómo puede tenerlo?
+¡Participe en nuestro juego!
+Solo debe contestar a una"><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: www.recetasusuarios.com
+
+Pollo con limón
+
+- Echar sal al pollo y cubrirlo con zumo de limón. Esperar media hora.
+- Poner"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Juguetodos
+
+¡Ahora puedes ser el primero en informarte de nuestras ofertas!
+Si quieres descubrir todas nuestras novedade"><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Publicidad
+
+Felicidades
+
+Felicita a tus familiares y amigos de manera gratuita en el periódico Mallorquín. Envíanos la f"><span class="letter">J</span></li><li class="opt" data-letter="K" title="K: www.anuncios/clases-online
+
+Publicar anuncio.
+
+Se dan clases de Matemáticas de Secundaria por plataforma online.
+Se pued"><span class="letter">K</span></li><li class="opthint" aria-hidden="true">在上方 A–K 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b>
+www.muyimportante/revista.com
+
+Cuando se tiene gripe:
+• quedarse en casa;
+• estar en la cama todo el tiempo posible;
+• tomar muchos líquidos, como sopas, zumos de frutas y verduras para no deshidratarse (especialmente de limón, naranja y zanahoria porque tienen vitaminas y minerales).</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q4" data-n="4" data-ans="K" data-part="read"><div class="stem"><span class="qn">4</span><span lang="es">Le informan de que puede ver la clase otra vez.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: CENTRO DE SALUD SANTIAGO
+INFORMACIÓN GENERAL PARA LOS PACIENTES
+
+Se comunica que las consultas del dentista se han trasl"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: www.muyimportante/revista.com
+
+Cuando se tiene gripe:
+• quedarse en casa;
+• estar en la cama todo el tiempo posible;
+• t"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Chocosueños
+
+Para celebraciones y fiestas.
+
+Vale descuento del 10% en bombones y chocolates por compras superiores a 20 "><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: www.electrodomesticosbaratos.com
+Su tienda online
+
+Más de cuarenta años de experiencia en la venta de electrodomésticos "><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Cocina rápida y sencilla.
+
+Atún con naranja
+
+✓ Poner las patatas en agua caliente durante 10 minutos y meterlas después "><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Clases de inglés online.
+
+Para: estudiantes de secundaria y universitarios.
+Para empresas.
+Nuestras clases particulares "><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: ¿Quiere tener un móvil de última generación?
+¿Cómo puede tenerlo?
+¡Participe en nuestro juego!
+Solo debe contestar a una"><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: www.recetasusuarios.com
+
+Pollo con limón
+
+- Echar sal al pollo y cubrirlo con zumo de limón. Esperar media hora.
+- Poner"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Juguetodos
+
+¡Ahora puedes ser el primero en informarte de nuestras ofertas!
+Si quieres descubrir todas nuestras novedade"><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Publicidad
+
+Felicidades
+
+Felicita a tus familiares y amigos de manera gratuita en el periódico Mallorquín. Envíanos la f"><span class="letter">J</span></li><li class="opt" data-letter="K" title="K: www.anuncios/clases-online
+
+Publicar anuncio.
+
+Se dan clases de Matemáticas de Secundaria por plataforma online.
+Se pued"><span class="letter">K</span></li><li class="opthint" aria-hidden="true">在上方 A–K 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>K</b>
+www.anuncios/clases-online
+
+Publicar anuncio.
+
+Se dan clases de Matemáticas de Secundaria por plataforma online.
+Se pueden colgar los deberes, escribir comentarios y, además, se graba la clase para poder verla de nuevo si lo necesita.
+Clases individuales o en grupo.
+Se ofrece una clase de prueba gratuita.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q5" data-n="5" data-ans="E" data-part="read"><div class="stem"><span class="qn">5</span><span lang="es">En la receta de este plato se han usado varias verduras.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: CENTRO DE SALUD SANTIAGO
+INFORMACIÓN GENERAL PARA LOS PACIENTES
+
+Se comunica que las consultas del dentista se han trasl"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: www.muyimportante/revista.com
+
+Cuando se tiene gripe:
+• quedarse en casa;
+• estar en la cama todo el tiempo posible;
+• t"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Chocosueños
+
+Para celebraciones y fiestas.
+
+Vale descuento del 10% en bombones y chocolates por compras superiores a 20 "><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: www.electrodomesticosbaratos.com
+Su tienda online
+
+Más de cuarenta años de experiencia en la venta de electrodomésticos "><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Cocina rápida y sencilla.
+
+Atún con naranja
+
+✓ Poner las patatas en agua caliente durante 10 minutos y meterlas después "><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Clases de inglés online.
+
+Para: estudiantes de secundaria y universitarios.
+Para empresas.
+Nuestras clases particulares "><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: ¿Quiere tener un móvil de última generación?
+¿Cómo puede tenerlo?
+¡Participe en nuestro juego!
+Solo debe contestar a una"><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: www.recetasusuarios.com
+
+Pollo con limón
+
+- Echar sal al pollo y cubrirlo con zumo de limón. Esperar media hora.
+- Poner"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Juguetodos
+
+¡Ahora puedes ser el primero en informarte de nuestras ofertas!
+Si quieres descubrir todas nuestras novedade"><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Publicidad
+
+Felicidades
+
+Felicita a tus familiares y amigos de manera gratuita en el periódico Mallorquín. Envíanos la f"><span class="letter">J</span></li><li class="opt" data-letter="K" title="K: www.anuncios/clases-online
+
+Publicar anuncio.
+
+Se dan clases de Matemáticas de Secundaria por plataforma online.
+Se pued"><span class="letter">K</span></li><li class="opthint" aria-hidden="true">在上方 A–K 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>E</b>
+Cocina rápida y sencilla.
+
+Atún con naranja
+
+✓ Poner las patatas en agua caliente durante 10 minutos y meterlas después en nevera para enfriar.
+✓ Cortar la lechuga, el tomate, la cebolla y el ajo.
+✓ Pelar la naranja y cortarla.
+✓ Mezclarlo todo y poner encima el atún.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q6" data-n="6" data-ans="G" data-part="read"><div class="stem"><span class="qn">6</span><span lang="es">Si participa en el concurso, puede ganar un premio.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: CENTRO DE SALUD SANTIAGO
+INFORMACIÓN GENERAL PARA LOS PACIENTES
+
+Se comunica que las consultas del dentista se han trasl"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: www.muyimportante/revista.com
+
+Cuando se tiene gripe:
+• quedarse en casa;
+• estar en la cama todo el tiempo posible;
+• t"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Chocosueños
+
+Para celebraciones y fiestas.
+
+Vale descuento del 10% en bombones y chocolates por compras superiores a 20 "><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: www.electrodomesticosbaratos.com
+Su tienda online
+
+Más de cuarenta años de experiencia en la venta de electrodomésticos "><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Cocina rápida y sencilla.
+
+Atún con naranja
+
+✓ Poner las patatas en agua caliente durante 10 minutos y meterlas después "><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Clases de inglés online.
+
+Para: estudiantes de secundaria y universitarios.
+Para empresas.
+Nuestras clases particulares "><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: ¿Quiere tener un móvil de última generación?
+¿Cómo puede tenerlo?
+¡Participe en nuestro juego!
+Solo debe contestar a una"><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: www.recetasusuarios.com
+
+Pollo con limón
+
+- Echar sal al pollo y cubrirlo con zumo de limón. Esperar media hora.
+- Poner"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Juguetodos
+
+¡Ahora puedes ser el primero en informarte de nuestras ofertas!
+Si quieres descubrir todas nuestras novedade"><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Publicidad
+
+Felicidades
+
+Felicita a tus familiares y amigos de manera gratuita en el periódico Mallorquín. Envíanos la f"><span class="letter">J</span></li><li class="opt" data-letter="K" title="K: www.anuncios/clases-online
+
+Publicar anuncio.
+
+Se dan clases de Matemáticas de Secundaria por plataforma online.
+Se pued"><span class="letter">K</span></li><li class="opthint" aria-hidden="true">在上方 A–K 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>G</b>
+¿Quiere tener un móvil de última generación?
+¿Cómo puede tenerlo?
+¡Participe en nuestro juego!
+Solo debe contestar a unas preguntas sobre salud y alimentación.
+Ahora llevar una vida SANA, tiene REGALO.
+www.revistasalud.com
+Fantásticos regalos todos los meses.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q7" data-n="7" data-ans="I" data-part="read"><div class="stem"><span class="qn">7</span><span lang="es">Le envían información de los productos que son más baratos.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: CENTRO DE SALUD SANTIAGO
+INFORMACIÓN GENERAL PARA LOS PACIENTES
+
+Se comunica que las consultas del dentista se han trasl"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: www.muyimportante/revista.com
+
+Cuando se tiene gripe:
+• quedarse en casa;
+• estar en la cama todo el tiempo posible;
+• t"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Chocosueños
+
+Para celebraciones y fiestas.
+
+Vale descuento del 10% en bombones y chocolates por compras superiores a 20 "><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: www.electrodomesticosbaratos.com
+Su tienda online
+
+Más de cuarenta años de experiencia en la venta de electrodomésticos "><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Cocina rápida y sencilla.
+
+Atún con naranja
+
+✓ Poner las patatas en agua caliente durante 10 minutos y meterlas después "><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Clases de inglés online.
+
+Para: estudiantes de secundaria y universitarios.
+Para empresas.
+Nuestras clases particulares "><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: ¿Quiere tener un móvil de última generación?
+¿Cómo puede tenerlo?
+¡Participe en nuestro juego!
+Solo debe contestar a una"><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: www.recetasusuarios.com
+
+Pollo con limón
+
+- Echar sal al pollo y cubrirlo con zumo de limón. Esperar media hora.
+- Poner"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Juguetodos
+
+¡Ahora puedes ser el primero en informarte de nuestras ofertas!
+Si quieres descubrir todas nuestras novedade"><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Publicidad
+
+Felicidades
+
+Felicita a tus familiares y amigos de manera gratuita en el periódico Mallorquín. Envíanos la f"><span class="letter">J</span></li><li class="opt" data-letter="K" title="K: www.anuncios/clases-online
+
+Publicar anuncio.
+
+Se dan clases de Matemáticas de Secundaria por plataforma online.
+Se pued"><span class="letter">K</span></li><li class="opthint" aria-hidden="true">在上方 A–K 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>I</b>
+Juguetodos
+
+¡Ahora puedes ser el primero en informarte de nuestras ofertas!
+Si quieres descubrir todas nuestras novedades, solo tienes que enviar tu correo electrónico a esta dirección: www.juguetodos.com
+Recibirás la revista de nuestra tienda cada mes.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol></section><section class="tarea" id="t2"><div class="thd"><span class="tno">Tarea 2</span><span class="tq">题 8 – 12</span><span class="tkind">选择题 · 从 A / B / C 中选出一个正确答案</span></div><p class="inst" lang="es">Usted va a leer el correo electrónico que Pedro ha escrito a su amiga Virginia. A continuación, conteste a las preguntas (de la 8 a la 12). Seleccione la opción correcta (A, B o C).</p><div class="source"><div class="src-h">Correo electrónico</div><div class="passage" lang="es">Hola Virginia:
+
+¿Qué tal estás? Hace mucho tiempo que no nos vemos. Lo siento, no te he escrito antes porque este mes he estado muy ocupado. Tenía que estudiar porque he hecho ahora todos mis exámenes finales. ¿Tú qué tal en tu nuevo trabajo?
+
+Te escribo porque me voy de vacaciones el próximo mes a México y me ha dicho Gonzalo que tú has estado allí este año. Me gustaría hablar contigo porque no conozco nada de este país, y mi hermana, que viene conmigo, tampoco.
+
+Me voy a quedar en el hotel Marina Club en Cancún. ¿Lo conoces? He visto las fotos en Internet y las habitaciones están muy bien. Me he decidido por este porque está justo enfrente de la playa y tiene buena fama. ¿Puedes aconsejarme algún lugar interesante para visitar? Es que quiero hacer algunas excursiones. También quería probar la comida típica de allí, ¿conoces algún restaurante bueno?
+
+Por cierto, también he comprado el billete de avión, es para el día veinte. A mí no me gusta mucho esa fecha porque es mi cumpleaños y, además, tengo vacaciones del quince al treinta, pero encontré una buena oferta en vuelos para ese día y lo compré.
+
+Como puedes ver, lo tengo casi todo organizado. Bueno, la maleta todavía no porque quiero comprarme unos pantalones y unas camisetas de verano. ¿Qué te parece si quedamos el sábado o el domingo y hablamos con calma? Se me olvidaba, te voy a mandar por WhatsApp las fotos del hotel para ver si lo conoces.
+
+Un abrazo,
+Pedro</div></div><ol class="qlist"><li class="q" id="q8" data-n="8" data-ans="B" data-part="read"><div class="stem"><span class="qn">8</span><span lang="es">Pedro ha escrito a Virginia para…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">contarle sus vacaciones.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">pedirle información.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">invitarla a un viaje.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · pedirle información.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q9" data-n="9" data-ans="C" data-part="read"><div class="stem"><span class="qn">9</span><span lang="es">En el texto se dice que Pedro…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">quiere ir a México con Gonzalo.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">tiene sus exámenes el próximo mes.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">se va de vacaciones con su hermana.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · se va de vacaciones con su hermana.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q10" data-n="10" data-ans="A" data-part="read"><div class="stem"><span class="qn">10</span><span lang="es">Según el texto, el hotel Marina Club…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">está al lado del mar.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">organiza excursiones.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">es famoso por su cocina.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · está al lado del mar.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q11" data-n="11" data-ans="A" data-part="read"><div class="stem"><span class="qn">11</span><span lang="es">Las vacaciones de Pedro empiezan el día…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">15.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">20.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">30.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · 15.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q12" data-n="12" data-ans="B" data-part="read"><div class="stem"><span class="qn">12</span><span lang="es">Pedro le propone a Virginia…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">ir con él de compras.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">verse el fin de semana.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">hacer una foto del hotel.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · verse el fin de semana.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol></section><section class="tarea" id="t3"><div class="thd"><span class="tno">Tarea 3</span><span class="tq">题 13 – 18</span><span class="tkind">选择题 · 从 A / B / C 中选出一个正确答案</span></div><p class="inst" lang="es">Usted va a leer seis anuncios. A continuación, responda a las preguntas (de la 13 a la 18). Seleccione la opción correcta (A, B o C).</p><div class="ex"><b>Ejemplo</b><span lang="es">El taller de cocina…</span><span>→</span><code>A</code><span style="color:#8a6d1a">«Precio: 5 euros por persona. Niños menores de 10 años: entrada gratuita.»</span></div><div class="source noticebox"><div class="src-h">TEXTO 0</div><div class="noticebox-body" lang="es">TALLER DE COCINA
+
+Este viernes, día 20, se celebra un taller de cocina en la escuela de hostelería. El objetivo de este es aprender a cocinar comida sana. Los estudiantes de la escuela de hostelería serán los encargados de enseñar diferentes recetas. Pueden participar personas de todas las edades.
+Matrícula: antes del día 18. Plazas limitadas.
+Precio: 5 euros por persona. Niños menores de 10 años: entrada gratuita.</div></div><ul class="opts"><li class="opt"><span class="letter">A</span><span class="otxt" lang="es">cuesta 5 euros para los mayores de 10 años.</span></li><li class="opt"><span class="letter">B</span><span class="otxt" lang="es">está dirigido a estudiantes de hostelería.</span></li><li class="opt"><span class="letter">C</span><span class="otxt" lang="es">admite a 18 personas como máximo.</span></li></ul><ol class="qlist"><li class="q" id="q13" data-n="13" data-ans="A" data-part="read"><div class="source noticebox"><div class="src-h">TEXTO 1</div><div class="noticebox-body" lang="es">Sevilla - Sanlúcar de Barrameda (Cádiz)
+
+Excursión en barco por el río Guadalquivir
+
+De mayo a octubre. Sábados y domingos.
+Salida del barco a las 8.30 h desde la estación marítima de la Torre del Oro y regreso en autobús a las 20 h.
+Precios: 20 euros (niños), 25 euros (mayores de 65 años) y 30 euros (adultos). Incluido menú del día en el restaurante El Sur, el seguro y el IVA.
+Grupos: reserva del barco cualquier día del año. Información en la estación marítima.</div></div><div class="stem"><span class="qn">13</span><span lang="es">En este anuncio se dice que…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">el precio incluye la comida.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">el viaje para grupos es más barato.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">el barco llega a Sevilla a las 20 h.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · el precio incluye la comida.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q14" data-n="14" data-ans="A" data-part="read"><div class="source noticebox"><div class="src-h">TEXTO 2</div><div class="noticebox-body" lang="es">Estado de Jalisco
+
+Feria Internacional del Libro (FIL)
+Guadalajara (México)
+
+Ayer se inauguró una nueva edición de la FIL, el evento literario más importante en lengua española de Latinoamérica, con la entrega del premio de Literatura en Lenguas Romances al poeta francés Ives Bonnefoy. Un año más, fue un éxito de público, 15% más que el año pasado, y aumentó el número de editoriales, que venían de 42 países. La feria cerró con un acto cultural organizado por el país invitado, Israel.</div></div><div class="stem"><span class="qn">14</span><span lang="es">Según el texto, en la Feria de Guadalajara…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">hubo un aumento en el número de visitantes.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">se presentó un libro de un escritor francés.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">participaron varias editoriales de Israel.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · hubo un aumento en el número de visitantes.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q15" data-n="15" data-ans="B" data-part="read"><div class="source noticebox"><div class="src-h">TEXTO 3</div><div class="noticebox-body" lang="es">Actualidad universitaria
+
+La universidad ha organizado el segundo concurso de grupos musicales. Para participar hay que enviar un correo electrónico a gruposmusicales@universidad.es con el nombre del grupo y el enlace a dos vídeos publicados en Youtube con las canciones del grupo. Un jurado será el responsable de seleccionar a seis grupos que tocarán durante 45 minutos en el teatro Falla y, finalmente, el público presente en el teatro seleccionará a los dos mejores.</div></div><div class="stem"><span class="qn">15</span><span lang="es">En este anuncio se dice que…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">el concurso se celebra en el teatro de la universidad.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">el tiempo de actuación de cada grupo es limitado.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">el público puede elegir a los seis mejores grupos.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · el tiempo de actuación de cada grupo es limitado.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q16" data-n="16" data-ans="C" data-part="read"><div class="source noticebox"><div class="src-h">TEXTO 4</div><div class="noticebox-body" lang="es">Asociación vecinal Buenavista presenta:
+
+Microteatro
+
+Un año más, la asociación de vecinos Buenavista ha presentado en nuestra ciudad Microteatro, un proyecto que ya está teniendo éxito en algunas ciudades del país. Un domingo al mes se pueden ver varias representaciones teatrales en las tiendas de las calles del barrio. En las actuaciones participan actores locales y otros conocidos por su participación en series de televisión muy populares. Precios: 3 y 4 euros. Plazas limitadas.</div></div><div class="stem"><span class="qn">16</span><span lang="es">En el texto se dice que el proyecto Microteatro…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">es la primera vez que se organiza en la ciudad.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">se va a representar en la asociación de vecinos.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">cuenta con la participación de actores famosos.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · cuenta con la participación de actores famosos.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q17" data-n="17" data-ans="C" data-part="read"><div class="source noticebox"><div class="src-h">TEXTO 5</div><div class="noticebox-body" lang="es">Área de cultura
+Biblioteca Municipal Clara Campoamor
+
+MARZO · PROGRAMACIÓN
+
+• Espectáculos teatrales (viernes y sábados por la tarde).
+• Exposición fotográfica de Alfredo Cortés «Arte y cine».
+• Concierto del grupo argentino Somos del Sur.
+• Club de idiomas para jóvenes cada quince días.
+• Club de lectura para niños los martes y sábados.
+• Excursión a Toledo para ver la exposición dedicada al gran pintor el Greco.
+
+Más información en www.bibliotecasmunicipales.org.</div></div><div class="stem"><span class="qn">17</span><span lang="es">La programación de la biblioteca municipal incluye…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">una exposición de un artista argentino.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">una actividad para jóvenes cada semana.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">una visita cultural en el mes de marzo.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · una visita cultural en el mes de marzo.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q18" data-n="18" data-ans="B" data-part="read"><div class="source noticebox"><div class="src-h">TEXTO 6</div><div class="noticebox-body" lang="es">Deportes
+
+TORNEO MINITENIS DE SEGOVIA
+
+Son ya treinta jóvenes tenistas los que se han matriculado en el torneo de tenis de Segovia.
+Para poder revisar la inscripción, podéis entrar en el documento actualizado a las nueve de la mañana: www.inscritosegovia.es
+El plazo está abierto hasta el 28 de febrero y se puede realizar en www.mptenis.es.
+El torneo será el sábado, 4 de mayo a las 18 h. y se cita a todos los jugadores a las 16 h.</div></div><div class="stem"><span class="qn">18</span><span lang="es">El torneo de minitenis de Segovia…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">se celebra en febrero.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">tiene treinta jugadores.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">empieza a las cuatro de la tarde.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · tiene treinta jugadores.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol></section><section class="tarea" id="t4"><div class="thd"><span class="tno">Tarea 4</span><span class="tq">题 19 – 24</span><span class="tkind">匹配题 · 从 A–J 的 10 个卡片里为每题选一项</span></div><p class="inst" lang="es">Usted va a leer seis enunciados y diez textos con información sobre casas para alquilar o comprar. A continuación, seleccione el texto (A - J) que corresponde a cada enunciado (del 19 al 24). Hay diez textos, incluido el ejemplo. Seleccione seis.</p><div class="ex"><b>Ejemplo</b><span lang="es">Hay un lugar para guardar el coche.</span><span>→</span><code>A</code><span style="color:#8a6d1a">«Garaje de dos plazas.»</span></div><ul class="pool"><li><span class="pl">A</span><span lang="es">ANUNCIOS DE VIVIENDAS
+
+Se alquila piso céntrico. Situado en una zona comercial. Exterior. 3 dormitorios. Amueblado. Garaje de dos plazas. Buen estado. Precio: 700 euros al mes. Correo electrónico: Fernando@gmail.com</span></li><li><span class="pl">B</span><span lang="es">Se vende piso de dos dormitorios, salón, baño y cocina amueblada con todos los electrodomésticos (nevera, cocina, microondas, lavadora y secadora). Está a las afueras, en una zona tranquila y al lado del campo de fútbol. Interesados llamar al 609 77 12 34.</span></li><li><span class="pl">C</span><span lang="es">Se alquila piso para estudiantes. Tres dormitorios, salón, cocina y dos baños. Calefacción central y gastos de comunidad incluidos en el precio del alquiler. Próximo al campus universitario. No se admiten animales. Contacto: miguelangel@yahoo.es</span></li><li><span class="pl">D</span><span lang="es">Alquilo casa de dos plantas completamente reformada. Tiene un jardín con una casita para el perro, piscina, cuatro habitaciones, dos baños, una cocina grande, un salón, un comedor y garaje. En el precio no se incluyen los gastos generales. Más información: juanjope@mail.com.</span></li><li><span class="pl">E</span><span lang="es">Se vende ático de 200 m². Muy céntrico, pero en una zona tranquila, con buenas vistas al Jardín Botánico Nacional y cerca de varios parques infantiles. Tiene dos dormitorios, un estudio, cocina completa, un baño grande y una gran terraza. Contacto: marialopez@gmail.com</span></li><li><span class="pl">F</span><span lang="es">Alquilo apartamento vacío completamente nuevo en la urbanización Atocha, a cinco minutos del centro comercial Los Naranjos y a quince del centro en coche. Zona tranquila. Tiene un dormitorio, salón con cocina en la misma habitación, baño y plaza de garaje. Contacto: vanesah@yahoo.es</span></li><li><span class="pl">G</span><span lang="es">Vendo piso en la zona norte de la ciudad. Tiene cuatro habitaciones, salón, comedor, dos baños y cocina equipada. Buena comunicación con el centro: líneas 4, 7 y 10 de autobús y líneas 2 y 3 de metro. Información en la Agencia López, calle Asturias 20, teléfono: 91 456 89 21.</span></li><li><span class="pl">H</span><span lang="es">Se vende apartamento céntrico a ocho minutos a pie de la Plaza Mayor. Un dormitorio con acceso a una gran terraza, salón amueblado, cocina y baño. Precio negociable. Para verlo, llamar de cuatro a siete de la tarde al 603 44 22 11 y preguntar por Carmen.</span></li><li><span class="pl">I</span><span lang="es">Se alquila piso nuevo en el centro. Es exterior y está vacío. Tiene 6 dormitorios, cocina luminosa, comedor, tres baños y un garaje con mucho espacio. Perfecto para familias grandes. Teléfono de contacto 678 99 00 12, preguntar por Andrea García.</span></li><li><span class="pl">J</span><span lang="es">Se alquila apartamento de nueva construcción. Situado en la zona centro, tiene un dormitorio, cocina, baño y un salón con una gran terraza. Todo exterior. Gastos de luz, agua, calefacción y Wifi incluidos en el precio. Llamar al 608 99 76 54 y preguntar por Ángel.</span></li></ul><ol class="qlist"><li class="q" id="q19" data-n="19" data-ans="J" data-part="read"><div class="stem"><span class="qn">19</span><span lang="es">La conexión a Internet está incluida en el precio.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: ANUNCIOS DE VIVIENDAS
+
+Se alquila piso céntrico. Situado en una zona comercial. Exterior. 3 dormitorios. Amueblado. Gara"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Se vende piso de dos dormitorios, salón, baño y cocina amueblada con todos los electrodomésticos (nevera, cocina, microo"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Se alquila piso para estudiantes. Tres dormitorios, salón, cocina y dos baños. Calefacción central y gastos de comunidad"><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Alquilo casa de dos plantas completamente reformada. Tiene un jardín con una casita para el perro, piscina, cuatro habit"><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Se vende ático de 200 m². Muy céntrico, pero en una zona tranquila, con buenas vistas al Jardín Botánico Nacional y cerc"><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Alquilo apartamento vacío completamente nuevo en la urbanización Atocha, a cinco minutos del centro comercial Los Naranj"><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: Vendo piso en la zona norte de la ciudad. Tiene cuatro habitaciones, salón, comedor, dos baños y cocina equipada. Buena "><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Se vende apartamento céntrico a ocho minutos a pie de la Plaza Mayor. Un dormitorio con acceso a una gran terraza, salón"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Se alquila piso nuevo en el centro. Es exterior y está vacío. Tiene 6 dormitorios, cocina luminosa, comedor, tres baños "><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Se alquila apartamento de nueva construcción. Situado en la zona centro, tiene un dormitorio, cocina, baño y un salón co"><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>J</b>
+Se alquila apartamento de nueva construcción. Situado en la zona centro, tiene un dormitorio, cocina, baño y un salón con una gran terraza. Todo exterior. Gastos de luz, agua, calefacción y Wifi incluidos en el precio. Llamar al 608 99 76 54 y preguntar por Ángel.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q20" data-n="20" data-ans="G" data-part="read"><div class="stem"><span class="qn">20</span><span lang="es">El barrio tiene un buen sistema de transportes públicos.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: ANUNCIOS DE VIVIENDAS
+
+Se alquila piso céntrico. Situado en una zona comercial. Exterior. 3 dormitorios. Amueblado. Gara"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Se vende piso de dos dormitorios, salón, baño y cocina amueblada con todos los electrodomésticos (nevera, cocina, microo"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Se alquila piso para estudiantes. Tres dormitorios, salón, cocina y dos baños. Calefacción central y gastos de comunidad"><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Alquilo casa de dos plantas completamente reformada. Tiene un jardín con una casita para el perro, piscina, cuatro habit"><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Se vende ático de 200 m². Muy céntrico, pero en una zona tranquila, con buenas vistas al Jardín Botánico Nacional y cerc"><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Alquilo apartamento vacío completamente nuevo en la urbanización Atocha, a cinco minutos del centro comercial Los Naranj"><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: Vendo piso en la zona norte de la ciudad. Tiene cuatro habitaciones, salón, comedor, dos baños y cocina equipada. Buena "><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Se vende apartamento céntrico a ocho minutos a pie de la Plaza Mayor. Un dormitorio con acceso a una gran terraza, salón"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Se alquila piso nuevo en el centro. Es exterior y está vacío. Tiene 6 dormitorios, cocina luminosa, comedor, tres baños "><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Se alquila apartamento de nueva construcción. Situado en la zona centro, tiene un dormitorio, cocina, baño y un salón co"><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>G</b>
+Vendo piso en la zona norte de la ciudad. Tiene cuatro habitaciones, salón, comedor, dos baños y cocina equipada. Buena comunicación con el centro: líneas 4, 7 y 10 de autobús y líneas 2 y 3 de metro. Información en la Agencia López, calle Asturias 20, teléfono: 91 456 89 21.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q21" data-n="21" data-ans="D" data-part="read"><div class="stem"><span class="qn">21</span><span lang="es">Le informan de que puede tener animales en la casa.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: ANUNCIOS DE VIVIENDAS
+
+Se alquila piso céntrico. Situado en una zona comercial. Exterior. 3 dormitorios. Amueblado. Gara"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Se vende piso de dos dormitorios, salón, baño y cocina amueblada con todos los electrodomésticos (nevera, cocina, microo"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Se alquila piso para estudiantes. Tres dormitorios, salón, cocina y dos baños. Calefacción central y gastos de comunidad"><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Alquilo casa de dos plantas completamente reformada. Tiene un jardín con una casita para el perro, piscina, cuatro habit"><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Se vende ático de 200 m². Muy céntrico, pero en una zona tranquila, con buenas vistas al Jardín Botánico Nacional y cerc"><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Alquilo apartamento vacío completamente nuevo en la urbanización Atocha, a cinco minutos del centro comercial Los Naranj"><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: Vendo piso en la zona norte de la ciudad. Tiene cuatro habitaciones, salón, comedor, dos baños y cocina equipada. Buena "><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Se vende apartamento céntrico a ocho minutos a pie de la Plaza Mayor. Un dormitorio con acceso a una gran terraza, salón"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Se alquila piso nuevo en el centro. Es exterior y está vacío. Tiene 6 dormitorios, cocina luminosa, comedor, tres baños "><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Se alquila apartamento de nueva construcción. Situado en la zona centro, tiene un dormitorio, cocina, baño y un salón co"><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>D</b>
+Alquilo casa de dos plantas completamente reformada. Tiene un jardín con una casita para el perro, piscina, cuatro habitaciones, dos baños, una cocina grande, un salón, un comedor y garaje. En el precio no se incluyen los gastos generales. Más información: juanjope@mail.com.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q22" data-n="22" data-ans="H" data-part="read"><div class="stem"><span class="qn">22</span><span lang="es">Para ver esta casa, tiene que llamar por la tarde.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: ANUNCIOS DE VIVIENDAS
+
+Se alquila piso céntrico. Situado en una zona comercial. Exterior. 3 dormitorios. Amueblado. Gara"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Se vende piso de dos dormitorios, salón, baño y cocina amueblada con todos los electrodomésticos (nevera, cocina, microo"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Se alquila piso para estudiantes. Tres dormitorios, salón, cocina y dos baños. Calefacción central y gastos de comunidad"><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Alquilo casa de dos plantas completamente reformada. Tiene un jardín con una casita para el perro, piscina, cuatro habit"><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Se vende ático de 200 m². Muy céntrico, pero en una zona tranquila, con buenas vistas al Jardín Botánico Nacional y cerc"><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Alquilo apartamento vacío completamente nuevo en la urbanización Atocha, a cinco minutos del centro comercial Los Naranj"><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: Vendo piso en la zona norte de la ciudad. Tiene cuatro habitaciones, salón, comedor, dos baños y cocina equipada. Buena "><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Se vende apartamento céntrico a ocho minutos a pie de la Plaza Mayor. Un dormitorio con acceso a una gran terraza, salón"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Se alquila piso nuevo en el centro. Es exterior y está vacío. Tiene 6 dormitorios, cocina luminosa, comedor, tres baños "><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Se alquila apartamento de nueva construcción. Situado en la zona centro, tiene un dormitorio, cocina, baño y un salón co"><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>H</b>
+Se vende apartamento céntrico a ocho minutos a pie de la Plaza Mayor. Un dormitorio con acceso a una gran terraza, salón amueblado, cocina y baño. Precio negociable. Para verlo, llamar de cuatro a siete de la tarde al 603 44 22 11 y preguntar por Carmen.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q23" data-n="23" data-ans="B" data-part="read"><div class="stem"><span class="qn">23</span><span lang="es">La casa está cerca de unas instalaciones deportivas.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: ANUNCIOS DE VIVIENDAS
+
+Se alquila piso céntrico. Situado en una zona comercial. Exterior. 3 dormitorios. Amueblado. Gara"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Se vende piso de dos dormitorios, salón, baño y cocina amueblada con todos los electrodomésticos (nevera, cocina, microo"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Se alquila piso para estudiantes. Tres dormitorios, salón, cocina y dos baños. Calefacción central y gastos de comunidad"><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Alquilo casa de dos plantas completamente reformada. Tiene un jardín con una casita para el perro, piscina, cuatro habit"><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Se vende ático de 200 m². Muy céntrico, pero en una zona tranquila, con buenas vistas al Jardín Botánico Nacional y cerc"><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Alquilo apartamento vacío completamente nuevo en la urbanización Atocha, a cinco minutos del centro comercial Los Naranj"><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: Vendo piso en la zona norte de la ciudad. Tiene cuatro habitaciones, salón, comedor, dos baños y cocina equipada. Buena "><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Se vende apartamento céntrico a ocho minutos a pie de la Plaza Mayor. Un dormitorio con acceso a una gran terraza, salón"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Se alquila piso nuevo en el centro. Es exterior y está vacío. Tiene 6 dormitorios, cocina luminosa, comedor, tres baños "><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Se alquila apartamento de nueva construcción. Situado en la zona centro, tiene un dormitorio, cocina, baño y un salón co"><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b>
+Se vende piso de dos dormitorios, salón, baño y cocina amueblada con todos los electrodomésticos (nevera, cocina, microondas, lavadora y secadora). Está a las afueras, en una zona tranquila y al lado del campo de fútbol. Interesados llamar al 609 77 12 34.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q24" data-n="24" data-ans="E" data-part="read"><div class="stem"><span class="qn">24</span><span lang="es">Se dice que hay grandes zonas verdes al lado de la casa.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: ANUNCIOS DE VIVIENDAS
+
+Se alquila piso céntrico. Situado en una zona comercial. Exterior. 3 dormitorios. Amueblado. Gara"><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Se vende piso de dos dormitorios, salón, baño y cocina amueblada con todos los electrodomésticos (nevera, cocina, microo"><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Se alquila piso para estudiantes. Tres dormitorios, salón, cocina y dos baños. Calefacción central y gastos de comunidad"><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Alquilo casa de dos plantas completamente reformada. Tiene un jardín con una casita para el perro, piscina, cuatro habit"><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Se vende ático de 200 m². Muy céntrico, pero en una zona tranquila, con buenas vistas al Jardín Botánico Nacional y cerc"><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Alquilo apartamento vacío completamente nuevo en la urbanización Atocha, a cinco minutos del centro comercial Los Naranj"><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: Vendo piso en la zona norte de la ciudad. Tiene cuatro habitaciones, salón, comedor, dos baños y cocina equipada. Buena "><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Se vende apartamento céntrico a ocho minutos a pie de la Plaza Mayor. Un dormitorio con acceso a una gran terraza, salón"><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Se alquila piso nuevo en el centro. Es exterior y está vacío. Tiene 6 dormitorios, cocina luminosa, comedor, tres baños "><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Se alquila apartamento de nueva construcción. Situado en la zona centro, tiene un dormitorio, cocina, baño y un salón co"><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>E</b>
+Se vende ático de 200 m². Muy céntrico, pero en una zona tranquila, con buenas vistas al Jardín Botánico Nacional y cerca de varios parques infantiles. Tiene dos dormitorios, un estudio, cocina completa, un baño grande y una gran terraza. Contacto: marialopez@gmail.com</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol></section><section class="tarea" id="t5"><div class="thd"><span class="tno">Tarea 5</span><span class="tq">题 25 – 30</span><span class="tkind">选择题 · 从 A / B / C 中选出一个正确答案</span></div><p class="inst" lang="es">Usted va a leer un texto sobre el intercambio de casas. A continuación, conteste a las preguntas (de la 25 a la 30). Seleccione la opción correcta (A, B o C).</p><div class="source"><div class="src-h">EL INTERCAMBIO DE CASAS</div><div class="passage" lang="es">El intercambio de casas para el verano lo inventaron los anglosajones. Esta opción comenzó en el mundo académico, cuando los profesores tenían que cambiar de universidad. Los españoles somos relativamente nuevos en esto, pero esta práctica cada día tiene más éxito y es más común. Nuestro país es ya el tercero en número de familias que eligen esta modalidad de vacaciones. Lo más buscado por un español suele ser un país europeo, pero están subiendo otros como México o Canadá.
+La mayoría de los que hacen intercambio son familias, un 35%. Un 30% son parejas, mientras que un 15% son personas que viajan solas, un 12% son grupos de amigos, y un 8% jubilados. El primer punto positivo del intercambio de casas es el ahorro de dinero. En segundo lugar, la posibilidad de estar en un lugar que tiene más espacio y, finalmente, la opción de quedarse más días en el lugar que se quiere visitar y hacer nuevos amigos.
+Las nuevas tecnologías han popularizado esta opción y cada día aparecen más sitios web. Para obtener información hay que estar registrado y pagar una cantidad al año. Por ejemplo, estar registrado en www.intercambiomicasa.com cuesta unos cien euros el primer año y tiene precios especiales si se continúa durante dos o tres años. El pago da derecho a contactar con otros socios, a modificar la información y a recibir una revista gratuita mensual.
+Para intercambiar la casa es necesario seguir unas recomendaciones como colgar buenas fotografías, describir la casa y su situación (barrio, localización, transportes…). Algunos propietarios hacen un seguro de la casa, pero no es necesario, otros prefieren dar las llaves en mano a los visitantes y a otros les gusta dejar información de las actividades culturales o suelen dar la dirección de familiares y amigos.
+Las páginas web de intercambio publican miles de comentarios. Por ejemplo, Fernando comenta que a él le atraía mucho esta idea, pero a su mujer no porque ella pensaba que no era seguro. Un día, Fernando habló con un compañero de trabajo que solía hacerlo y le convenció. Por eso, intercambió su casa, se fue con su familia a Italia y la experiencia fue tan buena que quiere volver a repetirla.
+El intercambio de casas no es el único en Internet, hay otros como ofrecer una cama o un sofá o compartir coche. Ahora, lo que está teniendo más éxito es intercambiar plazas de garaje solo para aparcar el coche.
+
+(Información extraída de www.consumocolaborativo.com y de http://elviajero.elpais.com)</div></div><ol class="qlist"><li class="q" id="q25" data-n="25" data-ans="A" data-part="read"><div class="stem"><span class="qn">25</span><span lang="es">Según el texto, el intercambio de casas…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">es cada vez más habitual en España.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">es un invento de un grupo de profesores.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">es una modalidad de vacaciones popular en Europa.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · es cada vez más habitual en España.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q26" data-n="26" data-ans="B" data-part="read"><div class="stem"><span class="qn">26</span><span lang="es">Para algunos, lo más interesante del intercambio es que…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">se conoce a otras personas.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">se gasta menos dinero.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">se puede estar más días de vacaciones.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · se gasta menos dinero.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q27" data-n="27" data-ans="B" data-part="read"><div class="stem"><span class="qn">27</span><span lang="es">La página web www.intercambiomicasa.com…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">es gratuita para los usuarios.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">publica una revista cada mes.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">hace un descuento el primer año.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · publica una revista cada mes.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q28" data-n="28" data-ans="C" data-part="read"><div class="stem"><span class="qn">28</span><span lang="es">Según el texto, para intercambiar una casa…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">se debe hacer un seguro.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">es recomendable dar las llaves en mano.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">hay que dar información completa de la vivienda.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · hay que dar información completa de la vivienda.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q29" data-n="29" data-ans="A" data-part="read"><div class="stem"><span class="qn">29</span><span lang="es">Fernando comenta en la web que…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">a su familia le gustó la experiencia.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">le parecía peligroso intercambiar su casa.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">encontró la casa por un compañero de trabajo.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · a su familia le gustó la experiencia.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q30" data-n="30" data-ans="C" data-part="read"><div class="stem"><span class="qn">30</span><span lang="es">Según el texto, está siendo cada vez más popular en Internet…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">ofrecer un sofá para dormir.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">compartir el coche para viajar.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">dejar el garaje de la casa.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · dejar el garaje de la casa.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol></section>
+  </section>
+
+  <section class="block" id="listening">
+    <h2>Prueba 2 · Comprensión auditiva <span class="pill">30 题 · 即时判分</span></h2>
+    <p class="lead">先点每题（或每个 Tarea）的播放键听录音，再选答案 → 「确认作答」立即判定。
+      每个 Tarea 有一段完整录音，可反复播放；右上角可调播放速度。听力与阅读共用一张答题卡，
+      题号接续为第 31–60 题（真题中 Prueba 2 是独立编号 1–25，这里为了统一答题卡顺延）。</p>
+    <div class="spdbar"><span class="spd-lbl">播放速度</span><button class="spd" data-rate="0.75" type="button">0.75×</button><button class="spd on" data-rate="1" type="button">1×</button><button class="spd" data-rate="1.25" type="button">1.25×</button><button class="spd" data-rate="1.5" type="button">1.5×</button><span class="spd-tip">音频不点不下载，点播放键即可听。建议先按正常语速做一遍，对答案后再放慢重听；每题都能单独重播。　来源：官方未公开音频，按官方听力原文用神经语音合成</span></div>
+    <section class="tarea" id="lt1"><div class="thd"><span class="tno">Tarea 1</span><span class="tq">题 31 – 37</span><span class="tq grey">原卷 Prueba 2 · 第 1 – 7 题</span><span class="tkind">选择题 · 从 A / B / C 中选出一个正确答案</span></div><p class="inst" lang="es">Usted va a escuchar siete anuncios de radio. Los anuncios se repiten dos veces. Lea las preguntas (de la 1 a la 7) para cada anuncio y seleccione la opción correcta (A, B o C).</p><div class="aud"><span class="alab">示例录音</span><audio controls preload="none" src="audio/m0-v2_t1_ex0.mp3"></audio></div><div class="ex"><b>Ejemplo</b><span lang="es">Puedes comprar el nuevo Niko B53…</span><span>→</span><code>A</code><span style="color:#8a6d1a">«No se vende en tiendas. Si llamas al teléfono 902 33 44 43…»</span></div><ul class="opts"><li class="opt"><span class="letter">A</span><span class="otxt" lang="es">llamando por teléfono.</span></li><li class="opt"><span class="letter">B</span><span class="otxt" lang="es">en cualquier tienda.</span></li><li class="opt"><span class="letter">C</span><span class="otxt" lang="es">a través de Internet.</span></li></ul><ol class="qlist"><li class="q" id="q31" data-n="31" data-ans="C" data-part="listen"><div class="stem"><span class="qn">31</span><span lang="es">Según la audición, La hora del cuento es…</span></div><div class="aud"><span class="alab">第 31 题录音</span><audio controls preload="none" src="audio/m0-v2_t1_q1.mp3"></audio></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">una historia para niños pequeños.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">el nombre de una obra de teatro.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">una actividad organizada por la biblioteca.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · una actividad organizada por la biblioteca.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q32" data-n="32" data-ans="B" data-part="listen"><div class="stem"><span class="qn">32</span><span lang="es">Las entradas para el concierto de flamenco…</span></div><div class="aud"><span class="alab">第 32 题录音</span><audio controls preload="none" src="audio/m0-v2_t1_q2.mp3"></audio></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">cuestan diez euros con cincuenta.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">se pueden comprar por Internet.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">se ponen a la venta el miércoles.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · se pueden comprar por Internet.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q33" data-n="33" data-ans="B" data-part="listen"><div class="stem"><span class="qn">33</span><span lang="es">En este anuncio, le informan de que hay un 50% de descuento en…</span></div><div class="aud"><span class="alab">第 33 题录音</span><audio controls preload="none" src="audio/m0-v2_t1_q3.mp3"></audio></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">la ropa de señora.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">artículos de informática.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">armarios para el dormitorio.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · artículos de informática.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q34" data-n="34" data-ans="C" data-part="listen"><div class="stem"><span class="qn">34</span><span lang="es">Los participantes del concurso de paellas…</span></div><div class="aud"><span class="alab">第 34 题录音</span><audio controls preload="none" src="audio/m0-v2_t1_q4.mp3"></audio></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">deben enviar la inscripción el día 6.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">pueden ganar un viaje a Valencia.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">tienen que llevar algunos ingredientes.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · tienen que llevar algunos ingredientes.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q35" data-n="35" data-ans="A" data-part="listen"><div class="stem"><span class="qn">35</span><span lang="es">Según la audición, la feria del cómic de Zaragoza…</span></div><div class="aud"><span class="alab">第 35 题录音</span><audio controls preload="none" src="audio/m0-v2_t1_q5.mp3"></audio></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">va a celebrarse en el mismo lugar que el año pasado.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">va a dar unos premios el próximo fin de semana.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">va a presentar los trabajos de sesenta dibujantes.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · va a celebrarse en el mismo lugar que el año pasado.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q36" data-n="36" data-ans="A" data-part="listen"><div class="stem"><span class="qn">36</span><span lang="es">En la peluquería Estilos, el corte de pelo cuesta…</span></div><div class="aud"><span class="alab">第 36 题录音</span><audio controls preload="none" src="audio/m0-v2_t1_q6.mp3"></audio></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">diez euros.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">quince euros.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">veinte euros.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · diez euros.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q37" data-n="37" data-ans="B" data-part="listen"><div class="stem"><span class="qn">37</span><span lang="es">En este anuncio se informa de…</span></div><div class="aud"><span class="alab">第 37 题录音</span><audio controls preload="none" src="audio/m0-v2_t1_q7.mp3"></audio></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">dónde es el curso de informática.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">cuál es el plazo de matrícula de los cursos.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">cuánto dura el curso para personas mayores.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · cuál es el plazo de matrícula de los cursos.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol><details class="trans"><summary>查看听力原文 Transcript（建议作答后再看）</summary><div class="tbody" lang="es"><div class="seg"><div class="stag">示例</div><p><span class="who">Hombre:</span>Te presentamos el nuevo Niko B53, un teléfono móvil de última generación. Te permite realizar todo tipo de funciones. No se vende en tiendas. Si llamas al teléfono 902 33 44 43 puedes tener el Niko B53 por sólo ciento cincuenta euros. Además, si eres una de las cien primeras llamadas te regalaremos la conexión a Internet durante el primer mes.</p></div><div class="seg"><div class="stag">第 1 题</div><p><span class="who">Mujer:</span>La Biblioteca Pública ha presentado la programación de La hora del cuento. Un proyecto dirigido a niños de seis a doce años que quiere despertar el amor de los más pequeños a los libros, sus historias y sus personajes. La entrada es libre y la cita es cada miércoles de cinco a siete en el teatro de la biblioteca.</p></div><div class="seg"><div class="stag">第 2 题</div><p><span class="who">Hombre:</span>Ya están a la venta las entradas para los espectáculos organizados por la Fundación de Cultura. Para el concierto de flamenco del martes día diez, las entradas se pueden comprar en www.fundaciondecultura.es y el precio es de quince euros. Para el espectáculo infantil Magia del miércoles día once, están a la venta en el teatro Galdós.</p></div><div class="seg"><div class="stag">第 3 题</div><p><span class="who">Mujer:</span>El lunes día ocho comienzan las rebajas en los grandes almacenes Corteplús. Toda la ropa de caballero, señora y niño con un treinta por ciento de descuento. También grandes ofertas en armarios de dormitorio y camas de todos los tamaños. Descuentos del cincuenta por ciento en ordenadores, impresoras y tabletas, solo cuatro días, del diez al trece.</p></div><div class="seg"><div class="stag">第 4 题</div><p><span class="who">Hombre:</span>¿Le gusta cocinar? Participe en el concurso de paellas que se celebra el próximo día seis en el restaurante Valencia. Cada participante debe llevar todo lo que necesita excepto el arroz, el aceite y la sal. Si está interesado o interesada, complete la inscripción antes del uno de diciembre y gane un viaje en barco por el río Duero.</p></div><div class="seg"><div class="stag">第 5 题</div><p><span class="who">Mujer:</span>La feria del cómic de Zaragoza reúne, un año más, a cuarenta dibujantes y sesenta expositores en el Palacio de Congresos. La feria comenzará el jueves con la gala de los premios al mejor cómic nacional e internacional y a la mejor web de cómics. Durante el próximo fin de semana los autores más importantes visitarán el palacio y firmarán ejemplares.</p></div><div class="seg"><div class="stag">第 6 题</div><p><span class="who">Hombre:</span>Cambia de aspecto en peluquería Estilos. Aprovecha la oferta de esta semana. Corte de pelo para hombre o mujer por diez euros, cambio de color por quince y, por veinte euros, el combinado corte y color. Además, si entras en nuestra web y nos dejas tu correo electrónico, recibirás información de los descuentos y promociones más interesantes.</p></div><div class="seg"><div class="stag">第 7 题</div><p><span class="who">Mujer:</span>La asociación de vecinos Pinto abrió ayer el plazo de inscripciones para los cursos de informática e Internet para personas mayores. Hasta el veintisiete de enero se pueden presentar las solicitudes en las oficinas de la asociación. Los cursos son gratuitos para los socios y el horario será de mañana y de tarde para todos los niveles.</p></div></div></details></section><section class="tarea" id="lt2"><div class="thd"><span class="tno">Tarea 2</span><span class="tq">题 38 – 43</span><span class="tq grey">原卷 Prueba 2 · 第 8 – 13 题</span><span class="tkind">选择题 · 从 A / B / C 中选出一个正确答案</span></div><p class="inst" lang="es">Usted va a escuchar una parte de un programa de radio y debe responder a seis preguntas. La audición se repite dos veces. Lea las preguntas (de la 8 a la 13) y seleccione la opción correcta (A, B o C).</p><div class="ex"><b>Ejemplo</b><span lang="es">En esta noticia se informa de…</span><span>→</span><code>B</code><span style="color:#8a6d1a">Es la gala de los Premios Número Uno, una ceremonia deportiva.</span></div><ul class="opts"><li class="opt"><span class="letter">A</span><span class="otxt" lang="es">una competición deportiva.</span></li><li class="opt"><span class="letter">B</span><span class="otxt" lang="es">una fiesta del mundo del deporte.</span></li><li class="opt"><span class="letter">C</span><span class="otxt" lang="es">una presentación de un periódico deportivo.</span></li></ul><div class="aud"><span class="alab">听力音频 · 本 Tarea 全部题目（可反复播放）</span><audio controls preload="none" src="audio/m0-v2_t2_q1.mp3"></audio></div><ol class="qlist"><li class="q" id="q38" data-n="38" data-ans="B" data-part="listen"><div class="stem"><span class="qn">38</span><span lang="es">En esta noticia se informa de…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">una competición deportiva.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">una fiesta del mundo del deporte.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">una presentación de un periódico deportivo.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · una fiesta del mundo del deporte.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q39" data-n="39" data-ans="A" data-part="listen"><div class="stem"><span class="qn">39</span><span lang="es">El periodista Manolo Hernández fue un famoso…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">tenista.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">gimnasta.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">nadador.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · tenista.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q40" data-n="40" data-ans="C" data-part="listen"><div class="stem"><span class="qn">40</span><span lang="es">Según la audición, el ciclista Alberto Corredor…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">recogió su primer premio.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">dio un premio a Miguel Azcárate.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">se emocionó durante el acto.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · se emocionó durante el acto.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q41" data-n="41" data-ans="C" data-part="listen"><div class="stem"><span class="qn">41</span><span lang="es">El equipo femenino de baloncesto…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">ha ganado el campeonato mundial.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">ha cambiado de entrenador este año.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">ha participado en una competición europea.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · ha participado en una competición europea.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q42" data-n="42" data-ans="A" data-part="listen"><div class="stem"><span class="qn">42</span><span lang="es">Esther Pérez ganó un premio por…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">sacar buenas fotografías.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">dirigir un programa deportivo.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">tener una carrera de éxitos profesionales.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · sacar buenas fotografías.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q43" data-n="43" data-ans="B" data-part="listen"><div class="stem"><span class="qn">43</span><span lang="es">En la audición se dice que Pelayo Iglesias…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">jugó diez años en el equipo del Oviedo.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">compuso una canción para un equipo de fútbol.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">fue futbolista profesional antes que cantante.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · compuso una canción para un equipo de fútbol.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol><details class="trans"><summary>查看听力原文 Transcript（建议作答后再看）</summary><div class="tbody" lang="es"><div class="seg"><div class="stag">整段听力原文</div><p><span class="who">Mujer:</span>Anoche, en Madrid, se celebró la Gala de los Premios Número Uno, que organiza el periódico GP. Fue una ceremonia que sirvió para premiar a los mejores deportistas del año pasado, elegidos por los lectores del periódico.</p><p><span class="who">Mujer:</span>El presentador fue el periodista Manolo Hernández, un excelente representante del mundo del deporte reconocido internacionalmente por sus éxitos en las pistas de tenis. Antes de comenzar con la entrega de premios, Manolo presentó al nuevo equipo nacional de gimnasia y de natación.</p><p><span class="who">Mujer:</span>A continuación, llegó el momento de los premios. El primero en recibirlo fue el ciclista Alberto Corredor, que lloró cuando su director deportivo, Miguel Azcárate, se lo entregó.</p><p><span class="who">Mujer:</span>También subió a recoger su premio el entrenador del equipo nacional de baloncesto femenino, Pablo López. Los cambios en el equipo y el entrenamiento duro llevaron a las chicas del baloncesto a ganar la Copa de Europa y a clasificarse para el mundial que se va a celebrar este año.</p><p><span class="who">Mujer:</span>María Izquierdo, directora del programa deportivo As Deportivo, recogió el premio al mejor trabajo periodístico por la información ofrecida en la última Copa del Mundo de fútbol. Esther Pérez fue la ganadora de la mejor foto deportiva y Arturo Gómez recogió un premio por toda su carrera periodística.</p><p><span class="who">Mujer:</span>La ceremonia deportiva se cerró con la actuación del cantante Pelayo Iglesias, que interpretó canciones de su último disco y la canción que escribió para el equipo de su corazón, el Oviedo. Siempre ha dicho que cuando era pequeño quería dedicarse al fútbol y que jugó en el Oviedo una temporada cuando tenía diez años.</p></div></div></details></section><section class="tarea" id="lt3"><div class="thd"><span class="tno">Tarea 3</span><span class="tq">题 44 – 49</span><span class="tq grey">原卷 Prueba 2 · 第 14 – 19 题</span><span class="tkind">匹配题 · 从 A–J 的 10 个卡片里为每题选一项</span></div><p class="inst" lang="es">Usted va a escuchar siete mensajes, incluido el ejemplo. Cada mensaje se repite dos veces. Seleccione el enunciado (de la A a la J) que corresponde a cada mensaje (del 14 al 19). Hay diez enunciados, incluido el ejemplo. Seleccione seis.</p><div class="aud"><span class="alab">示例录音</span><audio controls preload="none" src="audio/m0-v2_t3_ex0.mp3"></audio></div><div class="ex"><b>Ejemplo</b><span lang="es">Mensaje 0</span><span>→</span><code>F</code><span style="color:#8a6d1a">«No voy a poder llegar a tiempo a tu casa para ir juntos al teatro».</span></div><ul class="pool"><li><span class="pl">A</span><span lang="es">Le dicen que ahora no pueden hablar con usted.</span></li><li><span class="pl">B</span><span lang="es">Informan de que el viaje ha terminado.</span></li><li><span class="pl">C</span><span lang="es">Le propone otro día para quedar y verse.</span></li><li><span class="pl">D</span><span lang="es">Ha comprado algunas cosas para el dormitorio.</span></li><li><span class="pl">E</span><span lang="es">Le han llamado para pedirle los datos personales.</span></li><li><span class="pl">F</span><span lang="es">Va a llegar más tarde.</span></li><li><span class="pl">G</span><span lang="es">En ese lugar tienen precios especiales.</span></li><li><span class="pl">H</span><span lang="es">Comunican que va a salir el tren.</span></li><li><span class="pl">I</span><span lang="es">Le están informando de cuál es el horario.</span></li><li><span class="pl">J</span><span lang="es">Explica por qué no puede quedar con alguien.</span></li></ul><ol class="qlist"><li class="q" id="q44" data-n="44" data-ans="D" data-part="listen"><div class="stem"><span class="qn">44</span><span lang="es">Mensaje 1</span></div><div class="aud"><span class="alab">第 44 题录音</span><audio controls preload="none" src="audio/m0-v2_t3_q1.mp3"></audio></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: Le dicen que ahora no pueden hablar con usted."><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Informan de que el viaje ha terminado."><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Le propone otro día para quedar y verse."><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Ha comprado algunas cosas para el dormitorio."><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Le han llamado para pedirle los datos personales."><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Va a llegar más tarde."><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: En ese lugar tienen precios especiales."><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Comunican que va a salir el tren."><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Le están informando de cuál es el horario."><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Explica por qué no puede quedar con alguien."><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>D</b>
+Ha comprado algunas cosas para el dormitorio.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q45" data-n="45" data-ans="G" data-part="listen"><div class="stem"><span class="qn">45</span><span lang="es">Mensaje 2</span></div><div class="aud"><span class="alab">第 45 题录音</span><audio controls preload="none" src="audio/m0-v2_t3_q2.mp3"></audio></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: Le dicen que ahora no pueden hablar con usted."><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Informan de que el viaje ha terminado."><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Le propone otro día para quedar y verse."><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Ha comprado algunas cosas para el dormitorio."><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Le han llamado para pedirle los datos personales."><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Va a llegar más tarde."><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: En ese lugar tienen precios especiales."><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Comunican que va a salir el tren."><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Le están informando de cuál es el horario."><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Explica por qué no puede quedar con alguien."><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>G</b>
+En ese lugar tienen precios especiales.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q46" data-n="46" data-ans="I" data-part="listen"><div class="stem"><span class="qn">46</span><span lang="es">Mensaje 3</span></div><div class="aud"><span class="alab">第 46 题录音</span><audio controls preload="none" src="audio/m0-v2_t3_q3.mp3"></audio></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: Le dicen que ahora no pueden hablar con usted."><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Informan de que el viaje ha terminado."><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Le propone otro día para quedar y verse."><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Ha comprado algunas cosas para el dormitorio."><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Le han llamado para pedirle los datos personales."><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Va a llegar más tarde."><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: En ese lugar tienen precios especiales."><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Comunican que va a salir el tren."><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Le están informando de cuál es el horario."><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Explica por qué no puede quedar con alguien."><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>I</b>
+Le están informando de cuál es el horario.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q47" data-n="47" data-ans="J" data-part="listen"><div class="stem"><span class="qn">47</span><span lang="es">Mensaje 4</span></div><div class="aud"><span class="alab">第 47 题录音</span><audio controls preload="none" src="audio/m0-v2_t3_q4.mp3"></audio></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: Le dicen que ahora no pueden hablar con usted."><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Informan de que el viaje ha terminado."><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Le propone otro día para quedar y verse."><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Ha comprado algunas cosas para el dormitorio."><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Le han llamado para pedirle los datos personales."><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Va a llegar más tarde."><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: En ese lugar tienen precios especiales."><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Comunican que va a salir el tren."><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Le están informando de cuál es el horario."><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Explica por qué no puede quedar con alguien."><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>J</b>
+Explica por qué no puede quedar con alguien.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q48" data-n="48" data-ans="B" data-part="listen"><div class="stem"><span class="qn">48</span><span lang="es">Mensaje 5</span></div><div class="aud"><span class="alab">第 48 题录音</span><audio controls preload="none" src="audio/m0-v2_t3_q5.mp3"></audio></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: Le dicen que ahora no pueden hablar con usted."><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Informan de que el viaje ha terminado."><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Le propone otro día para quedar y verse."><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Ha comprado algunas cosas para el dormitorio."><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Le han llamado para pedirle los datos personales."><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Va a llegar más tarde."><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: En ese lugar tienen precios especiales."><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Comunican que va a salir el tren."><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Le están informando de cuál es el horario."><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Explica por qué no puede quedar con alguien."><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b>
+Informan de que el viaje ha terminado.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q49" data-n="49" data-ans="A" data-part="listen"><div class="stem"><span class="qn">49</span><span lang="es">Mensaje 6</span></div><div class="aud"><span class="alab">第 49 题录音</span><audio controls preload="none" src="audio/m0-v2_t3_q6.mp3"></audio></div><ul class="opts letteropts"><li class="opt" data-letter="A" title="A: Le dicen que ahora no pueden hablar con usted."><span class="letter">A</span></li><li class="opt" data-letter="B" title="B: Informan de que el viaje ha terminado."><span class="letter">B</span></li><li class="opt" data-letter="C" title="C: Le propone otro día para quedar y verse."><span class="letter">C</span></li><li class="opt" data-letter="D" title="D: Ha comprado algunas cosas para el dormitorio."><span class="letter">D</span></li><li class="opt" data-letter="E" title="E: Le han llamado para pedirle los datos personales."><span class="letter">E</span></li><li class="opt" data-letter="F" title="F: Va a llegar más tarde."><span class="letter">F</span></li><li class="opt" data-letter="G" title="G: En ese lugar tienen precios especiales."><span class="letter">G</span></li><li class="opt" data-letter="H" title="H: Comunican que va a salir el tren."><span class="letter">H</span></li><li class="opt" data-letter="I" title="I: Le están informando de cuál es el horario."><span class="letter">I</span></li><li class="opt" data-letter="J" title="J: Explica por qué no puede quedar con alguien."><span class="letter">J</span></li><li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b>
+Le dicen que ahora no pueden hablar con usted.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol><details class="trans"><summary>查看听力原文 Transcript（建议作答后再看）</summary><div class="tbody" lang="es"><div class="seg"><div class="stag">示例</div><p><span class="who">Mujer:</span>Hola, Pedro. Te llamaba porque no voy a poder llegar a tiempo a tu casa para ir juntos al teatro. Es que esta tarde mis padres se van de viaje y tengo que quedarme en casa con mi hermano pequeño hasta las siete. Por favor, espérame en la puerta del teatro.</p></div><div class="seg"><div class="stag">第 1 题</div><p><span class="who">Hombre:</span>Mire, le llamamos de la tienda de muebles Fernández para decirle que ya hemos recibido el armario y la cama que usted eligió el mes pasado. Podemos llevárselo todo a su casa mañana. Nuestro teléfono es el 609 87 00 21.</p></div><div class="seg"><div class="stag">第 2 题</div><p><span class="who">Mujer:</span>Rebajas del cincuenta por ciento en la sección de ropa para hombre, mujer y niño. La mejor calidad al mejor precio en la segunda planta. Le esperamos.</p></div><div class="seg"><div class="stag">第 3 题</div><p><span class="who">Hombre:</span>Se comunica a los clientes del centro comercial Mercadiez que el próximo viernes, día veinticuatro, abrimos de nueve de la mañana a diez de la noche. Gracias por su atención.</p></div><div class="seg"><div class="stag">第 4 题</div><p><span class="who">Mujer:</span>Hola, Marcos. Soy Marian, te llamo para decirte que no puedo ir contigo a jugar al tenis el sábado. Es que tengo gripe y no me encuentro nada bien. Lo siento.</p></div><div class="seg"><div class="stag">第 5 题</div><p><span class="who">Hombre:</span>Señores viajeros, estamos en la estación de Málaga, fin del trayecto. La compañía de tren Al-Ándalus les da las gracias por elegirnos y les espera en su próximo viaje.</p></div><div class="seg"><div class="stag">第 6 题</div><p><span class="who">Mujer:</span>Este es el contestador de la clínica dental Dentiplus. En estos momentos tenemos nuestra línea ocupada. Deje su mensaje y sus datos personales después de oír la señal. Disculpe las molestias.</p></div></div></details></section><section class="tarea" id="lt4"><div class="thd"><span class="tno">Tarea 4</span><span class="tq">题 50 – 55</span><span class="tq grey">原卷 Prueba 2 · 第 20 – 25 题</span><span class="tkind">选择题 · 从 A / B / C 中选出一个正确答案</span></div><p class="inst" lang="es">Usted va a escuchar una conversación telefónica entre una empleada de la agencia de viajes Soltur y un cliente. La conversación se repite dos veces. Lea las preguntas (de la 20 a la 25) y seleccione la opción correcta (A, B o C).</p><div class="ex"><b>Ejemplo</b><span lang="es">La oferta de agosto es para viajar a…</span><span>→</span><code>A</code><span style="color:#8a6d1a">«Para agosto tenemos una oferta muy buena en Ibiza.»</span></div><ul class="opts"><li class="opt"><span class="letter">A</span><span class="otxt" lang="es">Ibiza.</span></li><li class="opt"><span class="letter">B</span><span class="otxt" lang="es">Toledo.</span></li><li class="opt"><span class="letter">C</span><span class="otxt" lang="es">los Picos de Europa.</span></li></ul><div class="aud"><span class="alab">听力音频 · 本 Tarea 全部题目（可反复播放）</span><audio controls preload="none" src="audio/m0-v2_t4_q1.mp3"></audio></div><ol class="qlist"><li class="q" id="q50" data-n="50" data-ans="A" data-part="listen"><div class="stem"><span class="qn">50</span><span lang="es">La empleada informa de que la oferta es para ir a…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">Ibiza.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">Toledo.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">los Picos de Europa.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · Ibiza.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q51" data-n="51" data-ans="B" data-part="listen"><div class="stem"><span class="qn">51</span><span lang="es">Según la audición, el hombre quiere viajar…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">el 1 de agosto.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">el 10 de agosto.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">el 30 de agosto.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · el 10 de agosto.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q52" data-n="52" data-ans="A" data-part="listen"><div class="stem"><span class="qn">52</span><span lang="es">En la audición se dice que el precio incluye…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">el IVA.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">el seguro.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">la limpieza.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b> · el IVA.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q53" data-n="53" data-ans="B" data-part="listen"><div class="stem"><span class="qn">53</span><span lang="es">La empleada informa de que en el campin hay…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">una farmacia.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">un supermercado.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">tres pistas de tenis.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>B</b> · un supermercado.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q54" data-n="54" data-ans="C" data-part="listen"><div class="stem"><span class="qn">54</span><span lang="es">En la audición se dice que la casa…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">tiene un garaje pequeño.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">está en el pueblo.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">es bastante espaciosa.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · es bastante espaciosa.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q55" data-n="55" data-ans="C" data-part="listen"><div class="stem"><span class="qn">55</span><span lang="es">Los sábados, la agencia cierra a las…</span></div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt" lang="es">13.45 h.</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt" lang="es">14 h.</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt" lang="es">14.30 h.</span></li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b> · 14.30 h.</div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol><details class="trans"><summary>查看听力原文 Transcript（建议作答后再看）</summary><div class="tbody" lang="es"><div class="seg"><div class="stag">整段听力原文</div><p><span class="who">Mujer:</span>Viajes Soltur, ¿dígame?</p><p><span class="who">Hombre:</span>Mire, llamaba porque he visto algunos anuncios de viajes para agosto y quería información.</p><p><span class="who">Mujer:</span>Para agosto tenemos una oferta muy buena en Ibiza, en un hotel en primera línea de playa.</p><p><span class="who">Hombre:</span>¡Uf! Es que a la playa en agosto está llena de gente. Prefiero otro lugar.</p><p><span class="who">Mujer:</span>Voy a ver. Hay otras opciones que no están de oferta, pero son interesantes. Puede ir a Toledo y hacer varias rutas culturales por la región, o puede viajar a los Picos de Europa, a una de las casas de madera del campin Astur.</p><p><span class="who">Hombre:</span>Me gusta más esta última opción. Me gustaría ir del diez al veinte de agosto, ¿podría ser?</p><p><span class="who">Mujer:</span>Sí, está libre todo el mes, del uno al treinta.</p><p><span class="who">Hombre:</span>El anuncio decía que el precio era de trescientos euros por persona, ¿verdad?</p><p><span class="who">Mujer:</span>Sí, así es.</p><p><span class="who">Hombre:</span>¿Qué incluye?</p><p><span class="who">Mujer:</span>La luz, el agua y el impuesto del IVA.</p><p><span class="who">Hombre:</span>¿Y el seguro y la limpieza?</p><p><span class="who">Mujer:</span>Eso no, pero el seguro no es caro y la limpieza es optativa.</p><p><span class="who">Hombre:</span>¿Qué servicios ofrece el campin?</p><p><span class="who">Mujer:</span>Hay un pequeño supermercado e instalaciones deportivas: tres piscinas, dos pistas de tenis y un parque para niños.</p><p><span class="who">Hombre:</span>¿Y farmacia?</p><p><span class="who">Mujer:</span>Eso no, pero hay una en el pueblo, a diez minutos.</p><p><span class="who">Hombre:</span>¿Y la casa es grande? Es que somos cinco.</p><p><span class="who">Mujer:</span>Sí, no se preocupe. Hay cinco habitaciones, dos baños, un salón que da a una pequeña terraza y un garaje.</p><p><span class="who">Hombre:</span>Mire, ¿puedo pasar el sábado a las dos para hacer la reserva? Es que salgo de trabajar a las dos menos cuarto.</p><p><span class="who">Mujer:</span>Sí, sí. Cerramos a las dos y media.</p><p><span class="who">Hombre:</span>De acuerdo.</p></div></div></details></section><section class="tarea" id="lt5"><div class="thd"><span class="tno">Tarea 5</span><span class="tq">题 56 – 60</span><span class="tq grey">原卷 Prueba 2 · 第 26 – 30 题</span><span class="tkind">匹配题 · 从 A–H 的 8 个卡片里为每题选一项</span></div><p class="inst" lang="es">Usted va a escuchar una conversación entre dos personas, Laura y Javier. La conversación se repite dos veces. Seleccione la imagen (de la A a la H) que corresponde a cada enunciado (del 26 al 30). Hay ocho imágenes. Seleccione cinco.</p><div class="ex"><b>Ejemplo</b><span lang="es">Es el lugar donde Javier estuvo de vacaciones.</span><span>→</span><code>H</code><span style="color:#8a6d1a">«los niños querían ir a la playa» → la imagen H es la playa.</span></div><div class="aud"><span class="alab">听力音频 · 本 Tarea 全部题目（可反复播放）</span><audio controls preload="none" src="audio/m0-v2_t5_q1.mp3"></audio></div><ul class="pool imgpool"><li><img src="img/audio/m0-v2_pool_A.jpg" alt="Opción A" loading="lazy"><span class="pl">A</span></li><li><img src="img/audio/m0-v2_pool_B.jpg" alt="Opción B" loading="lazy"><span class="pl">B</span></li><li><img src="img/audio/m0-v2_pool_C.jpg" alt="Opción C" loading="lazy"><span class="pl">C</span></li><li><img src="img/audio/m0-v2_pool_D.jpg" alt="Opción D" loading="lazy"><span class="pl">D</span></li><li><img src="img/audio/m0-v2_pool_E.jpg" alt="Opción E" loading="lazy"><span class="pl">E</span></li><li><img src="img/audio/m0-v2_pool_F.jpg" alt="Opción F" loading="lazy"><span class="pl">F</span></li><li><img src="img/audio/m0-v2_pool_G.jpg" alt="Opción G" loading="lazy"><span class="pl">G</span></li><li><img src="img/audio/m0-v2_pool_H.jpg" alt="Opción H" loading="lazy"><span class="pl">H</span></li></ul><ol class="qlist"><li class="q" id="q56" data-n="56" data-ans="C" data-part="listen"><div class="stem"><span class="qn">56</span><span lang="es">Esto es lo que Javier necesita comprar.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A"><span class="letter">A</span></li><li class="opt" data-letter="B"><span class="letter">B</span></li><li class="opt" data-letter="C"><span class="letter">C</span></li><li class="opt" data-letter="D"><span class="letter">D</span></li><li class="opt" data-letter="E"><span class="letter">E</span></li><li class="opt" data-letter="F"><span class="letter">F</span></li><li class="opt" data-letter="G"><span class="letter">G</span></li><li class="opt" data-letter="H"><span class="letter">H</span></li><li class="opthint" aria-hidden="true">在上方 A–H 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>C</b></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q57" data-n="57" data-ans="H" data-part="listen"><div class="stem"><span class="qn">57</span><span lang="es">Los hijos de Javier preferían ir a ese lugar.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A"><span class="letter">A</span></li><li class="opt" data-letter="B"><span class="letter">B</span></li><li class="opt" data-letter="C"><span class="letter">C</span></li><li class="opt" data-letter="D"><span class="letter">D</span></li><li class="opt" data-letter="E"><span class="letter">E</span></li><li class="opt" data-letter="F"><span class="letter">F</span></li><li class="opt" data-letter="G"><span class="letter">G</span></li><li class="opt" data-letter="H"><span class="letter">H</span></li><li class="opthint" aria-hidden="true">在上方 A–H 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>H</b></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q58" data-n="58" data-ans="F" data-part="listen"><div class="stem"><span class="qn">58</span><span lang="es">Es lo que Laura quería hacer en vacaciones.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A"><span class="letter">A</span></li><li class="opt" data-letter="B"><span class="letter">B</span></li><li class="opt" data-letter="C"><span class="letter">C</span></li><li class="opt" data-letter="D"><span class="letter">D</span></li><li class="opt" data-letter="E"><span class="letter">E</span></li><li class="opt" data-letter="F"><span class="letter">F</span></li><li class="opt" data-letter="G"><span class="letter">G</span></li><li class="opt" data-letter="H"><span class="letter">H</span></li><li class="opthint" aria-hidden="true">在上方 A–H 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>F</b></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q59" data-n="59" data-ans="A" data-part="listen"><div class="stem"><span class="qn">59</span><span lang="es">Es la profesión del marido de Laura.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A"><span class="letter">A</span></li><li class="opt" data-letter="B"><span class="letter">B</span></li><li class="opt" data-letter="C"><span class="letter">C</span></li><li class="opt" data-letter="D"><span class="letter">D</span></li><li class="opt" data-letter="E"><span class="letter">E</span></li><li class="opt" data-letter="F"><span class="letter">F</span></li><li class="opt" data-letter="G"><span class="letter">G</span></li><li class="opt" data-letter="H"><span class="letter">H</span></li><li class="opthint" aria-hidden="true">在上方 A–H 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>A</b></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q60" data-n="60" data-ans="E" data-part="listen"><div class="stem"><span class="qn">60</span><span lang="es">Javier le propone esto a Laura.</span></div><ul class="opts letteropts"><li class="opt" data-letter="A"><span class="letter">A</span></li><li class="opt" data-letter="B"><span class="letter">B</span></li><li class="opt" data-letter="C"><span class="letter">C</span></li><li class="opt" data-letter="D"><span class="letter">D</span></li><li class="opt" data-letter="E"><span class="letter">E</span></li><li class="opt" data-letter="F"><span class="letter">F</span></li><li class="opt" data-letter="G"><span class="letter">G</span></li><li class="opt" data-letter="H"><span class="letter">H</span></li><li class="opthint" aria-hidden="true">在上方 A–H 卡片里选一项</li></ul><details class="ans"><summary>看解析</summary><div class="anbody">正确答案：<b>E</b></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol><details class="trans"><summary>查看听力原文 Transcript（建议作答后再看）</summary><div class="tbody" lang="es"><div class="seg"><div class="stag">整段听力原文</div><p><span class="who">Mujer:</span>¡Hombre, Javier! ¿Qué haces por aquí?</p><p><span class="who">Hombre:</span>Hola, Laura. Pues he venido a comprar algo de comida porque este fin de semana hemos tenido visita en casa y la nevera está casi vacía: no hay nada, ni carne, ni fruta, ni pescado.</p><p><span class="who">Mujer:</span>¿Quién os ha visitado?</p><p><span class="who">Hombre:</span>Los padres de Sara. No nos veíamos desde el verano pasado, que nos fuimos todos de viaje.</p><p><span class="who">Mujer:</span>¿Pero el verano pasado no os quedasteis en casa?</p><p><span class="who">Hombre:</span>Al final nos fuimos unos días. Es que los niños querían ir a la playa y, como siempre, les hicimos caso.</p><p><span class="who">Mujer:</span>Te entiendo. También nosotros cambiamos nuestras vacaciones el año pasado.</p><p><span class="who">Hombre:</span>¿Dónde fuisteis?</p><p><span class="who">Mujer:</span>Fuimos a Salou porque los niños querían ir al parque de atracciones de PortAventura. A mí, la verdad, me atraía la idea de pasar unos días en la montaña para hacer senderismo, estar lejos del ruido y poder dormir bien.</p><p><span class="who">Hombre:</span>Por cierto, ¿sabes que Carlos ha venido ya de México? El otro día me llamó y hemos quedado para ir a comer juntos a un restaurante.</p><p><span class="who">Mujer:</span>Sí, lo sabía, porque mi marido se lo encontró cuando salía del colegio. Carlos lleva allí a sus hijos.</p><p><span class="who">Hombre:</span>Sí, sí, es verdad. Ya me lo comentó. No me acordaba.</p><p><span class="who">Mujer:</span>¿Tienes su número de teléfono? Me gustaría llamarlo esta tarde.</p><p><span class="who">Hombre:</span>Es que no te lo puedo dar porque no tengo batería en el móvil y no me lo sé de memoria. ¿Y si le mandas un correo electrónico?</p><p><span class="who">Mujer:</span>Vale.</p></div></div></details></section>
+  </section>
+
+  <section class="block" id="writing">
+    <h2>Prueba 3 · Expresión e interacción escritas <span class="pill grey">题目 + 范文</span></h2>
+    <p class="lead">写作不自动判分。建议先在纸上或输入法里写一遍，再展开参考答案对照。范文仅为一种可行写法，非唯一标准。</p>
+    <div class="wq"><h3><span>Tarea 1</span><span class="pill grey">entre 30 y 40 palabras</span></h3><p class="task" lang="es">Usted está buscando personas para practicar un deporte. Escriba un mensaje en el foro del Servicio de Deportes de su universidad. En él debe:
+• decir qué deporte practica usted;
+• explicar por qué quiere encontrar a alguien;
+• contar dónde y cuándo lo quiere practicar;
+• informar de cómo pueden verse.</p><details class="sample"><summary>参考答案 / Modelo de respuesta</summary><div class="sbody" lang="es">Hola:
+
+Me llamo Ana y me gusta mucho el tenis. Busco a alguien para jugar porque mis amigos no tienen tiempo. Podemos jugar los sábados por la mañana en las pistas de la universidad. Si te interesa, escríbeme a ana@correo.com.</div></details></div><div class="wq"><h3><span>Tarea 2</span><span class="pill grey">entre 70 y 80 palabras</span></h3><p class="task" lang="es">Usted ha cambiado de trabajo esta semana. Escriba un correo electrónico a un/a amigo/a. En él debe:
+• decir cuál es su nuevo trabajo y dónde trabaja;
+• describir el lugar de trabajo;
+• explicar por qué ha cambiado de trabajo;
+• contar qué tiene que hacer en su nuevo trabajo.
+
+No olvide saludar y despedirse.</p><details class="sample"><summary>参考答案 / Modelo de respuesta</summary><div class="sbody" lang="es">Hola, Marta:
+
+¿Cómo estás? Te escribo para contarte una noticia: esta semana he empezado un trabajo nuevo. Soy recepcionista en un hotel del centro.
+
+El hotel es moderno y muy grande, y mis compañeros son simpáticos. He cambiado porque en mi trabajo anterior trabajaba muchas horas y ganaba poco.
+
+Ahora tengo que atender a los clientes, contestar el teléfono y hacer las reservas. Me gusta mucho.
+
+Un abrazo,
+Lucía</div></details></div><div class="wq"><h3><span>Tarea 3</span><span class="pill grey">entre 70 y 80 palabras</span></h3><p class="task" lang="es">Usted tiene que escribir una redacción sobre un viaje que hizo en sus últimas vacaciones.
+
+Usted tiene que comentar:
+• a qué lugar fue, cuándo y con quién;
+• por qué fue allí;
+• qué fue lo que más/menos le gustó;
+• dónde le gustaría ir la próxima vez y por qué.</p><details class="sample"><summary>参考答案 / Modelo de respuesta</summary><div class="sbody" lang="es">El verano pasado viajé a Asturias con dos amigos. Fuimos en agosto, durante una semana.
+
+Elegimos ese lugar porque queríamos estar en la montaña y ver el mar, y porque un amigo nos habló muy bien del norte.
+
+Lo que más me gustó fue la comida y los paisajes verdes. Lo que menos, que llovió casi todos los días.
+
+La próxima vez me gustaría ir a Japón porque quiero conocer su cultura y probar su comida.</div></details></div>
+  </section>
+</div>
+</main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><b>题目来源</b>：Instituto Cervantes 公开发布的 DELE A2 官方样卷（<span lang="es">Modelo 0</span>），
+      版权归 Instituto Cervantes 所有，此处仅用于个人学习与自测。</div>
+    <div><b>听力音频</b>：官方未发布录音，<span lang="es">Prueba 2</span> 的音频按官方听力原文用神经语音（TTS）合成，不同说话人用了不同音色；为控制体积压为单声道 48 kbps，节奏与停顿按原卷标注还原。<b>非真人录音</b>，正式备考请以考场原音为准。</div>
+    <div><b>说明</b>：答案依据官方 <span lang="es">Clave de respuestas</span> 逐题核对；如发现个别拼写差异以官方原件为准。</div>
+    <div style="margin-top:8px"><a href="index.html">← 返回全部试卷</a></div>
+  </div>
+<!--i18n:sw-->
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+<!--/i18n:sw--></footer>
+
+<div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div>
+<script>
+(function(){
+"use strict";
+var KEY="quiz:dele-a2-a2-modelo0-v2";
+var TOTAL=60;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+/* 答案分隔：多选用 ","，填空的等价写法用 "|"（两种都支持） */
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(/[,|]/).map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+function norm(s){return String(s==null?"":s).replace(/\s+/g," ").trim().toUpperCase()}
+function isFill(q){return q.getAttribute("data-kind")==="fill"}
+function fillInput(q){return q1("input.fill",q)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  /* 填空题：复原/锁定输入框 */
+  var inp=q1("input.fill",q);
+  if(inp){
+    if(locked){ if(inp.value!==(sel[0]||""))inp.value=sel[0]||""; }
+    inp.disabled=locked;
+    inp.classList.remove("ok","bad");
+    if(judged)inp.classList.add(rec.ok?"ok":"bad");
+  }
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = isFill(q) ? !norm(sel[0]||"") : sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok&&!isFill(q))
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q),ok;
+  if(isFill(q)){var v=norm(sel[0]||"");ok=(v!==""&&A.indexOf(v)>=0);}
+  else{ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});}
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+/* 填空题输入：只存值、点亮"确认作答"，不重绘以免打断光标 */
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(!el||!el.classList||!el.classList.contains("fill"))return;
+  var q=el.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  S[nOf(q)]={s:[el.value],ok:null,revealed:false};
+  save();
+  var sub=q1(".js-submit",q);if(sub)sub.disabled=!norm(el.value);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script>
+<script>
+(function(){
+"use strict";
+var KEY="quiz:dele-a2-a2-modelo0-v2";
+function fmt(d,o){return d?(d+"/30 · 正确率 "+Math.round(o/d*100)+"%"):"未开始"}
+function upd(){
+  var S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+  var R=[0,0],L=[0,0];
+  Object.keys(S).forEach(function(k){
+    var n=parseInt(k,10);if(!n)return;
+    var r=S[k];if(!r||r.ok===null||r.revealed)return;
+    var t=(n<=30)?R:L;t[0]++;if(r.ok)t[1]++;
+  });
+  var a=document.getElementById("ps-r"),b=document.getElementById("ps-l");
+  if(a){a.textContent=fmt(R[0],R[1]);a.className=R[0]?"on":""}
+  if(b){b.textContent=fmt(L[0],L[1]);b.className=L[0]?"on":""}
+}
+document.addEventListener("click",function(){setTimeout(upd,0)});
+document.addEventListener("input",function(){setTimeout(upd,0)});
+document.addEventListener("keydown",function(){setTimeout(upd,0)});
+window.addEventListener("load",upd);
+/* 引擎每次判定都会改写 #s-done，用它当信号最可靠（点击 / 回车 / 重做 / 清空全覆盖） */
+(function(){
+  var a=document.getElementById("s-done");
+  if(a&&window.MutationObserver){
+    new MutationObserver(upd).observe(a,{childList:true,characterData:true,subtree:true});
+  }
+})();
+upd();
+})();
+</script>
+<script>
+(function(){
+"use strict";
+function qa(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+qa(".spdbar button.spd").forEach(function(b){
+  b.addEventListener("click",function(){
+    var r=parseFloat(b.getAttribute("data-rate"))||1;
+    qa("audio").forEach(function(a){try{a.playbackRate=r}catch(e){}});
+    qa(".spdbar button.spd").forEach(function(x){x.classList.remove("on")});
+    b.classList.add("on");
+  });
+});
+function jump(id,sec){
+  var b=document.getElementById(id);if(!b)return;
+  b.addEventListener("click",function(){
+    var e=document.getElementById(sec);
+    if(e)e.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+}
+jump("btn-jump-l","listening");
+jump("btn-jump-w","writing");
+})();
+</script>
+<!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--><!--pc:js-->
+<script src="../assets/presence.js"></script>
+<!--/pc:js-->
+</body>
+</html>
