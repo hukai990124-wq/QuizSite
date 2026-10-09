@@ -174,7 +174,8 @@ document.documentElement.setAttribute("data-lang",l);
 document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
 }catch(e){}})();
 </script>
-<!--/i18n:head--></head><body><div class="wrap"><div class="toolbar"><div class="btns"><a class="navback" href="index.html">← 套题列表</a><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button><button onclick="window.print()" type="button">打印 / 存 PDF</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>100</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<!--/i18n:head--><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+</head><body><div class="wrap"><div class="toolbar"><div class="btns"><a class="navback" href="index.html">← 套题列表</a><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button><button onclick="window.print()" type="button">打印 / 存 PDF</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>100</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
 <h1>TOEIC® Reading Practice Test 07</h1>
 <p class="meta">来源：TOEIC Mock Tests — Reading Practice Test 7（toeicmocktests.com，官方 2026 格式）</p>
 <p class="meta">100 题 · Part 5（30）+ Part 6（16）+ Part 7（54）· 建议用时 75 分钟 · 点选项后按「确认作答」即可判对错，进度自动保存在本机</p>
@@ -1573,4 +1574,5 @@ s.onload=go;
 s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
 document.head.appendChild(s);})();
 </script>
-<!--/i18n:js--></body></html>
+<!--/i18n:js--><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+</body></html>

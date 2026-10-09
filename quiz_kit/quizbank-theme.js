@@ -1,0 +1,88 @@
+(function () {
+  "use strict";
+
+  if (!document.body || document.querySelector(".qb-sitebar")) return;
+
+  var lang = String(
+    document.documentElement.getAttribute("data-lang") ||
+    document.documentElement.lang || "zh-CN"
+  ).toLowerCase();
+  var homeLabel = lang.indexOf("ja") === 0
+    ? "問題一覧"
+    : lang.indexOf("en") === 0
+      ? "Question bank"
+      : "题库总览";
+  var heading = document.querySelector("h1");
+  var home = document.createElement("a");
+  var homeText = document.createElement("span");
+  var brand = document.createElement("div");
+  var mark = document.createElement("span");
+  var name = document.createElement("span");
+  var title = document.createElement("span");
+  var inner = document.createElement("div");
+  var header = document.createElement("header");
+
+  function hideLink(link) {
+    link.hidden = true;
+    link.style.setProperty("display", "none", "important");
+  }
+
+  function refreshTitle() {
+    var value = heading ? heading.textContent : document.title;
+    title.textContent = String(value || "Practice").replace(/\s+/g, " ").trim();
+  }
+
+  home.href = "/";
+  home.className = "qb-sitebar__home";
+  home.setAttribute("aria-label", homeLabel);
+  homeText.className = "i18n-noloc";
+  homeText.textContent = "← " + homeLabel;
+  home.appendChild(homeText);
+
+  brand.className = "qb-sitebar__brand";
+  mark.className = "qb-sitebar__mark";
+  mark.setAttribute("aria-hidden", "true");
+  mark.textContent = "Q";
+  name.textContent = "QuizBank";
+  brand.appendChild(mark);
+  brand.appendChild(name);
+
+  title.className = "qb-sitebar__title";
+  refreshTitle();
+  inner.className = "qb-sitebar__inner";
+  inner.appendChild(brand);
+  inner.appendChild(title);
+  inner.appendChild(home);
+  header.className = "qb-sitebar";
+  header.appendChild(inner);
+  document.body.insertBefore(header, document.body.firstChild);
+
+  document.querySelectorAll('a[title*="题库总览"]').forEach(function (link) {
+    if (!link.closest(".qb-sitebar") && !link.closest(".toolbar")) {
+      hideLink(link);
+    }
+  });
+
+  document.querySelectorAll("a.back").forEach(function (link) {
+    var target;
+    try {
+      target = new URL(link.href, window.location.href);
+    } catch (error) {
+      return;
+    }
+    if (
+      (target.pathname === "/" || target.pathname === "/index.html") &&
+      /题库总览|question bank/i.test(link.textContent)
+    ) {
+      hideLink(link);
+    }
+  });
+
+  if (heading && window.MutationObserver) {
+    new MutationObserver(refreshTitle).observe(heading, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+  }
+})();
