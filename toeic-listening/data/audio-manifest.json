@@ -1313,7 +1313,7 @@
   },
   {
     "audio": "audio/m6/p1-1.mp3",
-    "sha256": "bab0829bc43eb4979cd9821b5dcbad9b60cf459c32a08f7d389fa922b91c24a3",
+    "sha256": "887190524e6013c8de499d09597c048b56eac4891b1d660a641eef657e96b636",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1322,23 +1322,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p1-2.mp3",
-    "sha256": "b84fa89537d2a5573ce152d1d35bd1c316dffe1ea4b9781bf02650d73eefa3b8",
+    "sha256": "2a8da019a897c03707754bdd03a5ee7016b4b3967d323567edd728c55ffb5a0c",
     "accents": [
       "en-US",
       "en-US",
@@ -1347,23 +1352,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p1-3.mp3",
-    "sha256": "c6b35ac21093ce40e8075043b9862f7c724385fbb6665bf313895ef441a86542",
+    "sha256": "aa6c1019e35d7f0d0f3be58e936c9309da048515f40f9375c577731e444a869f",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1372,23 +1382,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p1-4.mp3",
-    "sha256": "f6131b11e441d6491f6b8d9adde1f3c4a5f6c0cc4d8aa55d509087bcf4bb6fc4",
+    "sha256": "4ec90a8e96c102fcf64301e2d989ee30cce9d504c2d1be4c8f1d3c000b656c2e",
     "accents": [
       "en-US",
       "en-US",
@@ -1397,23 +1412,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p1-5.mp3",
-    "sha256": "7956c1fadcf718b3834affa314f839c15ffcc57ea5956667f08a73ef3d432cbe",
+    "sha256": "05ca7c9414412759cdc85a04c613de0c9fa5e1e011264d505f70295870fb706c",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1422,23 +1442,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p1-6.mp3",
-    "sha256": "c0fda14413dec2198d8dfbfd3756ab32860f957b8ba1641579cada669852037d",
+    "sha256": "41bfb047e1e35bee19e45d242926056d633b09b27dbd044ba36e309011da69a1",
     "accents": [
       "en-US",
       "en-US",
@@ -1447,23 +1472,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-1.mp3",
-    "sha256": "edf9a468d45bfd2cd0e4b83e5803b60f5386e0b934c08963f8ab976b00894792",
+    "sha256": "58388ff7258ee64d83ba693e3c1e589bd1d9cc60aa625315fad2891d88b7d3ef",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1472,23 +1502,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-2.mp3",
-    "sha256": "6347d658db46082856fbe845cd1d21f162d597720fe422e6cc4f6c91f4339c2f",
+    "sha256": "780d6f00c97fc599ac6ed50d0397923669f0479e9c3ba761e86cec1f110f71e4",
     "accents": [
       "en-US",
       "en-US",
@@ -1497,23 +1532,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-3.mp3",
-    "sha256": "10433fe51cd1c58bbf88b61879979e5af03c481451087b14e2bcf6df54e77567",
+    "sha256": "b2b50976d7a52a308dbbb32bff9c8c18826bf47db3a20d1a7719ca026dd0b790",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1522,23 +1562,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-4.mp3",
-    "sha256": "47446ff858ccbfec0b168c5a479f70dc99c6e21bda9ffe74d63f32c2494222b0",
+    "sha256": "4425e1b5226365a53972782c2fca651bd665e4d4ea6673a55a712d93f855cb52",
     "accents": [
       "en-US",
       "en-US",
@@ -1547,23 +1592,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-5.mp3",
-    "sha256": "57805cae7f222f79f71a3d282a952a47cabce0a94a0e8d0a6f0c5bf887becd77",
+    "sha256": "8af48c35d24207929ab237fc5b32932b977922f08d1748ecae005c0faae625f2",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1572,23 +1622,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-6.mp3",
-    "sha256": "e0f06a5a11d251ef8f8e38f618749f5c4d6e8e8afdf17ed6bf2a9face6adc81b",
+    "sha256": "5e4ccfb5944f8c68ed609de94580c0fb48c519eda701ba9b9e59033a27f81821",
     "accents": [
       "en-US",
       "en-US",
@@ -1597,23 +1652,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-7.mp3",
-    "sha256": "feb7cc9613512badf08230cc4ccc143c820c9d02cf95511519ed97130e8a031f",
+    "sha256": "d86bd4d776ff50484f922c1850379289a6087d83530c8ca497874c5d88b4dc52",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1622,23 +1682,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-8.mp3",
-    "sha256": "2d1871d144b470b788ab9a58d48103e1dd153e6e339857ec0024ff6f1cd9c1f6",
+    "sha256": "d24f1e97575b681747a21ef4459adc7816e757ebed135273abf7246ec6318d85",
     "accents": [
       "en-US",
       "en-US",
@@ -1647,23 +1712,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-9.mp3",
-    "sha256": "0100060720f2306161fdfcb172c402c5cc24964d58e0ac389c4c3a5e86bde505",
+    "sha256": "9bb25d12977bcd3eab1845d9dc957e73cb77a93796a0da6741422c28a05e9068",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1672,23 +1742,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-10.mp3",
-    "sha256": "cd903809834466443848f331ac2ef8f16a729138ab99044da91ed24ba13afc3f",
+    "sha256": "f08dd3e329bfca89fd64f1bbbad755ce91f3d61e76c61cf83e121c64257aa349",
     "accents": [
       "en-US",
       "en-US",
@@ -1697,23 +1772,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-11.mp3",
-    "sha256": "58048cec45cd27245b425c320d8aebd0c8ed06dfc81d2002cd56679e8516df87",
+    "sha256": "3ff02a0e0d70888f2fb398756256d249dea1fa082c0f8cd9bd052282f7caab9e",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1722,23 +1802,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-12.mp3",
-    "sha256": "b955d00bbba83990f99d878ca8397da264e12818f1a6a337acc1f2ffc594d664",
+    "sha256": "b49179546ac5375d335020f32ed7b643904da8698869479a4636333f632fa831",
     "accents": [
       "en-US",
       "en-US",
@@ -1747,23 +1832,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-13.mp3",
-    "sha256": "b1094fa6463b54a6b60017570d206f51b08e23f2f8a84fc2c08f2d4c4656d92b",
+    "sha256": "0391f4d82f06c19fa94ceb1358bc045519e69e4de4c6be86d96545be49fd9c4d",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1772,23 +1862,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-14.mp3",
-    "sha256": "d35883d240dbd82d8032ab1769bb0b4038020b420cf1c1283e7f5c1cec7e41f4",
+    "sha256": "ee653e927dcf1c1176f315a26411d249174296734df8ecb839e1977575c3d90b",
     "accents": [
       "en-US",
       "en-US",
@@ -1797,23 +1892,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-15.mp3",
-    "sha256": "acb79cd09b02320fc00183f506b5c1533cc8a009f632708002e45972fc495168",
+    "sha256": "d7f657e401a4884e9ec3f22ca2c02289289347e20c710a38100a073c24d229e2",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1822,23 +1922,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-16.mp3",
-    "sha256": "be3e5452109e83bd1da72499ca53048a55a898c73b380cbb2922ff64231112ab",
+    "sha256": "a4a9b545dff1841c7b06fa9cde4bfd0f720cbd978b66f4b815f7dca71bdafc23",
     "accents": [
       "en-US",
       "en-US",
@@ -1847,23 +1952,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-17.mp3",
-    "sha256": "85ada224ced817bbf038e039d9268339d4f0f4cf9bcd2eb287892feed95e8e88",
+    "sha256": "5c8cb036b65e946762eedff5b2151e93779f939fbec2afa28654d6ac20827c01",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1872,23 +1982,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-18.mp3",
-    "sha256": "9d341953b65e31cd1e177809eca9a3cc3359f70ee369083d4cb6bf08d91b4f6e",
+    "sha256": "3f3fddc48829891c2a702dcfc909293c3bb96153bcdaef96278513c36086ee6d",
     "accents": [
       "en-US",
       "en-US",
@@ -1897,23 +2012,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-19.mp3",
-    "sha256": "401a3788faad345277e0f7c5e01f9f1c0b62cc8f93d34daafc2fc9d69fb28d6a",
+    "sha256": "5fa8145f7b8882bae46b7af97a0e2d05caed24495b530c5994e0ad5d596ae32f",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1922,23 +2042,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-20.mp3",
-    "sha256": "3881375dfb0955a9e9113a86e72bfe13ec39aa8c236e74022ff82a48824a70d0",
+    "sha256": "64693e20eb7ae68034d3d773a1b8084390d7a3f35919486e2898d50276b53b62",
     "accents": [
       "en-US",
       "en-US",
@@ -1947,23 +2072,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-21.mp3",
-    "sha256": "6f66d8fc0d4d5784c5c635f030014e90ebf7834227d4454e9b3f44f1f8cd0786",
+    "sha256": "e1dd59822834041844bc2e153d5be0b845a513c42892349eaa649f3e9de5cd8b",
     "accents": [
       "en-GB",
       "en-GB",
@@ -1972,23 +2102,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-22.mp3",
-    "sha256": "b7cdb48913061889f22db0c9832d240f265c39dbbb286215f8f6d13b0d262bcc",
+    "sha256": "a442fe299c9d0c1a2f0fb8a83df7531b9e9530b1f5ad2f0c3c0952fca97dbd87",
     "accents": [
       "en-US",
       "en-US",
@@ -1997,23 +2132,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-23.mp3",
-    "sha256": "f0ad73b2d75eee16ad0f2826e9125903993d6194aa57897c2e2e7262af2296f0",
+    "sha256": "251ee23723284cdd58ebca5fa360fecca1dd5a0181efffba4c0ec97b3747520a",
     "accents": [
       "en-GB",
       "en-GB",
@@ -2022,23 +2162,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-24.mp3",
-    "sha256": "d71036bb3c99a75ca4d74ba63fc1859714262698ed53d37ba8ce9b716e0422e6",
+    "sha256": "64b21a7ce104d72311dd408605ba700c87c8209e00a34768bc0c23c337c4c0da",
     "accents": [
       "en-US",
       "en-US",
@@ -2047,23 +2192,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p2-25.mp3",
-    "sha256": "85b3558c8989f8a3668677c2276a1c9ef5a990ccb0ec424ee78e2929faaedb51",
+    "sha256": "f8502d8867df87baf46d39c47a5da4e272d6c774db051ddbb2e810338224244f",
     "accents": [
       "en-GB",
       "en-GB",
@@ -2072,23 +2222,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-1.mp3",
-    "sha256": "ca5b0edcc10c9b259765cd7dd60584bcf4d80befcf2512a63704614e47e772cb",
+    "sha256": "cababa85bd11d8dcb44ca715b596671c58daddab152d38dc7316f35c8cd830fc",
     "accents": [
       "en-US",
       "en-GB",
@@ -2096,23 +2251,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-2.mp3",
-    "sha256": "1db153576ba4d97ace460dcf6a4cd1fac5693de9dc45a8d52cec1e2896f1ad35",
+    "sha256": "1b750671a76851613f43fad6d6361a84b6a100c0c1621e5f88dbbfabc911935f",
     "accents": [
       "en-US",
       "en-GB",
@@ -2120,23 +2280,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-3.mp3",
-    "sha256": "2ad0dbd7ce70e46b1655dd0c761a7da9c52705b6cc2f8d0b27fcf91df6b2c19c",
+    "sha256": "f70b697e70a03c2182b1311019a449c32ebdb4401d65376b82da73d7ff7ea248",
     "accents": [
       "en-US",
       "en-GB",
@@ -2144,23 +2309,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-4.mp3",
-    "sha256": "af9a9d4dd86d16a70dd0f2df3c4c56f569b8c5bd3e25e86e879856fd1fd44efe",
+    "sha256": "3f654fa58bd6123a4010f544c4d7548e03eae57f5e0df3ccc030886de39607b2",
     "accents": [
       "en-US",
       "en-GB",
@@ -2169,23 +2339,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-5.mp3",
-    "sha256": "5540ca03e3cf0ec7b6b78da40420928d91cf059b1cc0453561872cd2a3edefef",
+    "sha256": "af74b96aa5f8a0cf24dad328240fbde8f834d42c137c2a639dd19eb6b1168c79",
     "accents": [
       "en-US",
       "en-GB",
@@ -2194,23 +2369,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-6.mp3",
-    "sha256": "3087f607644ad9cb378e80a8721605e1b3f46d3b2f3fdac417531971310a2d1d",
+    "sha256": "adaf5ab3e817155999765a030fd777c125dd2e27343410bb44058756e1ce41ee",
     "accents": [
       "en-GB",
       "en-US",
@@ -2219,23 +2399,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-7.mp3",
-    "sha256": "9175db06d8304e8ca7343141d5e90e3acabb1ce95c39cfe8712c5c2901b70e82",
+    "sha256": "77a426d9953c14195e562a195be8fd11c0c63a32aa5ff9836aaba2bdb5b192d0",
     "accents": [
       "en-US",
       "en-GB",
@@ -2244,23 +2429,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-8.mp3",
-    "sha256": "c9d7d0ab7ddef19046998346957c7279c93bfd1bff2376589a326168e89a01f5",
+    "sha256": "26418e70b1d74a842048ae566d166b803aa52a45a35b80d010f54f8af5073ffd",
     "accents": [
       "en-GB",
       "en-US",
@@ -2269,23 +2459,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-9.mp3",
-    "sha256": "a09997160dfe3cda046d35d4533241ae6e19dc424c35ccb4af5d59390c23ec54",
+    "sha256": "fb84a0be448f010d16c15f01ce1a7398ac9bf9dc1b02ab092debad3b31239ac2",
     "accents": [
       "en-GB",
       "en-US",
@@ -2294,23 +2489,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-10.mp3",
-    "sha256": "268d56119931f744aa33ff39a139dbcb0c223b3f97adf4111583fe9345ed3068",
+    "sha256": "3fef440f0da70dd811f226f4520fb945b2f2abdb669fc9f54af0c486fa76a274",
     "accents": [
       "en-US",
       "en-GB",
@@ -2318,23 +2518,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-11.mp3",
-    "sha256": "12e96f7ee51d8240d5d0e8b0bcc1ee3eae474d3ce25fe907c7ff77217bd76b08",
+    "sha256": "cf8c45546f824114ba9bcb7c666a57da55fdd7d73d98a8faeef9718c8bae2376",
     "accents": [
       "en-GB",
       "en-US",
@@ -2342,23 +2547,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-12.mp3",
-    "sha256": "f01cd06caafd1f71375a01365e50c6776cf71574e8405dab9e93f522c30b5cdb",
+    "sha256": "f8957e26d551551840d9f420f1b3fb583cb2adcc2bd8c82122b4c1cf5dc9493d",
     "accents": [
       "en-GB",
       "en-US",
@@ -2366,23 +2576,28 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p3-13.mp3",
-    "sha256": "8d2aae9584b30aa8925c3f3cf85b2a6b1bb0454a5504f0a21c095237d6a39e26",
+    "sha256": "48f702f59689683229f45ff102defa0500e338e92aa591f7b49a1a94c753382d",
     "accents": [
       "en-GB",
       "en-US",
@@ -2390,238 +2605,293 @@
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-1.mp3",
-    "sha256": "92cf563a7977fe0067dc790630d58d7f47d29237dd0ea6d93b3d7f6990a2cd24",
+    "sha256": "6cb28cc11cb50248b71242c41d1fe922d86b317715ac8b8ccaa93ebdbbe42e01",
     "accents": [
       "en-GB"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-2.mp3",
-    "sha256": "4e5b5765b9a1396c449e139ab5218d79a23091d18d3d209ddaff3593206e5883",
+    "sha256": "d1b0146b8537154962caa42ed24517e7964a5f39302c6d03da1aff64051056ca",
     "accents": [
       "en-US"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-3.mp3",
-    "sha256": "27542244f85894d5e0d2543efe1b0932793cf6bd4815eb4730196bf6fc79c334",
+    "sha256": "399ab3b47bcc6a195307986053456100516c13f26e253958cd17f815f8927053",
     "accents": [
       "en-GB"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-4.mp3",
-    "sha256": "7bd28e990d108c2f0a1dc19b2a4dc6b2acd6aa2e47b7e7d531422449ad39e2c6",
+    "sha256": "e3b37d4715f15b6c59e36aff0f4c8d74ab0de622ecdbf62896fabb6a9f730c52",
     "accents": [
       "en-US"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-5.mp3",
-    "sha256": "5e215bd8a93562ad1675a3d24e8613795ad44a05a7a4a1dee4ca46bb7861c11d",
+    "sha256": "664d30ba91e602b815f078c0df7ba66f0b0efce4a828b551d6ba5477036b65a4",
     "accents": [
       "en-GB"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-6.mp3",
-    "sha256": "817734a3d84a7626920ccd0b00f3e614048535de8193b5e7fc8ecdad51195555",
+    "sha256": "06bb59098d72dd6c8a80cae303999ec520948fdca0319566a744c9eec90a5ea5",
     "accents": [
       "en-US"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-7.mp3",
-    "sha256": "a3faea2b98e47f5774303f6687fc96ba699157859c76088da482aed3cb3621dc",
+    "sha256": "b8da5e02cd03b20d2ebd913bb5f3b0af9442397253828a225405acf65915e666",
     "accents": [
       "en-GB"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-8.mp3",
-    "sha256": "465324b88d3189915954affe0cda84683b9c998c3a98f0dd6263e441560012b6",
+    "sha256": "357a3bfc80e2f98c355b6eeaad0142d4114c3a4915397516561bf1989ec38f52",
     "accents": [
       "en-US"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-9.mp3",
-    "sha256": "795fef5f0cf03df4b5702683b6df80ccaf5411e785ef82db005c54dcb7972538",
+    "sha256": "7d868113f1ffc2dbc2798bad610c9dc77598572e7583fe6ee64702bd7020b91b",
     "accents": [
       "en-GB"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   },
   {
     "audio": "audio/m6/p4-10.mp3",
-    "sha256": "b4fbf65a525f899fba49cb57bd11ebb22a59523a47b2dd856cad667cae4ad251",
+    "sha256": "d9a96770974f435d314ce74b603f70322750b160172cc045c3855617a0c6fdb7",
     "accents": [
       "en-US"
     ],
     "voiceSettings": {
       "en-GB": {
-        "engine": "Piper en_GB-vctk-medium p225",
-        "speakerId": 107,
-        "lengthScale": 0.95
+        "engine": "Kokoro-82M",
+        "voice": "bf_emma",
+        "speed": 1.1
       },
       "en-US": {
-        "engine": "Piper en_US-ryan-medium",
-        "lengthScale": 1.0
+        "engine": "Kokoro-82M",
+        "voice": "am_michael",
+        "speed": 1.1
       }
     },
-    "modelSha256": {
-      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
-      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    "generator": "Kokoro-82M via Hugging Face Spaces",
+    "service": "https://huggingface.co/spaces/hexgrad/Kokoro-TTS",
+    "outputSettings": {
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateKbps": 64,
+      "silenceBetweenSegmentsMs": 400
     }
   }
 ]

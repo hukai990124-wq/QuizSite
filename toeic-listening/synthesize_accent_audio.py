@@ -21,7 +21,14 @@ def main():
               'en-US':PiperVoice.load(args.american_model)}
     configs = {'en-GB':SynthesisConfig(speaker_id=107, length_scale=0.95),
                'en-US':SynthesisConfig(length_scale=1.0)}
-    jobs = json.loads((BASE / 'data/extra-audio-jobs.json').read_text(encoding='utf-8'))
+    all_jobs = json.loads((BASE / 'data/extra-audio-jobs.json').read_text(encoding='utf-8'))
+    jobs = [job for job in all_jobs if job['audio'].startswith('audio/m5/')]
+    manifest_path = BASE / 'data/audio-manifest.json'
+    existing_manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+    existing_by_audio = {entry['audio']:entry for entry in existing_manifest}
+    untouched_jobs = [job for job in all_jobs if not job['audio'].startswith('audio/m5/')]
+    if not jobs or any(job['audio'] not in existing_by_audio for job in untouched_jobs):
+        raise ValueError('Existing Test 06 manifest is required; Piper generation now targets Test 05 only.')
     model_hashes = {accent:hashlib.sha256(Path(model).read_bytes()).hexdigest()
                     for accent, model in [('en-GB',args.british_model), ('en-US',args.american_model)]}
     manifest = []
@@ -53,7 +60,12 @@ def main():
                          'modelSha256':model_hashes})
         if ordinal % 12 == 0:
             print(f'Generated {ordinal}/{len(jobs)} mixed-accent recordings', flush=True)
-    (BASE / 'data/audio-manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
+    generated_by_audio = {entry['audio']:entry for entry in manifest}
+    merged_manifest = [generated_by_audio.get(job['audio'], existing_by_audio.get(job['audio']))
+                       for job in all_jobs]
+    if any(entry is None for entry in merged_manifest):
+        raise ValueError('Generated audio manifest is incomplete.')
+    manifest_path.write_text(json.dumps(merged_manifest, indent=2) + '\n', encoding='utf-8')
 
 
 if __name__ == '__main__':

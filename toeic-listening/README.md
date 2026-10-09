@@ -34,8 +34,8 @@ python toeic-listening/add_tmt_sets.py render       # 渲染 HTML/md 并同步�
 打印机图片题重写了干扰项和解析，以增强动作、状态辨别，已人工检查图片。
 
 短题逐题英美交替；每段长对话的男声固定美式、女声固定英式；独白按段交替。
-美式男声为 Piper Ryan，英式女声为 Piper VCTK p225，均为合成音，不是官方或真人录音。
-模型只用于本地生成，不进入网页；网站播放的是 108 个本地 MP3 文件。
+第 05 套使用 Piper Ryan（美式男声）和 Piper VCTK p225（英式女声）；第 06 套改用 Kokoro-82M，分别使用 `am_michael`（美式男声）和 `bf_emma`（英式女声），语速 1.1。
+均为合成音，不是官方或真人录音。模型不在网页端运行；网站播放的是 108 个本地 MP3 文件。
 语音来源及许可信息见 `AUDIO-NOTICES.md`。
 网页加载和首次播放需要网络；下载完整 HTML 和资源目录后可离线打开。
 
@@ -45,9 +45,11 @@ python toeic-listening/add_tmt_sets.py render       # 渲染 HTML/md 并同步�
 2. `node toeic-listening/import_ocean.cjs ../toeic-question-ocean`
 3. Python 安装 `piper-tts==1.8.0`，准备 FFmpeg。
 4. 下载 Piper 的 `en_GB-vctk-medium` 与 `en_US-ryan-medium` ONNX 模型及同名 `.onnx.json`，执行
-   `python toeic-listening/synthesize_accent_audio.py --british-model <英式模型路径> --american-model <美式模型路径> --ffmpeg <FFmpeg路径>`。
-5. `python toeic-listening/build_extra_sets.py`
-6. `python -m unittest discover -s toeic-listening -p test_extra_sets.py -v`
+   `python toeic-listening/synthesize_accent_audio.py --british-model <英式模型路径> --american-model <美式模型路径> --ffmpeg <FFmpeg路径>`（只重生成第 05 套）。
+5. 第 06 套通过 Kokoro 公共 Space 合成并暂存、校验后安装：
+   `node toeic-listening/synthesize_kokoro_m6.mjs --out-dir <暂存目录> --ffmpeg <FFmpeg路径> --install`。
+6. `python toeic-listening/build_extra_sets.py`
+7. `python -m unittest discover -s toeic-listening -p test_extra_sets.py -v`
 
 生成器复用 `gen_html.py` / `quiz_kit`，仅写入第 05 / 06 套；
 原四套题目、音频和进度键不会重建或迁移。
@@ -120,7 +122,7 @@ img/                               ← Part 1 照片（01–04、07–10 各 6 �
 | 套号 | 来源 |
 |---|---|
 | 01–04 | **TOEIC Mock Tests**（toeicmocktests.com）—— 免费模拟，官方 2026 格式，无需注册 |
-| 05–06 | **TOEIC Question Ocean**（MIT 许可原创模拟题，Piper 本地合成音） |
+| 05–06 | **TOEIC Question Ocean**（MIT 许可原创模拟题；05 使用 Piper，06 使用 Kokoro-82M） |
 | 07–10 | **TOEIC Mock Tests**（toeicmocktests.com）—— 与 01–04 同源，追加套 |
 
 - Part 1 照片为该站用 AI 生成的仿真商务场景图（05–06 除外，用 Ocean 的原创图）。

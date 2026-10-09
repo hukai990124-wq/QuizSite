@@ -17,10 +17,24 @@ class ExtraSetsTest(unittest.TestCase):
         for recording, job in zip(manifest, jobs):
             self.assertEqual(recording['audio'], job['audio'])
             self.assertEqual(recording['accents'], [s['accent'] for s in job['segments']])
-            self.assertEqual(recording['voiceSettings']['en-GB'],
-                             {'engine':'Piper en_GB-vctk-medium p225', 'speakerId':107, 'lengthScale':0.95})
-            self.assertEqual(recording['voiceSettings']['en-US'],
-                             {'engine':'Piper en_US-ryan-medium', 'lengthScale':1.0})
+            if job['audio'].startswith('audio/m5/'):
+                self.assertEqual(recording['voiceSettings']['en-GB'],
+                                 {'engine':'Piper en_GB-vctk-medium p225', 'speakerId':107, 'lengthScale':0.95})
+                self.assertEqual(recording['voiceSettings']['en-US'],
+                                 {'engine':'Piper en_US-ryan-medium', 'lengthScale':1.0})
+            else:
+                self.assertEqual(recording['generator'], 'Kokoro-82M via Hugging Face Spaces')
+                self.assertEqual(recording['service'], 'https://huggingface.co/spaces/hexgrad/Kokoro-TTS')
+                self.assertEqual(recording['voiceSettings']['en-GB'],
+                                 {'engine':'Kokoro-82M', 'voice':'bf_emma', 'speed':1.1})
+                self.assertEqual(recording['voiceSettings']['en-US'],
+                                 {'engine':'Kokoro-82M', 'voice':'am_michael', 'speed':1.1})
+                self.assertEqual(recording['outputSettings'], {
+                    'sampleRateHz':24000,
+                    'channels':1,
+                    'bitrateKbps':64,
+                    'silenceBetweenSegmentsMs':400,
+                })
             self.assertEqual(recording['sha256'], hashlib.sha256((LISTENING / job['audio']).read_bytes()).hexdigest())
 
     def test_two_distinct_standard_sets_have_answers_and_transcripts(self):
