@@ -1,4 +1,8 @@
 {
+ "音频为电脑合成（TTS），非真人录音。手机可用，网页加载和首次播放需要联网；完整下载 HTML 与资源目录后可离线使用。": {
+  "en": "Audio is synthesized (TTS), not a human recording. Works on phones. Loading the page and first playback require a connection; offline use requires downloading the complete HTML and asset folders.",
+  "ja": "音声は合成音声（TTS）で、人による録音ではありません。スマホでも利用可能です。ページの読み込みと初回再生にはネット接続が必要です。HTMLとリソースフォルダをすべてダウンロードすればオフラインで利用できます。"
+ },
  "_comment": "题库站点 UI 三语字典 · 中文原文 → 英文 / 日文。只覆盖界面文案，题目、选项、解析一律不翻译。key 必须与页面文本节点规范化后（trim + 空白折叠为单空格）完全一致。",
  "TOEIC 听力 · 6 套": {
   "en": "TOEIC Listening · 6 sets",

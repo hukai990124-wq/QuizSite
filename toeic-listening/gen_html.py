@@ -328,6 +328,12 @@ def main():
     .wrap{max-width:880px;margin:0 auto;background:#fff;padding:34px 42px 70px;box-shadow:0 1px 8px rgba(0,0,0,.08)}
     h1{font-size:26px;margin:0 0 8px}
     .meta{color:#5b6570;font-size:14px;margin:2px 0 22px}
+    a.card{display:block;border:1px solid #d8dee5;border-radius:10px;padding:14px 18px;margin:12px 0;text-decoration:none;color:inherit}
+    a.card:hover{border-color:#9db3c4;background:#fafcfd}
+    a.card:focus-visible{outline:3px solid #0b6b3a;outline-offset:3px}
+    a.card .t{font-weight:600}
+    a.card .s{color:#5b6570;font-size:13px}
+    @media(max-width:560px){.wrap{padding:56px 16px 40px}h1{font-size:23px}}
     """
     cards = []
     for m, fn in files:
@@ -342,7 +348,7 @@ def main():
            f'<h1>TOEIC® Listening 练习 · 4 套</h1>'
            f'<p class="meta">每套 100 题：Part 1（6）+ Part 2（25）+ Part 3（39）+ Part 4（30），约 45 分钟。<br>'
            f'进卷后点「▶」听录音 → 选答案 →「确认作答」即刻判对错；正确率与进度自动保存在本机浏览器。<br>'
-           f'音频为电脑合成（TTS），非真人录音。手机可用，Safari 加到主屏幕即可离线练。</p>'
+           f'音频为电脑合成（TTS），非真人录音。手机可用，网页加载和首次播放需要联网；完整下载 HTML 与资源目录后可离线使用。</p>'
            + "\n".join(cards) + '</div>' + Q.index_script() + '</body></html>')
     open(os.path.join(BASE, 'index.html'), 'w', encoding='utf-8').write(idx)
     print('written: index.html')
