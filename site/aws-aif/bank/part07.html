@@ -1,0 +1,2473 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS AIF-C01 AI 真题库（452 题） 第07份</title><style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;
+ padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.toolbar button.primary:hover{background:#0a5d33}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.badge.hot{color:#9a3412;background:#fff7ed;border-color:#fed7aa}
+.hothint{margin:11px 0 0;font-size:12.5px;color:#9a3412;background:#fff7ed;border:1px dashed #fed7aa;border-radius:8px;padding:8px 11px}
+.src{font-size:11px;color:#9ca3af;margin-left:auto;font-variant-numeric:tabular-nums}
+.stem p{margin:0 0 6px}
+.en{color:var(--en)}
+.zh{color:var(--zh);font-size:14px}
+.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}
+.opts{list-style:none;margin:12px 0 0;padding:0}
+.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}
+.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}
+details.ans .correct{font-size:14px;margin:4px 0 8px}
+details.ans .correct b{color:#047857;font-size:16px}
+details.ans .expl{padding-bottom:12px}
+@media print{
+ body{background:#fff}
+ .toolbar{display:none}
+ .wrap{max-width:none;padding:0}
+ .q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}
+ details.ans{border:1px solid #ccc;background:#fff;display:block}
+ details.ans .expl{display:block}
+}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* ===================== 手写填空（fill） ===================== */
+.q[data-kind="fill"] .fillrow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.q[data-kind="fill"] input.fill{font:inherit;font-size:15px;padding:8px 13px;border:1px solid #cbd5e1;
+ border-radius:8px;min-width:230px;max-width:100%;background:#fff;color:#0f172a}
+.q[data-kind="fill"] input.fill:focus{outline:none;border-color:#4a7fb5;box-shadow:0 0 0 3px rgba(74,127,181,.15)}
+.q[data-kind="fill"].done input.fill{background:#f1f5f9;color:#334155}
+.q[data-kind="fill"] input.fill.ok{border-color:#0b7a44;background:#eaf7ef;color:#0b5130;font-weight:600}
+.q[data-kind="fill"] input.fill.bad{border-color:#c0392b;background:#fdeeed;color:#8f2c20}
+.q[data-kind="fill"] .flabel{font-size:12px;color:#8b95a1}
+@media (max-width:560px){.q[data-kind="fill"] input.fill{min-width:0;width:100%}}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+</style><!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--></head><body>
+<div class="wrap">
+<p class="sub" style="margin:0 0 10px"><a href="../index.html">← 返回 AIF-C01 目录</a></p>
+<h1>AWS AIF-C01 · AI 真题库（452 题） · 第 07 份</h1>
+<p class="sub">第 7/10 份 · 题目 301–350 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）</p>
+<div class="toolbar"><div class="btns">
+<button class="primary" id="btn-sheet" type="button">答题卡</button>
+<button id="btn-wrong" type="button">只看错题</button>
+<button id="btn-expand" type="button">展开全部解析</button>
+<button id="btn-report" type="button">交卷</button>
+<button id="btn-reset" type="button">重置</button>
+<button onclick="window.print()" type="button">打印 / 存 PDF</button>
+</div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>50</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<div class="q" id="q301" data-n="301" data-ans="C">
+  <div class="qhead"><span class="qno">Question 301</span><span class="badge">单选</span><span class="src">#301</span></div>
+  <div class="stem">
+    <p class="en">A company is using large language models (LLMs) to develop online tutoring applications. The company needs to apply configurable safeguards to the LLMs. These safeguards must ensure that the LLMs follow standard safety rules when creating applications. Which solution will meet these requirements with the LEAST effort?</p>
+    <p class="zh">一家公司正在使用大型语言模型（LLM）开发在线辅导应用程序。该公司需要对这些语言模型应用可配 置的安全保障措施。这些保障措施必须确保语言模型在创建应用程序时遵循标准的安全规则。 哪种解决方案能以最少的努力满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Amazon Bedrock playgrounds</p>
+        <p class="zh">亚马逊Bedrock沙盒环境</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon SageMaker Clarify</p>
+        <p class="zh">亚马逊 SageMaker Clarify</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon Bedrock Guardrails</p>
+        <p class="zh">亚马逊Bedrock安全防护措施</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Amazon SageMaker Jumpstart</p>
+        <p class="zh">亚马逊SageMaker快速入门</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">Amazon Bedrock Guardrails provide configurable safeguards that enforce standard safety rules on large language models (LLMs) with minimal effort, making it easy to ensure safe and compliant Al application development.</p>
+      <p class="zh">亚马逊Bedrock安全护栏提供了可配置的防护措施，能够以最小的努力对大型语言模型（LLM）实施 标准的安全规则，从而轻松确保人工智能应用程序开发的安全性和合规性。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q302" data-n="302" data-ans="A">
+  <div class="qhead"><span class="qno">Question 302</span><span class="badge">单选</span><span class="src">#302</span></div>
+  <div class="stem">
+    <p class="en">A company is exploring Amazon Nova models in Amazon Bedrock. The company needs a multimodal model that supports multiple languages. Which Nova model will meet these requirements MOsT cost-effectively?</p>
+    <p class="zh">一家公司正在亚马逊Bedrock中探索亚马逊Nova模型。该公司需要一个支持多种语言的多模态模型。 哪款诺瓦型号能满足这些要求且性价比最高？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Nova Lite</p>
+        <p class="zh">新星精简版</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Nova Pro</p>
+        <p class="zh">新诺瓦Pro</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Nova Canvas</p>
+        <p class="zh">新诺瓦画布</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Nova Reel</p>
+        <p class="zh">新星胶片</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Nova Lite is a multimodal model in Amazon Bedrock that supports multiple languages and is designed to be the most cost-effective option among the Nova models, making it suitable for organizations seeking efficient, scalable, and economical Al solutions.</p>
+      <p class="zh">NovaLite是亚马逊Bedrock中的一个多模态模型，支持多种语言，是Nova系列模型中最经济实惠的选择， 适合寻求高效、可扩展且经济的AI解决方案的组织。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q303" data-n="303" data-ans="B">
+  <div class="qhead"><span class="qno">Question 303</span><span class="badge">单选</span><span class="src">#303</span></div>
+  <div class="stem">
+    <p class="en">A company is building a new generative Al chatbot. The chatbot uses an Amazon Bedrock foundation model (FM) to generate responses. During testing, the company notices that the chatbot is prone to prompt injection attacks. What can the company do to secure the chatbot with the LEAST implementation effort?</p>
+    <p class="zh">一家公司正在开发一款新的生成式人工智能聊天机器人。该聊天机器人使用亚马逊Bedrock基础模型 （FM）来生成回复。在测试期间，该公司发现该聊天机器人容易受到提示注入攻击。 公司能采取什么措施以最小的实施工作量来保障聊天机器人的安全？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Fine-tune the FM to avoid harmful responses.</p>
+        <p class="zh">微调频率调制以避免有害反应。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use Amazon Bedrock Guardrails content filters and denied topics.</p>
+        <p class="zh">使用亚马逊Bedrock安全护栏内容过滤器和禁止话题。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Change the FM to a more secure FM.</p>
+        <p class="zh">将调频（FM）更改为更安全的调频（FM）。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use chain-of-thought prompting to produce secure responses.</p>
+        <p class="zh">使用链式思维提示来生成安全的响应。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Using Amazon Bedrock Guardrails&#x27; content filters and denied topics is the quickest and least effort solution to mitigate prompt injection attacks. These guardrails can be configured without model retraining, helping to automatically filter or block unsafe prompts and responses.</p>
+      <p class="zh">使用亚马逊Bedrock安全防护措施中的内容过滤器和禁止话题是缓解提示注入攻击最快且最省力的解决方案。 这些防护措施无需重新训练模型即可进行配置，有助于自动过滤或阻止不安全的提示和响应。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q304" data-n="304" data-ans="B">
+  <div class="qhead"><span class="qno">Question 304</span><span class="badge">单选</span><span class="src">#304</span></div>
+  <div class="stem">
+    <p class="en">What does inference refer to in the context of Al?</p>
+    <p class="zh">在人工智能的语境中，“推理”指的是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">The process of creating new Al algorithms</p>
+        <p class="zh">创建新的人工智能算法的过程</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">The use of a trained model to make predictions or decisions on unseen data</p>
+        <p class="zh">利用训练好的模型对未见过的数据进行预测或决策</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">The process of combining multiple Al models into one model</p>
+        <p class="zh">将多个AI模型组合成一个模型的过程</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">The method of collecting training data for Al systems</p>
+        <p class="zh">用于人工智能系统的训练数据收集方法</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Inference in Al refers to applying a trained model to new, unseen data to generate predictions or decisions, leveraging the patterns learned during training.</p>
+      <p class="zh">在人工智能中，推理是指将训练好的模型应用于新的、未见过的数据，以生成预测或决策，利用在训练过程 中学到的模式。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q305" data-n="305" data-ans="D">
+  <div class="qhead"><span class="qno">Question 305</span><span class="badge">单选</span><span class="src">#305</span></div>
+  <div class="stem">
+    <p class="en">A company wants to build an Al assistant to provide responses to user queries. The Al assistant must evaluate specific data sources, query external APls, generate response options, and compare and prioritize response options. Which Amazon Bedrock feature or resource will meet these requirements?</p>
+    <p class="zh">一家公司想要开发一个AI助手来回答用户的查询。该AI助手必须评估特定的数据源，查询外部API, 生成回答选项，并对回答选项进行比较和优先级排序。 亚马逊Bedrock的哪项功能或资源能满足这些要求?</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Prompt Management</p>
+        <p class="zh">提示管理</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Response streaming</p>
+        <p class="zh">响应流式传输</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Knowledge Bases</p>
+        <p class="zh">知识库</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Agents</p>
+        <p class="zh">代理人</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl">
+      <p class="en">Amazon Bedrock Agents enable Al assistants to interact with specific data sources, query external APls, generate and compare response options, and prioritize results, making them the ideal feature for building advanced, task-oriented chatbots with decision-making and orchestration capabilities.</p>
+      <p class="zh">亚马逊Bedrock代理使AI助手能够与特定数据源进行交互、查询外部API、生成和比较响应选项，并对结 果进行优先级排序，是构建具有决策和协调能力的高级任务导向型聊天机器人的理想功能。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q306" data-n="306" data-ans="B">
+  <div class="qhead"><span class="qno">Question 306</span><span class="badge">单选</span><span class="src">#306</span></div>
+  <div class="stem">
+    <p class="en">An Al practitioner notices a large language model (LLM) is generating different responses for the same input across multiple invocations. Which risk of Al does this describe?</p>
+    <p class="zh">一位人工智能从业者注意到，对于相同的输入，一个大型语言模型（LLM）在多次调用时生成了不同的 响应。 这描述的是人工智能的哪种风险？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Hallucinations</p>
+        <p class="zh">幻觉</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Nondeterminism</p>
+        <p class="zh">非确定性</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Accuracy</p>
+        <p class="zh">准确性</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Multimodality</p>
+        <p class="zh">多模态</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Nondeterminism refers to the property where a large language model generates different responses for the same input due to inherent randomness or stochasticity in the generation process. This can lead to varying outputs on multiple invocations with identical inputs.</p>
+      <p class="zh">非确定性是指大型语言模型由于生成过程中的固有随机性或随机性，对于相同的输入会生成不同的响应。这 可能导致在多次调用且输入完全相同的情况下输出结果各不相同。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q307" data-n="307" data-ans="A">
+  <div class="qhead"><span class="qno">Question 307</span><span class="badge">单选</span><span class="src">#307</span></div>
+  <div class="stem">
+    <p class="en">A company is building a generative Al application on AWS. The application will help improve reading comprehension for students. The application must give students the ability to add illustrations to stories. Which solution will meet this requirement?</p>
+    <p class="zh">一家公司正在AWS.上构建一个生成式人工智能应用程序。该应用程序将帮助提高学生的阅读理解能力。 该应用程序必须让学生能够为故事添加插图。 哪种解决方案能满足这一要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use Amazon Bedrock Stable Diffusion 3.5 Large to generate images based on text inputs.</p>
+        <p class="zh">使用亚马逊Bedrock稳定扩散3.5大型模型根据文本输入生成图像。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use Amazon Polly to create an audiobook based on story texts.</p>
+        <p class="zh">使用亚马逊Polly根据故事文本创建有声读物。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use Amazon Rekognition to analyze image contents and detect text attributes.</p>
+        <p class="zh">使用业马逊Rekognition分析图像内容并检测文本属性。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Create a standard prompt template. Use Amazon Q Business to illustrate stories.</p>
+        <p class="zh">创建一个标准的提示模板。使用亚马逊Q商务来阐释故事。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Amazon Bedrock Stable Diffusion 3.5 Large is a generative Al model designed to create high-quality images from text prompts, allowing students to add custom illustrations to their stories and enhancing reading comprehension through visual aids.</p>
+      <p class="zh">亚马逊BedrockStableDiffusion3.5Large是一款生成式人工智能模型，能够根据文本提示生成高质量 图像，让学生能够为自己的故事添加自定义插图，并通过视觉辅助手段提高阅读理解能力。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q308" data-n="308" data-ans="B">
+  <div class="qhead"><span class="qno">Question 308</span><span class="badge">单选</span><span class="src">#308</span></div>
+  <div class="stem">
+    <p class="en">A healthcare company wants to analyze patient data. The data was gathered over the previous year to detect patterns in disease outbreaks. The company needs to create a trend analysis report for each month to present to public health officials. The company must provide insights into patient data from the most recent month of the current year. Which inference method will meet these requirements MOsT cost-effectively?</p>
+    <p class="zh">一家医疗保健公司想要分析患者数据。这些数据是在过去一年中收集的，旨在发现疾病爆发的模式。该公司 需要为每个月制作一份趋势分析报告，提交给公共卫生官员。公司还必须提供本年度最近-一个月的患者数据 的分析见解。 哪种推理方法能以最经济有效的方式满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Real-time inference</p>
+        <p class="zh">实时推理</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Batch transform</p>
+        <p class="zh">批量转换</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Serverless inference</p>
+        <p class="zh">无服务器推理</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Asynchronous inference</p>
+        <p class="zh">异步推理</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Batch transform is the most cost-effective inference method for analyzing large amounts of data collected over a period (such as monthly patient data). It allows you to process and generate reports on all historical data in batches, rather than incurring the higher costs of real-time or serverless inference.</p>
+      <p class="zh">批量转换是分析一段时间内收集的大量数据（例如每月患者数据）最经济高效的推理方法。它允许您批量处 理并生成所有历史数据的报告，而无需承担实时或无服务器推理的更高成本。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q309" data-n="309" data-ans="">
+  <div class="qhead"><span class="qno">Question 309</span><span class="badge hot">HOTSPOT 拖拽题</span><span class="src">#309</span></div>
+  <div class="stem">
+    <p class="en">HOTSPOT Select and order the steps from the following list to correctly describe the ML lifecycle for a new custom model. Select each step one time. Hot Area: Step 1:Select StepSelect... Definethe business obiective Definethnebusinessobjective. Deploythemodel. Depolpnandtrointhemedal Developandtrainthemodel. Processthedata Focess tne data. Step2select Step2select. Definethebusinessobiective Definethnebusinessobjective. Deploythemodel. Depolynadtainthedal Developandtrainthemodel. Processthedata Focess ne data. Step3Select StepsSelect... Definethebusinessohiectiye Definethnebusinessobjective. Deploythemodel. Depolonondainthemedal Developandtrainthemodel. Processthedata Focessnedata. Step4:Select Step4.Select... Definethebusinessobiective Derinethnebusinessobjective. Deploythemodel. Depolynndtrainthemodal Developandtrainthemodel. Processthedata ocess ne data.</p>
+    <p class="zh">热点 从以下列表中选择并按顺序排列步骤，以正确描述新自定义模型的机器学习生命周期。每个步骤只能选 择一次。 热点区域： Step1:select.. Definethebusiness objective. Deploy themodel. Developand train themodel. Processthedata. Step2:Select... Definethebusiness objective. Deploythemodel. Develop and train themodel. Processthedata. Step3:Select... Definethebusinessobjective. Deploythemodel. Developandtrainthemodel. Processthedata. Step4:Select... Define the business objective. Deploy themodel. Developand trainthemodel. Processthedata.</p>
+  </div>
+  <p class="hothint">拖拽匹配题（HOTSPOT）：考试中需从下拉列表为每一项匹配答案，此处仅作题目与答案解析的展示复习。</p>
+  <details class="ans" open>
+    <summary>答案 / Answer</summary>
+    <p class="correct">此题答案见下方解析</p>
+  </details>
+</div>
+<div class="q" id="q310" data-n="310" data-ans="D">
+  <div class="qhead"><span class="qno">Question 310</span><span class="badge">单选</span><span class="src">#310</span></div>
+  <div class="stem">
+    <p class="en">A company acquires International Organization for Standardization (ISO) accreditation to manage Al risks and to use Al responsibly. What does this accreditation reflect about the company?</p>
+    <p class="zh">一家公司获得了国际标准化组织（ISO）的认证，以管理人工智能风险并负贵任地使用人工智能。 这项认证反映了该公司怎样的情况？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">All members of the company are IsO certified.</p>
+        <p class="zh">公司所有成员均通过了ISO认证。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">All Al systems that the company uses are ISO certified.</p>
+        <p class="zh">该公司使用的所有人工智能系统均通过了ISO认证。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">All Al application team members are ISO certified.</p>
+        <p class="zh">所有人工智能应用团队成员均通过了ISO认证。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">The company&#x27;s development framework is ISO certified.</p>
+        <p class="zh">该公司的开发框架已通过ISO认证。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl">
+      <p class="en">ISO accreditation for managing Al risks means that the company&#x27;s development processes, controls, and frameworks for Al are certified to meet IsO standards. It does not certify individual employees or Al systems, but rather the organizational framework and practices.</p>
+      <p class="zh">获得管理人工智能风险的ISO认证意味着公司的开发流程、控制措施和框架符合ISO标准。这并非是对 单个员工或人工智能系统的认证，而是对组织架构和实践的认可。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q311" data-n="311" data-ans="">
+  <div class="qhead"><span class="qno">Question 311</span><span class="badge hot">HOTSPOT 拖拽题</span><span class="src">#311</span></div>
+  <div class="stem">
+    <p class="en">HOTSPOT Select the correct prompt engineering technique from the following list for each description. Select each prompt engineering technique one time or not at all. Hot Area: Provideasmall numberofexamplestothemodel tounderstandSelect FrovideasnaanberorexampiestodeodertoundelstandPelect thedesiredtaskbeforegeneratingoutputs.Chain-of-thoughtprompting Few-shotpromptingpg Few-shorprompting Role-basedprompting Single-shotprompting Zerg-shotpromptingg Zero-shotprompting Promntamodeltobreak.downthestep-by-step.processthatSelect Promptamodeltobreakdowhthestep-by-stepprocessthatSelect.. themodeltooktoarriveatafinalanswer.Chain-of-thoughtprompting diehodertooktoaveatanaranswer.Few-shotpromptingpeg rew-shotprompting Role-basedprompting Single-shotprompting Zerg-shotpromptingg Zero-shotprompting Promptamodeltoperformataskwithoutprovidingexamples.Select PromptanodertopenomataskwiunoutproviangexampiesSelect. Chain-of-thoughtprompting Few-shotpromptingpg Few-shotprompting Role-basedprompting Single-shotprompting Zerg-shotprompting zero-shotprompting</p>
+    <p class="zh">热点 从以下列表中为每个描述选择正确的提示工程技术。每个提示工程技术只能选择一次或根本不选。 热点区域： Provideasmall numberof examples to themodel tounderstandSelect.. the desired task before generating outputs.Chain-of-thought prompting Few-shot prompting Role-basedprompting Single-shotprompting Zero-shot prompting Prompt a model to break down the step-by-step processthatSelect. themodel took to arriveat a final answer.Chain-of-thought prompting Few-shotprompting Role-basedprompting singleshot prompting Zero-shot prompting Promptamodeltoperformataskwithout providingexamples.Select. Chain-of-thought prompting Few-shotprompting Role-basedprompting single-shotprompting Zero-shot prompting</p>
+  </div>
+  <p class="hothint">拖拽匹配题（HOTSPOT）：考试中需从下拉列表为每一项匹配答案，此处仅作题目与答案解析的展示复习。</p>
+  <details class="ans" open>
+    <summary>解析 / Explanation</summary>
+    <p class="correct">此题答案见下方解析</p>
+    <div class="expl">
+      <p class="en">Provide a small number of examples to the model to understand the desired task before generating outputs -&gt; Few-shot prompting Prompt a model to break down the step-by-step process that the model took to arrive at a final answer -&gt; Chain-of-thought prompting Prompt a model to perform a task without providing examples -&gt; Zero-shot prompting Few-shot prompting uses a few examples to guide the model&#x27;s outputs. Chain-of-thought prompting asks the model to explain its reasoning step-by-step. Zero-shot prompting asks the model to perform a task without any examples.</p>
+      <p class="zh">在生成输出之前，向模型提供少量示例以使其理解所需任务-&gt;少样本提示 提示模型分解其得出最终答案的逐步过程-&gt;思维链提示 提示模型执行任务而不提供示例&gt;零样本提示 少样本提示法通过几个示例来引导模型的输出。 链式思维提示要求模型逐步解释其推理过程。 零样本提示要求模型在没有任何示例的情况下执行任务。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q312" data-n="312" data-ans="B">
+  <div class="qhead"><span class="qno">Question 312</span><span class="badge">单选</span><span class="src">#312</span></div>
+  <div class="stem">
+    <p class="en">A company is developing an ML model to predict heart disease risk. The model uses patient data, such as age, cholesterol, blood pressure, smoking status, and exercise habits. The dataset includes a target value that indicates whether a patient has heart disease. Which ML technique will meet these requirements?</p>
+    <p class="zh">一家公司正在开发一种机器学习模型来预测患心脏病的风险。该模型使用患者数据，例如年龄、胆固醇 水平、血压、吸烟状况和运动习惯。数据集包含一个目标值，用于表明患者是否患有心脏病。 哪种机器学习技术能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Unsupervised learning</p>
+        <p class="zh">无监督学习</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Supervised learning</p>
+        <p class="zh">监督学习</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Reinforcement learning</p>
+        <p class="zh">强化学习</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Semi-supervised learning</p>
+        <p class="zh">半监督学习</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Supervised learning is used when the dataset includes both input features (like age, cholesterol, blood pressure, etc.) and a target value indicating the presence of heart disease. The model learns to predict the target value from labeled examples.</p>
+      <p class="zh">当数据集既包含输入特征（如年龄、胆固醇、血压等），又包含表明是否患有心脏病的目标值时，就会 使用监督学习。模型通过有标签的示例学习预测目标值。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q313" data-n="313" data-ans="">
+  <div class="qhead"><span class="qno">Question 313</span><span class="badge hot">HOTSPOT 拖拽题</span><span class="src">#313</span></div>
+  <div class="stem">
+    <p class="en">HOTSPOT A company periodically updates its product database by manually uploading digital product guides. The product guides contain text and images. The company wants to automate this task by using generative Al. Select and order the steps from the following list to automate the database update task by using generative Al. Select each step one time. Hot Area: Stepselect Steptelecty nsertdataintotheproductdatabase. lnloadthe dicitalteytandimaaeflestoanAmazons3bucket UploadthedigitaltextandimagetilestoanAmazons3bucket. UseAmazonNovamultimodalmodelstoprocessthedigitaltextandimagefiles. seAazovaaioaar oaep o poeess a gignarekt and mage nes: step2select Stepelecty Insertdataintotheproductdatabase. lnloadthedioitalteytandimaaoalestoanAmazons3buckat Uploadthedigital textandimagetilestoanAmazons3bucket. UseAmazonNovamultimodalmodelstoprocessthedigitaltextandimagefiles. se Aazornovaaranoaaroaeis to proeess ae argnartekt and nage cs: Step3select Stepsselect. nsertdataintotheproductdatabase. Hinloadthe digitalteytandimaaealestoanAmazons3bucket Uploadthedigital textandimagefilestoanAmazons3bucket. UseAmazonNovamultimodalmodelstoprocessthedigitaltextandimagefiles. Lse Racornvaaoaaroacigopooess ae aignareatandnagecs</p>
+    <p class="zh">热点 一家公司定期通过手动上传数字产品指南来更新其产品数据库。这些产品指南包含文本和图片。该公司 希望利用生成式人工智能来实现这一任务的自动化。 从以下列表中选择并按顺序排列步骤，以使用生成式人工智能自动化数据库更新任务。每个步 骤只能选择一次。 热点区域： 3select.. Unsertdata intotheproductdatabase. UploadthedigitaltextandimagefilestoanAmazons3bucket. UseAmazonNovamultimodalmodelstoprocessthedigitaltextandimagefiles.es. Step2:select.. Insert data into the product database. Upload thedigitaltextand imagefiles toanAmazonS3bucket. UseAmazonNovamultimodalmodelsto processthedigitaltextandimagefiles. Step3:select.. Insertdata into the product database. Uploadthedigital extand imagefilestoanAmazonS3bucket. UseAmazonNovamultimodalmodelstoprocessthedigitaltextandimagefiles.</p>
+  </div>
+  <p class="hothint">拖拽匹配题（HOTSPOT）：考试中需从下拉列表为每一项匹配答案，此处仅作题目与答案解析的展示复习。</p>
+  <details class="ans" open>
+    <summary>答案 / Answer</summary>
+    <p class="correct">此题答案见下方解析</p>
+  </details>
+</div>
+<div class="q" id="q314" data-n="314" data-ans="C">
+  <div class="qhead"><span class="qno">Question 314</span><span class="badge">单选</span><span class="src">#314</span></div>
+  <div class="stem">
+    <p class="en">A company has guidelines for data storage and deletion. Which data governance strategy does this describe?</p>
+    <p class="zh">一家公司有数据存储和删除的指导方针。 这描述的是哪种数据治理策略？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Data de-identification</p>
+        <p class="zh">数据去标识化</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Data quality standards</p>
+        <p class="zh">数据质量标准</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Data retention</p>
+        <p class="zh">数据保留</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Log storage</p>
+        <p class="zh">日志存储</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">Data retention refers to the policies and practices that define how long data is stored and when it should be deleted, ensuring compliance with organizational guidelines and regulatory requirements.</p>
+      <p class="zh">数据保留指的是定义数据存储时长以及何时应予以删除的政策和做法，以确保符合组织方针和监管要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q315" data-n="315" data-ans="B">
+  <div class="qhead"><span class="qno">Question 315</span><span class="badge">单选</span><span class="src">#315</span></div>
+  <div class="stem">
+    <p class="en">A company needs to apply numerical transformations to a set of images to transpose and rotate the images. Which solution will meet these requirements in the MOsT operationally efficient way?</p>
+    <p class="zh">一家公司需要对一组图像进行数值转换，以实现图像的转置和旋转。 哪种解决方案能以最高效的操作方式满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Create a deep neural network by using the images as input.</p>
+        <p class="zh">利用这些图像作为输入来创建一个深度神经网络。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Create an AWS Lambda function to perform the transformations.</p>
+        <p class="zh">创建一个AWSLambda函数来执行转换操作。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use an Amazon Bedrock large language model (LLM) with a high temperature.</p>
+        <p class="zh">使用亚马逊Bedlrock大型语言模型（LLM），并将温度值设得较高。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use AWS Glue Data Quality to make corrections to each image.</p>
+        <p class="zh">使用AWSGlue数据质量功能对每张图像进行修正。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">An AWs Lambda function can efficiently perform numerical image transformations such as transposing and rotating images at scale without the need to build or train a neural network, making it the most operationally efficient solution.</p>
+      <p class="zh">AWSLambda函数能够高效地执行诸如图像转置和旋转之类的数值图像转换操作，而且无需构建或训练 神经网络，因此是操作效率最高的解决方案。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q316" data-n="316" data-ans="C">
+  <div class="qhead"><span class="qno">Question 316</span><span class="badge">单选</span><span class="src">#316</span></div>
+  <div class="stem">
+    <p class="en">An Al practitioner is writing software code. The Al practitioner wants to quickly develop a test case and create documentation for the code. Which solution will meet these requirements with the LEAST effort?</p>
+    <p class="zh">一位人工智能从业者正在编写软件代码。该从业者希望快速开发一个测试用例并为代码编写文档。 哪种解决方案能以最少的努力满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Upload the code to an online coding assistant.</p>
+        <p class="zh">将代码上传至在线编程助手。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Develop an application to use foundation models (FMs).</p>
+        <p class="zh">开发一个使用基础模型（FMs）的应用程序。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use Amazon Q Developer in an integrated development environment (IDE).</p>
+        <p class="zh">在集成开发环境（IDE）中使用AmazonQ开发者工具。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Research and write test cases. Then, create test cases and add documentation.</p>
+        <p class="zh">研究并编写测试用例。然后，创建测试用例并添加文档。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">Amazon Q Developer integrated with an IDE can automatically generate test cases and create documentation for code, minimizing manual effort and accelerating development compared with building custom solutions or manual research.</p>
+      <p class="zh">亚马逊Q开发者与集成开发环境（IDE）相结合，能够自动为代码生成测试用例并创建文档，与构建自定 义解决方案或进行手动研究相比，这能大幅减少人工工作量并加快开发速度。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q317" data-n="317" data-ans="B">
+  <div class="qhead"><span class="qno">Question 317</span><span class="badge">单选</span><span class="src">#317</span></div>
+  <div class="stem">
+    <p class="en">A company is developing a generative Al application to automatically generate product descriptions for an ecommerce website. The product descriptions must consist of paragraphs of text that are consistent in style and tone. The application must generate thousands of unique descriptions each day. Which type of generative model will meet these requirements?</p>
+    <p class="zh">一家公司正在开发一款生成式人工智能应用程序，用于为一家电商网站自动生成产品描述。这些产品描述 必须由风格和语气一致的段落组成。该应用程序每天必须生成数千条独特的描述。 哪种生成模型能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">A variational autoencoder (VAE)model</p>
+        <p class="zh">变分自编码器（VAE）模型</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">A transformer-based model</p>
+        <p class="zh">一种基于变压器的模型</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">A diffusion model</p>
+        <p class="zh">扩散模型</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">A generative adversarial network (GAN) model</p>
+        <p class="zh">生成对抗网络（GAN）模型</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Transformer-based models, such as large language models, are designed to generate coherent and contextually consistent text at scale. They are well-suited for creating thousands of unique, styled product descriptions daily.</p>
+      <p class="zh">基于Transformer的模型，例如大型语言模型，旨在大规模生成连贯且上下文一致的文本。它们非常适合每 天生成数千条独特且风格各异的产品描述。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q318" data-n="318" data-ans="D">
+  <div class="qhead"><span class="qno">Question 318</span><span class="badge">单选</span><span class="src">#318</span></div>
+  <div class="stem">
+    <p class="en">An Al practitioner has trained a model on a training dataset. The model performs well on the training data. However, the model does not perform well on evaluation data. What is the MOST likely cause of this issue?</p>
+    <p class="zh">一位人工智能从业者在一个训练数据集上训练了一个模型。该模型在训练数据上表现良好。然而，该模型 在评估数据上的表现采佳。数现主以2。以在的以据主长长对。然 这个问题最有可能的原因是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">The model is underfit.</p>
+        <p class="zh">该模型拟合不足。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">The model requires prompt engineering.</p>
+        <p class="zh">该模型需要即时的工程设计。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">The model is biased.</p>
+        <p class="zh">该模型存在偏差。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">The model is overfit.</p>
+        <p class="zh">该模型过拟合了。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl">
+      <p class="en">Overfitting occurs when a model learns the training data too well, including noise and details that do not generalize. As a result, it performs well on training data but poorly on unseen evaluation data.</p>
+      <p class="zh">过拟合发生在模型对训练数据学习过度时，包括了噪声和无法泛化的细节。因此，它在训练数据上表现 食好，但在案觉过的评估数据上表现不佳。一后来，)</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q319" data-n="319" data-ans="B">
+  <div class="qhead"><span class="qno">Question 319</span><span class="badge">单选</span><span class="src">#319</span></div>
+  <div class="stem">
+    <p class="en">A company wants to develop an interpretable ML model to assess the risk of loan applications. Which type of ML model or algorithm will meet these requirements?</p>
+    <p class="zh">一家公司希望开发一种可解释的机器学习模型来评估贷款申请的风险。 哪种类型的机器学习模型或算法能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Deep learning model</p>
+        <p class="zh">深度学习模型</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Logistic regression model</p>
+        <p class="zh">逻辑回归模型</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">K-means algorithm</p>
+        <p class="zh">K 均值算法</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Random cut forest algorithm</p>
+        <p class="zh">随机切割森林算法</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Logistic regression is a simple, interpretable ML model that provides clear relationships between input features and predicted outcomes. It is widely used for risk assessment tasks like loan applications, where transparency and explainability are critical.</p>
+      <p class="zh">逻辑回归是一种简单且易于理解的机器学习模型，它能清晰地展现输入特征与预测结果之间的关系。该模 型在诸如贷款请等风险评估任务中被广泛应用，因为这些任务对透明度和可解释性有着很高的要求。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q320" data-n="320" data-ans="B">
+  <div class="qhead"><span class="qno">Question 320</span><span class="badge">单选</span><span class="src">#320</span></div>
+  <div class="stem">
+    <p class="en">A company stores customer personally identifiable information (Pll) data. The company must store the Pll data within the company&#x27;s AWS Region. Which aspect of governance does this describe?</p>
+    <p class="zh">一家公司存储客户的个人身份信息（PII）数据。该公司必须将PII数据存储在其所在的AWS区域内。 这描述的是治理的哪个方面？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Data mining</p>
+        <p class="zh">数据挖掘</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Data residency</p>
+        <p class="zh">数据驻留</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Pre-training bias</p>
+        <p class="zh">预训练偏差</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Geolocation routing</p>
+        <p class="zh">地理位置路由</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Data residency refers to the requirement that data, such as Pll, must remain within a specific geographic location or region, ensuring compliance with local regulations and governance policies.</p>
+      <p class="zh">数据驻留是指诸如个人身份信息（PII）之类的数据必须保留在特定的地理位置或区域内，以确保符合当 地法规和治理政策的要求。信定：大数据次国定主在人人</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q321" data-n="321" data-ans="C">
+  <div class="qhead"><span class="qno">Question 321</span><span class="badge">单选</span><span class="src">#321</span></div>
+  <div class="stem">
+    <p class="en">A company wants to implement a generative Al solution to improve its marketing operations. The company wants to increase its revenue in the next 6 months. Which approach will meet these requirements?</p>
+    <p class="zh">一家公司希望实施生成式人工智能解决方案以改进其营销业务。该公司希望在接下来的6个月内增加收入。 哪种方法能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Immediately start training a custom FM by using the company&#x27;s existing data.</p>
+        <p class="zh">立即利用公司现有的数据开始训练一个定制的FM模型。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Conduct stakeholder interviews to refine use cases and set measurable goals.</p>
+        <p class="zh">进行利益相关者访谈，以完善用例并设定可衡量的目标。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Implement a prebuilt Al assistant solution and measure its impact on customer satisfaction.</p>
+        <p class="zh">实施一个预先构建好的人工智能助手解决方案，并衡量其对客户满意度的影响。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Analyze industry Al implementations and replicate the most successful features.</p>
+        <p class="zh">分析行业内的AI应用实例，并复制其中最成功的特性。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">Using a prebuilt Al assistant allows the company to deploy generative Al quickly without the time and cost of training custom models. This accelerates implementation, enabling measurable business impact such as improved customer engagement and increased revenue within the short 6-month timeframe.</p>
+      <p class="zh">使用预构建的AI助手能让公司迅速部署生成式AI，无需花费时间和成本来训练定制模型。这加快了实施 速度，从而能够产生可衡量的业务影响，例如“ 在短短6个月的时间内，客户参与度得到提升，收入也有所增加。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q322" data-n="322" data-ans="B">
+  <div class="qhead"><span class="qno">Question 322</span><span class="badge">单选</span><span class="src">#322</span></div>
+  <div class="stem">
+    <p class="en">A healthcare company wants to create a model to improve disease diagnostics by analyzing patient voices. The company has recorded hundreds of patient voices for this project. The company is currently filtering voice recordings according to duration and language. Which phase of the ML lifecycle describes the current project phase?</p>
+    <p class="zh">一家医疗保健公司希望创建一个模型，通过分析患者的声音来改进疾病诊断。为此，该公司已录制 了数百名患著的声音。，国 该公司目前正在根据时长和语言对语音记录进行筛选。 机器学习生命周期的哪个阶段描述了当前项目所处的阶段？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Data collection</p>
+        <p class="zh">数据收集</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Data preprocessing</p>
+        <p class="zh">数据预处理</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Feature engineering</p>
+        <p class="zh">特征工程</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Model training</p>
+        <p class="zh">模型训练</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Filtering voice recordings by duration and language is part of data preprocessing, where raw data is cleaned and prepared to ensure quality and consistency before moving to feature engineering and model training.</p>
+      <p class="zh">通过时长和语言对语音记录进行筛选是数据预处理的一部分，在此过程中会对原始数据进行清理和准备， 以确保在进行特征工程和模型训练之前数据的质量和一致性。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q323" data-n="323" data-ans="A">
+  <div class="qhead"><span class="qno">Question 323</span><span class="badge">单选</span><span class="src">#323</span></div>
+  <div class="stem">
+    <p class="en">A company is using Amazon Bedrock to build an Al assistant. The Al assistant helps customers find relevant products by making suggestions. However, the Al assistant&#x27;s responses are often generic and irrelevant. The company wants to use prompt engineering to improve the Al assistant&#x27;s responses. Which solution will meet these requirements?</p>
+    <p class="zh">一家公司正在使用亚马逊Bedrock构建一个AI助手。该AI助手通过提供建议帮助客户找到相关产品。 然而，该AI助手的回复常常很笼统且不相关。该公司希望利用提示工程来改进AI助手的回复。 哪种解决方案能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use few-shot prompting to add domain-specific context and explicit instructions.</p>
+        <p class="zh">使用少样本提示来添加特定领域的背景信息和明确的指令。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use chain-of-thought prompting with hidden reasoning steps to ignore explicit domain instructions.</p>
+        <p class="zh">使用隐藏推理步骤的链式思维提示来忽略明确的领域指令。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Modify the Al assistant&#x27;s conversational style to use more formal language and include technical product specifications.</p>
+        <p class="zh">调整AI助手的对话风格，使其使用更正式的语言，并包含技术产品规格。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use zero-shot prompting to augment retrieval from a product database.</p>
+        <p class="zh">利用零样本提示来增强从产品数据库中的检索。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Few-shot prompting provides the model with examples and domain-specific context, guiding it to generate more accurate and relevant responses. This improves the quality of product suggestions compared to generic outputs.</p>
+      <p class="zh">少样本提示为模型提供示例和特定领域的背景信息，引导其生成更准确、更相关的响应。这使得产品推荐 的质量优于通用输出。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q324" data-n="324" data-ans="D">
+  <div class="qhead"><span class="qno">Question 324</span><span class="badge">单选</span><span class="src">#324</span></div>
+  <div class="stem">
+    <p class="en">A company runs a website for users to make travel reservations. The company wants an Al solution to help create consistent branding for hotels on the website. The Al solution needs to generate hotel descriptions for the website in a consistent writing style. Which AWS service will meet these requirements?</p>
+    <p class="zh">一家公司运营着一个供用户预订旅行的网站。该公司希望借助人工智能解决方案，为网站上的酒店打造 统一的品牌形象。主合 该人工智能解决方案需要以-一致的写作风格为网站生成酒店描述。 哪种AWS服务能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Amazon Comprehend</p>
+        <p class="zh">亚马逊comprehend服务</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon Personalize</p>
+        <p class="zh">亚马逊个性化服务</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon Rekognition</p>
+        <p class="zh">亚马逊Rekognition</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Amazon Bedrock</p>
+        <p class="zh">亚马逊Bedrock</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl">
+      <p class="en">Amazon Bedrock provides access to foundation models for generative Al tasks such as creating text in a consistent style. It is the correct service to generate hotel descriptions with uniform branding for the website.</p>
+      <p class="zh">亚马逊Bedrock提供了用于生成式人工智能任务的基础模型访问权限，例如以一致的风格生成文本。它是 为网站生成具有统品牌形象的酒店描述的正确服务。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q325" data-n="325" data-ans="C">
+  <div class="qhead"><span class="qno">Question 325</span><span class="badge">单选</span><span class="src">#325</span></div>
+  <div class="stem">
+    <p class="en">A company is using a pre-trained large language model (LLM). The LLM must perform multiple tasks that require specific domain knowledge. The LLM does not have information about several technical topics in the domain. The company has unlabeled data that the company can use to fine-tune the model. Which fine-tuning method will meet these requirements?</p>
+    <p class="zh">一家公司正在使用一个预训练的大语言模型（LLM）。该模型必须执行多项需要特定领域知识的任务。然 而，该模型对于该领域中的若干技术主题没有相关信息。该公司拥有未标注的数据，可以用来对模型进行 微调。，以以中技设行值以性效 哪种微调方法能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Full training</p>
+        <p class="zh">全面培训</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Supervised fine-tuning</p>
+        <p class="zh">监督微调</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Continued pre-training</p>
+        <p class="zh">持续预训练</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Retrieval Augmented Generation (RAG)</p>
+        <p class="zh">检索增强生成 (RAG)</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">Continued pre-training uses the company&#x27;s unlabeled domain data to further train a pre-trained LLM, expanding its knowledge in specific technical areas without requiring labeled datasets. This makes it the best fit for the scenario.</p>
+      <p class="zh">持续的预训练利用公司的未标注领域数据进一步训练预训练的大型语言模型，使其在特定技术领域的知 识得到扩展，且无需标注数据集。这使其成为该场景的最佳选择。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q326" data-n="326" data-ans="B">
+  <div class="qhead"><span class="qno">Question 326</span><span class="badge">单选</span><span class="src">#326</span></div>
+  <div class="stem">
+    <p class="en">A company wants to classify images of different objects based on custom features extracted from a dataset. Which solution will meet this requirement with the LEAST development effort?</p>
+    <p class="zh">一家公司希望根据从数据集中提取的自定义特征对不同物体的图像进行分类。 哪种解决方案能以最少的开发工作量满足这一要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use traditional ML algorithms with custom features extracted from the dataset.</p>
+        <p class="zh">使用从数据集中提取的自定义特征的传统机器学习算法。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use a pre-trained deep learning model. Fine-tune the model on the dataset.</p>
+        <p class="zh">使用预训练的深度学习模型。在数据集上对模型进行微调。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use a generative adversarial network (GAN) model to classify the images.</p>
+        <p class="zh">使用生成对抗网络（GAN）模型对图像进行分类。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use a support vector machine (SVM) with manually engineered features for classification.</p>
+        <p class="zh">使用具有手动设计特征的支持向量机（SVM）进行分类。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Fine-tuning a pre-trained deep learning model leverages transfer learning, reducing development effort because the model already captures general image features. Only minimal adjustments with the custom dataset are needed to achieveaccurate classification.</p>
+      <p class="zh">微调预训练的深度学习模型利用了迁移学习，减少了开发工作量，因为该模型已经捕捉到了通用的图像 特征。只需对自定义数据集进行少量调整，即可实现准确的分类。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q327" data-n="327" data-ans="A">
+  <div class="qhead"><span class="qno">Question 327</span><span class="badge">单选</span><span class="src">#327</span></div>
+  <div class="stem">
+    <p class="en">A company wants to customize Amazon Bedrock foundation models (FMs) to improve an application&#x27;s performance. The company must prepare a training dataset for text-to-text model fine-tuning. Which dataset format should the company use to train the models?</p>
+    <p class="zh">一家公司希望对亚马逊Bedrock基础模型（FMs）进行定制，以提升某应用程序的性能。该公司必须准 备一个用手支本到文本模型微调的训练数据集。 公司应该使用哪种数据集格式来训练模型？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">A JSON file with labeled data</p>
+        <p class="zh">一个带有标注数据的JSON文件</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">A CSV file with unlabeled data</p>
+        <p class="zh">一个包含未标注数据的CSV文件</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">A CSV file with tabular data</p>
+        <p class="zh">一个包含表格数据的CSV文件</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">A text file with unlabeled data</p>
+        <p class="zh">一个包含未标注数据的文本文件</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>答案 / Answer</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+  </details>
+</div>
+<div class="q" id="q328" data-n="328" data-ans="">
+  <div class="qhead"><span class="qno">Question 328</span><span class="badge hot">HOTSPOT 拖拽题</span><span class="src">#328</span></div>
+  <div class="stem">
+    <p class="en">HOTSPOT A company wants to build generative Al applications by using Amazon Bedrock. The company wants to minimize development effort. Select and order the model development techniques from the following list from the LEAST development effort to the MOsT development effort. Each model development technique should be selected one time. Hot Area: AnswerArea LEAsTdevelopmenteffortSelect EAsrdevelopmentenort.Select. Continuedpre-training Eine.tuningpng Fine-tuning Promptengineering RetrievalAugmentedGeneration(RAG) [RethevalAugmentedGeneration (RAG) select elect. Continuedpre-training Eine.tuningpg Fine-tuning Promptengineering RetrievalAugmentedGeneration(RAG) [RetrevalAugmentedGeneration(RAG) select elect. Continuedpre-training Eine.tuningpang Fine-tuning Promptengineering RetrievalAugmentedGeneration (RAG) [RetrevalAugmentedGeneration (RAG) MosTdevelopmenteffort:select Mosrdevelopinentenort:select... Continuedpre-training Eine.tuningpitrang Fine-tuning Promptengineering RetrievalAugmentedGeneration(RAG) [RetrevalAugmentedGeneration(RAG)</p>
+    <p class="zh">热点 一家公司希望利用亚马逊Bedrock构建生成式人工智能应用程序，同时希望将开发工作量降至最低。 从以下列表中选择并按开发工作量从小到大的顺序排列模型开发技术。每个模型开发技术只能选择 一次。 热点区域： LEAsTdevelopmenteffort:Select.. Continuedpre-training Fine-tuning Promptengineering RetrievalAugmentedGeneration(RAG) Select..eration (RAG) Continuedpre-training Fine-tuning Promptengineering Retrieval Augmented Generation (RAG) Select...Veration (RAG) Continued pre-training Fine-tuning Promptengineering Retrieval Augmented Generation (RAG) MOSTdevelopment effortSelect..eration (RAG) Continuedpre-training Fine-tuning Promptengineering Retrieval AugmentedGeneration (RAG) opregcoy RetrievalAugmentedGeneration(RAG)</p>
+  </div>
+  <p class="hothint">拖拽匹配题（HOTSPOT）：考试中需从下拉列表为每一项匹配答案，此处仅作题目与答案解析的展示复习。</p>
+  <details class="ans" open>
+    <summary>解析 / Explanation</summary>
+    <p class="correct">此题答案见下方解析</p>
+    <div class="expl">
+      <p class="en">1. Prompt engineering 2. Retrieval Augmented Generation (RAG) 3. Fine-tuning 4. Continued pre-training Prompt engineering requires minimal effort as it only involves designing effective prompts. RAG adds moderate effort by integrating retrieval mechanisms with the model. Fine-tuning requires labeled data and retraining, demanding more resources. Continued pre-training is the most effort-intensive because it involves large-scale training with unlabeled domain data.</p>
+      <p class="zh">1. 提示工程 2.检索增强生成（RAG) 3.微调 4.持续的预训练 提示工程所需的努力最小，因为它仅涉及设计有效的提示。检索增强生成（RAG）通过将检索机制与模型 相结合，增加了适度的努力。微调需要标注数据和重新训练，因此需要更多资源。持续的预训练是最耗费 精力的，因为它涉及使用大量未标注的领域数据进行大规模训练。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q329" data-n="329" data-ans="A">
+  <div class="qhead"><span class="qno">Question 329</span><span class="badge">单选</span><span class="src">#329</span></div>
+  <div class="stem">
+    <p class="en">An airline company wants to use a generative Al model to convert a flight booking system from one coding language into another coding language. The company must select a model for this task. Which criteria should the company use to select the correct generative Al model for this task?</p>
+    <p class="zh">一家航空公司希望使用生成式人工智能模型将航班预订系统从--种编程语言转换为另一种编程语言。该公司 必须为此任务选择一个模型。 公司应采用哪些标准来为这项任务挑选合适的生成式人工智能模型？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Syntax, semantic understanding, and code optimization capabilities</p>
+        <p class="zh">语法、语义理解和代码优化能力</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Code generation speed and error handling capabilities</p>
+        <p class="zh">代码生成速度和错误处理能力</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Ability to generate creative content</p>
+        <p class="zh">创作创意内容的能力</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Model size and resource requirements</p>
+        <p class="zh">模型大小和资源需求</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Converting code from one programming language to another requires a generative Al model that can understand both the syntax (rules of the language) and semantics (logic and meaning of the code). Code optimization ensures the translated code is efficient and functional in the target language.</p>
+      <p class="zh">将代码从一种编程语言转换为另一种编程语言需要一个生成式人工智能模型，该模型能够理解两种语言的 语法（语言规则）和语义（代码的逻辑和含义）。代码优化可确保转换后的代码在自标语言中高效且功能 正常。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q330" data-n="330" data-ans="B">
+  <div class="qhead"><span class="qno">Question 330</span><span class="badge">单选</span><span class="src">#330</span></div>
+  <div class="stem">
+    <p class="en">An Al practitioner is using Amazon Bedrock Prompt Management to create a reusable prompt. The prompt must be able to interact with external services by calling an external APl. Which solution will meet this requirement?</p>
+    <p class="zh">一位人工智能从业者正在使用亚马逊Bedrock提示管理功能创建一个可重复使用的提示。该提示必须能够通 过调用外部API与外部服务进行交互。 哪种解决方案能满足这一要求?</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Use special tokens.</p>
+        <p class="zh">使用特殊标记。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use a tools configuration.</p>
+        <p class="zh">使用工具配置。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use prompt variables.</p>
+        <p class="zh">使用提示变量。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use a stop sequence.</p>
+        <p class="zh">使用停止序列。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">In Amazon Bedrock Prompt Management, a tools configuration allows prompts to call external APls and services. This enables the Al assistant to extend functionality beyond static responses and interact with external systems.</p>
+      <p class="zh">在亚马逊Bedrock提示管理中，工具配置允许提示调用外部API和服务。这使AI助手能够超越静态响应， 与外部系统进行交互，从而扩展其功能。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q331" data-n="331" data-ans="A,E">
+  <div class="qhead"><span class="qno">Question 331</span><span class="badge">多选</span><span class="src">#331</span></div>
+  <div class="stem">
+    <p class="en">A company wants to use Amazon Q Business for its data. The company needs to ensure the security and privacy of the data. Which combination of steps will meet these requirements? (Choose two.)</p>
+    <p class="zh">一家公司希望使用亚马逊Q商业版来处理其数据。该公司需要确保数据的安全性和隐私性。 哪两种步骤组合能满足这些要求？（选择两项。）</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Enable AWS Key Management Service (AWS KMS) keys for the Amazon Q Business Enterprise index.</p>
+        <p class="zh">为AmazonQ商业版企业索引启用AWS密钥管理服务（AWSKMS）密钥。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Set up cross-account access to the Amazon Q index.</p>
+        <p class="zh">设置跨账户访问AmazonQ指数。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Configure Amazon Inspector for authentication.</p>
+        <p class="zh">配置Amazon Inspector以进行身份验证。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Allow public access to the Amazon Q index.</p>
+        <p class="zh">允许公众访问亚马逊Q指数。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">Configure AWS Identity and Access Management (IAM) for authentication.</p>
+        <p class="zh">配置AWS身份和访问管理（IAM）以进行身份验证。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A,E</b></p>
+    <div class="expl">
+      <p class="en">Enabling AWS KMS keys ensures encryption of data at rest for the Amazon Q Business Enterprise index, protecting sensitive data. Configuring IAM provides secure authentication and access control, ensuring only authorized users and applications can access the data.</p>
+      <p class="zh">启用AWSKMS密钥可确保对AmazonQBusinessEnterprise索引中的静态数据进行加密，从而保护敏感数 据。 配置身份和访问管理（IAM）可提供安全的身份验证和访问控制，确保只有经过授权的用户和应用程序 能够访问数据。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q332" data-n="332" data-ans="B">
+  <div class="qhead"><span class="qno">Question 332</span><span class="badge">单选</span><span class="src">#332</span></div>
+  <div class="stem">
+    <p class="en">A company uses Amazon Comprehend to analyze customer feedback. A customer has several unique trained models. The company uses Comprehend to assign each model an endpoint. The company wants to automate a report on each endpoint that is not used for more than 15 days. Which service will meet these requirements?</p>
+    <p class="zh">一家公司使用亚马逊Comprehend来分析客户反馈。该公司有多个独特的训练模型。公司使用Comprehend 为每个模型分配一个端点。该公司希望自动生成一份关于每个超过15天未使用的端点的报告。 哪种服务能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">AWS Trusted Advisor</p>
+        <p class="zh">AWS可信顾问</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon CloudWatch</p>
+        <p class="zh">亚马逊云监控（AmazonCloudWatch)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">AWS CloudTrail</p>
+        <p class="zh">AWS CloudTrail 服务</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">AWS Config</p>
+        <p class="zh">AWS配置</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Amazon CloudWatch can monitor Amazon Comprehend endpoint metrics, such as invocations. By tracking usage and setting alarms or automated checks, it can generate reports for endpoints that have not been used in the last 15 days.</p>
+      <p class="zh">亚马逊CloudWatch可以监控亚马逊Comprehend端点指标，例如调用次数。通过跟踪使用情况并设置警报 或自动检查，它可以为过去15天内未使用的端点生成报告。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q333" data-n="333" data-ans="D">
+  <div class="qhead"><span class="qno">Question 333</span><span class="badge">单选</span><span class="src">#333</span></div>
+  <div class="stem">
+    <p class="en">A company plans to use a generative Al model to provide real-time service quotes to users. Which criteria should the company use to select the correct model for this use case?</p>
+    <p class="zh">一家公司计划使用生成式人工智能模型为用户提供实时服务报价。 公司应采用哪些标准来为这个用例选择合适的模型？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Model size</p>
+        <p class="zh">模型尺寸</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Training data quality</p>
+        <p class="zh">训练数据质量</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">General-purpose use and high-powered GPU availability</p>
+        <p class="zh">通用用途及高性能 GPU 的可用性</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Model latency and optimized inference speed</p>
+        <p class="zh">模型延迟与优化后的推理速度</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl">
+      <p class="en">For real-time service quotes, the critical requirement is low response time. A model with optimized inference speed and low latency ensures fast and efficient user interactions, making it the correct selection criterion.</p>
+      <p class="zh">对于实时服务报价而言，关键要求是响应时间短。具有优化推理速度和低延迟的模型能够确保快速高效的用 户交互，因此这是正确的选择标准。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q334" data-n="334" data-ans="B">
+  <div class="qhead"><span class="qno">Question 334</span><span class="badge">单选</span><span class="src">#334</span></div>
+  <div class="stem">
+    <p class="en">An Al practitioner must fine-tune an open source large language model (LLM) for text categorization. The dataset is already prepared. Which solution will meet these requirements with the LEAsT operational effort?</p>
+    <p class="zh">二位人工智能从业者必须对一个开源的大语言模型（LLM）进行微调，以用于文本分类。数据集已经准备 好了。 哪种解决方案能以最少的操作努力满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Create a custom model training job in PartyRock on Amazon Bedrock.</p>
+        <p class="zh">在亚马逊Bedlrock的PartyRock中创建自定义模型训练任务。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use Amazon SageMaker JumpStart to create a training job.</p>
+        <p class="zh">使用Amazon SageMaker JumpStart 创建训练任务。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use a custom script to run an Amazon SageMaker Al model training job.</p>
+        <p class="zh">使用自定义脚本运行Amazon SageMakerAI模型训练任务。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Create a Jupyter notebook on an Amazon EC2 instance. Use the notebook to train the model.</p>
+        <p class="zh">在亚马逊EC2实例上创建一个Jupyter笔记本。使用该笔记本训练模型。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">SageMaker JumpStart provides prebuilt solutions and workflows for fine-tuning open source models with minimal setup. It reduces operational effort compared to custom scripts, EC2 notebooks, or PartyRock, making it the most efficient choice.</p>
+      <p class="zh">SageMaker JumpStart提供了开箱即用的解决方案和工作流，只需少量设置即可对开源模型进行微调。与自 定义脚本、EC2笔记本或PartyRock相比，它减少了运营工作量，是效率最高的选择。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q335" data-n="335" data-ans="C">
+  <div class="qhead"><span class="qno">Question 335</span><span class="badge">单选</span><span class="src">#335</span></div>
+  <div class="stem">
+    <p class="en">What is the primary purpose of system prompts in generative Ai applications?</p>
+    <p class="zh">在生成式人工智能应用中，系统提示的主要目的是什么？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">To authenticate user credentials to access responses from Al</p>
+        <p class="zh">对用户凭证进行身份验证以获取来自人工智能的响应</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">To generate random responses by Al</p>
+        <p class="zh">通过人工智能生成随机回复</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">To define the role and behavioral boundaries of Al</p>
+        <p class="zh">明确人工智能的角色和行为边界</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">To compress output data from Al</p>
+        <p class="zh">对来自人工智能的输出数据进行压缩</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">System prompts are used to establish the role, tone, rules, and behavioral constraints of the Al, ensuring it responds in a controlled and consistent manner aligned with the application&#x27;s intended purpose.</p>
+      <p class="zh">系统提示用于确立人工智能的角色、语气、规则和行为限制，确保其以受控且一致的方式作出回应，符合应 用程序的预期用途。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q336" data-n="336" data-ans="A">
+  <div class="qhead"><span class="qno">Question 336</span><span class="badge">单选</span><span class="src">#336</span></div>
+  <div class="stem">
+    <p class="en">A company is using a large language model (LLM) to create a generative Al assistant. The company must choose an Al technique to ensure that the Al assistant generates the most factually correct responses. The company selects the Retrieval Augmented Generation (RAG) technique. Which limitation of LLMs is the company trying to reduce?</p>
+    <p class="zh">一家公司正在使用大型语言模型（LLM）来创建一个生成式人工智能助手。该公司必须选择一种人工智能 技术，以确保该人工智能助手生成最准确的事实性回答。该公司选定了检索增强生成（RAG）技术。 该公司正在努力减少大型语言模型的哪项局限性？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Hallucinations</p>
+        <p class="zh">幻觉</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Security</p>
+        <p class="zh">安全</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Nondeterminism</p>
+        <p class="zh">非确定性</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Interpretability</p>
+        <p class="zh">可解释性</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Retrieval Augmented Generation reduces hallucinations by grounding the model&#x27;s responses in authoritative external data sources, which helps ensure that generated answers are based on factual and verifiable information rather than the model inventing incorrect details.</p>
+      <p class="zh">检索增强生成通过将模型的响应与权威的外部数据源相联系来减少幻觉，这有助于确保生成的答案基于事 实和可验证的信息，而不是模型编造错误的细节。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q337" data-n="337" data-ans="D">
+  <div class="qhead"><span class="qno">Question 337</span><span class="badge">单选</span><span class="src">#337</span></div>
+  <div class="stem">
+    <p class="en">A company is building a job recommendation system based on job posting data and job seeker user profiles. The system shows bias in job recommendations based on gender for user profiles that are otherwise equivalent. Which principle should the company follow to address this issue, according to AWS best practices for responsible Al?</p>
+    <p class="zh">一家公司正在基于职位发布数据和求职者用户资料构建一个职位推荐系统。该系统在为条件相当的用 户推荐职位时，存在基于性别的偏见。 根据AWS负责任的人工智能最佳实践，公司应遵循哪项原则来解决此问题？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Governance</p>
+        <p class="zh">治理</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Explainability</p>
+        <p class="zh">可解释性</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Controllability</p>
+        <p class="zh">可控性</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Fairness</p>
+        <p class="zh">公平性</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl">
+      <p class="en">Fairness focuses on identifying and mitigating bias so that Al systems provide equitable outcomes for users with similar characteristics, preventing discriminatory behavior such as gender-based bias in job recommendations.</p>
+      <p class="zh">公平性侧重于识别和减轻偏见，以确保人工智能系统为具有相似特征的用户提供公平的结果，防止诸如 基于性别的就业推荐偏见等歧视行为。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q338" data-n="338" data-ans="A,C">
+  <div class="qhead"><span class="qno">Question 338</span><span class="badge">多选</span><span class="src">#338</span></div>
+  <div class="stem">
+    <p class="en">A company wants its Al models to be transparent and explainable. Which combination of Amazon SageMaker Al features will meet these requirements? (Choose two.)</p>
+    <p class="zh">一家公司希望其人工智能模型具有透明度和可解释性。 哪种亚马逊SageMaker人工智能功能的组合能满足这些要求？（选择两项。）</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">SageMaker Model Cards</p>
+        <p class="zh">SageMaker模型卡片</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">SageMaker Pipelines</p>
+        <p class="zh">SageMaker管道</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">SageMaker Clarity</p>
+        <p class="zh">SageMaker 清晰版</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">SageMaker Model Monitor</p>
+        <p class="zh">SageMaker模型监控器</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext">
+        <p class="en">SageMaker Debugger</p>
+        <p class="zh">SageMaker 调试器</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A,C</b></p>
+    <div class="expl">
+      <p class="en">SageMaker Model Cards provide standardized documentation that describes a model&#x27;s intended use, training data, performance, and limitations, supporting transparency. SageMaker Clarity helps explain model behavior by detecting bias and providing feature attribution, making model decisions more interpretable and explainable.</p>
+      <p class="zh">SageMaker模型卡片提供了标准化的文档，描述了模型的预期用途、训练数据、性能和局限性，有助 于提高透明度。 SageMakerClarity通过检测偏差并提供特征归因来帮助解释模型行为，使模型决策更具可解释性和可 理解性。位过性工</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q339" data-n="339" data-ans="A">
+  <div class="qhead"><span class="qno">Question 339</span><span class="badge">单选</span><span class="src">#339</span></div>
+  <div class="stem">
+    <p class="en">A company is developing a product recommendation application by using a generative Al model. The company must minimize the application&#x27;s environmental impact. Which solution will meet these requirements?</p>
+    <p class="zh">一家公司正在利用生成式人工智能模型开发一款产品推荐应用程序。该公司必须将该应用程序对环境 的影响降到最低。 哪种解决方案能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Optimize the deployed model architecture to prioritize computational efficiency during model inference.</p>
+        <p class="zh">优化已部署的模型架构，以在模型推理过程中优先考虑计算效率。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Adopt a distributed inference approach by using multiple smaller models across multiple Availability Zones.</p>
+        <p class="zh">采用分布式推理方法，在多个可用区使用多个较小的模型。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Adopt a hybrid strategy by deploying the model on premises and storing the data on AWS.</p>
+        <p class="zh">采用混合策略，在本地部署模型，并将数据存储在AWS上。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Deploy multiple models and use a dynamic model selection mechanism that queries different models randomly.</p>
+        <p class="zh">部署多个模型，并使用一种动态模型选择机制，该机制随机查询不同的模型。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Optimizing the model architecture for computational efficiency reduces the compute resources and energy required during inference, which directly lowers the environmental impact of running the generative Al application.</p>
+      <p class="zh">优化模型架构以提高计算效率，能够减少推理过程中所需的计算资源和能源，从而直接降低运行生成式人 工智能应用程序对环境的影响。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q340" data-n="340" data-ans="B">
+  <div class="qhead"><span class="qno">Question 340</span><span class="badge">单选</span><span class="src">#340</span></div>
+  <div class="stem">
+    <p class="en">A company uses Amazon SageMaker Al to generate article summaries in multiple languages. The company needs a metric to evaluate the quality of the summary translations in multiple languages. Which evaluation metric will meet these requirements?</p>
+    <p class="zh">一家公司使用亚马逊SageMaker人工智能生成多语言的文章摘要。该公司需要一个指标来评估多语 言摘要翻译的质量。 哪种评估指标能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Recall-Oriented Understudy for Gisting Evaluation (ROUGE)</p>
+        <p class="zh">基于召回率的摘要评估工具（ROUGE)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Bilingual evaluation understudy (BLEU)</p>
+        <p class="zh">双语评估参考译文(BLEU)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Area Under the ROC Curve (AUC)</p>
+        <p class="zh">受试者工作特征曲线下的面积（AUC)</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Precision</p>
+        <p class="zh">精度</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Bilingual Evaluation Understudy measures how closely a generated translation matches one or more high- quality reference translations, making it well suited for evaluating the quality of multilingual summary translations.</p>
+      <p class="zh">双语评估助手（BLEU）衡量生成的翻译与一个或多个高质量参考翻译的接近程度，使其非常适合用于评估 多语言摘要翻译的质量。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q341" data-n="341" data-ans="C">
+  <div class="qhead"><span class="qno">Question 341</span><span class="badge">单选</span><span class="src">#341</span></div>
+  <div class="stem">
+    <p class="en">A research company is growing microbiological cultures. The company captures images of the cultures without any prior labeled data about growth areas. The company needs to identify the regions of the images that show culture growth. Which ML technique will meet these requirements?</p>
+    <p class="zh">一家研究公司正在培养微生物。该公司在没有任何关于培养区域的先验标注数据的情况下拍摄了培养物 的图像。该公司需要识别图像中显示培养物生长的区域。 哪种机器学习技术能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Logistic regression</p>
+        <p class="zh">逻辑回归</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Decision tree</p>
+        <p class="zh">决策树</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Clustering</p>
+        <p class="zh">聚类</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Dimensionality reduction</p>
+        <p class="zh">维度约简</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">Clustering can group similar pixel patterns or image regions without labeled data, allowing the model to identify areas that share visual characteristics associated with culture growth.</p>
+      <p class="zh">聚类可以在没有标注数据的情况下将相似的像素模式或图像区域分组，从而使模型能够识别出具有与培 养物生长箱关的视宽特征的域。的信东成的，支以主</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q342" data-n="342" data-ans="C">
+  <div class="qhead"><span class="qno">Question 342</span><span class="badge">单选</span><span class="src">#342</span></div>
+  <div class="stem">
+    <p class="en">A company that streams media is selecting an Amazon Nova foundation model (FM) to process documents and images. The company is comparing Nova Micro and Nova Lite. The company wants to minimize costs. Which model characteristics should the company consider to meet these requirements?</p>
+    <p class="zh">一家从事媒体流传输的公司正在选择亚马逊的Nova基础模型（FM）来处理文档和图像。该公司正在比 较Nova Micro和Nova Lite。该公司希望将成本降至最低。 公司应考虑哪些模型特性才能满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Nova Micro uses transformer-based architectures.Nova Lite does not use transformer-based architectures.</p>
+        <p class="zh">Nova Micro采用基于转换器的架构。Nova Lite不采用基于转换器的架构。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Nova Micro supports only text data. Nova Lite is optimized for numerical data.</p>
+        <p class="zh">Nova Micro仅支持文本数据。Nova Lite则针对数值数据进行了优化。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Nova Micro supports only text. Nova Lite supports images, videos, and text.</p>
+        <p class="zh">Nova Micro仅支持文本。Nova Lite支持图片、视频和文本。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Nova Micro runs only on CPUs. Nova Lite runs only on GPUs.</p>
+        <p class="zh">Nova Micro 仅能在 CPU 上运行。Nova Lite 仅能在 GPU上运行。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">Nova Micro supports only text processing, while Nova Lite supports multimodal inputs including images, videos, and text. Selecting the model with broader multimodal support allows the company to choose the most cost-effective option that still meets document and image processing requirements.</p>
+      <p class="zh">NovaMicro仅支持文本处理，而Nova Lite则支持包括图像、视频和文本在内的多模态输入。选择具有更 广泛多模态支持的模型，使公司能够选择既满足文档和图像处理需求又最具成本效益的选项。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q343" data-n="343" data-ans="A">
+  <div class="qhead"><span class="qno">Question 343</span><span class="badge">单选</span><span class="src">#343</span></div>
+  <div class="stem">
+    <p class="en">A company stores customer data in OpenSearch. The company wants an Al solution to retrieve specific customer information from the stored data. The Al solution must convert queries into data requests and generate CSV files from the results. Then, the Al solution must upload the CSV files to Amazon S3. Which solution will meet these requirements in the MOsT operationally-efficient way?</p>
+    <p class="zh">一家公司将客户数据存储在OpenSearch中。该公司希望有一个AI解决方案从存储的数据中检索特定的 客户信息。该AI解决方案必须将查询转换为数据请求，并从结果中生成CSV文件。然后，该AI解决方 案必须将cSV文件上传到Amazon S3。 哪种解决方案能以最高效的操作方式满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Create an Al agent to perform the required steps.</p>
+        <p class="zh">创建一个能够执行所需步骤的人工智能代理。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use a single foundation model (FM) with few-shot prompting.</p>
+        <p class="zh">使用单个基础模型（FM）并采用少样本提示。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Create a software application without using Al to perform the required steps.</p>
+        <p class="zh">开发一个软件应用程序，且在执行所需步骤时不使用人工智能。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Train a decision tree model to generate a solution based on user questions.</p>
+        <p class="zh">训练一个决策树模型，根据用户的问题生成解决方案。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">An Al agent can orchestrate multiple actions end to end, including translating user queries into OpenSearch requests, generating csV files from the results, and uploading the files to Amazon S3, making it the most operationally efficient approach.</p>
+      <p class="zh">一个AI代理可以端到端地协调多个操作，包括将用户查询转换为OpenSearch请求，从结果中生成 CSV文件，并将文件上传到亚马逊S3，使其成为操作效率最高的方法。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q344" data-n="344" data-ans="A">
+  <div class="qhead"><span class="qno">Question 344</span><span class="badge">单选</span><span class="src">#344</span></div>
+  <div class="stem">
+    <p class="en">Which foundation model (FM) in Amazon Bedrock can be fine-tuned for text, image, and video comprehension?</p>
+    <p class="zh">亚马逊Bedrock中的哪个基础模型（FM）可以针对文本、图像和视频理解进行微调？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Amazon Nova Pro</p>
+        <p class="zh">亚马逊诺瓦专业版</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Amazon Titan Multimodal Embeddings G1</p>
+        <p class="zh">亚马逊泰坦多模态嵌入G1</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Amazon Titan Text G1 - Express</p>
+        <p class="zh">亚马逊泰坦文本G1-快速版</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Amazon Nova Micro</p>
+        <p class="zh">亚马逊Nova微型服务器</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Amazon Nova Pro supports multimodal capabilities and can be fine-tuned for understanding and generating insights across text, image, and video inputs, making it suitable for comprehensive multimodal comprehension tasks.</p>
+      <p class="zh">亚马逊Nova Pro支持多模态功能，能够针对文本、图像和视频输入进行微调，以理解和生成洞察，使 其适用于全面的多模态理解任务。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q345" data-n="345" data-ans="B">
+  <div class="qhead"><span class="qno">Question 345</span><span class="badge">单选</span><span class="src">#345</span></div>
+  <div class="stem">
+    <p class="en">A company wants to generate synthetic data responses for multiple prompts from a large volume of data. The company wants to use an APl method to generate the responses. The company does not need to generate the responses immediately. Which solution meets these requirements with the LEAsT development effort?</p>
+    <p class="zh">一家公司希望从大量数据中为多个提示生成合成数据响应。该公司希望使用API方法来生成这些响应。 该公司不需要立即生成响应。 哪种解决方案能以最少的开发工作量满足这些要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Input the prompts into the model. Generate responses by using real-time inference.</p>
+        <p class="zh">将提示输入模型。通过实时推理生成响应。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Use Amazon Bedrock batch inference. Generate responses asynchronously.</p>
+        <p class="zh">使用亚马逊Bedrock批量推理。异步生成响应。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Use Amazon Bedrock agents. Build an agent system to process the prompts recursively.</p>
+        <p class="zh">使用亚马逊Bedrock代理。构建一个代理系统来递归处理提示。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Use AWs Lambda functions to automate the task. Submit one prompt after another and store each response.</p>
+        <p class="zh">使用AWSLambda函数来自动化该任务。依次提交提示，并存储每个响应。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Amazon Bedrock batch inference allows large volumes of prompts to be processed asynchronously through a managed APl, making it ideal for generating synthetic data at scale without requiring immediate responses or custom orchestration logic.</p>
+      <p class="zh">亚马逊Bedrock批量推理功能允许通过托管API异步处理大量提示，这使其成为大规模生成合成数据 的理想选择，无需即时响应或自定义编排逻辑。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q346" data-n="346" data-ans="B">
+  <div class="qhead"><span class="qno">Question 346</span><span class="badge">单选</span><span class="src">#346</span></div>
+  <div class="stem">
+    <p class="en">Which statement accurately describes Retrieval Augmented Generation (RAG)?</p>
+    <p class="zh">哪项陈述准确描述了检索增强生成（RAG）？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">A process that uses large amounts of new data to train large language models (LLMs) to improve LLM performance</p>
+        <p class="zh">一种利用大量新数据来训练大型语言模型（LLM）以提升其性能的过程</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">A process by which large language models (LLMs) reference external authoritative knowledge bases to enhance the relevance and accuracy of LLM responses without re-training</p>
+        <p class="zh">一种大型语言模型（LLM）引用外部权威知识库以增强其响应的相关性和准确性而不重新训练的过程</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">A process that limits large language models (LLMs) exclusively to their original training data to improve response speed for business applications without re-training</p>
+        <p class="zh">一种仅将大型语言模型（LLM）限制在其原始训练数据范围内以提高商业应用响应速度的过程，无 需重新训练。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">A process that focuses on language translation tasks for businesses that operate in multiple countries</p>
+        <p class="zh">一个专注于为在多个国家开展业务的企业提供语言翻译服务的流程</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl">
+      <p class="en">Retrieval Augmented Generation enhances model outputs by retrieving relevant information from external authoritative data sources at inference time and using that information to generate more accurate and contextually relevant responses without retraining the model.</p>
+      <p class="zh">检索增强生成通过在推理时从外部权威数据源检索相关信息，并利用这些信息生成更准确且上下文相 关的响应，从而增强模型输出，而无需重新训练模型。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q347" data-n="347" data-ans="D">
+  <div class="qhead"><span class="qno">Question 347</span><span class="badge">单选</span><span class="src">#347</span></div>
+  <div class="stem">
+    <p class="en">A company must comply with regulatory standards to develop and use trustworthy Al management solutions. Which approach will meet this requirement?</p>
+    <p class="zh">一家公司必须遵守监管标准，才能开发和使用值得信赖的人工智能管理解决方案。 哪种方法能满足这一要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Optimize model inference time by using high-powered GPUs for faster processing.</p>
+        <p class="zh">通过使用高性能GPU来加快处理速度，从而优化模型推理时间。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Ensure that each Al solution is developed only by technical experts. Do not involve other stakeholders.</p>
+        <p class="zh">确保每个AI解决方案仅由技术专家开发。不要让其他利益相关者参与。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Constrain transparency and user access to each model&#x27;s decision-making process.</p>
+        <p class="zh">限制每个模型决策过程的透明度和用户访问权限。</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Ensure fairness, transparency, accountability, and security throughout the lifecycle of each Al solution.</p>
+        <p class="zh">确保每个AI解决方案在其整个生命周期内都做到公平、透明、负责和安全。</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl">
+      <p class="en">Complying with trustworthy Al regulations requires embedding fairness, transparency, accountability, and security across the entire Al lifecycle, from design and development through deployment and ongoing operation.</p>
+      <p class="zh">遵守可信人工智能法规需要在整个人工智能生命周期中嵌入公平性、透明度、可问责性和安全性，涵盖从 设计和开发到部署以及持续运行的各个阶段。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q348" data-n="348" data-ans="C">
+  <div class="qhead"><span class="qno">Question 348</span><span class="badge">单选</span><span class="src">#348</span></div>
+  <div class="stem">
+    <p class="en">A company has trained a foundation model (FM) to perform a specific task. The company needs to fine- tune the FM to perform a different but related task. Which fine-tuning method will meet this requirement?</p>
+    <p class="zh">一家公司已训练了一个基础模型（FM）来执行特定任务。该公司需要对FM进行微调，使其能够执行一 个不同但相关的任务。多 哪种微调方法能满足这一要求？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Hyperparameter tuning</p>
+        <p class="zh">超参数调优</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">Pre-training</p>
+        <p class="zh">预训练</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">Transfer learning</p>
+        <p class="zh">迁移学习</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Reinforcement learning</p>
+        <p class="zh">强化学习</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl">
+      <p class="en">Transfer learning adapts an already trained foundation model to a new but related task by leveraging the knowledge learned from the original task, reducing training time and data requirements while improving performance.</p>
+      <p class="zh">迁移学习通过利用从原始任务中学到的知识，将一个已经训练好的基础模型应用于新的但相关的任务，从 而减少训练时间和数据需求，同时提高性能。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q349" data-n="349" data-ans="A">
+  <div class="qhead"><span class="qno">Question 349</span><span class="badge">单选</span><span class="src">#349</span></div>
+  <div class="stem">
+    <p class="en">An Al practitioner is developing a prompt for large language models (LLMs) in Amazon Bedrock. The Al practitioner must ensure that the prompt works across all Amazon Bedrock LLMs. Which characteristic can differ across the LLMs?</p>
+    <p class="zh">一~位人工智能从业者正在亚马逊Bedrock中为太型语言模型（LLM）开发提示语。该从业者必须确保提 示语适用于亚马逊Bedrock中的所有大型语言模型。 哪些特征在不同的大型语言模型之间可能存在差异？</p>
+  </div>
+  <ol class="opts">
+    <li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext">
+        <p class="en">Maximumtoken count</p>
+        <p class="zh">最大标记数</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext">
+        <p class="en">On-demand inference parameter support</p>
+        <p class="zh">按需推理参数支持</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext">
+        <p class="en">The ability to control model output randomness</p>
+        <p class="zh">控制模型输出随机性的能力</p>
+      </div>
+    </li>
+    <li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext">
+        <p class="en">Compatibility with Amazon Bedrock Guardrails</p>
+        <p class="zh">与亚马逊Bedrock安全护栏的兼容性</p>
+      </div>
+    </li>
+  </ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+  <div class="verdict"></div>
+  <details class="ans">
+    <summary>解析 / Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl">
+      <p class="en">Different large language models have varying maximum token limits, which affects how much input and output text a prompt can include, so prompts must account for these differences to work consistently across models.</p>
+      <p class="zh">不同的大型语言模型具有不同的最大标记限制，这会影响提示中可以包含的输入和输出文本量，因此提 示必须考虑到这些差异，以便在不同模型中都能保持一致的效果。</p>
+    </div>
+  </details>
+</div>
+<div class="q" id="q350" data-n="350" data-ans="">
+  <div class="qhead"><span class="qno">Question 350</span><span class="badge hot">HOTSPOT 拖拽题</span><span class="src">#350</span></div>
+  <div class="stem">
+    <p class="en">HOTSPOT A company wants to use ML to increase customer engagement and sales. The company has collected a large dataset that includes customer demographics, purchase history, browsing patterns, and product ratings. Select the correct ML approach from the following list for each use case. Select each ML approach one time. Hot Area: Predictcustomerlifetimevalue(CLV)byestimatinghowmuchrevenueacustomer wllgenerateoverthecustomerslifetime. Identify the likelihood of a customer to stop using the company&#x27;s services.Classification ldeyteikemoodoracustomertostopusngthecompanyssevicesClassificationClustering CclusteringRegression Regression Groupcustomers based onsimilar purchasing patterns and preferences. Classiication Clustering Regression</p>
+    <p class="zh">热点 一家公司希望利用机器学习来提高客户参与度和销售额。该公司已收集了一个庞大的数据集，其中包括客 户的人口统计信息、购买历史、浏览模式和产品评价。 从以下列表中为每个用例选择正确的机器学习方法。每个机器学习方法只能选择一次。 热点区域： Predict customer lifetime value (CLV) by astimating how much revenue a customer will generate over the customer&#x27;s lifetime. Ident h ikeihodofacustmer o tpusing te companys seiceslmeiegin ElstinaionRegession Regression Group customers based on similar purchasing patterns and preferences. Classification Clustering [Regression</p>
+  </div>
+  <p class="hothint">拖拽匹配题（HOTSPOT）：考试中需从下拉列表为每一项匹配答案，此处仅作题目与答案解析的展示复习。</p>
+  <details class="ans" open>
+    <summary>解析 / Explanation</summary>
+    <p class="correct">此题答案见下方解析</p>
+    <div class="expl">
+      <p class="en">Customer lifetime value is a continuous numeric prediction representing expected revenue over time. The likelihood that a customer will stop using services is a binary outcome prediction. Grouping customers by similar behaviors and preferences requires identifying natural patterns without predefined labels.</p>
+      <p class="zh">客户终身价值是一个连续的数值预测，代表了预期的长期收入。 客户停止使用服务的可能性是一种二元结果预测。 根据相似的行为和偏好对客户进行分组，需要识别出自然的模式，而无需预先设定标签。</p>
+    </div>
+  </details>
+</div>
+</div><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:aws:aifbank:07";
+var TOTAL=50;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+/* 答案分隔：多选用 ","，填空的等价写法用 "|"（两种都支持） */
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(/[,|]/).map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+function norm(s){return String(s==null?"":s).replace(/\s+/g," ").trim().toUpperCase()}
+function isFill(q){return q.getAttribute("data-kind")==="fill"}
+function fillInput(q){return q1("input.fill",q)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  /* 填空题：复原/锁定输入框 */
+  var inp=q1("input.fill",q);
+  if(inp){
+    if(locked){ if(inp.value!==(sel[0]||""))inp.value=sel[0]||""; }
+    inp.disabled=locked;
+    inp.classList.remove("ok","bad");
+    if(judged)inp.classList.add(rec.ok?"ok":"bad");
+  }
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = isFill(q) ? !norm(sel[0]||"") : sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok&&!isFill(q))
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q),ok;
+  if(isFill(q)){var v=norm(sel[0]||"");ok=(v!==""&&A.indexOf(v)>=0);}
+  else{ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});}
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+/* 填空题输入：只存值、点亮"确认作答"，不重绘以免打断光标 */
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(!el||!el.classList||!el.classList.contains("fill"))return;
+  var q=el.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  S[nOf(q)]={s:[el.value],ok:null,revealed:false};
+  save();
+  var sub=q1(".js-submit",q);if(sub)sub.disabled=!norm(el.value);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script><!--i18n:sw-->
+<footer class="lang-foot">
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+</footer>
+<!--/i18n:sw--><!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--><!--pc:js-->
+<script src="../../assets/presence.js"></script>
+<!--/pc:js-->
+</body></html>

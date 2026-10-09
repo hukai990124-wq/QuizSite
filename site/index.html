@@ -41,6 +41,7 @@ a.card .top{display:flex;justify-content:space-between;align-items:center;gap:8p
 .tg.b{border-color:#bfdbfe;background:#eff6ff;color:#1d4ed8}
 .tg.p{border-color:#ddd6fe;background:#f5f3ff;color:#6d28d9}
 .tg.o{border-color:#fde68a;background:#fffbeb;color:#b45309}
+.tg.g{border-color:#bbf7d0;background:#f0fdf4;color:#047857}
 .cnt{font-size:12px;color:#8b95a1;font-variant-numeric:tabular-nums}
 a.card h3{margin:0 0 7px;font-size:16.5px;line-height:1.4;color:#0f172a}
 a.card .sd{margin:0 0 15px;font-size:13.2px;color:#5b6570;flex:1 1 auto}
@@ -105,12 +106,13 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
   <div class="in">
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
-    <p class="sub">4 个题库 · 共 2510 题 · 可作答判分 · 进度自动保存在本机浏览器</p>
+    <p class="sub">5 个题库 · 共 3192 题 · 可作答判分 · 进度自动保存在本机浏览器</p>
     <ul class="meta">
       <li>西班牙语 DELE A1</li>
       <li>TOEIC 听力</li>
       <li>TOEIC 阅读</li>
       <li>AWS SAA-C03</li>
+      <li>AWS AIF-C01</li>
     </ul>
   </div>
 </header>
@@ -118,7 +120,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 2510</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 3192</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -150,6 +152,13 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <p class="sd">中英对照，含真题演练卷、原创练习卷与官方样题，每题带解析。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
+
+      <a class="card" href="aws-aif/index.html" data-site="aws-aif">
+        <div class="top"><span class="tg g">AI 认证</span><span class="cnt">682 题</span></div>
+        <h3>AWS AIF-C01 · AI Practitioner</h3>
+        <p class="sd">真题库 452 题 + 练习卷 230 题，中英对照，每题带答案与解析。</p>
+        <div class="pg"><i></i><span>未开始</span></div>
+      </a>
     </div>
 
     <div class="howto">
@@ -167,7 +176,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <footer>
   <div class="wrap">
     <div>个人学习自测用。DELE / TOEIC / AWS 题目版权归各自官方机构所有，请勿用于商业用途或再分发。</div>
-    <div class="build">最后更新：2026-10-08 01:47 JST</div>
+    <div class="build">最后更新：2026-10-09 10:08 JST</div>
   </div>
 <!--i18n:sw-->
 <div class="lang-switch i18n-noloc" role="group" aria-label="Language">
@@ -192,13 +201,23 @@ function awsKeys(){
   a.push(["aws:official:01",10]);
   return a;
 }
+/* AIF-C01：真题库（bank，10 份）+ 练习卷（practice，5 份） */
+function aifKeys(){
+  var a=[],i;
+  for(i=1;i<=9;i++)a.push(["aws:aifbank:"+pad2(i),50]);
+  a.push(["aws:aifbank:10",2]);
+  for(i=1;i<=4;i++)a.push(["aws:aifprac:"+pad2(i),50]);
+  a.push(["aws:aifprac:05",30]);
+  return a;
+}
 /* 各题库的 localStorage key 与其题量（key 实际存储为 "quiz:"+key） */
 var SITES={
   "dele-a1":{keys:[["dele-a1-a1-modelo0-2020",25],["dele-a1-a1-modelo0-2008",25],
                    ["dele-a1-a1-0720",25],["dele-a1-a1-2009-0516",25]]},
   "toeic-listening":{keys:seq("toeic-l:t",1,4,100)},
   "toeic-reading":{keys:seq("toeic:t",1,10,100)},
-  "aws-saa":{keys:awsKeys()}
+  "aws-saa":{keys:awsKeys()},
+  "aws-aif":{keys:aifKeys()}
 };
 function read(keys){
   var d=0,o=0;

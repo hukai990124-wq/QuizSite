@@ -672,10 +672,6 @@
   "en": "Personal quiz bank · Online practice",
   "ja": "個人問題集 · オンライン練習"
  },
- "4 个题库 · 共 2510 题 · 可作答判分 · 进度自动保存在本机浏览器": {
-  "en": "4 quiz banks · 2,510 questions · Answerable & scored · Progress saved automatically in this browser",
-  "ja": "4つの問題集 · 全2510問 · 解答・採点可 · 進捗はこのブラウザに自動保存"
- },
  "总进度（全部题库）": {
   "en": "Overall progress (all banks)",
   "ja": "全体の進捗（全問題集）"
@@ -1243,5 +1239,281 @@
  "在线人数": {
   "en": "People online",
   "ja": "オンライン人数"
+ },
+ "5 个题库 · 共 3192 题 · 可作答判分 · 进度自动保存在本机浏览器": {
+  "en": "5 quiz banks · 3,192 questions · Answerable & scored · Progress saved automatically in this browser",
+  "ja": "5つの問題集 · 全3192問 · 解答・採点可 · 進捗はこのブラウザに自動保存"
+ },
+ "AI 认证": {
+  "en": "AI Certification",
+  "ja": "AI認定"
+ },
+ "682 题": {
+  "en": "682 questions",
+  "ja": "682問"
+ },
+ "真题库 452 题 + 练习卷 230 题，中英对照，每题带答案与解析。": {
+  "en": "452 real-exam questions + 230 practice questions, English + Chinese, every question with an answer and explanation.",
+  "ja": "過去問452問＋練習230問。英語＋中国語、全問に解答と解説付き。"
+ },
+ "两条线共 682 题 · 中英对照 · 可作答判分 · 进度存在本机浏览器": {
+  "en": "682 questions across two tracks · English + Chinese · Answerable & scored · Progress saved in this browser",
+  "ja": "2ライン合計682問 · 英語＋中国語 · 解答・採点可 · 進捗はこのブラウザに保存"
+ },
+ "AI 真题库（452 题）": {
+  "en": "Real-Exam Bank (452)",
+  "ja": "過去問集（452問）"
+ },
+ "AI 练习卷（230 题）": {
+  "en": "Practice Set (230)",
+  "ja": "練習セット（230問）"
+ },
+ "扫描版题库 OCR 转换，452 题全量，中英对照并带答案与解析。题量大，适合整套刷。": {
+  "en": "Converted from a scanned bank by OCR; all 452 questions in English + Chinese with answers and explanations. Large volume — good for full-length practice.",
+  "ja": "スキャン版問題集をOCRで変換。全452問を英語＋中国語で収録し、解答と解説付き。問題数が多いので通し演習向き。"
+ },
+ "HydraNode 考生回忆题 230 道，每道附逐项解析，适合查漏补缺。": {
+  "en": "230 recalled questions from HydraNode, each with per-option explanations — good for filling knowledge gaps.",
+  "ja": "HydraNodeの受験者記憶による230問。各問に選択肢別の解説付きで、弱点補強に最適。"
+ },
+ "考试信息：65 题 / 90 分钟 / 及格 700（100–1000 分制）；五大领域：AI 与 ML 基础 20%、生成式 AI 基础 24%、基础模型应用 28%、负责任 AI 14%、安全合规与治理 14%。": {
+  "en": "Exam facts: 65 questions / 90 minutes / pass mark 700 (on a 100–1000 scale); five domains: Fundamentals of AI and ML 20%, Fundamentals of Generative AI 24%, Applications of Foundation Models 28%, Guidelines for Responsible AI 14%, Security, Compliance, and Governance for AI Solutions 14%.",
+  "ja": "試験情報：65問／90分／合格700（100〜1000点制）。5領域：AIとMLの基礎 20%、生成AIの基礎 24%、基盤モデルの応用 28%、責任あるAI 14%、セキュリティ・コンプライアンス・ガバナンス 14%。"
+ },
+ "题目版权归 Amazon Web Services 及各原始来源所有，仅供个人备考自用，请勿再分发。": {
+  "en": "Question copyrights belong to Amazon Web Services and the respective original sources. For personal exam preparation only — do not redistribute.",
+  "ja": "問題の著作権はAmazon Web Servicesおよび各出典元に帰属します。個人の試験対策用であり、再配布しないでください。"
+ },
+ "← 返回 AIF-C01 目录": {
+  "en": "← Back to AIF-C01 index",
+  "ja": "← AIF-C01 目次へ"
+ },
+ "点选项后按「确认作答」判对错，正确率自动存在本机": {
+  "en": "Pick an option and press “Check answer” to score; accuracy is saved automatically in this browser",
+  "ja": "選択肢を選んで「回答を確認」で採点。正答率はこのブラウザに自動保存"
+ },
+ "共 230 题 · 分 5 份 · 每份 50 题 · 中英对照覆盖 230 题": {
+  "en": "230 questions · 5 sets · 50 per set · English + Chinese for all 230",
+  "ja": "全230問 · 5セット · 各50問 · 英語＋中国語 230問"
+ },
+ "230 题 · 分 5 份 · 每份 50 题 · 中译覆盖 230 题": {
+  "en": "230 questions · 5 sets · 50 per set · Chinese translation for all 230",
+  "ja": "230問 · 5セット · 各50問 · 中国語訳 230問"
+ },
+ "多选": {
+  "en": "Multi-select",
+  "ja": "複数選択"
+ },
+ "单选": {
+  "en": "Single answer",
+  "ja": "単一選択"
+ },
+ "题目 201–230": {
+  "en": "Questions 201–230",
+  "ja": "問題 201–230"
+ },
+ "第 1/5 份 · 题目 1–50 · 共 230 题 · 点选项后按「确认作答」即刻判对错 · 来源：HydraNode 免费题库（考生回忆题，逐项解析）": {
+  "en": "Set 1/5 · Questions 1–50 · 230 total · Pick an option and press “Check answer” to score instantly · Source: HydraNode free question bank (recalled by test-takers; per-option explanations)",
+  "ja": "第1/5セット · 問題 1–50 · 全230問 · 選択肢を選んで「回答を確認」で即採点 · 出典：HydraNode 無料問題集（受験者の記憶による／選択肢別解説）"
+ },
+ "第 2/5 份 · 题目 51–100 · 共 230 题 · 点选项后按「确认作答」即刻判对错 · 来源：HydraNode 免费题库（考生回忆题，逐项解析）": {
+  "en": "Set 2/5 · Questions 51–100 · 230 total · Pick an option and press “Check answer” to score instantly · Source: HydraNode free question bank (recalled by test-takers; per-option explanations)",
+  "ja": "第2/5セット · 問題 51–100 · 全230問 · 選択肢を選んで「回答を確認」で即採点 · 出典：HydraNode 無料問題集（受験者の記憶による／選択肢別解説）"
+ },
+ "第 3/5 份 · 题目 101–150 · 共 230 题 · 点选项后按「确认作答」即刻判对错 · 来源：HydraNode 免费题库（考生回忆题，逐项解析）": {
+  "en": "Set 3/5 · Questions 101–150 · 230 total · Pick an option and press “Check answer” to score instantly · Source: HydraNode free question bank (recalled by test-takers; per-option explanations)",
+  "ja": "第3/5セット · 問題 101–150 · 全230問 · 選択肢を選んで「回答を確認」で即採点 · 出典：HydraNode 無料問題集（受験者の記憶による／選択肢別解説）"
+ },
+ "第 4/5 份 · 题目 151–200 · 共 230 题 · 点选项后按「确认作答」即刻判对错 · 来源：HydraNode 免费题库（考生回忆题，逐项解析）": {
+  "en": "Set 4/5 · Questions 151–200 · 230 total · Pick an option and press “Check answer” to score instantly · Source: HydraNode free question bank (recalled by test-takers; per-option explanations)",
+  "ja": "第4/5セット · 問題 151–200 · 全230問 · 選択肢を選んで「回答を確認」で即採点 · 出典：HydraNode 無料問題集（受験者の記憶による／選択肢別解説）"
+ },
+ "第 5/5 份 · 题目 201–230 · 共 230 题 · 点选项后按「确认作答」即刻判对错 · 来源：HydraNode 免费题库（考生回忆题，逐项解析）": {
+  "en": "Set 5/5 · Questions 201–230 · 230 total · Pick an option and press “Check answer” to score instantly · Source: HydraNode free question bank (recalled by test-takers; per-option explanations)",
+  "ja": "第5/5セット · 問題 201–230 · 全230問 · 選択肢を選んで「回答を確認」で即採点 · 出典：HydraNode 無料問題集（受験者の記憶による／選択肢別解説）"
+ },
+ "AWS AIF-C01 AI 练习卷（230 题） · 目录": {
+  "en": "AWS AIF-C01 Practice Set (230) · Index",
+  "ja": "AWS AIF-C01 練習セット（230問） · 目次"
+ },
+ "AWS AIF-C01 AI 练习卷（230 题） 第01份": {
+  "en": "AWS AIF-C01 Practice Set (230) — Set 01",
+  "ja": "AWS AIF-C01 練習セット（230問） 第01回"
+ },
+ "AWS AIF-C01 AI 练习卷（230 题） 第02份": {
+  "en": "AWS AIF-C01 Practice Set (230) — Set 02",
+  "ja": "AWS AIF-C01 練習セット（230問） 第02回"
+ },
+ "AWS AIF-C01 AI 练习卷（230 题） 第03份": {
+  "en": "AWS AIF-C01 Practice Set (230) — Set 03",
+  "ja": "AWS AIF-C01 練習セット（230問） 第03回"
+ },
+ "AWS AIF-C01 AI 练习卷（230 题） 第04份": {
+  "en": "AWS AIF-C01 Practice Set (230) — Set 04",
+  "ja": "AWS AIF-C01 練習セット（230問） 第04回"
+ },
+ "AWS AIF-C01 AI 练习卷（230 题） 第05份": {
+  "en": "AWS AIF-C01 Practice Set (230) — Set 05",
+  "ja": "AWS AIF-C01 練習セット（230問） 第05回"
+ },
+ "AWS AIF-C01 · AI 练习卷（230 题） · 第 01 份": {
+  "en": "AWS AIF-C01 · Practice Set (230) · Set 01",
+  "ja": "AWS AIF-C01 · 練習セット（230問） · 第01回"
+ },
+ "AWS AIF-C01 · AI 练习卷（230 题） · 第 02 份": {
+  "en": "AWS AIF-C01 · Practice Set (230) · Set 02",
+  "ja": "AWS AIF-C01 · 練習セット（230問） · 第02回"
+ },
+ "AWS AIF-C01 · AI 练习卷（230 题） · 第 03 份": {
+  "en": "AWS AIF-C01 · Practice Set (230) · Set 03",
+  "ja": "AWS AIF-C01 · 練習セット（230問） · 第03回"
+ },
+ "AWS AIF-C01 · AI 练习卷（230 题） · 第 04 份": {
+  "en": "AWS AIF-C01 · Practice Set (230) · Set 04",
+  "ja": "AWS AIF-C01 · 練習セット（230問） · 第04回"
+ },
+ "AWS AIF-C01 · AI 练习卷（230 题） · 第 05 份": {
+  "en": "AWS AIF-C01 · Practice Set (230) · Set 05",
+  "ja": "AWS AIF-C01 · 練習セット（230問） · 第05回"
+ },
+ "此题答案见下方解析": {
+  "en": "See the explanation below for the answer",
+  "ja": "解答は下の解説を参照してください"
+ },
+ "共 452 题 · 分 10 份 · 每份 50 题 · 中英对照覆盖 452 题": {
+  "en": "452 questions · 10 sets · 50 per set · English + Chinese for all 452",
+  "ja": "全452問 · 10セット · 各50問 · 英語＋中国語 452問"
+ },
+ "452 题 · 分 10 份 · 每份 50 题 · 中译覆盖 452 题": {
+  "en": "452 questions · 10 sets · 50 per set · Chinese translation for all 452",
+  "ja": "452問 · 10セット · 各50問 · 中国語訳 452問"
+ },
+ "第 1/10 份 · 题目 1–50 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 1/10 · Questions 1–50 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第1/10セット · 問題 1–50 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 01 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 01",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第01回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第01份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 01",
+  "ja": "AWS AIF-C01 過去問集（452問） 第01回"
+ },
+ "第 2/10 份 · 题目 51–100 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 2/10 · Questions 51–100 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第2/10セット · 問題 51–100 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 02 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 02",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第02回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第02份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 02",
+  "ja": "AWS AIF-C01 過去問集（452問） 第02回"
+ },
+ "第 3/10 份 · 题目 101–150 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 3/10 · Questions 101–150 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第3/10セット · 問題 101–150 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 03 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 03",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第03回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第03份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 03",
+  "ja": "AWS AIF-C01 過去問集（452問） 第03回"
+ },
+ "第 4/10 份 · 题目 151–200 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 4/10 · Questions 151–200 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第4/10セット · 問題 151–200 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 04 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 04",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第04回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第04份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 04",
+  "ja": "AWS AIF-C01 過去問集（452問） 第04回"
+ },
+ "第 5/10 份 · 题目 201–250 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 5/10 · Questions 201–250 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第5/10セット · 問題 201–250 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 05 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 05",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第05回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第05份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 05",
+  "ja": "AWS AIF-C01 過去問集（452問） 第05回"
+ },
+ "第 6/10 份 · 题目 251–300 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 6/10 · Questions 251–300 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第6/10セット · 問題 251–300 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 06 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 06",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第06回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第06份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 06",
+  "ja": "AWS AIF-C01 過去問集（452問） 第06回"
+ },
+ "第 7/10 份 · 题目 301–350 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 7/10 · Questions 301–350 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第7/10セット · 問題 301–350 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 07 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 07",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第07回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第07份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 07",
+  "ja": "AWS AIF-C01 過去問集（452問） 第07回"
+ },
+ "第 8/10 份 · 题目 351–400 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 8/10 · Questions 351–400 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第8/10セット · 問題 351–400 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 08 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 08",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第08回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第08份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 08",
+  "ja": "AWS AIF-C01 過去問集（452問） 第08回"
+ },
+ "第 9/10 份 · 题目 401–450 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 9/10 · Questions 401–450 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第9/10セット · 問題 401–450 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 09 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 09",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第09回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第09份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 09",
+  "ja": "AWS AIF-C01 過去問集（452問） 第09回"
+ },
+ "第 10/10 份 · 题目 451–452 · 共 452 题 · 点选项后按「确认作答」即刻判对错 · 来源：扫描版 AWS AI 题库（452 题，中英对照）": {
+  "en": "Set 10/10 · Questions 451–452 · 452 total · Pick an option and press “Check answer” to score instantly · Source: scanned AWS AI question bank (452 questions, English + Chinese)",
+  "ja": "第10/10セット · 問題 451–452 · 全452問 · 選択肢を選んで「回答を確認」で即採点 · 出典：スキャン版 AWS AI 問題集（452問、英語＋中国語）"
+ },
+ "AWS AIF-C01 · AI 真题库（452 题） · 第 10 份": {
+  "en": "AWS AIF-C01 · Real-Exam Bank (452) · Set 10",
+  "ja": "AWS AIF-C01 · 過去問集（452問） · 第10回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） 第10份": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) — Set 10",
+  "ja": "AWS AIF-C01 過去問集（452問） 第10回"
+ },
+ "AWS AIF-C01 AI 真题库（452 题） · 目录": {
+  "en": "AWS AIF-C01 Real-Exam Bank (452) · Index",
+  "ja": "AWS AIF-C01 過去問集（452問） · 目次"
+ },
+ "题目 451–452": {
+  "en": "Questions 451–452",
+  "ja": "問題 451–452"
  }
 }
