@@ -14,13 +14,16 @@ BASE = Path(__file__).resolve().parent
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--british-model', required=True)
+    parser.add_argument('--american-model', required=True)
     parser.add_argument('--ffmpeg', required=True)
     args = parser.parse_args()
-    voice = PiperVoice.load(args.british_model)
-    config = SynthesisConfig(speaker_id=95, length_scale=1.15)
+    voices = {'en-GB':PiperVoice.load(args.british_model),
+              'en-US':PiperVoice.load(args.american_model)}
+    configs = {'en-GB':SynthesisConfig(speaker_id=107, length_scale=0.95),
+               'en-US':SynthesisConfig(length_scale=1.0)}
     jobs = json.loads((BASE / 'data/extra-audio-jobs.json').read_text(encoding='utf-8'))
-    subprocess.run(['pwsh', '-NoProfile', '-File', str(BASE / 'synthesize_us_segments.ps1')], check=True)
-    model_hash = hashlib.sha256(Path(args.british_model).read_bytes()).hexdigest()
+    model_hashes = {accent:hashlib.sha256(Path(model).read_bytes()).hexdigest()
+                    for accent, model in [('en-GB',args.british_model), ('en-US',args.american_model)]}
     manifest = []
     for ordinal, job in enumerate(jobs, 1):
         destination = BASE / job['audio']
@@ -32,9 +35,9 @@ def main():
             output.setparams((1, 2, 22050, 0, 'NONE', 'not compressed'))
             for index, segment in enumerate(job['segments']):
                 segment_path = segment_dir / f'{destination.stem}-{index}.wav'
-                if segment['accent'] == 'en-GB':
-                    with wave.open(str(segment_path), 'wb') as british:
-                        voice.synthesize_wav(segment['text'], british, syn_config=config)
+                with wave.open(str(segment_path), 'wb') as synthesized:
+                    voices[segment['accent']].synthesize_wav(
+                        segment['text'], synthesized, syn_config=configs[segment['accent']])
                 with wave.open(str(segment_path), 'rb') as audio:
                     if (audio.getnchannels(), audio.getsampwidth(), audio.getframerate()) != (1, 2, 22050):
                         raise ValueError('Unexpected audio format: ' + str(segment_path))
@@ -44,8 +47,10 @@ def main():
                         '-codec:a', 'libmp3lame', '-b:a', '64k', str(destination)], check=True)
         manifest.append({'audio':job['audio'], 'sha256':hashlib.sha256(destination.read_bytes()).hexdigest(),
                          'accents':[s['accent'] for s in job['segments']],
-                         'engines':{'en-US':'Microsoft Zira Desktop', 'en-GB':'Piper en_GB-vctk-medium p226'},
-                         'britishModelSha256':model_hash})
+                         'voiceSettings':{'en-GB':{'engine':'Piper en_GB-vctk-medium p225',
+                                                    'speakerId':107, 'lengthScale':0.95},
+                                          'en-US':{'engine':'Piper en_US-ryan-medium', 'lengthScale':1.0}},
+                         'modelSha256':model_hashes})
         if ordinal % 12 == 0:
             print(f'Generated {ordinal}/{len(jobs)} mixed-accent recordings', flush=True)
     (BASE / 'data/audio-manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')

@@ -7,19 +7,18 @@ All speech is synthetic. Voice assignment is recorded per segment in
 
 ## American English
 
-Microsoft Zira Desktop, installed Windows speech synthesis voice.
-New speech is synthesized from the licensed practice text; no third-party
-recorded audio is downloaded or copied.
+Piper `en_US-ryan-medium`, a single-speaker US English model. The published
+model repository is MIT licensed. The model is used only for local generation.
 
 ## British English
 
-Piper `en_GB-vctk-medium`, speaker `p226` (English male voice), speaker ID 95.
+Piper `en_GB-vctk-medium`, speaker `p225` (English female voice), speaker ID 107.
 Model/configuration: https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/vctk/medium
 
 The published model repository is MIT licensed. The model card identifies the
 VCTK corpus under CC BY 4.0 and states that it was fine-tuned from Lessac medium.
-We do not distribute the model, training recordings, or runtime in this website.
-The model file's hash is retained in the audio manifest for reproducibility.
+We do not distribute either model, training recordings, or runtime in this
+website. Model file hashes are retained in the audio manifest for reproducibility.
 
 VCTK attribution: Yamagishi, Junichi; Veaux, Christophe; MacDonald, Kirsten (2019).
 CSTR VCTK Corpus: English Multi-speaker Corpus for CSTR Voice Cloning Toolkit

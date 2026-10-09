@@ -61,7 +61,7 @@ const tests = [5, 6].map((mock, testIndex) => {
     const number = part === 'p2' ? ordinal + 6 : ordinal;
     const accent = number % 2 ? 'en-GB' : 'en-US';
     jobs.push({audio, segments:segments.map(segment => ({...segment,
-      accent:part === 'p3' ? (segment.speaker.startsWith('M') ? 'en-GB' : 'en-US') : accent}))});
+      accent:part === 'p3' ? (segment.speaker.startsWith('W') ? 'en-GB' : 'en-US') : accent}))});
     return audio;
   }
   select(photos, 6, testIndex).forEach((q, i) => {

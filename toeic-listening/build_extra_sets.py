@@ -21,7 +21,7 @@ def main():
         source = ('<p class="meta">来源：<a href="https://github.com/kdeppaei/toeic-question-ocean">'
                   'TOEIC Question Ocean</a> · 原创模拟题 · '
                   '<a href="LICENSE-OCEAN.txt">MIT 许可</a> · 非 ETS 官方试题。'
-                  '短题逐题英美交替；长对话男声英式、女声美式；独白按段交替。合成音，非真人录音。</p>')
+                  '短题逐题英美交替；长对话男声美式、女声英式；独白按段交替。合成音，非真人录音。</p>')
         markup = gen_html.render(test).replace('</h1>', '</h1>' + source, 1)
         markup = markup.replace('约 45 分钟 · 音频为电脑合成（非真人录音）',
                                 '中高难度强化练习 · 英美口音混用 · 音频为电脑合成（非真人录音）')

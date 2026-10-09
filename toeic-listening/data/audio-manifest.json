@@ -1,1547 +1,2627 @@
 [
   {
     "audio": "audio/m5/p1-1.mp3",
-    "sha256": "fc2682ec3855080052839a1bae0c1fa547eef500d22a9f91f7705d511b87d92e",
+    "sha256": "74b2d8f2f0692e699ec793136c1a43bf001777f55fbfe336893ac9f7f599a64d",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p1-2.mp3",
-    "sha256": "a7367638bdd9843dbd24abb48dd7d9ae1c49488d02524835c6c3df46bd074da2",
+    "sha256": "e8eaf9f02943d396ab9edc8117a0f65bb2783e04185ede51f5511e0e99fce405",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p1-3.mp3",
-    "sha256": "7dd8b59e0b0bc4ab331776a2d576d752f80e5fde0ae82f7c05adbdcfca69f1e8",
+    "sha256": "50f02688d2bafbcf8f6d8f20ddbb3cf1777536a6bfebb2928390b6fcb93d0862",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p1-4.mp3",
-    "sha256": "85d9eaacf07fe921bed44017d66bc5ae6a0e60c3b908d21d40ddb3046e91f55f",
+    "sha256": "4d71e226d6715e080703369184917604b5d0e0fc3b93e83886b4af8e8c86b59b",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p1-5.mp3",
-    "sha256": "509207d1694433f695e783c8179a92807cb91a30c92e1f7e20193b74d4b75de5",
+    "sha256": "c793e1a81369d7412973966a727ec19cf8e0e2c81829a8f7cafdcb866a4cb632",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p1-6.mp3",
-    "sha256": "bba4a9fb746d52b5c372bf922478dde000d8f61b9ef5db2650529b2abe0f8f48",
+    "sha256": "3664177e06029483034efb8fdeb486ba0b489681ea918d11f3b8c64e71f4bc8e",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-1.mp3",
-    "sha256": "6e6c855bdc6f8aca08b24d65d69bfd54ac4c26393ccf95a43e51f3c04c9e9ff8",
+    "sha256": "522debf6809cc8bc1bcc14790022f0f54cc052c2fb9f1ff88fa05c7cbb3a2024",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-2.mp3",
-    "sha256": "193bcfecdee2393555c651a44586eceaa666ab6bdfd6e8ff33b3dc7d95ee6a9e",
+    "sha256": "a3bf93000cfb5f625f1c6ca4c1030d010f07a40807e571d6c3b22320679aa82b",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-3.mp3",
-    "sha256": "0fe12ea2f5bf215194a1cfce24820b9d595169ed06f16f954fe4287b72cac2dd",
+    "sha256": "f51acf31a5c3f8cffc6940d36cf3a98e403b50227fee5f804c23b73af0805035",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-4.mp3",
-    "sha256": "b0213e505439e75a8d74f1175be84a3215ec52d16ec0f16a628eb091ee94aa6f",
+    "sha256": "f43ee63eb6be2751d63c407ec17751be43fde5f2642ac9d81f46202ef52e1312",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-5.mp3",
-    "sha256": "6f0f1caf564bd45af7c1cb5432ff4a0c4d46b5d2089a40785ea594fe3ae34ed6",
+    "sha256": "e0e0df6828208bad4c3bb3668411c2285e2945c63d117762ffa559cab05d3567",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-6.mp3",
-    "sha256": "3aa4341f6a41544d07bc6f64011c8dc1f627a0fa2dadcf7f97076028ce6d6f76",
+    "sha256": "46f7006b29b7e2b18e665152fe4ff9f06fd0336383fa50566da16f9936e39b75",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-7.mp3",
-    "sha256": "f103ebb8e1bcbb709f4a06d18394fb004c7ebb90ac522fce515433e03fc71f92",
+    "sha256": "12f35042a55266f1e874a1784732d3d54511ad9de513a2301df86948949c6897",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-8.mp3",
-    "sha256": "e46732a44b6ab42e5f699f948c51ed6c01b1cbc63ac5642a296202777817ae47",
+    "sha256": "be091b56da31bc714ff7e3831070965fa8c186190c5dab0253c9ef17ab9d9edd",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-9.mp3",
-    "sha256": "82f25cb8b51144655ce0576781b2e69f8511af2769262f36d23730c29f4a2a7c",
+    "sha256": "157ac9de3020515f329d5fed9e9da9b63ec9e015a9bd60320b2fc8a4b91eb66f",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-10.mp3",
-    "sha256": "15f101e394b15046320d91ce4faa9aa49091cb62bb8d7022f812bee4cb195535",
+    "sha256": "71c6f26a72a885aef1197ff33e543e02cf95dd516646847a27fd1020a4613af0",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-11.mp3",
-    "sha256": "9dd3d48f00da13d87fab881d1110e2be6a7aa9e340c34d4f37c778e7cb459f97",
+    "sha256": "3104481e0f3b7b59bd714f75a7eb6d7886c97bbe24844344925ba0e279222292",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-12.mp3",
-    "sha256": "bf063b01f3f97ec14e1dca97d91ae96e8062de690d552282bdabe604ad5c2965",
+    "sha256": "292cfa43549a9572ad6d1dc4711f47157504c887180a43abaff7ca9517da4e09",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-13.mp3",
-    "sha256": "b2d6dd51052be50af2efdcf9f938f6d36f325351572f95b787d270c5616e9e27",
+    "sha256": "69f3882c1ede68662e733fc764e0c14b0d60166362ba252a5c0e662586e11d91",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-14.mp3",
-    "sha256": "a475bcb9cd63b42b5ed963718e5f0995fb0a1a4defba1fc0ae22cb3dd104ffcc",
+    "sha256": "bc8c54e29e00fac566589746bafb9f2906a8966ffbc58dbcb59e0418695537cc",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-15.mp3",
-    "sha256": "eccbe91dcae3a06ab9e9a9aabc8cd34029cdeb1f11828a83fa13557fb0871ea3",
+    "sha256": "865680e7d764cbb0c2e510c28c6eeea7f3e2f76e4b14e172406012ec1246fcd0",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-16.mp3",
-    "sha256": "0c3a2568b9a8cde3eb386d4b6bd8010f3f19cde6902316a85b27b63d368d3b0c",
+    "sha256": "62ef82d8cf36f045bfb82cf484d59752feaca4480f0d01ce6327e2810128a2a5",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-17.mp3",
-    "sha256": "f6f59f99cd2903e559a82405a22654537875e1364a1e6f564b6729d51bcbfa57",
+    "sha256": "14bc68a81163639b4922ff597b1e8cc5dc4645bb9147d02fc84e938c2957a7d2",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-18.mp3",
-    "sha256": "e04c39fe71a72c7eefdca54ebb09b849ab326d6a917891d0d78441d86e62e2e9",
+    "sha256": "c704aca14a2e6c67c7f053cf961430dbf52348a574c3969fe66546ce0222bc25",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-19.mp3",
-    "sha256": "1a14a9543f63c7c492ea51c1cdfbf20f9a69b398d47b1c7b9a3d7a7eab148497",
+    "sha256": "95754ae709c19dd86af8dc25f938519665caa85ad84657b7d5922f657dbcd0ab",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-20.mp3",
-    "sha256": "47c0d4139d2c0d068b1df64631686e16b7e9e86a3fa416d0ee194d6eb0e9e62b",
+    "sha256": "d818065d3959baf0e50cfabe1d6f3a7b06c4787d38d325b17d949b9a7ec3c0c8",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-21.mp3",
-    "sha256": "fefbae624bb5123f285c5e68f709e0c1b67a6ee7704fa71c2d4fad5aaca228b1",
+    "sha256": "07c5f228aab2f26a10ccef64d0996155f54d727ac3a9c9be6a409fc7c435a04f",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-22.mp3",
-    "sha256": "34fd68b795e8ad1aa5cb1bbdc9f9a5b2711cd71c0edb7a25dcd800a97df299b6",
+    "sha256": "1bfc669980e99d68c68ba8ba253197a97e0acf0b15359658c4274538f3db512a",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-23.mp3",
-    "sha256": "1cca99a2eedd2a0e551469e9651491857b5e635dbe4bad1bfc575c038b92fdb1",
+    "sha256": "c6417594ae07d52f704e3b07a18c6453ccc0b1ad0495f0cbca46be23d0179152",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-24.mp3",
-    "sha256": "6eea10e9867f666d87bacd4f94c79567d26f88599b57370f94bb6dbbe1d93795",
+    "sha256": "733872bddb23cc8d3f1fca62d06155aae784c6c443db61b0927ad73296f2eca5",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p2-25.mp3",
-    "sha256": "594461a93ef5b073e7aebc479ffb7138169bcbbd99cde9b6377047f1ceba6a0b",
+    "sha256": "d26c3903300bb63697aee380cf103a03f8d6919a00253bea1618d18222051821",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-1.mp3",
-    "sha256": "12d42995607c849f70a89d298e467bf1e34363764e6afd13c210a8b6fecbe327",
+    "sha256": "3bfc9410d67b10c7a400f3b06e2b58828d1e575e64bbac8f700d56aff0a8e935",
     "accents": [
-      "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-2.mp3",
-    "sha256": "8df08bbbeccc84ebade8acc92b9a4a6d5660ad863580583eb06d52c7c383942e",
+    "sha256": "2021a2bd80e615111ca91c29544676622bbf9193c50318dde349c548730e5684",
     "accents": [
-      "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-3.mp3",
-    "sha256": "088c04283f2778c32ade2b0f814c21758e4eb3ec9592705b2bb7894bdab3d1e8",
+    "sha256": "975dc665631a79becb68813e8dd41e1b07ac78735f26b49fcaf11135ca93afb9",
     "accents": [
-      "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-4.mp3",
-    "sha256": "5b3ad288cb559711ea0468daf5ef13cb92e46f27f3ad9a0f6a82abfd839f0e99",
+    "sha256": "f952ff095d1df0c3e4855571b74b58802af904ab90750ba8142d1b4ed0389b03",
     "accents": [
-      "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-5.mp3",
-    "sha256": "d48c2e62a6a61879438645dfa9755e507c909134f5447b81fdbe1d041b2bac18",
+    "sha256": "7fd6bdefc4747c2f8f2e0e1515d61aff5fa48994e2237922a38556d34b0c7f49",
     "accents": [
-      "en-GB",
       "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-6.mp3",
-    "sha256": "f36bad7affa61c4efa22f90bdf12769f8d0f63f5797c14d4eff05bdbc529d44a",
+    "sha256": "aa2750ac546dfb5a95e80fd8e7d601007311a56dc5de65b32a729f1389f3ad2e",
     "accents": [
-      "en-GB",
       "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-7.mp3",
-    "sha256": "c64e48c761ac69421c8897f14c768699c4f7699162b12177bb07983b376a2086",
+    "sha256": "3aa564b90703d2209ef7fcf700f6d7538781095605c3f5bab2a8971f397e2412",
     "accents": [
-      "en-GB",
       "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-8.mp3",
-    "sha256": "58fd3c6307e1e0027dd611916fd836a37de367cd8db899796a656d96a7cb5117",
+    "sha256": "3bb3a082b8567191e42a81247c4469dcfd283b023e68f819a712cd66ccde65a7",
     "accents": [
-      "en-US",
       "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-9.mp3",
-    "sha256": "83d121990525b59ebb5959cbf115c5930795fbf207899b0d2f2bec0ef93be371",
+    "sha256": "4d773182a63b921ab3baf5f507a265dd85ec6b61c254545fd14d1029648af590",
     "accents": [
-      "en-GB",
       "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-10.mp3",
-    "sha256": "ef8a929448ae56bdb340b860b184aa828274b31248477fdd0ed8e284b40950bd",
+    "sha256": "06b68be0950147dfdc698ef2f9d4dd3586d54f2c112eeb0165c6785f2479306a",
     "accents": [
-      "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-11.mp3",
-    "sha256": "8ff2c21643e03f46f418365fef6d43d829b5941d4d6edbc5ee0befa4f0a42a03",
+    "sha256": "85b7273ee1c150952c96039e08d5ec6f50e5680ae857ea66cd763f12582cac3d",
     "accents": [
-      "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-12.mp3",
-    "sha256": "dcd53f0e12829083081388728546211d9887c2cb8ac8455e4fa90a62cdafd830",
+    "sha256": "e53ba8c551c87c5a3d6730a742ea15e63c5a1d54af866735343a33d6b264ffb3",
     "accents": [
-      "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p3-13.mp3",
-    "sha256": "567f8ecca29b19aed1356e7239b61f53a61ea894f5076df8583e95dea80b8c84",
+    "sha256": "a2a270a2109b6e0249bc194df758726dfc3a5e38cd21698c682b7f9950c9d2c0",
     "accents": [
-      "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-1.mp3",
-    "sha256": "2316556bd36a4ceb6140f95eee0577808796dbba36e39259db428f3c3e52a386",
+    "sha256": "b238efcff6acb9a26a2cce6372ad6957ea0bccdb57fd9f9c11720368c455128e",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-2.mp3",
-    "sha256": "dcbbc2a7ad98f9904f8f319836611fd3f5b2d2c9520524653e665c0c25847542",
+    "sha256": "6bad509756cf32da72d8c82a4ed2f87c4c062039afeae910dac28b9389ae873e",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-3.mp3",
-    "sha256": "08fe04dbefd5aad47f0380d333587caaf9305529df2fd0e3751625606ef358bf",
+    "sha256": "cc40e7f899c70cb8453a60242173fc9637194042e06fc38ebdb7eb914fc55788",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-4.mp3",
-    "sha256": "744ed3f2dd2cf8186f5c9f565f724f4d89d6109333b930eec74ddac3d66411f3",
+    "sha256": "bc218ecb4489e25b212bc3a39ea3e1e82112da54ec5e5adc1aa688edad849f81",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-5.mp3",
-    "sha256": "30d2df91e28dfcbb06da7a70519ceb44d2abd2595207ff2d6deeeabf804458dd",
+    "sha256": "49a68c1b296bd2d26813a7ddd79a8ecb6b6849bba6fd9c223febfee92658a91a",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-6.mp3",
-    "sha256": "e6185a98e443f75ba74f8257c3ce03443826f7b498d86faae822f3132f6435db",
+    "sha256": "4ffc97f027637101d067ae94dd8d65f63e3709bf4635efeed02605aeefaad592",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-7.mp3",
-    "sha256": "f79da99e07a57f14f2eaca561673472542964fb5441d1269a3e265472c652e46",
+    "sha256": "cba4844935c71dec1115a892873909a0011d1ca881e28a6886b6ecbe5c6eb8ce",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-8.mp3",
-    "sha256": "2b7b61ddd18c5fdc69ebc92f8f68aed10e2b3a1e850ec6f419de0fffff6c80f3",
+    "sha256": "9b6d441fa45bc7d28277bff36f8e00406386d2f703496bff777cc91e40f4005c",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-9.mp3",
-    "sha256": "c5880823b81903e1c707cd4eaf6bfad78b759ab5374448f1ed77a5015df02f64",
+    "sha256": "612a79e16efae4d8e9f02055d09fb8f07858c39c3f36b50587755ad944113cb8",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m5/p4-10.mp3",
-    "sha256": "31a1d82c6c0fc622bfc4f824aa851613cbc7ba4fffb35ad738bf423d2c5a0690",
+    "sha256": "b679247aab3f0c1e14406884bdac2a7678f272179d2a6cf14ba0bb4ee3046822",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p1-1.mp3",
-    "sha256": "9986d38eb42d900069e4e9896e144ea3d6f57d0bf77ee3051c338859a270cb73",
+    "sha256": "bab0829bc43eb4979cd9821b5dcbad9b60cf459c32a08f7d389fa922b91c24a3",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p1-2.mp3",
-    "sha256": "4e48e66726893b4e888b2a1832aa655a030ab3e134e7ba5a51f12b9d532f95ff",
+    "sha256": "b84fa89537d2a5573ce152d1d35bd1c316dffe1ea4b9781bf02650d73eefa3b8",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p1-3.mp3",
-    "sha256": "5c992553d8cf742483c614408530c2fda2ea79cc48774643944f7afbf31c434e",
+    "sha256": "c6b35ac21093ce40e8075043b9862f7c724385fbb6665bf313895ef441a86542",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p1-4.mp3",
-    "sha256": "cc29ce256e1ea999b6a50d735474bf179bba131d4e9a705507ad32aa2ecbf22a",
+    "sha256": "f6131b11e441d6491f6b8d9adde1f3c4a5f6c0cc4d8aa55d509087bcf4bb6fc4",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p1-5.mp3",
-    "sha256": "adf43170e0de1123eb110bb805962bf9ffee7ba3c1e6cf6ff5a63c79de49d638",
+    "sha256": "7956c1fadcf718b3834affa314f839c15ffcc57ea5956667f08a73ef3d432cbe",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p1-6.mp3",
-    "sha256": "0375c1f15690f70fb23b25c6cf4610bbffa1c3809bfd330f51cafdc531754810",
+    "sha256": "c0fda14413dec2198d8dfbfd3756ab32860f957b8ba1641579cada669852037d",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-1.mp3",
-    "sha256": "fca90e67bf3869ba3f520cc6fd899b550ede471ccfba7b840eff186aa30fbcea",
+    "sha256": "edf9a468d45bfd2cd0e4b83e5803b60f5386e0b934c08963f8ab976b00894792",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-2.mp3",
-    "sha256": "cfa1e12fce6db1e12cbd7552375c9da268eaff24220f6bac5c6070ab332c8b58",
+    "sha256": "6347d658db46082856fbe845cd1d21f162d597720fe422e6cc4f6c91f4339c2f",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-3.mp3",
-    "sha256": "fb2259d4d493ba0565869b72bc4ddbf2b5ef661e71c8165ec908f08c0632f18b",
+    "sha256": "10433fe51cd1c58bbf88b61879979e5af03c481451087b14e2bcf6df54e77567",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-4.mp3",
-    "sha256": "c6f342a0c7615cda2efd15c948efedd378597a08d46fcf7babaed853e0027093",
+    "sha256": "47446ff858ccbfec0b168c5a479f70dc99c6e21bda9ffe74d63f32c2494222b0",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-5.mp3",
-    "sha256": "0a38274597a2b55605916c149bd84a434d2e9bd655e18f4499e1470709a8d873",
+    "sha256": "57805cae7f222f79f71a3d282a952a47cabce0a94a0e8d0a6f0c5bf887becd77",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-6.mp3",
-    "sha256": "64133ea7bf8027f4d654b1abaae3704c6735a21f5eb2b6c4d1babe4cbcdd6b4e",
+    "sha256": "e0f06a5a11d251ef8f8e38f618749f5c4d6e8e8afdf17ed6bf2a9face6adc81b",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-7.mp3",
-    "sha256": "3913443c0c3fd8a86c3f5f1277f2d4022fcb8d3f7554297da741b5c963b087d2",
+    "sha256": "feb7cc9613512badf08230cc4ccc143c820c9d02cf95511519ed97130e8a031f",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-8.mp3",
-    "sha256": "1dab06d928c2b7d3af2ed796e124d76402b31de032eda49036a109201d61fda0",
+    "sha256": "2d1871d144b470b788ab9a58d48103e1dd153e6e339857ec0024ff6f1cd9c1f6",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-9.mp3",
-    "sha256": "9b91d104874039123700cde58158b140cfb5a47507f6ef9a6ffdf36e5dd8be36",
+    "sha256": "0100060720f2306161fdfcb172c402c5cc24964d58e0ac389c4c3a5e86bde505",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-10.mp3",
-    "sha256": "9959d77296c36e7b599ef70301483e9db7bab1bc3123cb408f115f6a55dc948a",
+    "sha256": "cd903809834466443848f331ac2ef8f16a729138ab99044da91ed24ba13afc3f",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-11.mp3",
-    "sha256": "0d245be725b1b31b8fb3597f8394d31b67387e47930e6f985cf99ffa95f9c814",
+    "sha256": "58048cec45cd27245b425c320d8aebd0c8ed06dfc81d2002cd56679e8516df87",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-12.mp3",
-    "sha256": "db62cc378d7bd1cb5197b33c7c90d0319eeebcda4debfda57937303a20d45533",
+    "sha256": "b955d00bbba83990f99d878ca8397da264e12818f1a6a337acc1f2ffc594d664",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-13.mp3",
-    "sha256": "dfbbfc6970c381d76f37494bc73b7d63cdd2ff2e5c235f07cef276361549a976",
+    "sha256": "b1094fa6463b54a6b60017570d206f51b08e23f2f8a84fc2c08f2d4c4656d92b",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-14.mp3",
-    "sha256": "3d5bdc67e1205a2be667be69e6125e7a0325fcb60b2bfcb091f491e4c5ec03b2",
+    "sha256": "d35883d240dbd82d8032ab1769bb0b4038020b420cf1c1283e7f5c1cec7e41f4",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-15.mp3",
-    "sha256": "2481aaf00140d46dc9ebe61c097659095e249c63da3c76dc4219ad0e33a988e5",
+    "sha256": "acb79cd09b02320fc00183f506b5c1533cc8a009f632708002e45972fc495168",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-16.mp3",
-    "sha256": "8aa06d9e1f77c9abe217cb17f03d4826e0c33637cd7330b9790a91f96588f78a",
+    "sha256": "be3e5452109e83bd1da72499ca53048a55a898c73b380cbb2922ff64231112ab",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-17.mp3",
-    "sha256": "f09711e1a90d389d32f2a7657e1dd2bad1862bed17c3f62d921c075a7c6d59b1",
+    "sha256": "85ada224ced817bbf038e039d9268339d4f0f4cf9bcd2eb287892feed95e8e88",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-18.mp3",
-    "sha256": "dad157e16ffcef76f0e7d182a88011e210e36a25ced3ebf162fb9cbca362c2ab",
+    "sha256": "9d341953b65e31cd1e177809eca9a3cc3359f70ee369083d4cb6bf08d91b4f6e",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-19.mp3",
-    "sha256": "314a82ec7d78cc313e9c11d480e3e3c3252cbe3a939a1fd1bde5d3f3d0b7ee52",
+    "sha256": "401a3788faad345277e0f7c5e01f9f1c0b62cc8f93d34daafc2fc9d69fb28d6a",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-20.mp3",
-    "sha256": "909679dead3ba537a1b8b9d612db88c74480057ae223fa29bcba690c5026b28a",
+    "sha256": "3881375dfb0955a9e9113a86e72bfe13ec39aa8c236e74022ff82a48824a70d0",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-21.mp3",
-    "sha256": "fe3dbef9d383de300aa4bae475a32f579ab9d3e40d138bbbfc06d12420dbec63",
+    "sha256": "6f66d8fc0d4d5784c5c635f030014e90ebf7834227d4454e9b3f44f1f8cd0786",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-22.mp3",
-    "sha256": "2050a1619166b17836abe400766a1348a488b15d60537e0f4008510a68375bc9",
+    "sha256": "b7cdb48913061889f22db0c9832d240f265c39dbbb286215f8f6d13b0d262bcc",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-23.mp3",
-    "sha256": "3d78e11322c84ab15ef99a4f268a97986ed9959ca2564f26c739ebf299f4cf5a",
+    "sha256": "f0ad73b2d75eee16ad0f2826e9125903993d6194aa57897c2e2e7262af2296f0",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-24.mp3",
-    "sha256": "2ee1bf3cdfb5674cf6066d1358269984d1b4d4474c4c8dea252b4cdf30b63957",
+    "sha256": "d71036bb3c99a75ca4d74ba63fc1859714262698ed53d37ba8ce9b716e0422e6",
     "accents": [
       "en-US",
       "en-US",
       "en-US",
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p2-25.mp3",
-    "sha256": "7adbff630fd7ff02aca24c939a8781f850732adb49c9a7e8e6d7011034023d49",
+    "sha256": "85b3558c8989f8a3668677c2276a1c9ef5a990ccb0ec424ee78e2929faaedb51",
     "accents": [
       "en-GB",
       "en-GB",
       "en-GB",
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-1.mp3",
-    "sha256": "0495908c2193a7b75a6633975dd1a44c3ed8888ecd41def4011624c3d8af36e3",
+    "sha256": "ca5b0edcc10c9b259765cd7dd60584bcf4d80befcf2512a63704614e47e772cb",
     "accents": [
-      "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-2.mp3",
-    "sha256": "6c8338dbcf1b8cd7672526b5f1b0cd1996365989688a22e9278e914376ce3a09",
+    "sha256": "1db153576ba4d97ace460dcf6a4cd1fac5693de9dc45a8d52cec1e2896f1ad35",
     "accents": [
-      "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-3.mp3",
-    "sha256": "642ece18abaf3b5de1e616219a810d5ee4949d96ec94fd9d93ee47f7feeafd3c",
+    "sha256": "2ad0dbd7ce70e46b1655dd0c761a7da9c52705b6cc2f8d0b27fcf91df6b2c19c",
     "accents": [
-      "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-4.mp3",
-    "sha256": "f71af466e100beccd474d51882f0be4e153d1025948d87af86e73253ba11790e",
+    "sha256": "af9a9d4dd86d16a70dd0f2df3c4c56f569b8c5bd3e25e86e879856fd1fd44efe",
     "accents": [
-      "en-GB",
       "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-5.mp3",
-    "sha256": "0be63e00363b8a573bae08d90343f947541a57049c8a84e0befa4af5a0e042f7",
+    "sha256": "5540ca03e3cf0ec7b6b78da40420928d91cf059b1cc0453561872cd2a3edefef",
     "accents": [
-      "en-GB",
       "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-6.mp3",
-    "sha256": "08862104175fb4495a797fe148994aff510cb058b317d1fa2c1b40e4f124aea6",
+    "sha256": "3087f607644ad9cb378e80a8721605e1b3f46d3b2f3fdac417531971310a2d1d",
     "accents": [
-      "en-US",
       "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-7.mp3",
-    "sha256": "aae352c117540a2ce3293e80e748047e2861469a219f11e1331b948fc37b48ab",
+    "sha256": "9175db06d8304e8ca7343141d5e90e3acabb1ce95c39cfe8712c5c2901b70e82",
     "accents": [
-      "en-GB",
       "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-8.mp3",
-    "sha256": "a441460f35be723f48697bb6bee6e8d6b4b4436d093b17bae8319ae8feeefbef",
+    "sha256": "c9d7d0ab7ddef19046998346957c7279c93bfd1bff2376589a326168e89a01f5",
     "accents": [
-      "en-US",
       "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-9.mp3",
-    "sha256": "4a16fe7c54957ab402d90d52a9000cbfac1d40590ff7b6090eeb307a2ca5d318",
+    "sha256": "a09997160dfe3cda046d35d4533241ae6e19dc424c35ccb4af5d59390c23ec54",
     "accents": [
-      "en-US",
       "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-10.mp3",
-    "sha256": "1f52a1e96fe6d1206a7f17a87057b3db362fb4641568eefc8295aa9b06813279",
+    "sha256": "268d56119931f744aa33ff39a139dbcb0c223b3f97adf4111583fe9345ed3068",
     "accents": [
-      "en-GB",
       "en-US",
-      "en-GB"
+      "en-GB",
+      "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-11.mp3",
-    "sha256": "3963743de15857d8bc7ac3a91306f2fce9beec3455b72f3a648be22c664c004f",
+    "sha256": "12e96f7ee51d8240d5d0e8b0bcc1ee3eae474d3ce25fe907c7ff77217bd76b08",
     "accents": [
-      "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-12.mp3",
-    "sha256": "661500ffe322da77d0b40e9ada219fd127c2e03a8cb2af723eb571fa86fc0a8a",
+    "sha256": "f01cd06caafd1f71375a01365e50c6776cf71574e8405dab9e93f522c30b5cdb",
     "accents": [
-      "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p3-13.mp3",
-    "sha256": "8b99e81930aaf72a3a744f5666e245ca28e38997c3e653c06c4b10a09e7d1354",
+    "sha256": "8d2aae9584b30aa8925c3f3cf85b2a6b1bb0454a5504f0a21c095237d6a39e26",
     "accents": [
-      "en-US",
       "en-GB",
-      "en-US"
+      "en-US",
+      "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-1.mp3",
-    "sha256": "244f8edb26aeb1c7a3ae0980c1ae06214548e1262b30273068631a3a090209a1",
+    "sha256": "92cf563a7977fe0067dc790630d58d7f47d29237dd0ea6d93b3d7f6990a2cd24",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-2.mp3",
-    "sha256": "b6ea597da585b8243ccbcd368c162b258e0d1d9b912d83e0b9fc4e50e4d95a19",
+    "sha256": "4e5b5765b9a1396c449e139ab5218d79a23091d18d3d209ddaff3593206e5883",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-3.mp3",
-    "sha256": "3d4611f19019aa50efc736b6a516adb511f40e1cd100ea4f5bc13930b63c0417",
+    "sha256": "27542244f85894d5e0d2543efe1b0932793cf6bd4815eb4730196bf6fc79c334",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-4.mp3",
-    "sha256": "74c123f2c585e2b2845dfcbe1f0c890a980dbedab44fbaf8a70df580fb002e42",
+    "sha256": "7bd28e990d108c2f0a1dc19b2a4dc6b2acd6aa2e47b7e7d531422449ad39e2c6",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-5.mp3",
-    "sha256": "7b5eadbdb71664774d44207978f7f71ce0167c9a81331cb506ff4e9dec246878",
+    "sha256": "5e215bd8a93562ad1675a3d24e8613795ad44a05a7a4a1dee4ca46bb7861c11d",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-6.mp3",
-    "sha256": "2ac6560fed622c696f572d48aa9563eae3a4296bbce3eb0b807857394cee1123",
+    "sha256": "817734a3d84a7626920ccd0b00f3e614048535de8193b5e7fc8ecdad51195555",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-7.mp3",
-    "sha256": "4961b6ff992df678bfc622e45d99d4339b55362596344971c9767e62ee71aecc",
+    "sha256": "a3faea2b98e47f5774303f6687fc96ba699157859c76088da482aed3cb3621dc",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-8.mp3",
-    "sha256": "096a24e6c5ec4518be91943035d6302f30dee5e9309717f0984ca4014d35b055",
+    "sha256": "465324b88d3189915954affe0cda84683b9c998c3a98f0dd6263e441560012b6",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-9.mp3",
-    "sha256": "412e3fa745ecd93571c71a64ab5b1cef7ee32e24114eadfe17184802e5007176",
+    "sha256": "795fef5f0cf03df4b5702683b6df80ccaf5411e785ef82db005c54dcb7972538",
     "accents": [
       "en-GB"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   },
   {
     "audio": "audio/m6/p4-10.mp3",
-    "sha256": "4647bae9e1b767c1f80d71feb3054e2a5bf163347005e2eb629189cd00065b20",
+    "sha256": "b4fbf65a525f899fba49cb57bd11ebb22a59523a47b2dd856cad667cae4ad251",
     "accents": [
       "en-US"
     ],
-    "engines": {
-      "en-US": "Microsoft Zira Desktop",
-      "en-GB": "Piper en_GB-vctk-medium p226"
+    "voiceSettings": {
+      "en-GB": {
+        "engine": "Piper en_GB-vctk-medium p225",
+        "speakerId": 107,
+        "lengthScale": 0.95
+      },
+      "en-US": {
+        "engine": "Piper en_US-ryan-medium",
+        "lengthScale": 1.0
+      }
     },
-    "britishModelSha256": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6"
+    "modelSha256": {
+      "en-GB": "4e9fc85ab9009385319fc6bae7f55577f8a2d7ee77fd9159a5500eb6531f41e6",
+      "en-US": "abf4c274862564ed647ba0d2c47f8ee7c9b717d27bdad9219100eb310db4047a"
+    }
   }
 ]

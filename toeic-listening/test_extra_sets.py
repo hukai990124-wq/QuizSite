@@ -17,6 +17,10 @@ class ExtraSetsTest(unittest.TestCase):
         for recording, job in zip(manifest, jobs):
             self.assertEqual(recording['audio'], job['audio'])
             self.assertEqual(recording['accents'], [s['accent'] for s in job['segments']])
+            self.assertEqual(recording['voiceSettings']['en-GB'],
+                             {'engine':'Piper en_GB-vctk-medium p225', 'speakerId':107, 'lengthScale':0.95})
+            self.assertEqual(recording['voiceSettings']['en-US'],
+                             {'engine':'Piper en_US-ryan-medium', 'lengthScale':1.0})
             self.assertEqual(recording['sha256'], hashlib.sha256((LISTENING / job['audio']).read_bytes()).hexdigest())
 
     def test_two_distinct_standard_sets_have_answers_and_transcripts(self):
@@ -60,7 +64,7 @@ class ExtraSetsTest(unittest.TestCase):
                     roles = {}
                     for segment in job['segments']:
                         roles.setdefault(segment['speaker'], set()).add(segment['accent'])
-                    self.assertEqual(roles, {'M': {'en-GB'}, 'W': {'en-US'}})
+                    self.assertEqual(roles, {'M': {'en-US'}, 'W': {'en-GB'}})
                 else:
                     self.assertEqual(len({s['accent'] for s in job['segments']}), 1)
         tests = json.loads((LISTENING / 'data/extra-tests.json').read_text(encoding='utf-8'))
@@ -81,6 +85,7 @@ class ExtraSetsTest(unittest.TestCase):
             self.assertIn('id="btn-wrong"', page)
             self.assertIn('i18n:head', page)
             self.assertIn('TOEIC Question Ocean', page)
+            self.assertIn('长对话男声美式、女声英式', page)
             self.assertNotIn('youtube.com', page)
             for markup in (source, page):
                 resources = re.findall(r'<(?:audio|img)[^>]+src="([^"]+)"', markup)

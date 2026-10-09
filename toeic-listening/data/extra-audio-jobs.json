@@ -779,18 +779,18 @@
     "segments": [
       {
         "speaker": "M",
-        "text": "Ms. Owens, your résumé shows extensive experience in international sales. Could you tell me about your work in Singapore?",
-        "accent": "en-GB"
+        "text": "Ms. Owens, your r\u00e9sum\u00e9 shows extensive experience in international sales. Could you tell me about your work in Singapore?",
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Certainly. I managed a team of twelve and helped increase regional revenue by eighteen percent.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Impressive. The next step is a video interview with our vice president.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -800,17 +800,17 @@
       {
         "speaker": "M",
         "text": "I tested the projector in Conference Room C, but the image is still too dark.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "The larger projector is available in Room A. We could move the presentation there.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Good idea. I'll tell the attendees about the room change.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -820,17 +820,17 @@
       {
         "speaker": "M",
         "text": "The product photos on our website look blurry on mobile phones.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "I can resize the image files this afternoon. We should also test the pages on several screen sizes.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Good. Please finish before the online sale begins tomorrow.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -840,17 +840,17 @@
       {
         "speaker": "M",
         "text": "The client wants us to demonstrate the reporting feature during tomorrow's video call.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Then we should use the test account rather than real customer data.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Agreed. I'll prepare a sample report and send you the login information.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -860,22 +860,22 @@
       {
         "speaker": "M",
         "text": "Did the security update finish on the reception tablets?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Not yet. The network team found a compatibility issue with the older models.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "We have visitors arriving at nine tomorrow. Can we use the backup login page?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Yes, but I will ask the team to test it again this afternoon.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -885,22 +885,22 @@
       {
         "speaker": "M",
         "text": "The webinar test looks clear, but the captions are appearing about five seconds late.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "I noticed that too. The streaming platform has a sync setting we can adjust.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Good. Can you fix it before the Australian office joins the rehearsal?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Yes, I will update it and run another test in ten minutes.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -910,22 +910,22 @@
       {
         "speaker": "M",
         "text": "The analytics team is relocating to the fourth floor on Monday.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "I reserved twelve desks, but only eight monitors have arrived.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "We can borrow four from the training room until the shipment comes in.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Great. I will label the desks and ask facilities to install the docking stations.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -935,22 +935,22 @@
       {
         "speaker": "W",
         "text": "Did you enable automatic transcription for tomorrow's client briefing?",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Not yet. The legal department says we need each guest's consent before recording.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Then I'll add a consent notice to the invitation and ask the account manager to confirm with the guests.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Good. Once she replies, I can set the assistant to delete the recording after thirty days.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -960,22 +960,22 @@
       {
         "speaker": "M",
         "text": "Have we confirmed live captions for Friday's product demonstration? Two clients will join from overseas.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "The captioning vendor is available, but its quote covers English only. One client requested Japanese translation.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Our Tokyo office has an interpreter on staff. Could she join remotely for the question-and-answer session?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "I'll ask her. If she is available, we can keep the vendor for the main presentation and avoid changing the schedule.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -985,17 +985,17 @@
       {
         "speaker": "W",
         "text": "Hi, Daniel. The client moved tomorrow's product presentation from 10 A.M. to 2 P.M.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Thanks for letting me know. I'll update the room reservation and notify the design team.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Great. Please ask them to bring the revised brochures.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -1005,17 +1005,17 @@
       {
         "speaker": "W",
         "text": "We received a message from our shipping company. The office chairs won't arrive until Friday because of a storm.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "That's a problem. The new employees start on Thursday.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "We can move some chairs from the training room temporarily.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -1025,17 +1025,17 @@
       {
         "speaker": "W",
         "text": "Hello, I'm calling about order 7615. We need thirty notebooks instead of twenty.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "I can update the quantity, but the delivery date may move from Tuesday to Wednesday.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Wednesday is fine, as long as the boxes arrive before noon.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -1045,17 +1045,17 @@
       {
         "speaker": "W",
         "text": "I found a morning flight to Osaka, but it leaves at six ten.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "That's early. Is there a later flight that arrives before the conference dinner?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Yes, one leaves at nine and arrives at noon. It costs thirty dollars more.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -1940,17 +1940,17 @@
       {
         "speaker": "M",
         "text": "The online advertisement attracted more visitors than expected, but few of them completed a purchase.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Perhaps the checkout process is too complicated. We should ask the Web team to review it.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Agreed. I'll also compare our prices with those of our competitors.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -1960,17 +1960,17 @@
       {
         "speaker": "M",
         "text": "The refrigerator in the restaurant kitchen isn't maintaining the correct temperature.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "I called the service company, but their technician cannot come until Friday.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Then we should move the dairy products to the smaller refrigerator in the bakery.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -1980,17 +1980,17 @@
       {
         "speaker": "M",
         "text": "The photos for the winter catalog are scheduled for Thursday, but the sample coats haven't arrived.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "The supplier says they will be delivered tomorrow morning.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Good. Please check every item as soon as the boxes arrive.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -2000,22 +2000,22 @@
       {
         "speaker": "M",
         "text": "Did the security update finish on the reception tablets?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Not yet. The network team found a compatibility issue with the older models.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "We have visitors arriving at nine tomorrow. Can we use the backup login page?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Yes, but I will ask the team to test it again this afternoon.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -2025,22 +2025,22 @@
       {
         "speaker": "M",
         "text": "The safety training video is ready, but the captions are not matching the audio.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Thanks for checking. The vendor sent a corrected file this morning.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Should I upload it to the learning portal now?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Please do. The warehouse staff need to complete the course by Friday.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -2050,22 +2050,22 @@
       {
         "speaker": "W",
         "text": "I just checked the support dashboard, and three tickets are missing customer names.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "That usually happens when the mobile form is submitted too quickly.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Can you add a required-field warning before today's update goes live?",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Yes. I will add it and test the form within the hour.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -2075,22 +2075,22 @@
       {
         "speaker": "M",
         "text": "Hi, this is Daniel from Northstar Supplies. I cannot open the presentation file you sent.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Sorry about that. It may be too large for your email server.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Could you upload it to the vendor portal instead?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Of course. I will upload it now and send you a temporary password.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -2100,22 +2100,22 @@
       {
         "speaker": "W",
         "text": "Are the warehouse tablets ready for passkey sign-in?",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "The pilot worked on the newer devices, but twelve older scanners cannot install the security update.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "The leased replacements are scheduled to arrive Tuesday. What should the night shift use until then?",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "I'll issue temporary security keys and leave a sign-out sheet with the supervisor.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -2125,22 +2125,22 @@
       {
         "speaker": "W",
         "text": "The phishing-simulation report says the finance team clicked fewer test links this month, but more employees entered passwords after clicking.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "So the click rate improved, but the risky behavior became more serious. Should we still end the pilot on Friday?",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Not yet. The report covers only two weeks, and several new hires have not taken the security workshop.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "I'll extend the pilot through the workshop next Wednesday and ask the analyst to separate new-hire results.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -2150,17 +2150,17 @@
       {
         "speaker": "M",
         "text": "Good afternoon. I have a reservation under the name Chen, but my flight arrives after midnight.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "That's fine. I'll mark your reservation for late arrival. Would you also like us to arrange airport transportation?",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Yes, please. That would be very helpful.",
-        "accent": "en-GB"
+        "accent": "en-US"
       }
     ]
   },
@@ -2170,17 +2170,17 @@
       {
         "speaker": "W",
         "text": "The coffee machine in the employee lounge is leaking again.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "I'll call the repair company, but they may not come until tomorrow.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "In that case, let's put up a sign and move the smaller machine from the second floor.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -2190,17 +2190,17 @@
       {
         "speaker": "W",
         "text": "The customer service workshop is almost full. Should we add a second session next week?",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Yes. Wednesday afternoon is open in the training room.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "Great. I'll ask Human Resources to send another announcement.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },
@@ -2210,17 +2210,17 @@
       {
         "speaker": "W",
         "text": "The accounting team is moving to the sixth floor on Monday.",
-        "accent": "en-US"
+        "accent": "en-GB"
       },
       {
         "speaker": "M",
         "text": "Then we need to update the directory in the lobby.",
-        "accent": "en-GB"
+        "accent": "en-US"
       },
       {
         "speaker": "W",
         "text": "I'll also send a message to our regular delivery companies.",
-        "accent": "en-US"
+        "accent": "en-GB"
       }
     ]
   },

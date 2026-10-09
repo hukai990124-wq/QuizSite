@@ -13,8 +13,8 @@
 优先抽取原库标注的中高难度项目，平衡分配两套；标签不是经过校准的 TOEIC 分数。
 打印机图片题重写了干扰项和解析，以增强动作、状态辨别，已人工检查图片。
 
-短题逐题英美交替；每段长对话的男声固定英式、女声固定美式；独白按段交替。
-美式音色为 Microsoft Zira，英式为 Piper VCTK p226，均为合成音，不是官方或真人录音。
+短题逐题英美交替；每段长对话的男声固定美式、女声固定英式；独白按段交替。
+美式男声为 Piper Ryan，英式女声为 Piper VCTK p225，均为合成音，不是官方或真人录音。
 模型只用于本地生成，不进入网页；网站播放的是 108 个本地 MP3 文件。
 语音来源及许可信息见 `AUDIO-NOTICES.md`。
 网页加载和首次播放需要网络；下载完整 HTML 和资源目录后可离线打开。
@@ -23,9 +23,9 @@
 
 1. 将题源仓库检出到上述固定版本。
 2. `node toeic-listening/import_ocean.cjs ../toeic-question-ocean`
-3. Python 安装 `piper-tts==1.8.0`；Windows 安装 Microsoft Zira Desktop 语音、PowerShell 7（`pwsh`），准备 FFmpeg。
-4. 下载 Piper 的 `en_GB-vctk-medium.onnx` 和同名 `.onnx.json`，执行
-   `python toeic-listening/synthesize_accent_audio.py --british-model <模型路径> --ffmpeg <FFmpeg路径>`。
+3. Python 安装 `piper-tts==1.8.0`，准备 FFmpeg。
+4. 下载 Piper 的 `en_GB-vctk-medium` 与 `en_US-ryan-medium` ONNX 模型及同名 `.onnx.json`，执行
+   `python toeic-listening/synthesize_accent_audio.py --british-model <英式模型路径> --american-model <美式模型路径> --ffmpeg <FFmpeg路径>`。
 5. `python toeic-listening/build_extra_sets.py`
 6. `python -m unittest discover -s toeic-listening -p test_extra_sets.py -v`
 
