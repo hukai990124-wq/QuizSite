@@ -22,11 +22,13 @@
 
   /* ---------------------------------------------------------------- 区域规则 */
   /* 与 quiz_kit/_extract_ui.py 的 decide() 同源：由【最近的带 class 祖先（含自身）】
-     决定归属；命中 WHITE → 可翻译，命中 BLACK → 跳过，都没有 → 继续向上。 */
+     决定归属；命中 WHITE → 可翻译，命中 BLACK → 跳过，都没有 → 继续向上。
+     aud = 听力播放器外壳（.aud > .alab 标签 + <audio>）；它常被放在题目区（BLACK）
+     内部，但里面只有播放器的说明文字，没有题目内容，所以单独放行。 */
   var WHITE = {};
   ("hero idx-hd idx-main toolbar tbin btns qbar qact sheet mask report howto author-dialog " +
    "reset-dialog verdict scroll-hint notice card cards tags tg pg no sd meta badge sub ov-hd " +
-   "ov-bar need lang-foot").split(" ").forEach(function (c) { WHITE[c] = 1; });
+   "ov-bar need lang-foot aud").split(" ").forEach(function (c) { WHITE[c] = 1; });
 
   var BLACK = {};
   ("q tarea source qlist pool passage stem opt opts anbody src-table src-grid " +
@@ -69,7 +71,9 @@
     [/本题需选\s*(\d+)\s*项，你选了\s*(\d+)\s*项/g,
       "needs $1 answers, you picked $2", "この問題は$1つ選択が必要（あなたは$2つ）"],
     [/(\d+)\s*分\s*(\d+)\s*秒/g, "$1 min $2 sec", "$1分$2秒"],
-    [/正确答案\s*[:：]\s*/g, "Correct: ", "正解："]
+    [/正确答案\s*[:：]\s*/g, "Correct: ", "正解："],
+    /* 听力播放器：每题一个「第 N 题录音」标签 */
+    [/^\s*第\s*(\d+)\s*题录音\s*$/, "Audio · Q$1", "音声 · 第$1問"]
   ];
   function dyn(text, lang) {
     var out = text, i, r;

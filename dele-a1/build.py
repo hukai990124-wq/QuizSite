@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 """DELE A1 练习册生成器
 - 复用 ../quiz_kit/quizkit.py 的判分引擎（选择题 / 匹配题 / 手写填空题）
-- 产出：out/index.html + 每套一份 out/<slug>.html + out/img/*
+- 产出：out/index.html + 每套一份 out/<slug>.html + out/img/* + out/audio/*
+- 一份试卷 = Prueba 1 阅读 + Prueba 2 听力 + Prueba 3 写作
+
+题号约定：阅读占 1–25，听力接续 26–50（真题里 Prueba 2 是独立编号 1–25，
+接续编号是为了让整份共用一张答题卡；页面上有说明）。
 """
 import os
 import shutil
@@ -11,11 +15,19 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "quiz_kit"))
 sys.path.insert(0, HERE)
 
-import quizkit as QK          # noqa: E402
-from data import SETS         # noqa: E402
+import quizkit as QK                    # noqa: E402
+import parse_trans                      # noqa: E402
+from data import SETS                   # noqa: E402
+from data_audio import LISTENING        # noqa: E402
 
 OUT = os.path.join(HERE, "out")
 esc = QK.esc
+
+READ_N = 25          # 阅读题数（固定）
+LISTEN_OFFSET = 25   # 听力题号偏移：1 → 26
+
+# 判断题型标签
+KIND_HINT = {"mc": "选择题", "match": "匹配题", "fill": "手写填空"}
 
 BASE_CSS = r"""
 *{box-sizing:border-box}
@@ -50,7 +62,7 @@ button:hover{background:#f1f5f9}
 /* ---------- 主体 ---------- */
 main{padding:22px 0 92px}
 .wrap{max-width:860px;margin:0 auto;padding:0 16px}
-.block{margin:0 0 34px}
+.block{margin:0 0 34px;scroll-margin-top:calc(var(--tb,110px) + 16px)}
 .block>h2{font-size:17px;margin:0 0 6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pill{font-size:11.5px;font-weight:700;color:#0b6b3a;background:#eaf7ef;border:1px solid #bfe3ce;
  border-radius:99px;padding:2px 9px}
@@ -63,6 +75,7 @@ main{padding:22px 0 92px}
  margin-bottom:13px;flex-wrap:wrap}
 .tno{font-weight:800;font-size:15px;color:#1d4e79}
 .tq{font-size:12.5px;color:#5b6570;background:#f1f5f9;border-radius:6px;padding:2px 8px}
+.tq.grey{color:#8b95a1;background:#eef2f5}
 .tkind{font-size:12.5px;color:#8a6d1a;background:#fff8e6;border:1px solid #f0e2b8;border-radius:6px;padding:2px 8px}
 .inst{font-size:13.8px;color:#334155;margin:0 0 13px}
 
@@ -161,6 +174,46 @@ a.card .tags{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
 .howto h2{margin:0 0 10px;font-size:16px}
 .howto ol{margin:0;padding-left:20px;font-size:13.8px;color:#334155}
 .howto li{margin:5px 0}
+
+/* ---------- 听力（Prueba 2） ---------- */
+.aud{margin:0 0 12px}
+.aud:last-child{margin-bottom:0}
+.aud audio{display:block;width:100%;height:38px}
+.aud .alab{display:block;font-size:12.4px;color:#5b6570;margin:0 0 5px}
+.q .aud{margin:0 0 11px;background:#f7fafc;border:1px solid #e3e9ee;border-radius:9px;padding:8px 10px}
+.q .aud .alab{margin-bottom:4px}
+
+.spdbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#f4f8fb;
+ border:1px solid #dbe6ef;border-radius:10px;padding:9px 12px;margin:0 0 16px;font-size:12.8px;color:#42607a}
+.spdbar .spd-lbl{font-weight:700}
+.spdbar button.spd{font-size:12.5px;padding:4px 11px;min-height:0;border-radius:99px;border-color:#c9d9e6;color:#42607a}
+.spdbar button.spd.on{background:#1d4e79;border-color:#1d4e79;color:#fff}
+.spdbar .spd-tip{flex:1 1 100%;font-size:12.2px;color:#7d8f9e;line-height:1.6}
+
+ul.pool.imgpool{grid-template-columns:repeat(auto-fill,minmax(152px,1fr))}
+ul.pool.imgpool li{flex-direction:column;align-items:center;gap:7px;padding:9px}
+ul.pool.imgpool img{width:100%;height:106px;object-fit:contain;background:#fff;border-radius:6px}
+ul.pool.imgpool .pl{margin-top:0}
+
+details.trans{margin:14px 0 4px;font-size:13px}
+details.trans summary{cursor:pointer;color:#5b6570;font-size:12.6px}
+details.trans .tbody{margin:9px 0 0;padding:12px 14px;background:#fbfcfd;border:1px dashed #d8e0e8;
+ border-radius:8px;color:#334155}
+details.trans .seg{margin:0 0 11px}
+details.trans .seg:last-child{margin-bottom:0}
+details.trans .stag{display:inline-block;font-size:11px;font-weight:700;color:#1d4e79;background:#eef4fa;
+ border:1px solid #d7e5f1;border-radius:5px;padding:1px 7px;margin:0 0 5px}
+details.trans p{margin:0 0 3px;line-height:1.72}
+details.trans .who{color:#8a6d1a;font-weight:700;margin-right:5px}
+
+.partstat{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:12.6px;color:#5b6570;
+ border-top:1px solid #eef2f5;margin-top:9px;padding-top:9px}
+.partstat b{color:#334155}
+.partstat i{font-style:normal;color:#8b95a1;font-variant-numeric:tabular-nums}
+.partstat i.on{color:#0b6b3a;font-weight:600}
+
+.blind{border:1px dashed #e0b64a;background:#fffdf5;border-radius:9px;padding:10px 13px;
+ font-size:12.9px;color:#6b5310;margin:0 0 14px}
 """
 
 
@@ -199,6 +252,12 @@ RESP_CSS = r"""
   .pool{grid-template-columns:1fr}
   ul.opts.imgopts{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
   ul.opts.imgopts img{height:112px}
+  /* 听力：图片池在窄屏压成两列，音频条高度略降 */
+  ul.pool.imgpool{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  ul.pool.imgpool img{height:92px}
+  .aud audio{height:34px}
+  .spdbar{padding:8px 10px;gap:6px}
+  .spdbar button.spd{padding:5px 12px}
   table.src-table{font-size:13px}
   table.src-table td:first-child{width:30%}
   .scroll-hint{display:block;font-size:12px;color:#8b95a1;text-align:center;margin:7px 0 0}
@@ -230,6 +289,7 @@ RESP_CSS = r"""
   .layout main .wrap{max-width:none;padding:0}
   /* 侧栏不是顶部条了，跳题锚点不该再按 --tb 偏移 */
   .q{scroll-margin-top:18px!important}
+  section.block{scroll-margin-top:18px}
 
   .layout~footer .wrap{max-width:1360px;padding:0 24px}
 
@@ -244,6 +304,12 @@ RESP_CSS = r"""
    box-shadow:0 14px 44px rgba(16,24,40,.18);transform:translateY(150%)}
   body .sheet.open{transform:translateY(0)}
   body .sheet .grid{max-height:46vh}
+}
+
+/* ================= 打印：音频控件与播放设置不打印 ================= */
+@media print{
+  .aud,.spdbar,.partstat,.blind,.jump{display:none!important}
+  details.trans{break-inside:avoid}
 }
 """
 
@@ -299,6 +365,15 @@ def render_pool(pool):
     return '<ul class="pool">%s</ul>' % lis
 
 
+def render_pool_imgs(pool_imgs, letters):
+    """图片卡片池（听力 Tarea 2）：一张图一个字母。"""
+    if not pool_imgs:
+        return ""
+    lis = "".join('<li><img src="%s" alt="Opción %s" loading="lazy"><span class="pl">%s</span></li>'
+                  % (esc(pool_imgs[L]), esc(L), esc(L)) for L in letters if L in pool_imgs)
+    return '<ul class="pool imgpool">%s</ul>' % lis
+
+
 def render_example(ex):
     if not ex:
         return ""
@@ -308,24 +383,38 @@ def render_example(ex):
             % (esc(ex["stem"]), esc(ex["ans"]), why))
 
 
-def render_item(item, tarea):
-    n = item["n"]
-    stem = '<div class="stem"><span class="qn">%d</span><span lang="es">%s</span></div>' % (n, esc(item["stem"]))
+def aud_html(src, label="", cls=""):
+    """音频播放器。preload=none → 不点不下载（整份音频 12MB，必须懒加载）。"""
+    if not src:
+        return ""
+    lab = '<span class="alab">%s</span>' % esc(label) if label else ""
+    return ('<div class="aud%s">%s<audio controls preload="none" src="%s"></audio></div>'
+            % (cls, lab, esc(src)))
+
+
+def render_item(item, tarea, offset=0):
+    dn = item["n"] + offset                     # 连续题号（答题卡 / 锚点用）
+    stem = '<div class="stem"><span class="qn">%d</span><span lang="es">%s</span></div>' % (dn, esc(item["stem"]))
     kind = tarea["kind"]
     body = ""
 
     if kind == "fill":
         body = ('<div class="fillrow"><input class="fill" type="text" inputmode="text" autocomplete="off" '
                 'autocorrect="off" spellcheck="false" aria-label="Respuesta %d" placeholder="Escriba la palabra">'
-                '<span class="flabel">输入后按回车，或点「确认作答」</span></div>' % n)
+                '<span class="flabel">输入后按回车，或点「确认作答」</span></div>' % dn)
+        body = aud_html(item.get("aud"), "第 %d 题录音" % dn) + body
     else:
         opts = item.get("opts") or []
         imgs = item.get("imgs") or {}
         caps = item.get("captions") or {}
         pool = tarea.get("pool") or []
+        pmap = dict(pool)
+        if not opts and imgs:                   # 图片选项：字母由图片键推出来
+            opts = [[L, ""] for L in sorted(imgs)]
         letteronly = (kind == "match" and not opts)
         if letteronly:
-            opts = [[l, ""] for l, _ in pool]
+            letters = [l for l, _ in pool] or list(tarea.get("pool_letters") or "")
+            opts = [[l, ""] for l in letters]
         cls = "opts"
         if imgs:
             cls = "opts imgopts"
@@ -336,8 +425,8 @@ def render_item(item, tarea):
             letter = '<span class="letter">%s</span>' % esc(L)
             tip = ""
             if letteronly:
-                ptext = dict(pool).get(L, "").replace('"', "")
-                tip = ' title="%s: %s"' % (esc(L), esc(ptext[:120]))
+                ptext = pmap.get(L, "").replace('"', "")
+                tip = ' title="%s: %s"' % (esc(L), esc(ptext[:120])) if ptext else ""
                 parts.append('<li class="opt" data-letter="%s"%s>%s</li>' % (esc(L), tip, letter))
             elif imgs:
                 img = imgs.get(L, "")
@@ -349,8 +438,10 @@ def render_item(item, tarea):
                 parts.append('<li class="opt" data-letter="%s">%s<span class="otxt" lang="es">%s</span></li>'
                              % (esc(L), letter, esc(txt)))
         if letteronly:
-            parts.append('<li class="opthint" aria-hidden="true">在上方 A–J 卡片里选一项</li>')
-        body = '<ul class="%s">%s</ul>' % (cls, "".join(parts))
+            hint = "在上方 A–J 卡片里选一项" if pmap else "在上方图片卡片里选一项"
+            parts.append('<li class="opthint" aria-hidden="true">%s</li>' % hint)
+        # 逐题音频放在题干之前，先听再答
+        body = aud_html(item.get("aud"), "第 %d 题录音" % dn) + '<ul class="%s">%s</ul>' % (cls, "".join(parts))
 
     # 解析 / 说明
     an = ""
@@ -366,7 +457,7 @@ def render_item(item, tarea):
         an = "正确答案：<b>%s</b>%s" % (esc(ans), (" · " + esc(right)) if right else "")
     elif kind == "match":
         ans = item["ans"]
-        pmap = {l: t for l, t in (tarea.get("pool") or [])}
+        pmap = dict(tarea.get("pool") or [])
         an = "正确答案：<b>%s</b>%s" % (esc(ans), ("\n" + pmap.get(ans, "")) if pmap.get(ans) else "")
     elif kind == "fill":
         an = "可接受答案：<b>%s</b>" % " / ".join(esc(a) for a in item["ans"].split("|"))
@@ -374,32 +465,141 @@ def render_item(item, tarea):
         an += "\n" + esc(item["why"])
     ansblock = '<details class="ans"><summary>看解析</summary><div class="anbody">%s</div></details>' % an
 
-    return ('<li class="q" id="q%d" data-n="%d"%s data-ans="%s">%s%s%s%s</li>'
-            % (n, n,
+    return ('<li class="q" id="q%d" data-n="%d"%s data-ans="%s" data-part="%s">%s%s%s%s</li>'
+            % (dn, dn,
                ' data-kind="fill"' if kind == "fill" else "",
-               esc(item["ans"]), stem, body, ansblock, QK.verdict_html() + QK.act_html(1)))
+               esc(item["ans"]),
+               "listen" if offset else "read",
+               stem, body, ansblock, QK.verdict_html() + QK.act_html(1)))
 
 
-def render_tarea(t):
+def render_tarea(t, offset=0, extra="", prefix="", chip=""):
     no = t["no"]
     kind = t["kind"]
     nitems = len(t["items"])
     nopts = len((t["items"][0].get("opts") or [])) if t["items"][0].get("opts") else None
     hdr = ('<div class="thd"><span class="tno">Tarea %d</span>'
-           '<span class="tq">题 %d – %d</span>'
+           '<span class="tq">题 %d – %d</span>%s'
            '<span class="tkind">%s</span></div>'
-           % (no, t["qfrom"], t["qto"], esc(kind_cn(kind, nitems, nopts))))
-    parts = ['<section class="tarea" id="t%d">%s' % (no, hdr)]
+           % (no, t["qfrom"] + offset, t["qto"] + offset, chip,
+              esc(kind_cn(kind, nitems, nopts))))
+    parts = ['<section class="tarea" id="%st%d">%s' % (prefix, no, hdr)]
     parts.append('<p class="inst" lang="es">%s</p>' % esc(t["inst"]))
     if t.get("note"):
         parts.append('<div class="notice"><b>注</b><span>%s</span></div>' % esc(t["note"]))
     parts.append(render_source(t.get("source")))
+    parts.append(aud_html(t.get("example", {}).get("aud"), "示例录音"))
     parts.append(render_example(t.get("example")))
+    parts.append(aud_html(t.get("audio"), "听力音频 · 本 Tarea 全部题目（可反复播放）"))
+    parts.append(render_pool_imgs(t.get("pool_imgs"), t.get("pool_letters") or ""))
     parts.append(render_pool(t.get("pool")))
     parts.append('<ol class="qlist">%s</ol>'
-                 % "".join(render_item(it, t) for it in t["items"]))
+                 % "".join(render_item(it, t, offset) for it in t["items"]))
+    parts.append(extra)
     parts.append("</section>")
     return "".join(parts)
+
+
+# ---------------------------------------------------------------- 听力（Prueba 2）
+_TRANS_CACHE = {}
+
+# 听力原文出处（官方 transcript 解析结果）。2009 真题官方从未发布原文。
+TRANS_SRC = {
+    "a1-modelo0-2020": "parse/audio_text/m0_2020_trans.txt",
+    "a1-modelo0-2008": "parse/audio_text/m0_2008_trans.txt",
+    "a1-2011": "parse/audio_text/a1_2011_trans.txt",
+}
+_KIND_CN = {"mc": "mc", "match": "match", "fill": "fill"}
+
+
+def _segments(slug):
+    if slug not in _TRANS_CACHE:
+        path = TRANS_SRC.get(slug)
+        try:
+            txt = open(os.path.join(HERE, path), encoding="utf-8").read()
+            _TRANS_CACHE[slug] = parse_trans.parse(txt)
+        except Exception:
+            _TRANS_CACHE[slug] = []
+    return _TRANS_CACHE[slug]
+
+
+def _clean_trans_line(txt):
+    """去掉官方的技术性舞台指示（括号内容，不该被朗读、也会泄题）。"""
+    import re
+    t = re.sub(r"\([^)]*\)", " ", txt)
+    t = re.sub(r"\s+", " ", t).strip()
+    return t
+
+
+def render_transcript(slug, tarea_no):
+    """听力原文折叠块：逐段列出，段前标「第 N 题 / 示例」。"""
+    segs = [s for s in _segments(slug) if s["tarea"] == tarea_no]
+    if not segs:
+        return ""
+    blocks = []
+    for s in segs:
+        tag = s["tag"]
+        label = "示例" if tag == "ex0" else ("第 %s 题" % tag[1:] if tag.startswith("q") else tag)
+        lines = []
+        for who, body in s["lines"]:
+            body = _clean_trans_line(body)
+            if not body:
+                continue
+            lines.append('<p><span class="who">%s:</span>%s</p>' % (esc(who.title() if who.isupper() else who), esc(body)))
+        if lines:
+            blocks.append('<div class="seg"><div class="stag">%s</div>%s</div>' % (esc(label), "".join(lines)))
+    if not blocks:
+        return ""
+    return ('<details class="trans"><summary>查看听力原文 Transcript（建议作答后再看）</summary>'
+            '<div class="tbody" lang="es">%s</div></details>' % "".join(blocks))
+
+
+def render_ltarea(t, slug, offset=LISTEN_OFFSET):
+    """听力 Tarea：图片选项 / 图片池 / 逐题音频 由 data_audio 的字段驱动。"""
+    items = []
+    item_audio = t.get("item_audio") or []
+    for i, it in enumerate(t["items"]):
+        it = dict(it)
+        if t.get("imgbase"):
+            it["imgs"] = {L: "img/audio/%s_q%d_%s.jpg" % (t["imgbase"], it["n"], L)
+                          for L in t["letters"]}
+            # 让 Tarea 表头的题型标签也能数出「A / B / C（/ D）」
+            it.setdefault("opts", [[L, ""] for L in t["letters"]])
+        if i < len(item_audio):
+            it["aud"] = item_audio[i]
+        items.append(it)
+
+    t2 = dict(t)
+    t2["items"] = items
+    if t.get("example") and t.get("audio_intro"):
+        t2["example"] = dict(t["example"], aud=t["audio_intro"])
+    return render_tarea(t2, offset, extra=render_transcript(slug, t["no"]), prefix="l",
+                        chip='<span class="tq grey">原卷 Prueba 2 · 第 %d – %d 题</span>'
+                             % (t["qfrom"], t["qto"]))
+
+
+def render_listening(slug):
+    L = LISTENING.get(slug)
+    if not L:
+        return "", 0, ""
+    items_total = sum(len(t["items"]) for t in L["tareas"])
+    tareas = "".join(render_ltarea(t, slug) for t in L["tareas"])
+    note = esc(L.get("audio_note", ""))
+    if L.get("no_audio"):
+        head = ('<div class="blind"><b>本套无音频</b>：Instituto Cervantes 只为该场次公开了题目与答案，'
+                '从未发布录音，也没有听力原文，因此这里只能看题型与答案，无法播放。</div>')
+    else:
+        head = ('<div class="spdbar">'
+                '<span class="spd-lbl">播放速度</span>'
+                '<button class="spd" data-rate="0.75" type="button">0.75×</button>'
+                '<button class="spd on" data-rate="1" type="button">1×</button>'
+                '<button class="spd" data-rate="1.25" type="button">1.25×</button>'
+                '<button class="spd" data-rate="1.5" type="button">1.5×</button>'
+                '<span class="spd-tip">音频不点不下载，点播放键即可听。建议先按正常语速做一遍，'
+                '对答案后再放慢重听；每题都能单独重播。'
+                + (("　来源：%s" % note) if note else "") + '</span>'
+                '</div>')
+    return tareas, items_total, head
 
 
 def render_writing(ws):
@@ -421,12 +621,108 @@ def render_writing(ws):
 
 
 # ---------------------------------------------------------------- 页面
+# 分部统计（阅读 / 听力各自算分）：引擎不认识「分部」概念，这里补一条小脚本，
+# 每次交互后从 localStorage 重算，不动 quizkit.py（TOEIC / AWS 共用那份）。
+PARTSTAT_JS = r"""
+(function(){
+"use strict";
+var KEY="quiz:__STORE__";
+function fmt(d,o){return d?(d+"/25 · 正确率 "+Math.round(o/d*100)+"%"):"未开始"}
+function upd(){
+  var S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+  var R=[0,0],L=[0,0];
+  Object.keys(S).forEach(function(k){
+    var n=parseInt(k,10);if(!n)return;
+    var r=S[k];if(!r||r.ok===null||r.revealed)return;
+    var t=(n<=25)?R:L;t[0]++;if(r.ok)t[1]++;
+  });
+  var a=document.getElementById("ps-r"),b=document.getElementById("ps-l");
+  if(a){a.textContent=fmt(R[0],R[1]);a.className=R[0]?"on":""}
+  if(b){b.textContent=fmt(L[0],L[1]);b.className=L[0]?"on":""}
+}
+document.addEventListener("click",function(){setTimeout(upd,0)});
+document.addEventListener("input",function(){setTimeout(upd,0)});
+document.addEventListener("keydown",function(){setTimeout(upd,0)});
+window.addEventListener("load",upd);
+/* 引擎每次判定都会改写 #s-done，用它当信号最可靠（点击 / 回车 / 重做 / 清空全覆盖） */
+(function(){
+  var a=document.getElementById("s-done");
+  if(a&&window.MutationObserver){
+    new MutationObserver(upd).observe(a,{childList:true,characterData:true,subtree:true});
+  }
+})();
+upd();
+})();
+"""
+
+# 听力倍速 + 段落跳转
+AUDIO_JS = r"""
+(function(){
+"use strict";
+function qa(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+qa(".spdbar button.spd").forEach(function(b){
+  b.addEventListener("click",function(){
+    var r=parseFloat(b.getAttribute("data-rate"))||1;
+    qa("audio").forEach(function(a){try{a.playbackRate=r}catch(e){}});
+    qa(".spdbar button.spd").forEach(function(x){x.classList.remove("on")});
+    b.classList.add("on");
+  });
+});
+function jump(id,sec){
+  var b=document.getElementById(id);if(!b)return;
+  b.addEventListener("click",function(){
+    var e=document.getElementById(sec);
+    if(e)e.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+}
+jump("btn-jump-l","listening");
+jump("btn-jump-w","writing");
+})();
+"""
+
+
 def page_set(s):
     slug = s["slug"]
-    total = sum(len(t["items"]) for t in s["tareas"])
+    read_total = sum(len(t["items"]) for t in s["tareas"])
+    listen_tareas, listen_total, listen_head = render_listening(slug)
+    total = read_total + listen_total
     tareas = "".join(render_tarea(t) for t in s["tareas"])
     writing = render_writing(s["writing"])
-    title = "%s · DELE A1 练习册" % s["title"]
+    title = "%s · DELE A1 阅读+写作+听力" % s["title"]
+    store = "dele-a1-" + slug
+    partstat = '<div class="partstat"><span><b>阅读 Prueba 1</b> <i id="ps-r">未开始</i></span>'
+    if listen_total:
+        partstat += '<span><b>听力 Prueba 2</b> <i id="ps-l">未开始</i></span>'
+    partstat += '</div>'
+    listen_block = ""
+    if listen_tareas:
+        listen_block = """
+  <section class="block" id="listening">
+    <h2>Prueba 2 · Comprensión auditiva <span class="pill">%(lt)d 题 · 即时判分</span></h2>
+    <p class="lead">先点每题（或每个 Tarea）的播放键听录音，再选答案 → 「确认作答」立即判定。
+      每题都能单独重播；右上角可调播放速度。听力与阅读共用一张答题卡，题号接续为第 26–50 题
+      （真题中 Prueba 2 是独立编号 1–25，这里为了统一答题卡顺延）。</p>
+    %(head)s
+    %(ltareas)s
+  </section>
+""" % {"lt": listen_total, "head": listen_head, "ltareas": listen_tareas}
+    else:
+        listen_block = """
+  <section class="block" id="listening">
+    <h2>Prueba 2 · Comprensión auditiva <span class="pill grey">官方未公开</span></h2>
+    <div class="blind"><b>本套没有听力</b>：Instituto Cervantes 对 2020 年 7 月这场考试
+      只公开了 Prueba 1（阅读）与 Prueba 3（写作）的原卷，没有公开 Prueba 2 的听力试卷，
+      也没有配套录音，因此本套无法提供听力。想看听力请回到首页选其它 4 套。</div>
+  </section>
+"""
+    meta = ['<li>Prueba 1 · 阅读 25 题</li>']
+    if listen_tareas:
+        meta.append('<li>Prueba 2 · 听力 25 题</li>')
+    else:
+        meta.append('<li>Prueba 2 · 听力（官方未公开）</li>')
+    meta.append('<li>Prueba 3 · 写作 2 题</li>')
+    meta.append('<li>共 %d 题可判分</li>' % total)
+    meta_html = "".join(meta)
     html = """<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -443,10 +739,7 @@ def page_set(s):
     <h1>%(h1)s</h1>
     <p class="sub">%(sub)s</p>
     <ul class="meta">
-      <li>Prueba 1 · 阅读 %(total)d 题</li>
-      <li>Prueba 3 · 写作 2 题</li>
-      <li>阅读限时 45 分钟</li>
-      <li>可即时判分</li>
+      %(meta)s
     </ul>
   </div>
 </header>
@@ -459,21 +752,24 @@ def page_set(s):
       <button id="btn-report" type="button">交卷看成绩</button>
       <button id="btn-wrong" type="button">只看错题</button>
       <button id="btn-expand" type="button">展开全部解析</button>
+      <button id="btn-jump-l" class="jump" type="button">跳到听力 →</button>
+      <button id="btn-jump-w" class="jump" type="button">跳到写作 →</button>
       <button id="btn-reset" type="button">清空重做</button>
     </div>
     %(bar)s
+    %(partstat)s
   </div>
 </div>
 
 <main>
 <div class="wrap">
   <section class="block" id="reading">
-    <h2>Prueba 1 · Comprensión de lectura <span class="pill">%(total)d 题 · 即时判分</span></h2>
+    <h2>Prueba 1 · Comprensión de lectura <span class="pill">25 题 · 即时判分</span></h2>
     <p class="lead">点选项 → 「确认作答」→ 立即判定并显示正确答案与解析；填空题手写输入后按回车即可。
       进度自动保存在本机浏览器，随时可继续。</p>
     %(tareas)s
   </section>
-
+%(listen)s
   <section class="block" id="writing">
     <h2>Prueba 3 · Expresión e interacción escritas <span class="pill grey">题目 + 范文</span></h2>
     <p class="lead">写作不自动判分。建议先在纸上或输入法里写一遍，再展开参考答案对照。范文仅为一种可行写法，非唯一标准。</p>
@@ -487,6 +783,8 @@ def page_set(s):
   <div class="wrap">
     <div><b>题目来源</b>：Instituto Cervantes 公开发布的 DELE A1 官方样卷与往届真题（<span lang="es">Modelo 0 / convocatorias oficiales</span>），
       版权归 Instituto Cervantes 所有，此处仅用于个人学习与自测。</div>
+    <div><b>听力音频</b>：2020 样卷用官方公开的真人录音；2008 / 2011 官方未发布音频，
+      按官方 <span lang="es">transcripción</span> 用神经语音合成；2009 真题官方从未公布录音与原文，故该套听力无音频。</div>
     <div><b>说明</b>：答案依据官方 <span lang="es">Clave de respuestas</span> 逐题核对；长文本页因原 PDF 文本层为图片/自定义编码，
       由逐页视觉重建，如发现个别拼写差异以官方原件为准。</div>
     <div style="margin-top:8px"><a href="index.html">← 返回全部试卷</a></div>
@@ -495,33 +793,46 @@ def page_set(s):
 
 %(sheet)s
 %(js)s
+%(partstat_js)s
+%(audio_js)s
 </body>
 </html>
 """ % {
         "title": esc(title), "base": BASE_CSS, "engine": QK.CSS, "resp": RESP_CSS,
         "badge": esc(s["badge"]), "h1": esc(s["title"]), "sub": esc(s["subtitle"]),
         "total": total, "bar": QK.bar_html(total), "tareas": tareas, "writing": writing,
-        "sheet": QK.sheet_html(total), "js": QK.js("dele-a1-" + slug, total),
+        "listen": listen_block, "partstat": partstat, "meta": meta_html,
+        "sheet": QK.sheet_html(total), "js": QK.js(store, total),
+        "partstat_js": "<script>" + PARTSTAT_JS.replace("__STORE__", store) + "</script>",
+        "audio_js": "<script>" + AUDIO_JS + "</script>" if listen_tareas else "",
     }
     with open(os.path.join(OUT, slug + ".html"), "w", encoding="utf-8") as f:
         f.write(html)
-    return total
+    return read_total, listen_total
 
 
 def page_index(totals):
     cards = []
     for s in SETS:
-        total = totals[s["slug"]]
+        rt, lt = totals[s["slug"]]
+        L = LISTENING.get(s["slug"]) or {}
+        listen_tag = ""
+        if lt:
+            if L.get("no_audio"):
+                listen_tag = '<span class="tg">听力 %d 题 · 无音频</span>' % lt
+            else:
+                listen_tag = '<span class="tg">听力 %d 题</span>' % lt
         cards.append(
             '<a class="card" href="%(slug)s.html" data-quiz-key="dele-a1-%(slug)s" data-quiz-total="%(total)d">'
             '<div class="no">试卷 %(no)d</div>'
             '<h3>%(h1)s</h3>'
             '<p class="sd">%(sub)s</p>'
-            '<div class="tags"><span class="tg b">%(badge)s</span><span class="tg">阅读 %(total)d 题</span>'
-            '<span class="tg">写作 2 题</span></div>'
+            '<div class="tags"><span class="tg b">%(badge)s</span><span class="tg">阅读 %(rt)d 题</span>'
+            '%(ltag)s<span class="tg">写作 2 题</span></div>'
             '<div class="pg"><i></i><span>未开始</span></div>'
             '</a>' % {
-                "slug": s["slug"], "no": s["no"], "total": total,
+                "slug": s["slug"], "no": s["no"], "total": rt + lt,
+                "rt": rt, "ltag": listen_tag,
                 "h1": esc(s["title"]), "sub": esc(s["subtitle"]), "badge": esc(s["badge"]),
             })
     html = """<!DOCTYPE html>
@@ -529,14 +840,14 @@ def page_index(totals):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DELE A1 阅读 + 写作 · 官方真题练习册</title>
+<title>DELE A1 阅读 + 写作 + 听力 · 官方真题练习册</title>
 <style>%(base)s%(idx)s%(resp)s</style>
 </head>
 <body>
 <header class="idx-hd">
   <div class="wrap">
-    <h1>DELE A1 · 阅读 + 写作练习册</h1>
-    <p>Instituto Cervantes 官方公开的 4 套 A1 试卷 · 阅读 25 题可即时判分 · 写作附参考答案</p>
+    <h1>DELE A1 · 阅读 + 写作 + 听力</h1>
+    <p>Instituto Cervantes 官方公开的 5 套 A1 试卷 · 每套阅读 25 题可即时判分 · 其中 4 套另有听力 25 题（含官方真人录音与合成音频）· 写作附参考答案</p>
   </div>
 </header>
 
@@ -545,10 +856,12 @@ def page_index(totals):
     <div class="howto">
       <h2>怎么用</h2>
       <ol>
-        <li>每套试卷 25 道阅读题，点选项后按「确认作答」立即判定，并显示正确答案与解析。</li>
-        <li>第 4 个 Tarea 是「手写填空」，直接输入单词后按回车即可。</li>
-        <li>顶栏可打开<b>答题卡</b>跳题、<b>交卷看成绩</b>、<b>只看错题</b>；作答进度存在本机浏览器。</li>
-        <li>写作两题不判分，建议先自己写，再展开参考答案对照。</li>
+        <li>每套 <b>阅读 25 题</b>（第 1–25 题）；其中 4 套还有 <b>听力 25 题</b>（第 26–50 题）。点选项后按「确认作答」立即判定。</li>
+        <li><b>听力</b>先点播放键听录音再答题；每个 Tarea 有一段完整音频，每题也能单独重播，侧栏可切 0.75× / 1× / 1.25× / 1.5× 倍速，做完还能展开听力原文核对。</li>
+        <li>第 4 个 Tarea 常是「手写填空」，直接输入单词后按回车即可。</li>
+        <li>侧栏（手机在顶部）可打开<b>答题卡</b>跳题、<b>交卷看成绩</b>、<b>只看错题</b>，并随时看到阅读 / 听力<b>分部正确率</b>；作答进度存在本机浏览器。</li>
+        <li>Prueba 3 写作两题不判分，建议先自己写，再展开参考答案对照。</li>
+        <li>2009 年那套真题，官方从未发布听力录音与原文，因此那套听力只能看题型与答案、无法播放；2020 年 7 月那套官方只公开了阅读与写作，没有听力。</li>
       </ol>
     </div>
     <div class="cards">%(cards)s</div>
@@ -575,15 +888,24 @@ def main():
     if os.path.isdir(dst_img):
         shutil.rmtree(dst_img)
     shutil.copytree(src_img, dst_img)
+    # 音频（12MB）直接复制，不做删减
+    src_aud = os.path.join(HERE, "audio")
+    dst_aud = os.path.join(OUT, "audio")
+    if os.path.isdir(dst_aud):
+        shutil.rmtree(dst_aud)
+    shutil.copytree(src_aud, dst_aud)
     for f in os.listdir(dst_img):
-        if f.startswith("_"):
+        if f.startswith("_") and os.path.isfile(os.path.join(dst_img, f)):
             os.remove(os.path.join(dst_img, f))
     totals = {}
     for s in SETS:
         totals[s["slug"]] = page_set(s)
-        print("built", s["slug"], totals[s["slug"]])
+        print("built", s["slug"], "阅读 %d + 听力 %d" % totals[s["slug"]])
     page_index(totals)
     print("built index.html")
+    print("音频文件 %d 个 / %.1f MB" % (
+        len(os.listdir(dst_aud)), sum(os.path.getsize(os.path.join(dst_aud, f))
+                                      for f in os.listdir(dst_aud)) / 1048576))
 
 
 if __name__ == "__main__":
