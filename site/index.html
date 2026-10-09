@@ -143,7 +143,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">7 个题库 · 共 3901 题 · 可作答判分 · 进度自动保存在本机浏览器</p>
+      <p class="sub">7 个题库 · 共 4061 题次 · 可作答判分 · 进度自动保存在本机浏览器</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <ul class="meta">
@@ -184,7 +184,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 3901</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4061</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -230,9 +230,9 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="fe/index.html" data-site="fe">
-        <div class="top"><span class="tg g">日本 IT 资格考试</span><span class="cnt">184 题</span></div>
+        <div class="top"><span class="tg g">日本 IT 资格考试</span><span class="cnt">344 题次</span></div>
         <h3>基本情報技術者</h3>
-        <p class="sd">先选择科目 A 或科目 B：2022 官方样题，以及 2023–2026 年度公开题。日文原题，可作答判分。</p>
+        <p class="sd">先选择科目 A 或科目 B；各有三套 A60 / B20 完整练习结构，另保留 2023–2026 年度公开题。B 组卷含重复题。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
     </div>
@@ -343,7 +343,8 @@ var SITES={
   "aws-clf":{keys:seq("aws:clf:",1,4,50)},
   "aws-aif":{keys:aifKeys()},
   "fe":{keys:[["fe:a:2022",60],["fe:a:2023",20],["fe:a:2024",20],["fe:a:2025",20],["fe:a:2026",20],
-              ["fe:b:2022",20],["fe:b:2023",6],["fe:b:2024",6],["fe:b:2025",6],["fe:b:2026",6]]}
+              ["fe:b:2022",20],["fe:b:2023",6],["fe:b:2024",6],["fe:b:2025",6],["fe:b:2026",6],
+              ["fe:a:paper-2",60],["fe:a:paper-3",60],["fe:b:paper-2",20],["fe:b:paper-3",20]]}
 };
 function read(keys){
   var d=0,o=0;

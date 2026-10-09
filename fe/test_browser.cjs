@@ -46,6 +46,24 @@ const fs = require('fs');
   await page.goto('http://localhost:8765/fe/b.html?year=2023');
   await page.getByRole('heading', { name: '第 1 题 · 2023 年度 科目 B' }).waitFor();
   if (await page.locator('.question-nav button').count() !== 6) throw Error('2023 B public set must have 6 questions');
+  for (const paper of [2, 3]) {
+    for (const subject of ['a', 'b']) {
+      await page.goto(`http://localhost:8765/fe/${subject}.html?paper=${paper}`);
+      await page.getByRole('heading', { name: new RegExp(`第 1 题 · 第 ${paper} 套`) }).waitFor();
+      const expected = subject === 'a' ? 60 : 20;
+      if (await page.locator('.question-nav button').count() !== expected) throw Error(`Paper ${paper} ${subject} must have ${expected} questions`);
+      if (!(await page.locator('.source-credit').textContent()).includes('出典：')) throw Error('Source attribution missing');
+      if (!(await page.getByRole('link', { name: '题目原 PDF ↗' }).getAttribute('href')).startsWith('https://www.ipa.go.jp/')) throw Error('Original IPA PDF missing');
+      const correct = { '2-a': 'エ', '2-b': 'ア', '3-a': 'ウ', '3-b': 'エ' }[`${paper}-${subject}`];
+      await page.getByRole('button', { name: correct, exact: true }).click();
+      await page.getByRole('button', { name: '确认作答' }).click();
+      await page.getByRole('status').getByText(`回答正确 · 官方答案：${correct}`).waitFor();
+      await page.reload();
+      await page.getByRole('status').getByText(`回答正确 · 官方答案：${correct}`).waitFor();
+      if (subject === 'a') await page.screenshot({ path: `fe/shots/paper-${paper}-a.png`, fullPage: true });
+    }
+  }
+  await page.goto('http://localhost:8765/fe/b.html?year=2023');
   await page.screenshot({ path: 'fe/shots/browser-desktop.png', fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.reload();
@@ -56,8 +74,8 @@ const fs = require('fs');
   const feCards = page.locator('.cards a.card').filter({ hasText: '基本情報技術者' });
   if (await feCards.count() !== 1) throw Error('Homepage must show one FE category card');
   if (await feCards.first().getAttribute('href') !== 'fe/index.html') throw Error('FE card must open subject chooser');
-  if (!(await feCards.first().textContent()).includes('4/184')) throw Error('FE category must combine A and B progress');
-  if (!(await page.locator('#ov-txt').textContent()).includes('3901')) throw Error('Homepage total wrong');
+  if (!(await feCards.first().textContent()).includes('8/344')) throw Error('FE category must combine A and B progress');
+  if (!(await page.locator('#ov-txt').textContent()).includes('4061')) throw Error('Homepage total wrong');
   await feCards.first().click();
   await page.getByRole('link', { name: /科目 A 题库/ }).waitFor();
   await page.getByRole('link', { name: /科目 B 题库/ }).waitFor();

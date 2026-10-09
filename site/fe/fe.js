@@ -2,9 +2,11 @@
 "use strict";
 var subject=document.body.getAttribute("data-subject");
 var params=new URLSearchParams(location.search);
+var requestedPaper=Number(params.get("paper"));
+var paper=[2,3].indexOf(requestedPaper)>=0?requestedPaper:0;
 var requested=Number(params.get("year"));
-var year=[2022,2023,2024,2025,2026].indexOf(requested)>=0?requested:2026;
-var key="quiz:fe:"+subject+":"+year;
+var year=[2022,2023,2024,2025,2026].indexOf(requested)>=0?requested:2022;
+var key="quiz:fe:"+subject+":"+(paper?"paper-"+paper:year);
 var app=document.getElementById("app");
 var nav=document.getElementById("years");
 var current=0,chosen=null,exam=null,state={},storageError=false;
@@ -23,11 +25,17 @@ function readState(){
 }
 function saveState(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){storageError=true}}
 function yearNav(){
-  [2026,2025,2024,2023,2022].forEach(function(y){
+  [1,2,3].forEach(function(n){
+    var a=node("a","","第 "+n+" 套 · "+(n===1?"IPA 官方样题":subject==="a"?"科目 A 免除修了试验":"官方公开题组卷")+" · "+(subject==="a"?60:20)+" 题");
+    a.href=subject+".html"+(n===1?"?year=2022":"?paper="+n);
+    if((n===1&&!paper&&year===2022)||n===paper)a.setAttribute("aria-current","page");
+    nav.appendChild(a);
+  });
+  [2026,2025,2024,2023].forEach(function(y){
     var count=y===2022?(subject==="a"?60:20):(subject==="a"?20:6);
     var a=node("a","",y+(y===2022?" 官方样题":" 年度公开题")+" · "+count+" 题");
     a.href=subject+".html?year="+y;
-    if(y===year)a.setAttribute("aria-current","page");
+    if(!paper&&y===year)a.setAttribute("aria-current","page");
     nav.appendChild(a);
   });
 }
@@ -38,26 +46,31 @@ function score(){
 }
 function render(){
   var q=exam.questions[current],record=state[q.number];
+  var originalNumber=q.originNumber||q.number;
+  var sourcePage=q.sourcePage||exam.sourcePage;
+  var questionPdf=q.questionPdf||exam.questionPdf;
+  var answerPdf=q.answerPdf||exam.answerPdf;
+  var credit=q.sourceAttribution||exam.sourceAttribution;
   chosen=record&&record.selected?record.selected:null;
   app.replaceChildren();
   var article=node("article","panel");
   var heading=node("div","question-head");
   var titleBox=node("div");
-  titleBox.appendChild(node("h2","","第 "+q.number+" 题 · "+year+(exam.kind==="sample"?" 年官方样题":" 年度")+" 科目 "+subject.toUpperCase()));
-  titleBox.appendChild(node("p","","请阅读原题页中的「問"+q.number+"」，再选择答案。"));
+  titleBox.appendChild(node("h2","","第 "+q.number+" 题 · "+(paper?"第 "+paper+" 套":year+(exam.kind==="sample"?" 年官方样题":" 年度"))+" 科目 "+subject.toUpperCase()));
+  titleBox.appendChild(node("p","","请阅读原题页中的「問"+originalNumber+"」，再选择答案。"));
   heading.appendChild(titleBox);article.appendChild(heading);
   var sources=node("div","source-links");
-  sources.appendChild(link("IPA 官方来源页 ↗",exam.sourcePage));
-  sources.appendChild(link("题目原 PDF ↗",exam.questionPdf+"#page="+q.pages[0]));
-  sources.appendChild(link("官方答案 PDF ↗",exam.answerPdf));
+  sources.appendChild(link("IPA 官方来源页 ↗",sourcePage));
+  sources.appendChild(link("题目原 PDF ↗",questionPdf+"#page="+q.pages[0]));
+  sources.appendChild(link("官方答案 PDF ↗",answerPdf));
   article.appendChild(sources);
-  article.appendChild(node("p","source-credit",exam.sourceAttribution));
+  article.appendChild(node("p","source-credit",credit+" · 問"+originalNumber));
   q.images.forEach(function(src,i){
     var fig=node("figure","sheet");fig.style.margin="0 0 12px";
     var enlarged=link("",src);enlarged.setAttribute("aria-label","在新标签放大第 "+q.pages[i]+" 页题面");
-    var img=node("img");img.src=src;img.alt=year+" 年度科目 "+subject.toUpperCase()+" 第 "+q.number+" 题，官方 PDF 第 "+q.pages[i]+" 页";
+    var img=node("img");img.src=src;img.alt="科目 "+subject.toUpperCase()+" 原题第 "+originalNumber+" 题，官方 PDF 第 "+q.pages[i]+" 页";
     img.loading="lazy";enlarged.appendChild(img);fig.appendChild(enlarged);
-    fig.appendChild(node("figcaption","","点击题页可放大 · IPA 原题第 "+q.pages[i]+" 页 · © "+year+" IPA"));
+    fig.appendChild(node("figcaption","","点击题页可放大 · IPA 原题第 "+originalNumber+" 题，第 "+q.pages[i]+" 页 · © IPA"));
     article.appendChild(fig);
   });
   var answer=node("div","answer");
@@ -102,24 +115,27 @@ function render(){
     b.addEventListener("click",function(){current=index;render();window.scrollTo(0,0)});grid.appendChild(b);
   });
   side.appendChild(grid);
-  side.appendChild(node("p","fine","绿色 = 正确，红色 = 错误。进度只保存在本机浏览器；不同年度及科目互不混合。"));
+  side.appendChild(node("p","fine","绿色 = 正确，红色 = 错误。进度只保存在本机浏览器；不同套卷、年度及科目互不混合。"));
   if(storageError)side.appendChild(node("p","error","浏览器拒绝保存进度，本次作答在关闭页面后可能丢失。"));
   app.appendChild(side);
 }
 yearNav();
-fetch("data.json").then(function(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}).then(function(data){
-  exam=data.sets[year+"-"+subject];if(!exam)throw Error("找不到该卷");
+fetch(paper?"extra.json":"data.json").then(function(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}).then(function(data){
+  exam=data.sets[paper?"paper-"+paper+"-"+subject:year+"-"+subject];if(!exam)throw Error("找不到该卷");
   state=readState();
   var intro=document.getElementById("exam-intro");
   var subtitle=document.getElementById("exam-sub");
-  if(exam.kind==="sample"){
+  if(paper){
+    intro.textContent=subject==="a"?"这是 IPA 2025 年科目 A 免除修了试验的完整 60 题，适合按完整 A 卷练习；它不是 CBT 实考原卷。":"这是从 IPA 不同年份公开题与样题组成的 20 题练习卷，不是某次考试的完整真题。第 3 套有 10 题与第 1 套重复；来源按题标注。";
+    subtitle.textContent=exam.label+" · "+exam.questions.length+" 题";
+  }else if(exam.kind==="sample"){
     intro.textContent="这是 IPA 于 2022 年发布的新制科目 "+subject.toUpperCase()+" 官方样题（"+exam.questions.length+" 题），并非 2022 年旧制考试的实考卷。题目为日文原文，按原题号作答。";
     subtitle.textContent="2022 年官方样题 · "+exam.questions.length+" 题";
   }else{
     intro.textContent="这是 IPA "+year+" 年度公开的 "+exam.questions.length+" 道科目 "+subject.toUpperCase()+" 实考题，仅为部分试题；实际考试为 "+(subject==="a"?60:20)+" 题。本卷不是完整考试卷。";
     subtitle.textContent=year+" 年度公开题 · "+exam.questions.length+" 题";
   }
-  var notation=document.getElementById("notation-link");if(notation)notation.href=exam.questionPdf+"#page=2";
+  var notation=document.getElementById("notation-link");if(notation)notation.href=paper?"https://www.ipa.go.jp/shiken/syllabus/henkou/2022/ssf7ph000000h5tb-att/fe_kamoku_b_set_sample_qs.pdf#page=2":exam.questionPdf+"#page=2";
   render();
 }).catch(function(error){
   app.replaceChildren(node("div","panel error","题库加载失败："+error.message+"。请刷新页面重试。"));
