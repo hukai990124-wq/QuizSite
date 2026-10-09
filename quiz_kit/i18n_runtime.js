@@ -24,7 +24,7 @@
   /* 与 quiz_kit/_extract_ui.py 的 decide() 同源：由【最近的带 class 祖先（含自身）】
      决定归属；命中 WHITE → 可翻译，命中 BLACK → 跳过，都没有 → 继续向上。 */
   var WHITE = {};
-  ("hero idx-hd idx-main toolbar tbin btns qbar qact sheet mask report howto " +
+  ("hero idx-hd idx-main toolbar tbin btns qbar qact sheet mask report howto author-dialog " +
    "verdict scroll-hint notice card cards tags tg pg no sd meta badge sub ov-hd " +
    "ov-bar need lang-foot").split(" ").forEach(function (c) { WHITE[c] = 1; });
 

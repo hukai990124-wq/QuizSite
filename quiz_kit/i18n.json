@@ -1,5 +1,21 @@
 {
  "_comment": "题库站点 UI 三语字典 · 中文原文 → 英文 / 日文。只覆盖界面文案，题目、选项、解析一律不翻译。key 必须与页面文本节点规范化后（trim + 空白折叠为单空格）完全一致。",
+ "联系作者": {
+  "en": "Contact author",
+  "ja": "作者に連絡"
+ },
+ "题库作者": {
+  "en": "Quiz bank author",
+  "ja": "問題集の作者"
+ },
+ "欢迎通过 GitHub 联系，题目、答案或页面方面的反馈都很欢迎。": {
+  "en": "Contact me on GitHub. Feedback about questions, answers, or the site is welcome.",
+  "ja": "GitHub からお問い合わせください。問題、解答、サイトに関するご意見を歓迎します。"
+ },
+ "关闭弹窗": {
+  "en": "Close dialog",
+  "ja": "ダイアログを閉じる"
+ },
  "AWS CLF-C02": {
   "en": "AWS CLF-C02",
   "ja": "AWS CLF-C02"
