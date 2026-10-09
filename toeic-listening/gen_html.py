@@ -15,10 +15,9 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 BASE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, r"C:/Users/75729/WorkBuddy/2026-10-05-22-16-32/quiz_kit")
+sys.path.insert(0, os.path.join(os.path.dirname(BASE), "quiz_kit"))
 import quizkit as Q  # noqa: E402
 
-TESTS = json.load(open(os.path.join(BASE, 'parsed', 'tests.json'), encoding='utf-8'))
 
 DIRS = {
     'p1': 'For each question, you will listen to four short statements about a photograph. '
@@ -311,36 +310,43 @@ def strip_text(g):
     return (lab + ' — ' if lab else '') + strip_tags(g.get('html', ''))
 
 
-files = []
-for t in TESTS:
-    m = t['mock']
-    fn = f'TOEIC_Listening_Test_{m:02d}.html'
-    open(os.path.join(BASE, fn), 'w', encoding='utf-8').write(render(t))
-    mfn = f'TOEIC_Listening_Test_{m:02d}.md'
-    open(os.path.join(BASE, mfn), 'w', encoding='utf-8').write(render_md(t))
-    files.append((m, fn))
-    print('written:', fn, '/', mfn)
 
-IDX = """
-body{margin:0;background:#eceff1;font:16px/1.55 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:#1b1b1b}
-.wrap{max-width:880px;margin:0 auto;background:#fff;padding:34px 42px 70px;box-shadow:0 1px 8px rgba(0,0,0,.08)}
-h1{font-size:26px;margin:0 0 8px}
-.meta{color:#5b6570;font-size:14px;margin:2px 0 22px}
-"""
-cards = []
-for m, fn in files:
-    cards.append('<a class="card" href="%s" data-quiz-key="%s" data-quiz-total="100">'
-                 '<div class="t">TOEIC Listening Practice Test %02d</div>'
-                 '<div class="s">100 题 · Part 1–4 · 带音频，可作答判分</div>'
-                 '<div class="pg"><i></i><span>未开始</span></div></a>'
-                 % (fn, f"toeic-l:t{m:02d}", m))
-idx = (f'<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">'
-       f'<meta name="viewport" content="width=device-width,initial-scale=1">'
-       f'<title>TOEIC Listening 练习</title><style>{IDX}{Q.IDX_CSS}</style></head><body><div class="wrap">'
-       f'<h1>TOEIC® Listening 练习 · 4 套</h1>'
-       f'<p class="meta">每套 100 题：Part 1（6）+ Part 2（25）+ Part 3（39）+ Part 4（30），约 45 分钟。<br>'
-       f'进卷后点「▶」听录音 → 选答案 →「确认作答」即刻判对错；正确率与进度自动保存在本机浏览器。<br>'
-       f'音频为电脑合成（TTS），非真人录音。手机可用，Safari 加到主屏幕即可离线练。</p>'
-       + "\n".join(cards) + '</div>' + Q.index_script() + '</body></html>')
-open(os.path.join(BASE, 'index.html'), 'w', encoding='utf-8').write(idx)
-print('written: index.html')
+def main():
+    tests = json.load(open(os.path.join(BASE, 'parsed', 'tests.json'), encoding='utf-8'))
+    files = []
+    for t in tests:
+        m = t['mock']
+        fn = f'TOEIC_Listening_Test_{m:02d}.html'
+        open(os.path.join(BASE, fn), 'w', encoding='utf-8').write(render(t))
+        mfn = f'TOEIC_Listening_Test_{m:02d}.md'
+        open(os.path.join(BASE, mfn), 'w', encoding='utf-8').write(render_md(t))
+        files.append((m, fn))
+        print('written:', fn, '/', mfn)
+
+    IDX = """
+    body{margin:0;background:#eceff1;font:16px/1.55 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:#1b1b1b}
+    .wrap{max-width:880px;margin:0 auto;background:#fff;padding:34px 42px 70px;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+    h1{font-size:26px;margin:0 0 8px}
+    .meta{color:#5b6570;font-size:14px;margin:2px 0 22px}
+    """
+    cards = []
+    for m, fn in files:
+        cards.append('<a class="card" href="%s" data-quiz-key="%s" data-quiz-total="100">'
+                     '<div class="t">TOEIC Listening Practice Test %02d</div>'
+                     '<div class="s">100 题 · Part 1–4 · 带音频，可作答判分</div>'
+                     '<div class="pg"><i></i><span>未开始</span></div></a>'
+                     % (fn, f"toeic-l:t{m:02d}", m))
+    idx = (f'<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">'
+           f'<meta name="viewport" content="width=device-width,initial-scale=1">'
+           f'<title>TOEIC Listening 练习</title><style>{IDX}{Q.IDX_CSS}</style></head><body><div class="wrap">'
+           f'<h1>TOEIC® Listening 练习 · 4 套</h1>'
+           f'<p class="meta">每套 100 题：Part 1（6）+ Part 2（25）+ Part 3（39）+ Part 4（30），约 45 分钟。<br>'
+           f'进卷后点「▶」听录音 → 选答案 →「确认作答」即刻判对错；正确率与进度自动保存在本机浏览器。<br>'
+           f'音频为电脑合成（TTS），非真人录音。手机可用，Safari 加到主屏幕即可离线练。</p>'
+           + "\n".join(cards) + '</div>' + Q.index_script() + '</body></html>')
+    open(os.path.join(BASE, 'index.html'), 'w', encoding='utf-8').write(idx)
+    print('written: index.html')
+
+
+if __name__ == '__main__':
+    main()

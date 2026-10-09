@@ -1,4 +1,38 @@
-# TOEIC® Listening 练习 · 4 套（带音频 + 可作答判分）
+# TOEIC® Listening 练习 · 6 套（带音频 + 可作答判分）
+
+## 第 05 / 06 套：英美混音强化练习
+
+两套均为 100 题：Part 1 × 6、Part 2 × 25、Part 3 × 39、Part 4 × 30。
+沿用现有逐题答题、即时判分、错题筛选、答题卡、交卷和本机进度保存。
+
+题目来自 [TOEIC Question Ocean](https://github.com/kdeppaei/toeic-question-ocean)，
+固定版本 `a940bb8b479ef4d06af468015d757041c3d2e457`；为 MIT 许可的原创模拟，
+不是 ETS 官方真题。版权声明见 `LICENSE-OCEAN.txt`。
+新增图片均为该项目的原创 AI 商务场景，未使用其 Pexels 照片。
+中文解析保留原文；选项作确定性重排，答案和录音同步调整。
+优先抽取原库标注的中高难度项目，平衡分配两套；标签不是经过校准的 TOEIC 分数。
+打印机图片题重写了干扰项和解析，以增强动作、状态辨别，已人工检查图片。
+
+短题逐题英美交替；每段长对话的男声固定英式、女声固定美式；独白按段交替。
+美式音色为 Microsoft Zira，英式为 Piper VCTK p226，均为合成音，不是官方或真人录音。
+模型只用于本地生成，不进入网页；网站播放的是 108 个本地 MP3 文件。
+语音来源及许可信息见 `AUDIO-NOTICES.md`。
+网页加载和首次播放需要网络；下载完整 HTML 和资源目录后可离线打开。
+
+### 复现与检查
+
+1. 将题源仓库检出到上述固定版本。
+2. `node toeic-listening/import_ocean.cjs ../toeic-question-ocean`
+3. Python 安装 `piper-tts==1.8.0`；Windows 安装 Microsoft Zira Desktop 语音，准备 FFmpeg。
+4. 下载 Piper 的 `en_GB-vctk-medium.onnx` 和同名 `.onnx.json`，执行
+   `python toeic-listening/synthesize_accent_audio.py --british-model <模型路径> --ffmpeg <FFmpeg路径>`。
+5. `python toeic-listening/build_extra_sets.py`
+6. `python -m unittest discover -s toeic-listening -p test_extra_sets.py -v`
+
+生成器复用 `gen_html.py` / `quiz_kit`，仅写入第 05 / 06 套；
+原四套题目、音频和进度键不会重建或迁移。
+
+下文是原第 01–04 套的来源说明，相关版权声明仅针对原四套。
 
 **4 套完整 TOEIC 听力**，每套 **100 题**，结构与现行 TOEIC L&R 考试的听力部分完全对齐：
 

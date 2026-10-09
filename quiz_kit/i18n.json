@@ -1,5 +1,21 @@
 {
  "_comment": "题库站点 UI 三语字典 · 中文原文 → 英文 / 日文。只覆盖界面文案，题目、选项、解析一律不翻译。key 必须与页面文本节点规范化后（trim + 空白折叠为单空格）完全一致。",
+ "TOEIC 听力 · 6 套": {
+  "en": "TOEIC Listening · 6 sets",
+  "ja": "TOEIC リスニング · 6セット"
+ },
+ "TOEIC® Listening 练习 · 6 套": {
+  "en": "TOEIC® Listening Practice · 6 sets",
+  "ja": "TOEIC® Listening 練習 · 6セット"
+ },
+ "600 题": {
+  "en": "600 questions",
+  "ja": "600問"
+ },
+ "100 题 · Part 1–4 · 英美混音强化练习": {
+  "en": "100 questions · Parts 1–4 · US/UK mixed-accent practice",
+  "ja": "100問 · Part 1–4 · 英米アクセント強化練習"
+ },
  "联系作者": {
   "en": "Contact author",
   "ja": "作者に連絡"

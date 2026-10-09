@@ -1,0 +1,2327 @@
+[
+  {
+    "audio": "audio/m5/p1-1.mp3",
+    "segments": [
+      {
+        "text": "A. A worker is measuring the width of a window frame.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. Some curtains are being hung.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The glass is being cleaned.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "D. The window frame is being painted.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p1-2.mp3",
+    "segments": [
+      {
+        "text": "A. The chairs have been stacked beside the wall.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. Several people are watching a presentation.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Tables are arranged around the edge of the room.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "D. Rows of chairs are facing a presentation screen.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p1-3.mp3",
+    "segments": [
+      {
+        "text": "A. Some sheets are being fed into an automatic document feeder.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The machine is being wheeled away from the wall.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. An office machine is being operated using a touch screen.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "D. A drawer beneath the control panel is being pulled open.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p1-4.mp3",
+    "segments": [
+      {
+        "text": "A. The windshield is being washed.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. A mechanic is replacing a tire.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Some boxes are being unloaded from the trunk.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "D. A charging cable is being connected to a vehicle.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p1-5.mp3",
+    "segments": [
+      {
+        "text": "A. Two commuters are comparing transit maps.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. Passengers are boarding a train.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. A traveler is buying a ticket from a machine.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "D. The transit shelter is completely empty.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p1-6.mp3",
+    "segments": [
+      {
+        "text": "A. A worker is adjusting a wall-mounted thermostat.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. A picture is being hung in a hallway.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. The wall is being painted.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "D. Some wiring is being removed from the ceiling.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-1.mp3",
+    "segments": [
+      {
+        "text": "Why was the mobile-login launch delayed?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. Because the encryption test took longer than expected.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The new badge scanner is beside the entrance.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. I can reserve a larger room.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-2.mp3",
+    "segments": [
+      {
+        "text": "Who has the latest revenue figures for the investor briefing?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. I think Mr. Alvarez has the latest figures.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. Only two boxes were delivered.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. The cafeteria closes at seven.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-3.mp3",
+    "segments": [
+      {
+        "text": "Should we postpone the software demonstration?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. It was demonstrated in the lobby.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. Let's wait for the client's reply first.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The software license is renewable.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-4.mp3",
+    "segments": [
+      {
+        "text": "The data migration will take two hours longer than expected.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The database contains customer records.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. It was expected by the technical team.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Then let's notify the evening-shift staff.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-5.mp3",
+    "segments": [
+      {
+        "text": "Who's taking minutes while Lena presents the quarterly forecast?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. I can, unless Martin has already volunteered.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. In the main conference room.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The forecast was revised twice.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-6.mp3",
+    "segments": [
+      {
+        "text": "Would you mind sending me the revised schedule?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. It was revised yesterday.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. Not at all. I'll send it right away.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Yes, the schedule changed.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-7.mp3",
+    "segments": [
+      {
+        "text": "Which route should we take to the airport?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. The expressway is usually faster.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. Our flight leaves at seven.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. I took a taxi yesterday.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-8.mp3",
+    "segments": [
+      {
+        "text": "Isn't Mr. Gomez attending the trade show?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. He works in marketing.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. No, he has another appointment.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. The trade show was successful.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-9.mp3",
+    "segments": [
+      {
+        "text": "What do you think of the new office layout?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. It's much easier to move around now.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The office moved last month.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. On the third floor.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-10.mp3",
+    "segments": [
+      {
+        "text": "Has the finance department approved the budget?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. Yes, it was very costly.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. Not yet, but they expect to finish today.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. The budget meeting is upstairs.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-11.mp3",
+    "segments": [
+      {
+        "text": "Didn't the technician replace this part yesterday?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. The part costs thirty dollars.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. Yesterday was very busy.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. No, the replacement hasn't arrived yet.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-12.mp3",
+    "segments": [
+      {
+        "text": "Could you tell me where the orientation is being held?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. It begins after lunch.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. The new employees attended.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. In the auditorium on the first floor.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-13.mp3",
+    "segments": [
+      {
+        "text": "Has the customer confirmed the delivery address?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. The delivery truck is outside.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. Yes, the package is heavy.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. Not yet, so I sent another e-mail.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-14.mp3",
+    "segments": [
+      {
+        "text": "Why hasn't the replacement part arrived?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. It fits this machine.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. We ordered two parts.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. The supplier shipped it to the wrong address.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-15.mp3",
+    "segments": [
+      {
+        "text": "Didn't you reserve the conference room?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. I tried, but it was already booked.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The conference lasted two hours.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The room is on the fifth floor.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-16.mp3",
+    "segments": [
+      {
+        "text": "Could you check whether the client received our proposal?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. Sure, I'll call this afternoon.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. The proposal is well written.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. We received two packages.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-17.mp3",
+    "segments": [
+      {
+        "text": "Hasn't the maintenance inspection finished yet?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. No, it will continue for another hour.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The inspector signed the form.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. Yes, the equipment is new.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-18.mp3",
+    "segments": [
+      {
+        "text": "May I borrow your access card for a moment?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The card reader is downstairs.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. I borrowed a laptop.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. I'm sorry, cards can't be shared.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-19.mp3",
+    "segments": [
+      {
+        "text": "Why was my membership renewal rejected?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. Your membership lasts a year.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The form is at the front desk.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The payment information was incomplete.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-20.mp3",
+    "segments": [
+      {
+        "text": "Could I exchange this jacket for a larger size?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The jacket is on sale.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. The fitting room is occupied.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Certainly, if you have the receipt.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-21.mp3",
+    "segments": [
+      {
+        "text": "Why hasn't the advertising copy been approved?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. The legal team requested a revision.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. It was copied in color.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The advertisement starts tomorrow.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-22.mp3",
+    "segments": [
+      {
+        "text": "Didn't the courier pick up the package this morning?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The package is lightweight.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. This morning was busy.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. No, the pickup was rescheduled.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-23.mp3",
+    "segments": [
+      {
+        "text": "When will the replacement sensor be delivered?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. I usually take the express train.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The vendor said it would arrive by Friday.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. Yes, the meeting room is upstairs.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-24.mp3",
+    "segments": [
+      {
+        "text": "Who is coordinating the AI ethics workshop?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. Yes, the tablet has a protective case.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. The dashboard was updated twice.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Please ask Mia; she manages the training calendar.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p2-25.mp3",
+    "segments": [
+      {
+        "text": "When should we begin the product-demo rehearsal?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. It is made of recycled paper.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The cafeteria is downstairs.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. Not until the consultant arrives.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-1.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "Ms. Owens, your résumé shows extensive experience in international sales. Could you tell me about your work in Singapore?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Certainly. I managed a team of twelve and helped increase regional revenue by eighteen percent.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Impressive. The next step is a video interview with our vice president.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-2.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "I tested the projector in Conference Room C, but the image is still too dark.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "The larger projector is available in Room A. We could move the presentation there.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Good idea. I'll tell the attendees about the room change.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-3.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "The product photos on our website look blurry on mobile phones.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "I can resize the image files this afternoon. We should also test the pages on several screen sizes.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Good. Please finish before the online sale begins tomorrow.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-4.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "The client wants us to demonstrate the reporting feature during tomorrow's video call.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Then we should use the test account rather than real customer data.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Agreed. I'll prepare a sample report and send you the login information.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-5.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "Did the security update finish on the reception tablets?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Not yet. The network team found a compatibility issue with the older models.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "We have visitors arriving at nine tomorrow. Can we use the backup login page?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Yes, but I will ask the team to test it again this afternoon.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-6.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "The webinar test looks clear, but the captions are appearing about five seconds late.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "I noticed that too. The streaming platform has a sync setting we can adjust.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Good. Can you fix it before the Australian office joins the rehearsal?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Yes, I will update it and run another test in ten minutes.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-7.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "The analytics team is relocating to the fourth floor on Monday.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "I reserved twelve desks, but only eight monitors have arrived.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "We can borrow four from the training room until the shipment comes in.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Great. I will label the desks and ask facilities to install the docking stations.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-8.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "Did you enable automatic transcription for tomorrow's client briefing?",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Not yet. The legal department says we need each guest's consent before recording.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Then I'll add a consent notice to the invitation and ask the account manager to confirm with the guests.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Good. Once she replies, I can set the assistant to delete the recording after thirty days.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-9.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "Have we confirmed live captions for Friday's product demonstration? Two clients will join from overseas.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "The captioning vendor is available, but its quote covers English only. One client requested Japanese translation.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Our Tokyo office has an interpreter on staff. Could she join remotely for the question-and-answer session?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "I'll ask her. If she is available, we can keep the vendor for the main presentation and avoid changing the schedule.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-10.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "Hi, Daniel. The client moved tomorrow's product presentation from 10 A.M. to 2 P.M.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Thanks for letting me know. I'll update the room reservation and notify the design team.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Great. Please ask them to bring the revised brochures.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-11.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "We received a message from our shipping company. The office chairs won't arrive until Friday because of a storm.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "That's a problem. The new employees start on Thursday.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "We can move some chairs from the training room temporarily.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-12.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "Hello, I'm calling about order 7615. We need thirty notebooks instead of twenty.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "I can update the quantity, but the delivery date may move from Tuesday to Wednesday.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Wednesday is fine, as long as the boxes arrive before noon.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p3-13.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "I found a morning flight to Osaka, but it leaves at six ten.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "That's early. Is there a later flight that arrives before the conference dinner?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Yes, one leaves at nine and arrives at noon. It costs thirty dollars more.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-1.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "This is a reminder that the west stairwell will be closed tomorrow from 9 A.M. until 1 P.M. for safety inspections. During that time, employees should use the elevators near the cafeteria or the east stairwell. Deliveries should enter through the loading dock on Pine Street.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-2.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Thank you for attending the Regional Entrepreneurs Conference. The keynote speech will begin in the Grand Hall at nine thirty. After the speech, participants may choose from three smaller workshops. A schedule and room map are included inside your name badge holder.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-3.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Thank you for purchasing the CleanAir 500 purifier. Before first use, remove the protective covering from the filter and place the unit at least thirty centimeters from a wall. The indicator light will turn orange when the filter needs to be replaced. Replacement filters can be ordered through our website.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-4.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Good morning. Beginning Monday, employees who visit the client center may use the company mobile app to check in at the lobby kiosk. After opening the app, select Client Center Visit and scan the code displayed on the kiosk screen. A printed badge will still be required, so please pick it up before entering the meeting area. If you have trouble with the app, ask the reception team for assistance.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-5.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Attention all employees. The lobby check-in kiosk will be offline tomorrow while a software patch is installed. During this time, visitors should check in at the security desk and show a photo ID. Employees expecting guests should send the guest list to reception by 5 P.M. today.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-6.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Registration is now open for the Saturday workshop, Managing Remote Project Teams. The session is designed for new project managers and will include practical exercises on scheduling, feedback, and conflict resolution. Register by Friday to receive a 15 percent discount and a digital workbook.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-7.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Good morning, store managers. The energy-monitoring portal will be offline tonight from nine until midnight while technicians recalibrate the rooftop solar meters. This work will not interrupt electricity in any store. However, automated energy reports scheduled during that period will be generated tomorrow morning instead. Managers do not need to submit manual readings unless an alert remains visible after the portal returns. A short guide to the updated dashboard will be posted in the operations library on Friday.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-8.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Attention passengers. The 8:15 train to Riverside will depart twenty minutes late because maintenance crews are inspecting the tracks. Passengers may use their current tickets on the 8:30 express train at no additional charge.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-9.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Welcome to the City Design Museum. The photography exhibit on the second floor opens at 10:30. Guided tours begin every hour in the main lobby. Please note that food and beverages are not permitted inside the galleries.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m5/p4-10.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Employees on the fourth floor should be aware that the water supply will be turned off tomorrow from ten A.M. until noon while a pipe is replaced. Restrooms on the third and fifth floors will remain available. Please direct any questions to the facilities department.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p1-1.mp3",
+    "segments": [
+      {
+        "text": "A. Customers are being served at the tables.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The tables have been covered with tablecloths.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. Several chairs have been stacked beside cafe tables.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "D. The awning has been folded above the entrance.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p1-2.mp3",
+    "segments": [
+      {
+        "text": "A. The floor is being cleaned with a machine.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. A cable is being connected to a wall outlet.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. A technician is coiling an electrical cable.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "D. A technician is carrying a speaker onto a stage.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p1-3.mp3",
+    "segments": [
+      {
+        "text": "A. Some equipment is being loaded into a truck.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. A technician is inspecting a row of solar panels.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The panels are covered with snow.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "D. A worker is painting the roof.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p1-4.mp3",
+    "segments": [
+      {
+        "text": "A. The storage shelves are completely empty.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. A ladder has been folded against a wall.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. A worker is placing a box on a high shelf.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "D. Some boxes are being carried outdoors.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p1-5.mp3",
+    "segments": [
+      {
+        "text": "A. A woman is tapping an access card on a turnstile reader.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The glass doors are being cleaned.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. Some luggage is being carried through the lobby.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "D. A receptionist is arranging flowers on a counter.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p1-6.mp3",
+    "segments": [
+      {
+        "text": "A. A bicycle is being loaded onto a vehicle.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. A commuter is fastening a bicycle to a rack.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. The bicycle's rear tire is being replaced.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "D. Several cyclists are riding past an office.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-1.mp3",
+    "segments": [
+      {
+        "text": "Do all drafts have to be reviewed by legal?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. She bought it near the station.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. Only the final version needs approval.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. I prefer the window seat.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-2.mp3",
+    "segments": [
+      {
+        "text": "Have the laboratory test results arrived?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The printer is next to the elevator.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. I chose the vegetarian option.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Not yet, but I expect them before noon.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-3.mp3",
+    "segments": [
+      {
+        "text": "Haven't the revised invoices been sent to the clients?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. We sent three sales representatives.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The clients requested itemized bills.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. They're still waiting for the director's signature.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-4.mp3",
+    "segments": [
+      {
+        "text": "Didn't the supplier agree to cover the rush fee?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. Only if we ordered before noon.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. At the loading dock.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. The invoice was printed yesterday.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-5.mp3",
+    "segments": [
+      {
+        "text": "The backup server still hasn't synchronized with the billing system.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. It is stored in the supply cabinet.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The invoice includes tax.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. I'll postpone the switchover, then.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-6.mp3",
+    "segments": [
+      {
+        "text": "Haven't the invoices been mailed yet?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. They were very expensive.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. At the post office.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. No, the printer stopped working.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-7.mp3",
+    "segments": [
+      {
+        "text": "Why don't we review the proposal after lunch?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. That sounds like a good idea.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The proposal was approved.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. Lunch is included.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-8.mp3",
+    "segments": [
+      {
+        "text": "Could I get an aisle seat, please?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The aisle is narrow.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. I'll check what is available.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. The flight was canceled.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-9.mp3",
+    "segments": [
+      {
+        "text": "Should I call the supplier now or wait until tomorrow?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. Call now, in case the office closes early.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The supplier called yesterday.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. Tomorrow is a holiday.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-10.mp3",
+    "segments": [
+      {
+        "text": "Would you like me to make a copy of the receipt?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The copier was repaired.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. I paid by credit card.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Yes, that would be helpful.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-11.mp3",
+    "segments": [
+      {
+        "text": "Why don't we move the display closer to the entrance?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. The display was expensive.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. That might attract more customers.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The entrance closes at nine.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-12.mp3",
+    "segments": [
+      {
+        "text": "Shouldn't we order more printer paper before the holiday?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The printer is near my desk.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. Yes, I'll add it to the supply order.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. The holiday lasts three days.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-13.mp3",
+    "segments": [
+      {
+        "text": "Would it be possible to extend the deadline?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. I can ask the project manager.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The deadline was printed clearly.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. We submitted three copies.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-14.mp3",
+    "segments": [
+      {
+        "text": "Is there enough time to review the contract today?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The contract has ten pages.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. I reviewed the schedule.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Yes, if we start before lunch.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-15.mp3",
+    "segments": [
+      {
+        "text": "Why don't I send you the updated price list?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. The list is alphabetical.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. Thanks, that would be useful.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. Prices rose last month.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-16.mp3",
+    "segments": [
+      {
+        "text": "Should we print the handouts in color?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The printer uses less paper.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. I handed them out yesterday.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Only the charts need to be in color.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-17.mp3",
+    "segments": [
+      {
+        "text": "Would you prefer a printed receipt or an e-mail copy?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. I copied the document.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. An e-mail copy, please.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The payment was approved.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-18.mp3",
+    "segments": [
+      {
+        "text": "Would you be able to review this estimate today?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. I should have time after lunch.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. The estimate was accurate.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. It costs about two hundred dollars.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-19.mp3",
+    "segments": [
+      {
+        "text": "Haven't the conference badges been printed?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. No, the final guest list just arrived.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. The badge has a blue border.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. They were on the conference table.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-20.mp3",
+    "segments": [
+      {
+        "text": "Would you mind checking these figures once more?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. Not at all. I'll review them now.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. The figures increased last year.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. There are twelve figures.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-21.mp3",
+    "segments": [
+      {
+        "text": "Should I reserve the larger meeting room?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. I attended the meeting.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. Yes, we expect about forty guests.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. The room is on the right.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-22.mp3",
+    "segments": [
+      {
+        "text": "Could we move the appointment to Friday morning?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. The appointment lasted an hour.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. Let me check the consultant's schedule.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Friday is the fifth day.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-23.mp3",
+    "segments": [
+      {
+        "text": "Did you still need me to update the compliance report?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. About twelve people attended.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. No, I already sent the revised file.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. It is located near the service elevator.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-24.mp3",
+    "segments": [
+      {
+        "text": "Did anyone restart the tablet at the registration desk?",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "A. I reset the tablet this morning.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "B. The meeting room seats twelve people.",
+        "speaker": "",
+        "accent": "en-US"
+      },
+      {
+        "text": "C. Yes, the report was printed yesterday.",
+        "speaker": "",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p2-25.mp3",
+    "segments": [
+      {
+        "text": "When should we reopen the training room?",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "A. After the safety inspection is complete.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "B. At the north entrance.",
+        "speaker": "",
+        "accent": "en-GB"
+      },
+      {
+        "text": "C. It was printed in color.",
+        "speaker": "",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-1.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "The online advertisement attracted more visitors than expected, but few of them completed a purchase.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Perhaps the checkout process is too complicated. We should ask the Web team to review it.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Agreed. I'll also compare our prices with those of our competitors.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-2.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "The refrigerator in the restaurant kitchen isn't maintaining the correct temperature.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "I called the service company, but their technician cannot come until Friday.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Then we should move the dairy products to the smaller refrigerator in the bakery.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-3.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "The photos for the winter catalog are scheduled for Thursday, but the sample coats haven't arrived.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "The supplier says they will be delivered tomorrow morning.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Good. Please check every item as soon as the boxes arrive.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-4.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "Did the security update finish on the reception tablets?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Not yet. The network team found a compatibility issue with the older models.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "We have visitors arriving at nine tomorrow. Can we use the backup login page?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Yes, but I will ask the team to test it again this afternoon.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-5.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "The safety training video is ready, but the captions are not matching the audio.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Thanks for checking. The vendor sent a corrected file this morning.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Should I upload it to the learning portal now?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Please do. The warehouse staff need to complete the course by Friday.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-6.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "I just checked the support dashboard, and three tickets are missing customer names.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "That usually happens when the mobile form is submitted too quickly.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Can you add a required-field warning before today's update goes live?",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Yes. I will add it and test the form within the hour.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-7.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "Hi, this is Daniel from Northstar Supplies. I cannot open the presentation file you sent.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Sorry about that. It may be too large for your email server.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Could you upload it to the vendor portal instead?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Of course. I will upload it now and send you a temporary password.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-8.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "Are the warehouse tablets ready for passkey sign-in?",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "The pilot worked on the newer devices, but twelve older scanners cannot install the security update.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "The leased replacements are scheduled to arrive Tuesday. What should the night shift use until then?",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "I'll issue temporary security keys and leave a sign-out sheet with the supervisor.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-9.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "The phishing-simulation report says the finance team clicked fewer test links this month, but more employees entered passwords after clicking.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "So the click rate improved, but the risky behavior became more serious. Should we still end the pilot on Friday?",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Not yet. The report covers only two weeks, and several new hires have not taken the security workshop.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "I'll extend the pilot through the workshop next Wednesday and ask the analyst to separate new-hire results.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-10.mp3",
+    "segments": [
+      {
+        "speaker": "M",
+        "text": "Good afternoon. I have a reservation under the name Chen, but my flight arrives after midnight.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "That's fine. I'll mark your reservation for late arrival. Would you also like us to arrange airport transportation?",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Yes, please. That would be very helpful.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-11.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "The coffee machine in the employee lounge is leaking again.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "I'll call the repair company, but they may not come until tomorrow.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "In that case, let's put up a sign and move the smaller machine from the second floor.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-12.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "The customer service workshop is almost full. Should we add a second session next week?",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Yes. Wednesday afternoon is open in the training room.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "Great. I'll ask Human Resources to send another announcement.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p3-13.mp3",
+    "segments": [
+      {
+        "speaker": "W",
+        "text": "The accounting team is moving to the sixth floor on Monday.",
+        "accent": "en-US"
+      },
+      {
+        "speaker": "M",
+        "text": "Then we need to update the directory in the lobby.",
+        "accent": "en-GB"
+      },
+      {
+        "speaker": "W",
+        "text": "I'll also send a message to our regular delivery companies.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-1.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Before we begin today's safety workshop, please sign the attendance sheet near the entrance and collect a training booklet. The morning session will end at eleven forty-five, followed by lunch in the cafeteria. The afternoon demonstration will take place outdoors, so please bring your identification badge.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-2.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Passengers traveling on Flight 482 to Vancouver should proceed to Gate 16. Boarding will begin at five forty instead of five twenty because the aircraft arrived late. Passengers requiring assistance may speak with an agent at the service desk beside the gate.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-3.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Welcome to the Grand Meridian Hotel. Breakfast is served in the Garden Restaurant from six thirty to ten. Guests who have booked an airport shuttle should meet the driver in the east lobby ten minutes before departure. For late checkout requests, please contact the front desk before eleven A.M.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-4.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Attention hotel guests. Due to construction near the main entrance, airport shuttle pickup will move to the north entrance beginning this evening. Please follow the blue signs through the lobby and arrive at least five minutes before your scheduled departure. Staff members will be available to assist guests with luggage.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-5.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Hello, this is Marisa from BrightLine Office Equipment. I am calling to let you know that your color printer has been repaired and is ready for pickup. The technician also replaced the paper tray at no additional charge. Please bring your service receipt when you come to our store.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-6.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Attention, distribution staff. Starting Monday, small indoor drones will scan shelf labels after the warehouse closes. Please keep the main aisles clear by eight thirty P.M. During the first week, technicians will be on site to monitor each flight. If a drone stops unexpectedly, do not move it. Submit an incident through the operations app. Manual cycle counts will continue in the refrigerated zone until its safety test is complete.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-7.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Attention, visitors to the Harbor Design Fair. Because the pedestrian tunnel beneath Central Avenue is closed for an inspection, the west entrance cannot be reached from the Metro station by the usual route. Complimentary shuttle buses will leave the station's north exit every twelve minutes and stop beside Hall C. The digital map in yesterday's confirmation e-mail still shows the tunnel route, so please disregard it. Visitors who already have printed tickets may board the shuttle without checking in at the information desk.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-8.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Hello, this is Karen from Apex Office Supplies. I'm calling about order 5842. The blue folders are temporarily out of stock, so we can send green ones today or ship the blue folders next Monday. Please call me before 4 P.M. to let me know which option you prefer.",
+        "accent": "en-US"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-9.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Good morning, shoppers. Beginning today, the home appliance department has moved from the third floor to the newly renovated second floor. To celebrate, all small kitchen appliances are fifteen percent off through Sunday. Please ask a sales associate for assistance.",
+        "accent": "en-GB"
+      }
+    ]
+  },
+  {
+    "audio": "audio/m6/p4-10.mp3",
+    "segments": [
+      {
+        "speaker": "",
+        "text": "Thank you for calling Martin's Furniture. Our showroom is open Monday through Saturday from nine to six. For information about an existing delivery, press one. To schedule a design consultation, press two. To speak with a billing representative, remain on the line.",
+        "accent": "en-US"
+      }
+    ]
+  }
+]

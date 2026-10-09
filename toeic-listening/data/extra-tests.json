@@ -1,0 +1,3642 @@
+[
+  {
+    "mock": 5,
+    "parts": {
+      "p1": [
+        {
+          "sourceId": "P1-017",
+          "difficulty": "800",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "A worker is measuring the width of a window frame.",
+            "Some curtains are being hung.",
+            "The glass is being cleaned.",
+            "The window frame is being painted."
+          ],
+          "answer": 0,
+          "exp": "工作人員將捲尺水平拉過窗框，正在量測寬度。畫面中沒有窗簾、清潔工具或油漆刷。",
+          "no": 1,
+          "img": "img/ocean-window-measure-ai-v4.jpg",
+          "scene": "一名工作人員正在測量窗框的寬度。",
+          "statements": [
+            "A worker is measuring the width of a window frame.",
+            "Some curtains are being hung.",
+            "The glass is being cleaned.",
+            "The window frame is being painted."
+          ],
+          "audio": "audio/m5/p1-1.mp3"
+        },
+        {
+          "sourceId": "P1-022",
+          "difficulty": "800",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "The chairs have been stacked beside the wall.",
+            "Several people are watching a presentation.",
+            "Tables are arranged around the edge of the room.",
+            "Rows of chairs are facing a presentation screen."
+          ],
+          "answer": 3,
+          "exp": "空教室中的椅子分列成數排，全部朝向前方的簡報幕。椅子沒有堆疊，現場也沒有人或桌子。",
+          "no": 2,
+          "img": "img/ocean-training-room-ai-v5.jpg",
+          "scene": "一排排椅子面向簡報幕。",
+          "statements": [
+            "The chairs have been stacked beside the wall.",
+            "Several people are watching a presentation.",
+            "Tables are arranged around the edge of the room.",
+            "Rows of chairs are facing a presentation screen."
+          ],
+          "audio": "audio/m5/p1-2.mp3"
+        },
+        {
+          "sourceId": "P1-006",
+          "difficulty": "600",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "Some sheets are being fed into an automatic document feeder.",
+            "The machine is being wheeled away from the wall.",
+            "An office machine is being operated using a touch screen.",
+            "A drawer beneath the control panel is being pulled open."
+          ],
+          "answer": 2,
+          "exp": "男子的手指正触碰机器的控制屏。纸盒并未拉开，也没有送纸或移动机器的动作；后三项用常见办公动作作为干扰。此题为基于原许可图片的改编。",
+          "no": 3,
+          "img": "img/ocean-printer-ai-v2.jpg",
+          "scene": "一台办公设备正通过触摸屏操作。",
+          "statements": [
+            "Some sheets are being fed into an automatic document feeder.",
+            "The machine is being wheeled away from the wall.",
+            "An office machine is being operated using a touch screen.",
+            "A drawer beneath the control panel is being pulled open."
+          ],
+          "audio": "audio/m5/p1-3.mp3"
+        },
+        {
+          "sourceId": "P1-013",
+          "difficulty": "600",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "The windshield is being washed.",
+            "A mechanic is replacing a tire.",
+            "Some boxes are being unloaded from the trunk.",
+            "A charging cable is being connected to a vehicle."
+          ],
+          "answer": 3,
+          "exp": "男子正把充電接頭插入車身後側的充電口。畫面中沒有清洗擋風玻璃、更換輪胎或從行李廂卸貨。",
+          "no": 4,
+          "img": "img/ocean-ev-charging-ai-v4.jpg",
+          "scene": "一條充電線正被接上車輛。",
+          "statements": [
+            "The windshield is being washed.",
+            "A mechanic is replacing a tire.",
+            "Some boxes are being unloaded from the trunk.",
+            "A charging cable is being connected to a vehicle."
+          ],
+          "audio": "audio/m5/p1-4.mp3"
+        },
+        {
+          "sourceId": "P1-016",
+          "difficulty": "600",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "Two commuters are comparing transit maps.",
+            "Passengers are boarding a train.",
+            "A traveler is buying a ticket from a machine.",
+            "The transit shelter is completely empty."
+          ],
+          "answer": 0,
+          "exp": "兩名通勤者手持紙本路線圖，旁邊也有大型路線圖，顯示他們正在比對交通資訊；畫面沒有列車或售票機。",
+          "no": 5,
+          "img": "img/ocean-transit-map-ai-v4.jpg",
+          "scene": "兩名通勤者正在比較交通路線圖。",
+          "statements": [
+            "Two commuters are comparing transit maps.",
+            "Passengers are boarding a train.",
+            "A traveler is buying a ticket from a machine.",
+            "The transit shelter is completely empty."
+          ],
+          "audio": "audio/m5/p1-5.mp3"
+        },
+        {
+          "sourceId": "P1-021",
+          "difficulty": "600",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "A worker is adjusting a wall-mounted thermostat.",
+            "A picture is being hung in a hallway.",
+            "The wall is being painted.",
+            "Some wiring is being removed from the ceiling."
+          ],
+          "answer": 0,
+          "exp": "工作人員伸手按下牆上的恆溫器控制面板。畫面沒有掛畫、油漆或拆除天花板線路。",
+          "no": 6,
+          "img": "img/ocean-thermostat-ai-v5.jpg",
+          "scene": "一名工作人員正在調整壁掛式恆溫器。",
+          "statements": [
+            "A worker is adjusting a wall-mounted thermostat.",
+            "A picture is being hung in a hallway.",
+            "The wall is being painted.",
+            "Some wiring is being removed from the ceiling."
+          ],
+          "audio": "audio/m5/p1-6.mp3"
+        }
+      ],
+      "p2": [
+        {
+          "sourceId": "P2-071",
+          "difficulty": "800",
+          "text": "What is the best response to the question?",
+          "options": [
+            "Because the encryption test took longer than expected.",
+            "The new badge scanner is beside the entrance.",
+            "I can reserve a larger room."
+          ],
+          "answer": 0,
+          "exp": "Why was the launch delayed? 要回答原因，encryption test took longer 是原因句。",
+          "no": 7,
+          "prompt": "Why was the mobile-login launch delayed?",
+          "audio": "audio/m5/p2-1.mp3"
+        },
+        {
+          "sourceId": "P2-080",
+          "difficulty": "800",
+          "text": "Choose the best response.",
+          "options": [
+            "I think Mr. Alvarez has the latest figures.",
+            "Only two boxes were delivered.",
+            "The cafeteria closes at seven."
+          ],
+          "answer": 0,
+          "exp": "Who has...? 詢問誰有最新數字，I think Mr. Alvarez... 是自然的間接回答。",
+          "no": 8,
+          "prompt": "Who has the latest revenue figures for the investor briefing?",
+          "audio": "audio/m5/p2-2.mp3"
+        },
+        {
+          "sourceId": "P2-097",
+          "difficulty": "800",
+          "text": "Choose the best response.",
+          "options": [
+            "It was demonstrated in the lobby.",
+            "Let's wait for the client's reply first.",
+            "The software license is renewable."
+          ],
+          "answer": 1,
+          "exp": "Should we...? 提出決策；先等客戶回覆是保留式、但自然的間接回答。",
+          "no": 9,
+          "prompt": "Should we postpone the software demonstration?",
+          "audio": "audio/m5/p2-3.mp3"
+        },
+        {
+          "sourceId": "P2-105",
+          "difficulty": "800",
+          "text": "Choose the best response.",
+          "options": [
+            "The database contains customer records.",
+            "It was expected by the technical team.",
+            "Then let's notify the evening-shift staff."
+          ],
+          "answer": 2,
+          "exp": "移轉延長會影響晚班；通知晚班員工是最合理的情境反應。",
+          "no": 10,
+          "prompt": "The data migration will take two hours longer than expected.",
+          "audio": "audio/m5/p2-4.mp3"
+        },
+        {
+          "sourceId": "P2-108",
+          "difficulty": "800",
+          "text": "Choose the best response.",
+          "options": [
+            "I can, unless Martin has already volunteered.",
+            "In the main conference room.",
+            "The forecast was revised twice."
+          ],
+          "answer": 0,
+          "exp": "Who's taking minutes 詢問由誰記錄會議內容；I can 直接承接工作，unless 子句補充可能已有志願者。",
+          "no": 11,
+          "prompt": "Who's taking minutes while Lena presents the quarterly forecast?",
+          "audio": "audio/m5/p2-5.mp3"
+        },
+        {
+          "sourceId": "P2-006",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "It was revised yesterday.",
+            "Not at all. I'll send it right away.",
+            "Yes, the schedule changed."
+          ],
+          "answer": 1,
+          "exp": "Would you mind...? 接受請求可回答 Not at all。",
+          "no": 12,
+          "prompt": "Would you mind sending me the revised schedule?",
+          "audio": "audio/m5/p2-6.mp3"
+        },
+        {
+          "sourceId": "P2-009",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The expressway is usually faster.",
+            "Our flight leaves at seven.",
+            "I took a taxi yesterday."
+          ],
+          "answer": 0,
+          "exp": "Which route 問路線選擇。",
+          "no": 13,
+          "prompt": "Which route should we take to the airport?",
+          "audio": "audio/m5/p2-7.mp3"
+        },
+        {
+          "sourceId": "P2-013",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "He works in marketing.",
+            "No, he has another appointment.",
+            "The trade show was successful."
+          ],
+          "answer": 1,
+          "exp": "依事實回答否定疑問句。",
+          "no": 14,
+          "prompt": "Isn't Mr. Gomez attending the trade show?",
+          "audio": "audio/m5/p2-8.mp3"
+        },
+        {
+          "sourceId": "P2-016",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "It's much easier to move around now.",
+            "The office moved last month.",
+            "On the third floor."
+          ],
+          "answer": 0,
+          "exp": "What do you think of...? 問意見。",
+          "no": 15,
+          "prompt": "What do you think of the new office layout?",
+          "audio": "audio/m5/p2-9.mp3"
+        },
+        {
+          "sourceId": "P2-020",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "Yes, it was very costly.",
+            "Not yet, but they expect to finish today.",
+            "The budget meeting is upstairs."
+          ],
+          "answer": 1,
+          "exp": "現在完成式 Yes/No 問句，回答目前狀態。",
+          "no": 16,
+          "prompt": "Has the finance department approved the budget?",
+          "audio": "audio/m5/p2-10.mp3"
+        },
+        {
+          "sourceId": "P2-023",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The part costs thirty dollars.",
+            "Yesterday was very busy.",
+            "No, the replacement hasn't arrived yet."
+          ],
+          "answer": 2,
+          "exp": "否定疑問句仍依事實回答；此處說明尚未更換的原因。",
+          "no": 17,
+          "prompt": "Didn't the technician replace this part yesterday?",
+          "audio": "audio/m5/p2-11.mp3"
+        },
+        {
+          "sourceId": "P2-027",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "It begins after lunch.",
+            "The new employees attended.",
+            "In the auditorium on the first floor."
+          ],
+          "answer": 2,
+          "exp": "where 問地點。",
+          "no": 18,
+          "prompt": "Could you tell me where the orientation is being held?",
+          "audio": "audio/m5/p2-12.mp3"
+        },
+        {
+          "sourceId": "P2-030",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The delivery truck is outside.",
+            "Yes, the package is heavy.",
+            "Not yet, so I sent another e-mail."
+          ],
+          "answer": 2,
+          "exp": "現在完成式問目前是否已完成；回答尚未並說明後續行動。",
+          "no": 19,
+          "prompt": "Has the customer confirmed the delivery address?",
+          "audio": "audio/m5/p2-13.mp3"
+        },
+        {
+          "sourceId": "P2-034",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "It fits this machine.",
+            "We ordered two parts.",
+            "The supplier shipped it to the wrong address."
+          ],
+          "answer": 2,
+          "exp": "Why 問尚未抵達的原因。",
+          "no": 20,
+          "prompt": "Why hasn't the replacement part arrived?",
+          "audio": "audio/m5/p2-14.mp3"
+        },
+        {
+          "sourceId": "P2-037",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "I tried, but it was already booked.",
+            "The conference lasted two hours.",
+            "The room is on the fifth floor."
+          ],
+          "answer": 0,
+          "exp": "否定疑問句依事實回答，並說明沒有訂到的原因。",
+          "no": 21,
+          "prompt": "Didn't you reserve the conference room?",
+          "audio": "audio/m5/p2-15.mp3"
+        },
+        {
+          "sourceId": "P2-041",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "Sure, I'll call this afternoon.",
+            "The proposal is well written.",
+            "We received two packages."
+          ],
+          "answer": 0,
+          "exp": "Could you...? 是請求，應承諾採取行動。",
+          "no": 22,
+          "prompt": "Could you check whether the client received our proposal?",
+          "audio": "audio/m5/p2-16.mp3"
+        },
+        {
+          "sourceId": "P2-045",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "No, it will continue for another hour.",
+            "The inspector signed the form.",
+            "Yes, the equipment is new."
+          ],
+          "answer": 0,
+          "exp": "尚未完成，並補充還需一小時。",
+          "no": 23,
+          "prompt": "Hasn't the maintenance inspection finished yet?",
+          "audio": "audio/m5/p2-17.mp3"
+        },
+        {
+          "sourceId": "P2-049",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The card reader is downstairs.",
+            "I borrowed a laptop.",
+            "I'm sorry, cards can't be shared."
+          ],
+          "answer": 2,
+          "exp": "對借用門禁卡的請求，依安全規定婉拒。",
+          "no": 24,
+          "prompt": "May I borrow your access card for a moment?",
+          "audio": "audio/m5/p2-18.mp3"
+        },
+        {
+          "sourceId": "P2-054",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "Your membership lasts a year.",
+            "The form is at the front desk.",
+            "The payment information was incomplete."
+          ],
+          "answer": 2,
+          "exp": "Why 問遭拒原因。",
+          "no": 25,
+          "prompt": "Why was my membership renewal rejected?",
+          "audio": "audio/m5/p2-19.mp3"
+        },
+        {
+          "sourceId": "P2-058",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The jacket is on sale.",
+            "The fitting room is occupied.",
+            "Certainly, if you have the receipt."
+          ],
+          "answer": 2,
+          "exp": "退換貨請求最自然的回應是說明可辦理的條件。",
+          "no": 26,
+          "prompt": "Could I exchange this jacket for a larger size?",
+          "audio": "audio/m5/p2-20.mp3"
+        },
+        {
+          "sourceId": "P2-062",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The legal team requested a revision.",
+            "It was copied in color.",
+            "The advertisement starts tomorrow."
+          ],
+          "answer": 0,
+          "exp": "Why 問尚未核准的原因。",
+          "no": 27,
+          "prompt": "Why hasn't the advertising copy been approved?",
+          "audio": "audio/m5/p2-21.mp3"
+        },
+        {
+          "sourceId": "P2-066",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The package is lightweight.",
+            "This morning was busy.",
+            "No, the pickup was rescheduled."
+          ],
+          "answer": 2,
+          "exp": "否定疑問句依事實回答，並說明重新排程。",
+          "no": 28,
+          "prompt": "Didn't the courier pick up the package this morning?",
+          "audio": "audio/m5/p2-22.mp3"
+        },
+        {
+          "sourceId": "P2-069",
+          "difficulty": "600",
+          "text": "What is the best response to the question?",
+          "options": [
+            "I usually take the express train.",
+            "The vendor said it would arrive by Friday.",
+            "Yes, the meeting room is upstairs."
+          ],
+          "answer": 1,
+          "exp": "題目問交期或送達時間時，回答供應商說週五前送達最自然。",
+          "no": 29,
+          "prompt": "When will the replacement sensor be delivered?",
+          "audio": "audio/m5/p2-23.mp3"
+        },
+        {
+          "sourceId": "P2-072",
+          "difficulty": "600",
+          "text": "What is the best response to the question?",
+          "options": [
+            "Yes, the tablet has a protective case.",
+            "The dashboard was updated twice.",
+            "Please ask Mia; she manages the training calendar."
+          ],
+          "answer": 2,
+          "exp": "Who is coordinating...? 需要回答負責人或轉介對象，Mia manages the calendar 最合適。",
+          "no": 30,
+          "prompt": "Who is coordinating the AI ethics workshop?",
+          "audio": "audio/m5/p2-24.mp3"
+        },
+        {
+          "sourceId": "P2-074",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "It is made of recycled paper.",
+            "The cafeteria is downstairs.",
+            "Not until the consultant arrives."
+          ],
+          "answer": 2,
+          "exp": "Not until... 可回應 When 類型問題，表示要等顧問抵達後才開始或處理。",
+          "no": 31,
+          "prompt": "When should we begin the product-demo rehearsal?",
+          "audio": "audio/m5/p2-25.mp3"
+        }
+      ],
+      "p3": [
+        {
+          "no": 32,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "Ms. Owens, your résumé shows extensive experience in international sales. Could you tell me about your work in Singapore?"
+            },
+            {
+              "speaker": "W",
+              "text": "Certainly. I managed a team of twelve and helped increase regional revenue by eighteen percent."
+            },
+            {
+              "speaker": "M",
+              "text": "Impressive. The next step is a video interview with our vice president."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-041",
+              "difficulty": "800",
+              "text": "What is the purpose of the conversation?",
+              "options": [
+                "To revise a travel itinerary",
+                "To inspect a branch office",
+                "To conduct a job interview",
+                "To negotiate a sales contract"
+              ],
+              "answer": 2,
+              "exp": "談論履歷、經驗和下一階段面試。"
+            },
+            {
+              "sourceId": "P3-042",
+              "difficulty": "800",
+              "text": "What did the woman accomplish in Singapore?",
+              "options": [
+                "She designed a new product",
+                "She reduced travel costs",
+                "She increased regional revenue",
+                "She opened twelve stores"
+              ],
+              "answer": 2,
+              "exp": "女子說提高區域營收 18%。"
+            },
+            {
+              "sourceId": "P3-043",
+              "difficulty": "800",
+              "text": "What will the woman most likely do next?",
+              "options": [
+                "Attend a trade show",
+                "Train new employees",
+                "Have another interview",
+                "Submit an expense report"
+              ],
+              "answer": 2,
+              "exp": "下一步是與副總裁視訊面試。"
+            }
+          ],
+          "audio": "audio/m5/p3-1.mp3"
+        },
+        {
+          "no": 35,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "I tested the projector in Conference Room C, but the image is still too dark."
+            },
+            {
+              "speaker": "W",
+              "text": "The larger projector is available in Room A. We could move the presentation there."
+            },
+            {
+              "speaker": "M",
+              "text": "Good idea. I'll tell the attendees about the room change."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-081",
+              "difficulty": "800",
+              "text": "What problem does the man mention?",
+              "options": [
+                "A projector image is too dark",
+                "A presentation file is missing",
+                "A conference room is locked",
+                "Several attendees are late"
+              ],
+              "answer": 0,
+              "exp": "男子說投影畫面太暗。"
+            },
+            {
+              "sourceId": "P3-082",
+              "difficulty": "800",
+              "text": "What does the woman suggest?",
+              "options": [
+                "Using another room",
+                "Buying a new computer",
+                "Printing the slides",
+                "Postponing the meeting"
+              ],
+              "answer": 0,
+              "exp": "女子建議移到有較大投影機的 A 會議室。"
+            },
+            {
+              "sourceId": "P3-083",
+              "difficulty": "800",
+              "text": "What will the man do?",
+              "options": [
+                "Cancel the presentation",
+                "Notify the attendees",
+                "Repair the projector",
+                "Reserve a restaurant"
+              ],
+              "answer": 1,
+              "exp": "男子會通知與會者更換房間。"
+            }
+          ],
+          "audio": "audio/m5/p3-2.mp3"
+        },
+        {
+          "no": 38,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "The product photos on our website look blurry on mobile phones."
+            },
+            {
+              "speaker": "W",
+              "text": "I can resize the image files this afternoon. We should also test the pages on several screen sizes."
+            },
+            {
+              "speaker": "M",
+              "text": "Good. Please finish before the online sale begins tomorrow."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G12-Q1",
+              "difficulty": "800",
+              "text": "What issue are the speakers discussing?",
+              "options": [
+                "A delayed shipment",
+                "A missing customer review",
+                "Blurry website images",
+                "Incorrect product prices"
+              ],
+              "answer": 2,
+              "exp": "產品照片在手機顯示模糊。"
+            },
+            {
+              "sourceId": "P3-G12-Q2",
+              "difficulty": "800",
+              "text": "What does the woman propose doing?",
+              "options": [
+                "Testing different screen sizes",
+                "Replacing all products",
+                "Hiring a photographer today",
+                "Closing the website"
+              ],
+              "answer": 0,
+              "exp": "她提議測試多種螢幕尺寸。"
+            },
+            {
+              "sourceId": "P3-G12-Q3",
+              "difficulty": "800",
+              "text": "When should the work be completed?",
+              "options": [
+                "Before tomorrow's online sale",
+                "By the end of next month",
+                "After a customer survey",
+                "Before today's lunch"
+              ],
+              "answer": 0,
+              "exp": "男子要求在明天促銷前完成。"
+            }
+          ],
+          "audio": "audio/m5/p3-3.mp3"
+        },
+        {
+          "no": 41,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "The client wants us to demonstrate the reporting feature during tomorrow's video call."
+            },
+            {
+              "speaker": "W",
+              "text": "Then we should use the test account rather than real customer data."
+            },
+            {
+              "speaker": "M",
+              "text": "Agreed. I'll prepare a sample report and send you the login information."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G16-Q1",
+              "difficulty": "800",
+              "text": "What does the client want to see?",
+              "options": [
+                "A reporting feature",
+                "A hiring plan",
+                "A delivery schedule",
+                "A new office location"
+              ],
+              "answer": 0,
+              "exp": "客戶想看報表功能。"
+            },
+            {
+              "sourceId": "P3-G16-Q2",
+              "difficulty": "800",
+              "text": "Why does the woman suggest using a test account?",
+              "options": [
+                "To lower the software price",
+                "To shorten the video call",
+                "To train a new employee",
+                "To avoid using real customer data"
+              ],
+              "answer": 3,
+              "exp": "避免使用真實顧客資料。"
+            },
+            {
+              "sourceId": "P3-G16-Q3",
+              "difficulty": "800",
+              "text": "What will the man send to the woman?",
+              "options": [
+                "Customer invoices",
+                "A meeting recording",
+                "Login information",
+                "A printed contract"
+              ],
+              "answer": 2,
+              "exp": "男子會寄登入資訊。"
+            }
+          ],
+          "audio": "audio/m5/p3-4.mp3"
+        },
+        {
+          "no": 44,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "Did the security update finish on the reception tablets?"
+            },
+            {
+              "speaker": "W",
+              "text": "Not yet. The network team found a compatibility issue with the older models."
+            },
+            {
+              "speaker": "M",
+              "text": "We have visitors arriving at nine tomorrow. Can we use the backup login page?"
+            },
+            {
+              "speaker": "W",
+              "text": "Yes, but I will ask the team to test it again this afternoon."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-052-Q4",
+              "difficulty": "800",
+              "text": "What is implied about some reception tablets?",
+              "options": [
+                "They are older models",
+                "They were recently stolen",
+                "They are used only outdoors",
+                "They have no internet access"
+              ],
+              "answer": 0,
+              "exp": "女方說 compatibility issue with the older models，表示有些平板是舊機型。"
+            },
+            {
+              "sourceId": "P3-G18-Q2",
+              "difficulty": "800",
+              "text": "What temporary solution does the man suggest?",
+              "options": [
+                "Using a backup login page",
+                "Canceling tomorrow's appointments",
+                "Printing visitor badges in advance",
+                "Replacing all of the tablets"
+              ],
+              "answer": 0,
+              "exp": "男方問 Can we use the backup login page?，所以暫時方案是使用備用登入頁。"
+            },
+            {
+              "sourceId": "P3-G18-Q3",
+              "difficulty": "800",
+              "text": "Why do the tablets need to be ready by tomorrow morning?",
+              "options": [
+                "A network audit will begin",
+                "Visitors are expected at nine",
+                "A delivery will be checked in",
+                "The office will close at noon"
+              ],
+              "answer": 1,
+              "exp": "男方說 visitors arriving at nine tomorrow，接待系統必須在訪客抵達前可用。"
+            }
+          ],
+          "audio": "audio/m5/p3-5.mp3"
+        },
+        {
+          "no": 47,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "The webinar test looks clear, but the captions are appearing about five seconds late."
+            },
+            {
+              "speaker": "W",
+              "text": "I noticed that too. The streaming platform has a sync setting we can adjust."
+            },
+            {
+              "speaker": "M",
+              "text": "Good. Can you fix it before the Australian office joins the rehearsal?"
+            },
+            {
+              "speaker": "W",
+              "text": "Yes, I will update it and run another test in ten minutes."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-054-Q1",
+              "difficulty": "600",
+              "text": "What problem do the speakers mention?",
+              "options": [
+                "The captions are delayed",
+                "The presenter is late",
+                "The registration link is broken",
+                "The venue has changed"
+              ],
+              "answer": 0,
+              "exp": "男子說 captions are appearing about five seconds late，表示字幕延遲。"
+            },
+            {
+              "sourceId": "P3-054-Q2",
+              "difficulty": "600",
+              "text": "What will the woman adjust?",
+              "options": [
+                "A sync setting",
+                "A seating chart",
+                "A shipping address",
+                "A hotel reservation"
+              ],
+              "answer": 0,
+              "exp": "女子提到 streaming platform has a sync setting we can adjust，因此她會調整同步設定。"
+            },
+            {
+              "sourceId": "P3-054-Q3",
+              "difficulty": "800",
+              "text": "What will happen in ten minutes?",
+              "options": [
+                "A presenter will be hired",
+                "A report will be printed",
+                "Another test will be run",
+                "The office will close"
+              ],
+              "answer": 2,
+              "exp": "女子最後說 run another test in ten minutes，表示十分鐘後會再測一次。"
+            }
+          ],
+          "audio": "audio/m5/p3-6.mp3"
+        },
+        {
+          "no": 50,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "The analytics team is relocating to the fourth floor on Monday."
+            },
+            {
+              "speaker": "W",
+              "text": "I reserved twelve desks, but only eight monitors have arrived."
+            },
+            {
+              "speaker": "M",
+              "text": "We can borrow four from the training room until the shipment comes in."
+            },
+            {
+              "speaker": "W",
+              "text": "Great. I will label the desks and ask facilities to install the docking stations."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-056-Q1",
+              "difficulty": "600",
+              "text": "What are the speakers mainly discussing?",
+              "options": [
+                "Hiring temporary reception staff",
+                "Ordering new security badges",
+                "Rescheduling a training seminar",
+                "Preparing desks for a relocated team"
+              ],
+              "answer": 3,
+              "exp": "對話圍繞 relocated analytics team、desks、monitors 和 docking stations，主題是替搬遷團隊準備座位。"
+            },
+            {
+              "sourceId": "P3-056-Q2",
+              "difficulty": "600",
+              "text": "How many monitors still need to be provided?",
+              "options": [
+                "Four",
+                "Eight",
+                "Twelve",
+                "Sixteen"
+              ],
+              "answer": 0,
+              "exp": "需要十二台螢幕，但 only eight monitors have arrived，所以還缺四台。"
+            },
+            {
+              "sourceId": "P3-056-Q3",
+              "difficulty": "800",
+              "text": "What will the woman probably do next?",
+              "options": [
+                "Contact the facilities department",
+                "Cancel the monitor shipment",
+                "Move to the fourth floor",
+                "Revise the analytics dashboard"
+              ],
+              "answer": 0,
+              "exp": "女方說會 ask facilities to install the docking stations，所以接下來可能聯絡設施部。"
+            }
+          ],
+          "audio": "audio/m5/p3-7.mp3"
+        },
+        {
+          "no": 53,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "Did you enable automatic transcription for tomorrow's client briefing?"
+            },
+            {
+              "speaker": "M",
+              "text": "Not yet. The legal department says we need each guest's consent before recording."
+            },
+            {
+              "speaker": "W",
+              "text": "Then I'll add a consent notice to the invitation and ask the account manager to confirm with the guests."
+            },
+            {
+              "speaker": "M",
+              "text": "Good. Once she replies, I can set the assistant to delete the recording after thirty days."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G19-Q1",
+              "difficulty": "800",
+              "text": "Why has automatic transcription not been enabled?",
+              "options": [
+                "Guest consent is still required",
+                "The assistant needs an update",
+                "The invitation has already been sent",
+                "The briefing was postponed"
+              ],
+              "answer": 0,
+              "exp": "男方說法務要求 recording 前取得 each guest's consent，因此尚未啟用。"
+            },
+            {
+              "sourceId": "P3-G19-Q2",
+              "difficulty": "800",
+              "text": "What will the woman do?",
+              "options": [
+                "Replace the meeting assistant",
+                "Shorten the client briefing",
+                "Revise the invitation and contact an account manager",
+                "Delete an earlier recording"
+              ],
+              "answer": 2,
+              "exp": "女方會 add a consent notice，並 ask the account manager to confirm。"
+            },
+            {
+              "sourceId": "P3-G19-Q3",
+              "difficulty": "800",
+              "text": "What will happen after the account manager replies?",
+              "options": [
+                "The legal department will send invoices",
+                "Guests will receive new devices",
+                "A deletion schedule will be configured",
+                "The briefing will move to another room"
+              ],
+              "answer": 2,
+              "exp": "男方說 Once she replies，就設定錄音在三十天後自動刪除。"
+            }
+          ],
+          "audio": "audio/m5/p3-8.mp3"
+        },
+        {
+          "no": 56,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "Have we confirmed live captions for Friday's product demonstration? Two clients will join from overseas."
+            },
+            {
+              "speaker": "W",
+              "text": "The captioning vendor is available, but its quote covers English only. One client requested Japanese translation."
+            },
+            {
+              "speaker": "M",
+              "text": "Our Tokyo office has an interpreter on staff. Could she join remotely for the question-and-answer session?"
+            },
+            {
+              "speaker": "W",
+              "text": "I'll ask her. If she is available, we can keep the vendor for the main presentation and avoid changing the schedule."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G23-Q1",
+              "difficulty": "800",
+              "text": "What problem do the speakers discuss?",
+              "options": [
+                "Two clients cannot join the meeting",
+                "The Tokyo office changed its schedule",
+                "A demonstration has been canceled",
+                "A quote does not include a needed language"
+              ],
+              "answer": 3,
+              "exp": "字幕廠商的報價只含英文，但客戶需要日文翻譯；核心問題是報價未涵蓋所需語言。"
+            },
+            {
+              "sourceId": "P3-G23-Q2",
+              "difficulty": "800",
+              "text": "Why does the man mention the Tokyo office?",
+              "options": [
+                "It employs an interpreter",
+                "It designed the new product",
+                "It will host the demonstration",
+                "It received a lower vendor quote"
+              ],
+              "answer": 0,
+              "exp": "男士提到東京辦公室有專職口譯員，目的是提出日文翻譯的替代解決方案。"
+            },
+            {
+              "sourceId": "P3-G23-Q3",
+              "difficulty": "800",
+              "text": "What does the woman imply about the schedule?",
+              "options": [
+                "It can remain unchanged if the interpreter is free",
+                "It must be shortened for overseas clients",
+                "It has already been sent to the vendor",
+                "It includes a second demonstration"
+              ],
+              "answer": 0,
+              "exp": "女士說若口譯員有空，就能 avoid changing the schedule，意即目前時程可維持不變。"
+            }
+          ],
+          "audio": "audio/m5/p3-9.mp3"
+        },
+        {
+          "no": 59,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "Hi, Daniel. The client moved tomorrow's product presentation from 10 A.M. to 2 P.M."
+            },
+            {
+              "speaker": "M",
+              "text": "Thanks for letting me know. I'll update the room reservation and notify the design team."
+            },
+            {
+              "speaker": "W",
+              "text": "Great. Please ask them to bring the revised brochures."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-011",
+              "difficulty": "600",
+              "text": "What are the speakers mainly discussing?",
+              "options": [
+                "A change to a presentation",
+                "A new product price",
+                "A hiring decision",
+                "A travel reimbursement"
+              ],
+              "answer": 0,
+              "exp": "對話重點是簡報時間改動。"
+            },
+            {
+              "sourceId": "P3-012",
+              "difficulty": "600",
+              "text": "What will the man do?",
+              "options": [
+                "Print employee badges",
+                "Meet a supplier at the airport",
+                "Cancel a product launch",
+                "Reserve a room and contact a team"
+              ],
+              "answer": 3,
+              "exp": "男子說會更新會議室預約並通知設計團隊。"
+            },
+            {
+              "sourceId": "P3-013",
+              "difficulty": "600",
+              "text": "What does the woman ask the design team to bring?",
+              "options": [
+                "Customer surveys",
+                "Revised brochures",
+                "Expense reports",
+                "Laptop warranties"
+              ],
+              "answer": 1,
+              "exp": "女子要求攜帶修訂後的小冊子。"
+            }
+          ],
+          "audio": "audio/m5/p3-10.mp3"
+        },
+        {
+          "no": 62,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "We received a message from our shipping company. The office chairs won't arrive until Friday because of a storm."
+            },
+            {
+              "speaker": "M",
+              "text": "That's a problem. The new employees start on Thursday."
+            },
+            {
+              "speaker": "W",
+              "text": "We can move some chairs from the training room temporarily."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-031",
+              "difficulty": "600",
+              "text": "Why will the delivery be late?",
+              "options": [
+                "Because the warehouse is full",
+                "Because of severe weather",
+                "Because payment is missing",
+                "Because the order was canceled"
+              ],
+              "answer": 1,
+              "exp": "女子明確說 because of a storm。"
+            },
+            {
+              "sourceId": "P3-032",
+              "difficulty": "600",
+              "text": "What will happen on Thursday?",
+              "options": [
+                "A storm will reach the city",
+                "The training room will close",
+                "New employees will begin work",
+                "The chairs will be repaired"
+              ],
+              "answer": 2,
+              "exp": "男子說新員工星期四開始上班。"
+            },
+            {
+              "sourceId": "P3-033",
+              "difficulty": "600",
+              "text": "What does the woman suggest?",
+              "options": [
+                "Postponing employee training",
+                "Calling every supplier",
+                "Using chairs from another room",
+                "Buying desks online"
+              ],
+              "answer": 2,
+              "exp": "女子建議暫時搬用訓練室的椅子。"
+            }
+          ],
+          "audio": "audio/m5/p3-11.mp3"
+        },
+        {
+          "no": 65,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "Hello, I'm calling about order 7615. We need thirty notebooks instead of twenty."
+            },
+            {
+              "speaker": "M",
+              "text": "I can update the quantity, but the delivery date may move from Tuesday to Wednesday."
+            },
+            {
+              "speaker": "W",
+              "text": "Wednesday is fine, as long as the boxes arrive before noon."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-071",
+              "difficulty": "600",
+              "text": "Why is the woman calling?",
+              "options": [
+                "To report damaged notebooks",
+                "To request a refund",
+                "To apply for a job",
+                "To change an order quantity"
+              ],
+              "answer": 3,
+              "exp": "女子要把筆記本數量從二十本改成三十本。"
+            },
+            {
+              "sourceId": "P3-072",
+              "difficulty": "600",
+              "text": "What may change?",
+              "options": [
+                "The shipping address",
+                "The delivery date",
+                "The product color",
+                "The payment method"
+              ],
+              "answer": 1,
+              "exp": "男子說交貨日期可能由星期二改到星期三。"
+            },
+            {
+              "sourceId": "P3-073",
+              "difficulty": "600",
+              "text": "What does the woman require?",
+              "options": [
+                "A lower price",
+                "Separate invoices",
+                "Tuesday delivery",
+                "Delivery before noon"
+              ],
+              "answer": 3,
+              "exp": "女子說只要中午以前抵達即可。"
+            }
+          ],
+          "audio": "audio/m5/p3-12.mp3"
+        },
+        {
+          "no": 68,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "I found a morning flight to Osaka, but it leaves at six ten."
+            },
+            {
+              "speaker": "M",
+              "text": "That's early. Is there a later flight that arrives before the conference dinner?"
+            },
+            {
+              "speaker": "W",
+              "text": "Yes, one leaves at nine and arrives at noon. It costs thirty dollars more."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G11-Q1",
+              "difficulty": "600",
+              "text": "What are the speakers arranging?",
+              "options": [
+                "A product delivery",
+                "A training schedule",
+                "A flight",
+                "A dinner menu"
+              ],
+              "answer": 2,
+              "exp": "對話在比較飛往大阪的班機。"
+            },
+            {
+              "sourceId": "P3-G11-Q2",
+              "difficulty": "600",
+              "text": "Why does the man prefer a later flight?",
+              "options": [
+                "He wants to arrive after dinner",
+                "The first flight leaves very early",
+                "He needs a cheaper ticket",
+                "The conference has been canceled"
+              ],
+              "answer": 1,
+              "exp": "六點十分太早。"
+            },
+            {
+              "sourceId": "P3-G11-Q3",
+              "difficulty": "600",
+              "text": "What is said about the nine o'clock flight?",
+              "options": [
+                "It costs more",
+                "It arrives in the evening",
+                "It has no available seats",
+                "It requires two transfers"
+              ],
+              "answer": 0,
+              "exp": "該班機多三十美元。"
+            }
+          ],
+          "audio": "audio/m5/p3-13.mp3"
+        }
+      ],
+      "p4": [
+        {
+          "no": 71,
+          "graphic": null,
+          "script": [
+            "This is a reminder that the west stairwell will be closed tomorrow from 9 A.M. until 1 P.M. for safety inspections. During that time, employees should use the elevators near the cafeteria or the east stairwell. Deliveries should enter through the loading dock on Pine Street."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-041",
+              "difficulty": "800",
+              "text": "What will be closed?",
+              "options": [
+                "An elevator",
+                "A stairwell",
+                "A cafeteria",
+                "A loading dock"
+              ],
+              "answer": 1,
+              "exp": "西側樓梯間將關閉。"
+            },
+            {
+              "sourceId": "P4-042",
+              "difficulty": "800",
+              "text": "What should employees use?",
+              "options": [
+                "The elevators or east stairwell",
+                "The Pine Street entrance only",
+                "The west stairwell",
+                "The emergency exit"
+              ],
+              "answer": 0,
+              "exp": "公告指定電梯或東側樓梯間。"
+            },
+            {
+              "sourceId": "P4-043",
+              "difficulty": "800",
+              "text": "Where should deliveries enter?",
+              "options": [
+                "Through the loading dock",
+                "Through the cafeteria",
+                "Through the main lobby",
+                "Through the west stairwell"
+              ],
+              "answer": 0,
+              "exp": "貨運應從 Pine Street 裝卸區進入。"
+            }
+          ],
+          "audio": "audio/m5/p4-1.mp3"
+        },
+        {
+          "no": 74,
+          "graphic": null,
+          "script": [
+            "Thank you for attending the Regional Entrepreneurs Conference. The keynote speech will begin in the Grand Hall at nine thirty. After the speech, participants may choose from three smaller workshops. A schedule and room map are included inside your name badge holder."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-G08-Q1",
+              "difficulty": "800",
+              "text": "Where will the keynote speech take place?",
+              "options": [
+                "In the registration office",
+                "In a small workshop room",
+                "In the Grand Hall",
+                "In a hotel restaurant"
+              ],
+              "answer": 2,
+              "exp": "主題演講在大禮堂。"
+            },
+            {
+              "sourceId": "P4-G08-Q2",
+              "difficulty": "800",
+              "text": "What may participants do after the speech?",
+              "options": [
+                "Collect a refund",
+                "Meet the keynote speaker privately",
+                "Attend one of three workshops",
+                "Leave for the airport"
+              ],
+              "answer": 2,
+              "exp": "之後可選擇三場工作坊之一。"
+            },
+            {
+              "sourceId": "P4-G08-Q3",
+              "difficulty": "800",
+              "text": "Where can participants find a room map?",
+              "options": [
+                "At the parking entrance",
+                "On the conference website only",
+                "Under their seats",
+                "Inside the name badge holder"
+              ],
+              "answer": 3,
+              "exp": "地圖放在名牌套內。"
+            }
+          ],
+          "audio": "audio/m5/p4-2.mp3"
+        },
+        {
+          "no": 77,
+          "graphic": null,
+          "script": [
+            "Thank you for purchasing the CleanAir 500 purifier. Before first use, remove the protective covering from the filter and place the unit at least thirty centimeters from a wall. The indicator light will turn orange when the filter needs to be replaced. Replacement filters can be ordered through our website."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-G12-Q1",
+              "difficulty": "800",
+              "text": "What should users do before first use?",
+              "options": [
+                "Order a replacement filter",
+                "Place the unit against a wall",
+                "Turn the indicator light orange",
+                "Remove a covering from the filter"
+              ],
+              "answer": 3,
+              "exp": "首次使用前要移除濾網保護膜。"
+            },
+            {
+              "sourceId": "P4-G12-Q2",
+              "difficulty": "800",
+              "text": "How far should the unit be from a wall?",
+              "options": [
+                "More than three meters",
+                "It may touch the wall",
+                "At least thirty centimeters",
+                "Exactly five centimeters"
+              ],
+              "answer": 2,
+              "exp": "至少離牆三十公分。"
+            },
+            {
+              "sourceId": "P4-G12-Q3",
+              "difficulty": "800",
+              "text": "What does an orange light indicate?",
+              "options": [
+                "The unit is too far from a wall",
+                "The website is unavailable",
+                "The covering is still attached",
+                "The filter needs replacement"
+              ],
+              "answer": 3,
+              "exp": "橘色燈表示需要更換濾網。"
+            }
+          ],
+          "audio": "audio/m5/p4-3.mp3"
+        },
+        {
+          "no": 80,
+          "graphic": null,
+          "script": [
+            "Good morning. Beginning Monday, employees who visit the client center may use the company mobile app to check in at the lobby kiosk. After opening the app, select Client Center Visit and scan the code displayed on the kiosk screen. A printed badge will still be required, so please pick it up before entering the meeting area. If you have trouble with the app, ask the reception team for assistance."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-046-Q1",
+              "difficulty": "600",
+              "text": "What is the announcement mainly about?",
+              "options": [
+                "A cafeteria renovation",
+                "A cancelled software order",
+                "A new mobile check-in feature",
+                "A change in parking fees"
+              ],
+              "answer": 2,
+              "exp": "公告主要說明員工可使用公司手機 app 在大廳 kiosk 辦理報到，因此主題是新的手機報到功能。"
+            },
+            {
+              "sourceId": "P4-046-Q2",
+              "difficulty": "600",
+              "text": "What should employees scan?",
+              "options": [
+                "A code on a kiosk screen",
+                "A paper parking pass",
+                "A cafeteria receipt",
+                "A visitor's passport"
+              ],
+              "answer": 0,
+              "exp": "公告提到 scan the code displayed on the kiosk screen，員工要掃描自助機螢幕上的代碼。"
+            },
+            {
+              "sourceId": "P4-046-Q3",
+              "difficulty": "800",
+              "text": "What is still required?",
+              "options": [
+                "A laptop password",
+                "A printed badge",
+                "A parking receipt",
+                "A signed lunch form"
+              ],
+              "answer": 1,
+              "exp": "公告明確說 A printed badge will still be required，表示仍需要紙本識別證。"
+            }
+          ],
+          "audio": "audio/m5/p4-4.mp3"
+        },
+        {
+          "no": 83,
+          "graphic": null,
+          "script": [
+            "Attention all employees. The lobby check-in kiosk will be offline tomorrow while a software patch is installed. During this time, visitors should check in at the security desk and show a photo ID. Employees expecting guests should send the guest list to reception by 5 P.M. today."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-048-Q1",
+              "difficulty": "600",
+              "text": "What is the announcement mainly about?",
+              "options": [
+                "A temporary change to visitor check-in",
+                "A new cafeteria menu",
+                "A quarterly sales contest",
+                "A delay in payroll processing"
+              ],
+              "answer": 0,
+              "exp": "公告主要說 lobby kiosk will be offline 和 visitors should check in at the security desk，主題是訪客報到方式暫時改變。"
+            },
+            {
+              "sourceId": "P4-048-Q2",
+              "difficulty": "600",
+              "text": "Where should visitors check in tomorrow?",
+              "options": [
+                "At the security desk",
+                "At the cafeteria entrance",
+                "In the training room",
+                "On the fourth floor"
+              ],
+              "answer": 0,
+              "exp": "公告明確說 visitors should check in at the security desk。"
+            },
+            {
+              "sourceId": "P4-048-Q3",
+              "difficulty": "800",
+              "text": "What are employees asked to do by 5 P.M.?",
+              "options": [
+                "Send a guest list to reception",
+                "Install a software patch",
+                "Move a kiosk to the lobby",
+                "Print new identification cards"
+              ],
+              "answer": 0,
+              "exp": "最後一句說 employees expecting guests should send the guest list to reception by 5 P.M. today。"
+            }
+          ],
+          "audio": "audio/m5/p4-5.mp3"
+        },
+        {
+          "no": 86,
+          "graphic": null,
+          "script": [
+            "Registration is now open for the Saturday workshop, Managing Remote Project Teams. The session is designed for new project managers and will include practical exercises on scheduling, feedback, and conflict resolution. Register by Friday to receive a 15 percent discount and a digital workbook."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-050-Q1",
+              "difficulty": "600",
+              "text": "What is being advertised?",
+              "options": [
+                "A professional development workshop",
+                "A new commuter train route",
+                "A restaurant opening",
+                "A software refund program"
+              ],
+              "answer": 0,
+              "exp": "廣告提到 Saturday workshop、project managers 和 early registration，因此是在宣傳專業進修工作坊。"
+            },
+            {
+              "sourceId": "P4-050-Q2",
+              "difficulty": "600",
+              "text": "Who is the workshop designed for?",
+              "options": [
+                "New project managers",
+                "Experienced accountants",
+                "Hotel receptionists",
+                "Warehouse technicians"
+              ],
+              "answer": 0,
+              "exp": "音檔中明確說 The session is designed for new project managers。"
+            },
+            {
+              "sourceId": "P4-050-Q3",
+              "difficulty": "800",
+              "text": "What is offered to people who register by Friday?",
+              "options": [
+                "A printed contract",
+                "A private consulting session",
+                "A discount and a digital workbook",
+                "A free hotel room"
+              ],
+              "answer": 2,
+              "exp": "最後一句說 Register by Friday to receive a 15 percent discount and a digital workbook。"
+            }
+          ],
+          "audio": "audio/m5/p4-6.mp3"
+        },
+        {
+          "no": 89,
+          "graphic": null,
+          "script": [
+            "Good morning, store managers. The energy-monitoring portal will be offline tonight from nine until midnight while technicians recalibrate the rooftop solar meters. This work will not interrupt electricity in any store. However, automated energy reports scheduled during that period will be generated tomorrow morning instead. Managers do not need to submit manual readings unless an alert remains visible after the portal returns. A short guide to the updated dashboard will be posted in the operations library on Friday."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-G20-Q1",
+              "difficulty": "800",
+              "text": "Why will the monitoring portal be unavailable?",
+              "options": [
+                "The operations library is moving",
+                "New stores are being added",
+                "Solar meters are being recalibrated",
+                "Managers are entering manual readings"
+              ],
+              "answer": 2,
+              "exp": "公告說技術人員重新校準屋頂太陽能電表，因此監控平台於晚間暫停服務。"
+            },
+            {
+              "sourceId": "P4-G20-Q2",
+              "difficulty": "800",
+              "text": "What will happen to reports scheduled during the maintenance period?",
+              "options": [
+                "They will be produced the next morning",
+                "They will be sent to technicians",
+                "They will be canceled",
+                "They will require manager approval"
+              ],
+              "answer": 0,
+              "exp": "原文說該時段的自動報告 will be generated tomorrow morning instead，答案是隔天早上產生。"
+            },
+            {
+              "sourceId": "P4-G20-Q3",
+              "difficulty": "800",
+              "text": "Under what condition should managers submit manual readings?",
+              "options": [
+                "If an alert remains after the portal is restored",
+                "If a store loses electricity",
+                "If a report arrives before midnight",
+                "If the updated guide is unavailable"
+              ],
+              "answer": 0,
+              "exp": "公告明確限定 unless an alert remains visible after the portal returns；只有平台恢復後警示仍存在，才需提交人工讀數。"
+            }
+          ],
+          "audio": "audio/m5/p4-7.mp3"
+        },
+        {
+          "no": 92,
+          "graphic": null,
+          "script": [
+            "Attention passengers. The 8:15 train to Riverside will depart twenty minutes late because maintenance crews are inspecting the tracks. Passengers may use their current tickets on the 8:30 express train at no additional charge."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-011",
+              "difficulty": "600",
+              "text": "What is the purpose of the announcement?",
+              "options": [
+                "To recruit maintenance workers",
+                "To report a train delay",
+                "To advertise a new station",
+                "To explain a ticket price increase"
+              ],
+              "answer": 1,
+              "exp": "公告說明列車延誤。"
+            },
+            {
+              "sourceId": "P4-012",
+              "difficulty": "600",
+              "text": "Why is the train delayed?",
+              "options": [
+                "The driver is absent",
+                "A ticket machine is broken",
+                "Heavy rain flooded the station",
+                "The tracks are being inspected"
+              ],
+              "answer": 3,
+              "exp": "維修人員正在檢查軌道。"
+            },
+            {
+              "sourceId": "P4-013",
+              "difficulty": "600",
+              "text": "What may passengers do?",
+              "options": [
+                "Board at a different city",
+                "Take an express train without paying extra",
+                "Request a hotel room",
+                "Exchange tickets next week"
+              ],
+              "answer": 1,
+              "exp": "原票可免費搭乘 8:30 快車。"
+            }
+          ],
+          "audio": "audio/m5/p4-8.mp3"
+        },
+        {
+          "no": 95,
+          "graphic": null,
+          "script": [
+            "Welcome to the City Design Museum. The photography exhibit on the second floor opens at 10:30. Guided tours begin every hour in the main lobby. Please note that food and beverages are not permitted inside the galleries."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-031",
+              "difficulty": "600",
+              "text": "Where is the announcement being made?",
+              "options": [
+                "At a restaurant",
+                "At a factory",
+                "At an airport",
+                "At a museum"
+              ],
+              "answer": 3,
+              "exp": "內容提及 exhibit、guided tours、galleries。"
+            },
+            {
+              "sourceId": "P4-032",
+              "difficulty": "600",
+              "text": "When does the photography exhibit open?",
+              "options": [
+                "At 1:30",
+                "At 10:30",
+                "At 9:00",
+                "At noon"
+              ],
+              "answer": 1,
+              "exp": "公告明確說 10:30。"
+            },
+            {
+              "sourceId": "P4-033",
+              "difficulty": "600",
+              "text": "What is prohibited in the galleries?",
+              "options": [
+                "Photography",
+                "Guided tours",
+                "Children",
+                "Food and drinks"
+              ],
+              "answer": 3,
+              "exp": "展廳禁止飲食。"
+            }
+          ],
+          "audio": "audio/m5/p4-9.mp3"
+        },
+        {
+          "no": 98,
+          "graphic": null,
+          "script": [
+            "Employees on the fourth floor should be aware that the water supply will be turned off tomorrow from ten A.M. until noon while a pipe is replaced. Restrooms on the third and fifth floors will remain available. Please direct any questions to the facilities department."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-G07-Q1",
+              "difficulty": "600",
+              "text": "What will happen tomorrow?",
+              "options": [
+                "The water will be turned off temporarily",
+                "The fourth floor will close permanently",
+                "Employees will move offices",
+                "A new restroom will open"
+              ],
+              "answer": 0,
+              "exp": "明天會暫時停水。"
+            },
+            {
+              "sourceId": "P4-G07-Q2",
+              "difficulty": "600",
+              "text": "Which restrooms will remain available?",
+              "options": [
+                "Only those in the lobby",
+                "Those on the third and fifth floors",
+                "Only those on the fourth floor",
+                "Those near the cafeteria"
+              ],
+              "answer": 1,
+              "exp": "三樓與五樓可使用。"
+            },
+            {
+              "sourceId": "P4-G07-Q3",
+              "difficulty": "600",
+              "text": "Whom should employees contact with questions?",
+              "options": [
+                "The accounting department",
+                "The security office",
+                "The cafeteria manager",
+                "The facilities department"
+              ],
+              "answer": 3,
+              "exp": "問題請洽設施部門。"
+            }
+          ],
+          "audio": "audio/m5/p4-10.mp3"
+        }
+      ]
+    },
+    "source": "TOEIC Question Ocean",
+    "sourceRevision": "a940bb8b479ef4d06af468015d757041c3d2e457"
+  },
+  {
+    "mock": 6,
+    "parts": {
+      "p1": [
+        {
+          "sourceId": "P1-018",
+          "difficulty": "800",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "Customers are being served at the tables.",
+            "The tables have been covered with tablecloths.",
+            "Several chairs have been stacked beside cafe tables.",
+            "The awning has been folded above the entrance."
+          ],
+          "answer": 2,
+          "exp": "數張椅子整齊堆疊在咖啡館桌子旁。桌面沒有桌巾或顧客，遮陽棚則是展開狀態。",
+          "no": 1,
+          "img": "img/ocean-cafe-chairs-ai-v4.jpg",
+          "scene": "幾張椅子堆疊在咖啡館桌子旁。",
+          "statements": [
+            "Customers are being served at the tables.",
+            "The tables have been covered with tablecloths.",
+            "Several chairs have been stacked beside cafe tables.",
+            "The awning has been folded above the entrance."
+          ],
+          "audio": "audio/m6/p1-1.mp3"
+        },
+        {
+          "sourceId": "P1-025",
+          "difficulty": "800",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "The floor is being cleaned with a machine.",
+            "A cable is being connected to a wall outlet.",
+            "A technician is coiling an electrical cable.",
+            "A technician is carrying a speaker onto a stage."
+          ],
+          "answer": 2,
+          "exp": "技術人員雙手整理多圈電纜，正在將它捲收。電纜沒有接到插座，也沒有人搬喇叭或清潔地面。",
+          "no": 2,
+          "img": "img/ocean-cable-coil-ai-v5.jpg",
+          "scene": "一名技術人員正在捲收電纜。",
+          "statements": [
+            "The floor is being cleaned with a machine.",
+            "A cable is being connected to a wall outlet.",
+            "A technician is coiling an electrical cable.",
+            "A technician is carrying a speaker onto a stage."
+          ],
+          "audio": "audio/m6/p1-2.mp3"
+        },
+        {
+          "sourceId": "P1-010",
+          "difficulty": "600",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "Some equipment is being loaded into a truck.",
+            "A technician is inspecting a row of solar panels.",
+            "The panels are covered with snow.",
+            "A worker is painting the roof."
+          ],
+          "answer": 1,
+          "exp": "技術人員跪在太陽能板旁，正使用儀表檢查設備；屋頂上沒有積雪、油漆作業或卡車。",
+          "no": 3,
+          "img": "img/ocean-solar-ai-v3.jpg",
+          "scene": "一名技術人員正在檢查一排太陽能板。",
+          "statements": [
+            "Some equipment is being loaded into a truck.",
+            "A technician is inspecting a row of solar panels.",
+            "The panels are covered with snow.",
+            "A worker is painting the roof."
+          ],
+          "audio": "audio/m6/p1-3.mp3"
+        },
+        {
+          "sourceId": "P1-015",
+          "difficulty": "600",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "The storage shelves are completely empty.",
+            "A ladder has been folded against a wall.",
+            "A worker is placing a box on a high shelf.",
+            "Some boxes are being carried outdoors."
+          ],
+          "answer": 2,
+          "exp": "工作人員站在梯子上，雙手正把紙箱放到較高的貨架。貨架並非空的，梯子也沒有收起。",
+          "no": 4,
+          "img": "img/ocean-high-shelf-ai-v4.jpg",
+          "scene": "一名工作人員正在把箱子放上高處的架子。",
+          "statements": [
+            "The storage shelves are completely empty.",
+            "A ladder has been folded against a wall.",
+            "A worker is placing a box on a high shelf.",
+            "Some boxes are being carried outdoors."
+          ],
+          "audio": "audio/m6/p1-4.mp3"
+        },
+        {
+          "sourceId": "P1-019",
+          "difficulty": "600",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "A woman is tapping an access card on a turnstile reader.",
+            "The glass doors are being cleaned.",
+            "Some luggage is being carried through the lobby.",
+            "A receptionist is arranging flowers on a counter."
+          ],
+          "answer": 0,
+          "exp": "女子將門禁卡靠近旋轉閘門的讀卡區。她沒有整理花卉、清潔玻璃門或搬運行李。",
+          "no": 5,
+          "img": "img/ocean-access-badge-ai-v5.jpg",
+          "scene": "一名女子正在旋轉閘門的讀卡機上感應門禁卡。",
+          "statements": [
+            "A woman is tapping an access card on a turnstile reader.",
+            "The glass doors are being cleaned.",
+            "Some luggage is being carried through the lobby.",
+            "A receptionist is arranging flowers on a counter."
+          ],
+          "audio": "audio/m6/p1-5.mp3"
+        },
+        {
+          "sourceId": "P1-023",
+          "difficulty": "600",
+          "text": "Look at the picture and select the sentence that best describes it.",
+          "options": [
+            "A bicycle is being loaded onto a vehicle.",
+            "A commuter is fastening a bicycle to a rack.",
+            "The bicycle's rear tire is being replaced.",
+            "Several cyclists are riding past an office."
+          ],
+          "answer": 1,
+          "exp": "通勤者將鎖具環繞自行車車架與停車架，正在固定自行車；畫面沒有車輛、換胎或其他騎士。",
+          "no": 6,
+          "img": "img/ocean-bicycle-lock-ai-v5.jpg",
+          "scene": "一名通勤者正在把自行車鎖在停車架上。",
+          "statements": [
+            "A bicycle is being loaded onto a vehicle.",
+            "A commuter is fastening a bicycle to a rack.",
+            "The bicycle's rear tire is being replaced.",
+            "Several cyclists are riding past an office."
+          ],
+          "audio": "audio/m6/p1-6.mp3"
+        }
+      ],
+      "p2": [
+        {
+          "sourceId": "P2-075",
+          "difficulty": "800",
+          "text": "Choose the best response.",
+          "options": [
+            "She bought it near the station.",
+            "Only the final version needs approval.",
+            "I prefer the window seat."
+          ],
+          "answer": 1,
+          "exp": "問句若涉及草稿或版本是否都需核准，Only the final version needs approval 直接回應核准範圍。",
+          "no": 7,
+          "prompt": "Do all drafts have to be reviewed by legal?",
+          "audio": "audio/m6/p2-1.mp3"
+        },
+        {
+          "sourceId": "P2-084",
+          "difficulty": "800",
+          "text": "Choose the best response.",
+          "options": [
+            "The printer is next to the elevator.",
+            "I chose the vegetarian option.",
+            "Not yet, but I expect them before noon."
+          ],
+          "answer": 2,
+          "exp": "Have the results arrived? 問結果到了沒，Not yet, but... 是自然且資訊完整的回答。",
+          "no": 8,
+          "prompt": "Have the laboratory test results arrived?",
+          "audio": "audio/m6/p2-2.mp3"
+        },
+        {
+          "sourceId": "P2-102",
+          "difficulty": "800",
+          "text": "Choose the best response.",
+          "options": [
+            "We sent three sales representatives.",
+            "The clients requested itemized bills.",
+            "They're still waiting for the director's signature."
+          ],
+          "answer": 2,
+          "exp": "問發票是否已寄出；still waiting for... 間接表示尚未寄出並說明原因。",
+          "no": 9,
+          "prompt": "Haven't the revised invoices been sent to the clients?",
+          "audio": "audio/m6/p2-3.mp3"
+        },
+        {
+          "sourceId": "P2-107",
+          "difficulty": "800",
+          "text": "Choose the best response.",
+          "options": [
+            "Only if we ordered before noon.",
+            "At the loading dock.",
+            "The invoice was printed yesterday."
+          ],
+          "answer": 0,
+          "exp": "否定問句詢問供應商是否同意負擔急件費；Only if... 說明該承諾附帶的條件，是最切合的回應。",
+          "no": 10,
+          "prompt": "Didn't the supplier agree to cover the rush fee?",
+          "audio": "audio/m6/p2-4.mp3"
+        },
+        {
+          "sourceId": "P2-109",
+          "difficulty": "800",
+          "text": "Choose the best response.",
+          "options": [
+            "It is stored in the supply cabinet.",
+            "The invoice includes tax.",
+            "I'll postpone the switchover, then."
+          ],
+          "answer": 2,
+          "exp": "備援伺服器尚未同步，合理後續是延後系統切換；then 表示根據前述狀況採取決定。",
+          "no": 11,
+          "prompt": "The backup server still hasn't synchronized with the billing system.",
+          "audio": "audio/m6/p2-5.mp3"
+        },
+        {
+          "sourceId": "P2-007",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "They were very expensive.",
+            "At the post office.",
+            "No, the printer stopped working."
+          ],
+          "answer": 2,
+          "exp": "否定疑問句仍依事實回答；此處說明尚未寄出的原因。",
+          "no": 12,
+          "prompt": "Haven't the invoices been mailed yet?",
+          "audio": "audio/m6/p2-6.mp3"
+        },
+        {
+          "sourceId": "P2-011",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "That sounds like a good idea.",
+            "The proposal was approved.",
+            "Lunch is included."
+          ],
+          "answer": 0,
+          "exp": "Why don't we...? 是提議。",
+          "no": 13,
+          "prompt": "Why don't we review the proposal after lunch?",
+          "audio": "audio/m6/p2-7.mp3"
+        },
+        {
+          "sourceId": "P2-015",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The aisle is narrow.",
+            "I'll check what is available.",
+            "The flight was canceled."
+          ],
+          "answer": 1,
+          "exp": "服務情境中應確認座位供應狀況。",
+          "no": 14,
+          "prompt": "Could I get an aisle seat, please?",
+          "audio": "audio/m6/p2-8.mp3"
+        },
+        {
+          "sourceId": "P2-018",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "Call now, in case the office closes early.",
+            "The supplier called yesterday.",
+            "Tomorrow is a holiday."
+          ],
+          "answer": 0,
+          "exp": "選擇問句應直接給建議。",
+          "no": 15,
+          "prompt": "Should I call the supplier now or wait until tomorrow?",
+          "audio": "audio/m6/p2-9.mp3"
+        },
+        {
+          "sourceId": "P2-022",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The copier was repaired.",
+            "I paid by credit card.",
+            "Yes, that would be helpful."
+          ],
+          "answer": 2,
+          "exp": "Would you like me to...? 是主動提供協助，最自然的是接受或婉拒。",
+          "no": 16,
+          "prompt": "Would you like me to make a copy of the receipt?",
+          "audio": "audio/m6/p2-10.mp3"
+        },
+        {
+          "sourceId": "P2-025",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The display was expensive.",
+            "That might attract more customers.",
+            "The entrance closes at nine."
+          ],
+          "answer": 1,
+          "exp": "Why don't we...? 是建議，應回應是否同意。",
+          "no": 17,
+          "prompt": "Why don't we move the display closer to the entrance?",
+          "audio": "audio/m6/p2-11.mp3"
+        },
+        {
+          "sourceId": "P2-028",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The printer is near my desk.",
+            "Yes, I'll add it to the supply order.",
+            "The holiday lasts three days."
+          ],
+          "answer": 1,
+          "exp": "Shouldn't we...? 帶有建議意味，最自然的是同意並採取行動。",
+          "no": 18,
+          "prompt": "Shouldn't we order more printer paper before the holiday?",
+          "audio": "audio/m6/p2-12.mp3"
+        },
+        {
+          "sourceId": "P2-032",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "I can ask the project manager.",
+            "The deadline was printed clearly.",
+            "We submitted three copies."
+          ],
+          "answer": 0,
+          "exp": "對能否延期的詢問，最自然的回應是表示會向負責人確認。",
+          "no": 19,
+          "prompt": "Would it be possible to extend the deadline?",
+          "audio": "audio/m6/p2-13.mp3"
+        },
+        {
+          "sourceId": "P2-036",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The contract has ten pages.",
+            "I reviewed the schedule.",
+            "Yes, if we start before lunch."
+          ],
+          "answer": 2,
+          "exp": "Yes/No 問時間是否足夠，回答條件最自然。",
+          "no": 20,
+          "prompt": "Is there enough time to review the contract today?",
+          "audio": "audio/m6/p2-14.mp3"
+        },
+        {
+          "sourceId": "P2-039",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The list is alphabetical.",
+            "Thanks, that would be useful.",
+            "Prices rose last month."
+          ],
+          "answer": 1,
+          "exp": "Why don't I...? 在此表示主動提議協助，應接受或婉拒。",
+          "no": 21,
+          "prompt": "Why don't I send you the updated price list?",
+          "audio": "audio/m6/p2-15.mp3"
+        },
+        {
+          "sourceId": "P2-043",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The printer uses less paper.",
+            "I handed them out yesterday.",
+            "Only the charts need to be in color."
+          ],
+          "answer": 2,
+          "exp": "選擇如何列印，回應哪部分需要彩色最自然。",
+          "no": 22,
+          "prompt": "Should we print the handouts in color?",
+          "audio": "audio/m6/p2-16.mp3"
+        },
+        {
+          "sourceId": "P2-047",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "I copied the document.",
+            "An e-mail copy, please.",
+            "The payment was approved."
+          ],
+          "answer": 1,
+          "exp": "選擇問句應直接選擇其中一項。",
+          "no": 23,
+          "prompt": "Would you prefer a printed receipt or an e-mail copy?",
+          "audio": "audio/m6/p2-17.mp3"
+        },
+        {
+          "sourceId": "P2-052",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "I should have time after lunch.",
+            "The estimate was accurate.",
+            "It costs about two hundred dollars."
+          ],
+          "answer": 0,
+          "exp": "Would you be able to...? 是請求，應說明能否完成。",
+          "no": 24,
+          "prompt": "Would you be able to review this estimate today?",
+          "audio": "audio/m6/p2-18.mp3"
+        },
+        {
+          "sourceId": "P2-056",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "No, the final guest list just arrived.",
+            "The badge has a blue border.",
+            "They were on the conference table."
+          ],
+          "answer": 0,
+          "exp": "否定疑問句依事實回答，並解釋尚未列印的原因。",
+          "no": 25,
+          "prompt": "Haven't the conference badges been printed?",
+          "audio": "audio/m6/p2-19.mp3"
+        },
+        {
+          "sourceId": "P2-060",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "Not at all. I'll review them now.",
+            "The figures increased last year.",
+            "There are twelve figures."
+          ],
+          "answer": 0,
+          "exp": "Would you mind...? 接受請求可回答 Not at all。",
+          "no": 26,
+          "prompt": "Would you mind checking these figures once more?",
+          "audio": "audio/m6/p2-20.mp3"
+        },
+        {
+          "sourceId": "P2-064",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "I attended the meeting.",
+            "Yes, we expect about forty guests.",
+            "The room is on the right."
+          ],
+          "answer": 1,
+          "exp": "Should I...? 是詢問是否採取行動。",
+          "no": 27,
+          "prompt": "Should I reserve the larger meeting room?",
+          "audio": "audio/m6/p2-21.mp3"
+        },
+        {
+          "sourceId": "P2-068",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "The appointment lasted an hour.",
+            "Let me check the consultant's schedule.",
+            "Friday is the fifth day."
+          ],
+          "answer": 1,
+          "exp": "對更改預約時間的請求，先確認行程最自然。",
+          "no": 28,
+          "prompt": "Could we move the appointment to Friday morning?",
+          "audio": "audio/m6/p2-22.mp3"
+        },
+        {
+          "sourceId": "P2-070",
+          "difficulty": "600",
+          "text": "What is the best response to the question?",
+          "options": [
+            "About twelve people attended.",
+            "No, I already sent the revised file.",
+            "It is located near the service elevator."
+          ],
+          "answer": 1,
+          "exp": "Did you still need...? 是詢問是否仍需要動作，回答已寄出修正版最符合。",
+          "no": 29,
+          "prompt": "Did you still need me to update the compliance report?",
+          "audio": "audio/m6/p2-23.mp3"
+        },
+        {
+          "sourceId": "P2-073",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "I reset the tablet this morning.",
+            "The meeting room seats twelve people.",
+            "Yes, the report was printed yesterday."
+          ],
+          "answer": 0,
+          "exp": "問句若在詢問裝置故障或登入問題，I reset the tablet this morning 是自然回應；其餘選項轉到會議室或報告，不符合情境。",
+          "no": 30,
+          "prompt": "Did anyone restart the tablet at the registration desk?",
+          "audio": "audio/m6/p2-24.mp3"
+        },
+        {
+          "sourceId": "P2-078",
+          "difficulty": "600",
+          "text": "Choose the best response.",
+          "options": [
+            "After the safety inspection is complete.",
+            "At the north entrance.",
+            "It was printed in color."
+          ],
+          "answer": 0,
+          "exp": "When should...? 詢問時間，After... 回答何時可以重新開放，語意最吻合。",
+          "no": 31,
+          "prompt": "When should we reopen the training room?",
+          "audio": "audio/m6/p2-25.mp3"
+        }
+      ],
+      "p3": [
+        {
+          "no": 32,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "The online advertisement attracted more visitors than expected, but few of them completed a purchase."
+            },
+            {
+              "speaker": "W",
+              "text": "Perhaps the checkout process is too complicated. We should ask the Web team to review it."
+            },
+            {
+              "speaker": "M",
+              "text": "Agreed. I'll also compare our prices with those of our competitors."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-061",
+              "difficulty": "800",
+              "text": "What are the speakers concerned about?",
+              "options": [
+                "A low purchase rate",
+                "A delayed advertisement",
+                "A lack of website visitors",
+                "A shortage of products"
+              ],
+              "answer": 0,
+              "exp": "訪客多但完成購買的人少。"
+            },
+            {
+              "sourceId": "P3-062",
+              "difficulty": "800",
+              "text": "What does the woman suggest?",
+              "options": [
+                "Closing the online store",
+                "Changing the company logo",
+                "Reviewing the checkout process",
+                "Hiring more salespeople"
+              ],
+              "answer": 2,
+              "exp": "女子建議請網站團隊檢查結帳流程。"
+            },
+            {
+              "sourceId": "P3-063",
+              "difficulty": "800",
+              "text": "What will the man compare?",
+              "options": [
+                "Shipping routes",
+                "Advertising images",
+                "Product prices",
+                "Employee schedules"
+              ],
+              "answer": 2,
+              "exp": "男子會比較競爭者價格。"
+            }
+          ],
+          "audio": "audio/m6/p3-1.mp3"
+        },
+        {
+          "no": 35,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "The refrigerator in the restaurant kitchen isn't maintaining the correct temperature."
+            },
+            {
+              "speaker": "W",
+              "text": "I called the service company, but their technician cannot come until Friday."
+            },
+            {
+              "speaker": "M",
+              "text": "Then we should move the dairy products to the smaller refrigerator in the bakery."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G10-Q1",
+              "difficulty": "800",
+              "text": "What problem is mentioned?",
+              "options": [
+                "A bakery order is late",
+                "A kitchen employee is absent",
+                "A restaurant is overcrowded",
+                "A refrigerator is not cold enough"
+              ],
+              "answer": 3,
+              "exp": "冰箱無法維持正確溫度。"
+            },
+            {
+              "sourceId": "P3-G10-Q2",
+              "difficulty": "800",
+              "text": "When can the technician come?",
+              "options": [
+                "Tomorrow morning",
+                "On Friday",
+                "This afternoon",
+                "On Monday"
+              ],
+              "answer": 1,
+              "exp": "技術人員星期五才能來。"
+            },
+            {
+              "sourceId": "P3-G10-Q3",
+              "difficulty": "800",
+              "text": "What does the man suggest?",
+              "options": [
+                "Moving some food",
+                "Buying new equipment immediately",
+                "Closing the bakery",
+                "Canceling a delivery"
+              ],
+              "answer": 0,
+              "exp": "男子建議移動乳製品。"
+            }
+          ],
+          "audio": "audio/m6/p3-2.mp3"
+        },
+        {
+          "no": 38,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "The photos for the winter catalog are scheduled for Thursday, but the sample coats haven't arrived."
+            },
+            {
+              "speaker": "W",
+              "text": "The supplier says they will be delivered tomorrow morning."
+            },
+            {
+              "speaker": "M",
+              "text": "Good. Please check every item as soon as the boxes arrive."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G14-Q1",
+              "difficulty": "800",
+              "text": "What are the speakers preparing for?",
+              "options": [
+                "A catalog photo session",
+                "A winter conference",
+                "A supplier interview",
+                "A clothing sale today"
+              ],
+              "answer": 0,
+              "exp": "他們正準備冬季目錄攝影。"
+            },
+            {
+              "sourceId": "P3-G14-Q2",
+              "difficulty": "800",
+              "text": "When should the coats arrive?",
+              "options": [
+                "This afternoon",
+                "Tomorrow morning",
+                "Thursday evening",
+                "Next winter"
+              ],
+              "answer": 1,
+              "exp": "供應商說明早送達。"
+            },
+            {
+              "sourceId": "P3-G14-Q3",
+              "difficulty": "800",
+              "text": "What does the man ask the woman to do?",
+              "options": [
+                "Return all the coats",
+                "Call a different photographer",
+                "Inspect the delivered items",
+                "Cancel the photo session"
+              ],
+              "answer": 2,
+              "exp": "箱子送達後要檢查所有商品。"
+            }
+          ],
+          "audio": "audio/m6/p3-3.mp3"
+        },
+        {
+          "no": 41,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "Did the security update finish on the reception tablets?"
+            },
+            {
+              "speaker": "W",
+              "text": "Not yet. The network team found a compatibility issue with the older models."
+            },
+            {
+              "speaker": "M",
+              "text": "We have visitors arriving at nine tomorrow. Can we use the backup login page?"
+            },
+            {
+              "speaker": "W",
+              "text": "Yes, but I will ask the team to test it again this afternoon."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-052-Q1",
+              "difficulty": "600",
+              "text": "What problem are the speakers discussing?",
+              "options": [
+                "A missing visitor badge",
+                "A broken delivery cart",
+                "A canceled client lunch",
+                "A delayed security update"
+              ],
+              "answer": 3,
+              "exp": "兩人討論 security update 還沒完成，且會影響明早的登入流程。"
+            },
+            {
+              "sourceId": "P3-052-Q2",
+              "difficulty": "600",
+              "text": "When are visitors expected to arrive?",
+              "options": [
+                "At noon today",
+                "At nine tomorrow",
+                "This afternoon",
+                "Next Monday"
+              ],
+              "answer": 1,
+              "exp": "男方說 We have visitors arriving at nine tomorrow。"
+            },
+            {
+              "sourceId": "P3-052-Q3",
+              "difficulty": "800",
+              "text": "What will the woman probably do this afternoon?",
+              "options": [
+                "Order new reception desks",
+                "Print visitor name tags",
+                "Reschedule a client meeting",
+                "Ask a team to test a backup page"
+              ],
+              "answer": 3,
+              "exp": "女方最後說會請 team this afternoon 再測 backup login page。"
+            }
+          ],
+          "audio": "audio/m6/p3-4.mp3"
+        },
+        {
+          "no": 44,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "The safety training video is ready, but the captions are not matching the audio."
+            },
+            {
+              "speaker": "W",
+              "text": "Thanks for checking. The vendor sent a corrected file this morning."
+            },
+            {
+              "speaker": "M",
+              "text": "Should I upload it to the learning portal now?"
+            },
+            {
+              "speaker": "W",
+              "text": "Please do. The warehouse staff need to complete the course by Friday."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-053-Q1",
+              "difficulty": "600",
+              "text": "What are the speakers mainly discussing?",
+              "options": [
+                "A delay in office furniture delivery",
+                "A request for a new printer",
+                "A change to lunch service",
+                "A problem with a training video"
+              ],
+              "answer": 3,
+              "exp": "對話一開始提到 safety training video 的字幕與音訊不一致，後續也在談修正版檔案與上傳，因此主題是訓練影片的問題。"
+            },
+            {
+              "sourceId": "P3-053-Q2",
+              "difficulty": "600",
+              "text": "What did the vendor send?",
+              "options": [
+                "A warehouse schedule",
+                "A new microphone",
+                "A corrected file",
+                "A printed manual"
+              ],
+              "answer": 2,
+              "exp": "女子說 The vendor sent a corrected file this morning，表示供應商寄來的是修正版檔案。"
+            },
+            {
+              "sourceId": "P3-053-Q3",
+              "difficulty": "800",
+              "text": "What will the man probably do next?",
+              "options": [
+                "Record a new video",
+                "Cancel the training course",
+                "Upload a file to a learning portal",
+                "Call the warehouse supervisor"
+              ],
+              "answer": 2,
+              "exp": "男子問是否要上傳到 learning portal，女子回答 Please do，所以男子接下來很可能會上傳檔案。"
+            }
+          ],
+          "audio": "audio/m6/p3-5.mp3"
+        },
+        {
+          "no": 47,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "I just checked the support dashboard, and three tickets are missing customer names."
+            },
+            {
+              "speaker": "M",
+              "text": "That usually happens when the mobile form is submitted too quickly."
+            },
+            {
+              "speaker": "W",
+              "text": "Can you add a required-field warning before today's update goes live?"
+            },
+            {
+              "speaker": "M",
+              "text": "Yes. I will add it and test the form within the hour."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-055-Q1",
+              "difficulty": "600",
+              "text": "What problem does the woman mention?",
+              "options": [
+                "A vendor changed its address",
+                "The website is loading slowly",
+                "Some tickets are missing customer names",
+                "The help desk is closed"
+              ],
+              "answer": 2,
+              "exp": "女方提到 three support tickets are missing customer names，因此問題是部分工單缺少客戶姓名。"
+            },
+            {
+              "sourceId": "P3-055-Q2",
+              "difficulty": "600",
+              "text": "What does the man say he will do?",
+              "options": [
+                "Call three customers",
+                "Cancel a software release",
+                "Print a dashboard report",
+                "Add a required-field warning"
+              ],
+              "answer": 3,
+              "exp": "男方說 I will add it and test the form，it 指女方要求的 required-field warning。"
+            },
+            {
+              "sourceId": "P3-055-Q3",
+              "difficulty": "800",
+              "text": "When will the man test the form?",
+              "options": [
+                "During next month's audit",
+                "Within the hour",
+                "Tomorrow morning",
+                "After the help desk closes"
+              ],
+              "answer": 1,
+              "exp": "男方最後說 within the hour，表示一小時內會測試表單。"
+            }
+          ],
+          "audio": "audio/m6/p3-6.mp3"
+        },
+        {
+          "no": 50,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "Hi, this is Daniel from Northstar Supplies. I cannot open the presentation file you sent."
+            },
+            {
+              "speaker": "W",
+              "text": "Sorry about that. It may be too large for your email server."
+            },
+            {
+              "speaker": "M",
+              "text": "Could you upload it to the vendor portal instead?"
+            },
+            {
+              "speaker": "W",
+              "text": "Of course. I will upload it now and send you a temporary password."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-057-Q1",
+              "difficulty": "600",
+              "text": "Why is the man calling the woman?",
+              "options": [
+                "To confirm a dinner reservation",
+                "To report a lost laptop",
+                "To ask about a presentation file",
+                "To request a refund"
+              ],
+              "answer": 2,
+              "exp": "男方第一句提到 cannot open the presentation file，因此來電目的是詢問簡報檔問題。"
+            },
+            {
+              "sourceId": "P3-057-Q2",
+              "difficulty": "600",
+              "text": "What does the man ask the woman to do?",
+              "options": [
+                "Print several copies",
+                "Schedule a factory tour",
+                "Reduce the product price",
+                "Upload the file to a portal"
+              ],
+              "answer": 3,
+              "exp": "男方問 Could you upload it to the vendor portal instead? 因此要求她上傳到入口網站。"
+            },
+            {
+              "sourceId": "P3-057-Q3",
+              "difficulty": "800",
+              "text": "What will the woman send to the man?",
+              "options": [
+                "A shipping label",
+                "A revised invoice",
+                "A temporary password",
+                "A dinner invitation"
+              ],
+              "answer": 2,
+              "exp": "女方最後說 send you a temporary password，表示會寄臨時密碼。"
+            }
+          ],
+          "audio": "audio/m6/p3-7.mp3"
+        },
+        {
+          "no": 53,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "Are the warehouse tablets ready for passkey sign-in?"
+            },
+            {
+              "speaker": "M",
+              "text": "The pilot worked on the newer devices, but twelve older scanners cannot install the security update."
+            },
+            {
+              "speaker": "W",
+              "text": "The leased replacements are scheduled to arrive Tuesday. What should the night shift use until then?"
+            },
+            {
+              "speaker": "M",
+              "text": "I'll issue temporary security keys and leave a sign-out sheet with the supervisor."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G21-Q1",
+              "difficulty": "800",
+              "text": "What problem does the man mention?",
+              "options": [
+                "The pilot program was canceled",
+                "New tablets were delivered late",
+                "Some scanners cannot install an update",
+                "The night supervisor lost a form"
+              ],
+              "answer": 2,
+              "exp": "男方說 twelve older scanners cannot install the security update。"
+            },
+            {
+              "sourceId": "P3-G21-Q2",
+              "difficulty": "800",
+              "text": "What is expected to happen on Tuesday?",
+              "options": [
+                "A pilot report will be published",
+                "Replacement devices will arrive",
+                "Employees will return security keys",
+                "A supervisor will start the night shift"
+              ],
+              "answer": 1,
+              "exp": "女方說 leased replacements are scheduled to arrive Tuesday。"
+            },
+            {
+              "sourceId": "P3-G21-Q3",
+              "difficulty": "800",
+              "text": "What will the man provide?",
+              "options": [
+                "New warehouse shelves",
+                "A software training video",
+                "Printed delivery labels",
+                "Temporary security keys"
+              ],
+              "answer": 3,
+              "exp": "男方明確說 I'll issue temporary security keys。"
+            }
+          ],
+          "audio": "audio/m6/p3-8.mp3"
+        },
+        {
+          "no": 56,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "The phishing-simulation report says the finance team clicked fewer test links this month, but more employees entered passwords after clicking."
+            },
+            {
+              "speaker": "M",
+              "text": "So the click rate improved, but the risky behavior became more serious. Should we still end the pilot on Friday?"
+            },
+            {
+              "speaker": "W",
+              "text": "Not yet. The report covers only two weeks, and several new hires have not taken the security workshop."
+            },
+            {
+              "speaker": "M",
+              "text": "I'll extend the pilot through the workshop next Wednesday and ask the analyst to separate new-hire results."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G24-Q1",
+              "difficulty": "800",
+              "text": "What concern does the man express about the report?",
+              "options": [
+                "It excludes the finance team",
+                "A less frequent action now has more serious consequences",
+                "The workshop results were published too early",
+                "The analyst used last month's click rate"
+              ],
+              "answer": 1,
+              "exp": "男士對比「點擊較少」與「輸入密碼較多」，指出發生次數下降，但實際風險更嚴重。"
+            },
+            {
+              "sourceId": "P3-G24-Q2",
+              "difficulty": "800",
+              "text": "Why does the woman recommend continuing the pilot?",
+              "options": [
+                "The workshop has been canceled",
+                "The observation period is limited",
+                "The finance team requested another report",
+                "The analyst missed Friday's deadline"
+              ],
+              "answer": 1,
+              "exp": "女士說報告 only covers two weeks，且新進員工尚未受訓，因此目前資料不足以結束試行。"
+            },
+            {
+              "sourceId": "P3-G24-Q3",
+              "difficulty": "800",
+              "text": "What will the man most likely ask the analyst to do?",
+              "options": [
+                "Remove all password data",
+                "Compare two finance systems",
+                "Report new employees as a separate group",
+                "Schedule the security workshop"
+              ],
+              "answer": 2,
+              "exp": "男士明說 ask the analyst to separate new-hire results，也就是將新進員工獨立呈現。"
+            }
+          ],
+          "audio": "audio/m6/p3-9.mp3"
+        },
+        {
+          "no": 59,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "M",
+              "text": "Good afternoon. I have a reservation under the name Chen, but my flight arrives after midnight."
+            },
+            {
+              "speaker": "W",
+              "text": "That's fine. I'll mark your reservation for late arrival. Would you also like us to arrange airport transportation?"
+            },
+            {
+              "speaker": "M",
+              "text": "Yes, please. That would be very helpful."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-021",
+              "difficulty": "600",
+              "text": "Where most likely does the woman work?",
+              "options": [
+                "At a hotel",
+                "At a factory",
+                "At a bank",
+                "At a museum"
+              ],
+              "answer": 0,
+              "exp": "提到 reservation、late arrival 與機場接送，最可能是飯店。"
+            },
+            {
+              "sourceId": "P3-022",
+              "difficulty": "600",
+              "text": "What concern does the man mention?",
+              "options": [
+                "His payment was rejected",
+                "His luggage is missing",
+                "He will arrive very late",
+                "His room is too small"
+              ],
+              "answer": 2,
+              "exp": "男子擔心午夜後才抵達。"
+            },
+            {
+              "sourceId": "P3-023",
+              "difficulty": "600",
+              "text": "What service does the man request?",
+              "options": [
+                "Laundry repair",
+                "Conference catering",
+                "Package delivery",
+                "Airport transportation"
+              ],
+              "answer": 3,
+              "exp": "男子接受安排機場交通。"
+            }
+          ],
+          "audio": "audio/m6/p3-10.mp3"
+        },
+        {
+          "no": 62,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "The coffee machine in the employee lounge is leaking again."
+            },
+            {
+              "speaker": "M",
+              "text": "I'll call the repair company, but they may not come until tomorrow."
+            },
+            {
+              "speaker": "W",
+              "text": "In that case, let's put up a sign and move the smaller machine from the second floor."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-051",
+              "difficulty": "600",
+              "text": "What problem is mentioned?",
+              "options": [
+                "A lounge is overcrowded",
+                "A repair bill is missing",
+                "A sign was printed incorrectly",
+                "A machine is leaking"
+              ],
+              "answer": 3,
+              "exp": "咖啡機漏水。"
+            },
+            {
+              "sourceId": "P3-052",
+              "difficulty": "600",
+              "text": "What will the man probably do?",
+              "options": [
+                "Contact a repair company",
+                "Order more coffee",
+                "Clean the second floor",
+                "Replace an employee"
+              ],
+              "answer": 0,
+              "exp": "男子說會打電話給維修公司。"
+            },
+            {
+              "sourceId": "P3-053",
+              "difficulty": "600",
+              "text": "What does the woman propose?",
+              "options": [
+                "Closing the building",
+                "Canceling tomorrow's meeting",
+                "Buying a refrigerator",
+                "Moving another machine"
+              ],
+              "answer": 3,
+              "exp": "女子建議搬二樓的小型機器。"
+            }
+          ],
+          "audio": "audio/m6/p3-11.mp3"
+        },
+        {
+          "no": 65,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "The customer service workshop is almost full. Should we add a second session next week?"
+            },
+            {
+              "speaker": "M",
+              "text": "Yes. Wednesday afternoon is open in the training room."
+            },
+            {
+              "speaker": "W",
+              "text": "Great. I'll ask Human Resources to send another announcement."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G09-Q1",
+              "difficulty": "600",
+              "text": "What are the speakers discussing?",
+              "options": [
+                "Hiring a workshop instructor",
+                "Adding another training session",
+                "Canceling a customer order",
+                "Moving to a new office"
+              ],
+              "answer": 1,
+              "exp": "他們討論增加第二場訓練。"
+            },
+            {
+              "sourceId": "P3-G09-Q2",
+              "difficulty": "600",
+              "text": "When is the training room available?",
+              "options": [
+                "Saturday afternoon",
+                "Wednesday afternoon",
+                "Monday morning",
+                "Friday evening"
+              ],
+              "answer": 1,
+              "exp": "男子說星期三下午有空。"
+            },
+            {
+              "sourceId": "P3-G09-Q3",
+              "difficulty": "600",
+              "text": "What will the woman ask Human Resources to do?",
+              "options": [
+                "Reserve a restaurant",
+                "Interview a candidate",
+                "Prepare customer invoices",
+                "Send another announcement"
+              ],
+              "answer": 3,
+              "exp": "女子會請人資再發公告。"
+            }
+          ],
+          "audio": "audio/m6/p3-12.mp3"
+        },
+        {
+          "no": 68,
+          "graphic": null,
+          "script": [
+            {
+              "speaker": "W",
+              "text": "The accounting team is moving to the sixth floor on Monday."
+            },
+            {
+              "speaker": "M",
+              "text": "Then we need to update the directory in the lobby."
+            },
+            {
+              "speaker": "W",
+              "text": "I'll also send a message to our regular delivery companies."
+            }
+          ],
+          "questions": [
+            {
+              "sourceId": "P3-G13-Q1",
+              "difficulty": "600",
+              "text": "What will happen on Monday?",
+              "options": [
+                "A delivery company will close",
+                "The lobby will be renovated",
+                "A team will move to another floor",
+                "A directory will be printed for sale"
+              ],
+              "answer": 2,
+              "exp": "會計團隊星期一搬到六樓。"
+            },
+            {
+              "sourceId": "P3-G13-Q2",
+              "difficulty": "600",
+              "text": "What does the man say needs to be updated?",
+              "options": [
+                "The lobby directory",
+                "The accounting software",
+                "The delivery schedule",
+                "The company website"
+              ],
+              "answer": 0,
+              "exp": "男子說要更新大廳目錄。"
+            },
+            {
+              "sourceId": "P3-G13-Q3",
+              "difficulty": "600",
+              "text": "Whom will the woman contact?",
+              "options": [
+                "New accounting applicants",
+                "Building inspectors",
+                "Conference attendees",
+                "Regular delivery companies"
+              ],
+              "answer": 3,
+              "exp": "女子會通知固定合作的送貨公司。"
+            }
+          ],
+          "audio": "audio/m6/p3-13.mp3"
+        }
+      ],
+      "p4": [
+        {
+          "no": 71,
+          "graphic": null,
+          "script": [
+            "Before we begin today's safety workshop, please sign the attendance sheet near the entrance and collect a training booklet. The morning session will end at eleven forty-five, followed by lunch in the cafeteria. The afternoon demonstration will take place outdoors, so please bring your identification badge."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-061",
+              "difficulty": "800",
+              "text": "What should listeners do first?",
+              "options": [
+                "Watch an outdoor demonstration",
+                "Sign an attendance sheet",
+                "Go to the cafeteria",
+                "Put on safety equipment"
+              ],
+              "answer": 1,
+              "exp": "開始前先簽到並領手冊。"
+            },
+            {
+              "sourceId": "P4-062",
+              "difficulty": "800",
+              "text": "What happens after the morning session?",
+              "options": [
+                "Lunch is served",
+                "A test is given",
+                "The workshop ends",
+                "A bus departs"
+              ],
+              "answer": 0,
+              "exp": "上午課程後在餐廳用餐。"
+            },
+            {
+              "sourceId": "P4-063",
+              "difficulty": "800",
+              "text": "Why should listeners bring an identification badge?",
+              "options": [
+                "The cafeteria requires payment",
+                "The entrance is being repaired",
+                "The afternoon activity is outdoors",
+                "They need to borrow a booklet"
+              ],
+              "answer": 2,
+              "exp": "下午示範在戶外，需攜帶識別證。"
+            }
+          ],
+          "audio": "audio/m6/p4-1.mp3"
+        },
+        {
+          "no": 74,
+          "graphic": null,
+          "script": [
+            "Passengers traveling on Flight 482 to Vancouver should proceed to Gate 16. Boarding will begin at five forty instead of five twenty because the aircraft arrived late. Passengers requiring assistance may speak with an agent at the service desk beside the gate."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-G10-Q1",
+              "difficulty": "800",
+              "text": "Where should passengers go?",
+              "options": [
+                "The baggage office",
+                "The ticket counter",
+                "Gate 16",
+                "Gate 20"
+              ],
+              "answer": 2,
+              "exp": "乘客應前往十六號登機門。"
+            },
+            {
+              "sourceId": "P4-G10-Q2",
+              "difficulty": "800",
+              "text": "Why will boarding begin late?",
+              "options": [
+                "The gate is being repaired",
+                "The crew is in a meeting",
+                "The aircraft arrived late",
+                "The weather is severe"
+              ],
+              "answer": 2,
+              "exp": "因為飛機晚到。"
+            },
+            {
+              "sourceId": "P4-G10-Q3",
+              "difficulty": "800",
+              "text": "Where can passengers request assistance?",
+              "options": [
+                "At a service desk beside the gate",
+                "At the parking office",
+                "Inside the aircraft",
+                "At the baggage carousel"
+              ],
+              "answer": 0,
+              "exp": "可洽登機門旁服務櫃台。"
+            }
+          ],
+          "audio": "audio/m6/p4-2.mp3"
+        },
+        {
+          "no": 77,
+          "graphic": null,
+          "script": [
+            "Welcome to the Grand Meridian Hotel. Breakfast is served in the Garden Restaurant from six thirty to ten. Guests who have booked an airport shuttle should meet the driver in the east lobby ten minutes before departure. For late checkout requests, please contact the front desk before eleven A.M."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-G14-Q1",
+              "difficulty": "800",
+              "text": "Where is breakfast served?",
+              "options": [
+                "At the front desk",
+                "On the airport shuttle",
+                "In the Garden Restaurant",
+                "In the east lobby"
+              ],
+              "answer": 2,
+              "exp": "早餐在 Garden Restaurant。"
+            },
+            {
+              "sourceId": "P4-G14-Q2",
+              "difficulty": "800",
+              "text": "When should shuttle passengers meet the driver?",
+              "options": [
+                "At six thirty",
+                "After checkout",
+                "At eleven A.M.",
+                "Ten minutes before departure"
+              ],
+              "answer": 3,
+              "exp": "出發前十分鐘會合。"
+            },
+            {
+              "sourceId": "P4-G14-Q3",
+              "difficulty": "800",
+              "text": "What should guests do to request late checkout?",
+              "options": [
+                "Visit the restaurant",
+                "Call the airport",
+                "Contact the front desk before eleven",
+                "Meet the shuttle driver"
+              ],
+              "answer": 2,
+              "exp": "十一點前聯絡櫃台。"
+            }
+          ],
+          "audio": "audio/m6/p4-3.mp3"
+        },
+        {
+          "no": 80,
+          "graphic": null,
+          "script": [
+            "Attention hotel guests. Due to construction near the main entrance, airport shuttle pickup will move to the north entrance beginning this evening. Please follow the blue signs through the lobby and arrive at least five minutes before your scheduled departure. Staff members will be available to assist guests with luggage."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-047-Q1",
+              "difficulty": "600",
+              "text": "What is the announcement mainly about?",
+              "options": [
+                "A discount at a coffee shop",
+                "A lost identification card",
+                "A new airport security rule",
+                "A change to shuttle pickup locations"
+              ],
+              "answer": 3,
+              "exp": "公告主要說明飯店接駁車改在北側入口接送，因此主題是接駁車上車地點變更。"
+            },
+            {
+              "sourceId": "P4-047-Q2",
+              "difficulty": "600",
+              "text": "Where should guests go?",
+              "options": [
+                "To the north entrance",
+                "To the coffee shop",
+                "To the parking office",
+                "To the business center"
+              ],
+              "answer": 0,
+              "exp": "公告說 airport shuttle pickup will move to the north entrance，旅客要前往北側入口。"
+            },
+            {
+              "sourceId": "P4-047-Q3",
+              "difficulty": "800",
+              "text": "What will staff members help with?",
+              "options": [
+                "Printing boarding passes",
+                "Changing room keys",
+                "Booking restaurant tables",
+                "Carrying luggage"
+              ],
+              "answer": 3,
+              "exp": "最後一句說 staff members will be available to assist guests with luggage，因此會協助行李。"
+            }
+          ],
+          "audio": "audio/m6/p4-4.mp3"
+        },
+        {
+          "no": 83,
+          "graphic": null,
+          "script": [
+            "Hello, this is Marisa from BrightLine Office Equipment. I am calling to let you know that your color printer has been repaired and is ready for pickup. The technician also replaced the paper tray at no additional charge. Please bring your service receipt when you come to our store."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-049-Q1",
+              "difficulty": "600",
+              "text": "Why is the speaker calling?",
+              "options": [
+                "To change a hotel reservation",
+                "To confirm a repaired printer is ready",
+                "To complain about a late payment",
+                "To invite someone to a workshop"
+              ],
+              "answer": 1,
+              "exp": "留言開頭說 your color printer has been repaired and is ready for pickup，所以來電確認印表機已修好可取件。"
+            },
+            {
+              "sourceId": "P4-049-Q2",
+              "difficulty": "600",
+              "text": "What did the technician replace?",
+              "options": [
+                "The printer stand",
+                "The ink invoice",
+                "The paper tray",
+                "The power cable"
+              ],
+              "answer": 2,
+              "exp": "留言中說 The technician also replaced the paper tray。"
+            },
+            {
+              "sourceId": "P4-049-Q3",
+              "difficulty": "800",
+              "text": "What should the listener bring?",
+              "options": [
+                "A warranty brochure",
+                "A shipping label",
+                "A guest badge",
+                "A service receipt"
+              ],
+              "answer": 3,
+              "exp": "最後一句 Please bring your service receipt 清楚指出應攜帶維修收據。"
+            }
+          ],
+          "audio": "audio/m6/p4-5.mp3"
+        },
+        {
+          "no": 86,
+          "graphic": null,
+          "script": [
+            "Attention, distribution staff. Starting Monday, small indoor drones will scan shelf labels after the warehouse closes. Please keep the main aisles clear by eight thirty P.M. During the first week, technicians will be on site to monitor each flight. If a drone stops unexpectedly, do not move it. Submit an incident through the operations app. Manual cycle counts will continue in the refrigerated zone until its safety test is complete."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-G16-Q1",
+              "difficulty": "800",
+              "text": "What is the purpose of the announcement?",
+              "options": [
+                "To report missing shelf labels",
+                "To recruit warehouse technicians",
+                "To explain a new inventory procedure",
+                "To announce an earlier closing time"
+              ],
+              "answer": 2,
+              "exp": "公告說明無人機掃描貨架標籤的新流程及員工應配合事項。"
+            },
+            {
+              "sourceId": "P4-G16-Q2",
+              "difficulty": "800",
+              "text": "By what time should the main aisles be clear?",
+              "options": [
+                "After the first week",
+                "By 8:30 P.M.",
+                "By 9:00 A.M.",
+                "Before Monday noon"
+              ],
+              "answer": 1,
+              "exp": "講者要求 keep the main aisles clear by eight thirty P.M.。"
+            },
+            {
+              "sourceId": "P4-G16-Q3",
+              "difficulty": "800",
+              "text": "Where will manual cycle counts continue?",
+              "options": [
+                "Along the main aisles",
+                "Near the operations office",
+                "In the refrigerated zone",
+                "In the loading area"
+              ],
+              "answer": 2,
+              "exp": "最後一句指出 Manual cycle counts will continue in the refrigerated zone。"
+            }
+          ],
+          "audio": "audio/m6/p4-6.mp3"
+        },
+        {
+          "no": 89,
+          "graphic": null,
+          "script": [
+            "Attention, visitors to the Harbor Design Fair. Because the pedestrian tunnel beneath Central Avenue is closed for an inspection, the west entrance cannot be reached from the Metro station by the usual route. Complimentary shuttle buses will leave the station's north exit every twelve minutes and stop beside Hall C. The digital map in yesterday's confirmation e-mail still shows the tunnel route, so please disregard it. Visitors who already have printed tickets may board the shuttle without checking in at the information desk."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-G21-Q1",
+              "difficulty": "800",
+              "text": "Why has the usual walking route changed?",
+              "options": [
+                "A fair has moved to another hall",
+                "A tunnel is being inspected",
+                "The Metro station is closing early",
+                "Central Avenue is hosting a parade"
+              ],
+              "answer": 1,
+              "exp": "公告指出 pedestrian tunnel ... is closed for an inspection，因此原步行路線無法使用。"
+            },
+            {
+              "sourceId": "P4-G21-Q2",
+              "difficulty": "800",
+              "text": "What are visitors told to disregard?",
+              "options": [
+                "A sign beside Hall C",
+                "A map in a confirmation e-mail",
+                "A notice at the north exit",
+                "A printed ticket"
+              ],
+              "answer": 1,
+              "exp": "昨日確認郵件的電子地圖仍顯示已封閉的隧道路線，公告明確要求 disregard it。"
+            },
+            {
+              "sourceId": "P4-G21-Q3",
+              "difficulty": "800",
+              "text": "What is indicated about visitors with printed tickets?",
+              "options": [
+                "They may board the shuttle directly",
+                "They must use the west entrance",
+                "They receive priority seating in Hall C",
+                "They should exchange them at the station"
+              ],
+              "answer": 0,
+              "exp": "最後一句說持紙本票者可直接搭接駁車，不必先到服務台報到。"
+            }
+          ],
+          "audio": "audio/m6/p4-7.mp3"
+        },
+        {
+          "no": 92,
+          "graphic": null,
+          "script": [
+            "Hello, this is Karen from Apex Office Supplies. I'm calling about order 5842. The blue folders are temporarily out of stock, so we can send green ones today or ship the blue folders next Monday. Please call me before 4 P.M. to let me know which option you prefer."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-021",
+              "difficulty": "600",
+              "text": "Why is the speaker calling?",
+              "options": [
+                "To collect a late payment",
+                "To discuss an order",
+                "To schedule an interview",
+                "To announce a store opening"
+              ],
+              "answer": 1,
+              "exp": "來電討論訂單 5842。"
+            },
+            {
+              "sourceId": "P4-022",
+              "difficulty": "600",
+              "text": "What item is unavailable?",
+              "options": [
+                "Green chairs",
+                "Printer paper",
+                "Desk lamps",
+                "Blue folders"
+              ],
+              "answer": 3,
+              "exp": "藍色資料夾缺貨。"
+            },
+            {
+              "sourceId": "P4-023",
+              "difficulty": "600",
+              "text": "What does the speaker request?",
+              "options": [
+                "A delivery address",
+                "A product brochure",
+                "A decision before 4 P.M.",
+                "A new purchase order"
+              ],
+              "answer": 2,
+              "exp": "要求四點前回覆選項。"
+            }
+          ],
+          "audio": "audio/m6/p4-8.mp3"
+        },
+        {
+          "no": 95,
+          "graphic": null,
+          "script": [
+            "Good morning, shoppers. Beginning today, the home appliance department has moved from the third floor to the newly renovated second floor. To celebrate, all small kitchen appliances are fifteen percent off through Sunday. Please ask a sales associate for assistance."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-051",
+              "difficulty": "600",
+              "text": "What has changed?",
+              "options": [
+                "A department has moved",
+                "The store has closed",
+                "Parking fees have increased",
+                "A product has been recalled"
+              ],
+              "answer": 0,
+              "exp": "家電部門移到二樓。"
+            },
+            {
+              "sourceId": "P4-052",
+              "difficulty": "600",
+              "text": "What is discounted?",
+              "options": [
+                "Delivery services",
+                "Restaurant meals",
+                "Small kitchen appliances",
+                "All furniture"
+              ],
+              "answer": 2,
+              "exp": "小型廚房家電打八五折。"
+            },
+            {
+              "sourceId": "P4-053",
+              "difficulty": "600",
+              "text": "Until when is the discount offered?",
+              "options": [
+                "Through Sunday",
+                "Until noon today",
+                "For one month",
+                "Through Friday"
+              ],
+              "answer": 0,
+              "exp": "公告明確說 through Sunday。"
+            }
+          ],
+          "audio": "audio/m6/p4-9.mp3"
+        },
+        {
+          "no": 98,
+          "graphic": null,
+          "script": [
+            "Thank you for calling Martin's Furniture. Our showroom is open Monday through Saturday from nine to six. For information about an existing delivery, press one. To schedule a design consultation, press two. To speak with a billing representative, remain on the line."
+          ],
+          "questions": [
+            {
+              "sourceId": "P4-G09-Q1",
+              "difficulty": "600",
+              "text": "When is the showroom closed?",
+              "options": [
+                "Every afternoon",
+                "On Sunday",
+                "On Saturday",
+                "On Monday"
+              ],
+              "answer": 1,
+              "exp": "營業日為週一至週六，因此週日休息。"
+            },
+            {
+              "sourceId": "P4-G09-Q2",
+              "difficulty": "600",
+              "text": "What should callers do to arrange a design consultation?",
+              "options": [
+                "Press one",
+                "Visit the showroom",
+                "Remain on the line",
+                "Press two"
+              ],
+              "answer": 3,
+              "exp": "設計諮詢按二。"
+            },
+            {
+              "sourceId": "P4-G09-Q3",
+              "difficulty": "600",
+              "text": "Why should a caller remain on the line?",
+              "options": [
+                "To order new furniture",
+                "To speak with a billing representative",
+                "To change a delivery address",
+                "To hear store hours again"
+              ],
+              "answer": 1,
+              "exp": "留在線上可與帳務人員通話。"
+            }
+          ],
+          "audio": "audio/m6/p4-10.mp3"
+        }
+      ]
+    },
+    "source": "TOEIC Question Ocean",
+    "sourceRevision": "a940bb8b479ef4d06af468015d757041c3d2e457"
+  }
+]
