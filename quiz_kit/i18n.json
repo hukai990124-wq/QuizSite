@@ -1583,5 +1583,25 @@
  "6 个题库 · 共 3392 题 · 可作答判分 · 进度自动保存在本机浏览器": {
   "en": "6 quiz banks · 3,392 questions · Answerable & scored · Progress saved automatically in this browser",
   "ja": "6つの問題集 · 全3392問 · 解答・採点可 · 進捗はこのブラウザに自動保存"
+ },
+ "重置学习进度": {
+  "en": "Reset progress",
+  "ja": "学習の進捗をリセット"
+ },
+ "确定要清空全部作答记录吗？": {
+  "en": "Clear all of your answers?",
+  "ja": "回答記録をすべて消去しますか？"
+ },
+ "将删除本机浏览器中保存的全部答题进度与正确率，此操作无法撤销。题目内容不受影响。": {
+  "en": "This erases every answer and accuracy record saved in this browser. It cannot be undone. The question content itself is unaffected.",
+  "ja": "このブラウザーに保存された解答と正答率の記録をすべて削除します。元に戻すことはできません。問題そのものには影響しません。"
+ },
+ "取消": {
+  "en": "Cancel",
+  "ja": "キャンセル"
+ },
+ "确定重置": {
+  "en": "Reset",
+  "ja": "リセット"
  }
 }

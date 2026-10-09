@@ -17,24 +17,38 @@ a{color:#1d4e79}
  border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:7px 13px;background:rgba(255,255,255,.13);
  color:#fff;font:inherit;font-size:13px;cursor:pointer;backdrop-filter:blur(8px);transition:background .15s,border-color .15s}
 .contact-author-trigger:hover{background:rgba(255,255,255,.24);border-color:rgba(255,255,255,.7)}
-.contact-author-trigger:focus-visible,.author-dialog button:focus-visible,.author-dialog a:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
-.author-dialog{width:min(420px,calc(100vw - 32px));max-width:none;margin:auto;padding:0;border:1px solid #dbe3ea;
+.contact-author-trigger:focus-visible,.author-dialog button:focus-visible,.author-dialog a:focus-visible,
+.reset-progress:focus-visible,.reset-dialog button:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
+.author-dialog,.reset-dialog{width:min(420px,calc(100vw - 32px));max-width:none;margin:auto;padding:0;border:1px solid #dbe3ea;
  border-radius:16px;color:#0f172a;box-shadow:0 24px 70px rgba(15,23,42,.26)}
-.author-dialog::backdrop{background:rgba(15,23,42,.48);backdrop-filter:blur(2px)}
-.author-dialog .panel{position:relative;padding:25px 24px 24px}
-.author-dialog .close{position:absolute;top:10px;right:12px;width:34px;height:34px;border:0;border-radius:50%;
+.author-dialog::backdrop,.reset-dialog::backdrop{background:rgba(15,23,42,.48);backdrop-filter:blur(2px)}
+.author-dialog .panel,.reset-dialog .panel{position:relative;padding:25px 24px 24px}
+.author-dialog .close,.reset-dialog .close{position:absolute;top:10px;right:12px;width:34px;height:34px;border:0;border-radius:50%;
  background:#f1f5f9;color:#475569;font-size:22px;line-height:1;cursor:pointer}
-.author-dialog .eyebrow{margin:0 0 5px;color:#64748b;font-size:12px}
-.author-dialog h2{margin:0 38px 8px 0;font-size:20px;line-height:1.35}
-.author-dialog .description{margin:0 0 18px;color:#475569;font-size:14px;line-height:1.65}
+.author-dialog .eyebrow,.reset-dialog .eyebrow{margin:0 0 5px;color:#64748b;font-size:12px}
+.author-dialog h2,.reset-dialog h2{margin:0 38px 8px 0;font-size:20px;line-height:1.35}
+.author-dialog .description,.reset-dialog .description{margin:0 0 18px;color:#475569;font-size:14px;line-height:1.65}
 .author-dialog .profile{display:block;padding:12px 14px;border:1px solid #d8e3ed;border-radius:10px;background:#f8fafc;
  color:#1d4e79;font-size:14px;font-weight:600;overflow-wrap:anywhere;text-decoration:none}
 .author-dialog .profile:hover{background:#eff6ff;border-color:#93c5fd}
+/* 「重置学习进度」确认框里的两个动作按钮 */
+.reset-dialog .acts{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.reset-dialog .acts button{font:inherit;font-size:13.5px;font-weight:600;border-radius:10px;padding:9px 17px;
+ cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s}
+.reset-dialog .acts .ghost{border-color:#d8dee5;background:#fff;color:#475569}
+.reset-dialog .acts .ghost:hover{background:#f1f5f9}
+.reset-dialog .acts .danger{background:#b4232a;border-color:#b4232a;color:#fff}
+.reset-dialog .acts .danger:hover{background:#9a1c22;border-color:#9a1c22}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .hero .badge{display:inline-block;font-size:12px;letter-spacing:.6px;
  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.38);border-radius:99px;padding:2px 11px}
 .hero h1{margin:13px 0 8px;font-size:31px;line-height:1.3}
+.hero-sub{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .hero .sub{margin:0;color:#c9dcee;font-size:14px}
+.reset-progress{flex:0 0 auto;border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:4px 12px;
+ background:rgba(255,255,255,.10);color:#cfe3f5;font:inherit;font-size:12.5px;line-height:1.6;cursor:pointer;
+ white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
+.reset-progress:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.72);color:#fff}
 .hero .meta{margin:15px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
 .hero .meta li{font-size:12.5px;background:rgba(255,255,255,.13);border-radius:7px;padding:4px 10px}
 
@@ -84,6 +98,8 @@ footer .build{color:#8b95a1;font-size:12px;margin-top:3px;font-variant-numeric:t
   .contact-author-trigger{top:10px;right:14px;padding:6px 11px}
   .hero h1{font-size:23px}
   .hero .sub{font-size:13px}
+  .hero-sub{gap:9px}
+  .reset-progress{font-size:12px;padding:3px 10px}
   main{padding:18px 0 44px}
   .cards{grid-template-columns:1fr;gap:12px}
   a.card{padding:15px 16px}
@@ -126,7 +142,10 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
   <div class="in">
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
-    <p class="sub">6 个题库 · 共 3392 题 · 可作答判分 · 进度自动保存在本机浏览器</p>
+    <div class="hero-sub">
+      <p class="sub">6 个题库 · 共 3392 题 · 可作答判分 · 进度自动保存在本机浏览器</p>
+      <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
+    </div>
     <ul class="meta">
       <li>西班牙语 DELE A1</li>
       <li>TOEIC 听力</li>
@@ -145,6 +164,19 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <h2 id="contact-author-title">联系作者</h2>
     <p class="description">欢迎通过 GitHub 联系，题目、答案或页面方面的反馈都很欢迎。</p>
     <a class="profile" href="https://github.com/hukai990124-wq" target="_blank" rel="noopener noreferrer">https://github.com/hukai990124-wq</a>
+  </div>
+</dialog>
+
+<dialog class="reset-dialog" id="reset-dialog" aria-labelledby="reset-dialog-title">
+  <div class="panel">
+    <button class="close" type="button" data-close-reset-dialog><span aria-hidden="true">×</span><span class="sr-only">关闭弹窗</span></button>
+    <p class="eyebrow">重置学习进度</p>
+    <h2 id="reset-dialog-title">确定要清空全部作答记录吗？</h2>
+    <p class="description">将删除本机浏览器中保存的全部答题进度与正确率，此操作无法撤销。题目内容不受影响。</p>
+    <div class="acts">
+      <button class="ghost" type="button" data-close-reset-dialog>取消</button>
+      <button class="danger" type="button" id="reset-confirm">确定重置</button>
+    </div>
   </div>
 </dialog>
 
@@ -213,7 +245,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <footer>
   <div class="wrap">
     <div>个人学习自测用。题目来源与许可证见各题库说明；未经许可的题目请勿再分发。AWS 与相关标志归其所有者所有，本网站与 AWS 无关联或背书。</div>
-    <div class="build">最后更新：2026-10-09 10:08 JST</div>
+    <div class="build">最后更新：2026-10-09 10:24 JST</div>
   </div>
 <!--i18n:sw-->
 <div class="lang-switch i18n-noloc" role="group" aria-label="Language">
@@ -234,6 +266,38 @@ if(typeof dialog.showModal==="function"){
   dialog.querySelector("[data-close-author-dialog]").addEventListener("click",function(){dialog.close()});
   dialog.addEventListener("click",function(event){if(event.target===dialog)dialog.close()});
 }
+})();
+</script>
+
+<script>
+/* 「重置学习进度」：清掉本机浏览器里所有以 quiz: 开头的键
+   （各题库的作答记录、正确率、单卷计时；不动语言偏好 ui:lang 与访客标识 presence:vid） */
+(function(){
+"use strict";
+var btn=document.getElementById("reset-progress");
+var dlg=document.getElementById("reset-dialog");
+var ok=document.getElementById("reset-confirm");
+if(!btn||!dlg||!ok)return;
+function close(){try{dlg.close()}catch(e){}}
+function wipe(){
+  var n=0;
+  try{
+    var ks=[],i,k;
+    for(i=0;i<localStorage.length;i++){k=localStorage.key(i);if(k&&k.indexOf("quiz:")===0)ks.push(k)}
+    for(i=0;i<ks.length;i++){localStorage.removeItem(ks[i]);n++}
+  }catch(e){}
+  close();
+  if(n){try{location.reload()}catch(e){}}
+}
+btn.addEventListener("click",function(){
+  if(typeof dlg.showModal==="function")dlg.showModal();
+  else if(window.confirm(btn.textContent))wipe();
+});
+[].forEach.call(dlg.querySelectorAll("[data-close-reset-dialog]"),function(el){
+  el.addEventListener("click",close);
+});
+dlg.addEventListener("click",function(event){if(event.target===dlg)close()});
+ok.addEventListener("click",wipe);
 })();
 </script>
 
