@@ -384,7 +384,7 @@ def render_example(ex):
 
 
 def aud_html(src, label="", cls=""):
-    """音频播放器。preload=none → 不点不下载（整份音频 12MB，必须懒加载）。"""
+    """音频播放器。preload=none → 不点不下载，整站音频按需加载。"""
     if not src:
         return ""
     lab = '<span class="alab">%s</span>' % esc(label) if label else ""
@@ -507,6 +507,7 @@ _TRANS_CACHE = {}
 TRANS_SRC = {
     "a1-modelo0-2020": "parse/audio_text/m0_2020_trans.txt",
     "a1-modelo0-2008": "parse/audio_text/m0_2008_trans.txt",
+    "a1-2009-0516": "audio_text/a1-2009_synthetic.txt",
     "a1-2011": "parse/audio_text/a1_2011_trans.txt",
 }
 _KIND_CN = {"mc": "mc", "match": "match", "fill": "fill"}
@@ -683,6 +684,10 @@ jump("btn-jump-w","writing");
 
 def page_set(s):
     slug = s["slug"]
+    if slug == "a1-2009-0516":
+        audio_note = "2009 真题未公开录音与原文，本站提供新编练习稿的 AI 合成音频，不代表官方原声。"
+    else:
+        audio_note = "2009 真题的听力使用新编练习稿与 AI 合成音频，不代表官方原声。"
     read_total = sum(len(t["items"]) for t in s["tareas"])
     listen_tareas, listen_total, listen_head = render_listening(slug)
     total = read_total + listen_total
@@ -784,7 +789,7 @@ def page_set(s):
     <div><b>题目来源</b>：Instituto Cervantes 公开发布的 DELE A1 官方样卷与往届真题（<span lang="es">Modelo 0 / convocatorias oficiales</span>），
       版权归 Instituto Cervantes 所有，此处仅用于个人学习与自测。</div>
     <div><b>听力音频</b>：2020 样卷用官方公开的真人录音；2008 / 2011 官方未发布音频，
-      按官方 <span lang="es">transcripción</span> 用神经语音合成；2009 真题官方从未公布录音与原文，故该套听力无音频。</div>
+      按官方 <span lang="es">transcripción</span> 用神经语音合成；%(audio_note)s</div>
     <div><b>说明</b>：答案依据官方 <span lang="es">Clave de respuestas</span> 逐题核对；长文本页因原 PDF 文本层为图片/自定义编码，
       由逐页视觉重建，如发现个别拼写差异以官方原件为准。</div>
     <div style="margin-top:8px"><a href="index.html">← 返回全部试卷</a></div>
@@ -799,6 +804,7 @@ def page_set(s):
 </html>
 """ % {
         "title": esc(title), "base": BASE_CSS, "engine": QK.CSS, "resp": RESP_CSS,
+        "audio_note": audio_note,
         "badge": esc(s["badge"]), "h1": esc(s["title"]), "sub": esc(s["subtitle"]),
         "total": total, "bar": QK.bar_html(total), "tareas": tareas, "writing": writing,
         "listen": listen_block, "partstat": partstat, "meta": meta_html,
@@ -861,7 +867,7 @@ def page_index(totals):
         <li>第 4 个 Tarea 常是「手写填空」，直接输入单词后按回车即可。</li>
         <li>侧栏（手机在顶部）可打开<b>答题卡</b>跳题、<b>交卷看成绩</b>、<b>只看错题</b>，并随时看到阅读 / 听力<b>分部正确率</b>；作答进度存在本机浏览器。</li>
         <li>Prueba 3 写作两题不判分，建议先自己写，再展开参考答案对照。</li>
-        <li>2009 年那套真题，官方从未发布听力录音与原文，因此那套听力只能看题型与答案、无法播放；2020 年 7 月那套官方只公开了阅读与写作，没有听力。</li>
+        <li>2009 年那套真题未公开录音与原文，本站提供新编练习稿的 AI 合成音频，不代表官方原声；2020 年 7 月那套官方只公开了阅读与写作，没有听力。</li>
       </ol>
     </div>
     <div class="cards">%(cards)s</div>
@@ -888,7 +894,7 @@ def main():
     if os.path.isdir(dst_img):
         shutil.rmtree(dst_img)
     shutil.copytree(src_img, dst_img)
-    # 音频（12MB）直接复制，不做删减
+    # 音频直接复制，不做删减
     src_aud = os.path.join(HERE, "audio")
     dst_aud = os.path.join(OUT, "audio")
     if os.path.isdir(dst_aud):

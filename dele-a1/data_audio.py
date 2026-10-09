@@ -6,8 +6,8 @@
                   真人录音（已 320kbps→48kbps 单声道转码）
   · 2008 样卷  —— 官方 PDF 自带原文（p18-28）与答案（p39）；音频按原文用
                   Azure 神经语音合成
-  · 2009 真题  —— 官方只公开了题目与答案，**从未发布音频，也没有原文**，
-                  因此该套听力仅作题型浏览，不能播放
+  · 2009 真题  —— 官方未发布录音或听力原文；本站另提供新编练习稿与 AI 合成语音，
+                  不代表官方原声
   · 2011 真题  —— 官方公开了题目 + 原文 + 答案；音频按原文合成
 
 题号在每个 Prueba 内独立编号 1-25。
@@ -35,7 +35,7 @@ def _tags(slug, tarea, tags):
 #   audio        → 整段合一的单个音频（Tarea 4；2020 样卷四段各一个文件）
 #   audio_intro  → 「示例」那段音频，放在 Ejemplo 区块里
 #   item_audio   → 逐题音频列表，顺序与 items 一一对应
-# 若三者都没有 → 该 Tarea 无音频（2009 真题官方从未发布）
+# 若三者都没有 → 该 Tarea 无音频
 
 _Q5 = ["q1", "q2", "q3", "q4", "q5"]
 _Q8 = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"]
@@ -235,15 +235,16 @@ LISTENING["a1-modelo0-2008"] = {
 }
 
 # ---------------------------------------------------------------- 2009 真题
-# 官方只公开题目与答案，从未发布音频、也没有听力原文 → 只能看题型
+# 官方没有发布音频或听力原文；这里使用新编的练习稿与 AI 合成语音，不代表官方原声。
 LISTENING["a1-2009-0516"] = {
     "dur": "20 分钟",
-    "audio_note": "官方未公开音频，也没有听力原文（无法合成）——本套听力仅供题型浏览",
-    "no_audio": True,
+    "audio_note": "AI 合成的原创补充听力（非官方录音；听力原文为新编练习稿）",
     "tareas": [
         {
             "no": 1, "kind": "mc", "qfrom": 1, "qto": 5,
             "imgbase": "a1-2009", "letters": "ABCD",
+            "audio_intro": _aud("a1-2009-0516", 1, "ex0"),
+            "item_audio": _tags("a1-2009-0516", 1, _Q5),
             "inst": "A continuación escuchará cinco diálogos breves entre dos personas. Oirá "
                     "cada diálogo dos veces. Después de la segunda audición marque la opción "
                     "correcta (A, B, C o D).",
@@ -260,6 +261,8 @@ LISTENING["a1-2009-0516"] = {
         {
             "no": 2, "kind": "match", "qfrom": 6, "qto": 10,
             "pool_imgs": _pool("a1-2009", "ABCDEFGHI"), "pool_letters": "ABCDEFGHI",
+            "audio_intro": _aud("a1-2009-0516", 2, "ex0"),
+            "item_audio": _tags("a1-2009-0516", 2, _Q5),
             "inst": "A continuación escuchará cinco avisos o instrucciones. Oirá cada "
                     "intervención dos veces. Relacione los textos con las imágenes. "
                     "Hay tres letras que no debe seleccionar.",
@@ -274,6 +277,8 @@ LISTENING["a1-2009-0516"] = {
         },
         {
             "no": 3, "kind": "match", "qfrom": 11, "qto": 18,
+            "audio_intro": _aud("a1-2009-0516", 3, "ex0"),
+            "item_audio": _tags("a1-2009-0516", 3, ["q%d" % i for i in range(1, 9)]),
             "inst": "Va a escuchar a Laura hablando sobre sus viajes. Cada audición se repite "
                     "dos veces. Relacione cada ciudad con una letra de la columna de la derecha. "
                     "Hay tres letras que no se pueden seleccionar.",
@@ -306,6 +311,7 @@ LISTENING["a1-2009-0516"] = {
         },
         {
             "no": 4, "kind": "fill", "qfrom": 19, "qto": 25,
+            "audio": _aud("a1-2009-0516", 4, "q1"),
             "inst": "Teresa es una mujer que busca pareja y llama a la radio para hacer una "
                     "descripción personal. Complete el texto con la información que falta. "
                     "Escuchará la audición tres veces.",

@@ -43,12 +43,12 @@ PAGES = {
     "a1-2009-0516": (25, 25),
     "a1-2011": (25, 25),
 }
-# 每份试卷应有的 <audio> 数：2020 用整段音频（5 段），2008/2011 逐题（21 段），2009 无音频
+# 每份试卷应有的 <audio> 数：2009 有示例与逐题 AI 合成音频（22 段）
 AUDIO_N = {
     "a1-modelo0-2020": 5,
     "a1-modelo0-2008": 21,
     "a1-0720": 0,
-    "a1-2009-0516": 0,
+    "a1-2009-0516": 22,
     "a1-2011": 21,
 }
 fails = []
@@ -157,7 +157,7 @@ with sync_playwright() as pw:
 
         # 听力原文折叠
         ntrans = pg.eval_on_selector_all("details.trans", "e=>e.length")
-        expect_trans = 4 if slug in ("a1-modelo0-2020", "a1-modelo0-2008", "a1-2011") else 0
+        expect_trans = 4 if slug in ("a1-modelo0-2020", "a1-modelo0-2008", "a1-2009-0516", "a1-2011") else 0
         if ntrans != expect_trans:
             fails.append("%s: 听力原文折叠 %d != %d" % (slug, ntrans, expect_trans))
         if ntrans:
