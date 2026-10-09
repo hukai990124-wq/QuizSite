@@ -221,15 +221,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 var trigger=document.getElementById("contact-author-trigger");
 var dialog=document.getElementById("contact-author-dialog");
 if(!trigger||!dialog)return;
-trigger.addEventListener("click",function(){
-  var width=560,height=680;
-  var left=Math.max(0,Math.round(window.screenX+(window.outerWidth-width)/2));
-  var top=Math.max(0,Math.round(window.screenY+(window.outerHeight-height)/2));
-  var popup=window.open("https://github.com/hukai990124-wq","quizBankAuthorGithub",
-    "popup=yes,width="+width+",height="+height+",left="+left+",top="+top+",resizable=yes,scrollbars=yes");
-  if(popup){popup.opener=null;popup.focus()}
-  else if(typeof dialog.showModal==="function"){dialog.showModal()}
-});
+trigger.addEventListener("click",function(){if(typeof dialog.showModal==="function")dialog.showModal()});
 if(typeof dialog.showModal==="function"){
   dialog.querySelector("[data-close-author-dialog]").addEventListener("click",function(){dialog.close()});
   dialog.addEventListener("click",function(event){if(event.target===dialog)dialog.close()});
