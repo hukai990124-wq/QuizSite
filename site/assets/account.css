@@ -1,0 +1,137 @@
+.qb-auth-trigger {
+  min-width: 0;
+  max-width: 15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.qb-sitebar__account {
+  justify-self: end;
+  min-width: 0;
+  max-width: 15rem;
+  overflow: hidden;
+  padding: .42rem .7rem;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.qb-sitebar__account:hover { background: rgba(255,255,255,.17); }
+.qb-sitebar__account:focus-visible,
+.qb-auth-trigger:focus-visible,
+.qb-account-dialog button:focus-visible,
+.qb-account-dialog input:focus-visible {
+  outline: 3px solid #f5d99a;
+  outline-offset: 2px;
+}
+.qb-account-dialog {
+  width: min(430px, calc(100vw - 32px));
+  max-width: none;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #dbe3ea;
+  border-radius: 16px;
+  background: #fff;
+  color: #0f172a;
+  box-shadow: 0 24px 70px rgba(15,23,42,.26);
+  font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+}
+.qb-account-dialog::backdrop { background: rgba(15,23,42,.48); backdrop-filter: blur(2px); }
+.qb-account-dialog[open] { animation: qb-account-enter .16s ease-out; }
+@keyframes qb-account-enter { from { opacity: .65; transform: translateY(5px) scale(.99); } to { opacity: 1; transform: none; } }
+.qb-account-panel { position: relative; padding: 25px 24px 22px; }
+.qb-account-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.qb-account-eyebrow { margin: 0 0 4px; color: #64748b; font-size: 12px; }
+.qb-account-title { margin: 0 40px 8px 0; font-size: 21px; line-height: 1.35; }
+.qb-account-description { margin: 0 0 18px; color: #475569; font-size: 13.5px; }
+.qb-account-switch { display: flex; gap: 7px; margin: 0 0 16px; padding: 4px; border-radius: 10px; background: #f1f5f9; }
+.qb-account-switch button {
+  flex: 1;
+  min-height: 36px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #475569;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.qb-account-switch button[aria-pressed="true"] { border-color: #dbe3ea; background: #fff; color: #123c5e; box-shadow: 0 1px 2px rgba(15,23,42,.06); }
+.qb-account-fields { display: grid; gap: 13px; }
+.qb-account-field { display: grid; gap: 5px; color: #334155; font-size: 13px; font-weight: 600; }
+.qb-account-field input {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #fff;
+  color: #0f172a;
+  font: inherit;
+  font-weight: 400;
+}
+.qb-account-field input:focus { border-color: #1d4e79; }
+.qb-account-error { min-height: 1.4em; margin: 10px 0 0; color: #b4232a; font-size: 12.5px; }
+.qb-account-status { min-height: 1.4em; margin: 10px 0 0; color: #0b6b3a; font-size: 12.5px; }
+.qb-account-submit {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 14px;
+  border: 1px solid #0b6b3a;
+  border-radius: 9px;
+  background: #0b6b3a;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.qb-account-submit:hover { background: #085a30; }
+.qb-account-submit:disabled,
+.qb-account-dialog button:disabled { cursor: wait; opacity: .65; }
+.qb-account-note { margin: 13px 0 0; color: #64748b; font-size: 12px; }
+.qb-account-profile { margin: 8px 0 15px; overflow-wrap: anywhere; color: #123c5e; font-weight: 650; }
+.qb-account-actions { display: flex; gap: 9px; flex-wrap: wrap; }
+.qb-account-actions button {
+  min-height: 38px;
+  padding: 7px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #fff;
+  color: #334155;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.qb-account-actions .qb-account-delete { border-color: #f0b8bb; color: #a51f27; }
+.qb-account-delete-panel { margin-top: 15px; padding: 13px; border: 1px solid #f0b8bb; border-radius: 10px; background: #fff8f8; }
+.qb-account-delete-panel p { margin: 0 0 10px; color: #7f1d1d; font-size: 12.5px; }
+.qb-account-delete-panel[hidden],
+.qb-account-dialog [hidden] { display: none !important; }
+@media (max-width: 600px) {
+  .qb-auth-trigger { max-width: 10rem; }
+  .qb-sitebar__account { grid-column: 3; grid-row: 1; max-width: 10rem; padding: .4rem .55rem; font-size: .72rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qb-account-dialog[open] { animation: none; }
+}
+@media print { .qb-sitebar__account, .qb-account-dialog { display: none !important; } }

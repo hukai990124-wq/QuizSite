@@ -13,7 +13,8 @@ a{color:#1d4e79}
 
 .hero{position:relative;background:linear-gradient(135deg,#123c5e,#1d4e79 55%,#2a6ca0);color:#fff;padding:36px 0 32px}
 .hero .in{max-width:1180px;margin:0 auto;padding:0 24px}
-.contact-author-trigger{position:absolute;z-index:2;top:16px;right:max(14px,calc((100vw - 1180px)/2 + 24px));
+.hero-actions{position:absolute;z-index:2;top:16px;right:max(14px,calc((100vw - 1180px)/2 + 24px));display:flex;align-items:center;gap:8px}
+.contact-author-trigger{position:static;
  border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:7px 13px;background:rgba(255,255,255,.13);
  color:#fff;font:inherit;font-size:13px;cursor:pointer;backdrop-filter:blur(8px);transition:background .15s,border-color .15s}
 .contact-author-trigger:hover{background:rgba(255,255,255,.24);border-color:rgba(255,255,255,.7)}
@@ -95,7 +96,8 @@ footer .build{color:#8b95a1;font-size:12px;margin-top:3px;font-variant-numeric:t
 @media (max-width:640px){
   .hero{padding:24px 0 22px}
   .hero .in,.wrap{padding-left:14px;padding-right:14px}
-  .contact-author-trigger{top:10px;right:14px;padding:6px 11px}
+  .hero-actions{top:10px;right:14px;gap:6px}
+  .contact-author-trigger{padding:6px 11px;font-size:12.5px}
   .hero h1{font-size:23px}
   .hero .sub{font-size:13px}
   .hero-sub{gap:9px}
@@ -138,12 +140,15 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <!--/i18n:head--></head>
 <body>
 <header class="hero">
-  <button class="contact-author-trigger" id="contact-author-trigger" type="button" aria-controls="contact-author-dialog">联系作者</button>
+  <div class="hero-actions">
+    <button class="contact-author-trigger qb-auth-trigger" id="qb-account-trigger" type="button" aria-haspopup="dialog">登录 / 注册</button>
+    <button class="contact-author-trigger" id="contact-author-trigger" type="button" aria-controls="contact-author-dialog">联系作者</button>
+  </div>
   <div class="in">
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">8 个题库 · 共 4571 题次 · 可作答判分 · 进度自动保存在本机浏览器</p>
+      <p class="sub">8 个题库 · 共 4571 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <ul class="meta">
@@ -174,7 +179,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <button class="close" type="button" data-close-reset-dialog><span aria-hidden="true">×</span><span class="sr-only">关闭弹窗</span></button>
     <p class="eyebrow">重置学习进度</p>
     <h2 id="reset-dialog-title">确定要清空全部作答记录吗？</h2>
-    <p class="description">将删除本机浏览器中保存的全部答题进度与正确率，此操作无法撤销。题目内容不受影响。</p>
+    <p class="description">将删除本机保存的全部答题进度；登录状态下也会删除账号云端进度（离线时稍后同步）。此操作无法撤销。题目内容不受影响。</p>
     <div class="acts">
       <button class="ghost" type="button" data-close-reset-dialog>取消</button>
       <button class="danger" type="button" id="reset-confirm">确定重置</button>
@@ -250,8 +255,8 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
       <ol>
         <li>点上面任意一张卡片进入题库，再选一套卷子开始做。</li>
         <li>点选项 →「确认作答」→ 立刻判定并显示正确答案与解析。</li>
-        <li>作答进度存在<b>本机浏览器</b>里，关掉再打开可以接着做。</li>
-        <li>进度按<b>网址</b>隔离：换域名或换设备，之前的记录不会跟过来。</li>
+        <li>未登录时进度保存在本机；登录后同步至账号，可在不同设备继续学习。</li>
+        <li>账号进度在云端同步，本机浏览器也保留离线缓存；在新设备登录即可继续。</li>
       </ol>
     </div>
   </div>
@@ -366,6 +371,7 @@ function read(keys){
   });
   return {d:d,o:o};
 }
+function refreshProgress(){
 var allD=0,allO=0,allT=0;
 Object.keys(SITES).forEach(function(id){
   var st=SITES[id], r=read(st.keys);
@@ -376,17 +382,23 @@ Object.keys(SITES).forEach(function(id){
   var bar=card.querySelector(".pg i"),txt=card.querySelector(".pg span");
   if(bar)bar.style.width=(total?r.d/total*100:0)+"%";
   if(txt)txt.textContent=r.d?(r.d+"/"+total+" 题 · 正确率 "+Math.round(r.o/r.d*100)+"%"):"未开始";
-  if(r.d)card.querySelector(".pg").classList.add("on");
+  card.querySelector(".pg").classList.toggle("on",!!r.d);
 });
 var f=document.getElementById("ov-fill"),t=document.getElementById("ov-txt");
 if(f)f.style.width=(allT?allD/allT*100:0)+"%";
 if(t)t.textContent=allD+" / "+allT+(allD?" · 正确率 "+Math.round(allO/allD*100)+"%":"");
+}
+refreshProgress();
+window.addEventListener("quizbank:progress-updated",refreshProgress);
+window.addEventListener("storage",function(event){
+  if(event.key===null||event.key.indexOf("quiz:")===0)refreshProgress();
+});
 })();
 </script>
 <!--pc:js-->
 <script src="assets/presence.js"></script>
 <!--/pc:js-->
-<!--i18n:js-->
+<script src="/assets/account.js" id="quizbank-account-js" defer></script><!--i18n:js-->
 <script src="/assets/i18n.js"></script>
 <script id="i18n-boot">
 (function(){var REL="";

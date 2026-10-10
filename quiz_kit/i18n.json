@@ -1605,9 +1605,9 @@
   "en": "Clear all of your answers?",
   "ja": "回答記録をすべて消去しますか？"
  },
- "将删除本机浏览器中保存的全部答题进度与正确率，此操作无法撤销。题目内容不受影响。": {
-  "en": "This erases every answer and accuracy record saved in this browser. It cannot be undone. The question content itself is unaffected.",
-  "ja": "このブラウザーに保存された解答と正答率の記録をすべて削除します。元に戻すことはできません。問題そのものには影響しません。"
+ "将删除本机保存的全部答题进度；登录状态下也会删除账号云端进度（离线时稍后同步）。此操作无法撤销。题目内容不受影响。": {
+  "en": "This erases all progress saved in this browser and, if signed in, your cloud account progress (synced when back online). This cannot be undone. Question content is unaffected.",
+  "ja": "このブラウザーの進捗をすべて削除します。ログイン中はアカウントのクラウド進捗も削除され（オフライン時は再接続後に同期）、取り消せません。問題内容には影響しません。"
  },
  "取消": {
   "en": "Cancel",
@@ -1945,7 +1945,11 @@
  "← 返回目录": {"en": "← Back to contents", "ja": "← 目次に戻る"},
  "西班牙语 DELE A2": {"en": "Spanish · DELE A2", "ja": "スペイン語 DELE A2"},
  "110 题": {"en": "110 questions", "ja": "110問"},
- "8 个题库 · 共 4571 题次 · 可作答判分 · 进度自动保存在本机浏览器": {"en": "8 question banks · 4,571 attempts · answerable with instant scoring · progress saved in this browser", "ja": "8つの問題集・全4,571問・解答と即時採点対応・進捗はブラウザに保存"},
+ "8 个题库 · 共 4571 题次 · 可作答判分 · 登录后跨设备同步": {"en": "8 question banks · 4,571 attempts · answerable with instant scoring · sign in to sync across devices", "ja": "8つの問題集・全4,571問・解答と即時採点対応・ログインしてデバイス間で同期"},
+ "未登录时进度保存在本机；登录后同步至账号，可在不同设备继续学习。": {"en": "Progress stays on this device until you sign in; then it syncs to your account so you can continue on other devices.", "ja": "未ログイン時はこの端末に保存され、ログイン後はアカウントに同期して別の端末でも続けられます。"},
+ "账号进度在云端同步，本机浏览器也保留离线缓存；在新设备登录即可继续。": {"en": "Account progress syncs in the cloud, with an offline copy kept in this browser. Sign in on a new device to continue.", "ja": "アカウントの進捗はクラウドで同期され、このブラウザーにもオフライン用コピーが保存されます。新しい端末でログインすると続きから学習できます。"},
+ "绿色 = 正确，红色 = 错误。未登录时进度保存在本机；登录后同步到账号；不同试卷、年度及科目互不混合。": {"en": "Green = correct; red = incorrect. Progress stays on this device until you sign in, then syncs to your account. Separate papers, years, and subjects keep separate progress.", "ja": "緑＝正解、赤＝不正解。未ログイン時はこの端末に保存され、ログイン後はアカウントに同期されます。問題冊子・年度・科目ごとに進捗は分かれます。"},
+ "未登录时进度保存在本机；登录后可同步到账号，在其他设备登录即可继续。": {"en": "Progress is saved on this device until you sign in. Then it syncs to your account, so you can continue by signing in on another device.", "ja": "未ログイン時はこの端末に保存されます。ログイン後はアカウントに同期され、別の端末からログインして続けられます。"},
  "DELE A2 · 阅读 + 写作 + 听力": {"en": "DELE A2 · Reading + Writing + Listening", "ja": "DELE A2 · 読解＋作文＋リスニング"},
  "Instituto Cervantes 官方公开的 2 套 A2 试卷。阅读 55 题、听力 55 题均可即时判分（2020 样卷为官方真人录音，旧版样卷按官方原文合成），写作附参考答案。": {"en": "The two A2 papers released by Instituto Cervantes. All 55 reading and 55 listening questions are scored instantly (the 2020 sample uses the official human recording; the older sample is voiced from the official transcript), with model answers for writing.", "ja": "Instituto Cervantes が公開した A2 公式問題2セット。読解55問・リスニング55問はすべて即時採点（2020年版は公式音声、旧版は公式スクリプトから合成）。作文には模範解答つき。"},
  "DELE A2 · 现行题型": {"en": "DELE A2 · Current format", "ja": "DELE A2 · 現行形式"},

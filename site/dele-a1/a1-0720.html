@@ -389,6 +389,7 @@ button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a
   details.trans{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
 <!--i18n:head-->
 <style id="i18n-css">
 .lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
@@ -418,8 +419,7 @@ document.documentElement.setAttribute("data-lang",l);
 document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
 }catch(e){}})();
 </script>
-<!--/i18n:head--><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
-</head>
+<!--/i18n:head--></head>
 <body>
 <header class="hero">
   <div class="in">
@@ -813,6 +813,10 @@ upd();
 })();
 </script>
 
+<!--pc:js-->
+<script src="../assets/presence.js"></script>
+<!--/pc:js-->
+<script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
 <!--i18n:js-->
 <script src="/assets/i18n.js"></script>
 <script id="i18n-boot">
@@ -824,9 +828,5 @@ s.onload=go;
 s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
 document.head.appendChild(s);})();
 </script>
-<!--/i18n:js--><!--pc:js-->
-<script src="../assets/presence.js"></script>
-<!--/pc:js-->
-<script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
-</body>
+<!--/i18n:js--></body>
 </html>

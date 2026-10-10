@@ -17,7 +17,8 @@ a.card .pg::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;
 a.card .pg i{position:relative;display:block;height:5px;width:0;background:#0b6b3a;border-radius:99px;transition:width .3s}
 a.card .pg span{display:block;font-size:12px;color:#8b95a1;margin-top:6px}
 a.card .pg.on span{color:#0b6b3a;font-weight:600}
-</style><!--i18n:head-->
+</style><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+<!--i18n:head-->
 <style id="i18n-css">
 .lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
 footer .lang-switch{margin-top:14px}
@@ -46,8 +47,7 @@ document.documentElement.setAttribute("data-lang",l);
 document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
 }catch(e){}})();
 </script>
-<!--/i18n:head--><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
-</head><body><div class="wrap">
+<!--/i18n:head--></head><body><div class="wrap">
 <a class="back" href="../index.html">← 返回 AIF-C01 目录</a>
 <h1>AI 真题库（452 题）</h1>
 <p class="sub">共 452 题 · 分 10 份 · 每份 50 题 · 中英对照覆盖 452 题<br>点选项后按「确认作答」判对错，正确率自动存在本机</p>
@@ -84,6 +84,7 @@ qa("[data-quiz-key]").forEach(function(el){
 </script><!--pc:js-->
 <script src="../../assets/presence.js"></script>
 <!--/pc:js-->
+<script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
 <!--i18n:sw-->
 <footer class="lang-foot">
 <div class="lang-switch i18n-noloc" role="group" aria-label="Language">
@@ -103,5 +104,4 @@ s.onload=go;
 s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
 document.head.appendChild(s);})();
 </script>
-<!--/i18n:js--><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
-</body></html>
+<!--/i18n:js--></body></html>

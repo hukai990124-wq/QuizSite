@@ -145,7 +145,8 @@ button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a
 .toolbar button,.toolbar a.navback{font:inherit;font-size:13px;padding:6px 13px;border-radius:7px;border:1px solid var(--line);background:#fff;color:#334155;cursor:pointer;text-decoration:none;display:inline-block}
 .toolbar button:hover,.toolbar a.navback:hover{background:#f3f6f8}
 .toolbar a.navback{font-weight:600;color:#0a5d33;border-color:#c7e0d2;background:#f3faf6}
-</style><!--i18n:head-->
+</style><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+<!--i18n:head-->
 <style id="i18n-css">
 .lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
 footer .lang-switch{margin-top:14px}
@@ -174,8 +175,7 @@ document.documentElement.setAttribute("data-lang",l);
 document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
 }catch(e){}})();
 </script>
-<!--/i18n:head--><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
-</head><body><div class="wrap"><div class="toolbar"><div class="btns"><a class="navback" href="index.html">← 套题列表</a><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button><button onclick="window.print()" type="button">打印 / 存 PDF</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>100</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<!--/i18n:head--></head><body><div class="wrap"><div class="toolbar"><div class="btns"><a class="navback" href="index.html">← 套题列表</a><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button><button onclick="window.print()" type="button">打印 / 存 PDF</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>100</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
 <h1>TOEIC® Reading Practice Test 09</h1>
 <p class="meta">来源：7ESL TOEIC Reading Practice Test 2（7esl.com）</p>
 <p class="meta">100 题 · Part 5（30）+ Part 6（16）+ Part 7（54）· 建议用时 75 分钟 · 点选项后按「确认作答」即可判对错，进度自动保存在本机</p>
@@ -1503,6 +1503,7 @@ stats();sheet();
 </script><!--pc:js-->
 <script src="../assets/presence.js"></script>
 <!--/pc:js-->
+<script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
 <!--i18n:sw-->
 <footer class="lang-foot">
 <div class="lang-switch i18n-noloc" role="group" aria-label="Language">
@@ -1522,5 +1523,4 @@ s.onload=go;
 s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
 document.head.appendChild(s);})();
 </script>
-<!--/i18n:js--><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
-</body></html>
+<!--/i18n:js--></body></html>

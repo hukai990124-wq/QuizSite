@@ -1,7 +1,17 @@
 (function () {
   "use strict";
 
-  if (!document.body || document.querySelector(".qb-sitebar")) return;
+  if (!document.body) return;
+
+  if (!document.getElementById("quizbank-account-js")) {
+    var accountScript = document.createElement("script");
+    accountScript.id = "quizbank-account-js";
+    accountScript.src = "/assets/account.js";
+    accountScript.defer = true;
+    document.head.appendChild(accountScript);
+  }
+
+  if (document.querySelector(".qb-sitebar")) return;
 
   var lang = String(
     document.documentElement.getAttribute("data-lang") ||

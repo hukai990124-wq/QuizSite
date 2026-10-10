@@ -10,6 +10,8 @@
  * 只有 /api/presence* 才落到 Worker 上，才计入额度。
  */
 
+import { handleAccountRequest } from "./account.mjs";
+
 // 心跳超时：超过这个时长没有任何消息就当作已离开
 const TIMEOUT_MS = 90 * 1000;
 // 巡检间隔：定期兜底广播一次（防止某次事件广播丢失）
@@ -64,6 +66,9 @@ export default {
       const stub = env.PRESENCE.get(env.PRESENCE.idFromName("global"));
       return stub.fetch(request);
     }
+    if (url.pathname.startsWith("/api/auth") || url.pathname.startsWith("/api/progress")) {
+      return await handleAccountRequest(request, env) || new Response("Not found", { status: 404 });
+    }
     if (env.ASSETS) return env.ASSETS.fetch(request);
     return new Response("Not found", { status: 404 });
   },
@@ -91,12 +96,29 @@ export class Presence {
 
     if (url.pathname.endsWith("/snap")) {
       return new Response(JSON.stringify(this.snapshot()), {
-        headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+        headers: {
+          "content-type": "application/json; charset=utf-8",
+          "cache-control": "no-store",
+          "strict-transport-security": "max-age=31536000",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=()",
+        },
       });
     }
 
     if ((request.headers.get("Upgrade") || "").toLowerCase() !== "websocket") {
-      return new Response("Expected WebSocket upgrade", { status: 426 });
+      return new Response("Expected WebSocket upgrade", {
+        status: 426,
+        headers: {
+          "strict-transport-security": "max-age=31536000",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "permissions-policy": "camera=(), microphone=()",
+        },
+      });
     }
 
     const pair = new WebSocketPair();

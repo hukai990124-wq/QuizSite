@@ -45,7 +45,7 @@ img, video { max-width: 100%; }
   min-height: 58px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr minmax(0, 2fr) 1fr;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 1rem;
 }
@@ -124,7 +124,7 @@ summary:focus-visible,
   .qb-sitebar__inner {
     width: calc(100% - 1.5rem);
     min-height: 56px;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
     gap: .25rem .75rem;
     padding: .5rem 0;
   }

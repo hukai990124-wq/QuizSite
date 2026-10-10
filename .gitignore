@@ -44,3 +44,6 @@ _imgtest/
 /_*.md
 /_*.png
 /_*.mp3
+
+# ---- 7. Local Wrangler state and caches ----
+.wrangler/

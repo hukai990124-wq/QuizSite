@@ -21,6 +21,22 @@ directory = "site"
 binding = "ASSETS"
 run_worker_first = ["/api/*"]
 
+# Auth attempts are throttled in the Worker. Confirm this namespace ID is unique
+# within the Cloudflare account before deployment; Wrangler 4.36.0 or newer is required.
+[[ratelimits]]
+name = "AUTH_LIMIT"
+namespace_id = "2026101001"
+
+  [ratelimits.simple]
+  limit = 10
+  period = 60
+
+[[d1_databases]]
+binding = "DB"
+database_name = "quizbank-accounts"
+database_id = "5df2fac9-fe75-4a2a-9313-75e47a164de5"
+migrations_dir = "worker/migrations"
+
 [[durable_objects.bindings]]
 name = "PRESENCE"
 class_name = "Presence"

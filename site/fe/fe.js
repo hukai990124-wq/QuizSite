@@ -115,10 +115,15 @@ function render(){
     b.addEventListener("click",function(){current=index;render();window.scrollTo(0,0)});grid.appendChild(b);
   });
   side.appendChild(grid);
-  side.appendChild(node("p","fine","绿色 = 正确，红色 = 错误。进度只保存在本机浏览器；不同套卷、年度及科目互不混合。"));
+  side.appendChild(node("p","fine","绿色 = 正确，红色 = 错误。未登录时进度保存在本机；登录后同步到账号；不同试卷、年度及科目互不混合。"));
   if(storageError)side.appendChild(node("p","error","浏览器拒绝保存进度，本次作答在关闭页面后可能丢失。"));
   app.appendChild(side);
 }
+window.addEventListener("quizbank:progress-updated",function(){
+  if(!exam)return;
+  state=readState();
+  render();
+});
 yearNav();
 fetch(paper?"extra.json":"data.json").then(function(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}).then(function(data){
   exam=data.sets[paper?"paper-"+paper+"-"+subject:year+"-"+subject];if(!exam)throw Error("找不到该卷");
