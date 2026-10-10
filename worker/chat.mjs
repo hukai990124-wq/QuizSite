@@ -250,7 +250,7 @@ export async function handleChatRequest(request, env) {
         }
         if (!result.answer)
             return json({ error: "模型未返回完整讲解，请缩短问题后再试。" }, 503);
-        return json({ answer: result.answer, truncated: result.truncated, ...(await status(env.DB, userId, visitorHash, day)) });
+        return json({ answer: result.answer, truncated: result.truncated, ...(await status(env.DB, userId, visitorHash, day)), configured });
     }
     catch (error) {
         console.warn(JSON.stringify({ event: "ai_handler_failure", errorName: error instanceof Error ? error.name : "Error" }));

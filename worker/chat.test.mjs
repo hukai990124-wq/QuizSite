@@ -4,6 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { buildChatMessages, CHAT_POLICY, CHAT_PROMPT, chatDay, collectAnswer, handleChatRequest, isStudyRelated, visitorId } from "./chat.mjs";
+import { parseChatAnswer } from "../site/assets/chat-protocol.mjs";
 
 function fixture() {
   const sqlite = new DatabaseSync(":memory:");
@@ -108,6 +109,23 @@ test("successful inference settles usage and never returns the private reasoning
   assert.equal(data.remaining, 49);
   assert.equal(JSON.stringify(data).includes("private"), false);
   assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, 42);
+});
+
+test("successful account and guest replies satisfy the browser response contract", async t => {
+  for (const authenticated of [true, false]) {
+    await t.test(authenticated ? "registered user" : "guest", async t => {
+      const { env, token, sqlite } = fixture();
+      t.after(() => sqlite.close());
+      t.mock.method(globalThis, "fetch", () => streamReply());
+      const response = await handleChatRequest(request(authenticated ? token : null), env);
+      assert.equal(response.status, 200);
+      const answer = parseChatAnswer(await response.json());
+      assert.equal(answer.answer, "因为 B 满足题干要求。");
+      assert.equal(answer.configured, true);
+      assert.equal(answer.authenticated, authenticated);
+      assert.equal(answer.remaining, authenticated ? 49 : 19);
+    });
+  }
 });
 
 test("daily cap and global budget reject calls before contacting Qwen", async t => {
