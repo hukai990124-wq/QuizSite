@@ -47,3 +47,4 @@ _imgtest/
 
 # ---- 7. Local Wrangler state and caches ----
 .wrangler/
+/node_modules/

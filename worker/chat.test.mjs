@@ -160,3 +160,8 @@ test("stream parser handles chunk boundaries and rejects unfinished streams", as
   assert.equal((await collectAnswer(response)).answer, "你好");
   await assert.rejects(() => collectAnswer(new Response('data: {"choices":[{"delta":{"content":"半句"}}]}\n')));
 });
+
+test("stream parser rejects malformed upstream JSON and missing response bodies", async () => {
+  await assert.rejects(() => collectAnswer(new Response("data: not-json\n\n")));
+  await assert.rejects(() => collectAnswer(new Response(null)));
+});
