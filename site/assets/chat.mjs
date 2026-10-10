@@ -16,9 +16,8 @@ dialog.className = "qb-chat-dialog i18n-noloc";
 dialog.setAttribute("aria-labelledby", "qb-chat-title");
 dialog.innerHTML = `<header class="qb-chat-header"><h2 id="qb-chat-title">题库学习助手</h2><button type="button" id="qb-chat-close" aria-label="关闭聊天窗口">×</button></header>
 <div class="qb-chat-body">
-<p class="qb-chat-intro">选择题目或粘贴题干，可以追问解题步骤、错误选项和相关知识点。AI 讲解可能有误，请核对题库与官方资料。</p>
+<p class="qb-chat-intro">选择题目即可提问，后续直接在聊天框里追问。AI 讲解可能有误，请核对题库与官方资料。</p>
 <label for="qb-chat-question">带入题目</label><select id="qb-chat-question"><option value="">不指定题目／自行粘贴</option></select>
-<details><summary>查看或补充题目材料</summary><label for="qb-chat-context">题干、选项及阅读／听力原文</label><textarea id="qb-chat-context" rows="4" maxlength="10000" placeholder="可在这里补充原文或题目内容"></textarea></details>
 <div id="qb-chat-log" role="log" aria-label="学习对话" aria-live="polite"></div>
 <p id="qb-chat-status" role="status">正在检查登录状态……</p><p id="qb-chat-error" role="alert"></p>
 <button type="button" id="qb-chat-login" hidden>登录 / 注册</button>
@@ -26,10 +25,11 @@ dialog.innerHTML = `<header class="qb-chat-header"><h2 id="qb-chat-title">题库
 <div class="qb-chat-actions"><button type="button" id="qb-chat-clear">清空对话</button><button type="submit" id="qb-chat-send">发送问题</button></div></form></div>`;
 document.body.appendChild(dialog);
 const byId = id => document.getElementById(id);
-const select = byId("qb-chat-question"), input = byId("qb-chat-input"), context = byId("qb-chat-context");
+const select = byId("qb-chat-question"), input = byId("qb-chat-input");
 const log = byId("qb-chat-log"), status = byId("qb-chat-status"), error = byId("qb-chat-error");
 const login = byId("qb-chat-login"), send = byId("qb-chat-send"), clear = byId("qb-chat-clear");
 let history = [], busy = false, authenticated = false, returnFocus = trigger;
+let questionContext = "";
 let requestSequence = 0;
 
 function appendMessage(role, text) {
@@ -60,7 +60,6 @@ function controls(enabled) {
   input.disabled = busy || !authenticated;
   clear.disabled = busy;
   select.disabled = busy;
-  context.disabled = busy;
   byId("qb-chat-form").setAttribute("aria-busy", String(busy));
 }
 
@@ -91,16 +90,15 @@ function clearConversation() {
 
 select.addEventListener("change", () => {
   clearConversation();
-  context.value = extractQuestionContext(document.getElementById(select.value));
+  questionContext = extractQuestionContext(document.getElementById(select.value));
 });
-context.addEventListener("change", clearConversation);
 clear.addEventListener("click", clearConversation);
 
 function open(question, source = trigger) {
   returnFocus = source;
   if (question && !busy) {
     select.value = question.id;
-    context.value = extractQuestionContext(question);
+    questionContext = extractQuestionContext(question);
     input.value = "请详细讲解这道题，说明正确答案、各选项为什么对或错，并总结考点。";
     clearConversation();
   }
@@ -141,7 +139,7 @@ byId("qb-chat-form").addEventListener("submit", async event => {
   error.textContent = "";
   status.textContent = "正在整理讲解……";
   try {
-    const data = await api("/api/chat", { question, context: context.value, history: history.slice(-6).map(item => ({ role: item.role, content: item.content.slice(0, 2000) })) });
+    const data = await api("/api/chat", { question, context: questionContext, history: history.slice(-6).map(item => ({ role: item.role, content: item.content.slice(0, 2000) })) });
     appendMessage("user", question);
     appendMessage("assistant", data.answer);
     history.push({ role: "user", content: question }, { role: "assistant", content: data.answer });
