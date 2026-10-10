@@ -13,6 +13,7 @@
 name = "quizbank"
 main = "worker/worker.js"
 compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 
 # 静态页面继续由 Cloudflare 免费无限地发；只有 /api/* 先落到 Worker 脚本上。

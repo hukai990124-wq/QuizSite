@@ -1,8 +1,12 @@
+import { scryptSync } from "node:crypto";
+
 const MIN_CREDENTIAL_LENGTH = 6;
 const MAX_CREDENTIAL_LENGTH = 15;
-// OWASP's current PBKDF2-HMAC-SHA-256 recommendation is at least 600,000 iterations:
+// Workers caps native PBKDF2 at 100,000 iterations. Use OWASP's memory-hard
+// scrypt alternative rather than weakening PBKDF2 to fit that runtime limit:
 // https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
-const PASSWORD_ITERATIONS = 600_000;
+const PASSWORD_SCRYPT_N = 16384;
+const PASSWORD_HASH_PREFIX = "scrypt-v1$";
 const PASSWORD_SALT_BYTES = 16;
 const PASSWORD_HASH_BYTES = 32;
 const MAX_PROGRESS_ITEMS = 10_000;
@@ -72,27 +76,41 @@ async function derivePassword(password, salt, iterations) {
   }, key, PASSWORD_HASH_BYTES * 8));
 }
 
+function deriveScryptPassword(password, salt) {
+  return new Uint8Array(scryptSync(password, salt, PASSWORD_HASH_BYTES, {
+    N: PASSWORD_SCRYPT_N,
+    r: 8,
+    p: 5,
+    maxmem: 32 * 1024 * 1024,
+  }));
+}
+
 export async function hashPassword(password) {
   const salt = crypto.getRandomValues(new Uint8Array(PASSWORD_SALT_BYTES));
-  const hash = await derivePassword(password, salt, PASSWORD_ITERATIONS);
+  const hash = deriveScryptPassword(password, salt);
   return {
     salt: encodeBase64Url(salt),
-    hash: encodeBase64Url(hash),
-    iterations: PASSWORD_ITERATIONS,
+    hash: PASSWORD_HASH_PREFIX + encodeBase64Url(hash),
+    iterations: PASSWORD_SCRYPT_N,
   };
 }
 
 export async function verifyPassword(password, stored) {
   const salt = decodeBase64Url(stored?.salt);
-  const expected = decodeBase64Url(stored?.hash);
+  const isScrypt = typeof stored?.hash === "string" && stored.hash.startsWith(PASSWORD_HASH_PREFIX);
+  const expected = decodeBase64Url(isScrypt ? stored.hash.slice(PASSWORD_HASH_PREFIX.length) : stored?.hash);
   const iterations = stored?.iterations;
   if (
     !salt || salt.length !== PASSWORD_SALT_BYTES ||
     !expected || expected.length !== PASSWORD_HASH_BYTES ||
-    !Number.isInteger(iterations) || iterations < 100_000 || iterations > 1_000_000
+    (isScrypt
+      ? iterations !== PASSWORD_SCRYPT_N
+      : !Number.isInteger(iterations) || iterations < 100_000 || iterations > 1_000_000)
   ) return false;
 
-  const actual = await derivePassword(password, salt, iterations);
+  const actual = isScrypt
+    ? deriveScryptPassword(password, salt)
+    : await derivePassword(password, salt, iterations);
   let difference = 0;
   for (let index = 0; index < expected.length; index += 1) {
     difference |= actual[index] ^ expected[index];
@@ -353,7 +371,7 @@ async function handleLogin(request, env) {
       hash: user.password_hash,
       iterations: user.password_iterations,
     })
-    : (await derivePassword(body.password, new Uint8Array(PASSWORD_SALT_BYTES), PASSWORD_ITERATIONS), false);
+    : (deriveScryptPassword(body.password, new Uint8Array(PASSWORD_SALT_BYTES)), false);
   if (!user || !passwordMatches) return invalidCredentials();
 
   const session = await createSession(env.DB, user.id);
@@ -531,6 +549,7 @@ export async function handleAccountRequest(request, env) {
     return await route.handler(request, env);
   } catch (error) {
     if (error instanceof ApiError) return jsonResponse({ error: error.message }, error.status);
+    console.error("quizbank_account_failure", { route: pathname, errorName: error?.name || "Error" });
     return apiUnavailable();
   }
 }

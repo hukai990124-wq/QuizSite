@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { pbkdf2Sync, scryptSync } from "node:crypto";
 import {
   chooseProgressRecord,
   handleAccountRequest,
@@ -59,6 +60,40 @@ test("password hashes are salted and verify only the original password", async (
   assert.notEqual(first.hash, second.hash);
   assert.equal(await verifyPassword("sixsix", first), true);
   assert.equal(await verifyPassword("sixsix!", first), false);
+});
+
+test("password hashing works under the Workers PBKDF2 iteration cap", async (t) => {
+  const deriveBits = crypto.subtle.deriveBits.bind(crypto.subtle);
+  t.mock.method(crypto.subtle, "deriveBits", (algorithm, key, length) => {
+    if (algorithm.name === "PBKDF2" && algorithm.iterations > 100_000) {
+      throw new DOMException("Pbkdf2 iteration counts above 100000 are not supported", "NotSupportedError");
+    }
+    return deriveBits(algorithm, key, length);
+  });
+
+  const stored = await hashPassword("secret1");
+  assert.equal(await verifyPassword("secret1", stored), true);
+  assert.equal(await verifyPassword("wrongpw", stored), false);
+});
+
+test("versioned scrypt hashes match native scrypt and reject unrecognized parameters", async () => {
+  const stored = await hashPassword("secret1");
+  const salt = Buffer.from(stored.salt, "base64url");
+  const expected = scryptSync("secret1", salt, 32, { N: 16384, r: 8, p: 5, maxmem: 32 * 1024 * 1024 });
+  assert.equal(stored.hash, "scrypt-v1$" + expected.toString("base64url"));
+  assert.equal(await verifyPassword("secret1", { ...stored, iterations: 32768 }), false);
+  assert.equal(await verifyPassword("secret1", { ...stored, hash: stored.hash.replace("scrypt-v1", "scrypt-v9") }), false);
+});
+
+test("existing unprefixed PBKDF2 records remain verifiable", async () => {
+  const salt = Buffer.alloc(16, 7);
+  const stored = {
+    salt: salt.toString("base64url"),
+    hash: pbkdf2Sync("secret1", salt, 100_000, 32, "sha256").toString("base64url"),
+    iterations: 100_000,
+  };
+  assert.equal(await verifyPassword("secret1", stored), true);
+  assert.equal(await verifyPassword("wrongpw", stored), false);
 });
 
 test("progress payloads accept bounded quiz records and reject unsafe keys or oversized values", () => {
