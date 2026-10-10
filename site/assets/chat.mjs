@@ -57,7 +57,7 @@ async function api(path, body) {
 
 function controls(enabled) {
   send.disabled = busy || !enabled;
-  input.disabled = busy || !authenticated;
+  input.disabled = busy;
   clear.disabled = busy;
   select.disabled = busy;
   byId("qb-chat-form").setAttribute("aria-busy", String(busy));
@@ -69,8 +69,9 @@ async function checkStatus() {
     const data = await api("/api/chat/status");
     if (sequence !== requestSequence) return;
     authenticated = true;
-    login.hidden = true;
-    status.textContent = !data.configured ? "学习助手尚未配置完成。" : !data.available ? "全站 AI 额度已达上限，服务已暂停。" : `今日剩余 ${data.remaining} / ${data.dailyLimit} 次（太平洋标准时间每日重置）。`;
+    login.hidden = data.authenticated || data.remaining > 0;
+    if (!data.authenticated) login.textContent = "注册账号";
+    status.textContent = !data.configured ? "学习助手尚未配置完成。" : !data.available ? "全站 AI 额度已达上限，服务已暂停。" : data.remaining === 0 ? (data.authenticated ? "今日额度已用完，将于 UTC-8标准时间0:00分刷新。" : "访客今日额度已用完。注册账号将回答次数扩展至50次每日。") : data.authenticated ? `今日剩余 ${data.remaining} / ${data.dailyLimit} 次（UTC-8 标准时间每日 0:00 刷新）。` : `访客今日剩余 ${data.remaining} / ${data.dailyLimit} 次；注册账号每日可提问 50 次。`;
     controls(data.configured && data.available && data.remaining > 0);
   } catch (failure) {
     if (sequence !== requestSequence) return;
@@ -109,7 +110,11 @@ trigger.addEventListener("click", () => open());
 byId("qb-chat-close").addEventListener("click", () => dialog.close());
 dialog.addEventListener("close", () => returnFocus?.focus());
 dialog.addEventListener("click", event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } });
-login.addEventListener("click", () => { dialog.close(); document.querySelector(".qb-auth-trigger")?.click(); });
+login.addEventListener("click", () => {
+  dialog.close();
+  document.querySelector(".qb-auth-trigger")?.click();
+  document.getElementById("qb-mode-register")?.click();
+});
 
 function indexQuestions() {
   document.querySelectorAll(".q[id], .question[id]").forEach(question => {
@@ -133,7 +138,7 @@ new MutationObserver(indexQuestions).observe(document.querySelector(".wrap") || 
 byId("qb-chat-form").addEventListener("submit", async event => {
   event.preventDefault();
   const question = input.value.trim();
-  if (busy || !authenticated || !question) return;
+  if (busy || !question) return;
   busy = true;
   controls(false);
   error.textContent = "";

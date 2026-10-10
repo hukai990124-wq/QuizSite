@@ -3,12 +3,12 @@ import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { buildChatMessages, CHAT_POLICY, CHAT_PROMPT, chatDay, collectAnswer, handleChatRequest } from "./chat.mjs";
+import { buildChatMessages, CHAT_POLICY, CHAT_PROMPT, chatDay, collectAnswer, handleChatRequest, visitorId } from "./chat.mjs";
 
 function fixture() {
   const sqlite = new DatabaseSync(":memory:");
   sqlite.exec("PRAGMA foreign_keys = ON");
-  for (const file of ["0001_accounts_and_progress.sql", "0002_ai_chat.sql"]) sqlite.exec(readFileSync(new URL(`./migrations/${file}`, import.meta.url), "utf8"));
+  for (const file of ["0001_accounts_and_progress.sql", "0002_ai_chat.sql", "0003_ai_guest_quotas.sql"]) sqlite.exec(readFileSync(new URL(`./migrations/${file}`, import.meta.url), "utf8"));
   sqlite.prepare("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?)").run("user1", "learner", "salt", "hash", 1, 0, Date.now());
   const token = "a".repeat(43);
   const tokenHash = createHash("sha256").update(token).digest("hex");
@@ -20,22 +20,43 @@ function fixture() {
   } };
   return { sqlite, env: { DB, DASHSCOPE_API_KEY: "mock-only", QWEN_MODEL: "qwen-flash", QWEN_FREE_ONLY_CONFIRMED: "true" }, token };
 }
-function request(token, body = { question: "为什么选 B？", context: "题库：AWS", history: [] }, origin = "https://example.com") {
-  return new Request("https://example.com/api/chat", { method: "POST", headers: { "Origin": origin, "Content-Type": "application/json", ...(token ? { Cookie: `__Host-quizbank_session=${token}` } : {}) }, body: JSON.stringify(body) });
+function request(token, body = { question: "为什么选 B？", context: "题库：AWS", history: [] }, origin = "https://example.com", ip = "203.0.113.5") {
+  return new Request("https://example.com/api/chat", { method: "POST", headers: { "Origin": origin, "Content-Type": "application/json", "CF-Connecting-IP": ip, ...(token ? { Cookie: `__Host-quizbank_session=${token}` } : {}) }, body: JSON.stringify(body) });
+}
+function statusRequest(token, ip = "203.0.113.5") {
+  return new Request("https://example.com/api/chat/status", { headers: { "CF-Connecting-IP": ip, ...(token ? { Cookie: `__Host-quizbank_session=${token}` } : {}) } });
 }
 function streamReply() {
   return new Response('data: {"choices":[{"delta":{"reasoning_content":"private","content":"因为 B 满足题干要求。"},"finish_reason":"stop"}]}\n\ndata: {"choices":[],"usage":{"total_tokens":42}}\n\ndata: [DONE]\n\n');
 }
 
-test("chat requires a real unexpired session and rejects cross-origin requests before inference", async t => {
+test("guest chat status works without an account, and cross-origin requests are still rejected", async t => {
   const { env, token, sqlite } = fixture();
   t.after(() => sqlite.close());
-  const spy = t.mock.method(globalThis, "fetch", () => { throw new Error("must not call"); });
-  assert.equal((await handleChatRequest(request(null), env)).status, 401);
+  const spy = t.mock.method(globalThis, "fetch", () => streamReply());
+  const guest = await handleChatRequest(statusRequest(null), env);
+  assert.equal(guest.status, 200);
+  assert.deepEqual(await guest.json(), { remaining: 20, dailyLimit: 20, authenticated: false, available: true, configured: true });
   assert.equal((await handleChatRequest(request(token, undefined, "https://other.com"), env)).status, 403);
   sqlite.prepare("UPDATE sessions SET expires_at = 0").run();
-  assert.equal((await handleChatRequest(request(token), env)).status, 401);
-  assert.equal(spy.mock.callCount(), 0);
+  const expired = await handleChatRequest(request(token), env);
+  assert.equal(expired.status, 200); // expired sessions fall back to the guest allowance
+  assert.equal((await expired.json()).authenticated, false);
+  assert.equal(spy.mock.callCount(), 1);
+});
+
+test("guest IP allowance is 20; registering on that IP preserves today's usage toward 50", async t => {
+  const { env, token, sqlite } = fixture();
+  t.after(() => sqlite.close());
+  const day = chatDay(Date.now());
+  const visitor = await visitorId(request(null), env.DASHSCOPE_API_KEY);
+  const insert = sqlite.prepare("INSERT INTO ai_requests (id, user_id, visitor_hash, day, created_at, reserved, charged, status) VALUES (?, NULL, ?, ?, 1, 1, 1, 'complete')");
+  for (let i = 0; i < 20; i++) insert.run(`guest${i}`, visitor, day);
+  const guestStatus = await (await handleChatRequest(statusRequest(null), env)).json();
+  assert.equal(guestStatus.remaining, 0);
+  const userStatus = await (await handleChatRequest(statusRequest(token), env)).json();
+  assert.equal(userStatus.authenticated, true);
+  assert.equal(userStatus.remaining, 30);
 });
 
 test("cannot inject a system role or exceed input bounds; server owns the system prompt", () => {
@@ -61,7 +82,7 @@ test("successful inference settles usage and never returns the private reasoning
   assert.equal(result.status, 200);
   const data = await result.json();
   assert.equal(data.answer, "因为 B 满足题干要求。");
-  assert.equal(data.remaining, 19);
+  assert.equal(data.remaining, 49);
   assert.equal(JSON.stringify(data).includes("private"), false);
   assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, 42);
 });
@@ -70,12 +91,16 @@ test("daily cap and global budget reject calls before contacting Qwen", async t 
   const { env, token, sqlite } = fixture();
   t.after(() => sqlite.close());
   const day = chatDay(Date.now());
-  const insert = sqlite.prepare("INSERT INTO ai_requests VALUES (?, ?, ?, ?, ?, ?, ?)");
-  for (let i = 0; i < 20; i++) insert.run(`req${i}`, "user1", day, 1, 1, 1, "complete");
+  const insert = sqlite.prepare("INSERT INTO ai_requests (id, user_id, visitor_hash, day, created_at, reserved, charged, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+  for (let i = 0; i < 50; i++) insert.run(`req${i}`, "user1", null, day, 1, 1, 1, "complete");
   const spy = t.mock.method(globalThis, "fetch", () => { throw new Error("must not call"); });
-  assert.equal((await handleChatRequest(request(token), env)).status, 429);
+  const capped = await handleChatRequest(request(token), env);
+  assert.equal(capped.status, 429);
+  const capData = await capped.json();
+  assert.equal(capData.remaining, 0);
+  assert.match(capData.error, /UTC-8标准时间0:00分刷新/);
   sqlite.prepare("DELETE FROM ai_requests").run();
-  insert.run("global", null, "2020-01-01", 1, CHAT_POLICY.tokenBudget, null, "pending");
+  insert.run("global", null, null, "2020-01-01", 1, CHAT_POLICY.tokenBudget, null, "pending");
   assert.equal((await handleChatRequest(request(token), env)).status, 429);
   assert.equal(spy.mock.callCount(), 0);
 });

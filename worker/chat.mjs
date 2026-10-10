@@ -1,6 +1,6 @@
 import { findSession, validateMutationRequest } from "./account.mjs";
 
-export const CHAT_POLICY = Object.freeze({ userDaily: 20, globalDaily: 100, tokenBudget: 800000, maxOutput: 4096 });
+export const CHAT_POLICY = Object.freeze({ guestDaily: 20, userDaily: 50, globalDaily: 1000, tokenBudget: 800000, maxOutput: 4096 });
 export const CHAT_PROMPT = `你是 QuizBank 的题库学习助手。只帮助理解本站 AWS、TOEIC、DELE、基本信息技术者题库及相关知识点。
 默认用中文，用户明确要求时使用对应语言。遇到题目，先说明结论，再给出可读的解题步骤、逐项分析正确和错误选项、总结考点，并按需提供一个相似例子。解释依据而非输出私有思考过程。
 用户可以继续追问。只有请求与题库学习无关时，简短说明范围并引导回学习问题。
@@ -82,25 +82,38 @@ export async function collectAnswer(response) {
   return { answer: answer.trim(), usage, truncated: finish === "length" };
 }
 
-async function status(db, userId, day) {
+export async function visitorId(request, secret) {
+  const ip = request.headers.get("CF-Connecting-IP");
+  if (!ip || !secret) return null;
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const digest = new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(ip)));
+  return Array.from(digest, byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function status(db, userId, visitorHash, day) {
+  const column = userId ? "user_id" : "visitor_hash";
+  const identity = userId || visitorHash;
+  const limit = userId ? CHAT_POLICY.userDaily : CHAT_POLICY.guestDaily;
   const row = await db.prepare(`SELECT
     (SELECT stopped FROM ai_state WHERE id = 1) AS stopped,
-    (SELECT COUNT(*) FROM ai_requests WHERE user_id = ? AND day = ?) AS user_used,
+    (SELECT COUNT(*) FROM ai_requests WHERE (${column} = ? OR (? = 1 AND visitor_hash = ?)) AND day = ?) AS identity_used,
     (SELECT COUNT(*) FROM ai_requests WHERE day = ?) AS global_used,
-    (SELECT COALESCE(SUM(COALESCE(charged, reserved)), 0) FROM ai_requests) AS tokens`).bind(userId, day, day).first();
-  return { remaining: Math.max(0, CHAT_POLICY.userDaily - row.user_used), available: !row.stopped && row.global_used < CHAT_POLICY.globalDaily && row.tokens < CHAT_POLICY.tokenBudget };
+    (SELECT COALESCE(SUM(COALESCE(charged, reserved)), 0) FROM ai_requests) AS tokens`).bind(identity, userId ? 1 : 0, visitorHash, day, day).first();
+  return { remaining: Math.max(0, limit - row.identity_used), dailyLimit: limit, authenticated: !!userId, available: !row.stopped && row.global_used < CHAT_POLICY.globalDaily && row.tokens < CHAT_POLICY.tokenBudget };
 }
 
 export async function handleChatRequest(request, env) {
   try {
     if (!env.DB) return json({ error: "学习助手暂不可用。" }, 503);
     const session = await findSession(request, env.DB);
-    if (!session) return json({ error: "请先登录后使用学习助手。" }, 401);
     const now = Date.now(), day = chatDay(now);
     const model = env.QWEN_MODEL;
     const configured = !!env.DASHSCOPE_API_KEY && !!model && env.QWEN_FREE_ONLY_CONFIRMED === "true";
+    const userId = session?.user_id || null;
+    const visitorHash = await visitorId(request, env.DASHSCOPE_API_KEY);
+    if (!userId && !visitorHash) return json({ error: "无法识别访客，请启用 Cloudflare 代理后重试。" }, 503);
     if (request.method === "GET" && new URL(request.url).pathname === "/api/chat/status") {
-      return json({ ...(await status(env.DB, session.user_id, day)), configured, dailyLimit: CHAT_POLICY.userDaily });
+      return json({ ...(await status(env.DB, userId, visitorHash, day)), configured });
     }
     if (request.method !== "POST" || new URL(request.url).pathname !== "/api/chat") return json({ error: "不支持此请求。" }, 405);
     if (!validateMutationRequest(request)) return json({ error: "请求来源或格式不正确。" }, 403);
@@ -111,15 +124,24 @@ export async function handleChatRequest(request, env) {
     // UTF-8 byte length is a conservative token allowance; reserve before making any API call.
     const reserved = new TextEncoder().encode(JSON.stringify(messages)).length + CHAT_POLICY.maxOutput + 1024;
     const id = crypto.randomUUID();
-    const reservation = await env.DB.prepare(`INSERT INTO ai_requests (id, user_id, day, created_at, reserved, status)
-      SELECT ?, ?, ?, ?, ?, 'pending' WHERE
+    const column = userId ? "user_id" : "visitor_hash";
+    const identity = userId || visitorHash;
+    const dailyLimit = userId ? CHAT_POLICY.userDaily : CHAT_POLICY.guestDaily;
+    const reservation = await env.DB.prepare(`INSERT INTO ai_requests (id, user_id, visitor_hash, day, created_at, reserved, status)
+      SELECT ?, ?, ?, ?, ?, ?, 'pending' WHERE
       (SELECT stopped FROM ai_state WHERE id = 1) = 0 AND
-      (SELECT COUNT(*) FROM ai_requests WHERE user_id = ? AND day = ?) < ? AND
+      (SELECT COUNT(*) FROM ai_requests WHERE (${column} = ? OR (? = 1 AND visitor_hash = ?)) AND day = ?) < ? AND
       (SELECT COUNT(*) FROM ai_requests WHERE day = ?) < ? AND
       (SELECT COALESCE(SUM(COALESCE(charged, reserved)), 0) FROM ai_requests) + ? <= ? AND
-      NOT EXISTS (SELECT 1 FROM ai_requests WHERE user_id = ? AND (created_at > ? OR (status = 'pending' AND created_at > ?)))
-    `).bind(id, session.user_id, day, now, reserved, session.user_id, day, CHAT_POLICY.userDaily, day, CHAT_POLICY.globalDaily, reserved, CHAT_POLICY.tokenBudget, session.user_id, now - 5000, now - 120000).run();
-    if (!reservation.meta?.changes) return json({ error: "提问次数、全站额度已达上限，或上一条仍在处理中，请稍后再试。", ...(await status(env.DB, session.user_id, day)) }, 429);
+      NOT EXISTS (SELECT 1 FROM ai_requests WHERE (${column} = ? OR (? = 1 AND visitor_hash = ?)) AND (created_at > ? OR (status = 'pending' AND created_at > ?)))
+    `).bind(id, userId, userId ? null : visitorHash, day, now, reserved, identity, userId ? 1 : 0, visitorHash, day, dailyLimit, day, CHAT_POLICY.globalDaily, reserved, CHAT_POLICY.tokenBudget, identity, userId ? 1 : 0, visitorHash, now - 5000, now - 120000).run();
+    if (!reservation.meta?.changes) {
+      const quota = await status(env.DB, userId, visitorHash, day);
+      const message = quota.remaining === 0
+        ? (userId ? "今日额度已用完，将于 UTC-8标准时间0:00分刷新。" : "访客今日额度已用完。注册账号将回答次数扩展至50次每日。")
+        : "请求过于频繁、全站额度已达上限，或上一条仍在处理中，请稍后再试。";
+      return json({ error: message, ...quota }, 429);
+    }
     let result;
     try {
       const response = await fetch("https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions", {
@@ -145,7 +167,7 @@ export async function handleChatRequest(request, env) {
       return json({ error: "回答未完成，请稍后再试。" }, 503);
     }
     if (!result.answer) return json({ error: "模型未返回完整讲解，请缩短问题后再试。" }, 503);
-    return json({ answer: result.answer, truncated: result.truncated, ...(await status(env.DB, session.user_id, day)) });
+    return json({ answer: result.answer, truncated: result.truncated, ...(await status(env.DB, userId, visitorHash, day)) });
   } catch (error) {
     console.warn(JSON.stringify({ event: "ai_handler_failure", errorName: error?.name || "Error" }));
     return json({ error: "学习助手暂不可用，请稍后再试。" }, 503);
