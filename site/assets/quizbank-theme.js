@@ -3,6 +3,14 @@
 
   if (!document.body) return;
 
+  if (!document.getElementById("quizbank-back-to-top-js")) {
+    var backToTopScript = document.createElement("script");
+    backToTopScript.id = "quizbank-back-to-top-js";
+    backToTopScript.type = "module";
+    backToTopScript.src = "/assets/back-to-top.mjs";
+    document.head.appendChild(backToTopScript);
+  }
+
   if (!document.getElementById("quizbank-account-js")) {
     var accountScript = document.createElement("script");
     accountScript.id = "quizbank-account-js";
