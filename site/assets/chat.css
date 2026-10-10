@@ -11,6 +11,7 @@
 .qb-chat-dialog label { display: block; margin: .5rem 0 .25rem; font-weight: 600; }
 .qb-chat-dialog select, .qb-chat-dialog textarea { width: 100%; padding: .5rem; border: 1px solid #94a3b8; border-radius: .375rem; background: white; color: #0f172a; font: inherit; }
 .qb-chat-dialog textarea { resize: vertical; }
+.qb-chat-input-hint { display: block; margin-top: .25rem; color: var(--qb-muted, #5b6570); font-size: .75rem; }
 .qb-chat-dialog details { margin: .5rem 0; }
 .qb-chat-dialog summary { cursor: pointer; color: #1d4e79; padding: .25rem 0; }
 #qb-chat-log { max-height: 35dvh; overflow-y: auto; margin: .75rem 0; }
