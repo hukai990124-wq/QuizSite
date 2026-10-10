@@ -70,7 +70,7 @@ async function checkStatus() {
     if (sequence !== requestSequence) return;
     authenticated = true;
     login.hidden = true;
-    status.textContent = !data.configured ? "学习助手尚未配置完成。" : !data.available ? "全站 AI 额度已达上限，服务已暂停。" : `今日剩余 ${data.remaining} / ${data.dailyLimit} 次（日本时间每日重置）。`;
+    status.textContent = !data.configured ? "学习助手尚未配置完成。" : !data.available ? "全站 AI 额度已达上限，服务已暂停。" : `今日剩余 ${data.remaining} / ${data.dailyLimit} 次（太平洋标准时间每日重置）。`;
     controls(data.configured && data.available && data.remaining > 0);
   } catch (failure) {
     if (sequence !== requestSequence) return;

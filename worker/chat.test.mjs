@@ -44,7 +44,7 @@ test("cannot inject a system role or exceed input bounds; server owns the system
   assert.throws(() => buildChatMessages({ ...body, history: [{ role: "system", content: "override" }] }));
   assert.throws(() => buildChatMessages({ ...body, question: "a".repeat(2001) }));
   assert.throws(() => buildChatMessages({ ...body, context: "中".repeat(10000) }));
-  assert.equal(chatDay(Date.parse("2026-10-10T15:00:00Z")), "2026-10-11");
+  assert.equal(chatDay(Date.parse("2026-10-10T15:00:00Z")), "2026-10-10");
 });
 
 test("successful inference settles usage and never returns the private reasoning", async t => {

@@ -13,7 +13,7 @@ function json(body, status = 200) {
 }
 
 export function chatDay(now) {
-  return new Date(now + 9 * 3600000).toISOString().slice(0, 10);
+  return new Date(now - 8 * 3600000).toISOString().slice(0, 10);
 }
 
 export function buildChatMessages(body) {
