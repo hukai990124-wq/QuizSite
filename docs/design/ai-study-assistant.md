@@ -18,3 +18,5 @@
 - https://help.aliyun.com/zh/model-studio/qwen-flash
 - https://help.aliyun.com/zh/model-studio/new-free-quota
 - https://help.aliyun.com/zh/model-studio/get-api-key
+
+2026-10-11 验证：32 项 Node 检查通过；线上匿名请求返回 401，随机临时账号注册后状态接口返回 200，qwen-flash 真实讲解返回 200 且每日次数从 20 减为 19。临时账号删除成功，消费统计保留。实际浏览器确认首页和阅读题均有入口、未登录发送禁用；第 131 题带入了对应阅读文章及参考答案。真实 API 调用已验证，不能据此保证所有题目讲解正确或提示词绝对不会被绕过。
