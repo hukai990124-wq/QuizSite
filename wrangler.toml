@@ -21,8 +21,9 @@ directory = "site"
 binding = "ASSETS"
 run_worker_first = ["/api/*"]
 
-# Auth attempts are throttled in the Worker. Confirm this namespace ID is unique
-# within the Cloudflare account before deployment; Wrangler 4.36.0 or newer is required.
+# Required by registration and login: the Worker fails closed with 503 if this binding
+# is missing or unavailable. Confirm the namespace ID is unique within this Cloudflare
+# account; Wrangler 4.36.0 or newer is required.
 [[ratelimits]]
 name = "AUTH_LIMIT"
 namespace_id = "2026101001"
