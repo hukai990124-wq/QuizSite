@@ -16,6 +16,11 @@ compatibility_date = "2026-09-01"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 
+[vars]
+QWEN_MODEL = "qwen-flash"
+# Owner confirmed this exact model's free-quota-only setting in Model Studio.
+QWEN_FREE_ONLY_CONFIRMED = "true"
+
 # 静态页面继续由 Cloudflare 免费无限地发；只有 /api/* 先落到 Worker 脚本上。
 [assets]
 directory = "site"

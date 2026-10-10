@@ -11,6 +11,7 @@
  */
 
 import { handleAccountRequest } from "./account.mjs";
+import { handleChatRequest } from "./chat.mjs";
 
 // 心跳超时：超过这个时长没有任何消息就当作已离开
 const TIMEOUT_MS = 90 * 1000;
@@ -62,6 +63,9 @@ const CC = {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname === "/api/chat" || url.pathname === "/api/chat/status") {
+      return handleChatRequest(request, env);
+    }
     if (url.pathname === "/api/presence" || url.pathname === "/api/presence/snap") {
       const stub = env.PRESENCE.get(env.PRESENCE.idFromName("global"));
       return stub.fetch(request);

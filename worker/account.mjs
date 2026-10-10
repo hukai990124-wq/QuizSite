@@ -255,7 +255,7 @@ async function createSession(db, userId) {
   return { cookie: sessionCookie(token), expiresAt };
 }
 
-async function findSession(request, db) {
+export async function findSession(request, db) {
   const token = readSessionToken(request);
   if (!token) return null;
   const tokenHash = await digestHex(token);

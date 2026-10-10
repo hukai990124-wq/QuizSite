@@ -604,6 +604,13 @@
   }
 
   function initialize() {
+    if (!document.getElementById("quizbank-chat-js")) {
+      var chatScript = document.createElement("script");
+      chatScript.id = "quizbank-chat-js";
+      chatScript.type = "module";
+      chatScript.src = "/assets/chat.mjs";
+      document.head.appendChild(chatScript);
+    }
     loadStyles();
     createTrigger();
     makeDialog();
