@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { buildChatMessages, CHAT_POLICY, CHAT_PROMPT, chatDay, collectAnswer, handleChatRequest, visitorId } from "./chat.mjs";
+import { buildChatMessages, CHAT_POLICY, CHAT_PROMPT, chatDay, collectAnswer, handleChatRequest, isStudyRelated, visitorId } from "./chat.mjs";
 
 function fixture() {
   const sqlite = new DatabaseSync(":memory:");
@@ -66,6 +66,29 @@ test("cannot inject a system role or exceed input bounds; server owns the system
   assert.throws(() => buildChatMessages({ ...body, question: "a".repeat(2001) }));
   assert.throws(() => buildChatMessages({ ...body, context: "中".repeat(10000) }));
   assert.equal(chatDay(Date.parse("2026-10-10T15:00:00Z")), "2026-10-10");
+});
+
+test("study relevance accepts bank topics and follow-ups but rejects unrelated requests", () => {
+  assert.equal(isStudyRelated("What's the difference between IAM roles and policies?", "", []), true);
+  assert.equal(isStudyRelated("请详细解释这道题", "TOEIC 题目：Choose the correct phrasal verb.", []), true);
+  assert.equal(isStudyRelated("为什么选 B？", "题目：AWS Lambda 的计费方式", [{ role: "assistant", content: "Lambda 按调用次数和执行时长计费。" }]), true);
+  assert.equal(isStudyRelated("What's the weather in Tokyo today?", "题目：AWS Lambda 的计费方式", []), false);
+  assert.equal(isStudyRelated("讲个笑话", "题目：AWS Lambda 的计费方式", []), false);
+  assert.equal(isStudyRelated("what is 2 + 2?", "题目：AWS Lambda 的计费方式", []), false);
+});
+
+test("off-topic attempts consume one request but do not call Qwen or reserve tokens", async t => {
+  const { env, token, sqlite } = fixture();
+  t.after(() => sqlite.close());
+  const spy = t.mock.method(globalThis, "fetch", () => { throw new Error("off-topic input must not reach Qwen"); });
+  const result = await handleChatRequest(request(token, { question: "What's the weather in Tokyo today?", context: "AWS Lambda question", history: [] }), env);
+  assert.equal(result.status, 422);
+  const data = await result.json();
+  assert.equal(data.remaining, 49);
+  assert.equal(data.error, "我只能回答 QuizBank 题库及相关知识点问题；本次尝试已计入今日额度。");
+  const usage = sqlite.prepare("SELECT status, reserved, charged FROM ai_requests").get();
+  assert.deepEqual({ ...usage }, { status: "failed", reserved: 0, charged: 0 });
+  assert.equal(spy.mock.callCount(), 0);
 });
 
 test("successful inference settles usage and never returns the private reasoning", async t => {
