@@ -23,7 +23,7 @@ async function main() {
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   server.unref();
-  const base = `http://127.0.0.1:${server.address().port}`;
+  const base = process.env.QUIZBANK_TEST_BASE || `http://127.0.0.1:${server.address().port}`;
   const browser = await chromium.launch({ headless: true, channel: process.env.QUIZBANK_BROWSER_CHANNEL || 'msedge' });
   activeBrowser = browser;
   const context = await browser.newContext();
@@ -193,7 +193,7 @@ async function main() {
     for (const [number, data] of Object.entries(mappings).filter(([number]) => Math.ceil(Number(number) / 50) === part)) {
       assert.equal(await page.locator(`#q${number} select`).count(), data.rows.length);
       assert.equal(await page.locator(`#q${number} select`).first().locator('option').count(), data.options.length + 1);
-      if (!data.answer) assert.equal(await page.locator(`#q${number} .js-submit`).isDisabled(), true);
+      assert.ok(data.answer, 'all current matching questions have a scoring key');
       if (data.review) {
         const q = page.locator(`#q${number}`);
         assert.equal(await q.locator('.hotspot-reference').isVisible(), false, 'reasoning stays folded before answering');
@@ -205,14 +205,26 @@ async function main() {
         assert.deepEqual(await q.locator('.hotspot-reference a').evaluateAll(links => links.map(link => link.href)), data.review.sources);
         if (data.answer) {
           const selects = q.locator('select');
+          if (['188', '245'].includes(number)) {
+            for (let index = 0; index < data.answer.length; index++) await selects.nth(index).selectOption(index === 0 ? 'A' : String.fromCharCode(65 + data.answer[index]));
+            await q.locator('.js-submit').click();
+            assert.equal(await q.evaluate(node => node.classList.contains('wrong')), true);
+            await q.locator('.js-redo').click();
+          }
           for (let index = 0; index < data.answer.length; index++) await selects.nth(index).selectOption(String.fromCharCode(65 + data.answer[index]));
           await q.locator('.js-submit').click();
           assert.equal(await q.evaluate(node => node.classList.contains('done') && !node.classList.contains('wrong')), true);
+          if (['188', '245'].includes(number)) {
+            await page.reload();
+            await page.waitForSelector(`#q${number} .hotspot-form`);
+            assert.deepEqual(await selects.evaluateAll(nodes => nodes.map(node => node.value)), data.answer.map(index => String.fromCharCode(65 + index)));
+            assert.equal(await selects.first().isDisabled(), true);
+          }
         }
       }
     }
   }
-  regressions.push('all 32 matching questions have selectable options; unverified answers cannot be graded');
+  regressions.push('all 32 matching questions have scoring keys; all seven editorial keys pass including Q188 and repaired Q245');
   await page.goto(base + '/index.html', { waitUntil: 'domcontentloaded' });
   await page.locator('.qb-auth-trigger').click();
   await page.locator('#qb-username').fill('TestUser1');

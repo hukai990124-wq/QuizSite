@@ -118,9 +118,9 @@ function mount(q, data) {
             const language = document.documentElement.dataset.lang;
             const lang = language === 'en' || language === 'ja' ? language : 'zh';
             const copy = {
-                zh: ['经资料核对的参考答案（非原题答案）', '参考判断存在歧义；本题暂不判分。', '参考判断与 AWS 资料'],
-                en: ['Source-checked editorial answer (not the original key)', 'Ambiguous editorial assessment; this question is not graded.', 'Editorial assessment and AWS sources'],
-                ja: ['資料確認済みの参考解答（元の解答ではありません）', '参考判断に曖昧さがあるため、採点しません。', '参考判断とAWS資料']
+                zh: ['按参考答案评分（非官方／原题答案）', '参考判断存在歧义；本题暂不判分。', '参考判断与 AWS 资料'],
+                en: ['Graded using an editorial key (not an official or original key)', 'Ambiguous editorial assessment; this question is not graded.', 'Editorial assessment and AWS sources'],
+                ja: ['参考解答で採点（公式・元の解答ではありません）', '参考判断に曖昧さがあるため、採点しません。', '参考判断とAWS資料']
             }[lang];
             notice.textContent = known ? copy[0] : copy[1];
             heading.textContent = copy[2];

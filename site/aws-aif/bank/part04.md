@@ -895,17 +895,17 @@ Binary classification models are designed to distinguish between two classes - f
 <!--hotspot:review-->
 **参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
 
-第一项对应 B（隐私与安全），第三项对应 C（安全性）。第二项“提供可解释的决策”严格来说对应 Explainability，但现有选项缺少它。如果原题将透明性作宽泛表述，则可能预期 D，形成 B → D → C；这是有歧义的推测，不能当作确定答案。因此保留原选项，本题暂不判分。
+推断评分答案：B → D → C。匿名化保护隐私与安全，护栏防止有害输出及滥用属于安全性；现有选项中，将提供决策解释匹配到宽义的透明性 D。透明性与可解释性不完全相同，本题保留原选项，按此推断答案评分；这不是官方或原题答案。
 
-Item 1 maps to B (Privacy and security), and item 3 to C (Safety). Item 2 explicitly concerns Explainability, which is absent from the options. If Transparency is intended broadly, B → D → C is plausible, but not certain. The original options are preserved and this ambiguous question remains ungraded.
+Inferred scoring key: B → D → C. Anonymization protects privacy and security; guardrails address safety. Among the available choices, explaining decisions is mapped to Transparency in a broad sense. Transparency and Explainability are distinct concepts. The original options are kept, and this inferred practice key is used for scoring; it is not an official or original key.
 
-第1項目はB（プライバシーとセキュリティ）、第3項目はC（安全性）です。第2項目は厳密にはExplainabilityですが選択肢にありません。透明性を広義に使っているならB → D → Cが想定される可能性はありますが、確定できません。元の選択肢を維持し、採点は行いません。
+推定採点基準：B → D → C。匿名化はプライバシーとセキュリティ、ガードレールは安全性に対応します。決定の説明は、既存の選択肢では広義の透明性Dに対応させます。透明性と説明可能性は同一概念ではありません。元の選択肢を維持し、この推定解答で採点します。公式・元の解答ではありません。
 
 **AWS 资料 / AWS sources**
 - [AWS reference 1](https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html)
 - [AWS reference 2](https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/raisp02-bp07.html)
 <!--/hotspot:review-->
-**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
+**参考答案 / Editorial answer: 1: B (Privacy and security / 隐私与安全) → 2: D (Transparency / 透明性) → 3: C (Safety / 安全性)**
 
 
 ---

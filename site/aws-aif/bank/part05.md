@@ -1052,21 +1052,22 @@ Fine-tuning is the process of training a pre-existing foundation model on a smal
 - **B.** Privacy and security / 隐私与安全
 - **C.** Robustness / 鲁棒性
 - **D.** Safety / 安全性
+- **E.** Fairness / 公平性（补充参考选项 / Added practice option）
 <!--/hotspot:options-->
 
 <!--hotspot:review-->
 **参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
 
-概念参考：隐私与安全 → 公平性 → 鲁棒性。加密和网络隔离保护数据；评估不同人群的影响对应 Fairness；测试意外输入对应 Robustness。第一、第三项分别是 B、C，但第二项 Fairness 缺失，无法完成现有选项下的匹配。原解析的概念合理，不能据此声称已恢复原选项。本题暂不判分。
+推断评分答案：B → E → C。加密和网络隔离对应隐私与安全；评估不同人群的影响对应公平性；使用意外数据测试对应鲁棒性。原选项缺少公平性，因此补充 E（Fairness）作为练习选项，不是恢复出的原题选项。本题按修订后的参考答案评分，不代表官方或原题答案。
 
-Conceptual reference: Privacy and security → Fairness → Robustness. Encryption and network isolation protect data; population-group impact concerns fairness; unexpected-input testing concerns robustness. Items 1 and 3 map to B and C, but Fairness is missing. The source explanation is conceptually sound, yet does not prove the original option list. This question remains ungraded.
+Inferred scoring key: B → E → C. Encryption and network isolation address privacy and security; population-group impact concerns fairness; unexpected-input testing concerns robustness. E (Fairness) is an added practice option because it was absent from the source list, not a recovered original option. This repaired practice key is used for scoring; it is not an official or original key.
 
-概念上の参考：プライバシーとセキュリティ → 公平性 → 堅牢性。暗号化とネットワーク分離はデータ保護、集団別の影響評価はFairness、予期しない入力の試験はRobustnessです。第1・第3項目はB・Cですが第2項目の選択肢が欠落しています。元の説明は概念上妥当でも、元の選択肢を復元したとは言えないため採点しません。
+推定採点基準：B → E → C。暗号化とネットワーク分離はプライバシーとセキュリティ、集団別の影響評価は公平性、予期しない入力の試験は堅牢性に対応します。元の選択肢には公平性がないため、E（Fairness）を練習用に追加しました。元の選択肢を復元したものではなく、修訂した参考解答で採点します。公式・元の解答ではありません。
 
 **AWS 资料 / AWS sources**
 - [AWS reference 1](https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html)
 <!--/hotspot:review-->
-**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
+**参考答案 / Editorial answer: 1: B (Privacy and security / 隐私与安全) → 2: E (Fairness / 公平性（补充参考选项 / Added practice option）) → 3: C (Robustness / 鲁棒性)**
 
 Encrypt the application data, and isolate the application on a private network -> Privacy and security Evaluate how different population groups will be impacted -> Fairness Test the application with unexpected data to ensure the application will work in unique situations -> Robustness Protecting data and networks is part of privacy and security. Assessing impacts on different groups ensures fairness. Testing with unexpected data checks the application's robustness.
 
