@@ -37,7 +37,7 @@ test("guest chat status works without an account, and cross-origin requests are 
   const spy = t.mock.method(globalThis, "fetch", () => streamReply());
   const guest = await handleChatRequest(statusRequest(null), env);
   assert.equal(guest.status, 200);
-  assert.deepEqual(await guest.json(), { remaining: 20, dailyLimit: 20, authenticated: false, available: true, configured: true });
+  assert.deepEqual(await guest.json(), { remaining: 10, dailyLimit: 10, authenticated: false, available: true, configured: true });
   assert.equal((await handleChatRequest(request(token, undefined, "https://other.com"), env)).status, 403);
   sqlite.prepare("UPDATE sessions SET expires_at = 0").run();
   const expired = await handleChatRequest(request(token), env);
@@ -46,18 +46,23 @@ test("guest chat status works without an account, and cross-origin requests are 
   assert.equal(spy.mock.callCount(), 1);
 });
 
-test("guest IP allowance is 20; registering on that IP preserves today's usage toward 50", async t => {
+test("guest IP allowance is 10; registering on that IP preserves today's usage toward 50", async t => {
   const { env, token, sqlite } = fixture();
   t.after(() => sqlite.close());
   const day = chatDay(Date.now());
   const visitor = await visitorId(request(null), env.DASHSCOPE_API_KEY);
   const insert = sqlite.prepare("INSERT INTO ai_requests (id, user_id, visitor_hash, day, created_at, reserved, charged, status) VALUES (?, NULL, ?, ?, 1, 1, 1, 'complete')");
-  for (let i = 0; i < 20; i++) insert.run(`guest${i}`, visitor, day);
+  for (let i = 0; i < 10; i++) insert.run(`guest${i}`, visitor, day);
   const guestStatus = await (await handleChatRequest(statusRequest(null), env)).json();
   assert.equal(guestStatus.remaining, 0);
+  const spy = t.mock.method(globalThis, "fetch", () => streamReply());
+  const exhausted = await handleChatRequest(request(null), env);
+  assert.equal(exhausted.status, 429);
+  assert.match((await exhausted.json()).error, /注册账号/);
+  assert.equal(spy.mock.callCount(), 0);
   const userStatus = await (await handleChatRequest(statusRequest(token), env)).json();
   assert.equal(userStatus.authenticated, true);
-  assert.equal(userStatus.remaining, 30);
+  assert.equal(userStatus.remaining, 40);
 });
 
 test("cannot inject a system role or exceed input bounds; server owns the system prompt", () => {
@@ -123,7 +128,7 @@ test("successful account and guest replies satisfy the browser response contract
       assert.equal(answer.answer, "因为 B 满足题干要求。");
       assert.equal(answer.configured, true);
       assert.equal(answer.authenticated, authenticated);
-      assert.equal(answer.remaining, authenticated ? 49 : 19);
+      assert.equal(answer.remaining, authenticated ? 49 : 9);
     });
   }
 });

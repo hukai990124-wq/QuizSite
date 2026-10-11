@@ -1,5 +1,5 @@
 import { findSession, validateMutationRequest } from "./account.mjs";
-export const CHAT_POLICY = Object.freeze({ guestDaily: 20, userDaily: 50, globalDaily: 1000, tokenBudget: 800000, maxOutput: 4096 });
+export const CHAT_POLICY = Object.freeze({ guestDaily: 10, userDaily: 50, globalDaily: 1000, tokenBudget: 800000, maxOutput: 4096 });
 export const CHAT_PROMPT = `你是 QuizBank 的题库学习助手。只帮助理解本站 AWS、TOEIC、DELE、基本信息技术者题库及相关知识点。
 默认用中文，用户明确要求时使用对应语言。遇到题目，先说明结论，再给出可读的解题步骤、逐项分析正确和错误选项、总结考点，并按需提供一个相似例子。解释依据而非输出私有思考过程。
 用户可以继续追问题目。若用户夹带题库学习以外的请求，只回答其中与题目或考点有关的部分，并简短拒绝无关请求。
