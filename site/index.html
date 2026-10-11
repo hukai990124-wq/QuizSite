@@ -149,7 +149,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">9 个题库 · 共 4631 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <p class="sub">9 个题库 · 共 4731 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
@@ -193,7 +193,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4631</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4731</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -209,13 +209,6 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <div class="top"><span class="tg p">西班牙语</span><span class="cnt">110 题</span></div>
         <h3>DELE A2 · 阅读 + 写作 + 听力</h3>
         <p class="sd">Instituto Cervantes 官方公开的 2 套 A2 试卷。阅读 55 题、听力 55 题均可即时判分（2020 样卷为官方真人录音，旧版样卷按官方原文合成），写作附参考答案。</p>
-        <div class="pg"><i></i><span>未开始</span></div>
-      </a>
-
-      <a class="card" href="workbuddy-opc/index.html" data-site="workbuddy-opc">
-        <div class="top"><span class="tg b">AI 认证</span><span class="cnt">10 题</span></div>
-        <h3>WorkBuddy OPC 从业者 · 备考</h3>
-        <p class="sd">面向腾讯云「效率智能体 OPC 从业者」认证的备考题库（持续扩充中）。题目依据 WorkBuddy 官方文档自编，单选 + 多选，即时判分，每题附解析与官方出处。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
 
@@ -256,6 +249,13 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <div class="top"><span class="tg g">日本 IT 资格考试</span><span class="cnt">344 题次</span></div>
         <h3>基本情報技術者</h3>
         <p class="sd">先选择科目 A 或科目 B；各有三套 A60 / B20 完整练习结构，另保留 2023–2026 年度公开题。B 组卷含重复题。</p>
+        <div class="pg"><i></i><span>未开始</span></div>
+      </a>
+
+      <a class="card" href="workbuddy-opc/index.html" data-site="workbuddy-opc">
+        <div class="top"><span class="tg g">AI 认证</span><span class="cnt">110 题</span></div>
+        <h3>WorkBuddy OPC 从业者 · 备考</h3>
+        <p class="sd">面向腾讯云「效率智能体 OPC 从业者」认证的备考题库。按官方课程地图 11 个模块编排，共 110 题（单选 + 多选）。题目依据 WorkBuddy 官方文档自编，即时判分，每题附解析与官方出处。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
     </div>
@@ -370,7 +370,7 @@ var SITES={
   "fe":{keys:[["fe:a:2022",60],["fe:a:2023",20],["fe:a:2024",20],["fe:a:2025",20],["fe:a:2026",20],
               ["fe:b:2022",20],["fe:b:2023",6],["fe:b:2024",6],["fe:b:2025",6],["fe:b:2026",6],
               ["fe:a:paper-2",60],["fe:a:paper-3",60],["fe:b:paper-2",20],["fe:b:paper-3",20]]},
-  "workbuddy-opc":{keys:[["wb-opc-m02",10]]}
+  "workbuddy-opc":{keys:[["wb-opc-m01",10],["wb-opc-m02",10],["wb-opc-m03",10],["wb-opc-m04",10],["wb-opc-m05",10],["wb-opc-m06",10],["wb-opc-m07",10],["wb-opc-m08",10],["wb-opc-m09",10],["wb-opc-m10",10],["wb-opc-m11",10]]}
 };
 function read(keys){
   var d=0,o=0;

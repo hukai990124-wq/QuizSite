@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>自动化 · WorkBuddy OPC 备考题库</title>
+<style>
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* ===================== 手写填空（fill） ===================== */
+.q[data-kind="fill"] .fillrow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.q[data-kind="fill"] input.fill{font:inherit;font-size:15px;padding:8px 13px;border:1px solid #cbd5e1;
+ border-radius:8px;min-width:230px;max-width:100%;background:#fff;color:#0f172a}
+.q[data-kind="fill"] input.fill:focus{outline:none;border-color:#4a7fb5;box-shadow:0 0 0 3px rgba(74,127,181,.15)}
+.q[data-kind="fill"].done input.fill{background:#f1f5f9;color:#334155}
+.q[data-kind="fill"] input.fill.ok{border-color:#0b7a44;background:#eaf7ef;color:#0b5130;font-weight:600}
+.q[data-kind="fill"] input.fill.bad{border-color:#c0392b;background:#fdeeed;color:#8f2c20}
+.q[data-kind="fill"] .flabel{font-size:12px;color:#8b95a1}
+@media (max-width:560px){.q[data-kind="fill"] input.fill{min-width:0;width:100%}}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#f5f7f9;color:#0f172a;font-size:15px;line-height:1.7;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif}
+a{color:#1d4e79}
+.wrap{max-width:880px;margin:0 auto;padding:0 18px}
+
+.toolbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.97);
+ border-bottom:1px solid #e3e9ee;padding:9px 0 10px;box-shadow:0 1px 8px rgba(15,23,42,.04)}
+.toolbar .tbin{max-width:880px;margin:0 auto;padding:0 18px;display:flex;flex-wrap:wrap;
+ align-items:center;gap:7px 14px}
+.btns{display:flex;flex-wrap:wrap;gap:7px}
+.btns button{font:inherit;font-size:13px;padding:6px 13px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;transition:background .12s}
+.btns button:hover{background:#f1f5f9}
+.btns button.on{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.btns button.warn{border-color:#c98a00;color:#8a5f00}
+.btns button.warn.on{background:#c98a00;border-color:#c98a00;color:#fff}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;color:#0b6b3a;font-size:13px}
+.timer.low{color:#c0392b}
+
+header.hero{padding:26px 0 18px}
+header.hero h1{margin:0 0 6px;font-size:25px;letter-spacing:-.2px}
+header.hero .sub{margin:0;color:#64748b;font-size:14px}
+.crumb{font-size:13px;margin-bottom:12px}
+.crumb a{text-decoration:none;color:#5b6570}
+.crumb a:hover{color:#1d4e79;text-decoration:underline}
+.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.chip{font-size:12px;padding:3px 10px;border-radius:99px;background:#eef5fc;
+ border:1px solid #d3e3f2;color:#28567f}
+.chip.grey{background:#f1f5f9;border-color:#e2e8f0;color:#64748b}
+.chip.warn{background:#fff8e6;border-color:#f0dca8;color:#8a5f00}
+
+.qlist{list-style:none;margin:0;padding:0}
+li.q{background:#fff;border:1px solid #e3e9ee;border-radius:13px;padding:18px 20px;
+ margin:0 0 14px;position:relative}
+.qhd{display:flex;align-items:center;gap:9px;margin-bottom:7px;flex-wrap:wrap}
+.qn{font-weight:800;color:#0b6b3a;font-variant-numeric:tabular-nums;font-size:15px}
+.modtag{font-size:11.5px;color:#64748b;background:#f1f5f9;border:1px solid #e2e8f0;
+ border-radius:5px;padding:1px 7px;white-space:nowrap}
+.modtag.multi{background:#fff8e6;border-color:#f0dca8;color:#8a5f00}
+.stem{font-size:15.4px;font-weight:600;line-height:1.72;margin:0 0 12px;color:#111}
+.opts{list-style:none;margin:0;padding:0}
+li.opt{display:flex;gap:11px;align-items:flex-start;padding:10px 13px;border:1px solid #dfe5ea;
+ border-radius:9px;background:#fff;margin:7px 0;font-size:14.6px;line-height:1.62}
+.letter{flex:0 0 auto;width:23px;height:23px;border:1px solid #cbd5e1;border-radius:50%;
+ display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;
+ color:#475569;background:#f8fafc;margin-top:1px}
+.otxt{flex:1 1 auto}
+
+details.ans{margin-top:12px;border-top:1px dashed #e3e9ee;padding-top:10px}
+details.ans summary{cursor:pointer;font-size:13px;color:#0b6b3a;font-weight:600;
+ list-style:none;user-select:none}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"\25B8 "}
+details.ans[open] summary::before{content:"\25BE "}
+.anbody{margin-top:8px;font-size:13.8px;color:#475569;line-height:1.8;white-space:pre-line}
+.anbody b{color:#111}
+.anbody .ref{display:block;margin-top:9px;font-size:12px;color:#94a3b8;white-space:normal}
+.anbody .ref b{color:#64748b;font-weight:600}
+
+body.exam details.ans,body.exam .verdict,body.exam .js-reveal{display:none!important}
+body.exam li.opt.ok,body.exam li.opt.bad,body.exam li.opt.miss{background:#fff;border-color:#dfe5ea}
+body.exam li.opt.ok .letter,body.exam li.opt.bad .letter,body.exam li.opt.miss .letter{
+ background:#f8fafc;color:#475569;border-color:#cbd5e1}
+body.exam li.opt.ok::after,body.exam li.opt.bad::after,body.exam li.opt.miss::after{content:none}
+
+.pgroup{margin:22px 0 10px;font-size:14px;font-weight:700;color:#334155}
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:13px}
+.pcard{display:block;background:#fff;border:1px solid #e3e9ee;border-radius:13px;padding:16px 17px;
+ text-decoration:none;color:inherit;transition:transform .14s ease,box-shadow .14s ease}
+.pcard:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(15,23,42,.09)}
+.pcard .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.pcard .tag{font-size:11.5px;padding:3px 9px;border-radius:99px;background:#eef5fc;
+ border:1px solid #d3e3f2;color:#28567f;font-weight:600;white-space:nowrap}
+.pcard .tag.p{background:#fff8e6;border-color:#f0dca8;color:#8a5f00}
+.pcard .cnt{font-size:12px;color:#94a3b8;white-space:nowrap}
+.pcard h3{margin:0 0 6px;font-size:16px}
+.pcard p{margin:0;font-size:13px;color:#64748b;line-height:1.66}
+.note{background:#fff;border:1px solid #e3e9ee;border-radius:12px;padding:15px 18px;
+ font-size:13.3px;color:#475569;line-height:1.78;margin:0 0 22px}
+.note b{color:#111}
+.note ul{margin:8px 0 0;padding-left:20px}
+.note li{margin:3px 0}
+
+footer{padding:24px 0 40px;color:#94a3b8;font-size:12.5px;line-height:1.8}
+footer b{color:#64748b}
+footer a{color:#64748b}
+
+@media (max-width:560px){
+ li.q{padding:15px 14px}
+ header.hero h1{font-size:21px}
+}
+@media print{
+ .toolbar,.sheet,.mask,details.ans,.verdict,.qact{display:none!important}
+ li.q{break-inside:avoid;border-color:#ccc}
+}
+</style>
+<link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+<!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--></head>
+<body>
+<div class="toolbar">
+  <div class="tbin">
+    <div class="btns">
+      <button id="btn-sheet" type="button">答题卡</button>
+      <button id="btn-report" type="button">交卷看成绩</button>
+      <button id="btn-wrong" type="button">只看错题</button>
+      <button id="btn-expand" type="button">展开全部解析</button>
+      
+      <button id="btn-reset" type="button">清空重做</button>
+      <span class="timer" id="timer"></span>
+    </div>
+    <div class="qbar"><span>已答 <b id="s-done">0</b>/<b>10</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div>
+  </div>
+</div>
+
+<header class="hero i18n-noloc">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">← 返回题库目录</a></div>
+    <h1>自动化</h1>
+    <p class="sub">理解自动化任务如何按设定自动执行，以及它的前提与限制。</p>
+    <div class="meta"><span class="chip">10 题 · 单选 8 + 多选 2</span><span class="chip grey">即时判分 · 进度存在本机</span></div>
+  </div>
+</header>
+
+<main class="i18n-noloc">
+  <div class="wrap">
+    <div class="note">
+      按官方课程地图的模块顺序编排，用来<b>边看课程边查漏</b>。
+      点选项 → 「确认作答」立刻判定，每题都能展开「解析与依据」看到官方出处。
+      多选题<b>错选、漏选都不得分</b>。
+    </div>
+    <ol class="qlist i18n-noloc"><li class="q" id="q1" data-n="1" data-ans="A" data-multi="0"><div class="qhd"><span class="qn">1.</span></div><div class="stem">「自动化」功能的核心是：</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">让任务按设定的时间或条件自动执行，不需要每次手动发起</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">自动帮用户回复所有消息</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">自动升级软件版本</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">自动清理磁盘空间</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>A</b>
+自动化解决的是<b>重复劳动</b>：设好之后定期自动跑，不必每次手动发起。
+<span class="ref">依据：<b>WorkBuddy 产品机制（自动化）· 官方文档 › 更新日志</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q2" data-n="2" data-ans="B" data-multi="0"><div class="qhd"><span class="qn">2.</span></div><div class="stem">根据官方更新日志，自动化任务与项目空间的关系现在是：</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">必须绑定到某个项目空间才能运行</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">不再需要绑定项目空间，系统自动创建临时工作空间执行任务</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">只能在项目空间之外运行</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">每次运行前必须手动新建空间</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>B</b>
+更新日志原文：<b>自动化任务不再需要绑定项目空间</b>，系统自动创建临时工作空间执行任务，让自动化使用更灵活。
+<span class="ref">依据：<b>官方文档 · 更新日志（自动化任务不再需要绑定项目空间）</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q3" data-n="3" data-ans="B" data-multi="0"><div class="qhd"><span class="qn">3.</span></div><div class="stem">自动化任务列表为空时，系统会：</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">什么也不做，保持空白</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">自动创建预设任务模板，降低使用门槛</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">弹出付费提示</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">自动删除该功能入口</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>B</b>
+更新日志原文：自动化任务列表为空时<b>自动创建预设任务模板</b>，降低使用门槛。
+<span class="ref">依据：<b>官方文档 · 更新日志（自动化列表为空时自动创建预设任务模板）</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q4" data-n="4" data-ans="A,B,C" data-multi="1"><div class="qhd"><span class="qn">4.</span><span class="modtag multi">多选 · 需选 3 项</span></div><div class="stem">下列哪些适合做成自动化任务？（多选）</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">每天早上整理一份行业资讯摘要</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">每周固定时间生成一次数据周报</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">定期汇总某个目录下的新文件</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">只做一次、且需要反复斟酌措辞的重要文稿</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>A,B,C</b>
+自动化适合<b>周期性、规则明确、无需每次人工把关</b>的事。一次性且需要反复推敲的不适合（D）。
+<span class="ref">依据：<b>WorkBuddy 产品机制（自动化）· 产品实测</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 3 项</span></div></li><li class="q" id="q5" data-n="5" data-ans="B" data-multi="0"><div class="qhd"><span class="qn">5.</span></div><div class="stem">自动化任务与普通任务最主要的差别在于：</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">自动化任务不能生成文件</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">触发方式不同 —— 自动化按设定自动触发，普通任务由人手动发起</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">自动化任务不消耗积分</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">自动化任务无法查看结果</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>B</b>
+差别只在<b>触发方式</b>。产物、积分、结果查看都照常（A/C/D 错）。
+<span class="ref">依据：<b>WorkBuddy 产品机制（自动化）· 官方文档 › 更新日志</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q6" data-n="6" data-ans="A" data-multi="0"><div class="qhd"><span class="qn">6.</span></div><div class="stem">自动化任务要能按时跑起来，前提是：</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">电脑保持开机并运行 WorkBuddy</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">手机必须同时在线</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">必须连接外部显示器</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">必须处于企业版</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>A</b>
+任务在<b>本机</b>执行，电脑不运行就跑不了——这与远程控制类功能的前提一致。
+<span class="ref">依据：<b>WorkBuddy 产品机制（自动化 / 本机执行）· 产品实测</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q7" data-n="7" data-ans="A,B,C" data-multi="1"><div class="qhd"><span class="qn">7.</span><span class="modtag multi">多选 · 需选 3 项</span></div><div class="stem">关于自动化任务的执行结果，下列说法正确的是：（多选）</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">会像普通任务一样产出可查看的结果</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">可以查看历史执行情况</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">可以按需调整或停用</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">一旦创建就永久运行、无法停止</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>A,B,C</b>
+自动化任务可查看结果、可追溯历史、可停用调整。「无法停止」显然不合理（D 错）。
+<span class="ref">依据：<b>WorkBuddy 产品机制（自动化）· 产品实测</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 3 项</span></div></li><li class="q" id="q8" data-n="8" data-ans="A" data-multi="0"><div class="qhd"><span class="qn">8.</span></div><div class="stem">设置自动化时，最重要的是把什么写清楚？</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">执行频率 + 具体要做什么</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">电脑的硬件配置</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">软件的版本号</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">网络的带宽</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>A</b>
+自动化 = <b>什么时候做 + 做什么</b>。这两项写清楚，任务才可控。
+<span class="ref">依据：<b>WorkBuddy 产品机制（自动化）· 产品实测</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q9" data-n="9" data-ans="A" data-multi="0"><div class="qhd"><span class="qn">9.</span></div><div class="stem">关于自动化的定位，下列理解正确的是：</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">它属于「把重复性工作交给系统」的提效手段</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">它是一种外部服务接入方式</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">它是一种计费折扣机制</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">它只能用于代码开发</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>A</b>
+自动化 = <b>提效手段</b>（省掉重复发起）。接外部服务是连接器（B），计费是积分（C），也不限代码（D）。
+<span class="ref">依据：<b>WorkBuddy 产品机制（自动化）· 官方文档 › 更新日志</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li><li class="q" id="q10" data-n="10" data-ans="B" data-multi="0"><div class="qhd"><span class="qn">10.</span></div><div class="stem">如果发现某个自动化任务长期产出不符合预期，合理的做法是：</div><ul class="opts"><li class="opt" data-letter="A"><span class="letter">A</span><span class="otxt">删掉整个自动化功能</span></li><li class="opt" data-letter="B"><span class="letter">B</span><span class="otxt">调整任务描述或频率，必要时先停用</span></li><li class="opt" data-letter="C"><span class="letter">C</span><span class="otxt">增加执行频率以碰运气</span></li><li class="opt" data-letter="D"><span class="letter">D</span><span class="otxt">忽略它，继续叠加新的自动化</span></li></ul><details class="ans"><summary>看解析与依据</summary><div class="anbody">正确答案：<b>B</b>
+先<b>停下来</b>（停用）→ 改清楚需求或频率 → 再放开跑。盲目加频率只会放大问题（C 错）。
+<span class="ref">依据：<b>WorkBuddy 产品机制（自动化）· 产品实测</b></span></div></details><div class="verdict"></div><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div></li></ol>
+  </div>
+</main>
+
+<footer class="i18n-noloc">
+  <div class="wrap">
+    <div><b>题目来源</b>：腾讯<b>从未公开</b>该认证的考试题库 —— 官方只公布了课程地图与考试规则。
+      本题库全部题目为<b>依据官方公开资料自编</b>，用于知识点覆盖与查漏补缺，<b>不代表考试原题</b>。</div>
+    <div style="margin-top:6px"><b>出题依据</b>：WorkBuddy 官方文档（www.workbuddy.cn/docs）
+      · 腾讯云 OPC 认证课程地图 · 产品实测。每题解析下方标注了具体出处。</div>
+  </div>
+<!--i18n:sw-->
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+<!--/i18n:sw--></footer>
+
+<div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div>
+<script>
+(function(){
+"use strict";
+var KEY="quiz:wb-opc-m08";
+var TOTAL=10;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+/* 答案分隔：多选用 ","，填空的等价写法用 "|"（两种都支持） */
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(/[,|]/).map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+function norm(s){return String(s==null?"":s).replace(/\s+/g," ").trim().toUpperCase()}
+function isFill(q){return q.getAttribute("data-kind")==="fill"}
+function fillInput(q){return q1("input.fill",q)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  /* 填空题：复原/锁定输入框 */
+  var inp=q1("input.fill",q);
+  if(inp){
+    if(locked){ if(inp.value!==(sel[0]||""))inp.value=sel[0]||""; }
+    inp.disabled=locked;
+    inp.classList.remove("ok","bad");
+    if(judged)inp.classList.add(rec.ok?"ok":"bad");
+  }
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = isFill(q) ? !norm(sel[0]||"") : sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok&&!isFill(q))
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q),ok;
+  if(isFill(q)){var v=norm(sel[0]||"");ok=(v!==""&&A.indexOf(v)>=0);}
+  else{ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});}
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+/* 填空题输入：只存值、点亮"确认作答"，不重绘以免打断光标 */
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(!el||!el.classList||!el.classList.contains("fill"))return;
+  var q=el.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  S[nOf(q)]={s:[el.value],ok:null,revealed:false};
+  save();
+  var sub=q1(".js-submit",q);if(sub)sub.disabled=!norm(el.value);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script>
+
+<script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+<!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--><!--pc:js-->
+<script src="../assets/presence.js"></script>
+<!--/pc:js-->
+</body>
+</html>

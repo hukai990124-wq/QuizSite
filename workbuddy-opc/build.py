@@ -21,6 +21,9 @@ sys.path.insert(0, HERE)
 import quizkit as QK                    # noqa: E402
 from data import MODULES, PAPERS        # noqa: E402
 
+# 模块在 data.py 里按编写顺序 append，展示时按官方课程地图的编号排
+MODULES = sorted(MODULES, key=lambda m: m["no"])
+
 OUT = os.path.join(HERE, "out")
 esc = QK.esc
 
