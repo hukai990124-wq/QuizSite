@@ -19,7 +19,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(HERE), "quiz_kit"))
 sys.path.insert(0, HERE)
 
 import quizkit as QK                    # noqa: E402
-from data import MODULES, PAPERS        # noqa: E402
+from data import MODULES                # noqa: E402
+from data_papers import PAPERS          # noqa: E402
 
 # 模块在 data.py 里按编写顺序 append，展示时按官方课程地图的编号排
 MODULES = sorted(MODULES, key=lambda m: m["no"])
@@ -165,17 +166,28 @@ function score(){
   });
   return {got:got,full:full,right:right,wrong:wrong,blank:blank};
 }
+var autoFlag=false;
 function injectScoreRow(){
   var tbl=document.querySelector("#mask .report table");
   if(!tbl||document.getElementById("rp-score"))return;
   var r=score(),ok=r.got>=PASS;
   var tr=document.createElement("tr");
-  tr.innerHTML='<td><b>换算得分</b>（单选1.5/多选2）</td><td id="rp-score" style="color:'+
-    (ok?"#0b6b3a":"#c0392b")+'">'+r.got.toFixed(1)+" / "+r.full.toFixed(0)+
-    " "+(ok?"\u5df2\u8fbe\u53ca\u683c\u7ebf":"\u672a\u8fbe"+PASS+"\u5206")+"</td>";
+  // 固定文案（而非拼接数字），保证 i18n 运行时能整串命中词典
+  tr.innerHTML='<td><b>\u6362\u7b97\u5f97\u5206</b>\uff08\u5355\u90091.5/\u591a\u90092\uff09</td>'
+    +'<td id="rp-score" style="color:'+(ok?"#0b6b3a":"#c0392b")+'">'
+    +r.got.toFixed(1)+" / "+r.full.toFixed(0)
+    +" "+(ok?"\u5df2\u8fbe\u53ca\u683c\u7ebf":"\u672a\u8fbe\u53ca\u683c\u7ebf")+"</td>";
   tbl.appendChild(tr);
+  // 自动交卷提示写进成绩单（走 DOM），才能被 i18n 运行时翻译
+  if(autoFlag){
+    var tr2=document.createElement("tr");
+    tr2.innerHTML='<td>\u8003\u8bd5\u65f6\u95f4\u5230</td>'
+      +'<td style="color:#c0392b"><b>\u5df2\u81ea\u52a8\u4ea4\u5377</b></td>';
+    tbl.appendChild(tr2);
+  }
 }
 function finish(auto){
+  autoFlag=!!auto;
   if(tick){clearInterval(tick);tick=null;}
   body.classList.remove("exam");
   btn.classList.remove("on");
@@ -184,7 +196,6 @@ function finish(auto){
   injectScoreRow();
   var rb=document.getElementById("btn-report");
   if(rb)rb.click();
-  if(auto)alert("\u8003\u8bd5\u65f6\u95f4\u5230\uff0c\u5df2\u81ea\u52a8\u4ea4\u5377\u3002");
 }
 function paint(){
   if(!chip)return;
