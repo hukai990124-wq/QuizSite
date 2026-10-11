@@ -46,6 +46,7 @@ a{color:#1d4e79}
 .hero h1{margin:13px 0 8px;font-size:31px;line-height:1.3}
 .hero-sub{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .hero .sub{margin:0;color:#c9dcee;font-size:14px}
+.hero .study-time{margin:8px 0 0;color:#c9dcee;font-size:14px;font-weight:400;font-variant-numeric:tabular-nums}
 .reset-progress{flex:0 0 auto;border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:4px 12px;
  background:rgba(255,255,255,.10);color:#cfe3f5;font:inherit;font-size:12.5px;line-height:1.6;cursor:pointer;
  white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
@@ -151,6 +152,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
       <p class="sub">8 个题库 · 共 4571 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
+    <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
     <ul class="meta">
       <li>西班牙语 DELE A1</li>
       <li>西班牙语 DELE A2</li>

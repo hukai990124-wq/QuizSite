@@ -1,3 +1,5 @@
+import "./study-time.mjs";
+
 export const BACK_TO_TOP_THRESHOLD = 320;
 
 export function shouldShowBackToTop(scrollPosition: number): boolean {
