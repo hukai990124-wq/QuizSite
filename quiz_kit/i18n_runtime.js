@@ -48,12 +48,16 @@
   function region(el) {
     var p = el, i, c, tag;
     while (p && p.nodeType === 1) {
+      // i18n-noloc 是「显式声明不翻译」，优先级必须最高：
+      // 否则 <header>/<footer>/<summary> 这些标签会被无条件判为 white，
+      // 导致整页英文化时、标了 noloc 的内容区照样被翻掉。
+      // 各题库用它圈出需要照原文保留的内容区（如中文题面、日文原题、版本说明）。
+      c = clsOf(p);
+      for (i = 0; i < c.length; i++) if (BLACK[c[i]]) return "black";
       tag = p.tagName.toLowerCase();
       if (tag === "html") return null;
       if (tag === "summary" || WTAG[tag]) return "white";
-      c = clsOf(p);
       for (i = 0; i < c.length; i++) if (WHITE[c[i]]) return "white";
-      for (i = 0; i < c.length; i++) if (BLACK[c[i]]) return "black";
       p = p.parentNode;
     }
     return null;

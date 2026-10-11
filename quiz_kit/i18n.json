@@ -2095,5 +2095,10 @@
  "AI 服务暂时繁忙，请稍后重试。": {"en": "The AI service is busy right now. Please try again later.", "ja": "AIサービスが混み合っています。後でもう一度お試しください。"},
  "回答未完成，请稍后再试。": {"en": "The answer was not completed. Please try again later.", "ja": "回答が完了しませんでした。後でもう一度お試しください。"},
  "模型未返回完整讲解，请缩短问题后再试。": {"en": "The model did not return a complete explanation. Shorten the question and try again.", "ja": "モデルが完全な解説を返しませんでした。質問を短くして再試行してください。"},
- "学习助手暂不可用，请稍后再试。": {"en": "The study assistant is temporarily unavailable. Please try again later.", "ja": "学習アシスタントは一時的に利用できません。後でもう一度お試しください。"}
+ "学习助手暂不可用，请稍后再试。": {"en": "The study assistant is temporarily unavailable. Please try again later.", "ja": "学習アシスタントは一時的に利用できません。後でもう一度お試しください。"},
+ "9 个题库 · 共 4581 题次 · 可作答判分 · 登录后跨设备同步": {"en": "9 question banks · 4,581 attempts · answerable with instant scoring · sign in to sync across devices", "ja": "9つの問題集・全4,581問・解答と即時採点対応・ログインしてデバイス間で同期"},
+ "10 题": {"en": "10 questions", "ja": "10問"},
+ "WorkBuddy OPC": {"en": "WorkBuddy OPC", "ja": "WorkBuddy OPC"},
+ "WorkBuddy OPC 从业者 · 备考": {"en": "WorkBuddy OPC Practitioner · Prep", "ja": "WorkBuddy OPC 実務者 · 対策"},
+ "面向腾讯云「效率智能体 OPC 从业者」认证的备考题库（持续扩充中）。题目依据 WorkBuddy 官方文档自编，单选 + 多选，即时判分，每题附解析与官方出处。": {"en": "Prep bank for the Tencent Cloud \"AI Agent OPC Practitioner\" certification (growing). Questions are written from WorkBuddy's official docs; single- and multiple-choice, instantly scored, with an explanation and source note for every question.", "ja": "腾讯云「効率AIエージェント OPC 実務者」認定向けの対策問題集（随時拡張中）。問題は WorkBuddy 公式ドキュメントに基づく自作。単一選択＋複数選択、即時採点、各問に解説と出典を付記。"}
 }
