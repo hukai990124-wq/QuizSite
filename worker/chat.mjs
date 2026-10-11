@@ -215,7 +215,7 @@ export async function handleChatRequest(request, env) {
         if (!reservation.meta?.changes) {
             const quota = await status(env.DB, userId, visitorHash, day);
             const message = quota.remaining === 0
-                ? (userId ? "今日额度已用完，将于 UTC-8标准时间0:00分刷新。" : "访客今日额度已用完。注册账号将回答次数扩展至50次每日。")
+                ? (userId ? "今日额度已用完，将于 UTC-8标准时间0:00分刷新。" : "访客今日额度已用完。注册账号每日可提问 50 次。")
                 : "请求过于频繁、全站额度已达上限，或上一条仍在处理中，请稍后再试。";
             return json({ error: message, ...quota }, 429);
         }

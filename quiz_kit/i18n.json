@@ -2071,7 +2071,7 @@
  "学习助手尚未配置完成。": {"en": "The study assistant has not been configured yet.", "ja": "学習アシスタントはまだ設定されていません。"},
  "全站 AI 额度已达上限，服务已暂停。": {"en": "The site-wide AI quota has been reached; the service is paused.", "ja": "サイト全体のAI利用枠が上限に達したため、サービスを停止しています。"},
  "今日额度已用完，将于 UTC-8标准时间0:00分刷新。": {"en": "Today's quota is used up. It resets at 00:00 UTC-8.", "ja": "本日の利用枠を使い切りました。UTC-8 の 0:00 にリセットされます。"},
- "访客今日额度已用完。注册账号将回答次数扩展至50次每日。": {"en": "The guest quota for today is used up. An account raises the limit to 50 questions a day.", "ja": "ゲストの本日の利用枠を使い切りました。アカウントを作成すると1日50回まで質問できます。"},
+ "访客今日额度已用完。注册账号每日可提问 50 次。": {"en": "The guest quota for today is used up. An account can ask 50 questions a day.", "ja": "ゲストの本日の利用枠を使い切りました。アカウントを作成すると1日50回まで質問できます。"},
  "请先登录后使用学习助手。": {"en": "Please sign in to use the study assistant.", "ja": "学習アシスタントを使うにはログインしてください。"},
  "暂时无法连接学习助手。": {"en": "Cannot connect to the study assistant right now.", "ja": "現在、学習アシスタントに接続できません。"},
  "正在整理讲解……": {"en": "Preparing the explanation…", "ja": "解説を準備しています…"},

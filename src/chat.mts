@@ -95,7 +95,7 @@ async function checkStatus(): Promise<void> {
     if (sequence !== requestSequence) return;
     login.hidden = data.authenticated || data.remaining > 0;
     if (!data.authenticated) login.textContent = "注册账号";
-    status.textContent = !data.configured ? "学习助手尚未配置完成。" : !data.available ? "全站 AI 额度已达上限，服务已暂停。" : data.remaining === 0 ? (data.authenticated ? "今日额度已用完，将于 UTC-8标准时间0:00分刷新。" : "访客今日额度已用完。注册账号将回答次数扩展至50次每日。") : data.authenticated ? `今日剩余 ${data.remaining} / ${data.dailyLimit} 次（UTC-8 标准时间每日 0:00 刷新）。` : `访客今日剩余 ${data.remaining} / ${data.dailyLimit} 次；注册账号每日可提问 50 次。`;
+    status.textContent = !data.configured ? "学习助手尚未配置完成。" : !data.available ? "全站 AI 额度已达上限，服务已暂停。" : data.remaining === 0 ? (data.authenticated ? "今日额度已用完，将于 UTC-8标准时间0:00分刷新。" : "访客今日额度已用完。注册账号每日可提问 50 次。") : data.authenticated ? `今日剩余 ${data.remaining} / ${data.dailyLimit} 次（UTC-8 标准时间每日 0:00 刷新）。` : `访客今日剩余 ${data.remaining} / ${data.dailyLimit} 次；注册账号每日可提问 50 次。`;
     controls(data.configured && data.available && data.remaining > 0);
   } catch (failure: unknown) {
     if (sequence !== requestSequence) return;
