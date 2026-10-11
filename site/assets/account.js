@@ -113,17 +113,18 @@
       if (!inner) return;
       trigger = document.createElement("button");
       trigger.type = "button";
-      trigger.className = "qb-auth-trigger qb-sitebar__account";
+      trigger.className = "qb-auth-trigger qb-sitebar__account i18n-noloc";
       trigger.setAttribute("aria-haspopup", "dialog");
       inner.appendChild(trigger);
     }
+    trigger.classList.add("i18n-noloc");
     trigger.addEventListener("click", openDialog);
   }
 
   function makeDialog() {
     if (dialog) return;
     dialog = document.createElement("dialog");
-    dialog.className = "qb-account-dialog";
+    dialog.className = "qb-account-dialog i18n-noloc";
     dialog.setAttribute("aria-labelledby", "qb-account-title");
     dialog.innerHTML =
       '<section class="qb-account-panel">' +

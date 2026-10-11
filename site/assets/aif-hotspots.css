@@ -1,0 +1,7 @@
+.hotspot-form{display:grid;gap:12px;margin:16px 0}
+.hotspot-form label{display:grid;grid-template-columns:minmax(180px,1fr) minmax(220px,1.4fr);gap:10px;align-items:center}
+.hotspot-form select{font:inherit;width:100%;min-width:0;min-height:44px;border:1px solid #a8bac8;border-radius:8px;padding:8px;background:#fff;color:#16364a}
+.hotspot-form select:focus-visible{outline:3px solid #4a7fb5;outline-offset:2px}
+.hotspot-form select:disabled{background:#f1f5f9}
+.hotspot-choice{display:none;overflow-wrap:anywhere;color:#35536b}
+@media(max-width:650px){.hotspot-form label{grid-template-columns:1fr}.hotspot-choice{display:block}.hotspot-choice[hidden]{display:none}}

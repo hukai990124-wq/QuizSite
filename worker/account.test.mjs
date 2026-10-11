@@ -336,6 +336,22 @@ test("login, session lookup, logout, and account deletion use the server-side se
   assert.match(deleted.headers.get("Set-Cookie"), /Max-Age=0/);
 });
 
+test("phone and desktop sessions coexist, and logging out one does not revoke the other", async () => {
+  const env = makeEnvironment();
+  const registered = await handleAccountRequest(makeRequest("/api/auth/register", "POST", { username: "Tester1", password: "secret1" }), env);
+  const desktopCookie = registered.headers.get("Set-Cookie").split(";")[0];
+  const loggedIn = await handleAccountRequest(makeRequest("/api/auth/login", "POST", { username: "Tester1", password: "secret1" }), env);
+  const phoneCookie = loggedIn.headers.get("Set-Cookie").split(";")[0];
+  assert.notEqual(phoneCookie, desktopCookie);
+  for (const cookie of [desktopCookie, phoneCookie]) {
+    const me = await handleAccountRequest(makeRequest("/api/auth/me", "GET", undefined, { Cookie: cookie }), env);
+    assert.equal((await me.json()).user.username, "Tester1");
+  }
+  await handleAccountRequest(makeRequest("/api/auth/logout", "POST", {}, { Cookie: phoneCookie }), env);
+  const desktop = await handleAccountRequest(makeRequest("/api/auth/me", "GET", undefined, { Cookie: desktopCookie }), env);
+  assert.equal((await desktop.json()).user.username, "Tester1");
+});
+
 test("logout still clears the browser cookie when the database binding is unavailable", async () => {
   const response = await handleAccountRequest(makeRequest("/api/auth/logout", "POST", {}), {});
 

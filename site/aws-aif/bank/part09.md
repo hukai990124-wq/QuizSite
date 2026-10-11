@@ -57,7 +57,19 @@ Providing a custom APl allows the agents to access external data and services, s
 **中** 热点 一家公司拥有多个包含历史数据的数据集。该公司希望利用机器学习技术来处理每个数据集。 从以下列表中为每个数据集选择正确的机器学习技术。每个机器学习技术只能选择一次或根本不选。 热点区域： Adataset that contains text-based customer reviewsSelect. Computervision Naturl language processing (NLP) Reinforcement leaming Timeseriesforecasting Adataset that contains images of animals labeled withtheir species namesSelect.. Computer vision Natural language processing (NLP) Reinforcement leaming Time series forecasting Adataset that containsdailysales volumes for productsSelect.. computer vision Natural language processing (NLP) Reinforcementleaming Time series forecasting
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Text-based customer reviews / 文本客户评价
+2. Labeled animal images / 带标签动物图片
+3. Daily product sales / 每日产品销售量
+
+**选项 / Options**
+- **A.** Computer vision / 计算机视觉
+- **B.** Natural language processing (NLP) / 自然语言处理
+- **C.** Reinforcement learning / 强化学习
+- **D.** Time series forecasting / 时间序列预测
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: B (Natural language processing (NLP) / 自然语言处理) → 2: A (Computer vision / 计算机视觉) → 3: D (Time series forecasting / 时间序列预测)**
 
 Text-based customer reviews - Natural language processing (NLP) Images of animals labeled with species names Computer vision Daily sales volumes for products - Time series forecasting Customer reviews are unstructured text, so NLP is the appropriate technology for analyzing and processing language data. Images labeled by species are a visual classification task, which is handled by computer vision. Daily sales volumes are sequential data over time, making time series forecasting the correct choice for identifying patterns and predicting future values.
 
@@ -371,7 +383,20 @@ Decreasing the temperature reduces randomness in token selection, which makes th
 **中** 热点 一位人工智能从业煮正在使用亚马逊Nova文本模型。该从业者希望运用提示工程技巧，以确 保提宗能够支持选代花过程。“。口位 从以下列表中为每个定义选择正确的提示设计组件。每个提示设计组件只能选择一次。 热点区域： Specify the use case for the model.Select... Response style Role Success criteria Task Define the persona the model should assumeSelect.. to meet the requirements effectively.Response style Role Success criteria: Task Describe the tone, format, or structure thatSelect... the model should follow...... Responsestyle Role Success criteria Task Set clearmetrics to evaluatewhetherSelect... the model output meets expectations.Response style Role Success criteria Task
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Specify the model's use case / 指定模型用途
+2. Define the model's persona / 定义模型角色
+3. Define tone, format, or structure / 定义语气、格式或结构
+4. Set evaluation metrics / 设置评估指标
+
+**选项 / Options**
+- **A.** Response style / 回答风格
+- **B.** Role / 角色
+- **C.** Success criteria / 成功标准
+- **D.** Task / 任务
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: D (Task / 任务) → 2: B (Role / 角色) → 3: A (Response style / 回答风格) → 4: C (Success criteria / 成功标准)**
 
 Specify the use case for the model - Task Define the persona the model should assume to meet the requirements effectively - Role Describe the tone, format, or structure that the model should follow - Response style Set clear metrics to evaluate whether the model output meets expectations - Success criteria Task defines what the model is being asked to do. Role sets the persona or perspective the model should adopt. Response style determines the tone, format, and structure of the output. Success criteria establish how to judge whether the response meets the intended requirements.
 
@@ -944,7 +969,21 @@ Establishing data lifecycle policies, access controls, logging, and monitoring h
 **中** 热点 一家公司正在使用AmazonBedrockAgentCore来构建、部署和大规模实施代理。该公司需要确定应使 用哪些资源。合 从以下列表中为每个描述选择正确的AgentCore资源。每个资源只能选择一次或不选。 热门区域： Monitor agent behavior through intuitive dashboards Select.. Observability Code Interpreter Browsertool Runtime Gateway Memory Executecodesecurelyacrossmultiplelanguages Select... Observability Code Interpreter Browsertool Runtime Gateway HAmAA Livielury Fast, secure, and serverless browser runtime for agents Select... Observability CodeInterpreter Browsertool Runtime [Gateway [Memory
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Monitor agent behavior with dashboards / 仪表板监控智能体行为
+2. Execute code securely across languages / 安全执行多语言代码
+3. Serverless browser runtime for agents / 智能体无服务器浏览器运行时
+
+**选项 / Options**
+- **A.** Observability / 可观测性
+- **B.** Code Interpreter / 代码解释器
+- **C.** Browser tool / 浏览器工具
+- **D.** Runtime / 运行时
+- **E.** Gateway / 网关
+- **F.** Memory / 记忆
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: A (Observability / 可观测性) → 2: B (Code Interpreter / 代码解释器) → 3: C (Browser tool / 浏览器工具)**
 
 Observability Code Interpreter Browser tool Amazon Bedrock AgentCore Observability is used to monitor agent behavior with dashboards and operational telemetry. AgentCore Code Interpreter enables agents to securely execute code in supported languages. AgentCore Browser tool provides a fast, secure, serverless browser runtime that agents can use to interact with websites and web applications.
 
@@ -959,7 +998,22 @@ Observability Code Interpreter Browser tool Amazon Bedrock AgentCore Observabili
 **中** 热点 一家公司希望使用AmazonBedrock从现有文档中创建知识库。这些文档包含文本、表格和图像。 请从以下列表中选择并按正确顺序排列步骤，以准确描述如何通过Amazon Bedrock中的摄取流程 将文档中的数据转换为知识库。每个步骤只能选择一次或不选。 热门区域： Step 1 Convert the chunks into vector embeddings. Divide thedata into chunks. Parsethedocuments. Use data events to create a data lineage. UseRetrieval Augmented Generation (RAG)to retrieve relevant content. Writethevectorembeddingstothevectorstore. Step2 Convert the chunks into vector embeddings. Divide the data into chunks. Parsethedocuments. Use data events to create a data lineage. Use Retrieval Augmented Generation(RAG)to retrieve relevantcontent. Writethevectorembeddingstothevectorstore. Step3 Convert the chunks into vector embeddings. Dividethedataintochunks. Parsethedocuments. Use data events to create a data lineage. UseRetrieval Augmented Generation (RAG)to retrieve relevantcontent. Write the vector embeddings to the vector store. Step4 Convert thechunks into vector embeddings. Dividethedatainto chunks. Parsethedocuments. Use data events to create a data lineage. Use Retrieval Augmented Generation (RAG) to retrieve relevant content. Write the vector embeddings to the vector store.
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Step 1 / 第1步
+2. Step 2 / 第2步
+3. Step 3 / 第3步
+4. Step 4 / 第4步
+
+**选项 / Options**
+- **A.** Convert chunks to vector embeddings / 分块转换为向量嵌入
+- **B.** Divide data into chunks / 数据分块
+- **C.** Parse documents / 解析文档
+- **D.** Use data events for data lineage / 数据事件创建数据血缘
+- **E.** Use RAG to retrieve content / RAG检索相关内容
+- **F.** Write embeddings to a vector store / 向量嵌入写入向量存储
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Parse documents / 解析文档) → 2: B (Divide data into chunks / 数据分块) → 3: A (Convert chunks to vector embeddings / 分块转换为向量嵌入) → 4: F (Write embeddings to a vector store / 向量嵌入写入向量存储)**
 
 Step 1: Parse the documents. Step 2: Divide the data into chunks. Step 3: Convert the chunks into vector embeddings. Step 4: Write the vector embeddings to the vector store. Amazon Bedrock knowledge base ingestion starts by parsing the source documents, including supported content such as text, tables, and images. The parsed data is then split into chunks, converted into vector embeddings, and stored in a vector store so the knowledge base can retrieve relevant content later during RAG-based responses.
 

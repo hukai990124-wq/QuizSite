@@ -47,6 +47,20 @@ let busy = false;
 let returnFocus = trigger;
 let questionContext = "";
 let requestSequence = 0;
+const draftPrompts = {
+    zh: "请详细讲解这道题，说明正确答案、各选项为什么对或错，并总结考点。",
+    en: "Please explain this question in detail, identify the correct answer, explain why each option is right or wrong, and summarize the key concepts.",
+    ja: "この問題を詳しく解説し、正解と各選択肢が正しい・誤っている理由を説明して、重要なポイントをまとめてください。",
+};
+function draftPrompt() {
+    const language = document.documentElement.getAttribute("data-lang");
+    return language === "en" ? draftPrompts.en : language === "ja" ? draftPrompts.ja : draftPrompts.zh;
+}
+document.addEventListener("quizbank:language-changed", () => {
+    // Never translate or overwrite a user's own draft.
+    if (Object.values(draftPrompts).includes(input.value))
+        input.value = draftPrompt();
+});
 function appendMessage(role, text) {
     const message = document.createElement("div");
     message.className = `qb-chat-message qb-chat-message--${role}`;
@@ -120,7 +134,7 @@ function open(question = null, source = trigger) {
     if (question && !busy) {
         select.value = question.id;
         questionContext = extractQuestionContext(question);
-        input.value = "请详细讲解这道题，说明正确答案、各选项为什么对或错，并总结考点。";
+        input.value = draftPrompt();
         clearConversation();
     }
     if (!dialog.open)

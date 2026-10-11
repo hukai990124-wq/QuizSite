@@ -2,6 +2,12 @@
   "use strict";
 
   if (!document.body) return;
+  if (/\/aws-aif\/bank\/part\d+/.test(location.pathname)) {
+    var hotspotScript = document.createElement("script");
+    hotspotScript.type = "module";
+    hotspotScript.src = "/assets/aif-hotspots.mjs";
+    document.head.appendChild(hotspotScript);
+  }
 
   if (!document.getElementById("quizbank-account-js")) {
     var accountScript = document.createElement("script");
@@ -43,11 +49,19 @@
   }
 
   home.href = "/";
-  home.className = "qb-sitebar__home";
+  home.className = "qb-sitebar__home i18n-noloc";
   home.setAttribute("aria-label", homeLabel);
   homeText.className = "i18n-noloc";
   homeText.textContent = "← " + homeLabel;
   home.appendChild(homeText);
+  function updateHomeLanguage() {
+    var currentLang = document.documentElement.getAttribute("data-lang") || "zh";
+    var label = currentLang === "ja" ? "問題一覧" : currentLang === "en" ? "Question bank" : "题库总览";
+    homeText.textContent = "← " + label;
+    home.setAttribute("aria-label", label);
+  }
+  document.addEventListener("quizbank:language-changed", updateHomeLanguage);
+  updateHomeLanguage();
 
   brand.className = "qb-sitebar__brand";
   mark.className = "qb-sitebar__mark";

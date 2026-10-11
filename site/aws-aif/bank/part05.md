@@ -655,7 +655,17 @@ Amazon Bedrock Knowledge Bases let you index and retrieve your company's documen
 **中** 热点 一家公司正在使用亚马逊的SageMaker来开发人工智能模型。 从以下列表中为AI模型生命周期工作流中的每个步骤选择正确的SageMaker功能或资源。每个 SageMaker功能或资源只能选择一次或根本不选。 热点区域： Answer Area Managingdifferentversionsof themodel SageMaker Clarify SageMakerModel Registry SageMakerServerless Inference Usingthecurrentmodeltomakepredictions SageMaker Clarify SageMakerModel Registry SageMaker Serverless Inference
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Manage different versions of the model / 管理模型版本
+2. Use the current model for predictions / 使用当前模型预测
+
+**选项 / Options**
+- **A.** SageMaker Clarify
+- **B.** SageMaker Model Registry
+- **C.** SageMaker Serverless Inference
+<!--/hotspot:options-->
+**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
 
 
 ---
@@ -782,7 +792,18 @@ Amazon Bedrock Guardrails allows you to define rules and policies that evaluate 
 **中** 热点 一家公司希望开发一种解决方案，利用生成式人工智能为产品广告创作内容，包括示例图片 和产告语。 从以下列表中为每个动作选择正确的模型类型。每个模型类型应选择一次。 热点区域： Create high-quality images that are influenced by the generated slogans and productSelect... Diffusion model . ! Object detection model Transformer-based model Create contextuallyrelevant slogans based on the advertsement productSelect.. Diffusion model object detection model Transformer-based model Ensure that company brand elements are properlyplaced in the imagesSelect.. Diffusion model Object detection model Transformer-based model
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Generate high-quality advertisement images / 生成高质量广告图片
+2. Generate contextually relevant slogans / 生成相关广告标语
+3. Ensure brand elements are properly placed / 确认品牌元素正确放置
+
+**选项 / Options**
+- **A.** Diffusion model / 扩散模型
+- **B.** Object detection model / 目标检测模型
+- **C.** Transformer-based model / Transformer模型
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: A (Diffusion model / 扩散模型) → 2: C (Transformer-based model / Transformer模型) → 3: B (Object detection model / 目标检测模型)**
 
 Create high-quality images that are influenced by the generated slogans and product -> Diffusion model Create contextually relevant slogans based on the advertisement product -> Transformer-based model Ensure that company brand elements are properly placed in the images -> Object detection model Diffusion models are state-of-the-art for high-quality image generation. Transformer-based models excel at natural language processing, making them suitable for generating contextually relevant slogans. Object detection models are designed to identify and ensure correct placement of specific objects (e.g., brand elements) within images.
 
@@ -1006,7 +1027,19 @@ Fine-tuning is the process of training a pre-existing foundation model on a smal
 **中** 热点 一家公司正在开发一款人工智能应用程序，以帮助公司批准或拒绝个人贷款。该应用程序必须遵循负 责任的人工智能原则。 从以下列表中为每个行动选择正确的负责任的人工智能原则。每个负责任的人工智能原则只能选择一次或 根本不选。 热点区域： Encrypt the application data and isolate the application on a private network.Select.. pSelect. Explainability Fairness Privacy and security Robustness Safety Evaluate how different population groups willbe impacted.Select.. Select... Explainability Fairness Privacy and security Robustness Safety Test the application with unexpected data to ensure the application will work in unique situations.Select.. Select.. Explainability Fairness Privacy and security Robustness Safety
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Encrypt data and isolate a private network / 加密数据并隔离私有网络
+2. Evaluate impact on different population groups / 评估不同人群影响
+3. Test with unexpected data / 使用意外数据测试
+
+**选项 / Options**
+- **A.** Explainability / 可解释性
+- **B.** Privacy and security / 隐私与安全
+- **C.** Robustness / 鲁棒性
+- **D.** Safety / 安全性
+<!--/hotspot:options-->
+**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
 
 Encrypt the application data, and isolate the application on a private network -> Privacy and security Evaluate how different population groups will be impacted -> Fairness Test the application with unexpected data to ensure the application will work in unique situations -> Robustness Protecting data and networks is part of privacy and security. Assessing impacts on different groups ensures fairness. Testing with unexpected data checks the application's robustness.
 

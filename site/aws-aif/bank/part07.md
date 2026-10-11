@@ -193,7 +193,20 @@ Batch transform is the most cost-effective inference method for analyzing large 
 **中** 热点 从以下列表中选择并按顺序排列步骤，以正确描述新自定义模型的机器学习生命周期。每个步骤只能选 择一次。 热点区域： Step1:select.. Definethebusiness objective. Deploy themodel. Developand train themodel. Processthedata. Step2:Select... Definethebusiness objective. Deploythemodel. Develop and train themodel. Processthedata. Step3:Select... Definethebusinessobjective. Deploythemodel. Developandtrainthemodel. Processthedata. Step4:Select... Define the business objective. Deploy themodel. Developand trainthemodel. Processthedata.
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Step 1 / 第1步
+2. Step 2 / 第2步
+3. Step 3 / 第3步
+4. Step 4 / 第4步
+
+**选项 / Options**
+- **A.** Define the business objective / 定义业务目标
+- **B.** Deploy the model / 部署模型
+- **C.** Develop and train the model / 开发并训练模型
+- **D.** Process the data / 处理数据
+<!--/hotspot:options-->
+**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
 
 
 ---
@@ -228,7 +241,20 @@ ISO accreditation for managing Al risks means that the company's development pro
 **中** 热点 从以下列表中为每个描述选择正确的提示工程技术。每个提示工程技术只能选择一次或根本不选。 热点区域： Provideasmall numberof examples to themodel tounderstandSelect.. the desired task before generating outputs.Chain-of-thought prompting Few-shot prompting Role-basedprompting Single-shotprompting Zero-shot prompting Prompt a model to break down the step-by-step processthatSelect. themodel took to arriveat a final answer.Chain-of-thought prompting Few-shotprompting Role-basedprompting singleshot prompting Zero-shot prompting Promptamodeltoperformataskwithout providingexamples.Select. Chain-of-thought prompting Few-shotprompting Role-basedprompting single-shotprompting Zero-shot prompting
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Provide a few examples before generating output / 提供少量示例
+2. Break down reasoning step by step / 逐步分析推理过程
+3. Perform a task without examples / 不提供示例执行任务
+
+**选项 / Options**
+- **A.** Chain-of-thought prompting / 思维链提示
+- **B.** Few-shot prompting / 少样本提示
+- **C.** Role-based prompting / 角色提示
+- **D.** Single-shot prompting / 单样本提示
+- **E.** Zero-shot prompting / 零样本提示
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: B (Few-shot prompting / 少样本提示) → 2: A (Chain-of-thought prompting / 思维链提示) → 3: E (Zero-shot prompting / 零样本提示)**
 
 Provide a small number of examples to the model to understand the desired task before generating outputs -> Few-shot prompting Prompt a model to break down the step-by-step process that the model took to arrive at a final answer -> Chain-of-thought prompting Prompt a model to perform a task without providing examples -> Zero-shot prompting Few-shot prompting uses a few examples to guide the model's outputs. Chain-of-thought prompting asks the model to explain its reasoning step-by-step. Zero-shot prompting asks the model to perform a task without any examples.
 
@@ -266,7 +292,18 @@ Supervised learning is used when the dataset includes both input features (like 
 **中** 热点 一家公司定期通过手动上传数字产品指南来更新其产品数据库。这些产品指南包含文本和图片。该公司 希望利用生成式人工智能来实现这一任务的自动化。 从以下列表中选择并按顺序排列步骤，以使用生成式人工智能自动化数据库更新任务。每个步 骤只能选择一次。 热点区域： 3select.. Unsertdata intotheproductdatabase. UploadthedigitaltextandimagefilestoanAmazons3bucket. UseAmazonNovamultimodalmodelstoprocessthedigitaltextandimagefiles.es. Step2:select.. Insert data into the product database. Upload thedigitaltextand imagefiles toanAmazonS3bucket. UseAmazonNovamultimodalmodelsto processthedigitaltextandimagefiles. Step3:select.. Insertdata into the product database. Uploadthedigital extand imagefilestoanAmazonS3bucket. UseAmazonNovamultimodalmodelstoprocessthedigitaltextandimagefiles.
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Step 1 / 第1步
+2. Step 2 / 第2步
+3. Step 3 / 第3步
+
+**选项 / Options**
+- **A.** Insert data into the product database / 将数据写入产品数据库
+- **B.** Upload text and image files to Amazon S3 / 将文本和图片上传至S3
+- **C.** Process files with Amazon Nova multimodal models / 使用Nova多模态模型处理文件
+<!--/hotspot:options-->
+**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
 
 
 ---
@@ -597,7 +634,20 @@ Fine-tuning a pre-trained deep learning model leverages transfer learning, reduc
 **中** 热点 一家公司希望利用亚马逊Bedrock构建生成式人工智能应用程序，同时希望将开发工作量降至最低。 从以下列表中选择并按开发工作量从小到大的顺序排列模型开发技术。每个模型开发技术只能选择 一次。 热点区域： LEAsTdevelopmenteffort:Select.. Continuedpre-training Fine-tuning Promptengineering RetrievalAugmentedGeneration(RAG) Select..eration (RAG) Continuedpre-training Fine-tuning Promptengineering Retrieval Augmented Generation (RAG) Select...Veration (RAG) Continued pre-training Fine-tuning Promptengineering Retrieval Augmented Generation (RAG) MOSTdevelopment effortSelect..eration (RAG) Continuedpre-training Fine-tuning Promptengineering Retrieval AugmentedGeneration (RAG) opregcoy RetrievalAugmentedGeneration(RAG)
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Least effort / 开发工作量最少
+2. Second / 第二
+3. Third / 第三
+4. Most effort / 开发工作量最多
+
+**选项 / Options**
+- **A.** Continued pre-training / 持续预训练
+- **B.** Fine-tuning / 微调
+- **C.** Prompt engineering / 提示工程
+- **D.** Retrieval Augmented Generation (RAG) / 检索增强生成
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Prompt engineering / 提示工程) → 2: D (Retrieval Augmented Generation (RAG) / 检索增强生成) → 3: B (Fine-tuning / 微调) → 4: A (Continued pre-training / 持续预训练)**
 
 1. Prompt engineering 2. Retrieval Augmented Generation (RAG) 3. Fine-tuning 4. Continued pre-training Prompt engineering requires minimal effort as it only involves designing effective prompts. RAG adds moderate effort by integrating retrieval mechanisms with the model. Fine-tuning requires labeled data and retraining, demanding more resources. Continued pre-training is the most effort-intensive because it involves large-scale training with unlabeled domain data.
 
@@ -1099,7 +1149,18 @@ Different large language models have varying maximum token limits, which affects
 **中** 热点 一家公司希望利用机器学习来提高客户参与度和销售额。该公司已收集了一个庞大的数据集，其中包括客 户的人口统计信息、购买历史、浏览模式和产品评价。 从以下列表中为每个用例选择正确的机器学习方法。每个机器学习方法只能选择一次。 热点区域： Predict customer lifetime value (CLV) by astimating how much revenue a customer will generate over the customer's lifetime. Ident h ikeihodofacustmer o tpusing te companys seiceslmeiegin ElstinaionRegession Regression Group customers based on similar purchasing patterns and preferences. Classification Clustering [Regression
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Predict customer lifetime value / 预测客户终身价值
+2. Predict customer churn / 预测客户流失
+3. Group similar purchasing behaviors / 分组相似购买行为
+
+**选项 / Options**
+- **A.** Classification / 分类
+- **B.** Clustering / 聚类
+- **C.** Regression / 回归
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Regression / 回归) → 2: A (Classification / 分类) → 3: B (Clustering / 聚类)**
 
 Customer lifetime value is a continuous numeric prediction representing expected revenue over time. The likelihood that a customer will stop using services is a binary outcome prediction. Grouping customers by similar behaviors and preferences requires identifying natural patterns without predefined labels.
 

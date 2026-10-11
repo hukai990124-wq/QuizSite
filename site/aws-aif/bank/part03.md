@@ -308,7 +308,20 @@ A logistic regression model is a simple, interpretable machine learning model th
 **中** 热点 一家公司想要开发一个机器学习应用程序。 从以下列表中选择并按顺序排列正确的步骤来开发架构良好的机器学习工作负载。每个步骤只能选择 一次。 热点区域： AnswerArea Step1:select.. Select.店 Deploymodel Developmodel Monitormodel Define business goal and frame ML problem Step2select.. Selec.. Deploymodel Developmodel Monitormodel Define business goal and frame ML problem Step3:Select... Select.. Deploymodel Developmodel Monitormodel Definebusinessgoal andframeMLproblem Step4:select.. select.. Deploy model Developmodel Monitormodel Define business goal and frame ML problem
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Step 1 / 第1步
+2. Step 2 / 第2步
+3. Step 3 / 第3步
+4. Step 4 / 第4步
+
+**选项 / Options**
+- **A.** Deploy model / 部署模型
+- **B.** Develop model / 开发模型
+- **C.** Monitor model / 监控模型
+- **D.** Define business goal and frame ML problem / 明确业务目标并界定机器学习问题
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: D (Define business goal and frame ML problem / 明确业务目标并界定机器学习问题) → 2: B (Develop model / 开发模型) → 3: A (Deploy model / 部署模型) → 4: C (Monitor model / 监控模型)**
 
 The typical sequence of steps in building an ML application involves: 1. Defining the business goal and framing the ML problem - This step involves understanding the business need and determining how ML can address it. 2. Developing the model - This involves selecting the appropriate algorithm, training the model, and evaluating it. 3. Deploying the model - Once the model is trained, it is deployed to production to serve predictions. 4. Monitoring the model - After deployment, the model is monitored to ensure it performs well over time and to detect any issues like model drift.
 
@@ -551,7 +564,17 @@ The issue described is a case of bias in the model's decision-making process, wh
 **中** 热点 一家公司开发了一个大型语言模型（LLM），并希望将其提供给多个内部团队使用。该公司需要为每个团 队选择合适的推理模式。 从以下列表中为每个用例选择正确的推理模式。每个推理模式可被选择一次或多次。 热点区域： AnswerArea The company's chatbot needs predictions from the LLM to understand users'intent with minimal Select.. latency.Select. Batchtransform Real-time inference Adata processing job needs toquery theLLM to processgigabytes of text files on weekends.Selec... Select... Batchtransform Real-time inference The company's engineering team needs to create anAPl that can process smallpieces of textSelect.. contentandprovide low-latency predictions.Select... Batchtransform Real-time inference
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Chatbot predictions with minimal latency / 聊天机器人低延迟预测
+2. Process gigabytes of text files on weekends / 周末处理大量文本文件
+3. API providing low-latency predictions / API低延迟预测
+
+**选项 / Options**
+- **A.** Batch transform / 批量转换
+- **B.** Real-time inference / 实时推理
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: B (Real-time inference / 实时推理) → 2: A (Batch transform / 批量转换) → 3: B (Real-time inference / 实时推理)**
 
 The company's chatbot needs predictions from the LLM to understand users' intent with minimal latency-Real-timeinference This scenario requires Real-time inference, as chatbots typically need immediate responses with low latency to provide an interactive user experience. A data processing job needs to query the LLM to process gigabytes of text files on weekends - Batchtransform This use case is best suited for Batch transform. Since the data processing job involves handling large amounts of data, and it is scheduled for weekends, batch processing can handle these large volumes efficiently. The company's engineering team needs to create an APl that can process small pieces of text content and provide low-latency predictions -Real-time inference Real-time inference is the correct choice here, as the APl needs to process text quickly and provide immediate responses, making real-time inference appropriate.
 
@@ -775,7 +798,18 @@ Continuous pre-training keeps a foundation model "always learning" by periodical
 **中** 热点 一家公司希望开发机器学习应用程序以改进业务运营和提高效率。 从以下列表中为每个用例选择正确的机器学习范式。每个机器学习范式可被选择一次或多次。 热点区域： BinaryclassificationSelect... Supervised learning Unsupervisedlearning Multi-class classificationSelect... Supervised learning Unsupervisedlearning Pg K-means clusteringSelect.. Supervisedlearning Unsupervisedlearning S Dimensionality reductionSelect... Supervisedlearning Unsupervisedlearning
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Binary classification / 二分类
+2. Multiclass classification / 多分类
+3. K-means clustering / K-means聚类
+4. Dimensionality reduction / 降维
+
+**选项 / Options**
+- **A.** Supervised learning / 监督学习
+- **B.** Unsupervised learning / 无监督学习
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: A (Supervised learning / 监督学习) → 2: A (Supervised learning / 监督学习) → 3: B (Unsupervised learning / 无监督学习) → 4: B (Unsupervised learning / 无监督学习)**
 
 Binary classification: Supervised learning Binary classification involves predicting one of two possible outcomes, requiring labeled training data. Multi-classclassification:Supervised learning Multi-class classification extends binary classification to predict one of several classes, also requiring labeled data. K-means clustering: Unsupervised learning K-means clustering is used to group data points into clusters without requiring labeled data. Dimensionality reduction:Unsupervised learning Dimensionality reduction techniques, like PCA, reduce the number of features in the dataset without needing labeled data.
 
@@ -951,7 +985,18 @@ AmazonMacie是一项完全托管的数据安全和隐私服务，它利用机器
 **中** 热点 一家公司正在培训其员工如何为基础模型构建提示。 从以下列表中为每个提示模板选择正确的提示工程技术。每个提示工程技术应仅选择一次。 热点区域： "Classifythefollowingtextas eithersports,politics,orentertainment: [nputtextj.select.. Selec... Chain-of-thoughtreasoning Eeroshotleaning "A[na1].[image 2] and [mage3] are examplesof[arget class] Classity the following image as [largei class]Selec.. Select.. IChrain-of-thought reasoning Zen solemng r(Question. [instructions to foilow.j Think step by step and walkme throughyourthinking."Selec... Selec... Chain-of-thought reasonug Eewoshotleaning
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Classify text as sports, politics, or entertainment without examples / 无示例文本分类
+2. Classify an image after three examples / 三个示例后分类图片
+3. Think step by step / 逐步思考
+
+**选项 / Options**
+- **A.** Chain-of-thought reasoning / 思维链推理
+- **B.** Few-shot learning / 少样本学习
+- **C.** Zero-shot learning / 零样本学习
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Zero-shot learning / 零样本学习) → 2: B (Few-shot learning / 少样本学习) → 3: A (Chain-of-thought reasoning / 思维链推理)**
 
 "claeeifrthnfallaiainn tavt ae aithnranartenalitinear nntartainmnnt,rinniittavti " MM CorrectAnswer:Zero-shot learning Zero-shot learning involves providing the model with a task and no prior examples, relying entirely on the model's pre-trained knowledge to perform the classification. "A [image 1], [image 2], and [image 3] are examples of [target class]. Classify the following image nAT+APNAAIAAAT" Correct Answer: Few-shot learning Few-shot learning provides the model with a few examples (image 1, image 2, and image 3) before asking it to classify a new instance, helping it generalize to the task with minimal examples. "riiaetian1rinetriirtiane tafallaaiThinketanhuietan anduialk mnthranahanrthinina" Ln Irtr rT sToJao Correct Answer: Chain-of-thought reasoning Chain-of-thought reasoning encourages the model to break down its reasoning process step by step, enhancing its ability to solve complex tasks logically.
 
@@ -966,7 +1011,20 @@ AmazonMacie是一项完全托管的数据安全和隐私服务，它利用机器
 **中** 热点 一家公司正在使用一种生成式人工智能模型来开发数字助手。该模型的回复偶尔会包含不受 欢迎且可能有害的内容。 从以下列表中为每个缓解措施选择正确的AmazonBedrock过滤策略。每个过滤策略应仅选择一次。 热点区域： Biockinputpromptsormodelresponsesthatcontainharmfulcontent such as hate, insufts, violence, or misconduct Content fiters Contextualgroundingcheck Deniedtopics Word filters Avoidsubjectsrelatedto illegalinvestmentadviceorlegaladvice Content fiters.. Contextualgroundingcheck Deniedtopics Word filters Detectandblockspecificoffensiveterms Contentfilters Contextual grounding check Deniedtopics Word fiters Detect and fiter out information in the model's responses that is not grounded in the provided source information Content fiters Contextualgroundingcheck Deniedtopics Word fiters
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Block hate, insults, violence, or misconduct / 拦截仇恨、侮辱、暴力或不当内容
+2. Avoid illegal investment or legal advice / 避免非法投资或法律建议主题
+3. Block specific offensive terms / 拦截特定冒犯词语
+4. Filter responses not grounded in sources / 过滤无来源依据的回答
+
+**选项 / Options**
+- **A.** Content filters / 内容过滤器
+- **B.** Contextual grounding check / 上下文依据检查
+- **C.** Denied topics / 禁止的主题
+- **D.** Word filters / 词语过滤器
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: A (Content filters / 内容过滤器) → 2: C (Denied topics / 禁止的主题) → 3: D (Word filters / 词语过滤器) → 4: B (Contextual grounding check / 上下文依据检查)**
 
 Block input prompts or model responses that contain harmful content such as hate, insults, violence, or misconduct - Content filters Avoid subjects related to illegal investment advice or legal advice- Denied topics Detect and block specific offensive terms-Word filters Detect and filter out information in the model's responses that is not grounded in the provided source information- Contextual grounding check
 

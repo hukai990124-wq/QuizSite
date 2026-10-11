@@ -57,6 +57,14 @@ def load_line(key):
     qs = load_json(os.path.join(RAW, cfg["qfile"]), [])
     qs = sorted(qs, key=lambda q: q.get("num") or 0)
     zh = load_json(os.path.join(RAW, cfg["zhfile"]), {})
+    if key == "bank":
+        # Keep future exports consistent with the repaired browser dropdowns.
+        mapping = load_json(os.path.join(os.path.dirname(__file__), "../site/assets/aif-hotspots.json"), {})
+        for q in qs:
+            hotspot = mapping.get(str(q.get("num")))
+            if hotspot:
+                q["hotspot"] = hotspot
+                q["answer"] = ">".join(chr(65 + index) for index in hotspot["answer"]) if hotspot["answer"] is not None else ""
     return cfg, qs, {str(k): v for k, v in zh.items()}
 
 
@@ -221,7 +229,16 @@ def render_part_md(key, part_idx, qs_all, zh):
             L.append(f"- **{o['letter']}.** {o['text']}")
             if zopts.get(o["letter"]):
                 L.append(f"  - {zopts[o['letter']]}")
-        L += ["", f"**正确答案 / Answer: `{q['answer']}`**", ""]
+        hotspot = q.get("hotspot")
+        if hotspot:
+            L += ["", "**匹配项目 / Items**"]
+            L += [f"{index + 1}. {row}" for index, row in enumerate(hotspot["rows"])]
+            L += ["", "**选项 / Options**"]
+            L += [f"- **{chr(65 + index)}.** {option}" for index, option in enumerate(hotspot["options"])]
+            answer = " → ".join(f"{index + 1}: {chr(65 + choice)} ({hotspot['options'][choice]})" for index, choice in enumerate(hotspot["answer"])) if hotspot["answer"] is not None else "待核对 / Not yet verified — 暂不判分 / Not graded"
+            L += ["", f"**正确答案 / Answer: {answer}**", ""]
+        else:
+            L += ["", f"**正确答案 / Answer: `{q['answer']}`**", ""]
         if q.get("explanation"):
             L.append(q["explanation"])
         if z.get("explanation"):

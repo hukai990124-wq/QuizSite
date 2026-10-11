@@ -101,7 +101,18 @@ Amazon Translate is an AWS service that automates language translation using neu
 **中** 热点 一家公司希望其生成式人工智能模型对提示的回应更具个性化。 从以下列表中为每个用例选择正确的定制方法。每个用例只能选择一次。 热点区域： Themodelsmust be taught a newdomain-specifictask Continued pre-training Data augmentation Model fine-funing A limited amount of labeled data is available and more data is needed Continued pre-training Data augmentation Model fine-tuning Onlyunlabeleddata isavailable Continued pre-training Data augmentation Model fine-tuning
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Teach a new domain-specific task / 学习新领域的特定任务
+2. Need more labeled data / 需要更多标注数据
+3. Only unlabeled data is available / 仅有未标注数据
+
+**选项 / Options**
+- **A.** Continued pre-training / 持续预训练
+- **B.** Data augmentation / 数据增强
+- **C.** Model fine-tuning / 模型微调
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Model fine-tuning / 模型微调) → 2: B (Data augmentation / 数据增强) → 3: A (Continued pre-training / 持续预训练)**
 
 The models must be taught a new domain-specific task - Model fine-tuning Fine-tuning is the best approach when a model needs to learn a specific domain-related task. It involves adjusting a pre-trained model with a smaller, task-specific dataset to improve performance in that domain. A limited amount of labeled data is available and more data is needed - Data augmentation Data augmentation helps in scenarios where labeled data is scarce by artificially increasing the size and variability of the dataset, improving model generalization. Only unlabeled data is available - Continued pre-training Continued pre-training allows an existing foundation model to be further trained on domain-specific, unlabeled data to adapt to new contexts without requiring labeled data.
 
@@ -787,7 +798,17 @@ Federated learning lets you train a global model across multiple data holders (f
 **中** 热点 一家公司需要对托管在亚马逊Bedrock上的基础模型进行定制。 从以下公司需求列表中选择正确的模型定制方法。每个模型定制方法可被选择一次或多次。 热点区域： The company wants to imprcve themodel's performance on specific tasks andexamples.Select.. Select. Continuedpre-training Fine-tuning Thecompanywants to improve the model'sdomain knowledge by providing specific documents.Select... Setec.. Contirtred pre-training Fine-tuning The coinpany wants to retrain the mcdel by using more unlabeled data over tine.Select.. Select Contint.edpre-tra:ning Fine-tuning
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Improve performance on specific tasks and examples / 提升特定任务表现
+2. Improve domain knowledge with documents / 通过文档提升领域知识
+3. Retrain with more unlabeled data / 使用更多未标注数据训练
+
+**选项 / Options**
+- **A.** Continued pre-training / 持续预训练
+- **B.** Fine-tuning / 微调
+<!--/hotspot:options-->
+**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
 
 
 ---
@@ -845,7 +866,19 @@ Binary classification models are designed to distinguish between two classes - f
 **中** 热点 一家公司正在利用一个经过微调的大语言模型（LLM）设计客户服务聊天机器人。该公司希望确保聊天 机器人具备负责任的人工智能特性。 从以下列表中为每个应用设计操作选择正确的负责任的人工智能特性。每个负责任的人工智能特性应选 择一次或根本不选。 热点区域： Anonymize personal information during training data preparationSelect... Select... Govermance Privacyand security Safety Transparency Design thecustomer servicechatbotto provideexplainabledecisionsSelect... Select... Governance Privacy and security safety Transparency Use Amazon Bedrock Guardrails to prevent harmful output and misuse of the chatbotSelect.. Select... Governance Privacyand security Safety Transparency
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Anonymize personal information in training data / 训练数据个人信息匿名化
+2. Provide explainable decisions / 提供可解释的决策
+3. Use Guardrails to prevent harmful output and misuse / 使用护栏防止有害输出及滥用
+
+**选项 / Options**
+- **A.** Governance / 治理
+- **B.** Privacy and security / 隐私与安全
+- **C.** Safety / 安全性
+- **D.** Transparency / 透明性
+<!--/hotspot:options-->
+**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
 
 
 ---
@@ -903,7 +936,20 @@ Regression models are designed to predict continuous numerical values (for examp
 **中** 热点 一家公司希望将亚马逊SageMaker的功能用于各种用例。 从以下列表中为每个用例选择正确的SageMaker功能。每个SageMaker功能只能选择一次或根本不选。 热点区域： Preparing data through a visual interface without using codeSelect... Select SageMakerCanvas SageMakerFeature Store SageMaker Ground Truth SageMakerJumpStart SageMaker Model Monitor Finding and using a prebuilt solution for fraud detectionSelect.. Select SageMakerCanvas SageMakerFeature Store SageMakerGroundTruth SageMakerJumpStart SageMaker Model Monitor Create labeled datasets with human interventionSelect... select SageMakerCanvas SageMakerFeature Store SageMaker Ground Truth SageMakerJumpStart SageMaker Model Monitor
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Prepare data visually without code / 无代码可视化数据准备
+2. Find a prebuilt fraud-detection solution / 查找预构建欺诈检测方案
+3. Create labeled datasets with human intervention / 人工参与创建标注数据集
+
+**选项 / Options**
+- **A.** SageMaker Canvas
+- **B.** SageMaker Feature Store
+- **C.** SageMaker Ground Truth
+- **D.** SageMaker JumpStart
+- **E.** SageMaker Model Monitor
+<!--/hotspot:options-->
+**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
 
 
 ---
