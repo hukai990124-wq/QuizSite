@@ -15,7 +15,7 @@ function pages(dir) {
 async function main() {
   const server = http.createServer((request, response) => {
     const file = path.resolve(site, '.' + decodeURIComponent(new URL(request.url, 'http://localhost').pathname));
-    if (!file.startsWith(site + path.sep) || !fs.existsSync(file)) { response.writeHead(404); response.end(); return; }
+    if ((file !== site && !file.startsWith(site + path.sep)) || !fs.existsSync(file)) { response.writeHead(404); response.end(); return; }
     const target = fs.statSync(file).isDirectory() ? path.join(file, 'index.html') : file;
     const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml' };
     response.setHeader('Content-Type', types[path.extname(target)] || 'application/octet-stream');
@@ -103,6 +103,17 @@ async function main() {
   await page.waitForFunction(() => window.scrollY === 0);
   assert.equal(await page.locator('#quizbank-back-to-top').isVisible(),false);
   regressions.push('TypeScript back-to-top mounts once, toggles with scrolling and respects reduced motion');
+  await page.locator('#btn-report').click();
+  const reportHome = page.locator('#mask .qb-report-home');
+  await reportHome.waitFor({ state: 'visible' });
+  assert.equal(await reportHome.count(), 1);
+  assert.equal(await reportHome.getAttribute('href'), '/');
+  for (const language of ['zh', 'en', 'ja']) {
+    await page.evaluate(language => window.__I18N__.setLang(language), language);
+    assert.equal(await reportHome.textContent(), ({ zh: '回到主页', en: 'Back to home', ja: 'ホームに戻る' })[language]);
+  }
+  await page.locator('#rp-close').click();
+  regressions.push('submission report offers one home link in all three languages');
   const originalStem = await page.locator('#q114 .stem').textContent();
   for (const language of ['ja', 'zh', 'en']) {
     await page.evaluate(language => window.__I18N__.setLang(language), language);
@@ -255,6 +266,24 @@ async function main() {
     }
   }
   regressions.push('AI spinner animates only during requests, respects reduced motion, and stops on success/error/retry');
+  for (const paper of ['aws-clf/part01.html', 'aws-saa/real/part01.html', 'aws-aif/practice/part01.html', 'toeic-listening/TOEIC_Listening_Test_06.html', 'toeic-reading/TOEIC_Reading_Test_01.html', 'dele-a1/a1-2009-0516.html', 'dele-a2/a2-modelo0-2020.html', 'random.html?pool=toeic-listening&size=50&seed=12345678']) {
+    await page.goto(base + '/' + paper, {waitUntil:'domcontentloaded'});
+    await page.locator('#btn-report').click();
+    const link = page.locator('#mask .qb-report-home');
+    await link.waitFor({state:'visible'});
+    assert.equal(await link.count(),1);
+    for (const width of [320,768,1024,1440]) {
+      await page.setViewportSize({width,height:900});
+      const box = await link.boundingBox();
+      assert.ok(box.x >= 0 && box.x + box.width <= width);
+    }
+    await link.focus();
+    assert.equal(await link.evaluate(node => node === document.activeElement),true);
+    if (paper.startsWith('dele-a2') && process.argv[2]) await page.locator('#mask .report').screenshot({path:path.join(path.dirname(path.resolve(process.argv[2])), 'report-home.png')});
+    await link.press('Enter');
+    await page.waitForURL(base + '/', {waitUntil:'domcontentloaded'});
+  }
+  regressions.push('all subject reports and a generated random paper navigate home with keyboard activation and responsive layout');
   await browser.close();
   await new Promise(resolve => server.close(resolve));
   const report = { pageCount: scanPages.length, regressions, errors: [...new Set(errors)], missing: [...missing.values()] };

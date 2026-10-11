@@ -3,6 +3,32 @@
     "use strict";
     if (!document.body)
         return;
+    function updateReportHomeLanguage() {
+        var currentLang = document.documentElement.getAttribute("data-lang") || "zh";
+        document.querySelectorAll(".qb-report-home").forEach(function (link) {
+            link.textContent = currentLang === "ja" ? "ホームに戻る" : currentLang === "en" ? "Back to home" : "回到主页";
+        });
+    }
+    function mountReportHome() {
+        document.querySelectorAll(".report .row").forEach(function (row) {
+            if (row.querySelector(".qb-report-home"))
+                return;
+            var link = document.createElement("a");
+            link.href = "/";
+            link.className = "qb-report-home i18n-noloc";
+            row.appendChild(link);
+        });
+        updateReportHomeLanguage();
+    }
+    mountReportHome();
+    // Random papers replace their document and some render their report later.
+    new MutationObserver(function (mutations) {
+        if (mutations.some(function (mutation) {
+            return Array.from(mutation.addedNodes).some(function (node) { return node instanceof HTMLElement; });
+        }))
+            mountReportHome();
+    }).observe(document.body, { childList: true, subtree: true });
+    document.addEventListener("quizbank:language-changed", updateReportHomeLanguage);
     if (/\/aws-aif\/bank\/part\d+/.test(location.pathname)) {
         var hotspotScript = document.createElement("script");
         hotspotScript.type = "module";
