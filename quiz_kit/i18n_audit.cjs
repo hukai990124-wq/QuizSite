@@ -93,6 +93,16 @@ async function main() {
   const regressions = [];
   await page.goto(base + '/aws-aif/bank/part03.html', { waitUntil: 'domcontentloaded' });
   await page.waitForSelector('#q114 .hotspot-form');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.waitForSelector('#quizbank-back-to-top', {state:'attached'});
+  assert.equal(await page.locator('#quizbank-back-to-top').count(),1);
+  assert.equal(await page.locator('#quizbank-back-to-top').isVisible(),false);
+  await page.evaluate(() => window.scrollTo(0,600));
+  await page.waitForFunction(() => !document.getElementById('quizbank-back-to-top').hidden);
+  await page.locator('#quizbank-back-to-top').click();
+  await page.waitForFunction(() => window.scrollY === 0);
+  assert.equal(await page.locator('#quizbank-back-to-top').isVisible(),false);
+  regressions.push('TypeScript back-to-top mounts once, toggles with scrolling and respects reduced motion');
   const originalStem = await page.locator('#q114 .stem').textContent();
   for (const language of ['ja', 'zh', 'en']) {
     await page.evaluate(language => window.__I18N__.setLang(language), language);
