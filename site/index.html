@@ -398,7 +398,7 @@ window.addEventListener("storage",function(event){
 <!--pc:js-->
 <script src="assets/presence.js"></script>
 <!--/pc:js-->
-<script src="/assets/account.js" id="quizbank-account-js" defer></script><!--i18n:js-->
+<script src="/assets/account.js" id="quizbank-account-js" defer></script><script type="module" src="/assets/back-to-top.mjs" id="quizbank-back-to-top-js"></script><!--i18n:js-->
 <script src="/assets/i18n.js"></script>
 <script id="i18n-boot">
 (function(){var REL="";
@@ -409,5 +409,5 @@ s.onload=go;
 s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
 document.head.appendChild(s);})();
 </script>
-<!--/i18n:js--><script type="module" src="/assets/back-to-top.mjs" id="quizbank-back-to-top-js"></script></body>
+<!--/i18n:js--></body>
 </html>

@@ -73,7 +73,44 @@
     [/(\d+)\s*分\s*(\d+)\s*秒/g, "$1 min $2 sec", "$1分$2秒"],
     [/正确答案\s*[:：]\s*/g, "Correct: ", "正解："],
     /* 听力播放器：每题一个「第 N 题录音」标签 */
-    [/^\s*第\s*(\d+)\s*题录音\s*$/, "Audio · Q$1", "音声 · 第$1問"]
+    [/^\s*第\s*(\d+)\s*题录音\s*$/, "Audio · Q$1", "音声 · 第$1問"],
+
+    /* ---- 基本情報技術者（FE）题库：卷别 / 题号 / 进度等由 fe.js 拼出的动态文案。
+       规则按顺序链式生效，次序不能乱：
+       ① 含「科目 A 官方样题」字样的整句要最先处理；
+       ② 「卷别名称」要排在含它的「第 N 套 · X · N 题」整句之前；
+       ③ 具体整行规则最后兜底。 ---- */
+    [/^\s*这是 IPA 于\s*(\d+)\s*年发布的新制科目\s*([AB])\s*官方样题（\s*(\d+)\s*题），并非\s*(\d+)\s*年旧制考试的实考卷。题目为日文原文，按原题号作答。\s*$/,
+      "This is the official sample for the new-format Subject $2 published by IPA in $1 ($3 questions); it is not an actual paper from the old-format exam of $4. Questions are in the original Japanese; answer using the original question numbers.",
+      "これはIPAが$1年に公表した新制度の科目$2公式サンプル（$3問）です。旧制度$4年の本試験のものではありません。問題は日本語原文で、元の問番号で解答します。"],
+    [/科目\s*([AB])\s*免除修了试验/g, "Subject $1 exemption examination", "科目$1免除修了試験"],
+    [/科目\s*([AB])\s*官方样题/g, "Subject $1 official sample", "科目$1公式サンプル"],
+    [/IPA\s*官方样题/g, "IPA official sample", "IPA公式サンプル"],
+    [/官方公开题组卷/g, "assembled from official public questions", "公式公開問題の組卷"],
+    [/(\d+)\s*年官方样题\s*科目\s*([AB])/g, "$1 official sample · Subject $2", "$1年公式サンプル・科目$2"],
+    [/^\s*第\s*(\d+)\s*题，未作答\s*$/, "Q$1 · unanswered", "第$1問・未回答"],
+    [/^\s*第\s*(\d+)\s*题，正确\s*$/, "Q$1 · correct", "第$1問・正解"],
+    [/^\s*第\s*(\d+)\s*题，错误\s*$/, "Q$1 · wrong", "第$1問・不正解"],
+    [/^\s*第\s*(\d+)\s*套\s*·\s*(.+?)\s*·\s*(\d+)\s*题\s*$/, "Set $1 · $2 · $3 questions", "第$1セット・$2・$3問"],
+    [/^\s*(\d+)\s*年官方样题\s*·\s*(\d+)\s*题\s*$/, "$1 official sample · $2 questions", "$1年公式サンプル・$2問"],
+    [/^\s*(\d+)\s*年度公开题\s*·\s*(\d+)\s*题\s*$/, "$1 public questions · $2 questions", "$1年度公開問題・$2問"],
+    [/^\s*(\d+)\s*套完整结构\s*·\s*每套\s*(\d+)\s*题\s*$/, "$1 complete sets · $2 questions each", "$1セット完備・各$2問"],
+    [/^\s*(\d+)\s*\/\s*(\d+)\s*题已作答\s*·\s*(\d+)\s*题正确\s*$/,
+      "$1 / $2 answered · $3 correct", "$1 / $2 問解答済み・$3問正解"],
+    [/^\s*第\s*(\d+)\s*题选项\s*$/, "Options for question $1", "第$1問の選択肢"],
+    [/^\s*第\s*(\d+)\s*题\s*·\s*(.+?)\s*$/, "Q$1 · $2", "第$1問・$2"],
+    [/^\s*在新标签放大第\s*(\d+)\s*页题面\s*$/, "Open page $1 of the source paper in a new tab", "原題PDFの$1ページを新しいタブで開く"],
+    [/^\s*点击题页可放大\s*·\s*IPA 原题第\s*(\d+)\s*题，第\s*(\d+)\s*页\s*·\s*©\s*IPA\s*$/,
+      "Click the question page to enlarge · IPA question $1, page $2 · © IPA",
+      "問題ページをクリックで拡大・IPA 第$1問、$2ページ・© IPA"],
+    [/^\s*科目\s*([AB])\s*原题第\s*(\d+)\s*题，官方 PDF 第\s*(\d+)\s*页\s*$/,
+      "Subject $1 question $2, official PDF page $3", "科目$1 第$2問・公式PDF $3ページ"],
+    [/请阅读原题页中的「問\s*(\d+)」，再选择答案。/g,
+      "Read question $1 on the source page, then choose your answer.",
+      "原題ページの「問$1」を読んでから解答を選んでください。"],
+    [/伪代码记法见官方 PDF 第\s*(\d+)\s*[–\-]\s*(\d+)\s*页/g,
+      "See pages $1–$2 of the official PDF for pseudocode notation", "擬似言語の表記は公式PDFの$1–$2ページ参照"],
+    [/^\s*出典：/, "Source: ", "出典："]
   ];
   function dyn(text, lang) {
     var out = text, i, r;
@@ -186,7 +223,11 @@
         var v = el.getAttribute(ATTRS[j]);
         if (!v) continue;
         var e = hit(v);
-        if (e && e[lang === "en" ? 0 : 1]) setAttr(el, ATTRS[j], e[lang === "en" ? 0 : 1]);
+        if (e && e[lang === "en" ? 0 : 1]) { setAttr(el, ATTRS[j], e[lang === "en" ? 0 : 1]); continue; }
+        /* 属性里也有带数字的动态文案（如「第 3 题，未作答」这样的 aria-label），
+           精确匹配不到时回落到动态规则。 */
+        var d = dyn(v, lang);
+        if (d !== null) setAttr(el, ATTRS[j], d);
       }
     }
   }

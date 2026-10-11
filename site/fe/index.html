@@ -1,7 +1,53 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>基本情報技術者 · 官方题库 | 我的题库</title><link rel="stylesheet" href="fe.css"><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
-</head><body>
+<!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--></head><body>
 <header class="hero"><div class="wrap"><a class="back" href="../index.html">← 返回题库总览</a><h1>基本情報技術者試験</h1><p>科目 A 60 题 / 科目 B 20 题 · 三套完整练习结构 · 日文原题</p></div></header>
 <main class="wrap main"><div class="notice"><p>先选择<strong>科目 A / 科目 B</strong>，再选择第 1–3 套。第 1 套是 IPA 2022 年发布的官方新制样题。第 2、3 套的 A 卷分别使用 IPA 2025 年 1 月与 6 月的完整<strong>科目 A 免除修了试验</strong>；B 卷由 IPA 不同年份公开题与样题各组成 20 题，<strong>不是某次 CBT 考试的完整原卷</strong>。第 3 套 B 卷有 10 题也出现在第 1 套。旧的 2023–2026 年分年度公开题仍可在科目页找到。</p><p>题面保留官方图表、表格和伪代码。答案来自 IPA 官方解答例；每道题提供原始来源与 PDF。© 独立行政法人情報処理推進機構（IPA）。</p></div>
 <div class="subject-grid"><a class="subject-card" href="a.html?year=2022"><span class="eyebrow">SUBJECT A · 科目 A</span><h2>科目 A 题库 →</h2><p>三套 60 题：官方样题 1 套、完整科目 A 免除修了试验 2 套；另保留分年度公开题。</p><strong>3 套完整结构 · 每套 60 题</strong></a><a class="subject-card" href="b.html?year=2022"><span class="eyebrow">SUBJECT B · 科目 B</span><h2>科目 B 题库 →</h2><p>三套 20 题：官方样题 1 套、官方公开题组卷 2 套；另保留分年度公开题。</p><strong>3 套完整结构 · 每套 20 题</strong></a></div></main>
-<footer class="foot"><div class="wrap">来源：<a href="https://www.ipa.go.jp/shiken/syllabus/henkou/2022/20221226.html" target="_blank" rel="noopener noreferrer">IPA 2022 官方样题</a> · <a href="https://www.ipa.go.jp/shiken/about/menjo-fe.html" target="_blank" rel="noopener noreferrer">IPA 科目 A 免除修了试验</a> · <a href="https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/index.html" target="_blank" rel="noopener noreferrer">IPA 2023–2026 公开题</a>。用于个人学习练习，本站与 IPA 无隶属关系。</div></footer><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
-</body></html>
+<footer class="foot"><div class="wrap">来源：<a href="https://www.ipa.go.jp/shiken/syllabus/henkou/2022/20221226.html" target="_blank" rel="noopener noreferrer">IPA 2022 官方样题</a> · <a href="https://www.ipa.go.jp/shiken/about/menjo-fe.html" target="_blank" rel="noopener noreferrer">IPA 科目 A 免除修了试验</a> · <a href="https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/index.html" target="_blank" rel="noopener noreferrer">IPA 2023–2026 公开题</a>。用于个人学习练习，本站与 IPA 无隶属关系。</div><!--i18n:sw-->
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+<!--/i18n:sw--></footer><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+<!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--></body></html>
