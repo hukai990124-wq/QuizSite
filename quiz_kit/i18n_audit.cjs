@@ -173,6 +173,22 @@ async function main() {
       assert.equal(await page.locator(`#q${number} select`).count(), data.rows.length);
       assert.equal(await page.locator(`#q${number} select`).first().locator('option').count(), data.options.length + 1);
       if (!data.answer) assert.equal(await page.locator(`#q${number} .js-submit`).isDisabled(), true);
+      if (data.review) {
+        const q = page.locator(`#q${number}`);
+        assert.equal(await q.locator('.hotspot-reference').isVisible(), false, 'reasoning stays folded before answering');
+        await q.locator('details.ans summary').click();
+        for (const language of ['en','ja','zh']) {
+          await page.evaluate(language => window.__I18N__.setLang(language), language);
+          assert.equal(await q.locator('.hotspot-reference p').textContent(), data.review[language]);
+        }
+        assert.deepEqual(await q.locator('.hotspot-reference a').evaluateAll(links => links.map(link => link.href)), data.review.sources);
+        if (data.answer) {
+          const selects = q.locator('select');
+          for (let index = 0; index < data.answer.length; index++) await selects.nth(index).selectOption(String.fromCharCode(65 + data.answer[index]));
+          await q.locator('.js-submit').click();
+          assert.equal(await q.evaluate(node => node.classList.contains('done') && !node.classList.contains('wrong')), true);
+        }
+      }
     }
   }
   regressions.push('all 32 matching questions have selectable options; unverified answers cannot be graded');

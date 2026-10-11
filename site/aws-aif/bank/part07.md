@@ -206,7 +206,20 @@ Batch transform is the most cost-effective inference method for analyzing large 
 - **C.** Develop and train the model / 开发并训练模型
 - **D.** Process the data / 处理数据
 <!--/hotspot:options-->
-**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+参考顺序：A → D → C → B。先明确业务目标，再准备和处理数据，随后开发、训练并验证模型，最后部署。这是题目给定四个阶段的首次实施顺序；实际机器学习生命周期可以迭代，部署后还需监控。根据 AWS 生命周期资料推导，不是原题答案。
+
+Reference: A → D → C → B. Establish the business objective, process data, develop and train the model, then deploy it after evaluation. This is the initial order of the four listed steps; real ML lifecycles are iterative and also include monitoring. Inferred from AWS lifecycle guidance, not the original key.
+
+参考順序：A → D → C → B。業務目標を定義し、データを処理し、モデルを開発・学習・評価してからデプロイします。提示された4段階の初回実施順序であり、実際のMLライフサイクルは反復的で監視も必要です。AWSの資料に基づく推定で、元の解答ではありません。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://docs.aws.amazon.com/wellarchitected/latest/machine-learning-lens/machine-learning-lifecycle.html)
+<!--/hotspot:review-->
+**参考答案 / Editorial answer: 1: A (Define the business objective / 定义业务目标) → 2: D (Process the data / 处理数据) → 3: C (Develop and train the model / 开发并训练模型) → 4: B (Deploy the model / 部署模型)**
 
 
 ---
@@ -303,7 +316,20 @@ Supervised learning is used when the dataset includes both input features (like 
 - **B.** Upload text and image files to Amazon S3 / 将文本和图片上传至S3
 - **C.** Process files with Amazon Nova multimodal models / 使用Nova多模态模型处理文件
 <!--/hotspot:options-->
-**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+参考顺序：B → C → A。先将指南的文本和图片上传 S3，供 Nova 多模态理解模型读取处理，再将提取结果写入产品数据库。数据库写入由应用完成，不是 Nova 自动完成；实际还应校验提取结果。AWS 文档支持多模态及 S3 输入，三步顺序是根据数据依赖推导，非原题答案。
+
+Reference: B → C → A. Upload guide text and images to S3, process them with a Nova multimodal understanding model, then have the application write extracted results to the product database. Nova does not automatically perform the database write; validate results in practice. AWS documents multimodal S3 inputs; the ordering is inferred from data dependencies, not an original key.
+
+参考順序：B → C → A。ガイドのテキストと画像をS3へアップロードし、Novaのマルチモーダル理解モデルで処理した後、アプリが抽出結果を商品DBへ書き込みます。NovaがDBへ自動登録するわけではなく、実運用では結果の検証も必要です。AWS資料はS3入力を裏付けますが、順序はデータ依存関係からの推定であり元の解答ではありません。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://docs.aws.amazon.com/nova/latest/userguide/modalities.html)
+<!--/hotspot:review-->
+**参考答案 / Editorial answer: 1: B (Upload text and image files to Amazon S3 / 将文本和图片上传至S3) → 2: C (Process files with Amazon Nova multimodal models / 使用Nova多模态模型处理文件) → 3: A (Insert data into the product database / 将数据写入产品数据库)**
 
 
 ---

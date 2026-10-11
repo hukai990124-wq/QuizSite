@@ -61,6 +61,32 @@ function mount(q, data) {
   form.after(actions, warning, verdict);
   const details = q.querySelector('details.ans');
   details.open = q.classList.contains('done');
+  if (data.review) {
+    const notice = document.createElement('p'); notice.className = 'hotspot-reference-notice i18n-noloc';
+    actions.before(notice);
+    const panel = document.createElement('section'); panel.className = 'hotspot-reference i18n-noloc';
+    const heading = document.createElement('strong');
+    const explanation = document.createElement('p');
+    const sources = document.createElement('ul');
+    data.review.sources.forEach(url => {
+      const item = document.createElement('li'), link = document.createElement('a');
+      link.href = url; link.textContent = new URL(url).pathname.split('/').filter(Boolean).pop().replace(/\.html$/, '').replace(/-/g, ' ');
+      link.target = '_blank'; link.rel = 'noopener noreferrer'; item.append(link); sources.append(item);
+    });
+    panel.append(heading, explanation, sources); details.append(panel);
+    function localizeReview() {
+      const language = document.documentElement.dataset.lang;
+      const lang = ['en','ja'].includes(language) ? language : 'zh';
+      const copy = {
+        zh: ['经资料核对的参考答案（非原题答案）','参考判断存在歧义；本题暂不判分。','参考判断与 AWS 资料'],
+        en: ['Source-checked editorial answer (not the original key)','Ambiguous editorial assessment; this question is not graded.','Editorial assessment and AWS sources'],
+        ja: ['資料確認済みの参考解答（元の解答ではありません）','参考判断に曖昧さがあるため、採点しません。','参考判断とAWS資料']
+      }[lang];
+      notice.textContent = known ? copy[0] : copy[1];
+      heading.textContent = copy[2]; explanation.textContent = data.review[lang];
+    }
+    localizeReview(); document.addEventListener('quizbank:language-changed', localizeReview);
+  }
   if (known) {
     const answer = details.querySelector('.correct');
     answer.replaceChildren();

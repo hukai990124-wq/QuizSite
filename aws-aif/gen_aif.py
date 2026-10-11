@@ -236,7 +236,12 @@ def render_part_md(key, part_idx, qs_all, zh):
             L += ["", "**选项 / Options**"]
             L += [f"- **{chr(65 + index)}.** {option}" for index, option in enumerate(hotspot["options"])]
             answer = " → ".join(f"{index + 1}: {chr(65 + choice)} ({hotspot['options'][choice]})" for index, choice in enumerate(hotspot["answer"])) if hotspot["answer"] is not None else "待核对 / Not yet verified — 暂不判分 / Not graded"
-            L += ["", f"**正确答案 / Answer: {answer}**", ""]
+            label = "参考答案 / Editorial answer" if hotspot.get("review") and hotspot["answer"] is not None else "正确答案 / Answer"
+            L += ["", f"**{label}: {answer}**", ""]
+            if hotspot.get("review"):
+                L += ["**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**", ""]
+                L += [hotspot["review"][lang] + "\n" for lang in ("zh", "en", "ja")]
+                L += [f"- [AWS reference {index + 1}]({url})" for index, url in enumerate(hotspot["review"]["sources"])]
         else:
             L += ["", f"**正确答案 / Answer: `{q['answer']}`**", ""]
         if q.get("explanation"):

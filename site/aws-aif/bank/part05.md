@@ -665,7 +665,21 @@ Amazon Bedrock Knowledge Bases let you index and retrieve your company's documen
 - **B.** SageMaker Model Registry
 - **C.** SageMaker Serverless Inference
 <!--/hotspot:options-->
-**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+参考顺序：B → C。Model Registry 管理模型及版本；Serverless Inference 部署推理端点并接收请求返回预测。Clarify 主要用于偏差分析与可解释性，不是本题的版本管理或预测服务。Serverless Inference 是给定选项中的匹配项，并非所有预测任务的唯一方案。不是原题答案。
+
+Reference: B → C. Model Registry tracks model versions. Serverless Inference hosts an endpoint that returns predictions. Clarify addresses bias and explainability. Serverless Inference is the matching choice among these options, not the only way to perform inference. This is an editorial reference, not the original answer key.
+
+参考順序：B → C。Model Registryはモデルのバージョンを管理し、Serverless Inferenceはエンドポイントで予測を返します。Clarifyはバイアス分析と説明可能性のための機能です。Serverless Inferenceはこの選択肢内での答えであり、推論の唯一の方法ではありません。元の解答ではなく参考判断です。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry.html)
+- [AWS reference 2](https://docs.aws.amazon.com/sagemaker/latest/dg/serverless-endpoints.html)
+<!--/hotspot:review-->
+**参考答案 / Editorial answer: 1: B (SageMaker Model Registry) → 2: C (SageMaker Serverless Inference)**
 
 
 ---
@@ -1039,6 +1053,19 @@ Fine-tuning is the process of training a pre-existing foundation model on a smal
 - **C.** Robustness / 鲁棒性
 - **D.** Safety / 安全性
 <!--/hotspot:options-->
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+概念参考：隐私与安全 → 公平性 → 鲁棒性。加密和网络隔离保护数据；评估不同人群的影响对应 Fairness；测试意外输入对应 Robustness。第一、第三项分别是 B、C，但第二项 Fairness 缺失，无法完成现有选项下的匹配。原解析的概念合理，不能据此声称已恢复原选项。本题暂不判分。
+
+Conceptual reference: Privacy and security → Fairness → Robustness. Encryption and network isolation protect data; population-group impact concerns fairness; unexpected-input testing concerns robustness. Items 1 and 3 map to B and C, but Fairness is missing. The source explanation is conceptually sound, yet does not prove the original option list. This question remains ungraded.
+
+概念上の参考：プライバシーとセキュリティ → 公平性 → 堅牢性。暗号化とネットワーク分離はデータ保護、集団別の影響評価はFairness、予期しない入力の試験はRobustnessです。第1・第3項目はB・Cですが第2項目の選択肢が欠落しています。元の説明は概念上妥当でも、元の選択肢を復元したとは言えないため採点しません。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html)
+<!--/hotspot:review-->
 **正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
 
 Encrypt the application data, and isolate the application on a private network -> Privacy and security Evaluate how different population groups will be impacted -> Fairness Test the application with unexpected data to ensure the application will work in unique situations -> Robustness Protecting data and networks is part of privacy and security. Assessing impacts on different groups ensures fairness. Testing with unexpected data checks the application's robustness.

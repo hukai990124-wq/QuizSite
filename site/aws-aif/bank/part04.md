@@ -808,7 +808,20 @@ Federated learning lets you train a global model across multiple data holders (f
 - **A.** Continued pre-training / 持续预训练
 - **B.** Fine-tuning / 微调
 <!--/hotspot:options-->
-**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+参考顺序：B → A → A。微调使用任务相关的标注示例，提升特定任务表现；持续预训练使用未标注的领域文档补充知识，因此后两项都选持续预训练。这是根据题意和 AWS 资料推导的参考答案，不是原题答案。
+
+Reference: B → A → A. Fine-tuning learns a specific task from labeled examples. Continued pre-training learns domain knowledge from unlabeled documents, so both remaining actions use it. This is an editorial inference from the question and AWS guidance, not the original answer key.
+
+参考順序：B → A → A。ファインチューニングはラベル付きの事例で特定タスクを改善します。継続事前学習はラベルなしのドメイン文書から知識を学ぶため、後の2項目は継続事前学習です。設問とAWS資料に基づく推定であり、元の解答ではありません。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://aws.amazon.com/blogs/aws/customize-models-in-amazon-bedrock-with-your-own-data-using-fine-tuning-and-continued-pre-training/)
+<!--/hotspot:review-->
+**参考答案 / Editorial answer: 1: B (Fine-tuning / 微调) → 2: A (Continued pre-training / 持续预训练) → 3: A (Continued pre-training / 持续预训练)**
 
 
 ---
@@ -878,6 +891,20 @@ Binary classification models are designed to distinguish between two classes - f
 - **C.** Safety / 安全性
 - **D.** Transparency / 透明性
 <!--/hotspot:options-->
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+第一项对应 B（隐私与安全），第三项对应 C（安全性）。第二项“提供可解释的决策”严格来说对应 Explainability，但现有选项缺少它。如果原题将透明性作宽泛表述，则可能预期 D，形成 B → D → C；这是有歧义的推测，不能当作确定答案。因此保留原选项，本题暂不判分。
+
+Item 1 maps to B (Privacy and security), and item 3 to C (Safety). Item 2 explicitly concerns Explainability, which is absent from the options. If Transparency is intended broadly, B → D → C is plausible, but not certain. The original options are preserved and this ambiguous question remains ungraded.
+
+第1項目はB（プライバシーとセキュリティ）、第3項目はC（安全性）です。第2項目は厳密にはExplainabilityですが選択肢にありません。透明性を広義に使っているならB → D → Cが想定される可能性はありますが、確定できません。元の選択肢を維持し、採点は行いません。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html)
+- [AWS reference 2](https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/raisp02-bp07.html)
+<!--/hotspot:review-->
 **正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
 
 
@@ -949,7 +976,22 @@ Regression models are designed to predict continuous numerical values (for examp
 - **D.** SageMaker JumpStart
 - **E.** SageMaker Model Monitor
 <!--/hotspot:options-->
-**正确答案 / Answer: 待核对 / Not yet verified — 暂不判分 / Not graded**
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+参考顺序：A → D → C。Canvas 中的 Data Wrangler 支持可视化、低代码或无代码数据准备；JumpStart 提供包含欺诈检测的预构建方案；Ground Truth 支持人工标注训练数据。按原题的服务功能判定；当前 JumpStart 旧方案仅适用于 Studio Classic，Ground Truth 已不向新客户开放。不是原题答案。
+
+Reference: A → D → C. Canvas provides visual data preparation through Data Wrangler; JumpStart includes prebuilt fraud-detection solutions; Ground Truth supports human labeling. This follows the service roles in the question, not an original key. Current caveats: legacy JumpStart solutions require Studio Classic; Ground Truth is closed to new customers.
+
+参考順序：A → D → C。CanvasのData Wranglerは視覚的なデータ準備、JumpStartは不正検知などの構築済みソリューション、Ground Truthは人手によるラベル付けに対応します。元の解答ではなく設問上の役割に基づく判断です。現在、旧JumpStartソリューションはStudio Classic限定で、Ground Truthは新規顧客を受け付けていません。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-data-prep.html)
+- [AWS reference 2](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-solutions.html)
+- [AWS reference 3](https://docs.aws.amazon.com/sagemaker/latest/dg/sms.html)
+<!--/hotspot:review-->
+**参考答案 / Editorial answer: 1: A (SageMaker Canvas) → 2: D (SageMaker JumpStart) → 3: C (SageMaker Ground Truth)**
 
 
 ---
