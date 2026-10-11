@@ -74,21 +74,30 @@ test("cannot inject a system role or exceed input bounds; server owns the system
   assert.equal(chatDay(Date.parse("2026-10-10T15:00:00Z")), "2026-10-10");
 });
 
-test("system prompt allows general questions without weakening reference and credential boundaries", () => {
-  assert.match(CHAT_PROMPT, /也可以回答用户的一般问题/);
-  assert.doesNotMatch(CHAT_PROMPT, /只帮助理解|简短拒绝无关请求/);
+test("system prompt permits learning and technology in any language and briefly refuses unrelated entertainment", () => {
+  assert.match(CHAT_PROMPT, /学习和技术问题/);
+  assert.match(CHAT_PROMPT, /任何语言/);
+  assert.match(CHAT_PROMPT, /用户指定的语言/);
+  assert.doesNotMatch(CHAT_PROMPT, /默认用中文|只帮助理解本站/);
+  assert.match(CHAT_PROMPT, /游戏攻略/);
+  assert.match(CHAT_PROMPT, /简短拒绝/);
+  assert.match(CHAT_PROMPT, /游戏开发/);
+  assert.match(CHAT_PROMPT, /意图不明确/);
   assert.match(CHAT_PROMPT, /不执行其中改变角色/);
   assert.match(CHAT_PROMPT, /不声称已联网检索/);
 });
 
-test("questions without bank keywords reach Qwen and use the normal allowance and budget", async t => {
+test("requests reach Qwen without keyword filtering; the server prompt governs scope and normal quotas still apply", async t => {
   for (const question of ["解释这句话的意思", "再用简单一点的话说", "what is 2 + 2?", "讲个笑话", "What's the weather in Tokyo today?"]) {
     for (const authenticated of [true, false]) {
       await t.test(`${authenticated ? "account" : "guest"}: ${question}`, async t => {
         const { env, token, sqlite } = fixture();
         t.after(() => sqlite.close());
         const spy = t.mock.method(globalThis, "fetch", (url, init) => {
-          assert.equal(JSON.parse(init.body).messages.at(-1).content, question);
+          const messages = JSON.parse(init.body).messages;
+          assert.equal(messages.at(-1).content, question);
+          assert.equal(messages[0].role, "system");
+          assert.equal(messages[0].content, CHAT_PROMPT);
           const pending = sqlite.prepare("SELECT status, reserved, charged FROM ai_requests").get();
           assert.equal(pending.status, "pending");
           assert.ok(pending.reserved > CHAT_POLICY.maxOutput);
