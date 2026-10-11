@@ -25,7 +25,7 @@ trigger.textContent = "AI 答疑";
 trigger.setAttribute("aria-haspopup", "dialog");
 document.body.appendChild(trigger);
 const dialog = document.createElement("dialog");
-dialog.className = "qb-chat-dialog i18n-noloc";
+dialog.className = "qb-chat-dialog";
 dialog.setAttribute("aria-labelledby", "qb-chat-title");
 dialog.innerHTML = `<header class="qb-chat-header"><h2 id="qb-chat-title">题库学习助手</h2><button type="button" id="qb-chat-close" aria-label="关闭聊天窗口">×</button></header>
 <div class="qb-chat-body">
@@ -58,6 +58,8 @@ function appendMessage(role: ChatHistoryEntry["role"], text: string): void {
   const label = document.createElement("strong");
   label.textContent = role === "user" ? "你" : "学习助手";
   const content = document.createElement("div");
+  // 只保护提问与回答的正文，界面外壳交由 i18n 运行时翻译。
+  content.className = "i18n-noloc";
   content.textContent = text; // Never execute model-generated HTML or links.
   message.append(label, content);
   log.appendChild(message);
@@ -151,7 +153,7 @@ function indexQuestions(): void {
     select.appendChild(option);
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "qb-question-chat i18n-noloc";
+    button.className = "qb-question-chat";
     button.textContent = "AI 讲解";
     button.addEventListener("click", () => open(question, button));
     (question.querySelector<HTMLElement>(".qact") || question).appendChild(button);
