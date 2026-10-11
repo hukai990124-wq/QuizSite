@@ -54,7 +54,15 @@ def main():
     else:
         print("「题库总览」已存在，跳过")
 
-    # 3) i18n 注入（幂等，会遍历整个 site/）
+    # 3) 站点级组件注入（幂等，会遍历整个 site/）
+    #    theme_inject：顶部站点导航 / 返回顶部；AI 助手按钮由它加载的 account.js 引入。
+    #    缺了它，页面会不符合 site/assets/back-to-top.test.mjs 的全站断言。
+    r = subprocess.run([PY, os.path.join(ROOT, "quiz_kit", "theme_inject.py")])
+    if r.returncode != 0:
+        print("！主题注入失败")
+        return r.returncode
+
+    #    i18n：三语切换
     r = subprocess.run([PY, os.path.join(ROOT, "quiz_kit", "i18n_inject.py")])
     if r.returncode != 0:
         print("！i18n 注入失败")
