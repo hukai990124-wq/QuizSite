@@ -27,6 +27,8 @@ def render(data):
     template = (ROOT / "site/aws-aif/bank/part01.html").read_text(encoding="utf-8")
     css = re.search(r"<style>([\s\S]*?)</style>", template).group(1)
     css += ".vocab-pick{display:block;width:100%;text-align:left;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;padding:0}.vocab-pick span{display:block;margin-bottom:4px}.vocab-pick:focus-visible{outline:3px solid #0b6b3a;outline-offset:4px}.vocab-pick:disabled{color:inherit;cursor:default}.vocab-pick [lang=ja]{font-size:14px;color:#334155}.verdict:empty{display:none}"
+    # English originals stay visible; only the active UI language's translation is shown.
+    css += '.q [lang="zh"],.q [lang="ja"]{display:none}html[data-lang="zh"] .q [lang="zh"],html[data-lang="ja"] .q [lang="ja"]{display:block}'
     out = ['<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
            f'<title>AWS AIF · 专业术语单词库</title><style>{css}</style></head><body><div class="wrap">',
            '<p class="sub"><a href="index.html">← 返回 AIF-C01 目录</a></p>',

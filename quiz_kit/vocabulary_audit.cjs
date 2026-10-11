@@ -69,6 +69,11 @@ async function main() {
       await page.locator(`[data-set-lang="${language}"]`).click();
       assert.equal(await page.locator('h1').textContent(), heading);
       assert.equal(await first.locator('.opt.ok [lang="zh"]').textContent(), data[0].meaning.zh);
+      for (const region of ['.stem', '.opt.ok', '.expl']) {
+        assert.equal(await first.locator(`${region} [lang="en"]`).isVisible(), true, 'English original stays visible');
+        assert.equal(await first.locator(`${region} [lang="zh"]`).isVisible(), language === 'zh');
+        assert.equal(await first.locator(`${region} [lang="ja"]`).isVisible(), language === 'ja');
+      }
     }
     for (const width of [320,768,1024,1440]) {
       await page.setViewportSize({width,height:900});

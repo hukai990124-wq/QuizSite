@@ -2,7 +2,7 @@
 
 Add a vocabulary entry to the AWS-AIF directory: 50 original terminology questions, each with exactly two options (A/B), one correct answer, and Chinese, English and Japanese text. Terms cover the five AIF-C01 domains and AWS service distinctions. This is a learning supplement, not an official test or an exhaustive exam glossary.
 
-Use the existing QuizBank theme, question engine, answer card, wrong-answer filtering, redo, submission report, account controls, AI explanation button and back-to-top component. Native option buttons support keyboard input; selecting with Enter must not prematurely grade the question. Explanations compare the correct term with the distractor.
+Use the existing QuizBank theme, question engine, answer card, wrong-answer filtering, redo, submission report, account controls, AI explanation button and back-to-top component. Native option buttons support keyboard input; selecting with Enter must not prematurely grade the question. Explanations compare the correct term with the distractor. English originals always remain visible in stems, options and explanations. Chinese UI adds only Chinese translations, Japanese UI adds only Japanese translations, and English UI shows no additional translation. Follow the document's data-lang so changes take effect immediately without altering stored answers.
 
 Data: `aws-aif/vocabulary.json`. Generator: `python aws-aif/gen_vocabulary.py`; outputs only `site/aws-aif/vocabulary.html`. UI dictionary is generated separately through `quiz_kit/i18n_inject.py`. Build the TypeScript accessibility adapter through `pnpm run build`.
 
