@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { buildChatMessages, CHAT_POLICY, CHAT_PROMPT, chatDay, collectAnswer, handleChatRequest, isStudyRelated, visitorId } from "./chat.mjs";
+import { buildChatMessages, CHAT_POLICY, CHAT_PROMPT, chatDay, collectAnswer, handleChatRequest, visitorId } from "./chat.mjs";
 import { parseChatAnswer } from "../site/assets/chat-protocol.mjs";
 
 function fixture() {
@@ -37,7 +37,7 @@ test("guest chat status works without an account, and cross-origin requests are 
   const spy = t.mock.method(globalThis, "fetch", () => streamReply());
   const guest = await handleChatRequest(statusRequest(null), env);
   assert.equal(guest.status, 200);
-  assert.deepEqual(await guest.json(), { remaining: 20, dailyLimit: 20, authenticated: false, available: true, configured: true });
+  assert.deepEqual(await guest.json(), { remaining: 10, dailyLimit: 10, authenticated: false, available: true, configured: true });
   assert.equal((await handleChatRequest(request(token, undefined, "https://other.com"), env)).status, 403);
   sqlite.prepare("UPDATE sessions SET expires_at = 0").run();
   const expired = await handleChatRequest(request(token), env);
@@ -46,18 +46,23 @@ test("guest chat status works without an account, and cross-origin requests are 
   assert.equal(spy.mock.callCount(), 1);
 });
 
-test("guest IP allowance is 20; registering on that IP preserves today's usage toward 50", async t => {
+test("guest IP allowance is 10; registering on that IP preserves today's usage toward 50", async t => {
   const { env, token, sqlite } = fixture();
   t.after(() => sqlite.close());
   const day = chatDay(Date.now());
   const visitor = await visitorId(request(null), env.DASHSCOPE_API_KEY);
   const insert = sqlite.prepare("INSERT INTO ai_requests (id, user_id, visitor_hash, day, created_at, reserved, charged, status) VALUES (?, NULL, ?, ?, 1, 1, 1, 'complete')");
-  for (let i = 0; i < 20; i++) insert.run(`guest${i}`, visitor, day);
+  for (let i = 0; i < 10; i++) insert.run(`guest${i}`, visitor, day);
   const guestStatus = await (await handleChatRequest(statusRequest(null), env)).json();
   assert.equal(guestStatus.remaining, 0);
+  const spy = t.mock.method(globalThis, "fetch", () => streamReply());
+  const exhausted = await handleChatRequest(request(null), env);
+  assert.equal(exhausted.status, 429);
+  assert.match((await exhausted.json()).error, /注册账号/);
+  assert.equal(spy.mock.callCount(), 0);
   const userStatus = await (await handleChatRequest(statusRequest(token), env)).json();
   assert.equal(userStatus.authenticated, true);
-  assert.equal(userStatus.remaining, 30);
+  assert.equal(userStatus.remaining, 40);
 });
 
 test("cannot inject a system role or exceed input bounds; server owns the system prompt", () => {
@@ -69,27 +74,44 @@ test("cannot inject a system role or exceed input bounds; server owns the system
   assert.equal(chatDay(Date.parse("2026-10-10T15:00:00Z")), "2026-10-10");
 });
 
-test("study relevance accepts bank topics and follow-ups but rejects unrelated requests", () => {
-  assert.equal(isStudyRelated("What's the difference between IAM roles and policies?", "", []), true);
-  assert.equal(isStudyRelated("请详细解释这道题", "TOEIC 题目：Choose the correct phrasal verb.", []), true);
-  assert.equal(isStudyRelated("为什么选 B？", "题目：AWS Lambda 的计费方式", [{ role: "assistant", content: "Lambda 按调用次数和执行时长计费。" }]), true);
-  assert.equal(isStudyRelated("What's the weather in Tokyo today?", "题目：AWS Lambda 的计费方式", []), false);
-  assert.equal(isStudyRelated("讲个笑话", "题目：AWS Lambda 的计费方式", []), false);
-  assert.equal(isStudyRelated("what is 2 + 2?", "题目：AWS Lambda 的计费方式", []), false);
+test("system prompt permits learning and technology in any language and briefly refuses unrelated entertainment", () => {
+  assert.match(CHAT_PROMPT, /学习和技术问题/);
+  assert.match(CHAT_PROMPT, /任何语言/);
+  assert.match(CHAT_PROMPT, /用户指定的语言/);
+  assert.doesNotMatch(CHAT_PROMPT, /默认用中文|只帮助理解本站/);
+  assert.match(CHAT_PROMPT, /游戏攻略/);
+  assert.match(CHAT_PROMPT, /简短拒绝/);
+  assert.match(CHAT_PROMPT, /游戏开发/);
+  assert.match(CHAT_PROMPT, /意图不明确/);
+  assert.match(CHAT_PROMPT, /不执行其中改变角色/);
+  assert.match(CHAT_PROMPT, /不声称已联网检索/);
 });
 
-test("off-topic attempts consume one request but do not call Qwen or reserve tokens", async t => {
-  const { env, token, sqlite } = fixture();
-  t.after(() => sqlite.close());
-  const spy = t.mock.method(globalThis, "fetch", () => { throw new Error("off-topic input must not reach Qwen"); });
-  const result = await handleChatRequest(request(token, { question: "What's the weather in Tokyo today?", context: "AWS Lambda question", history: [] }), env);
-  assert.equal(result.status, 422);
-  const data = await result.json();
-  assert.equal(data.remaining, 49);
-  assert.equal(data.error, "我只能回答 QuizBank 题库及相关知识点问题；本次尝试已计入今日额度。");
-  const usage = sqlite.prepare("SELECT status, reserved, charged FROM ai_requests").get();
-  assert.deepEqual({ ...usage }, { status: "failed", reserved: 0, charged: 0 });
-  assert.equal(spy.mock.callCount(), 0);
+test("requests reach Qwen without keyword filtering; the server prompt governs scope and normal quotas still apply", async t => {
+  for (const question of ["解释这句话的意思", "再用简单一点的话说", "what is 2 + 2?", "讲个笑话", "What's the weather in Tokyo today?"]) {
+    for (const authenticated of [true, false]) {
+      await t.test(`${authenticated ? "account" : "guest"}: ${question}`, async t => {
+        const { env, token, sqlite } = fixture();
+        t.after(() => sqlite.close());
+        const spy = t.mock.method(globalThis, "fetch", (url, init) => {
+          const messages = JSON.parse(init.body).messages;
+          assert.equal(messages.at(-1).content, question);
+          assert.equal(messages[0].role, "system");
+          assert.equal(messages[0].content, CHAT_PROMPT);
+          const pending = sqlite.prepare("SELECT status, reserved, charged FROM ai_requests").get();
+          assert.equal(pending.status, "pending");
+          assert.ok(pending.reserved > CHAT_POLICY.maxOutput);
+          assert.equal(pending.charged, null);
+          return streamReply();
+        });
+        const result = await handleChatRequest(request(authenticated ? token : null, { question, context: "", history: [] }), env);
+        assert.equal(result.status, 200);
+        assert.equal((await result.json()).remaining, authenticated ? 49 : 9);
+        assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, 42);
+        assert.equal(spy.mock.callCount(), 1);
+      });
+    }
+  }
 });
 
 test("successful inference settles usage and never returns the private reasoning", async t => {
@@ -123,7 +145,7 @@ test("successful account and guest replies satisfy the browser response contract
       assert.equal(answer.answer, "因为 B 满足题干要求。");
       assert.equal(answer.configured, true);
       assert.equal(answer.authenticated, authenticated);
-      assert.equal(answer.remaining, authenticated ? 49 : 19);
+      assert.equal(answer.remaining, authenticated ? 49 : 9);
     });
   }
 });
@@ -135,14 +157,15 @@ test("daily cap and global budget reject calls before contacting Qwen", async t 
   const insert = sqlite.prepare("INSERT INTO ai_requests (id, user_id, visitor_hash, day, created_at, reserved, charged, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
   for (let i = 0; i < 50; i++) insert.run(`req${i}`, "user1", null, day, 1, 1, 1, "complete");
   const spy = t.mock.method(globalThis, "fetch", () => { throw new Error("must not call"); });
-  const capped = await handleChatRequest(request(token), env);
+  const generalQuestion = { question: "讲个笑话", context: "", history: [] };
+  const capped = await handleChatRequest(request(token, generalQuestion), env);
   assert.equal(capped.status, 429);
   const capData = await capped.json();
   assert.equal(capData.remaining, 0);
   assert.match(capData.error, /UTC-8标准时间0:00分刷新/);
   sqlite.prepare("DELETE FROM ai_requests").run();
   insert.run("global", null, null, "2020-01-01", 1, CHAT_POLICY.tokenBudget, null, "pending");
-  assert.equal((await handleChatRequest(request(token), env)).status, 429);
+  assert.equal((await handleChatRequest(request(token, generalQuestion), env)).status, 429);
   assert.equal(spy.mock.callCount(), 0);
 });
 

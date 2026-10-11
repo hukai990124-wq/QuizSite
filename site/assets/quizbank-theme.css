@@ -139,6 +139,20 @@ summary:focus-visible,
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+.report .qb-report-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 13.5px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--qb-navy, #123c5e);
+  background: var(--qb-navy, #123c5e);
+  color: #fff;
+  text-decoration: none;
+}
+.report .qb-report-home:focus-visible { outline: 2px solid var(--qb-navy, #123c5e); outline-offset: 3px; }
 @media print {
   .qb-sitebar { display: none !important; }
   body { background: #fff !important; }

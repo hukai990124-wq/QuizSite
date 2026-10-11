@@ -101,7 +101,18 @@ Amazon Translate is an AWS service that automates language translation using neu
 **中** 热点 一家公司希望其生成式人工智能模型对提示的回应更具个性化。 从以下列表中为每个用例选择正确的定制方法。每个用例只能选择一次。 热点区域： Themodelsmust be taught a newdomain-specifictask Continued pre-training Data augmentation Model fine-funing A limited amount of labeled data is available and more data is needed Continued pre-training Data augmentation Model fine-tuning Onlyunlabeleddata isavailable Continued pre-training Data augmentation Model fine-tuning
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Teach a new domain-specific task / 学习新领域的特定任务
+2. Need more labeled data / 需要更多标注数据
+3. Only unlabeled data is available / 仅有未标注数据
+
+**选项 / Options**
+- **A.** Continued pre-training / 持续预训练
+- **B.** Data augmentation / 数据增强
+- **C.** Model fine-tuning / 模型微调
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Model fine-tuning / 模型微调) → 2: B (Data augmentation / 数据增强) → 3: A (Continued pre-training / 持续预训练)**
 
 The models must be taught a new domain-specific task - Model fine-tuning Fine-tuning is the best approach when a model needs to learn a specific domain-related task. It involves adjusting a pre-trained model with a smaller, task-specific dataset to improve performance in that domain. A limited amount of labeled data is available and more data is needed - Data augmentation Data augmentation helps in scenarios where labeled data is scarce by artificially increasing the size and variability of the dataset, improving model generalization. Only unlabeled data is available - Continued pre-training Continued pre-training allows an existing foundation model to be further trained on domain-specific, unlabeled data to adapt to new contexts without requiring labeled data.
 
@@ -787,7 +798,30 @@ Federated learning lets you train a global model across multiple data holders (f
 **中** 热点 一家公司需要对托管在亚马逊Bedrock上的基础模型进行定制。 从以下公司需求列表中选择正确的模型定制方法。每个模型定制方法可被选择一次或多次。 热点区域： The company wants to imprcve themodel's performance on specific tasks andexamples.Select.. Select. Continuedpre-training Fine-tuning Thecompanywants to improve the model'sdomain knowledge by providing specific documents.Select... Setec.. Contirtred pre-training Fine-tuning The coinpany wants to retrain the mcdel by using more unlabeled data over tine.Select.. Select Contint.edpre-tra:ning Fine-tuning
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Improve performance on specific tasks and examples / 提升特定任务表现
+2. Improve domain knowledge with documents / 通过文档提升领域知识
+3. Retrain with more unlabeled data / 使用更多未标注数据训练
+
+**选项 / Options**
+- **A.** Continued pre-training / 持续预训练
+- **B.** Fine-tuning / 微调
+<!--/hotspot:options-->
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+参考顺序：B → A → A。微调使用任务相关的标注示例，提升特定任务表现；持续预训练使用未标注的领域文档补充知识，因此后两项都选持续预训练。这是根据题意和 AWS 资料推导的参考答案，不是原题答案。
+
+Reference: B → A → A. Fine-tuning learns a specific task from labeled examples. Continued pre-training learns domain knowledge from unlabeled documents, so both remaining actions use it. This is an editorial inference from the question and AWS guidance, not the original answer key.
+
+参考順序：B → A → A。ファインチューニングはラベル付きの事例で特定タスクを改善します。継続事前学習はラベルなしのドメイン文書から知識を学ぶため、後の2項目は継続事前学習です。設問とAWS資料に基づく推定であり、元の解答ではありません。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://aws.amazon.com/blogs/aws/customize-models-in-amazon-bedrock-with-your-own-data-using-fine-tuning-and-continued-pre-training/)
+<!--/hotspot:review-->
+**参考答案 / Editorial answer: 1: B (Fine-tuning / 微调) → 2: A (Continued pre-training / 持续预训练) → 3: A (Continued pre-training / 持续预训练)**
 
 
 ---
@@ -845,7 +879,33 @@ Binary classification models are designed to distinguish between two classes - f
 **中** 热点 一家公司正在利用一个经过微调的大语言模型（LLM）设计客户服务聊天机器人。该公司希望确保聊天 机器人具备负责任的人工智能特性。 从以下列表中为每个应用设计操作选择正确的负责任的人工智能特性。每个负责任的人工智能特性应选 择一次或根本不选。 热点区域： Anonymize personal information during training data preparationSelect... Select... Govermance Privacyand security Safety Transparency Design thecustomer servicechatbotto provideexplainabledecisionsSelect... Select... Governance Privacy and security safety Transparency Use Amazon Bedrock Guardrails to prevent harmful output and misuse of the chatbotSelect.. Select... Governance Privacyand security Safety Transparency
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Anonymize personal information in training data / 训练数据个人信息匿名化
+2. Provide explainable decisions / 提供可解释的决策
+3. Use Guardrails to prevent harmful output and misuse / 使用护栏防止有害输出及滥用
+
+**选项 / Options**
+- **A.** Governance / 治理
+- **B.** Privacy and security / 隐私与安全
+- **C.** Safety / 安全性
+- **D.** Transparency / 透明性
+<!--/hotspot:options-->
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+推断评分答案：B → D → C。匿名化保护隐私与安全，护栏防止有害输出及滥用属于安全性；现有选项中，将提供决策解释匹配到宽义的透明性 D。透明性与可解释性不完全相同，本题保留原选项，按此推断答案评分；这不是官方或原题答案。
+
+Inferred scoring key: B → D → C. Anonymization protects privacy and security; guardrails address safety. Among the available choices, explaining decisions is mapped to Transparency in a broad sense. Transparency and Explainability are distinct concepts. The original options are kept, and this inferred practice key is used for scoring; it is not an official or original key.
+
+推定採点基準：B → D → C。匿名化はプライバシーとセキュリティ、ガードレールは安全性に対応します。決定の説明は、既存の選択肢では広義の透明性Dに対応させます。透明性と説明可能性は同一概念ではありません。元の選択肢を維持し、この推定解答で採点します。公式・元の解答ではありません。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html)
+- [AWS reference 2](https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/raisp02-bp07.html)
+<!--/hotspot:review-->
+**参考答案 / Editorial answer: 1: B (Privacy and security / 隐私与安全) → 2: D (Transparency / 透明性) → 3: C (Safety / 安全性)**
 
 
 ---
@@ -903,7 +963,35 @@ Regression models are designed to predict continuous numerical values (for examp
 **中** 热点 一家公司希望将亚马逊SageMaker的功能用于各种用例。 从以下列表中为每个用例选择正确的SageMaker功能。每个SageMaker功能只能选择一次或根本不选。 热点区域： Preparing data through a visual interface without using codeSelect... Select SageMakerCanvas SageMakerFeature Store SageMaker Ground Truth SageMakerJumpStart SageMaker Model Monitor Finding and using a prebuilt solution for fraud detectionSelect.. Select SageMakerCanvas SageMakerFeature Store SageMakerGroundTruth SageMakerJumpStart SageMaker Model Monitor Create labeled datasets with human interventionSelect... select SageMakerCanvas SageMakerFeature Store SageMaker Ground Truth SageMakerJumpStart SageMaker Model Monitor
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Prepare data visually without code / 无代码可视化数据准备
+2. Find a prebuilt fraud-detection solution / 查找预构建欺诈检测方案
+3. Create labeled datasets with human intervention / 人工参与创建标注数据集
+
+**选项 / Options**
+- **A.** SageMaker Canvas
+- **B.** SageMaker Feature Store
+- **C.** SageMaker Ground Truth
+- **D.** SageMaker JumpStart
+- **E.** SageMaker Model Monitor
+<!--/hotspot:options-->
+
+<!--hotspot:review-->
+**参考判断 / Editorial reference / 参考判断（非原题答案 / Not the original key）**
+
+参考顺序：A → D → C。Canvas 中的 Data Wrangler 支持可视化、低代码或无代码数据准备；JumpStart 提供包含欺诈检测的预构建方案；Ground Truth 支持人工标注训练数据。按原题的服务功能判定；当前 JumpStart 旧方案仅适用于 Studio Classic，Ground Truth 已不向新客户开放。不是原题答案。
+
+Reference: A → D → C. Canvas provides visual data preparation through Data Wrangler; JumpStart includes prebuilt fraud-detection solutions; Ground Truth supports human labeling. This follows the service roles in the question, not an original key. Current caveats: legacy JumpStart solutions require Studio Classic; Ground Truth is closed to new customers.
+
+参考順序：A → D → C。CanvasのData Wranglerは視覚的なデータ準備、JumpStartは不正検知などの構築済みソリューション、Ground Truthは人手によるラベル付けに対応します。元の解答ではなく設問上の役割に基づく判断です。現在、旧JumpStartソリューションはStudio Classic限定で、Ground Truthは新規顧客を受け付けていません。
+
+**AWS 资料 / AWS sources**
+- [AWS reference 1](https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-data-prep.html)
+- [AWS reference 2](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-solutions.html)
+- [AWS reference 3](https://docs.aws.amazon.com/sagemaker/latest/dg/sms.html)
+<!--/hotspot:review-->
+**参考答案 / Editorial answer: 1: A (SageMaker Canvas) → 2: D (SageMaker JumpStart) → 3: C (SageMaker Ground Truth)**
 
 
 ---

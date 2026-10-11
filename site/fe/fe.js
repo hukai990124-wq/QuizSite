@@ -64,7 +64,10 @@ function render(){
   sources.appendChild(link("题目原 PDF ↗",questionPdf+"#page="+q.pages[0]));
   sources.appendChild(link("官方答案 PDF ↗",answerPdf));
   article.appendChild(sources);
-  article.appendChild(node("p","source-credit",credit+" · 問"+originalNumber));
+  var citation=node("p","source-credit");
+  citation.appendChild(node("span","","出典："));
+  citation.appendChild(node("span","i18n-noloc",credit.replace(/^出典[：:]\s*/,"")+" · 問"+originalNumber));
+  article.appendChild(citation);
   q.images.forEach(function(src,i){
     var fig=node("figure","sheet");fig.style.margin="0 0 12px";
     var enlarged=link("",src);enlarged.setAttribute("aria-label","在新标签放大第 "+q.pages[i]+" 页题面");

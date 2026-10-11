@@ -147,7 +147,20 @@ Reviewing the training data for biases and ensuring representation from all demo
 **中** 热点 从以下列表中为每个用例选择正确的AWS服务或工具。每个AWS服务或工具只能选择一次或根本不选。 热点区域： Applyhumanfeedbackacross theML lifecycletoimproveSelect... the accuracy and relevancy of models.Select. AmazonSageMakerClarify Amazon SageMakerGround Truth AmazonBedrockGuardrails AWsCloudTrail AWs Trusted Advisor ImplementsafeguardsthatalignwithresponsibleAl policies.Select... Select. AmazonSageMakerClarify Amazon SageMakerGround Truth Amazon BedrockGuardrails AWsCloudTrail AWsTrustedAdvisor Detect potential biasduringdata preparation andmodel training.Select... Select.. AmazonSageMakerClarify AmazonSageMakerGroundTruth AmazonBedrockGuardrails AsCloudTrail AWsTrustedAdvisor
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Apply human feedback throughout the ML lifecycle / 机器学习全生命周期引入人工反馈
+2. Implement responsible AI safeguards / 实施负责任AI保护措施
+3. Detect bias in data preparation and training / 数据准备和训练阶段检测偏差
+
+**选项 / Options**
+- **A.** Amazon SageMaker Clarify
+- **B.** Amazon SageMaker Ground Truth
+- **C.** Amazon Bedrock Guardrails
+- **D.** AWS CloudTrail
+- **E.** AWS Trusted Advisor
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: B (Amazon SageMaker Ground Truth) → 2: C (Amazon Bedrock Guardrails) → 3: A (Amazon SageMaker Clarify)**
 
 Apply human feedback across the ML lifecycle to improve the accuracy and relevancy of models. -> Amazon SageMaker Ground Truth Implement safeguards that align with responsible Al policies. -> Amazon Bedrock Guardrails Detect potential bias during data preparation and model training. -> Amazon SageMaker Clarify Amazon SageMaker Ground Truth is used for human-in-the-loop data labeling and model improvement. Amazon Bedrock Guardrails are designed to enforce responsible Al safeguards. Amazon SageMaker Clarify detects and helps mitigate bias during data preparation and model training.
 
@@ -300,7 +313,18 @@ A negative prompt is used to specify items or characteristics that you want the 
 **中** 热点 一家公司运用机器学习技术来开发应用程序。 从以下列表中为每个任务选择正确的机器学习技术。每个机器学习技术只能选择一次。 热点区域： Analyze a text question to determine if the answer is correct.Select... Binary classification Multiclassclassification Regression Analyze ecological factors to determine the numberSelect... ofspeciesina certainarea.Binaryclassification Multiclass classification aoaoo Regression Analyze car attributes to determine the car model.Select... yo Binaryclassification Multiclassclassification [Regression
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Determine whether an answer is correct / 判断答案是否正确
+2. Predict the number of species / 预测物种数量
+3. Identify the car model from its attributes / 根据属性识别汽车型号
+
+**选项 / Options**
+- **A.** Binary classification / 二分类
+- **B.** Multiclass classification / 多分类
+- **C.** Regression / 回归
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: A (Binary classification / 二分类) → 2: C (Regression / 回归) → 3: B (Multiclass classification / 多分类)**
 
 Analyze a text question to determine if the answer is correct -> Binary classification Analyze ecological factors to determine the number of species in a certain area -> Regression Analyze car attributes to determine the car model -> Multiclass classification Determining if an answer is correct is a yes/no (binary) decision. Predicting the number of species (a numeric value) is a regression task. Identifying a car model from attributes involves choosing from multiple possible classes, which is multiclass classification.
 
@@ -361,7 +385,18 @@ Amazon OpenSearch Service supports vector search capabilities, allowing you to p
 **中** 热点 一家公司正在利用亚马逊的SageMakerAI构建人工智能解决方案。该公司希望借助SageMakerAI 的功能来促进应用程序的开发。 从以下列表中为每个用例选择正确的 SageMaker AI功能。每个功能只能选择一次。 热点区域： Determine the most suitable model to use for a business case.Select... Clarify Data Wrangler Model Cards Prepare data through a low-code or no-code interface.Select... clarify Data Wrangler a Model Cards Identify biases or imbalances in the data.Select... clarify Data Wrangler Model Cards
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Determine a suitable model for a business case / 选择适合业务场景的模型
+2. Prepare data with low-code or no-code tools / 低代码或无代码数据准备
+3. Identify data bias or imbalance / 检测数据偏差或不平衡
+
+**选项 / Options**
+- **A.** Clarify
+- **B.** Data Wrangler
+- **C.** Model Cards
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Model Cards) → 2: B (Data Wrangler) → 3: A (Clarify)**
 
 Determine the most suitable model to use for a business case -> Model Cards Prepare data through a low-code or no-code interface -> Data Wrangler Identify biases or imbalances in the data -> Clarify Model Cards help summarize and communicate model characteristics for selection. Data Wrangler provides a no-code/low-code interface for data preparation. Clarify is used to detect bias and imbalances in datasets and models.
 
@@ -537,7 +572,18 @@ Amazon Bedrock provides model evaluation capabilities, allowing a team of scient
 **中** 热点 一家电子商务公司正在开发一种生成式人工智能解决方案，为应用程序用户生成个性化的产品推荐。 该公司希望追踪该人工智能解决方案在提高产品销售和用户在应用程序中的参与度方面的效果。 从以下列表中为每个业务目标选择正确的业务指标。每个业务指标只能选择一次。 热点区域： Measure how engaging the product recommendations are to usersSelec... Average ordervalue (AOV) Click-throughrate(CTR) Retention rate Determine the effect of the Al solution on the total value of user purchasesSelec.. Average order value (AOV) Click-through rate(CTR) Retention rate Assess theAl solution's ability to encourage users to return to the platformSelect... [Averageordervalue(AOV) Click-through rate (CTR) Retention rate
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Measure recommendation engagement / 衡量推荐互动程度
+2. Measure the value of purchases / 衡量购买金额
+3. Measure users returning to the platform / 衡量用户再次访问平台
+
+**选项 / Options**
+- **A.** Average order value (AOV) / 平均订单金额
+- **B.** Click-through rate (CTR) / 点击率
+- **C.** Retention rate / 留存率
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: B (Click-through rate (CTR) / 点击率) → 2: A (Average order value (AOV) / 平均订单金额) → 3: C (Retention rate / 留存率)**
 
 Measure how engaging the product recommendations are to users -> Click-through rate (CTR) Determine the effect of the Al solution on the total value of user purchases -> Average order value (AOV) Assess the Al solution's ability to encourage users to return to the platform -> Retention rate CTR reflects engagement with recommendations. AOV measures the impact on purchase value. Retention rate evaluates if users are returning due to the Al solution.
 
@@ -644,7 +690,19 @@ A large language model (LLM) can analyze unstructured text using NLP techniques 
 **中** 热点 一家公司想要改进多个机器学习模型。 从以下用例列表中选择正确的技术。每个技术应选择一次或根本不选。 热点区域： Enhancing the capabilties of a large languagemodel (LLM)by using extermal sourcesSelect... Few-shot learning Fine-tuning Retrieval Augmented Generation (RAG) Zero-shot learning Querying a model o generalize and make predictions on unseen tasksSelect.. Few-shot learning Fine-tuning Retrieval Augmented Generation (RAG) Zero-shot learning Queryingamodel witha limitedamount ofdata fornew tasksSelect.. Few-shot learning Fine-tuning Retrieval AugmentedGeneration (RAG) Zero-shot learning
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Enhance an LLM using external sources / 使用外部来源增强LLM
+2. Generalize to unseen tasks without examples / 无示例泛化到新任务
+3. Query a model with limited examples / 少量示例提问
+
+**选项 / Options**
+- **A.** Few-shot learning / 少样本学习
+- **B.** Fine-tuning / 微调
+- **C.** Retrieval Augmented Generation (RAG) / 检索增强生成
+- **D.** Zero-shot learning / 零样本学习
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Retrieval Augmented Generation (RAG) / 检索增强生成) → 2: D (Zero-shot learning / 零样本学习) → 3: A (Few-shot learning / 少样本学习)**
 
 Enhancing the capabilities of a large language model (LLM) by using external sources -> Retrieval Augmented Generation (RAG) Querying a model to generalize and make predictions on unseen tasks -> Zero-shot learning Querying a model with a limited amount of data for new tasks -> Few-shot learning RAG improves LLMs by incorporating information from external data sources at query time. Zero-shot learning allows a model to perform tasks it wasn't explicitly trained on, using generalization. Few-shot learning enables a model to handle new tasks with only a small number of examples.
 
@@ -705,7 +763,18 @@ Classification is the evaluation strategy that assigns input data (such as custo
 **中** 热点 从以下列表中为每个陈述选择正确的AI术语。每个AI术语只能选择一次。 热点区域： Simulates human problem-solving capabilitiesSelect... [Al Deep learning ML Applies data-driven learning techniques to make predictionsSelect... PpSP A Deep learning ML Focusesonprocessingdata throughintricateneuralnetworksSelect... A Deep learning ML
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Simulate human problem solving / 模拟人类解决问题
+2. Use data-driven learning for predictions / 数据驱动学习及预测
+3. Process data with complex neural networks / 使用复杂神经网络处理数据
+
+**选项 / Options**
+- **A.** AI / 人工智能
+- **B.** Deep learning / 深度学习
+- **C.** ML / 机器学习
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: A (AI / 人工智能) → 2: C (ML / 机器学习) → 3: B (Deep learning / 深度学习)**
 
 Simulates human problem-solving capabilities -> Al Applies data-driven learning techniques to make predictions -> ML Focuses on processing data through intricate neural networks -> Deep learning Al (Artificial Intelligence) is the broadest concept and includes simulating human-like reasoning and problem-solving. ML (Machine Learning) is a subset of Al focused on learning from data to make predictions or decisions. Deep learning is a subset of ML that uses neural networks with many layers to process complex data.
 
@@ -881,7 +950,20 @@ SageMaker Clarify提供了模型可解释性工具，让您能够可视化并理
 **中** 热点 一位人工智能从业者正在确定各种用例的合适数据类型。 从以下列表中为每个用例选择正确的数据类型。每个数据类型只能选择一次。 热点区域： Build a sentiment analysis model for social media posts.Select.. Image data Tabular data Textdata Time series data Train a self-driving car to recognize traffic signs.Select... Image data Tabulardata [Textdata Time series data Optimize ad campaigns by using customer demographic data and purchase history.Select.. Imagedata Tabulardata Textdata Time series data Forecast stock prices by using historical price data.Select... [Image data Tabulardata Textdata Time series data
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Social-media sentiment analysis / 社交媒体情感分析
+2. Recognize traffic signs / 识别交通标志
+3. Optimize ads using demographics and purchase history / 根据人口特征及购买历史优化广告
+4. Forecast stock prices from historical prices / 根据历史价格预测股价
+
+**选项 / Options**
+- **A.** Image data / 图像数据
+- **B.** Tabular data / 表格数据
+- **C.** Text data / 文本数据
+- **D.** Time series data / 时间序列数据
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Text data / 文本数据) → 2: A (Image data / 图像数据) → 3: B (Tabular data / 表格数据) → 4: D (Time series data / 时间序列数据)**
 
 Build a sentiment analysis model for social media posts -> Text data Train a self-driving car to recognize traffic signs -> Image data Optimize ad campaigns by using customer demographic data and purchase history -> Tabular data Forecast stock prices by using historical price data -> Time series data Sentiment analysis deals with text data from social media posts. Recognizing traffic signs requires processing image data. Optimizing ad campaigns uses structured (tabular) customer and purchase data. Stock price forecasting uses time series data, which captures trends over time.
 
@@ -1080,7 +1162,18 @@ Amazon SageMaker Model Card enables you to document a model's decision-making pr
 **中** 热点 一家公司正在开发一款生成式人工智能应用程序，并正在评估基础模型（FMs）。该公司需要考虑多个基 础模型的特性。 从下列列表中为每个定义选择正确的调频特性。每个调频特性应仅选择一次。 热点区域： Amount of information that can fit in a single promptSelect...7 Concurrency Contextwindows Eo [Latency Length of time it takes fora model to generate an outputSelect... Soonoooaoaoogooaoaapa Concurrency Contextwindows Latency Multipleusers invoking an application endpoint simultaneouslySelect... Pg Concurrency Contextwindows Latency
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Information fitting in one prompt / 单次提示可容纳的信息量
+2. Time taken to generate output / 生成输出所需时间
+3. Simultaneous endpoint invocations / 同时调用端点
+
+**选项 / Options**
+- **A.** Concurrency / 并发
+- **B.** Context windows / 上下文窗口
+- **C.** Latency / 延迟
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: B (Context windows / 上下文窗口) → 2: C (Latency / 延迟) → 3: A (Concurrency / 并发)**
 
 Amount of information that can fit in a single prompt -> Context windows Length of time it takes for a model to generate an output -> Latency Multiple users invoking an application endpoint simultaneously -> Concurrency Context windows determine how much information the model can process at once. Latency is the response time for generating output. Concurrency measures how many users or requests the endpoint can handle at the same time.
 

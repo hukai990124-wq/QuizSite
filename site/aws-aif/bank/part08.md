@@ -9,7 +9,20 @@
 **中** 热点 一家公司想要构建一个新的机器学习解决方案。该公司已经拥有数据。在构建解决方案之前，该 公司需要了解机学习的生命周期。。已量。国的 从以下列表中选择并按顺序排列步骤，以正确描述机器学习的生命周期。每个步骤只能选择一次。 热点区域： Step1: Deploy the model. Prepare the data for training. Testthemodel. Train the model. step2: Deploy the model. Prepare the data for training. Testthemodel. Train the model. Step3: Deploy the model. Prepare the data for training. Testthemodel. Train the model. Step4: Deploy the model. Preparethedatafortraining. g Testthemodel. rain the model.
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Step 1 / 第1步
+2. Step 2 / 第2步
+3. Step 3 / 第3步
+4. Step 4 / 第4步
+
+**选项 / Options**
+- **A.** Deploy the model / 部署模型
+- **B.** Prepare training data / 准备训练数据
+- **C.** Test the model / 测试模型
+- **D.** Train the model / 训练模型
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: B (Prepare training data / 准备训练数据) → 2: D (Train the model / 训练模型) → 3: C (Test the model / 测试模型) → 4: A (Deploy the model / 部署模型)**
 
 The ML lifecycle starts with preparing and cleaning the available data, followed by training the model on that data. The trained model is then evaluated to verify performance before being deployed into production for real-world use.
 
@@ -344,7 +357,18 @@ Amazon Bedrock provides a managed platform that offers access to multiple founda
 **中** 热点 一家公司想要定制一个基础模型（FM）。该公司希望了解可用的定制方法和数据类型。 从以下列表中为每个描述选择正确的定制方法。每个定制方法只能选择一次。 热点区域： Provide labeled data to customize a model to improveSelec... performance on specifictasks.wapaoContinued pre-training PopaaooDistillation Fine-funing Provide unlabeled data to customize an FM for a specificSelect... domain.Continuedpre-training Distillation Fine-tuning Transfer knowledge from a larger and more inteligent Select... model to a smaller model.ga eragoContinued pre-training Distillation Fine-tuning
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Customize with labeled data for specific tasks / 标注数据定制特定任务
+2. Customize with unlabeled domain data / 未标注领域数据定制
+3. Transfer knowledge to a smaller model / 向小模型转移知识
+
+**选项 / Options**
+- **A.** Continued pre-training / 持续预训练
+- **B.** Distillation / 蒸馏
+- **C.** Fine-tuning / 微调
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: C (Fine-tuning / 微调) → 2: A (Continued pre-training / 持续预训练) → 3: B (Distillation / 蒸馏)**
 
 Fine-tuning uses labeled data to adapt a foundation model for improved performance on specific tasks. Continued pre-training uses large volumes of unlabeled domain-specific data to adapt a foundation model to a specific domain. Distillation transfers knowledge from a larger, more capable model into a smaller model while retaining performance characteristics.
 
@@ -819,7 +843,18 @@ The model is being trained from randomly initialized weights on a large corpus u
 **中** 热点 一家公司正在开发一款人工智能助手应用程序。该公司必须为应用程序开发项目实施核心治理流程。该公司 必须确保该应用程序符合负责任的人工智能实践。 从以下列表中选择并按顺序排列步骤，以正确描述此用例的核心治理流程的实施。每个步骤只能选 择一次。 热点区域： Step2:select... tn Determinegovernancegoals,risks,andpolicies. Put together a cross-functional Al governance group. Set up model monitoring mechanisms. Step2:Select.. Lnotonnioaaonnonoeaolomiendnaliaio Determinegovernancegoals,risks,andpolicies. Put together a cross-functional Al governance group. Setupmodelmonitoringmechanisms. Step3:select... Determinegovernancegoals,risks,andpolicies. Put together a cross-functional Al governance group. Setupmodelmonitoringmechanisms.
 
 
-**正确答案 / Answer: ``**
+<!--hotspot:options-->
+**匹配项目 / Items**
+1. Step 1 / 第1步
+2. Step 2 / 第2步
+3. Step 3 / 第3步
+
+**选项 / Options**
+- **A.** Determine governance goals, risks, and policies / 确定治理目标、风险与政策
+- **B.** Form a cross-functional AI governance group / 组建跨职能AI治理团队
+- **C.** Set up model monitoring / 设置模型监控
+<!--/hotspot:options-->
+**正确答案 / Answer: 1: A (Determine governance goals, risks, and policies / 确定治理目标、风险与政策) → 2: B (Form a cross-functional AI governance group / 组建跨职能AI治理团队) → 3: C (Set up model monitoring / 设置模型监控)**
 
 Step 1: Determine governance goals, risks, and policies. Step 2: Put together a cross-functional Al governance group. Step 3: Set up model monitoring mechanisms. Governance starts by defining objectives, risks, and policies to establish direction. Then a cross-functional group is formed to enforce and operationalize governance. Finally, monitoring mechanisms are implemented to continuously ensure compliance and responsible Al behavior.
 

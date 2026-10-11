@@ -28,7 +28,7 @@
   var WHITE = {};
   ("hero idx-hd idx-main toolbar tbin btns qbar qact sheet mask report howto author-dialog " +
    "reset-dialog verdict scroll-hint notice card cards tags tg pg no sd meta badge sub ov-hd " +
-   "ov-bar need lang-foot aud").split(" ").forEach(function (c) { WHITE[c] = 1; });
+   "ov-bar need lang-foot aud qb-question-chat").split(" ").forEach(function (c) { WHITE[c] = 1; });
 
   var BLACK = {};
   ("q tarea source qlist pool passage stem opt opts anbody src-table src-grid " +
@@ -69,6 +69,22 @@
 
   /* 动态文案（数字会变，字典无法穷举的）—— 按顺序替换 */
   var RULES = [
+    [/^这是 IPA (\d+) 年度公开的 (\d+) 道科目 ([AB]) 实考题，仅为部分试题；实际考试为 (\d+) 题。本卷不是完整考试卷。$/, "These are $2 actual Subject $3 questions published by IPA in $1, only a subset of the $4-question exam. This is not a complete exam paper.", "IPAが$1年度に公開した科目$3の本試験問題$2問です。本試験（$4問）の一部であり、完全な試験セットではありません。"],
+    [/^第 (\d+) 题 · 第 (\d+) 套 科目 ([AB])$/, "Q$1 · Set $2 · Subject $3", "第$1問・第$2セット・科目$3"],
+    [/^第 (\d+) 题 · (\d+) 年度 科目 ([AB])$/, "Q$1 · $2 · Subject $3", "第$1問・$2年度・科目$3"],
+    [/(\d+) 年(\d+)月科目 ([AB]) 免除修了试验/g, "$1-$2 Subject $3 exemption examination", "$1年$2月 科目$3免除修了試験"],
+    [/^回答(正确|错误) · 官方答案：(.*)$/, function (_, result, answer) { return (result === "正确" ? "Correct" : "Incorrect") + " · Official answer: " + answer; }, function (_, result, answer) { return (result === "正确" ? "正解" : "不正解") + "・公式解答：" + answer; }],
+    [/^(.+) · 随机练习 (\d+) 题$/, "$1 · Random practice · $2 questions", "$1・ランダム演習 $2問"],
+    [/^从本网站 (.+) 题库随机抽取 · (\d+) 题 · 可作答判分 · 进度保存在本机$/, "Randomly selected from this site's $1 bank · $2 questions · Answer checking · Progress saved on this device", "当サイトの$1問題集からランダムに出題・$2問・採点対応・進捗はこの端末に保存"],
+    [/^(\d+) 题 · (Part .+) · (阅读篇章|录音题组)完整保留$/, function (_, count, parts, type) { return count + " questions · " + parts.replace(/（/g, "(").replace(/）/g, ")") + " · Complete " + (type === "阅读篇章" ? "reading passages" : "audio question groups") + " retained"; }, "$1問・$2・$3を分割せず保持"],
+    [/阅读篇章/g, "reading passages", "読解文章"],
+    [/录音题组/g, "audio question groups", "音声問題グループ"],
+    [/^题库不足：需要 (\d+) 组，找到 (\d+) 组$/, "Not enough questions: need $1 groups, found $2", "問題不足：$1グループ必要ですが、$2グループしかありません"],
+    [/^缺少 Part (\d+)$/, "Part $1 is missing", "Part $1がありません"],
+    [/^找不到完整题组来组成 (\d+) 题$/, "Cannot assemble $1 questions from complete groups", "完全な問題グループで$1問を構成できません"],
+    [/无法读取 (.+)（HTTP (\d+)）/g, "Cannot load $1 (HTTP $2)", "$1を読み込めません（HTTP $2）"],
+    [/^出题失败：/g, "Could not generate practice: ", "演習の作成に失敗："],
+    [/^题库加载失败：(.+)。请刷新页面重试。$/, "Could not load the question bank: $1. Refresh the page to try again.", "問題集を読み込めません：$1。ページを再読み込みしてください。"],
     [/最后更新\s*[:：]\s*/g, "Last updated: ", "最終更新："],
     [/题\s*·\s*正确率\s*/g, " answered · Accuracy ", "問 · 正答率 "],
     [/·\s*正确率\s*/g, "· Accuracy ", "· 正答率 "],
@@ -189,7 +205,7 @@
   function passA(root, lang) {
     (function walk(el) {
       var tag = el.tagName.toLowerCase();
-      if (!SKIP[tag] && region(el) === "white" && quasiLeaf(el) && !el.querySelector("[id]")) {
+      if (!SKIP[tag] && region(el) === "white" && quasiLeaf(el) && !el.querySelector("[id],.i18n-noloc")) {
         var e = DICT[norm(el.textContent)];
         if (e && e[lang === "en" ? 0 : 1]) {
           setMarkup(el, e[lang === "en" ? 0 : 1]);
@@ -259,26 +275,43 @@
   var obs = null, observerOn = false;
   function observe() {
     if (!obs) obs = new MutationObserver(onMutations);
-    obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+    obs.observe(document.body, { childList: true, subtree: true, characterData: true,
+      attributes: true, attributeFilter: ATTRS });
     observerOn = true;
   }
   function unobserve() {
     if (obs && observerOn) { obs.disconnect(); observerOn = false; }
   }
-  function onMutations(recs) {
-    var lang = current();
+  function onMutations(recs, language) {
+    var lang = LANGS.indexOf(language) >= 0 ? language : current();
     if (lang === "zh") return;
     var roots = [], i, j;
     for (i = 0; i < recs.length; i++) {
       var r = recs[i];
+      // App updates replace the original, not just the translated representation.
+      // Discard stale snapshots before translating new scores, quotas or messages.
+      if (r.type !== "attributes") {
+        var changed = r.target.nodeType === 1 ? r.target : r.target.parentNode;
+        while (changed && changed.nodeType === 1) { EORIG.delete(changed); changed = changed.parentNode; }
+      }
       if (r.type === "childList") {
+        r.removedNodes.forEach(function (removed) {
+          TORIG.forEach(function (_, node) { if (node === removed || removed.contains(node)) TORIG.delete(node); });
+          EORIG.forEach(function (_, el) { if (el === removed || removed.contains(el)) EORIG.delete(el); });
+          AORIG.forEach(function (_, el) { if (el === removed || removed.contains(el)) AORIG.delete(el); });
+        });
         for (j = 0; j < r.addedNodes.length; j++) {
           var n = r.addedNodes[j];
           if (n.nodeType === 1) roots.push(n);
           else if (n.nodeType === 3 && n.parentNode) roots.push(n.parentNode);
         }
       } else if (r.type === "characterData") {
+        TORIG.delete(r.target);
         if (r.target.parentNode) roots.push(r.target.parentNode);
+      } else if (r.type === "attributes") {
+        var bag = AORIG.get(r.target);
+        if (bag) delete bag[r.attributeName];
+        roots.push(r.target);
       }
     }
     if (!roots.length) return;
@@ -295,6 +328,12 @@
 
   function apply(lang) {
     if (LANGS.indexOf(lang) < 0) lang = "zh";
+    // A component can update its status and switch language in the same task.
+    // Process those updates before disconnect() discards the queued records.
+    if (obs && observerOn) {
+      var pending = obs.takeRecords();
+      if (pending.length) onMutations(pending, document.documentElement.getAttribute("data-lang"));
+    }
     unobserve();
     try {
       restore();
@@ -317,6 +356,7 @@
       if (document.body) observe();
     }
     document.documentElement.removeAttribute("data-i18n-wait");
+    document.dispatchEvent(new CustomEvent("quizbank:language-changed", { detail: { language: lang } }));
   }
 
   function current() {
@@ -341,7 +381,7 @@
       var raw = window.confirm;
       window.confirm = function (msg) {
         var l = current(), e = hit(msg);
-        return raw.call(window, (e && e[l === "en" ? 0 : 1]) || msg);
+        return raw.call(window, l === "zh" ? msg : ((e && e[l === "en" ? 0 : 1]) || dyn(msg, l) || msg));
       };
     }
     document.addEventListener("click", function (ev) {

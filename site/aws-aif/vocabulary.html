@@ -1,0 +1,799 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS AIF · 专业术语单词库</title><style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;
+ padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.toolbar button.primary:hover{background:#0a5d33}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.badge.hot{color:#9a3412;background:#fff7ed;border-color:#fed7aa}
+.hothint{margin:11px 0 0;font-size:12.5px;color:#9a3412;background:#fff7ed;border:1px dashed #fed7aa;border-radius:8px;padding:8px 11px}
+.src{font-size:11px;color:#9ca3af;margin-left:auto;font-variant-numeric:tabular-nums}
+.stem p{margin:0 0 6px}
+.en{color:var(--en)}
+.zh{color:var(--zh);font-size:14px}
+.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}
+.opts{list-style:none;margin:12px 0 0;padding:0}
+.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}
+.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}
+details.ans .correct{font-size:14px;margin:4px 0 8px}
+details.ans .correct b{color:#047857;font-size:16px}
+details.ans .expl{padding-bottom:12px}
+@media print{
+ body{background:#fff}
+ .toolbar{display:none}
+ .wrap{max-width:none;padding:0}
+ .q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}
+ details.ans{border:1px solid #ccc;background:#fff;display:block}
+ details.ans .expl{display:block}
+}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* ===================== 手写填空（fill） ===================== */
+.q[data-kind="fill"] .fillrow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.q[data-kind="fill"] input.fill{font:inherit;font-size:15px;padding:8px 13px;border:1px solid #cbd5e1;
+ border-radius:8px;min-width:230px;max-width:100%;background:#fff;color:#0f172a}
+.q[data-kind="fill"] input.fill:focus{outline:none;border-color:#4a7fb5;box-shadow:0 0 0 3px rgba(74,127,181,.15)}
+.q[data-kind="fill"].done input.fill{background:#f1f5f9;color:#334155}
+.q[data-kind="fill"] input.fill.ok{border-color:#0b7a44;background:#eaf7ef;color:#0b5130;font-weight:600}
+.q[data-kind="fill"] input.fill.bad{border-color:#c0392b;background:#fdeeed;color:#8f2c20}
+.q[data-kind="fill"] .flabel{font-size:12px;color:#8b95a1}
+@media (max-width:560px){.q[data-kind="fill"] input.fill{min-width:0;width:100%}}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+.vocab-pick{display:block;width:100%;text-align:left;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;padding:0}.vocab-pick span{display:block;margin-bottom:4px}.vocab-pick:focus-visible{outline:3px solid #0b6b3a;outline-offset:4px}.vocab-pick:disabled{color:inherit;cursor:default}.vocab-pick [lang=ja]{font-size:14px;color:#334155}.verdict:empty{display:none}.q [lang="zh"],.q [lang="ja"]{display:none}html[data-lang="zh"] .q [lang="zh"],html[data-lang="ja"] .q [lang="ja"]{display:block}</style><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+<!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--></head><body><div class="wrap">
+<p class="sub"><a href="index.html">← 返回 AIF-C01 目录</a></p>
+<h1>AWS AIF · 专业术语单词库</h1>
+<p class="sub">50 个专业术语 · 每题仅 A/B 两个选项 · 中英日对照 · 原创学习练习，非官方试题</p>
+<div class="toolbar"><div class="btns"><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>50</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<div class="q" id="q1" data-n="1" data-ans="B" data-term-id="ml">
+<div class="qhead"><span class="qno">Question 1</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Machine Learning (ML)” mean?</p><p lang="zh">“Machine Learning (ML)”的含义是什么？</p><p lang="ja">「Machine Learning (ML)」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Learning representations with multilayer neural networks</span><span lang="zh">使用多层神经网络学习表示</span><span lang="ja">多層ニューラルネットワークで表現を学ぶ</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Learning patterns from data to predict or decide</span><span lang="zh">从数据学习规律以进行预测或决策</span><span lang="ja">データから規則を学び予測や判断を行う</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Machine Learning (ML): Learning patterns from data to predict or decide. The other choice describes Deep Learning: Learning representations with multilayer neural networks.</p><p lang="zh">Machine Learning (ML)：从数据学习规律以进行预测或决策。另一选项描述的是 Deep Learning：使用多层神经网络学习表示。</p><p lang="ja">Machine Learning (ML)：データから規則を学び予測や判断を行う。もう一方は Deep Learning（多層ニューラルネットワークで表現を学ぶ）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q2" data-n="2" data-ans="A" data-term-id="dl">
+<div class="qhead"><span class="qno">Question 2</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Deep Learning” mean?</p><p lang="zh">“Deep Learning”的含义是什么？</p><p lang="ja">「Deep Learning」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Learning representations with multilayer neural networks</span><span lang="zh">使用多层神经网络学习表示</span><span lang="ja">多層ニューラルネットワークで表現を学ぶ</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Learning patterns from data to predict or decide</span><span lang="zh">从数据学习规律以进行预测或决策</span><span lang="ja">データから規則を学び予測や判断を行う</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Deep Learning: Learning representations with multilayer neural networks. The other choice describes Machine Learning (ML): Learning patterns from data to predict or decide.</p><p lang="zh">Deep Learning：使用多层神经网络学习表示。另一选项描述的是 Machine Learning (ML)：从数据学习规律以进行预测或决策。</p><p lang="ja">Deep Learning：多層ニューラルネットワークで表現を学ぶ。もう一方は Machine Learning (ML)（データから規則を学び予測や判断を行う）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q3" data-n="3" data-ans="A" data-term-id="nlp">
+<div class="qhead"><span class="qno">Question 3</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Natural Language Processing (NLP)” mean?</p><p lang="zh">“Natural Language Processing (NLP)”的含义是什么？</p><p lang="ja">「Natural Language Processing (NLP)」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Processing and understanding human language</span><span lang="zh">处理和理解人类语言</span><span lang="ja">人間の言語を処理・理解する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Analyzing visual information in images or video</span><span lang="zh">分析图像或视频中的视觉信息</span><span lang="ja">画像や動画の視覚情報を分析する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Natural Language Processing (NLP): Processing and understanding human language. The other choice describes Computer Vision: Analyzing visual information in images or video.</p><p lang="zh">Natural Language Processing (NLP)：处理和理解人类语言。另一选项描述的是 Computer Vision：分析图像或视频中的视觉信息。</p><p lang="ja">Natural Language Processing (NLP)：人間の言語を処理・理解する。もう一方は Computer Vision（画像や動画の視覚情報を分析する）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q4" data-n="4" data-ans="B" data-term-id="cv">
+<div class="qhead"><span class="qno">Question 4</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Computer Vision” mean?</p><p lang="zh">“Computer Vision”的含义是什么？</p><p lang="ja">「Computer Vision」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Processing and understanding human language</span><span lang="zh">处理和理解人类语言</span><span lang="ja">人間の言語を処理・理解する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Analyzing visual information in images or video</span><span lang="zh">分析图像或视频中的视觉信息</span><span lang="ja">画像や動画の視覚情報を分析する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Computer Vision: Analyzing visual information in images or video. The other choice describes Natural Language Processing (NLP): Processing and understanding human language.</p><p lang="zh">Computer Vision：分析图像或视频中的视觉信息。另一选项描述的是 Natural Language Processing (NLP)：处理和理解人类语言。</p><p lang="ja">Computer Vision：画像や動画の視覚情報を分析する。もう一方は Natural Language Processing (NLP)（人間の言語を処理・理解する）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q5" data-n="5" data-ans="A" data-term-id="supervised">
+<div class="qhead"><span class="qno">Question 5</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Supervised Learning” mean?</p><p lang="zh">“Supervised Learning”的含义是什么？</p><p lang="ja">「Supervised Learning」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Learning input-target relationships from labeled examples</span><span lang="zh">从带标签的样本学习输入与目标的关系</span><span lang="ja">ラベル付きの例から入力と正解の関係を学ぶ</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Finding structure in data without target labels</span><span lang="zh">在没有目标标签的数据中寻找结构</span><span lang="ja">正解ラベルのないデータから構造を見つける</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Supervised Learning: Learning input-target relationships from labeled examples. The other choice describes Unsupervised Learning: Finding structure in data without target labels.</p><p lang="zh">Supervised Learning：从带标签的样本学习输入与目标的关系。另一选项描述的是 Unsupervised Learning：在没有目标标签的数据中寻找结构。</p><p lang="ja">Supervised Learning：ラベル付きの例から入力と正解の関係を学ぶ。もう一方は Unsupervised Learning（正解ラベルのないデータから構造を見つける）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q6" data-n="6" data-ans="A" data-term-id="unsupervised">
+<div class="qhead"><span class="qno">Question 6</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Unsupervised Learning” mean?</p><p lang="zh">“Unsupervised Learning”的含义是什么？</p><p lang="ja">「Unsupervised Learning」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Finding structure in data without target labels</span><span lang="zh">在没有目标标签的数据中寻找结构</span><span lang="ja">正解ラベルのないデータから構造を見つける</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Learning input-target relationships from labeled examples</span><span lang="zh">从带标签的样本学习输入与目标的关系</span><span lang="ja">ラベル付きの例から入力と正解の関係を学ぶ</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Unsupervised Learning: Finding structure in data without target labels. The other choice describes Supervised Learning: Learning input-target relationships from labeled examples.</p><p lang="zh">Unsupervised Learning：在没有目标标签的数据中寻找结构。另一选项描述的是 Supervised Learning：从带标签的样本学习输入与目标的关系。</p><p lang="ja">Unsupervised Learning：正解ラベルのないデータから構造を見つける。もう一方は Supervised Learning（ラベル付きの例から入力と正解の関係を学ぶ）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q7" data-n="7" data-ans="A" data-term-id="reinforcement">
+<div class="qhead"><span class="qno">Question 7</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Reinforcement Learning” mean?</p><p lang="zh">“Reinforcement Learning”的含义是什么？</p><p lang="ja">「Reinforcement Learning」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Learning a policy from rewards after actions</span><span lang="zh">通过行动后的奖励反馈学习策略</span><span lang="ja">行動後の報酬から方策を学ぶ</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Learning input-target relationships from labeled examples</span><span lang="zh">从带标签的样本学习输入与目标的关系</span><span lang="ja">ラベル付きの例から入力と正解の関係を学ぶ</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Reinforcement Learning: Learning a policy from rewards after actions. The other choice describes Supervised Learning: Learning input-target relationships from labeled examples.</p><p lang="zh">Reinforcement Learning：通过行动后的奖励反馈学习策略。另一选项描述的是 Supervised Learning：从带标签的样本学习输入与目标的关系。</p><p lang="ja">Reinforcement Learning：行動後の報酬から方策を学ぶ。もう一方は Supervised Learning（ラベル付きの例から入力と正解の関係を学ぶ）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q8" data-n="8" data-ans="B" data-term-id="classification">
+<div class="qhead"><span class="qno">Question 8</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Classification” mean?</p><p lang="zh">“Classification”的含义是什么？</p><p lang="ja">「Classification」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Predicting a continuous value, such as a house price</span><span lang="zh">预测连续数值，例如房价</span><span lang="ja">住宅価格などの連続した数値を予測する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Predicting categories, such as spam or legitimate email</span><span lang="zh">预测离散类别，例如垃圾邮件或正常邮件</span><span lang="ja">迷惑メールか通常メールかなどのカテゴリを予測する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Classification: Predicting categories, such as spam or legitimate email. The other choice describes Regression: Predicting a continuous value, such as a house price.</p><p lang="zh">Classification：预测离散类别，例如垃圾邮件或正常邮件。另一选项描述的是 Regression：预测连续数值，例如房价。</p><p lang="ja">Classification：迷惑メールか通常メールかなどのカテゴリを予測する。もう一方は Regression（住宅価格などの連続した数値を予測する）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q9" data-n="9" data-ans="A" data-term-id="regression">
+<div class="qhead"><span class="qno">Question 9</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Regression” mean?</p><p lang="zh">“Regression”的含义是什么？</p><p lang="ja">「Regression」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Predicting a continuous value, such as a house price</span><span lang="zh">预测连续数值，例如房价</span><span lang="ja">住宅価格などの連続した数値を予測する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Predicting categories, such as spam or legitimate email</span><span lang="zh">预测离散类别，例如垃圾邮件或正常邮件</span><span lang="ja">迷惑メールか通常メールかなどのカテゴリを予測する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Regression: Predicting a continuous value, such as a house price. The other choice describes Classification: Predicting categories, such as spam or legitimate email.</p><p lang="zh">Regression：预测连续数值，例如房价。另一选项描述的是 Classification：预测离散类别，例如垃圾邮件或正常邮件。</p><p lang="ja">Regression：住宅価格などの連続した数値を予測する。もう一方は Classification（迷惑メールか通常メールかなどのカテゴリを予測する）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q10" data-n="10" data-ans="B" data-term-id="clustering">
+<div class="qhead"><span class="qno">Question 10</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Clustering” mean?</p><p lang="zh">“Clustering”的含义是什么？</p><p lang="ja">「Clustering」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Predicting categories, such as spam or legitimate email</span><span lang="zh">预测离散类别，例如垃圾邮件或正常邮件</span><span lang="ja">迷惑メールか通常メールかなどのカテゴリを予測する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Grouping similar data without predefined class labels</span><span lang="zh">按相似性将数据分组，无需预先给定类别标签</span><span lang="ja">事前のクラスラベルなしに類似データをグループ化する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Clustering: Grouping similar data without predefined class labels. The other choice describes Classification: Predicting categories, such as spam or legitimate email.</p><p lang="zh">Clustering：按相似性将数据分组，无需预先给定类别标签。另一选项描述的是 Classification：预测离散类别，例如垃圾邮件或正常邮件。</p><p lang="ja">Clustering：事前のクラスラベルなしに類似データをグループ化する。もう一方は Classification（迷惑メールか通常メールかなどのカテゴリを予測する）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q11" data-n="11" data-ans="A" data-term-id="training">
+<div class="qhead"><span class="qno">Question 11</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Training” mean?</p><p lang="zh">“Training”的含义是什么？</p><p lang="ja">「Training」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Adjusting model parameters using data</span><span lang="zh">利用数据调整模型的参数</span><span lang="ja">データを使ってモデルのパラメータを調整する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Using a trained model to produce output for new input</span><span lang="zh">用已训练模型处理新输入并产生输出</span><span lang="ja">学習済みモデルで新しい入力から出力を得る</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Training: Adjusting model parameters using data. The other choice describes Inference: Using a trained model to produce output for new input.</p><p lang="zh">Training：利用数据调整模型的参数。另一选项描述的是 Inference：用已训练模型处理新输入并产生输出。</p><p lang="ja">Training：データを使ってモデルのパラメータを調整する。もう一方は Inference（学習済みモデルで新しい入力から出力を得る）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q12" data-n="12" data-ans="A" data-term-id="inference">
+<div class="qhead"><span class="qno">Question 12</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Inference” mean?</p><p lang="zh">“Inference”的含义是什么？</p><p lang="ja">「Inference」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Using a trained model to produce output for new input</span><span lang="zh">用已训练模型处理新输入并产生输出</span><span lang="ja">学習済みモデルで新しい入力から出力を得る</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Adjusting model parameters using data</span><span lang="zh">利用数据调整模型的参数</span><span lang="ja">データを使ってモデルのパラメータを調整する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Inference: Using a trained model to produce output for new input. The other choice describes Training: Adjusting model parameters using data.</p><p lang="zh">Inference：用已训练模型处理新输入并产生输出。另一选项描述的是 Training：利用数据调整模型的参数。</p><p lang="ja">Inference：学習済みモデルで新しい入力から出力を得る。もう一方は Training（データを使ってモデルのパラメータを調整する）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q13" data-n="13" data-ans="B" data-term-id="overfitting">
+<div class="qhead"><span class="qno">Question 13</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Overfitting” mean?</p><p lang="zh">“Overfitting”的含义是什么？</p><p lang="ja">「Overfitting」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Failing to capture sufficient patterns in the data</span><span lang="zh">模型未能充分学到数据中的规律</span><span lang="ja">モデルがデータの規則を十分に学べていない</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Fitting training data too closely and generalizing poorly</span><span lang="zh">过度贴合训练数据，对新数据泛化较差</span><span lang="ja">訓練データに適合しすぎ未知データへの汎化が弱い</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Overfitting: Fitting training data too closely and generalizing poorly. The other choice describes Underfitting: Failing to capture sufficient patterns in the data.</p><p lang="zh">Overfitting：过度贴合训练数据，对新数据泛化较差。另一选项描述的是 Underfitting：模型未能充分学到数据中的规律。</p><p lang="ja">Overfitting：訓練データに適合しすぎ未知データへの汎化が弱い。もう一方は Underfitting（モデルがデータの規則を十分に学べていない）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q14" data-n="14" data-ans="A" data-term-id="underfitting">
+<div class="qhead"><span class="qno">Question 14</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Underfitting” mean?</p><p lang="zh">“Underfitting”的含义是什么？</p><p lang="ja">「Underfitting」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Failing to capture sufficient patterns in the data</span><span lang="zh">模型未能充分学到数据中的规律</span><span lang="ja">モデルがデータの規則を十分に学べていない</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Fitting training data too closely and generalizing poorly</span><span lang="zh">过度贴合训练数据，对新数据泛化较差</span><span lang="ja">訓練データに適合しすぎ未知データへの汎化が弱い</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Underfitting: Failing to capture sufficient patterns in the data. The other choice describes Overfitting: Fitting training data too closely and generalizing poorly.</p><p lang="zh">Underfitting：模型未能充分学到数据中的规律。另一选项描述的是 Overfitting：过度贴合训练数据，对新数据泛化较差。</p><p lang="ja">Underfitting：モデルがデータの規則を十分に学べていない。もう一方は Overfitting（訓練データに適合しすぎ未知データへの汎化が弱い）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q15" data-n="15" data-ans="A" data-term-id="precision">
+<div class="qhead"><span class="qno">Question 15</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Precision” mean?</p><p lang="zh">“Precision”的含义是什么？</p><p lang="ja">「Precision」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">The fraction of positive predictions that are truly positive</span><span lang="zh">预测为正的样本中，真正为正的比例</span><span lang="ja">陽性と予測した例のうち実際に陽性である割合</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">The fraction of actual positives correctly detected</span><span lang="zh">实际为正的样本中，被正确检出的比例</span><span lang="ja">実際に陽性の例のうち正しく検出できた割合</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Precision: The fraction of positive predictions that are truly positive. The other choice describes Recall: The fraction of actual positives correctly detected.</p><p lang="zh">Precision：预测为正的样本中，真正为正的比例。另一选项描述的是 Recall：实际为正的样本中，被正确检出的比例。</p><p lang="ja">Precision：陽性と予測した例のうち実際に陽性である割合。もう一方は Recall（実際に陽性の例のうち正しく検出できた割合）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q16" data-n="16" data-ans="A" data-term-id="recall">
+<div class="qhead"><span class="qno">Question 16</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Recall” mean?</p><p lang="zh">“Recall”的含义是什么？</p><p lang="ja">「Recall」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">The fraction of actual positives correctly detected</span><span lang="zh">实际为正的样本中，被正确检出的比例</span><span lang="ja">実際に陽性の例のうち正しく検出できた割合</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">The fraction of positive predictions that are truly positive</span><span lang="zh">预测为正的样本中，真正为正的比例</span><span lang="ja">陽性と予測した例のうち実際に陽性である割合</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Recall: The fraction of actual positives correctly detected. The other choice describes Precision: The fraction of positive predictions that are truly positive.</p><p lang="zh">Recall：实际为正的样本中，被正确检出的比例。另一选项描述的是 Precision：预测为正的样本中，真正为正的比例。</p><p lang="ja">Recall：実際に陽性の例のうち正しく検出できた割合。もう一方は Precision（陽性と予測した例のうち実際に陽性である割合）の説明です。</p><p><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01-domain1.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q17" data-n="17" data-ans="A" data-term-id="genai">
+<div class="qhead"><span class="qno">Question 17</span><span class="badge">单选</span><span class="src">Domain 2</span></div>
+<div class="stem"><p lang="en">What does “Generative AI (GenAI)” mean?</p><p lang="zh">“Generative AI (GenAI)”的含义是什么？</p><p lang="ja">「Generative AI (GenAI)」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Creating new content from learned patterns</span><span lang="zh">根据学到的模式生成新内容</span><span lang="ja">学習したパターンに基づき新しいコンテンツを生成する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Predicting categories, such as spam or legitimate email</span><span lang="zh">预测离散类别，例如垃圾邮件或正常邮件</span><span lang="ja">迷惑メールか通常メールかなどのカテゴリを予測する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Generative AI (GenAI): Creating new content from learned patterns. The other choice describes Classification: Predicting categories, such as spam or legitimate email.</p><p lang="zh">Generative AI (GenAI)：根据学到的模式生成新内容。另一选项描述的是 Classification：预测离散类别，例如垃圾邮件或正常邮件。</p><p lang="ja">Generative AI (GenAI)：学習したパターンに基づき新しいコンテンツを生成する。もう一方は Classification（迷惑メールか通常メールかなどのカテゴリを予測する）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q18" data-n="18" data-ans="A" data-term-id="fm">
+<div class="qhead"><span class="qno">Question 18</span><span class="badge">单选</span><span class="src">Domain 2</span></div>
+<div class="stem"><p lang="en">What does “Foundation Model (FM)” mean?</p><p lang="zh">“Foundation Model (FM)”的含义是什么？</p><p lang="ja">「Foundation Model (FM)」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">A broadly pretrained model adaptable to many tasks</span><span lang="zh">大规模预训练、可适配多种任务的模型</span><span lang="ja">大規模に事前学習され複数のタスクに適応できるモデル</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Representing content as vectors for semantic similarity</span><span lang="zh">用数值向量表示内容以比较语义相似性</span><span lang="ja">内容を数値ベクトルで表し意味の類似性を比較する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Foundation Model (FM): A broadly pretrained model adaptable to many tasks. The other choice describes Embedding: Representing content as vectors for semantic similarity.</p><p lang="zh">Foundation Model (FM)：大规模预训练、可适配多种任务的模型。另一选项描述的是 Embedding：用数值向量表示内容以比较语义相似性。</p><p lang="ja">Foundation Model (FM)：大規模に事前学習され複数のタスクに適応できるモデル。もう一方は Embedding（内容を数値ベクトルで表し意味の類似性を比較する）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q19" data-n="19" data-ans="A" data-term-id="llm">
+<div class="qhead"><span class="qno">Question 19</span><span class="badge">单选</span><span class="src">Domain 2</span></div>
+<div class="stem"><p lang="en">What does “Large Language Model (LLM)” mean?</p><p lang="zh">“Large Language Model (LLM)”的含义是什么？</p><p lang="ja">「Large Language Model (LLM)」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">A large-scale model for language understanding and generation</span><span lang="zh">大规模训练、面向语言理解与生成的模型</span><span lang="ja">大規模に学習された言語理解・生成向けモデル</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Analyzing visual information in images or video</span><span lang="zh">分析图像或视频中的视觉信息</span><span lang="ja">画像や動画の視覚情報を分析する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Large Language Model (LLM): A large-scale model for language understanding and generation. The other choice describes Computer Vision: Analyzing visual information in images or video.</p><p lang="zh">Large Language Model (LLM)：大规模训练、面向语言理解与生成的模型。另一选项描述的是 Computer Vision：分析图像或视频中的视觉信息。</p><p lang="ja">Large Language Model (LLM)：大規模に学習された言語理解・生成向けモデル。もう一方は Computer Vision（画像や動画の視覚情報を分析する）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q20" data-n="20" data-ans="A" data-term-id="token">
+<div class="qhead"><span class="qno">Question 20</span><span class="badge">单选</span><span class="src">Domain 2</span></div>
+<div class="stem"><p lang="en">What does “Token” mean?</p><p lang="zh">“Token”的含义是什么？</p><p lang="ja">「Token」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">A text processing unit that may be part of a word</span><span lang="zh">模型处理的文本单元，可能是词的一部分</span><span lang="ja">単語の一部にもなるモデルのテキスト処理単位</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Representing content as vectors for semantic similarity</span><span lang="zh">用数值向量表示内容以比较语义相似性</span><span lang="ja">内容を数値ベクトルで表し意味の類似性を比較する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Token: A text processing unit that may be part of a word. The other choice describes Embedding: Representing content as vectors for semantic similarity.</p><p lang="zh">Token：模型处理的文本单元，可能是词的一部分。另一选项描述的是 Embedding：用数值向量表示内容以比较语义相似性。</p><p lang="ja">Token：単語の一部にもなるモデルのテキスト処理単位。もう一方は Embedding（内容を数値ベクトルで表し意味の類似性を比較する）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q21" data-n="21" data-ans="A" data-term-id="embedding">
+<div class="qhead"><span class="qno">Question 21</span><span class="badge">单选</span><span class="src">Domain 2</span></div>
+<div class="stem"><p lang="en">What does “Embedding” mean?</p><p lang="zh">“Embedding”的含义是什么？</p><p lang="ja">「Embedding」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Representing content as vectors for semantic similarity</span><span lang="zh">用数值向量表示内容以比较语义相似性</span><span lang="ja">内容を数値ベクトルで表し意味の類似性を比較する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">A text processing unit that may be part of a word</span><span lang="zh">模型处理的文本单元，可能是词的一部分</span><span lang="ja">単語の一部にもなるモデルのテキスト処理単位</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Embedding: Representing content as vectors for semantic similarity. The other choice describes Token: A text processing unit that may be part of a word.</p><p lang="zh">Embedding：用数值向量表示内容以比较语义相似性。另一选项描述的是 Token：模型处理的文本单元，可能是词的一部分。</p><p lang="ja">Embedding：内容を数値ベクトルで表し意味の類似性を比較する。もう一方は Token（単語の一部にもなるモデルのテキスト処理単位）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q22" data-n="22" data-ans="B" data-term-id="prompt">
+<div class="qhead"><span class="qno">Question 22</span><span class="badge">单选</span><span class="src">Domain 3</span></div>
+<div class="stem"><p lang="en">What does “Prompt” mean?</p><p lang="zh">“Prompt”的含义是什么？</p><p lang="ja">「Prompt」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Using a trained model to produce output for new input</span><span lang="zh">用已训练模型处理新输入并产生输出</span><span lang="ja">学習済みモデルで新しい入力から出力を得る</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Instructions, questions or context supplied to a model</span><span lang="zh">提供给模型的指令、问题或上下文输入</span><span lang="ja">モデルに与える指示・質問・文脈の入力</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Prompt: Instructions, questions or context supplied to a model. The other choice describes Inference: Using a trained model to produce output for new input.</p><p lang="zh">Prompt：提供给模型的指令、问题或上下文输入。另一选项描述的是 Inference：用已训练模型处理新输入并产生输出。</p><p lang="ja">Prompt：モデルに与える指示・質問・文脈の入力。もう一方は Inference（学習済みモデルで新しい入力から出力を得る）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q23" data-n="23" data-ans="B" data-term-id="prompt-engineering">
+<div class="qhead"><span class="qno">Question 23</span><span class="badge">单选</span><span class="src">Domain 3</span></div>
+<div class="stem"><p lang="en">What does “Prompt Engineering” mean?</p><p lang="zh">“Prompt Engineering”的含义是什么？</p><p lang="ja">「Prompt Engineering」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Further training on task data to adjust model parameters</span><span lang="zh">使用任务数据继续训练并调整模型参数</span><span lang="ja">タスク用データで追加学習しモデルのパラメータを調整する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Designing and improving prompts to guide model output</span><span lang="zh">设计并改进输入提示以引导模型输出</span><span lang="ja">モデルの出力を導くためにプロンプトを設計・改善する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Prompt Engineering: Designing and improving prompts to guide model output. The other choice describes Fine-tuning: Further training on task data to adjust model parameters.</p><p lang="zh">Prompt Engineering：设计并改进输入提示以引导模型输出。另一选项描述的是 Fine-tuning：使用任务数据继续训练并调整模型参数。</p><p lang="ja">Prompt Engineering：モデルの出力を導くためにプロンプトを設計・改善する。もう一方は Fine-tuning（タスク用データで追加学習しモデルのパラメータを調整する）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q24" data-n="24" data-ans="A" data-term-id="zero-shot">
+<div class="qhead"><span class="qno">Question 24</span><span class="badge">单选</span><span class="src">Domain 3</span></div>
+<div class="stem"><p lang="en">What does “Zero-shot Prompting” mean?</p><p lang="zh">“Zero-shot Prompting”的含义是什么？</p><p lang="ja">「Zero-shot Prompting」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Requesting a task without providing examples in the prompt</span><span lang="zh">提示中不给任务示例，直接要求完成任务</span><span lang="ja">プロンプトに例を示さずタスクの実行を求める</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Providing a few examples in the prompt to show the desired behavior</span><span lang="zh">在提示中给出少量示例来说明预期行为</span><span lang="ja">プロンプト内の少数の例で期待する振る舞いを示す</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Zero-shot Prompting: Requesting a task without providing examples in the prompt. The other choice describes Few-shot Prompting: Providing a few examples in the prompt to show the desired behavior.</p><p lang="zh">Zero-shot Prompting：提示中不给任务示例，直接要求完成任务。另一选项描述的是 Few-shot Prompting：在提示中给出少量示例来说明预期行为。</p><p lang="ja">Zero-shot Prompting：プロンプトに例を示さずタスクの実行を求める。もう一方は Few-shot Prompting（プロンプト内の少数の例で期待する振る舞いを示す）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q25" data-n="25" data-ans="B" data-term-id="few-shot">
+<div class="qhead"><span class="qno">Question 25</span><span class="badge">单选</span><span class="src">Domain 3</span></div>
+<div class="stem"><p lang="en">What does “Few-shot Prompting” mean?</p><p lang="zh">“Few-shot Prompting”的含义是什么？</p><p lang="ja">「Few-shot Prompting」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Requesting a task without providing examples in the prompt</span><span lang="zh">提示中不给任务示例，直接要求完成任务</span><span lang="ja">プロンプトに例を示さずタスクの実行を求める</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Providing a few examples in the prompt to show the desired behavior</span><span lang="zh">在提示中给出少量示例来说明预期行为</span><span lang="ja">プロンプト内の少数の例で期待する振る舞いを示す</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Few-shot Prompting: Providing a few examples in the prompt to show the desired behavior. The other choice describes Zero-shot Prompting: Requesting a task without providing examples in the prompt.</p><p lang="zh">Few-shot Prompting：在提示中给出少量示例来说明预期行为。另一选项描述的是 Zero-shot Prompting：提示中不给任务示例，直接要求完成任务。</p><p lang="ja">Few-shot Prompting：プロンプト内の少数の例で期待する振る舞いを示す。もう一方は Zero-shot Prompting（プロンプトに例を示さずタスクの実行を求める）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q26" data-n="26" data-ans="A" data-term-id="fine-tuning">
+<div class="qhead"><span class="qno">Question 26</span><span class="badge">单选</span><span class="src">Domain 3</span></div>
+<div class="stem"><p lang="en">What does “Fine-tuning” mean?</p><p lang="zh">“Fine-tuning”的含义是什么？</p><p lang="ja">「Fine-tuning」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Further training on task data to adjust model parameters</span><span lang="zh">使用任务数据继续训练并调整模型参数</span><span lang="ja">タスク用データで追加学習しモデルのパラメータを調整する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Retrieving information into context before generating an answer</span><span lang="zh">检索资料加入上下文，再由模型生成回答</span><span lang="ja">情報を検索して文脈に加えモデルで回答を生成する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Fine-tuning: Further training on task data to adjust model parameters. The other choice describes Retrieval-Augmented Generation (RAG): Retrieving information into context before generating an answer.</p><p lang="zh">Fine-tuning：使用任务数据继续训练并调整模型参数。另一选项描述的是 Retrieval-Augmented Generation (RAG)：检索资料加入上下文，再由模型生成回答。</p><p lang="ja">Fine-tuning：タスク用データで追加学習しモデルのパラメータを調整する。もう一方は Retrieval-Augmented Generation (RAG)（情報を検索して文脈に加えモデルで回答を生成する）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q27" data-n="27" data-ans="B" data-term-id="rag">
+<div class="qhead"><span class="qno">Question 27</span><span class="badge">单选</span><span class="src">Domain 3</span></div>
+<div class="stem"><p lang="en">What does “Retrieval-Augmented Generation (RAG)” mean?</p><p lang="zh">“Retrieval-Augmented Generation (RAG)”的含义是什么？</p><p lang="ja">「Retrieval-Augmented Generation (RAG)」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Further training on task data to adjust model parameters</span><span lang="zh">使用任务数据继续训练并调整模型参数</span><span lang="ja">タスク用データで追加学習しモデルのパラメータを調整する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Retrieving information into context before generating an answer</span><span lang="zh">检索资料加入上下文，再由模型生成回答</span><span lang="ja">情報を検索して文脈に加えモデルで回答を生成する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Retrieval-Augmented Generation (RAG): Retrieving information into context before generating an answer. The other choice describes Fine-tuning: Further training on task data to adjust model parameters.</p><p lang="zh">Retrieval-Augmented Generation (RAG)：检索资料加入上下文，再由模型生成回答。另一选项描述的是 Fine-tuning：使用任务数据继续训练并调整模型参数。</p><p lang="ja">Retrieval-Augmented Generation (RAG)：情報を検索して文脈に加えモデルで回答を生成する。もう一方は Fine-tuning（タスク用データで追加学習しモデルのパラメータを調整する）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q28" data-n="28" data-ans="A" data-term-id="hallucination">
+<div class="qhead"><span class="qno">Question 28</span><span class="badge">单选</span><span class="src">Domain 2</span></div>
+<div class="stem"><p lang="en">What does “Hallucination” mean?</p><p lang="zh">“Hallucination”的含义是什么？</p><p lang="ja">「Hallucination」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Generating plausible but incorrect or unsupported content</span><span lang="zh">生成看似可信但不正确或缺乏依据的内容</span><span lang="ja">もっともらしいが誤っている、または根拠のない内容を生成する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Fitting training data too closely and generalizing poorly</span><span lang="zh">过度贴合训练数据，对新数据泛化较差</span><span lang="ja">訓練データに適合しすぎ未知データへの汎化が弱い</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Hallucination: Generating plausible but incorrect or unsupported content. The other choice describes Overfitting: Fitting training data too closely and generalizing poorly.</p><p lang="zh">Hallucination：生成看似可信但不正确或缺乏依据的内容。另一选项描述的是 Overfitting：过度贴合训练数据，对新数据泛化较差。</p><p lang="ja">Hallucination：もっともらしいが誤っている、または根拠のない内容を生成する。もう一方は Overfitting（訓練データに適合しすぎ未知データへの汎化が弱い）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q29" data-n="29" data-ans="B" data-term-id="temperature">
+<div class="qhead"><span class="qno">Question 29</span><span class="badge">单选</span><span class="src">Domain 3</span></div>
+<div class="stem"><p lang="en">What does “Temperature” mean?</p><p lang="zh">“Temperature”的含义是什么？</p><p lang="ja">「Temperature」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">The token capacity for context in a model call</span><span lang="zh">一次调用可处理的上下文 token 容量上限</span><span lang="ja">モデル呼び出しで扱える文脈のトークン容量上限</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">An inference parameter controlling sampling randomness</span><span lang="zh">控制生成采样随机性的推理参数</span><span lang="ja">生成時のサンプリングのランダムさを制御する推論パラメータ</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Temperature: An inference parameter controlling sampling randomness. The other choice describes Context Window: The token capacity for context in a model call.</p><p lang="zh">Temperature：控制生成采样随机性的推理参数。另一选项描述的是 Context Window：一次调用可处理的上下文 token 容量上限。</p><p lang="ja">Temperature：生成時のサンプリングのランダムさを制御する推論パラメータ。もう一方は Context Window（モデル呼び出しで扱える文脈のトークン容量上限）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q30" data-n="30" data-ans="A" data-term-id="context-window">
+<div class="qhead"><span class="qno">Question 30</span><span class="badge">单选</span><span class="src">Domain 2</span></div>
+<div class="stem"><p lang="en">What does “Context Window” mean?</p><p lang="zh">“Context Window”的含义是什么？</p><p lang="ja">「Context Window」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">The token capacity for context in a model call</span><span lang="zh">一次调用可处理的上下文 token 容量上限</span><span lang="ja">モデル呼び出しで扱える文脈のトークン容量上限</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">An inference parameter controlling sampling randomness</span><span lang="zh">控制生成采样随机性的推理参数</span><span lang="ja">生成時のサンプリングのランダムさを制御する推論パラメータ</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Context Window: The token capacity for context in a model call. The other choice describes Temperature: An inference parameter controlling sampling randomness.</p><p lang="zh">Context Window：一次调用可处理的上下文 token 容量上限。另一选项描述的是 Temperature：控制生成采样随机性的推理参数。</p><p lang="ja">Context Window：モデル呼び出しで扱える文脈のトークン容量上限。もう一方は Temperature（生成時のサンプリングのランダムさを制御する推論パラメータ）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q31" data-n="31" data-ans="B" data-term-id="fairness">
+<div class="qhead"><span class="qno">Question 31</span><span class="badge">单选</span><span class="src">Domain 4</span></div>
+<div class="stem"><p lang="en">What does “Fairness” mean?</p><p lang="zh">“Fairness”的含义是什么？</p><p lang="ja">「Fairness」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Understanding why a model produces a prediction or behavior</span><span lang="zh">理解模型为何产生某项预测或行为</span><span lang="ja">モデルが予測や振る舞いを生む理由を理解する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Considering group impacts and reducing unfair bias</span><span lang="zh">关注不同群体的影响，减少不公平偏差</span><span lang="ja">集団ごとの影響を考慮し不公平な偏りを減らす</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Fairness: Considering group impacts and reducing unfair bias. The other choice describes Explainability: Understanding why a model produces a prediction or behavior.</p><p lang="zh">Fairness：关注不同群体的影响，减少不公平偏差。另一选项描述的是 Explainability：理解模型为何产生某项预测或行为。</p><p lang="ja">Fairness：集団ごとの影響を考慮し不公平な偏りを減らす。もう一方は Explainability（モデルが予測や振る舞いを生む理由を理解する）の説明です。</p><p><a href="https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q32" data-n="32" data-ans="A" data-term-id="explainability">
+<div class="qhead"><span class="qno">Question 32</span><span class="badge">单选</span><span class="src">Domain 4</span></div>
+<div class="stem"><p lang="en">What does “Explainability” mean?</p><p lang="zh">“Explainability”的含义是什么？</p><p lang="ja">「Explainability」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Understanding why a model produces a prediction or behavior</span><span lang="zh">理解模型为何产生某项预测或行为</span><span lang="ja">モデルが予測や振る舞いを生む理由を理解する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Disclosing capabilities and limitations for informed choices</span><span lang="zh">披露系统能力和限制，帮助用户作知情选择</span><span lang="ja">能力と制限を開示し利用者の情報に基づく選択を助ける</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Explainability: Understanding why a model produces a prediction or behavior. The other choice describes Transparency: Disclosing capabilities and limitations for informed choices.</p><p lang="zh">Explainability：理解模型为何产生某项预测或行为。另一选项描述的是 Transparency：披露系统能力和限制，帮助用户作知情选择。</p><p lang="ja">Explainability：モデルが予測や振る舞いを生む理由を理解する。もう一方は Transparency（能力と制限を開示し利用者の情報に基づく選択を助ける）の説明です。</p><p><a href="https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q33" data-n="33" data-ans="A" data-term-id="transparency">
+<div class="qhead"><span class="qno">Question 33</span><span class="badge">单选</span><span class="src">Domain 4</span></div>
+<div class="stem"><p lang="en">What does “Transparency” mean?</p><p lang="zh">“Transparency”的含义是什么？</p><p lang="ja">「Transparency」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Disclosing capabilities and limitations for informed choices</span><span lang="zh">披露系统能力和限制，帮助用户作知情选择</span><span lang="ja">能力と制限を開示し利用者の情報に基づく選択を助ける</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Understanding why a model produces a prediction or behavior</span><span lang="zh">理解模型为何产生某项预测或行为</span><span lang="ja">モデルが予測や振る舞いを生む理由を理解する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Transparency: Disclosing capabilities and limitations for informed choices. The other choice describes Explainability: Understanding why a model produces a prediction or behavior.</p><p lang="zh">Transparency：披露系统能力和限制，帮助用户作知情选择。另一选项描述的是 Explainability：理解模型为何产生某项预测或行为。</p><p lang="ja">Transparency：能力と制限を開示し利用者の情報に基づく選択を助ける。もう一方は Explainability（モデルが予測や振る舞いを生む理由を理解する）の説明です。</p><p><a href="https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q34" data-n="34" data-ans="A" data-term-id="robustness">
+<div class="qhead"><span class="qno">Question 34</span><span class="badge">单选</span><span class="src">Domain 4</span></div>
+<div class="stem"><p lang="en">What does “Robustness” mean?</p><p lang="zh">“Robustness”的含义是什么？</p><p lang="ja">「Robustness」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Maintaining reliable behavior with varied or unexpected inputs</span><span lang="zh">面对输入变化或意外输入仍保持可靠表现</span><span lang="ja">入力の変化や予期しない入力でも信頼できる性能を保つ</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Considering group impacts and reducing unfair bias</span><span lang="zh">关注不同群体的影响，减少不公平偏差</span><span lang="ja">集団ごとの影響を考慮し不公平な偏りを減らす</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Robustness: Maintaining reliable behavior with varied or unexpected inputs. The other choice describes Fairness: Considering group impacts and reducing unfair bias.</p><p lang="zh">Robustness：面对输入变化或意外输入仍保持可靠表现。另一选项描述的是 Fairness：关注不同群体的影响，减少不公平偏差。</p><p lang="ja">Robustness：入力の変化や予期しない入力でも信頼できる性能を保つ。もう一方は Fairness（集団ごとの影響を考慮し不公平な偏りを減らす）の説明です。</p><p><a href="https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q35" data-n="35" data-ans="A" data-term-id="privacy">
+<div class="qhead"><span class="qno">Question 35</span><span class="badge">单选</span><span class="src">Domain 4</span></div>
+<div class="stem"><p lang="en">What does “Privacy” mean?</p><p lang="zh">“Privacy”的含义是什么？</p><p lang="ja">「Privacy」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Appropriately collecting, using and managing personal or sensitive data</span><span lang="zh">适当收集、使用和管理个人或敏感数据</span><span lang="ja">個人情報や機密データを適切に収集・利用・管理する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Reducing harmful output and misuse risks</span><span lang="zh">减少有害输出及系统滥用风险</span><span lang="ja">有害な出力やシステムの悪用リスクを減らす</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Privacy: Appropriately collecting, using and managing personal or sensitive data. The other choice describes Safety: Reducing harmful output and misuse risks.</p><p lang="zh">Privacy：适当收集、使用和管理个人或敏感数据。另一选项描述的是 Safety：减少有害输出及系统滥用风险。</p><p lang="ja">Privacy：個人情報や機密データを適切に収集・利用・管理する。もう一方は Safety（有害な出力やシステムの悪用リスクを減らす）の説明です。</p><p><a href="https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q36" data-n="36" data-ans="B" data-term-id="safety">
+<div class="qhead"><span class="qno">Question 36</span><span class="badge">单选</span><span class="src">Domain 4</span></div>
+<div class="stem"><p lang="en">What does “Safety” mean?</p><p lang="zh">“Safety”的含义是什么？</p><p lang="ja">「Safety」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Appropriately collecting, using and managing personal or sensitive data</span><span lang="zh">适当收集、使用和管理个人或敏感数据</span><span lang="ja">個人情報や機密データを適切に収集・利用・管理する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Reducing harmful output and misuse risks</span><span lang="zh">减少有害输出及系统滥用风险</span><span lang="ja">有害な出力やシステムの悪用リスクを減らす</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Safety: Reducing harmful output and misuse risks. The other choice describes Privacy: Appropriately collecting, using and managing personal or sensitive data.</p><p lang="zh">Safety：减少有害输出及系统滥用风险。另一选项描述的是 Privacy：适当收集、使用和管理个人或敏感数据。</p><p lang="ja">Safety：有害な出力やシステムの悪用リスクを減らす。もう一方は Privacy（個人情報や機密データを適切に収集・利用・管理する）の説明です。</p><p><a href="https://docs.aws.amazon.com/wellarchitected/latest/responsible-ai-lens/responsible-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q37" data-n="37" data-ans="B" data-term-id="bedrock">
+<div class="qhead"><span class="qno">Question 37</span><span class="badge">单选</span><span class="src">Domain 3</span></div>
+<div class="stem"><p lang="en">What does “Amazon Bedrock” mean?</p><p lang="zh">“Amazon Bedrock”的含义是什么？</p><p lang="ja">「Amazon Bedrock」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">A platform for building, training and deploying ML models</span><span lang="zh">构建、训练和部署机器学习模型的平台</span><span lang="ja">機械学習モデルの構築・学習・デプロイ向けプラットフォーム</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">A managed service for building generative AI apps with foundation models</span><span lang="zh">通过托管服务使用基础模型构建生成式 AI 应用</span><span lang="ja">基盤モデルで生成AIアプリを構築するマネージドサービス</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Amazon Bedrock: A managed service for building generative AI apps with foundation models. The other choice describes Amazon SageMaker AI: A platform for building, training and deploying ML models.</p><p lang="zh">Amazon Bedrock：通过托管服务使用基础模型构建生成式 AI 应用。另一选项描述的是 Amazon SageMaker AI：构建、训练和部署机器学习模型的平台。</p><p lang="ja">Amazon Bedrock：基盤モデルで生成AIアプリを構築するマネージドサービス。もう一方は Amazon SageMaker AI（機械学習モデルの構築・学習・デプロイ向けプラットフォーム）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q38" data-n="38" data-ans="A" data-term-id="sagemaker">
+<div class="qhead"><span class="qno">Question 38</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Amazon SageMaker AI” mean?</p><p lang="zh">“Amazon SageMaker AI”的含义是什么？</p><p lang="ja">「Amazon SageMaker AI」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">A platform for building, training and deploying ML models</span><span lang="zh">构建、训练和部署机器学习模型的平台</span><span lang="ja">機械学習モデルの構築・学習・デプロイ向けプラットフォーム</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">A managed service for building generative AI apps with foundation models</span><span lang="zh">通过托管服务使用基础模型构建生成式 AI 应用</span><span lang="ja">基盤モデルで生成AIアプリを構築するマネージドサービス</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Amazon SageMaker AI: A platform for building, training and deploying ML models. The other choice describes Amazon Bedrock: A managed service for building generative AI apps with foundation models.</p><p lang="zh">Amazon SageMaker AI：构建、训练和部署机器学习模型的平台。另一选项描述的是 Amazon Bedrock：通过托管服务使用基础模型构建生成式 AI 应用。</p><p lang="ja">Amazon SageMaker AI：機械学習モデルの構築・学習・デプロイ向けプラットフォーム。もう一方は Amazon Bedrock（基盤モデルで生成AIアプリを構築するマネージドサービス）の説明です。</p><p><a href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/ml-guide.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q39" data-n="39" data-ans="B" data-term-id="comprehend">
+<div class="qhead"><span class="qno">Question 39</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Amazon Comprehend” mean?</p><p lang="zh">“Amazon Comprehend”的含义是什么？</p><p lang="ja">「Amazon Comprehend」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Extracting text, tables and form data from documents</span><span lang="zh">从文档提取文字、表格和表单数据</span><span lang="ja">文書からテキスト・表・フォームデータを抽出する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Analyzing sentiment, entities and other information in text</span><span lang="zh">分析文本中的情感、实体等语言信息</span><span lang="ja">テキストの感情・エンティティなどの言語情報を分析する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Amazon Comprehend: Analyzing sentiment, entities and other information in text. The other choice describes Amazon Textract: Extracting text, tables and form data from documents.</p><p lang="zh">Amazon Comprehend：分析文本中的情感、实体等语言信息。另一选项描述的是 Amazon Textract：从文档提取文字、表格和表单数据。</p><p lang="ja">Amazon Comprehend：テキストの感情・エンティティなどの言語情報を分析する。もう一方は Amazon Textract（文書からテキスト・表・フォームデータを抽出する）の説明です。</p><p><a href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/ml-guide.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q40" data-n="40" data-ans="B" data-term-id="rekognition">
+<div class="qhead"><span class="qno">Question 40</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Amazon Rekognition” mean?</p><p lang="zh">“Amazon Rekognition”的含义是什么？</p><p lang="ja">「Amazon Rekognition」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Analyzing sentiment, entities and other information in text</span><span lang="zh">分析文本中的情感、实体等语言信息</span><span lang="ja">テキストの感情・エンティティなどの言語情報を分析する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Recognizing objects and other visual content in images and video</span><span lang="zh">识别图像和视频中的对象等视觉内容</span><span lang="ja">画像や動画内の物体などの視覚内容を認識する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Amazon Rekognition: Recognizing objects and other visual content in images and video. The other choice describes Amazon Comprehend: Analyzing sentiment, entities and other information in text.</p><p lang="zh">Amazon Rekognition：识别图像和视频中的对象等视觉内容。另一选项描述的是 Amazon Comprehend：分析文本中的情感、实体等语言信息。</p><p lang="ja">Amazon Rekognition：画像や動画内の物体などの視覚内容を認識する。もう一方は Amazon Comprehend（テキストの感情・エンティティなどの言語情報を分析する）の説明です。</p><p><a href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/ml-guide.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q41" data-n="41" data-ans="B" data-term-id="textract">
+<div class="qhead"><span class="qno">Question 41</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Amazon Textract” mean?</p><p lang="zh">“Amazon Textract”的含义是什么？</p><p lang="ja">「Amazon Textract」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Analyzing sentiment, entities and other information in text</span><span lang="zh">分析文本中的情感、实体等语言信息</span><span lang="ja">テキストの感情・エンティティなどの言語情報を分析する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Extracting text, tables and form data from documents</span><span lang="zh">从文档提取文字、表格和表单数据</span><span lang="ja">文書からテキスト・表・フォームデータを抽出する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Amazon Textract: Extracting text, tables and form data from documents. The other choice describes Amazon Comprehend: Analyzing sentiment, entities and other information in text.</p><p lang="zh">Amazon Textract：从文档提取文字、表格和表单数据。另一选项描述的是 Amazon Comprehend：分析文本中的情感、实体等语言信息。</p><p lang="ja">Amazon Textract：文書からテキスト・表・フォームデータを抽出する。もう一方は Amazon Comprehend（テキストの感情・エンティティなどの言語情報を分析する）の説明です。</p><p><a href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/ml-guide.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q42" data-n="42" data-ans="B" data-term-id="transcribe">
+<div class="qhead"><span class="qno">Question 42</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Amazon Transcribe” mean?</p><p lang="zh">“Amazon Transcribe”的含义是什么？</p><p lang="ja">「Amazon Transcribe」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Converting text into speech</span><span lang="zh">将文字转换为语音</span><span lang="ja">テキストを音声に変換する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Converting speech into text</span><span lang="zh">将语音转换为文字</span><span lang="ja">音声をテキストに変換する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Amazon Transcribe: Converting speech into text. The other choice describes Amazon Polly: Converting text into speech.</p><p lang="zh">Amazon Transcribe：将语音转换为文字。另一选项描述的是 Amazon Polly：将文字转换为语音。</p><p lang="ja">Amazon Transcribe：音声をテキストに変換する。もう一方は Amazon Polly（テキストを音声に変換する）の説明です。</p><p><a href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/ml-guide.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q43" data-n="43" data-ans="A" data-term-id="polly">
+<div class="qhead"><span class="qno">Question 43</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Amazon Polly” mean?</p><p lang="zh">“Amazon Polly”的含义是什么？</p><p lang="ja">「Amazon Polly」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Converting text into speech</span><span lang="zh">将文字转换为语音</span><span lang="ja">テキストを音声に変換する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Converting speech into text</span><span lang="zh">将语音转换为文字</span><span lang="ja">音声をテキストに変換する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Amazon Polly: Converting text into speech. The other choice describes Amazon Transcribe: Converting speech into text.</p><p lang="zh">Amazon Polly：将文字转换为语音。另一选项描述的是 Amazon Transcribe：将语音转换为文字。</p><p lang="ja">Amazon Polly：テキストを音声に変換する。もう一方は Amazon Transcribe（音声をテキストに変換する）の説明です。</p><p><a href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/ml-guide.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q44" data-n="44" data-ans="B" data-term-id="translate">
+<div class="qhead"><span class="qno">Question 44</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Amazon Translate” mean?</p><p lang="zh">“Amazon Translate”的含义是什么？</p><p lang="ja">「Amazon Translate」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Converting speech into text</span><span lang="zh">将语音转换为文字</span><span lang="ja">音声をテキストに変換する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Translating text between languages</span><span lang="zh">将文本从一种语言翻译成另一种语言</span><span lang="ja">テキストを別の言語に翻訳する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Amazon Translate: Translating text between languages. The other choice describes Amazon Transcribe: Converting speech into text.</p><p lang="zh">Amazon Translate：将文本从一种语言翻译成另一种语言。另一选项描述的是 Amazon Transcribe：将语音转换为文字。</p><p lang="ja">Amazon Translate：テキストを別の言語に翻訳する。もう一方は Amazon Transcribe（音声をテキストに変換する）の説明です。</p><p><a href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/ml-guide.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q45" data-n="45" data-ans="B" data-term-id="lex">
+<div class="qhead"><span class="qno">Question 45</span><span class="badge">单选</span><span class="src">Domain 1</span></div>
+<div class="stem"><p lang="en">What does “Amazon Lex” mean?</p><p lang="zh">“Amazon Lex”的含义是什么？</p><p lang="ja">「Amazon Lex」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Converting text into speech</span><span lang="zh">将文字转换为语音</span><span lang="ja">テキストを音声に変換する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Building conversational interfaces with speech or text</span><span lang="zh">构建语音或文本对话交互机器人</span><span lang="ja">音声やテキストの対話インターフェースを構築する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Amazon Lex: Building conversational interfaces with speech or text. The other choice describes Amazon Polly: Converting text into speech.</p><p lang="zh">Amazon Lex：构建语音或文本对话交互机器人。另一选项描述的是 Amazon Polly：将文字转换为语音。</p><p lang="ja">Amazon Lex：音声やテキストの対話インターフェースを構築する。もう一方は Amazon Polly（テキストを音声に変換する）の説明です。</p><p><a href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/ml-guide.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q46" data-n="46" data-ans="B" data-term-id="guardrails">
+<div class="qhead"><span class="qno">Question 46</span><span class="badge">单选</span><span class="src">Domain 4</span></div>
+<div class="stem"><p lang="en">What does “Amazon Bedrock Guardrails” mean?</p><p lang="zh">“Amazon Bedrock Guardrails”的含义是什么？</p><p lang="ja">「Amazon Bedrock Guardrails」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Connecting data sources and retrieving information for RAG</span><span lang="zh">连接数据源并检索信息以支持 RAG</span><span lang="ja">データソースを接続しRAG用の情報を検索する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Checking model inputs and outputs against configured content policies</span><span lang="zh">按配置检查模型输入输出并过滤不符合策略的内容</span><span lang="ja">設定されたコンテンツポリシーでモデルの入出力を検査する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Amazon Bedrock Guardrails: Checking model inputs and outputs against configured content policies. The other choice describes Amazon Bedrock Knowledge Bases: Connecting data sources and retrieving information for RAG.</p><p lang="zh">Amazon Bedrock Guardrails：按配置检查模型输入输出并过滤不符合策略的内容。另一选项描述的是 Amazon Bedrock Knowledge Bases：连接数据源并检索信息以支持 RAG。</p><p lang="ja">Amazon Bedrock Guardrails：設定されたコンテンツポリシーでモデルの入出力を検査する。もう一方は Amazon Bedrock Knowledge Bases（データソースを接続しRAG用の情報を検索する）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q47" data-n="47" data-ans="B" data-term-id="knowledge-bases">
+<div class="qhead"><span class="qno">Question 47</span><span class="badge">单选</span><span class="src">Domain 3</span></div>
+<div class="stem"><p lang="en">What does “Amazon Bedrock Knowledge Bases” mean?</p><p lang="zh">“Amazon Bedrock Knowledge Bases”的含义是什么？</p><p lang="ja">「Amazon Bedrock Knowledge Bases」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Checking model inputs and outputs against configured content policies</span><span lang="zh">按配置检查模型输入输出并过滤不符合策略的内容</span><span lang="ja">設定されたコンテンツポリシーでモデルの入出力を検査する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Connecting data sources and retrieving information for RAG</span><span lang="zh">连接数据源并检索信息以支持 RAG</span><span lang="ja">データソースを接続しRAG用の情報を検索する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Amazon Bedrock Knowledge Bases: Connecting data sources and retrieving information for RAG. The other choice describes Amazon Bedrock Guardrails: Checking model inputs and outputs against configured content policies.</p><p lang="zh">Amazon Bedrock Knowledge Bases：连接数据源并检索信息以支持 RAG。另一选项描述的是 Amazon Bedrock Guardrails：按配置检查模型输入输出并过滤不符合策略的内容。</p><p lang="ja">Amazon Bedrock Knowledge Bases：データソースを接続しRAG用の情報を検索する。もう一方は Amazon Bedrock Guardrails（設定されたコンテンツポリシーでモデルの入出力を検査する）の説明です。</p><p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q48" data-n="48" data-ans="A" data-term-id="iam">
+<div class="qhead"><span class="qno">Question 48</span><span class="badge">单选</span><span class="src">Domain 5</span></div>
+<div class="stem"><p lang="en">What does “AWS Identity and Access Management (IAM)” mean?</p><p lang="zh">“AWS Identity and Access Management (IAM)”的含义是什么？</p><p lang="ja">「AWS Identity and Access Management (IAM)」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Controlling who can perform which actions on AWS resources</span><span lang="zh">控制谁能对 AWS 资源执行哪些操作</span><span lang="ja">誰がAWSリソースにどの操作を行えるかを制御する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Creating and managing cryptographic keys</span><span lang="zh">创建和管理用于加密的密钥</span><span lang="ja">暗号化に使う鍵を作成・管理する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">AWS Identity and Access Management (IAM): Controlling who can perform which actions on AWS resources. The other choice describes AWS Key Management Service (KMS): Creating and managing cryptographic keys.</p><p lang="zh">AWS Identity and Access Management (IAM)：控制谁能对 AWS 资源执行哪些操作。另一选项描述的是 AWS Key Management Service (KMS)：创建和管理用于加密的密钥。</p><p lang="ja">AWS Identity and Access Management (IAM)：誰がAWSリソースにどの操作を行えるかを制御する。もう一方は AWS Key Management Service (KMS)（暗号化に使う鍵を作成・管理する）の説明です。</p><p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q49" data-n="49" data-ans="B" data-term-id="kms">
+<div class="qhead"><span class="qno">Question 49</span><span class="badge">单选</span><span class="src">Domain 5</span></div>
+<div class="stem"><p lang="en">What does “AWS Key Management Service (KMS)” mean?</p><p lang="zh">“AWS Key Management Service (KMS)”的含义是什么？</p><p lang="ja">「AWS Key Management Service (KMS)」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Controlling who can perform which actions on AWS resources</span><span lang="zh">控制谁能对 AWS 资源执行哪些操作</span><span lang="ja">誰がAWSリソースにどの操作を行えるかを制御する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Creating and managing cryptographic keys</span><span lang="zh">创建和管理用于加密的密钥</span><span lang="ja">暗号化に使う鍵を作成・管理する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">AWS Key Management Service (KMS): Creating and managing cryptographic keys. The other choice describes AWS Identity and Access Management (IAM): Controlling who can perform which actions on AWS resources.</p><p lang="zh">AWS Key Management Service (KMS)：创建和管理用于加密的密钥。另一选项描述的是 AWS Identity and Access Management (IAM)：控制谁能对 AWS 资源执行哪些操作。</p><p lang="ja">AWS Key Management Service (KMS)：暗号化に使う鍵を作成・管理する。もう一方は AWS Identity and Access Management (IAM)（誰がAWSリソースにどの操作を行えるかを制御する）の説明です。</p><p><a href="https://docs.aws.amazon.com/kms/latest/developerguide/overview.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+<div class="q" id="q50" data-n="50" data-ans="B" data-term-id="cloudtrail">
+<div class="qhead"><span class="qno">Question 50</span><span class="badge">单选</span><span class="src">Domain 5</span></div>
+<div class="stem"><p lang="en">What does “AWS CloudTrail” mean?</p><p lang="zh">“AWS CloudTrail”的含义是什么？</p><p lang="ja">「AWS CloudTrail」はどの意味ですか？</p></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Creating and managing cryptographic keys</span><span lang="zh">创建和管理用于加密的密钥</span><span lang="ja">暗号化に使う鍵を作成・管理する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick" aria-pressed="false"><span lang="en">Recording AWS account API activity for auditing</span><span lang="zh">记录 AWS 账号中的 API 活动以支持审计</span><span lang="ja">監査のためAWSアカウントのAPIアクティビティを記録する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">AWS CloudTrail: Recording AWS account API activity for auditing. The other choice describes AWS Key Management Service (KMS): Creating and managing cryptographic keys.</p><p lang="zh">AWS CloudTrail：记录 AWS 账号中的 API 活动以支持审计。另一选项描述的是 AWS Key Management Service (KMS)：创建和管理用于加密的密钥。</p><p lang="ja">AWS CloudTrail：監査のためAWSアカウントのAPIアクティビティを記録する。もう一方は AWS Key Management Service (KMS)（暗号化に使う鍵を作成・管理する）の説明です。</p><p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html" target="_blank" rel="noopener noreferrer">AWS documentation</a></p></div></details></div>
+</div><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:aws:aifvocab:01";
+var TOTAL=50;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+/* 答案分隔：多选用 ","，填空的等价写法用 "|"（两种都支持） */
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(/[,|]/).map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+function norm(s){return String(s==null?"":s).replace(/\s+/g," ").trim().toUpperCase()}
+function isFill(q){return q.getAttribute("data-kind")==="fill"}
+function fillInput(q){return q1("input.fill",q)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  /* 填空题：复原/锁定输入框 */
+  var inp=q1("input.fill",q);
+  if(inp){
+    if(locked){ if(inp.value!==(sel[0]||""))inp.value=sel[0]||""; }
+    inp.disabled=locked;
+    inp.classList.remove("ok","bad");
+    if(judged)inp.classList.add(rec.ok?"ok":"bad");
+  }
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = isFill(q) ? !norm(sel[0]||"") : sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok&&!isFill(q))
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q),ok;
+  if(isFill(q)){var v=norm(sel[0]||"");ok=(v!==""&&A.indexOf(v)>=0);}
+  else{ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});}
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+/* 填空题输入：只存值、点亮"确认作答"，不重绘以免打断光标 */
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(!el||!el.classList||!el.classList.contains("fill"))return;
+  var q=el.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  S[nOf(q)]={s:[el.value],ok:null,revealed:false};
+  save();
+  var sub=q1(".js-submit",q);if(sub)sub.disabled=!norm(el.value);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script>
+<script type="module" src="/assets/aif-vocabulary.mjs"></script><script src="/assets/presence.js"></script><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+<!--i18n:sw-->
+<footer class="lang-foot">
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+</footer>
+<!--/i18n:sw--><!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--></body></html>
