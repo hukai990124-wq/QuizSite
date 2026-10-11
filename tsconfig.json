@@ -17,6 +17,7 @@
   "include": [
     "worker/chat.mts",
     "worker/account.d.mts",
-    "src/**/*.mts"
+    "src/**/*.mts",
+    "src/**/*.ts"
   ]
 }

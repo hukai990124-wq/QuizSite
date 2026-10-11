@@ -1,9 +1,20 @@
 import unittest
+import tempfile
+from pathlib import Path
 
-from theme_inject import inject_html
+from theme_inject import ASSETS, copy_theme_assets, inject_html
 
 
 class ThemeInjectionTest(unittest.TestCase):
+    def test_generator_copies_compiled_navigation_without_restoring_legacy_js(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            copy_theme_assets(target)
+            self.assertEqual((target / "quizbank-theme.js").read_bytes(), (ASSETS / "quizbank-theme.js").read_bytes())
+            self.assertIn("/assets/back-to-top.mjs", (target / "quizbank-theme.js").read_text(encoding="utf-8"))
+            copy_theme_assets(target)
+            self.assertEqual((target / "quizbank-theme.js").read_bytes(), (ASSETS / "quizbank-theme.js").read_bytes())
+
     def test_adds_shared_stylesheet_and_runtime(self):
         source = "<html><head></head><body><main>Practice</main></body></html>"
 

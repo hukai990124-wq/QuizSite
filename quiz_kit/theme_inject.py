@@ -60,6 +60,17 @@ def inject_file(path):
     return changed
 
 
+def copy_theme_assets(assets_dir):
+    """Use compiled TypeScript JS, not a second hand-maintained implementation."""
+    for name in ("quizbank-theme.css", "quizbank-theme.js"):
+        source = ASSETS / name if name.endswith(".js") else HERE / name
+        if not source.exists():
+            raise FileNotFoundError(f"Missing {source}; run pnpm build first")
+        target = assets_dir / name
+        if not target.exists() or source.read_bytes() != target.read_bytes():
+            shutil.copyfile(source, target)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--site-root", type=Path, default=SITE)
@@ -68,11 +79,7 @@ def main():
     assets_dir = site_root / "assets"
     assets_dir.mkdir(parents=True, exist_ok=True)
 
-    for name in ("quizbank-theme.css", "quizbank-theme.js"):
-        source = HERE / name
-        target = assets_dir / name
-        if not target.exists() or source.read_bytes() != target.read_bytes():
-            shutil.copyfile(source, target)
+    copy_theme_assets(assets_dir)
 
     pages = sorted(path for path in site_root.rglob("*.html") if path.parent != assets_dir)
     updated = 0

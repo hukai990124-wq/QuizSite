@@ -3,7 +3,8 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./site/assets",
+    "moduleDetection": "legacy",
     "noEmit": false
   },
-  "include": ["src/**/*.mts"]
+  "include": ["src/**/*.mts", "src/**/*.ts"]
 }
