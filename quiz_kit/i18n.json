@@ -1,4 +1,13 @@
 {
+ "专业术语单词库": {"en": "Technical vocabulary", "ja": "専門用語集"},
+ "AWS AIF · 专业术语单词库": {"en": "AWS AIF · Technical vocabulary", "ja": "AWS AIF · 専門用語集"},
+ "考试题 682 题 + 专业术语 50 题 · 可作答判分 · 登录后跨设备同步": {"en": "682 exam questions + 50 vocabulary questions · instant scoring · sign in to sync across devices", "ja": "試験問題682問＋専門用語50問・即時採点・ログインしてデバイス間で同期"},
+ "50 个 AWS-AIF 专业术语，A/B 二选一，中英日对照，附易混淆概念解释。": {"en": "50 AWS-AIF terms with A/B choices, Chinese/English/Japanese text and explanations of confusing concepts.", "ja": "AWS-AIFの専門用語50問。A/Bの2択・中英日対照・混同しやすい概念の解説付き。"},
+ "50 题 · 原创学习练习 · 非官方试题": {"en": "50 questions · original learning practice · not official exam questions", "ja": "50問・オリジナル学習演習・公式試験問題ではありません"},
+ "50 个专业术语 · 每题仅 A/B 两个选项 · 中英日对照 · 原创学习练习，非官方试题": {"en": "50 technical terms · only A/B choices · Chinese/English/Japanese · original practice, not an official test", "ja": "専門用語50問・各問A/Bの2択・中英日対照・オリジナル演習（公式試験ではありません）"},
+ "732 题": {"en": "732 questions", "ja": "732問"},
+ "真题库 452 题 + 练习卷 230 题 + 专业术语 50 题，附答案与解析。": {"en": "452 bank questions + 230 practice questions + 50 vocabulary questions, with answers and explanations.", "ja": "問題集452問＋練習問題230問＋専門用語50問。解答・解説付き。"},
+ "8 个题库 · 共 4621 题次 · 可作答判分 · 登录后跨设备同步": {"en": "8 question banks · 4,621 attempts · instant scoring · sign in to sync across devices", "ja": "8つの問題集・全4,621問・即時採点・ログインしてデバイス間で同期"},
  "随机出题": {"en": "Random practice", "ja": "ランダム出題"},
  "随机 50 题": {"en": "Random 50 questions", "ja": "ランダム50問"},
  "随机 100 题": {"en": "Random 100 questions", "ja": "ランダム100問"},

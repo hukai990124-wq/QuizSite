@@ -149,7 +149,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">8 个题库 · 共 4571 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <p class="sub">8 个题库 · 共 4621 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
@@ -192,7 +192,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4571</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4621</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -239,9 +239,9 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="aws-aif/index.html" data-site="aws-aif">
-        <div class="top"><span class="tg g">AI 认证</span><span class="cnt">682 题</span></div>
+        <div class="top"><span class="tg g">AI 认证</span><span class="cnt">732 题</span></div>
         <h3>AWS AIF-C01 · AI Practitioner</h3>
-        <p class="sd">真题库 452 题 + 练习卷 230 题，中英对照，每题带答案与解析。</p>
+        <p class="sd">真题库 452 题 + 练习卷 230 题 + 专业术语 50 题，附答案与解析。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="fe/index.html" data-site="fe">
@@ -345,6 +345,7 @@ function aifKeys(){
   a.push(["aws:aifbank:10",2]);
   for(i=1;i<=4;i++)a.push(["aws:aifprac:"+pad2(i),50]);
   a.push(["aws:aifprac:05",30]);
+  a.push(["aws:aifvocab:01",50]);
   return a;
 }
 /* 各题库的 localStorage key 与其题量（key 实际存储为 "quiz:"+key） */
