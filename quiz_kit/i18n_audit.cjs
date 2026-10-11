@@ -224,6 +224,37 @@ async function main() {
     assert.equal(await page.locator('#qb-chat-title').textContent(), ({ zh: '题库学习助手', en: 'QuizBank study assistant', ja: 'QuizBank 学習アシスタント' })[language]);
   }
   regressions.push('account errors and chat dialog follow language switching without overwriting user input');
+  let nextReply;
+  await page.route('**/api/chat', route => nextReply(route));
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  for (const success of [true,false,true]) {
+    const pending = new Promise(resolve => {nextReply = resolve;});
+    await page.locator('#qb-chat-input').fill('Explain AWS S3 storage.');
+    await page.locator('#qb-chat-input').press('Enter');
+    const request = await pending;
+    assert.equal(await page.locator('.qb-chat-dialog').evaluate(node=>node.classList.contains('is-thinking')),true);
+    assert.equal(await page.locator('#qb-chat-form').getAttribute('aria-busy'),'true');
+    assert.notEqual(await page.locator('#qb-chat-status').evaluate(node=>getComputedStyle(node,'::before').animationName),'none');
+    for (const width of [320,768,1024,1440]) {
+      await page.setViewportSize({width,height:900});
+      const box = await page.locator('.qb-chat-dialog').boundingBox();
+      assert.ok(box.x >= 0 && box.x + box.width <= width);
+    }
+    if (process.argv[2]) await page.locator('.qb-chat-dialog').screenshot({path:path.join(path.dirname(path.resolve(process.argv[2])), 'ai-spinner-dialog.png')});
+    await page.emulateMedia({reducedMotion:'reduce'});
+    assert.equal(await page.locator('#qb-chat-status').evaluate(node=>getComputedStyle(node,'::before').animationName),'none');
+    await page.emulateMedia({reducedMotion:'no-preference'});
+    await request.fulfill(success ? {json:{answer:'S3 stores objects.',remaining:19,dailyLimit:20,authenticated:false,available:true,configured:true,truncated:false}} : {status:503,json:{error:'服务暂不可用。'}});
+    await page.waitForFunction(()=>!document.querySelector('.qb-chat-dialog').classList.contains('is-thinking'));
+    await page.waitForFunction(()=>!document.getElementById('qb-chat-send').disabled);
+    assert.equal(await page.locator('#qb-chat-status').evaluate(node=>getComputedStyle(node,'::before').animationName),'none');
+    if (!success) assert.equal(await page.locator('#qb-chat-error').textContent(),'服务暂不可用。');
+    else {
+      assert.equal(await page.locator('#qb-chat-error').textContent(),'');
+      assert.equal(await page.locator('.qb-chat-message--assistant').last().locator('div').textContent(),'S3 stores objects.');
+    }
+  }
+  regressions.push('AI spinner animates only during requests, respects reduced motion, and stops on success/error/retry');
   await browser.close();
   await new Promise(resolve => server.close(resolve));
   const report = { pageCount: scanPages.length, regressions, errors: [...new Set(errors)], missing: [...missing.values()] };

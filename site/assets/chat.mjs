@@ -92,7 +92,11 @@ function controls(enabled) {
     input.disabled = busy;
     clear.disabled = busy;
     select.disabled = busy;
-    form.setAttribute("aria-busy", String(busy));
+}
+function setBusy(value) {
+    busy = value;
+    dialog.classList.toggle("is-thinking", value);
+    form.setAttribute("aria-busy", String(value));
 }
 async function checkStatus() {
     const sequence = ++requestSequence;
@@ -181,7 +185,7 @@ form.addEventListener("submit", async (event) => {
     const question = input.value.trim();
     if (busy || !question)
         return;
-    busy = true;
+    setBusy(true);
     controls(false);
     error.textContent = "";
     status.textContent = "正在整理讲解……";
@@ -199,7 +203,7 @@ form.addEventListener("submit", async (event) => {
         error.textContent = failure instanceof ChatApiError ? failure.message : "连接中断，请稍后重试。";
     }
     finally {
-        busy = false;
+        setBusy(false);
         await checkStatus();
         if (!input.disabled)
             input.focus();
