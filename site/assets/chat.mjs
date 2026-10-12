@@ -187,9 +187,26 @@ function indexQuestions() {
         button.addEventListener("click", () => open(question, button));
         (question.querySelector(".qact") || question).appendChild(button);
     });
+    // Dynamic single-question viewers keep a hidden, stable question catalogue
+    // and expose a visible action targeting the corresponding catalogue entry.
+    document.querySelectorAll("[data-chat-question]").forEach(target => {
+        if (target.dataset.chatIndexed)
+            return;
+        const question = document.getElementById(target.dataset.chatQuestion || "");
+        if (!question)
+            return;
+        target.dataset.chatIndexed = "true";
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "qb-question-chat";
+        button.textContent = "AI 讲解";
+        button.addEventListener("click", () => open(question, button));
+        target.appendChild(button);
+    });
 }
 indexQuestions();
-new MutationObserver(indexQuestions).observe(document.querySelector(".wrap") || document.body, { childList: true, subtree: true });
+// Some viewers have a header .wrap before their dynamically rendered main.
+new MutationObserver(indexQuestions).observe(document.body, { childList: true, subtree: true });
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const question = input.value.trim();

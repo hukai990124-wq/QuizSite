@@ -10,6 +10,26 @@ var key="quiz:fe:"+subject+":"+(paper?"paper-"+paper:year);
 var app=document.getElementById("app");
 var nav=document.getElementById("years");
 var current=0,chosen=null,exam=null,state={},storageError=false;
+var chatMaterials={};
+
+function registerChatQuestions(){
+  var catalogue=node("div");catalogue.hidden=true;catalogue.id="fe-chat-catalogue";
+  exam.questions.forEach(function(q){
+    var entry=node("div","q");entry.id="fe-question-"+q.number;entry.dataset.n=String(q.number);
+    var text=chatMaterials[String(q.number)];
+    entry.dataset.chatContext=[
+      "试卷：基本情報技術者 科目 "+subject.toUpperCase()+" · "+(paper?"第 "+paper+" 套":year),
+      "题号："+q.number,
+      "IPA 原题号："+(q.originNumber||q.number),
+      text||"题面仅有图片，文本未能加载。请让用户提供题目内容，不能只根据答案编造解析。",
+      "题库参考答案："+q.answer,
+      "来源："+(q.questionPdf||exam.questionPdf),
+      "材料由 PDF 提取，图表、公式或伪代码的布局可能缺失。只按可见文本解释；缺少关键条件时明确说明，不根据参考答案补造条件。"
+    ].join("\n\n");
+    catalogue.appendChild(entry);
+  });
+  document.body.appendChild(catalogue);
+}
 
 function node(tag,className,content){
   var el=document.createElement(tag);
@@ -93,6 +113,7 @@ function render(){
   });
   answer.appendChild(options);
   var actions=node("div","actions");
+  actions.dataset.chatQuestion="fe-question-"+q.number;
   var submit=node("button","primary","确认作答");submit.type="button";submit.disabled=!!record;
   submit.addEventListener("click",function(){
     if(!chosen||state[q.number])return;
@@ -128,8 +149,12 @@ window.addEventListener("quizbank:progress-updated",function(){
   render();
 });
 yearNav();
-fetch(paper?"extra.json":"data.json").then(function(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}).then(function(data){
+var materialsRequest=fetch("chat-materials.json").then(function(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}).catch(function(error){console.warn("FE AI text unavailable:",error.message);return {}});
+Promise.all([fetch(paper?"extra.json":"data.json").then(function(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}),materialsRequest]).then(function(results){
+  var data=results[0],setId=paper?"paper-"+paper+"-"+subject:year+"-"+subject;
   exam=data.sets[paper?"paper-"+paper+"-"+subject:year+"-"+subject];if(!exam)throw Error("找不到该卷");
+  chatMaterials=results[1][setId]||{};
+  registerChatQuestions();
   state=readState();
   var intro=document.getElementById("exam-intro");
   var subtitle=document.getElementById("exam-sub");
