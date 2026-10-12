@@ -1,4 +1,6 @@
 import { findSession, validateMutationRequest } from "./account.mjs";
+import {streamChatAnswer} from "./chat-stream.mjs";
+import type {ChatLifetime} from "./chat-stream.mjs";
 
 export type ChatRole = "system" | "user" | "assistant";
 export interface ChatHistoryEntry {
@@ -107,7 +109,7 @@ async function readLimitedBody(request: Request): Promise<unknown> {
 }
 
 // Parse upstream SSE on the server; do not expose reasoning or provider metadata.
-export async function collectAnswer(response: Response): Promise<CollectedAnswer> {
+export async function collectAnswer(response: Response, onText?: (text: string) => void): Promise<CollectedAnswer> {
   if (!response.body) throw new Error("Missing upstream response body");
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
@@ -124,22 +126,29 @@ export async function collectAnswer(response: Response): Promise<CollectedAnswer
     if (isRecord(data.usage)) usage = data.usage;
     const choice = Array.isArray(data.choices) && isRecord(data.choices[0]) ? data.choices[0] : null;
     const delta = choice && isRecord(choice.delta) ? choice.delta : null;
-    if (typeof delta?.content === "string") answer += delta.content;
+    if (typeof delta?.content === "string") {
+      answer += delta.content;
+      if (delta.content) onText?.(delta.content);
+    }
     if (typeof choice?.finish_reason === "string" && choice.finish_reason) finish = choice.finish_reason;
   }
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    bytes += value.byteLength;
-    if (bytes > 1000000) { await reader.cancel(); throw new Error("Upstream response too large"); }
-    buffer += decoder.decode(value, { stream: true });
-    let cut;
-    while ((cut = buffer.indexOf("\n")) !== -1) { consume(buffer.slice(0, cut).trimEnd()); buffer = buffer.slice(cut + 1); }
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      bytes += value.byteLength;
+      if (bytes > 1000000) throw new Error("Upstream response too large");
+      buffer += decoder.decode(value, { stream: true });
+      let cut;
+      while ((cut = buffer.indexOf("\n")) !== -1) { consume(buffer.slice(0, cut).trimEnd()); buffer = buffer.slice(cut + 1); }
+    }
+    buffer += decoder.decode();
+    if (buffer.trim()) consume(buffer.trim());
+    if (!ended && !finish) throw new Error("Incomplete upstream response");
+    return { answer: answer.trim(), usage, truncated: finish === "length" };
+  } finally {
+    try { await reader.cancel(); } finally { reader.releaseLock(); }
   }
-  buffer += decoder.decode();
-  if (buffer.trim()) consume(buffer.trim());
-  if (!ended && !finish) throw new Error("Incomplete upstream response");
-  return { answer: answer.trim(), usage, truncated: finish === "length" };
 }
 
 export async function visitorId(request: Request, secret: string | undefined): Promise<string | null> {
@@ -162,7 +171,7 @@ async function status(db: NonNullable<ChatEnvironment["DB"]>, userId: string | n
   return { remaining: Math.max(0, limit - (row?.identity_used ?? 0)), dailyLimit: limit, authenticated: !!userId, available: !!row && !row.stopped && (row.global_used ?? 0) < CHAT_POLICY.globalDaily && (row.tokens ?? 0) < CHAT_POLICY.tokenBudget };
 }
 
-export async function handleChatRequest(request: Request, env: ChatEnvironment): Promise<Response> {
+export async function handleChatRequest(request: Request, env: ChatEnvironment, lifetime?: ChatLifetime): Promise<Response> {
   try {
     if (!env.DB) return json({ error: "学习助手暂不可用。" }, 503);
     const session = await findSession(request, env.DB);
@@ -206,11 +215,19 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment):
       return json({ error: message, ...quota }, 429);
     }
     let result;
+    const abort = new AbortController();
+    const db = env.DB;
+    async function settle(answer: CollectedAnswer): Promise<void> {
+      const tokens = answer.usage?.total_tokens;
+      const charged = typeof tokens === "number" && Number.isInteger(tokens) && tokens >= 0 ? tokens : reserved;
+      await db.prepare("UPDATE ai_requests SET status = 'complete', charged = ? WHERE id = ?").bind(charged, id).run();
+      if (charged > reserved) await db.prepare("UPDATE ai_state SET stopped = 1 WHERE id = 1").run();
+    }
     try {
       const response = await fetch("https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions", {
         method: "POST", headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({ model, messages, stream: true, stream_options: { include_usage: true }, max_tokens: CHAT_POLICY.maxOutput, enable_thinking: false }),
-        signal: AbortSignal.timeout(90000),
+        signal: AbortSignal.any([AbortSignal.timeout(90000), abort.signal]),
       });
       if (!response.ok) {
         // Fail closed on all quota, authentication, and model configuration denials.
@@ -219,11 +236,18 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment):
         console.warn(JSON.stringify({ event: "ai_provider_denied", status: response.status }));
         return json({ error: [401, 402, 403, 404].includes(response.status) ? "AI 服务已暂停：免费额度、密钥或模型权限需要管理员检查。" : "AI 服务暂时繁忙，请稍后重试。" }, 503);
       }
+      if (request.headers.get("Accept")?.includes("application/x-ndjson")) {
+        return streamChatAnswer(async onText => {
+          const answer = await collectAnswer(response, onText);
+          await settle(answer);
+          if (!answer.answer) throw new Error("Empty upstream answer");
+          return {truncated:answer.truncated, ...(await status(db, userId, visitorHash, day)), configured};
+        }, async () => {
+          await db.prepare("UPDATE ai_requests SET status = 'failed' WHERE id = ?").bind(id).run();
+        }, () => abort.abort(), lifetime);
+      }
       result = await collectAnswer(response);
-      const tokens = result.usage?.total_tokens;
-      const charged = typeof tokens === "number" && Number.isInteger(tokens) && tokens >= 0 ? tokens : reserved;
-      await env.DB.prepare("UPDATE ai_requests SET status = 'complete', charged = ? WHERE id = ?").bind(charged, id).run();
-      if (charged > reserved) await env.DB.prepare("UPDATE ai_state SET stopped = 1 WHERE id = 1").run();
+      await settle(result);
     } catch {
       // Unknown completion/usage stays fully charged to avoid overspending on retries.
       await env.DB.prepare("UPDATE ai_requests SET status = 'failed' WHERE id = ?").bind(id).run();

@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { buildChatMessages, CHAT_POLICY, CHAT_PROMPT, chatDay, collectAnswer, handleChatRequest, visitorId } from "./chat.mjs";
 import { parseChatAnswer } from "../site/assets/chat-protocol.mjs";
+import { readChatStream } from "../site/assets/chat-stream.mjs";
 
 function fixture() {
   const sqlite = new DatabaseSync(":memory:");
@@ -30,6 +31,89 @@ function statusRequest(token, ip = "203.0.113.5") {
 function streamReply() {
   return new Response('data: {"choices":[{"delta":{"reasoning_content":"private","content":"因为 B 满足题干要求。"},"finish_reason":"stop"}]}\n\ndata: {"choices":[],"usage":{"total_tokens":42}}\n\ndata: [DONE]\n\n');
 }
+
+test("opt-in streaming emits text before upstream completion and settles usage once", async t => {
+  const {env, token, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  let upstream;
+  t.mock.method(globalThis, "fetch", () => new Response(new ReadableStream({start(controller) {upstream = controller;}})));
+  const req = request(token);
+  req.headers.set("Accept", "application/x-ndjson");
+  const pending = handleChatRequest(req, env);
+  const result = await pending;
+  upstream.enqueue(new TextEncoder().encode('data: {"choices":[{"delta":{"content":"先读这一句","reasoning_content":"private"}}]}\n\n'));
+  assert.match(result.headers.get("Content-Type"), /application\/x-ndjson/);
+  const reader = result.body.getReader();
+  const first = JSON.parse(new TextDecoder().decode((await reader.read()).value).trim());
+  assert.deepEqual(first, {type:"delta",text:"先读这一句"});
+  assert.equal(sqlite.prepare("SELECT status FROM ai_requests").get().status, "pending");
+  upstream.enqueue(new TextEncoder().encode('data: {"choices":[{"delta":{"content":"，然后读下文。"},"finish_reason":"stop"}]}\n\ndata: {"choices":[],"usage":{"total_tokens":42}}\n\ndata: [DONE]\n\n'));
+  upstream.close();
+  let rest = "";
+  for (;;) {const item = await reader.read(); if (item.done) break; rest += new TextDecoder().decode(item.value);}
+  const frames = rest.trim().split("\n").map(JSON.parse);
+  assert.equal(frames.at(-1).type, "done");
+  assert.equal(frames.at(-1).remaining, 49);
+  assert.equal(rest.includes("private"), false);
+  assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, 42);
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM ai_requests").get().n, 1);
+});
+
+test("interrupted streaming reports a safe error and retains the unknown token reservation", async t => {
+  const {env, token, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  t.mock.method(globalThis, "fetch", () => new Response('data: {"choices":[{"delta":{"content":"只有半句"}}]}\n\n'));
+  const req = request(token);
+  req.headers.set("Accept", "application/x-ndjson");
+  const response = await handleChatRequest(req, env);
+  assert.match(response.headers.get("Content-Type"), /application\/x-ndjson/);
+  const frames = (await response.text()).trim().split("\n").map(JSON.parse);
+  assert.equal(frames[0].type, "delta");
+  assert.equal(frames.at(-1).type, "error");
+  assert.equal(sqlite.prepare("SELECT status FROM ai_requests").get().status, "failed");
+  assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, null);
+});
+
+test("client cancellation aborts upstream and the lifetime task records conservative usage", async t => {
+  const {env, token, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  let upstream, task;
+  t.mock.method(globalThis, "fetch", (_url, init) => new Response(new ReadableStream({
+    start(controller) {
+      upstream = controller;
+      init.signal.addEventListener("abort", () => controller.error(new DOMException("Cancelled", "AbortError")));
+    }
+  })));
+  const req = request(token);
+  req.headers.set("Accept", "application/x-ndjson");
+  const response = await handleChatRequest(req, env, {waitUntil(promise) {task = promise;}});
+  upstream.enqueue(new TextEncoder().encode('data: {"choices":[{"delta":{"content":"先显示"}}]}\n\n'));
+  const reader = response.body.getReader();
+  await reader.read();
+  await reader.cancel();
+  await task;
+  assert.equal(sqlite.prepare("SELECT status FROM ai_requests").get().status, "failed");
+  assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, null);
+});
+
+test("streamed account and guest replies satisfy the browser's incremental contract", async t => {
+  for (const authenticated of [true, false]) {
+    await t.test(authenticated ? "account" : "guest", async t => {
+      const {env, token, sqlite} = fixture();
+      t.after(() => sqlite.close());
+      t.mock.method(globalThis, "fetch", () => streamReply());
+      const req = request(authenticated ? token : null);
+      req.headers.set("Accept", "application/x-ndjson");
+      const response = await handleChatRequest(req, env);
+      const text = [];
+      const answer = await readChatStream(response, chunk => text.push(chunk));
+      assert.equal(answer.answer, "因为 B 满足题干要求。");
+      assert.equal(text.join(""), answer.answer);
+      assert.equal(answer.authenticated, authenticated);
+      assert.equal(answer.remaining, authenticated ? 49 : 9);
+    });
+  }
+});
 
 test("guest chat status works without an account, and cross-origin requests are still rejected", async t => {
   const { env, token, sqlite } = fixture();

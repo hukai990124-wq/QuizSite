@@ -1,6 +1,8 @@
 import { extractQuestionContext } from "./chat-context.mjs";
 import { submitChatOnEnter } from "./chat-keyboard.mjs";
 import { ChatApiError, parseChatAnswer, parseChatStatus } from "./chat-protocol.mjs";
+import { readChatStream } from "./chat-stream.mjs";
+import { createChatRenderer } from "./chat-renderer.mjs";
 function isRecord(value) {
     return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -73,13 +75,17 @@ function appendMessage(role, text) {
     message.append(label, content);
     log.appendChild(message);
     log.scrollTop = log.scrollHeight;
+    return content;
 }
-async function api(path, body, parse) {
+async function api(path, body, parse, onText) {
     const response = await fetch(path, {
         method: body ? "POST" : "GET", credentials: "same-origin", cache: "no-store",
-        headers: body ? { "Content-Type": "application/json" } : {},
+        headers: body ? { "Content-Type": "application/json", ...(onText ? { Accept: "application/x-ndjson" } : {}) } : {},
         body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(100000),
     });
+    if (response.ok && onText && response.headers.get("Content-Type")?.includes("application/x-ndjson")) {
+        return parse(await readChatStream(response, onText));
+    }
     const data = await response.json().catch(() => null);
     if (!response.ok) {
         const message = isRecord(data) && typeof data.error === "string" ? data.error : "服务暂不可用。";
@@ -96,7 +102,10 @@ function controls(enabled) {
 function setBusy(value) {
     busy = value;
     dialog.classList.toggle("is-thinking", value);
+    if (!value)
+        dialog.classList.remove("is-generating");
     form.setAttribute("aria-busy", String(value));
+    log.setAttribute("aria-busy", String(value));
 }
 async function checkStatus() {
     const sequence = ++requestSequence;
@@ -143,7 +152,8 @@ function open(question = null, source = trigger) {
     }
     if (!dialog.open)
         dialog.showModal();
-    void checkStatus();
+    if (!busy)
+        void checkStatus();
 }
 trigger.addEventListener("click", () => open());
 byId("qb-chat-close").addEventListener("click", () => dialog.close());
@@ -189,10 +199,30 @@ form.addEventListener("submit", async (event) => {
     controls(false);
     error.textContent = "";
     status.textContent = "正在整理讲解……";
+    appendMessage("user", question);
+    let reply = null;
+    const renderer = createChatRenderer(text => {
+        if (!reply) {
+            reply = appendMessage("assistant", "");
+            reply.parentElement?.classList.add("is-streaming");
+            dialog.classList.remove("is-thinking");
+            dialog.classList.add("is-generating");
+            status.textContent = "正在生成讲解……";
+        }
+        const nearBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 64;
+        reply.textContent = text;
+        if (nearBottom)
+            log.scrollTop = log.scrollHeight;
+    }, () => document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     try {
-        const data = await api("/api/chat", { question, context: questionContext, history: history.slice(-6).map(item => ({ role: item.role, content: item.content.slice(0, 2000) })) }, parseChatAnswer);
-        appendMessage("user", question);
-        appendMessage("assistant", data.answer);
+        const data = await api("/api/chat", { question, context: questionContext, history: history.slice(-6).map(item => ({ role: item.role, content: item.content.slice(0, 2000) })) }, parseChatAnswer, text => renderer.append(text));
+        // Old cached deployments/mocks can still return a complete JSON answer.
+        if (!reply)
+            renderer.append(data.answer);
+        await renderer.finish();
+        const completedReply = log.querySelector(".qb-chat-message--assistant:last-child .i18n-noloc");
+        if (completedReply)
+            completedReply.textContent = data.answer;
         history.push({ role: "user", content: question }, { role: "assistant", content: data.answer });
         history = history.slice(-6);
         input.value = "";
@@ -200,9 +230,18 @@ form.addEventListener("submit", async (event) => {
             error.textContent = "本次讲解达到长度上限，可继续追问其中一部分。";
     }
     catch (failure) {
+        await renderer.finish();
         error.textContent = failure instanceof ChatApiError ? failure.message : "连接中断，请稍后重试。";
+        const partial = log.querySelector(".qb-chat-message--assistant.is-streaming");
+        if (partial) {
+            const warning = document.createElement("small");
+            warning.textContent = "回答未完成，以上内容可能不完整。";
+            partial.classList.add("is-incomplete");
+            partial.appendChild(warning);
+        }
     }
     finally {
+        log.querySelectorAll(".is-streaming").forEach(node => node.classList.remove("is-streaming"));
         setBusy(false);
         await checkStatus();
         if (!input.disabled)

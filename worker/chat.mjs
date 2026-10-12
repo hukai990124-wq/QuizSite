@@ -1,4 +1,5 @@
 import { findSession, validateMutationRequest } from "./account.mjs";
+import { streamChatAnswer } from "./chat-stream.mjs";
 export const CHAT_POLICY = Object.freeze({ guestDaily: 10, userDaily: 50, globalDaily: 1000, tokenBudget: 800000, maxOutput: 4096 });
 export const CHAT_PROMPT = `你是 QuizBank 的学习助手，回答学习和技术问题，包括题库讲解、语言学习、数学与科学、课程知识、考试准备、编程、软件、硬件和工程技术。不要求用户包含考试名称或题库关键词，根据真实意图和对话上下文判断。
 接受任何语言的提问。优先使用用户指定的语言；未指定时跟随当前提问的语言，不强制使用中文。遇到题目，先说明结论，再给出可读的解题步骤、逐项分析正确和错误选项、总结考点，并按需提供一个相似例子。解释依据而非输出私有思考过程。
@@ -66,7 +67,7 @@ async function readLimitedBody(request) {
     return JSON.parse(text + decoder.decode());
 }
 // Parse upstream SSE on the server; do not expose reasoning or provider metadata.
-export async function collectAnswer(response) {
+export async function collectAnswer(response, onText) {
     if (!response.body)
         throw new Error("Missing upstream response body");
     const reader = response.body.getReader();
@@ -92,33 +93,44 @@ export async function collectAnswer(response) {
             usage = data.usage;
         const choice = Array.isArray(data.choices) && isRecord(data.choices[0]) ? data.choices[0] : null;
         const delta = choice && isRecord(choice.delta) ? choice.delta : null;
-        if (typeof delta?.content === "string")
+        if (typeof delta?.content === "string") {
             answer += delta.content;
+            if (delta.content)
+                onText?.(delta.content);
+        }
         if (typeof choice?.finish_reason === "string" && choice.finish_reason)
             finish = choice.finish_reason;
     }
-    while (true) {
-        const { done, value } = await reader.read();
-        if (done)
-            break;
-        bytes += value.byteLength;
-        if (bytes > 1000000) {
-            await reader.cancel();
-            throw new Error("Upstream response too large");
+    try {
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done)
+                break;
+            bytes += value.byteLength;
+            if (bytes > 1000000)
+                throw new Error("Upstream response too large");
+            buffer += decoder.decode(value, { stream: true });
+            let cut;
+            while ((cut = buffer.indexOf("\n")) !== -1) {
+                consume(buffer.slice(0, cut).trimEnd());
+                buffer = buffer.slice(cut + 1);
+            }
         }
-        buffer += decoder.decode(value, { stream: true });
-        let cut;
-        while ((cut = buffer.indexOf("\n")) !== -1) {
-            consume(buffer.slice(0, cut).trimEnd());
-            buffer = buffer.slice(cut + 1);
+        buffer += decoder.decode();
+        if (buffer.trim())
+            consume(buffer.trim());
+        if (!ended && !finish)
+            throw new Error("Incomplete upstream response");
+        return { answer: answer.trim(), usage, truncated: finish === "length" };
+    }
+    finally {
+        try {
+            await reader.cancel();
+        }
+        finally {
+            reader.releaseLock();
         }
     }
-    buffer += decoder.decode();
-    if (buffer.trim())
-        consume(buffer.trim());
-    if (!ended && !finish)
-        throw new Error("Incomplete upstream response");
-    return { answer: answer.trim(), usage, truncated: finish === "length" };
 }
 export async function visitorId(request, secret) {
     const ip = request.headers.get("CF-Connecting-IP");
@@ -139,7 +151,7 @@ async function status(db, userId, visitorHash, day) {
     (SELECT COALESCE(SUM(COALESCE(charged, reserved)), 0) FROM ai_requests) AS tokens`).bind(identity, userId ? 1 : 0, visitorHash, day, day).first();
     return { remaining: Math.max(0, limit - (row?.identity_used ?? 0)), dailyLimit: limit, authenticated: !!userId, available: !!row && !row.stopped && (row.global_used ?? 0) < CHAT_POLICY.globalDaily && (row.tokens ?? 0) < CHAT_POLICY.tokenBudget };
 }
-export async function handleChatRequest(request, env) {
+export async function handleChatRequest(request, env, lifetime) {
     try {
         if (!env.DB)
             return json({ error: "学习助手暂不可用。" }, 503);
@@ -190,11 +202,20 @@ export async function handleChatRequest(request, env) {
             return json({ error: message, ...quota }, 429);
         }
         let result;
+        const abort = new AbortController();
+        const db = env.DB;
+        async function settle(answer) {
+            const tokens = answer.usage?.total_tokens;
+            const charged = typeof tokens === "number" && Number.isInteger(tokens) && tokens >= 0 ? tokens : reserved;
+            await db.prepare("UPDATE ai_requests SET status = 'complete', charged = ? WHERE id = ?").bind(charged, id).run();
+            if (charged > reserved)
+                await db.prepare("UPDATE ai_state SET stopped = 1 WHERE id = 1").run();
+        }
         try {
             const response = await fetch("https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions", {
                 method: "POST", headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
                 body: JSON.stringify({ model, messages, stream: true, stream_options: { include_usage: true }, max_tokens: CHAT_POLICY.maxOutput, enable_thinking: false }),
-                signal: AbortSignal.timeout(90000),
+                signal: AbortSignal.any([AbortSignal.timeout(90000), abort.signal]),
             });
             if (!response.ok) {
                 // Fail closed on all quota, authentication, and model configuration denials.
@@ -204,12 +225,19 @@ export async function handleChatRequest(request, env) {
                 console.warn(JSON.stringify({ event: "ai_provider_denied", status: response.status }));
                 return json({ error: [401, 402, 403, 404].includes(response.status) ? "AI 服务已暂停：免费额度、密钥或模型权限需要管理员检查。" : "AI 服务暂时繁忙，请稍后重试。" }, 503);
             }
+            if (request.headers.get("Accept")?.includes("application/x-ndjson")) {
+                return streamChatAnswer(async (onText) => {
+                    const answer = await collectAnswer(response, onText);
+                    await settle(answer);
+                    if (!answer.answer)
+                        throw new Error("Empty upstream answer");
+                    return { truncated: answer.truncated, ...(await status(db, userId, visitorHash, day)), configured };
+                }, async () => {
+                    await db.prepare("UPDATE ai_requests SET status = 'failed' WHERE id = ?").bind(id).run();
+                }, () => abort.abort(), lifetime);
+            }
             result = await collectAnswer(response);
-            const tokens = result.usage?.total_tokens;
-            const charged = typeof tokens === "number" && Number.isInteger(tokens) && tokens >= 0 ? tokens : reserved;
-            await env.DB.prepare("UPDATE ai_requests SET status = 'complete', charged = ? WHERE id = ?").bind(charged, id).run();
-            if (charged > reserved)
-                await env.DB.prepare("UPDATE ai_state SET stopped = 1 WHERE id = 1").run();
+            await settle(result);
         }
         catch {
             // Unknown completion/usage stays fully charged to avoid overspending on retries.

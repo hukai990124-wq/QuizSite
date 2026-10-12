@@ -61,10 +61,10 @@ const CC = {
 };
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname === "/api/chat" || url.pathname === "/api/chat/status") {
-      return handleChatRequest(request, env);
+      return handleChatRequest(request, env, ctx);
     }
     if (url.pathname === "/api/presence" || url.pathname === "/api/presence/snap") {
       const stub = env.PRESENCE.get(env.PRESENCE.idFromName("global"));

@@ -1,0 +1,13 @@
+# Incremental AI replies
+
+The site builds its chat frontend and backend modules from strict TypeScript. Keep existing model, credentials, prompts, quotas, UTC-8 reset, input bounds and reservation rules unchanged. No new provider or paid calls are needed to verify this change.
+
+POST /api/chat remains JSON by default for existing clients. Opt-in Accept: application/x-ndjson returns UTF-8 newline-delimited frames: delta {type, text}, done {type, truncated, remaining, dailyLimit, authenticated, available, configured}, or error {type, error}. Errors before streaming retain existing HTTP status and JSON bodies. A done frame is required for a complete answer. Only public content passes through; reasoning, keys and provider metadata never do.
+
+Reserve once before contacting Qwen. Forward validated content deltas as received. After provider completion, settle actual usage (or retain the full reservation when unknown), then emit done. Interrupted responses retain budget and mark the request failed. Client cancellation aborts upstream; ctx.waitUntil keeps settlement alive after disconnect, within Cloudflare's lifetime limit. Do not automatically retry paid requests.
+
+Frontend: show the user's question immediately and a spinner until first text. Then show text in short adaptive batches with a caret. Reduced-motion/hidden tabs bypass typing animation. Render model text with textContent, never HTML. Preserve partial interrupted text with an explicit incomplete notice; only successfully finished replies enter history. Keep controls locked throughout the request. Screen readers use aria-busy to avoid announcing every tiny update. Preserve the user's scroll position if reading earlier text.
+
+Tests: delayed upstream demonstrates text arrives before completion, usage charged once, interruption/unknown usage, UTF-8 split frames, malformed/oversized streams, legacy JSON fallback, browser progressive arrival, reduced motion, error/retry, safe HTML text, and existing shared UI regressions.
+
+Sources: [Qwen streaming](https://www.alibabacloud.com/help/en/model-studio/stream), [Cloudflare streams](https://developers.cloudflare.com/workers/runtime-apis/streams/), [execution lifetime](https://developers.cloudflare.com/workers/runtime-apis/context/).
