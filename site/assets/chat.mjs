@@ -32,7 +32,7 @@ dialog.innerHTML = `<header class="qb-chat-header"><h2 id="qb-chat-title">题库
 <div id="qb-chat-log" role="log" aria-label="学习对话" aria-live="polite"></div>
 <p id="qb-chat-status" role="status">正在检查登录状态……</p><p id="qb-chat-error" role="alert"></p>
 <button type="button" id="qb-chat-login" hidden>登录 / 注册</button>
-<form id="qb-chat-form"><label for="qb-chat-input">你的问题</label><textarea id="qb-chat-input" rows="3" maxlength="2000" required placeholder="例如：为什么选 B？请逐项解释，并举一个例子。"></textarea><small class="qb-chat-input-hint">Enter 发送，Shift+Enter 换行</small>
+<form id="qb-chat-form"><label for="qb-chat-input">你的问题</label><textarea id="qb-chat-input" rows="3" maxlength="2000" required placeholder="例如：这道题选什么？简要说明理由。"></textarea><small class="qb-chat-input-hint">Enter 发送，Shift+Enter 换行</small>
 <div class="qb-chat-actions"><button type="button" id="qb-chat-clear">清空对话</button><button type="submit" id="qb-chat-send">发送问题</button></div></form></div>`;
 document.body.appendChild(dialog);
 const select = byId("qb-chat-question");
@@ -50,9 +50,9 @@ let returnFocus = trigger;
 let questionContext = "";
 let requestSequence = 0;
 const draftPrompts = {
-    zh: "请详细讲解这道题，说明正确答案、各选项为什么对或错，并总结考点。",
-    en: "Please explain this question in detail, identify the correct answer, explain why each option is right or wrong, and summarize the key concepts.",
-    ja: "この問題を詳しく解説し、正解と各選択肢が正しい・誤っている理由を説明して、重要なポイントをまとめてください。",
+    zh: "请简要说明这道题的正确答案和主要理由。",
+    en: "Briefly give the correct answer and the main reason for this question.",
+    ja: "この問題の正解と主な理由を簡潔に説明してください。",
 };
 function draftPrompt() {
     const language = document.documentElement.getAttribute("data-lang");

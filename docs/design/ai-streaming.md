@@ -1,6 +1,8 @@
 # Incremental AI replies
 
-The site builds its chat frontend and backend modules from strict TypeScript. Keep existing model, credentials, prompts, quotas, UTC-8 reset, input bounds and reservation rules unchanged. No new provider or paid calls are needed to verify this change.
+The site builds its chat frontend and backend modules from strict TypeScript. The streaming change kept the existing model, credentials, prompts, quotas, UTC-8 reset, input bounds and reservation rules unchanged. No new provider or paid calls are needed to verify streaming.
+
+2026-10-13 concise replies: default to a 2–4 sentence overview. Reference length: Chinese about 80–150 characters, English 40–80 words, Japanese 100–200 characters; other languages use comparable information density. Simple questions may be shorter. These are soft targets, not mechanical character cutoffs. Answer first, then core reasoning. Do not proactively analyze every option, give examples or add repeated summaries. Expand only the part explicitly requested in a follow-up. Change the question button's auto-draft and textarea example accordingly in all three languages. Enforce max_tokens=512 for each model call, down from 4096, and use that same cap in conservative token reservation. Token caps are not exact character limits. Keep the existing truncation notice, streaming, daily request counts and global token budget.
 
 POST /api/chat remains JSON by default for existing clients. Opt-in Accept: application/x-ndjson returns UTF-8 newline-delimited frames: delta {type, text}, done {type, truncated, remaining, dailyLimit, authenticated, available, configured}, or error {type, error}. Errors before streaming retain existing HTTP status and JSON bodies. A done frame is required for a complete answer. Only public content passes through; reasoning, keys and provider metadata never do.
 

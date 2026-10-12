@@ -158,6 +158,17 @@ test("cannot inject a system role or exceed input bounds; server owns the system
   assert.equal(chatDay(Date.parse("2026-10-10T15:00:00Z")), "2026-10-10");
 });
 
+test("answers default to a concise overview with a bounded model output", () => {
+  assert.equal(CHAT_POLICY.maxOutput, 512);
+  assert.match(CHAT_PROMPT, /80–150/);
+  assert.match(CHAT_PROMPT, /英文约 40–80 个词/);
+  assert.match(CHAT_PROMPT, /日文约 100–200 个字符/);
+  assert.match(CHAT_PROMPT, /参考目标，不要机械截字/);
+  assert.match(CHAT_PROMPT, /不主动逐项分析/);
+  assert.match(CHAT_PROMPT, /追问细节/);
+  assert.doesNotMatch(CHAT_PROMPT, /详细但避免冗长/);
+});
+
 test("system prompt permits learning and technology in any language and briefly refuses unrelated entertainment", () => {
   assert.match(CHAT_PROMPT, /学习和技术问题/);
   assert.match(CHAT_PROMPT, /任何语言/);
@@ -206,6 +217,7 @@ test("successful inference settles usage and never returns the private reasoning
     const body = JSON.parse(init.body);
     assert.equal(body.model, "qwen-flash");
     assert.equal(body.enable_thinking, false);
+    assert.equal(body.max_tokens, 512);
     return streamReply();
   });
   const result = await handleChatRequest(request(token), env);

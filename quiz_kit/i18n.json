@@ -1,4 +1,5 @@
 {
+ "例如：这道题选什么？简要说明理由。": {"en":"For example: Which answer is correct? Briefly explain why.","ja":"例：この問題の正解は？理由を簡潔に説明してください。"},
  "正在生成讲解……": {"en":"Generating the explanation…","ja":"解説を生成中…"},
  "回答未完成，以上内容可能不完整。": {"en":"The response was interrupted; the text above may be incomplete.","ja":"回答が中断されました。上の内容は未完成の可能性があります。"},
  "9 个题库 · 共 4841 题次 · 可作答判分 · 登录后跨设备同步": {"en": "9 question banks · 4,841 attempts · instant scoring · sign in to sync across devices", "ja": "9つの問題集・全4,841問・即時採点・ログインしてデバイス間で同期"},
