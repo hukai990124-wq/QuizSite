@@ -164,6 +164,8 @@ test("Japanese explanations prefer concise plain style without changing language
   assert.match(CHAT_PROMPT, /敬语学习题、题目引用/);
   assert.match(CHAT_PROMPT, /明确要求敬语时/);
   assert.match(CHAT_PROMPT, /保持尊重/);
+  assert.match(CHAT_PROMPT, /避免「です」「ます」「でしょう」/);
+  assert.match(CHAT_PROMPT, /即使历史回答用了礼貌体/);
 });
 
 test("answers default to a concise overview with a bounded model output", () => {

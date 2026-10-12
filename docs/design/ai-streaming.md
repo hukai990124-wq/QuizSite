@@ -1,5 +1,7 @@
 # Incremental AI replies
 
+2026-10-13 Japanese follow-up: explicitly avoid です／ます／でしょう／ございます sentence endings in explanation prose, return to plain form even when history used polite form, and include a compact before/after example. Preserve honorific exercises, quotations and explicit polite-style requests. This is prompt guidance, not deterministic output rewriting; no live inference is required for the prompt regression test.
+
 2026-10-13 Japanese style: prefer concise plain-form explanations (だ／である), reduce honorific/humble language, repeated polite endings, ceremonial introductions and closings, while remaining respectful. Preserve correct honorific forms in language-learning examples and source quotations, and honor an explicit request for polite style. Do not change language selection, length targets, quota or streaming behavior.
 
 2026-10-13 owner adjustment: double the reference lengths to Chinese 160–300 characters, English 80–160 words and Japanese 200–400 characters. Increase the model output cap from 512 to 1024 tokens, with matching budget reservation. Keep simple answers shorter and preserve concise summaries, follow-up expansion, streaming and daily request counts. This overrides the earlier length settings below.
