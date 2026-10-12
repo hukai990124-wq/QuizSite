@@ -159,10 +159,10 @@ test("cannot inject a system role or exceed input bounds; server owns the system
 });
 
 test("answers default to a concise overview with a bounded model output", () => {
-  assert.equal(CHAT_POLICY.maxOutput, 512);
-  assert.match(CHAT_PROMPT, /80–150/);
-  assert.match(CHAT_PROMPT, /英文约 40–80 个词/);
-  assert.match(CHAT_PROMPT, /日文约 100–200 个字符/);
+  assert.equal(CHAT_POLICY.maxOutput, 1024);
+  assert.match(CHAT_PROMPT, /160–300/);
+  assert.match(CHAT_PROMPT, /英文约 80–160 个词/);
+  assert.match(CHAT_PROMPT, /日文约 200–400 个字符/);
   assert.match(CHAT_PROMPT, /参考目标，不要机械截字/);
   assert.match(CHAT_PROMPT, /不主动逐项分析/);
   assert.match(CHAT_PROMPT, /追问细节/);
@@ -217,7 +217,7 @@ test("successful inference settles usage and never returns the private reasoning
     const body = JSON.parse(init.body);
     assert.equal(body.model, "qwen-flash");
     assert.equal(body.enable_thinking, false);
-    assert.equal(body.max_tokens, 512);
+    assert.equal(body.max_tokens, 1024);
     return streamReply();
   });
   const result = await handleChatRequest(request(token), env);

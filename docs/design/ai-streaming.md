@@ -1,5 +1,7 @@
 # Incremental AI replies
 
+2026-10-13 owner adjustment: double the reference lengths to Chinese 160–300 characters, English 80–160 words and Japanese 200–400 characters. Increase the model output cap from 512 to 1024 tokens, with matching budget reservation. Keep simple answers shorter and preserve concise summaries, follow-up expansion, streaming and daily request counts. This overrides the earlier length settings below.
+
 The site builds its chat frontend and backend modules from strict TypeScript. The streaming change kept the existing model, credentials, prompts, quotas, UTC-8 reset, input bounds and reservation rules unchanged. No new provider or paid calls are needed to verify streaming.
 
 2026-10-13 concise replies: default to a 2–4 sentence overview. Reference length: Chinese about 80–150 characters, English 40–80 words, Japanese 100–200 characters; other languages use comparable information density. Simple questions may be shorter. These are soft targets, not mechanical character cutoffs. Answer first, then core reasoning. Do not proactively analyze every option, give examples or add repeated summaries. Expand only the part explicitly requested in a follow-up. Change the question button's auto-draft and textarea example accordingly in all three languages. Enforce max_tokens=512 for each model call, down from 4096, and use that same cap in conservative token reservation. Token caps are not exact character limits. Keep the existing truncation notice, streaming, daily request counts and global token budget.
