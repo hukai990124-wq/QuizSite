@@ -158,6 +158,14 @@ test("cannot inject a system role or exceed input bounds; server owns the system
   assert.equal(chatDay(Date.parse("2026-10-10T15:00:00Z")), "2026-10-10");
 });
 
+test("Japanese explanations prefer concise plain style without changing language choice or necessary examples", () => {
+  assert.match(CHAT_PROMPT, /日语回答默认使用简洁的常体/);
+  assert.match(CHAT_PROMPT, /尊敬语、谦让语/);
+  assert.match(CHAT_PROMPT, /敬语学习题、题目引用/);
+  assert.match(CHAT_PROMPT, /明确要求敬语时/);
+  assert.match(CHAT_PROMPT, /保持尊重/);
+});
+
 test("answers default to a concise overview with a bounded model output", () => {
   assert.equal(CHAT_POLICY.maxOutput, 1024);
   assert.match(CHAT_PROMPT, /160–300/);

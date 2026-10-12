@@ -1,5 +1,7 @@
 # Incremental AI replies
 
+2026-10-13 Japanese style: prefer concise plain-form explanations (だ／である), reduce honorific/humble language, repeated polite endings, ceremonial introductions and closings, while remaining respectful. Preserve correct honorific forms in language-learning examples and source quotations, and honor an explicit request for polite style. Do not change language selection, length targets, quota or streaming behavior.
+
 2026-10-13 owner adjustment: double the reference lengths to Chinese 160–300 characters, English 80–160 words and Japanese 200–400 characters. Increase the model output cap from 512 to 1024 tokens, with matching budget reservation. Keep simple answers shorter and preserve concise summaries, follow-up expansion, streaming and daily request counts. This overrides the earlier length settings below.
 
 The site builds its chat frontend and backend modules from strict TypeScript. The streaming change kept the existing model, credentials, prompts, quotas, UTC-8 reset, input bounds and reservation rules unchanged. No new provider or paid calls are needed to verify streaming.
