@@ -26,8 +26,8 @@ async function main() {
     await page.locator('[data-set-lang="zh"]').click();
     await page.locator('a[href="vocabulary.html"]').click();
     await page.waitForSelector('.qb-sitebar');
-    assert.equal(await page.locator('.q').count(), 50);
-    assert.equal(await page.locator('.opt').count(), 100);
+    assert.equal(await page.locator('.q').count(), 100);
+    assert.equal(await page.locator('.opt').count(), 200);
     const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../aws-aif/vocabulary.json')));
     for (const q of data) {
       const node = page.locator(`[data-term-id="${q.id}"]`);
@@ -55,12 +55,12 @@ async function main() {
     await page.locator('#q2 .js-reveal').click();
     assert.equal(await page.locator('#s-ok').textContent(), '1');
     await page.locator('#q2 .js-redo').click();
-    for (let n = 2; n <= 50; n++) {
+    for (let n = 2; n <= 100; n++) {
       const q = page.locator('#q' + n);
       await q.locator(`[data-letter="${await q.getAttribute('data-ans')}"] button`).click();
       await q.locator('.js-submit').click();
     }
-    assert.equal(await page.locator('#s-ok').textContent(), '50');
+    assert.equal(await page.locator('#s-ok').textContent(), '100');
     await page.locator('#btn-report').click();
     assert.equal(await page.locator('#rp-pct').textContent(), '100%');
     assert.equal(await page.locator('.qb-report-home').getAttribute('href'), '/');
@@ -83,10 +83,10 @@ async function main() {
     }
     await page.goto(base + '/');
     const aif = page.locator('[data-site="aws-aif"]');
-    assert.match(await aif.locator('.pg span').textContent(), /50\/732/);
-    assert.match(await page.locator('#ov-txt').textContent(), /4621/);
+    assert.match(await aif.locator('.pg span').textContent(), /100\/782/);
+    assert.match(await page.locator('#ov-txt').textContent(), /4841/);
     assert.deepEqual(errors, []);
-    const result = {questions:50,choices:100,correctWrongRedoReload:true,keyboard:true,threeLanguages:true,responsive:true,homepageProgress:true,errors};
+    const result = {questions:100,choices:200,correctWrongRedoReload:true,keyboard:true,threeLanguages:true,responsive:true,homepageProgress:true,errors};
     if (process.argv[2]) fs.writeFileSync(process.argv[2], JSON.stringify(result, null, 2));
     console.log(JSON.stringify(result, null, 2));
   } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }

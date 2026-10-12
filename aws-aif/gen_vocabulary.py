@@ -33,7 +33,7 @@ def render(data):
            f'<title>AWS AIF · 专业术语单词库</title><style>{css}</style></head><body><div class="wrap">',
            '<p class="sub"><a href="index.html">← 返回 AIF-C01 目录</a></p>',
            '<h1>AWS AIF · 专业术语单词库</h1>',
-           '<p class="sub">50 个专业术语 · 每题仅 A/B 两个选项 · 中英日对照 · 原创学习练习，非官方试题</p>',
+           f'<p class="sub">{len(data)} 个专业术语 · 每题仅 A/B 两个选项 · 中英日对照 · 原创学习练习，非官方试题</p>',
            '<div class="toolbar"><div class="btns"><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button></div>' + Q.bar_html(len(data)) + '</div>']
     for n, q in enumerate(data, 1):
         other = by_id[q["distractor"]]
