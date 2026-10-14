@@ -2131,5 +2131,14 @@
   "未达及格线": {"en": "Below pass line", "ja": "合格ライン未達"},
   "全真模拟卷（一）": {"en": "Mock Exam 1", "ja": "模擬試験（一）"},
   "考试时间到": {"en": "Time is up", "ja": "試験時間終了"},
-  "已自动交卷": {"en": "Auto-submitted", "ja": "自動提出しました"}
+  "已自动交卷": {"en": "Auto-submitted", "ja": "自動提出しました"},
+  "10 个题库 · 共 4811 题次 · 可作答判分 · 登录后跨设备同步": {"en": "10 question banks · 4,811 attempts · answerable with instant scoring · sign in to sync across devices", "ja": "10つの問題集・全4,811問・解答と即時採点対応・ログインしてデバイス間で同期"},
+  "170 题": {"en": "170 questions", "ja": "170問"},
+  "20 题": {"en": "20 questions", "ja": "20問"},
+  "编程实操": {"en": "Coding practice", "ja": "プログラミング実習"},
+  "编程入门实操": {"en": "Coding Basics", "ja": "プログラミング入門"},
+  "编程入门实操 · 代码审查": {"en": "Coding Basics · Code Review", "ja": "プログラミング入門・コードレビュー"},
+  "CSS 代码审查": {"en": "CSS Code Review", "ja": "CSS コードレビュー"},
+  "练的是代码审查，不是写代码。两种题型各 10 题：给效果选实现、给问题代码找原因。覆盖盒模型、定位与包含块、层叠上下文、flex/grid 陷阱、优先级、渲染性能。": {"en": "Practise code review, not writing code. Two question types, 10 each: pick the correct implementation, or find the cause of buggy code. Covers the box model, positioning and containing blocks, stacking contexts, flex/grid pitfalls, specificity and rendering performance.", "ja": "コードを書く練習ではなく、レビューの練習。2種類の設問を各10問：実装を選ぶ問題と、問題のあるコードの原因を探す問題。ボックスモデル、配置と包含ブロック、スタッキングコンテキスト、flex/grid の落とし穴、詳細度、描画パフォーマンスを扱います。"},
+  "面向腾讯云「效率智能体 OPC 从业者」认证的备考题库。按官方课程地图 11 个模块编排（110 题）用于边看课边查漏，另有 1 套全真模拟卷（60 题：单选 40 + 多选 20），带 90 分钟模考模式、按官方分值换算、70 分及格线。题目依据官方文档自编，每题附解析与出处。": {"en": "Prep bank for the Tencent Cloud \"AI Agent OPC Practitioner\" certification. Organised by the 11 modules of the official curriculum map (110 questions) for reviewing alongside the course, plus one full mock exam (60 questions: 40 single- and 20 multiple-choice) with a 90-minute exam mode, official weighting and a 70-point pass mark. Questions are written from the official docs, each with an explanation and source.", "ja": "腾讯云「効率AIエージェント OPC 実務者」認定向けの対策問題集。公式カリキュラムマップの11モジュールに沿って構成（110問）し、講義と並行して弱点を確認。さらに本番形式の模擬試験1回分（60問：単一選択40＋複数選択20）を収録し、90分の試験モード・公式配点換算・70点合格ラインに対応。問題は公式ドキュメントに基づく自作で、各問に解説と出典を付記。"}
 }
