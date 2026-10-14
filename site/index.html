@@ -85,6 +85,12 @@ a.card .sd{margin:0 0 15px;font-size:13.2px;color:#5b6570;flex:1 1 auto}
 .pg span{display:block;font-size:12px;color:#8b95a1;margin-top:7px;font-variant-numeric:tabular-nums}
 .pg.on span{color:#0b6b3a;font-weight:600}
 
+.practice-section{margin:28px 0;padding:20px;border:1px solid #ecc0c7;border-top:4px solid #a51d32;border-radius:14px;background:#fff8f8}
+.practice-section h2{margin:0 0 8px;color:#75152a;font-size:20px}
+.practice-section>.sub{margin:0 0 16px;color:#5b6570;font-size:14px}
+.practice-section .cards{margin-bottom:0}
+.practice-section .tg{color:#75152a;background:#fff1f2;border-color:#ecc0c7}
+.practice-section a.card:hover{border-color:#a51d32}
 .howto{background:#fff;border:1px solid #e3e9ee;border-radius:14px;padding:18px 20px}
 .howto h2{margin:0 0 10px;font-size:16px}
 .howto ol{margin:0;padding-left:20px;font-size:13.8px;color:#334155}
@@ -149,7 +155,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">9 个题库 · 共 4841 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <p class="sub">10 个题库 · 共 4861 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
@@ -193,7 +199,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4841</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4861</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -259,6 +265,19 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
     </div>
+
+    <section class="practice-section" id="programming-practice" aria-labelledby="programming-title">
+      <h2 id="programming-title">编程入门实操</h2>
+      <p class="sub">先学会看懂 AI 写的代码：发现问题，选出正确修复。</p>
+      <div class="cards">
+        <a class="card" href="programming/index.html" data-site="programming">
+          <div class="top"><span class="tg">代码审查 · 入门</span><span class="cnt">20 题</span></div>
+          <h3>HTML 入门 · 代码审查训练</h3>
+          <p class="sd">标签、图片、链接与表单基础。每题四选一，附答案与解析，中英日对照。</p>
+          <div class="pg"><i></i><span>未开始</span></div>
+        </a>
+      </div>
+    </section>
 
     <div class="howto">
       <h2>怎么用</h2>
@@ -358,6 +377,7 @@ function aifKeys(){
 }
 /* 各题库的 localStorage key 与其题量（key 实际存储为 "quiz:"+key） */
 var SITES={
+  "programming":{keys:[["programming:html:01",20]]},
   "dele-a1":{keys:[["dele-a1-a1-modelo0-2020",50],["dele-a1-a1-modelo0-2008",50],
                    ["dele-a1-a1-0720",25],["dele-a1-a1-2009-0516",50],
                    ["dele-a1-a1-2011",50]]},

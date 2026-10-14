@@ -84,7 +84,7 @@ async function main() {
     await page.goto(base + '/');
     const aif = page.locator('[data-site="aws-aif"]');
     assert.match(await aif.locator('.pg span').textContent(), /100\/782/);
-    assert.match(await page.locator('#ov-txt').textContent(), /4841/);
+    assert.match(await page.locator('#ov-txt').textContent(), /4861/);
     assert.deepEqual(errors, []);
     const result = {questions:100,choices:200,correctWrongRedoReload:true,keyboard:true,threeLanguages:true,responsive:true,homepageProgress:true,errors};
     if (process.argv[2]) fs.writeFileSync(process.argv[2], JSON.stringify(result, null, 2));

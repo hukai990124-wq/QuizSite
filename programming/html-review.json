@@ -1,0 +1,162 @@
+[
+  {
+    "id":"html-01",
+    "prompt":{"en":"Review this image markup. Which replacement correctly uses the HTML image element and a text alternative?","zh":"审查这段图片代码：哪项正确使用 HTML 图片标签，并提供替代文字？","ja":"画像のコードをレビューする。HTMLの画像要素と代替テキストを正しく使う修正はどれか。"},
+    "code":"<image href=\"cat.jpg\" title=\"Cat\"></image>",
+    "options":["<img src=\"cat.jpg\" alt=\"Cat\">","<image src=\"cat.jpg\" alt=\"Cat\"></image>","<img href=\"cat.jpg\" alt=\"Cat\">","<img src=\"cat.jpg\" title=\"Cat\">"],"answer":"A",
+    "explanation":{"en":"Use img with src for the image URL and alt for its text alternative. title supplies advisory information, not a replacement for alt. img is a void element and has no closing tag.","zh":"图片用 img，地址用 src，替代文字用 alt。title 是补充提示，不能代替 alt。img 是空元素，不写结束标签。","ja":"画像はimg、画像URLはsrc、代替テキストはaltを使う。titleは補足情報で、altの代用ではない。imgは空要素なので終了タグを書かない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"
+  },
+  {
+    "id":"html-02",
+    "prompt":{"en":"The paragraph needs a proper closing tag. Which repair is correct?","zh":"段落缺少正确的结束标签，哪项修复正确？","ja":"段落の終了タグを正しく直すのはどれか。"},
+    "code":"<p>Hello<p/>",
+    "options":["<p>Hello<\\p>","<p>Hello</>","<p>Hello</p>","</p>Hello<p>"],"answer":"C",
+    "explanation":{"en":"An end tag places / before the tag name: </p>. <p/> does not close a paragraph in HTML. A bare </> is not an HTML end tag either.","zh":"结束标签的斜杠放在标签名前： </p>。HTML 中 <p/> 不会关闭段落，单独的 </> 也不是有效的 HTML 结束标签。","ja":"終了タグは名前の前に/を置く： </p>。HTMLでは<p/>で段落は閉じられず、</>もHTMLの終了タグではない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Glossary/Void_element"
+  },
+  {
+    "id":"html-03",
+    "prompt":{"en":"Preserve the strong emphasis inside this paragraph. Which nesting is correct?","zh":"保留段落内的强调效果，哪项嵌套正确？","ja":"段落内の強い強調を保つ。正しい入れ子はどれか。"},
+    "code":"<p><strong>Warning</p></strong>",
+    "options":["<p><strong>Warning</p></strong>","<strong><p>Warning</strong></p>","<p><strong>Warning<strong></p>","<p><strong>Warning</strong></p>"],"answer":"D",
+    "explanation":{"en":"Close the inner strong element before the outer paragraph. Crossing tag boundaries is invalid nesting; browser error recovery does not make the source correct.","zh":"先关闭内层 strong，再关闭外层 p。结束标签不能交叉；浏览器能自动纠错，不等于源码写对了。","ja":"内側のstrongを閉じてから外側のpを閉じる。タグを交差させない。ブラウザーが補正して表示しても、元のコードが正しいとは限らない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax"
+  },
+  {
+    "id":"html-04",
+    "prompt":{"en":"Turn the word Guide into a link to /guide.html. Which replacement works?","zh":"让 Guide 成为指向 /guide.html 的链接，哪项正确？","ja":"Guideを/guide.htmlへのリンクにする。正しい修正はどれか。"},
+    "code":"<a src=\"/guide.html\">Guide</a>",
+    "options":["<a src=\"/guide.html\">Guide</a>","<a href=\"/guide.html\">Guide</a>","<a href>Guide /guide.html</a>","<a link=\"/guide.html\">Guide</a>"],"answer":"B",
+    "explanation":{"en":"An anchor uses href for its destination. src loads a resource on elements such as img; it does not set an anchor's destination. link is not the required attribute.","zh":"a 标签用 href 指定跳转地址。src 用于 img 等元素加载资源，不会设置 a 的跳转目标；link 也不是这里需要的属性。","ja":"aのリンク先はhrefで指定する。srcはimgなどのリソース読み込み用で、aの移動先にはならない。linkという属性でも指定できない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
+  },
+  {
+    "id":"html-05",
+    "prompt":{"en":"Set the browser-tab title to My portfolio, not a visible page heading. Which belongs inside head?","zh":"要把浏览器标签页标题设为 My portfolio，而不是正文标题，head 内应该写哪项？","ja":"本文の見出しではなく、ブラウザーのタブ名をMy portfolioにする。head内に書くのはどれか。"},
+    "code":"<head>\n  <!-- tab title goes here -->\n</head>",
+    "options":["<h1>My portfolio</h1>","<title>My portfolio</title>","<head title=\"My portfolio\"></head>","<meta title=\"My portfolio\">"],"answer":"B",
+    "explanation":{"en":"title in head defines the document title shown in a browser tab. h1 is a visible heading in body. The title attribute on an element is different from the title element.","zh":"head 内的 title 元素定义标签页标题。h1 是 body 内的可见标题。title 属性与 <title> 元素不是一回事。","ja":"head内のtitle要素がタブに表示する文書タイトルを定義する。h1はbody内の見出し。title属性とtitle要素は別物だ。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/title"
+  },
+  {
+    "id":"html-06",
+    "prompt":{"en":"The tooltip should read exactly Red cat. Which attribute value keeps both words together?","zh":"提示文字要完整显示 Red cat，哪项能把两个单词都放进 title 的值？","ja":"ツールチップをRed catと表示したい。2語をtitleの値にまとめる書き方はどれか。"},
+    "code":"<img src=\"cat.jpg\" alt=\"Cat\" title=Red cat>",
+    "options":["<img src=\"cat.jpg\" alt=\"Cat\" title=Red cat>","<img src=\"cat.jpg\" alt=\"Cat\" title(\"Red cat\")>","<img src=\"cat.jpg\" alt=\"Cat\" title:Red cat>","<img src=\"cat.jpg\" alt=\"Cat\" title=\"Red cat\">"],"answer":"D",
+    "explanation":{"en":"Quote an attribute value containing spaces. Without quotes, title=Red ends at the space and cat is parsed separately. This tooltip still does not replace alt.","zh":"属性值包含空格时需要加引号。不加引号时 title=Red 在空格处结束，cat 会被当成另一个属性。提示文字仍不能代替 alt。","ja":"空白を含む属性値は引用符で囲む。引用符がないとtitleの値はRedまでで、catは別の属性として解析される。ツールチップはaltの代わりにはならない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax"
+  },
+  {
+    "id":"html-07",
+    "prompt":{"en":"Which repair uses the HTML line-break element without an invalid closing tag?","zh":"哪项正确使用 HTML 换行元素，且没有无效的结束标签？","ja":"無効な終了タグを使わず、HTMLの改行要素を正しく書くのはどれか。"},
+    "code":"<p>Line 1<br></br>Line 2</p>",
+    "options":["<p>Line 1<br>Line 2</p>","<p>Line 1<br>Line 2</br></p>","<p>Line 1</br>Line 2</p>","<p>Line 1<break>Line 2</break></p>"],"answer":"A",
+    "explanation":{"en":"br is a void element: use <br> without </br>. <br /> is also allowed in HTML, but the slash has no self-closing effect there. break is not the HTML line-break element.","zh":"br 是空元素，写 <br>，不写 </br>。HTML 中也允许 <br />，但尾部斜杠并没有自闭合效果。break 不是 HTML 换行元素。","ja":"brは空要素なので<br>と書き、</br>は付けない。HTMLでは<br />も許容されるが、末尾の/に自己終了の効果はない。breakは改行要素ではない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Glossary/Void_element"
+  },
+  {
+    "id":"html-08",
+    "prompt":{"en":"Use explicit list-item tags to create an unordered list of Tea and Coffee. Which repair is correct?","zh":"用明确的列表项标签，把 Tea 和 Coffee 做成无序列表，哪项正确？","ja":"項目タグを明示してTeaとCoffeeの順序なしリストを作る。正しい修正はどれか。"},
+    "code":"<ul><p>Tea</p><p>Coffee</p></ul>",
+    "options":["<ul><p>Tea</p><p>Coffee</p></ul>","<li><ul>Tea</ul><ul>Coffee</ul></li>","<ul><li>Tea</li><li>Coffee</li></ul>","<ul><item>Tea</item><item>Coffee</item></ul>"],"answer":"C",
+    "explanation":{"en":"ul is the unordered-list container and li marks each list item. A p is a paragraph, not a list item; item is not the standard HTML list-item element.","zh":"ul 是无序列表容器，每一项用 li。p 表示段落，不是列表项；item 也不是标准 HTML 列表项元素。","ja":"ulは順序なしリストの入れ物で、各項目はliで示す。pは段落でありリスト項目ではない。itemも標準の項目要素ではない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul"
+  },
+  {
+    "id":"html-09",
+    "prompt":{"en":"Clicking the label should focus this input. Which explicit association fixes the mismatch?","zh":"点击文字标签应聚焦输入框，哪项显式关联修复正确？","ja":"ラベルをクリックしたとき入力欄にフォーカスさせたい。明示的な関連付けとして正しい修正はどれか。"},
+    "code":"<label for=\"email\">Email</label>\n<input id=\"mail\" type=\"email\">",
+    "options":["<label href=\"mail\">Email</label><input id=\"mail\" type=\"email\">","<label for=\"email\">Email</label><input id=\"mail\" type=\"email\">","<label src=\"mail\">Email</label><input id=\"mail\" type=\"email\">","<label for=\"mail\">Email</label><input id=\"mail\" type=\"email\">"],"answer":"D",
+    "explanation":{"en":"A label's for must match the associated control's id exactly. This enables label activation and gives the field an accessible name. The input type does not create that association.","zh":"label 的 for 必须与输入控件的 id 一致，才能正确关联并提供可访问名称。input 的 type 不会自动建立这种关联。","ja":"labelのforを対象のidと一致させると、クリック操作とアクセシブルな名前の関連付けができる。inputのtypeだけでは関連付かない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"
+  },
+  {
+    "id":"html-10",
+    "prompt":{"en":"Preview is inside a form but must not submit it. Which explicit button type should be used?","zh":"Preview 位于表单中，但不应该提交表单，应明确设置哪种按钮类型？","ja":"フォーム内のPreviewボタンで送信を起こしたくない。明示するtypeはどれか。"},
+    "code":"<form><button>Preview</button></form>",
+    "options":["<button type=\"button\">Preview</button>","<button type=\"submit\">Preview</button>","<button type=\"reset\">Preview</button>","<button type=\"preview\">Preview</button>"],"answer":"A",
+    "explanation":{"en":"type=button makes an ordinary button without submitting or resetting the form. submit submits, reset resets fields, and preview is not a valid button type. Do not rely on a missing type in forms.","zh":"type=button 是普通按钮，不会提交或重置表单。submit 用于提交，reset 会重置字段，preview 不是有效类型。表单里不要依赖省略 type。","ja":"type=buttonなら送信もリセットも行わない通常のボタンになる。submitは送信、resetは入力のリセットで、previewは有効なtypeではない。フォーム内ではtypeを明示する。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button"
+  },
+  {
+    "id":"html-11",
+    "prompt":{"en":"The input must be editable. Which repair removes the boolean disabled state?","zh":"这个输入框需要可以编辑，哪项正确取消 disabled 布尔属性？","ja":"入力欄を編集可能にしたい。disabledの真偽属性を正しく解除する修正はどれか。"},
+    "code":"<input type=\"text\" disabled=\"false\">",
+    "options":["<input type=\"text\" disabled=\"false\">","<input type=\"text\" disabled=\"0\">","<input type=\"text\">","<input type=\"text\" disabled=\"no\">"],"answer":"C",
+    "explanation":{"en":"For a boolean HTML attribute, presence means true. Even disabled=\"false\" still disables the input. Remove the attribute to enable it; changing its text value is not enough.","zh":"HTML 布尔属性只要存在就表示真。即使写 disabled=\"false\" 也仍然禁用输入框。启用时要移除该属性，而不是修改其文字值。","ja":"HTMLの真偽属性は存在すれば真になる。disabled=\"false\"でも入力欄は無効のままだ。有効にするには属性自体を取り除く。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Glossary/Boolean/HTML"
+  },
+  {
+    "id":"html-12",
+    "prompt":{"en":"Two different elements reuse an id. Which version gives both unique identifiers?","zh":"两个不同元素重复使用 id，哪项修复后两者都有唯一标识？","ja":"2つの要素でidが重複している。それぞれを一意に識別できる修正はどれか。"},
+    "code":"<h1 id=\"intro\">Intro</h1>\n<p id=\"intro\">Details</p>",
+    "options":["<h1 id=\"intro\">Intro</h1><p id=\"intro\">Details</p>","<h1 id=\"intro\">Intro</h1><p id=\"details\">Details</p>","<h1 id=\"intro\">Intro</h1><p id=\"intro\" class=\"details\">Details</p>","<h1 id=\"same\">Intro</h1><p id=\"same\">Details</p>"],"answer":"B",
+    "explanation":{"en":"An id must be unique within its document tree. Different IDs distinguish the heading and paragraph. Adding a class does not fix a duplicated id; classes, unlike IDs, may be shared.","zh":"同一文档树内 id 必须唯一。使用不同 id 才能区分标题和段落。增加 class 不会消除 id 重复；class 则可以在多个元素间共享。","ja":"同じ文書ツリー内のidは一意にする。見出しと段落に別のidを付ける。classを追加してもidの重複は解消しない。classは複数要素で共有できる。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/id"
+  },
+  {
+    "id":"html-13",
+    "prompt":{"en":"Replace this JavaScript-style note with a real HTML comment. Which syntax is correct?","zh":"把这种 JavaScript 风格注释改成真正的 HTML 注释，哪项正确？","ja":"JavaScript風のメモをHTMLのコメントに直す。正しい構文はどれか。"},
+    "code":"// navigation starts here\n<nav>...</nav>",
+    "options":["/* navigation starts here */","// navigation starts here","<!-- navigation starts here -->","<# navigation starts here #>"],"answer":"C",
+    "explanation":{"en":"HTML comments use <!-- and -->. // is JavaScript-style, and /* */ is used in CSS and JavaScript, not ordinary HTML markup. Comments remain visible in page source, so never hide secrets there.","zh":"HTML 注释用 <!-- 与 -->。// 是 JavaScript 风格，/* */ 用于 CSS、JavaScript，不是普通 HTML 注释。注释仍能在源码中查看，不可放密钥。","ja":"HTMLのコメントは<!--と-->で囲む。//や/* */は通常のHTMLコメントにならない。コメントはソースから読めるので秘密情報を置かない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Comments"
+  },
+  {
+    "id":"html-14",
+    "prompt":{"en":"Display the literal text <img> in a code example, without creating an image element. Which source is correct?","zh":"要在示例中显示字面文本 <img>，而不创建图片元素，哪项源码正确？","ja":"画像要素を作らず、文字として<img>を表示する。正しいソースはどれか。"},
+    "code":"<code><img></code>",
+    "options":["<code><img></code>","<code>&lt;img&gt;</code>","<code></img></code>","<code><image></code>"],"answer":"B",
+    "explanation":{"en":"Character references &lt; and &gt; display angle brackets as text. Wrapping raw markup in code does not stop HTML parsing; code supplies semantics, not an escape mechanism.","zh":"字符引用 &lt;、&gt; 会把尖括号显示为文字。只套一层 code 并不能阻止 HTML 解析；code 提供代码语义，不负责转义。","ja":"文字参照&lt;と&gt;で山括弧を文字として表示できる。codeで囲むだけではHTML解析を止められない。codeは意味付けであり、エスケープ機能ではない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/code"
+  },
+  {
+    "id":"html-15",
+    "prompt":{"en":"Which replacement creates a complete minimal HTML document with the title in head and content in body?","zh":"哪项是完整的最小 HTML 文档：title 在 head 中，正文在 body 中？","ja":"titleをheadに、本文をbodyに置いた最小限の完全なHTML文書はどれか。"},
+    "code":"<html><body><title>Demo</title><p>Hello</p></body></html>",
+    "options":["<html><body><title>Demo</title></body></html>","<!doctype html><html><head><p>Hello</p></head><body><title>Demo</title></body></html>","<!doctype html><html><head><title>Demo<body><p>Hello</p></body></html>","<!doctype html><html><head><title>Demo</title></head><body><p>Hello</p></body></html>"],"answer":"D",
+    "explanation":{"en":"The doctype selects standards mode. head contains metadata such as title; body contains the visible paragraph. Correct tag boundaries matter even though browsers repair many malformed documents.","zh":"doctype 让浏览器使用标准模式。head 放 title 等元数据，body 放可见段落。浏览器会修复许多错误，但审查源码仍应检查正确的结构和边界。","ja":"doctypeで標準モードを選ぶ。headにはtitleなどのメタデータ、bodyには表示する段落を置く。ブラウザーの補正に頼らず構造とタグの境界を確認する。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax"
+  },
+  {
+    "id":"html-16",
+    "prompt":{"en":"Declare UTF-8 encoding inside head. Which markup does that?","zh":"在 head 中声明 UTF-8 字符编码，哪项正确？","ja":"head内でUTF-8の文字エンコーディングを宣言する。正しい記述はどれか。"},
+    "code":"<head><!-- UTF-8 declaration needed --></head>",
+    "options":["<meta charset=\"UTF-8\">","<charset>UTF-8</charset>","<title charset=\"UTF-8\">Demo</title>","<meta encoding=\"UTF-8\">"],"answer":"A",
+    "explanation":{"en":"Use meta charset=\"UTF-8\" early in head. encoding is not the meta attribute for this declaration, and a title attribute does not declare the document encoding.","zh":"在 head 靠前位置写 meta charset=\"UTF-8\"。这里用 charset，不是 encoding；给 title 写属性也不能声明文档编码。","ja":"headの先頭付近にmeta charset=\"UTF-8\"を置く。この宣言の属性はcharsetでありencodingではない。titleの属性でも文字コードは宣言できない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta"
+  },
+  {
+    "id":"html-17",
+    "prompt":{"en":"Make a form send the user's typed value under the key username using a normal form submission. Which missing attribute must be added?","zh":"通过普通表单提交，把用户输入的值以 username 为字段名发送，需要补上哪个属性？","ja":"通常のフォーム送信で入力値をusernameという項目名で送る。追加すべき属性はどれか。"},
+    "code":"<form action=\"/save\" method=\"post\">\n  <input id=\"username\" type=\"text\">\n  <button type=\"submit\">Save</button>\n</form>",
+    "options":["<input id=\"username\" type=\"text\" title=\"username\">","<input id=\"username\" type=\"text\" name=\"username\">","<input id=\"username\" type=\"text\" class=\"username\">","<input id=\"username\" type=\"text\" placeholder=\"username\">"],"answer":"B",
+    "explanation":{"en":"name supplies the key for a submitted control value. id identifies the element but does not supply a submission key. title, class and placeholder do not name form data either.","zh":"name 决定表单提交时的字段名。id 只标识元素，不会提供提交字段名；title、class、placeholder 也都不能代替 name。","ja":"nameがフォーム送信時の項目名になる。idは要素の識別子であり送信キーではない。title、class、placeholderもnameの代わりにはならない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+  },
+  {
+    "id":"html-18",
+    "prompt":{"en":"These radio buttons are one choice group: selecting one should deselect the other. Which repair makes that happen?","zh":"这两个单选按钮应属于同一组，选择一个会取消另一个，哪项修复正确？","ja":"2つのラジオボタンを同じ選択グループにし、一方を選ぶと他方を解除したい。正しい修正はどれか。"},
+    "code":"<input type=\"radio\" name=\"red\" value=\"red\">\n<input type=\"radio\" name=\"blue\" value=\"blue\">",
+    "options":["<input type=\"radio\" name=\"red\" value=\"red\"><input type=\"radio\" name=\"blue\" value=\"blue\">","<input type=\"checkbox\" name=\"color\" value=\"red\"><input type=\"checkbox\" name=\"color\" value=\"blue\">","<input type=\"radio\" name=\"color\" value=\"red\"><input type=\"radio\" name=\"color\" value=\"blue\">","<input type=\"radio\" id=\"color\" name=\"red\"><input type=\"radio\" id=\"color\" name=\"blue\">"],"answer":"C",
+    "explanation":{"en":"In the same form, radio inputs sharing a name belong to one group. Different values identify the selected choice. A shared id is invalid and does not form a radio group; checkboxes allow multiple selections.","zh":"同一表单中，radio 使用相同 name 才形成单选组，用不同 value 区分选项。重复 id 不会建立分组且不合法；checkbox 则允许多选。","ja":"同じフォーム内でnameを共有するradioが1つのグループになる。valueは選択肢ごとに変える。idの重複は不正で、グループ化にもならない。checkboxは複数選択が可能だ。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio"
+  },
+  {
+    "id":"html-19",
+    "prompt":{"en":"Put this data cell inside an explicit table row. Which nesting is correct?","zh":"把这个数据单元格放进明确的表格行中，哪项嵌套正确？","ja":"データセルを明示的な表の行に入れる。正しい入れ子はどれか。"},
+    "code":"<table><td>Alice</td></table>",
+    "options":["<table><tr><td>Alice</td></tr></table>","<tr><table><td>Alice</td></table></tr>","<table><td><tr>Alice</tr></td></table>","<table><row><td>Alice</td></row></table>"],"answer":"A",
+    "explanation":{"en":"The order is table, tr (row), then td (data cell). A browser may insert tbody automatically; that is normal. row is not the standard HTML row element.","zh":"层级是 table → tr（行）→ td（数据单元格）。浏览器可能自动插入 tbody，这是正常行为。row 不是标准的 HTML 表格行元素。","ja":"table、tr（行）、td（データセル）の順に入れる。ブラウザーがtbodyを自動挿入する場合もあるが正常な動作だ。rowは標準の行要素ではない。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/tr"
+  },
+  {
+    "id":"html-20",
+    "prompt":{"en":"Assign both existing CSS classes card and highlighted to this element. Which HTML is correct?","zh":"把已有的 card 和 highlighted 两个 CSS 类都应用到元素上，哪项 HTML 正确？","ja":"既存のCSSクラスcardとhighlightedを両方適用する。正しいHTMLはどれか。"},
+    "code":"<div class=\"card,highlighted\">Hello</div>",
+    "options":["<div class=\"card,highlighted\">Hello</div>","<div className=\"card highlighted\">Hello</div>","<div class=\"card.highlighted\">Hello</div>","<div class=\"card highlighted\">Hello</div>"],"answer":"D",
+    "explanation":{"en":"In ordinary HTML, class names are separated by spaces. Commas and dots become part of a single class name. className is a DOM/JSX convention, not the class attribute used in an HTML file.","zh":"普通 HTML 的多个类名用空格分隔，逗号和点号会成为单个类名的一部分。className 属于 DOM/JSX 用法，HTML 文件的属性应写 class。","ja":"通常のHTMLでは複数のクラス名を空白で区切る。カンマやピリオドは1つのクラス名の一部になる。classNameはDOMやJSXで使う名前で、HTMLの属性名はclassだ。"},
+    "source":"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/class"
+  }
+]
