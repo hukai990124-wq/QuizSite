@@ -1,0 +1,795 @@
+{
+  "id": "jb",
+  "title": {
+    "en": "Java Bronze (1Z0-818) Practice",
+    "zh": "Java Bronze 备考练习",
+    "ja": "Java Bronze 対策演習"
+  },
+  "description": {
+    "en": "Classic Sun/Oracle certification questions covering variables, initialisation, modifiers, operators, control flow, interfaces, inheritance and exceptions.",
+    "zh": "经典 Sun/Oracle 认证真题：变量与初始化、修饰符、运算符、控制流程、接口、继承与异常处理。",
+    "ja": "Sun/Oracle 認定試験の定番問題：変数と初期化、修飾子、演算子、制御構文、インターフェース、継承、例外処理。"
+  },
+  "questions": [
+    {
+      "id": "jb-01",
+      "topic": "initialisation",
+      "kind": "single",
+      "code": "class testClass{\n  public static void main(String[] args) {\n    int a;\n    System.out.println(a);\n  }\n}",
+      "prompt": {
+        "en": "What is wrong with the following Java program?",
+        "zh": "以下这段 Java 程序有什么问题？",
+        "ja": "次の Java プログラムのどこに問題があるか。"
+      },
+      "options": [
+        {
+          "en": "The class 'testClass' has no instance variables.",
+          "zh": "类 testClass 没有任何实例变量。",
+          "ja": "クラス testClass にインスタンス変数がない。"
+        },
+        {
+          "en": "The local variable 'a' is used without being initialised.",
+          "zh": "局部变量 a 未初始化就被使用了。",
+          "ja": "ローカル変数 a が初期化されずに使われている。"
+        },
+        {
+          "en": "The class 'testClass' has no access modifier.",
+          "zh": "类 testClass 没有访问修饰符。",
+          "ja": "クラス testClass にアクセス修飾子がない。"
+        },
+        {
+          "en": "Nothing is wrong with the program.",
+          "zh": "程序没有任何问题。",
+          "ja": "プログラムに問題はない。"
+        }
+      ],
+      "answer": "B",
+      "explanation": {
+        "en": "Local variables get no default value in Java. The compiler rejects any attempt to read one before a value has been assigned. Instance and static fields do receive defaults (0, false, null), but 'a' here is declared inside main, so it stays uninitialised.",
+        "zh": "Java 的局部变量没有默认值，任何「先赋值再读取」之外的用法都会被编译器直接拒绝。实例字段和静态字段才有默认值（0、false、null），但这里的 a 声明在 main 里面，属于局部变量，所以必须显式赋值后才能使用。",
+        "ja": "Java のローカル変数には既定値がないため、値を代入する前に読み取ろうとするとコンパイルエラーになる。既定値（0・false・null）を持つのはインスタンス変数と static 変数だけ。ここで a は main の中のローカル変数なので初期化が必須。"
+      }
+    },
+    {
+      "id": "jb-02",
+      "topic": "final",
+      "kind": "multi",
+      "code": "public class xyz {\n  int a;\n  final int b;\n  int c = 4;\n  final String str = \"hello world\";\n  public void func() {\n    int d;\n    String localstring = \"hello everyone\";\n    str = localstring;\n    System.out.println(str);\n    System.out.println(d);\n    System.out.println(a);\n  }\n}",
+      "prompt": {
+        "en": "Which of these are compile errors in the program above? (select all that apply)",
+        "zh": "以上程序中，哪些会导致编译错误？（多选）",
+        "ja": "このプログラムでコンパイルエラーになるものはどれか。（すべて選択）"
+      },
+      "options": [
+        {
+          "en": "Assigning to the final variable 'str' is not allowed.",
+          "zh": "不允许对 final 变量 str 重新赋值。",
+          "ja": "final 変数 str への再代入は許可されない。"
+        },
+        {
+          "en": "The variable 'a' has not been initialised.",
+          "zh": "变量 a 没有被初始化。",
+          "ja": "変数 a が初期化されていない。"
+        },
+        {
+          "en": "The final field 'b' must be initialised.",
+          "zh": "final 字段 b 必须被初始化。",
+          "ja": "final フィールド b は初期化が必須。"
+        },
+        {
+          "en": "The local variable 'd' is used without being initialised.",
+          "zh": "局部变量 d 未初始化就被使用了。",
+          "ja": "ローカル変数 d が初期化されずに使われている。"
+        }
+      ],
+      "answer": "A,C,D",
+      "explanation": {
+        "en": "A final field or variable can only be assigned once: assigning to 'str' inside func() is illegal. A final field also has to be assigned either at its declaration or in every constructor — 'b' gets neither. Local variables have no default value, so printing 'd' is an error. 'a' is an instance field, so it defaults to 0 and printing it is perfectly legal.",
+        "zh": "final 变量只能赋值一次，所以在 func() 里再次给 str 赋值是非法的。final 字段必须在声明时或每个构造器里完成初始化，b 两者都没有。局部变量没有默认值，所以打印 d 也是错误。而 a 是实例字段，默认值为 0，打印它完全合法。",
+        "ja": "final 変数は一度しか代入できないため、func() 内での str への再代入は不正。final フィールドは宣言時か全コンストラクタで初期化が必要で、b はどちらも満たしていない。ローカル変数に既定値はないので d の出力もエラー。a はインスタンス変数で既定値 0 を持つため出力は問題なし。"
+      }
+    },
+    {
+      "id": "jb-03",
+      "topic": "final",
+      "kind": "single",
+      "code": "final class test1{\n  protected static int a;\n}\nclass test2 extends test1{\n  public static void main(String[] args) {\n    System.out.println(a);\n  }\n}",
+      "prompt": {
+        "en": "What is wrong with the following Java program?",
+        "zh": "以下这段 Java 程序有什么问题？",
+        "ja": "次の Java プログラムのどこに問題があるか。"
+      },
+      "options": [
+        {
+          "en": "The static variable 'a' is not initialised.",
+          "zh": "静态变量 a 没有初始化。",
+          "ja": "static 変数 a が初期化されていない。"
+        },
+        {
+          "en": "The final class 'test1' cannot be inherited.",
+          "zh": "final 类 test1 不能被继承。",
+          "ja": "final クラス test1 は継承できない。"
+        },
+        {
+          "en": "Static variables are not allowed in a final class.",
+          "zh": "final 类中不允许有静态变量。",
+          "ja": "final クラスに static 変数は置けない。"
+        },
+        {
+          "en": "There is nothing wrong with the program.",
+          "zh": "程序没有任何问题。",
+          "ja": "プログラムに問題はない。"
+        }
+      ],
+      "answer": "B",
+      "explanation": {
+        "en": "A final class cannot be extended — that is exactly what the modifier is for. Everything else here is legal: a final class may hold static fields, and static fields default to 0 so 'a' need not be assigned explicitly.",
+        "zh": "被 final 修饰的类不能被继承，这正是它的用途。其余部分都合法：final 类里可以有静态字段，而静态字段有默认值 0，所以 a 不显式赋值也没问题。",
+        "ja": "final クラスは継承できない —— それがこの修飾子の役割。他はすべて合法。final クラスに static フィールドを置くことはでき、static フィールドは既定値 0 を持つので a の明示的な初期化も不要。"
+      }
+    },
+    {
+      "id": "jb-04",
+      "topic": "fields",
+      "kind": "single",
+      "code": "class testClass{\n  static int a;\n  public static void main(String[] args) {\n    System.out.println(a);\n  }\n}",
+      "prompt": {
+        "en": "What default value does the variable 'a' receive?",
+        "zh": "变量 a 取得的默认值是多少？",
+        "ja": "変数 a が持つ既定値はどれか。"
+      },
+      "options": [
+        {
+          "en": "0",
+          "zh": "0",
+          "ja": "0"
+        },
+        {
+          "en": "1",
+          "zh": "1",
+          "ja": "1"
+        },
+        {
+          "en": "null",
+          "zh": "null",
+          "ja": "null"
+        },
+        {
+          "en": "It has no default value and fails to compile.",
+          "zh": "没有默认值，程序无法编译。",
+          "ja": "既定値はなく、コンパイルできない。"
+        }
+      ],
+      "answer": "A",
+      "explanation": {
+        "en": "Static and instance fields of numeric primitives default to 0, booleans to false, and object references to null. Defaults apply only to fields — local variables never receive one.",
+        "zh": "静态字段和实例字段中，数值型基本类型默认为 0，布尔型为 false，引用类型为 null。默认值只给字段，局部变量永远不会自动获得默认值。",
+        "ja": "static フィールドとインスタンスフィールドは、数値プリミティブが 0、boolean が false、参照型が null で初期化される。既定値が与えられるのはフィールドだけで、ローカル変数には与えられない。"
+      }
+    },
+    {
+      "id": "jb-05",
+      "topic": "initialisation",
+      "kind": "single",
+      "code": "class abcd{\n  int a;\n  int b=0;\n  static int c;\n  public void m() {\n    int d;\n    int e=0;\n    // position 1\n  }\n}",
+      "prompt": {
+        "en": "Which statement CANNOT be inserted at position 1?",
+        "zh": "哪条语句不能插在第 1 处？",
+        "ja": "位置 1 に挿入できない文はどれか。"
+      },
+      "options": [
+        {
+          "en": "a++;",
+          "zh": "a++;",
+          "ja": "a++;"
+        },
+        {
+          "en": "c++;",
+          "zh": "c++;",
+          "ja": "c++;"
+        },
+        {
+          "en": "d++;",
+          "zh": "d++;",
+          "ja": "d++;"
+        },
+        {
+          "en": "e++;",
+          "zh": "e++;",
+          "ja": "e++;"
+        }
+      ],
+      "answer": "C",
+      "explanation": {
+        "en": "m() is an instance method, so a, b, c and e are all reachable: instance fields default to 0 (a, b), static fields default to 0 (c), and e was explicitly set to 0. Only 'd' is an uninitialised local variable, and reading it — which ++ does — is a compile error.",
+        "zh": "m() 是实例方法，因此 a、b、c、e 都可用：实例字段 a、b 默认为 0，静态字段 c 默认为 0，e 被显式赋值为 0。只有 d 是未初始化的局部变量，而 ++ 需要先读取它的值，所以编译报错。",
+        "ja": "m() はインスタンスメソッドなので a・b・c・e はすべて参照可能。インスタンスフィールド a, b は既定値 0、static フィールド c も 0、e は明示的に 0。d だけが未初期化のローカル変数で、++ は値の読み取りを伴うためコンパイルエラーになる。"
+      }
+    },
+    {
+      "id": "jb-06",
+      "topic": "static",
+      "kind": "single",
+      "code": "public class abc {\n  int a;\n  int b=0;\n  static int c;\n  public static void main(String[] args) {\n    int d;\n    int e=0;\n    // position 1\n  }\n}",
+      "prompt": {
+        "en": "Which statement is valid at position 1 inside this static main method?",
+        "zh": "在这个静态 main 方法的第 1 处，哪条语句合法？",
+        "ja": "この static な main メソッド内の位置 1 に入れてよい文はどれか。"
+      },
+      "options": [
+        {
+          "en": "a++;",
+          "zh": "a++;",
+          "ja": "a++;"
+        },
+        {
+          "en": "b++;",
+          "zh": "b++;",
+          "ja": "b++;"
+        },
+        {
+          "en": "c++;",
+          "zh": "c++;",
+          "ja": "c++;"
+        },
+        {
+          "en": "d++;",
+          "zh": "d++;",
+          "ja": "d++;"
+        }
+      ],
+      "answer": "C",
+      "explanation": {
+        "en": "main is static, so it cannot touch instance fields directly — a++ and b++ fail to compile (no object exists to read them from). 'd' is an uninitialised local variable. Only 'c', a static field, is reachable from a static context.",
+        "zh": "main 是静态方法，不能直接访问实例字段——没有对象可以承载它们，所以 a++ 和 b++ 都无法编译。d 是未初始化的局部变量。只有静态字段 c 可以在静态上下文中被访问。",
+        "ja": "main は static なのでインスタンスフィールドに直接触れられない —— a++ と b++ はコンパイルエラー（読み取る対象のインスタンスがない）。d は未初期化のローカル変数。static フィールド c だけが static コンテキストから参照できる。"
+      }
+    },
+    {
+      "id": "jb-07",
+      "topic": "types",
+      "kind": "single",
+      "code": "class testClass{\n  public static void main(String[] args) {\n    int i=4;\n    float f = 4.3;\n    double d = 1.8;\n    int c =0;\n    if(i == f) c++;\n    if(((int)(f+d)) == ((int) f) + (int)d) c+= 2;\n    System.out.println(c);\n  }\n}",
+      "prompt": {
+        "en": "What is the result of compiling and running this program?",
+        "zh": "编译并运行这段程序的结果是什么？",
+        "ja": "このプログラムをコンパイルして実行した結果はどうなるか。"
+      },
+      "options": [
+        {
+          "en": "0 is printed",
+          "zh": "输出 0",
+          "ja": "0 が出力される"
+        },
+        {
+          "en": "1 is printed",
+          "zh": "输出 1",
+          "ja": "1 が出力される"
+        },
+        {
+          "en": "2 is printed",
+          "zh": "输出 2",
+          "ja": "2 が出力される"
+        },
+        {
+          "en": "The code fails to compile",
+          "zh": "代码无法通过编译",
+          "ja": "コンパイルできない"
+        }
+      ],
+      "answer": "D",
+      "explanation": {
+        "en": "A decimal literal such as 4.3 is a double, and assigning a double to a float needs either a cast or an 'f' suffix — so 'float f = 4.3;' never compiles. Write 4.3f to make it legal; the loop conditions are red herrings you never reach.",
+        "zh": "像 4.3 这样的小数字面量默认是 double 类型，把 double 赋给 float 必须做强制转型或加 f 后缀，所以 float f = 4.3; 这一行就编译不过。写成 4.3f 才合法——后面的判断全是干扰，根本执行不到。",
+        "ja": "4.3 のような小数リテラルは double 型。double を float に代入するにはキャストか f サフィックスが必要なため、float f = 4.3; の時点でコンパイルできない。4.3f と書けば合法。後続の条件判定は到達しないので関係ない。"
+      }
+    },
+    {
+      "id": "jb-08",
+      "topic": "interface",
+      "kind": "single",
+      "code": "interface inter{\n  void func();\n}\nclass testClass implements inter{\n  public void func(){\n    System.out.println(\"hello world\");\n  }\n  public static void main(String[] args) {\n    inter x = new inter();\n    x.func();\n  }\n}",
+      "prompt": {
+        "en": "What happens when this program runs?",
+        "zh": "这段程序运行时会发生什么？",
+        "ja": "このプログラムを実行するとどうなるか。"
+      },
+      "options": [
+        {
+          "en": "\"hello world\" is printed",
+          "zh": "输出 hello world",
+          "ja": "hello world が出力される"
+        },
+        {
+          "en": "An ArrayIndexOutOfBoundsException is thrown",
+          "zh": "抛出 ArrayIndexOutOfBoundsException",
+          "ja": "ArrayIndexOutOfBoundsException が発生する"
+        },
+        {
+          "en": "Compilation error — an interface cannot be instantiated",
+          "zh": "编译错误——接口不能被实例化",
+          "ja": "コンパイルエラー —— インターフェースはインスタンス化できない"
+        },
+        {
+          "en": "The output cannot be determined",
+          "zh": "输出无法确定",
+          "ja": "出力は不定である"
+        }
+      ],
+      "answer": "C",
+      "explanation": {
+        "en": "An interface declares behaviour without implementing it, so 'new inter()' is meaningless and rejected by the compiler. You must instantiate a concrete class and hold it in an interface-typed reference: 'inter x = new testClass();'.",
+        "zh": "接口只声明行为而不提供实现，因此 new inter() 没有意义，编译器会直接报错。正确做法是实例化某个具体类，再用接口类型的引用去持有它：inter x = new testClass();",
+        "ja": "インターフェースは実装を持たないため new inter() は意味を持たずコンパイラに拒否される。具象クラスをインスタンス化し、インターフェース型の参照で保持する必要がある：inter x = new testClass();"
+      }
+    },
+    {
+      "id": "jb-09",
+      "topic": "polymorphism",
+      "kind": "single",
+      "code": "interface inter{\n  void func();\n}\nclass testClass implements inter{\n  public void func(){\n    System.out.println(\"hello world\");\n  }\n  public static void main(String[] args) {\n    // position 1\n    x.func();\n  }\n}",
+      "prompt": {
+        "en": "Which declaration can be inserted at position 1 so that 'func()' can be invoked without a compile error?",
+        "zh": "在第 1 处插入哪条声明，可以让 func() 被调用且不产生编译错误？",
+        "ja": "位置 1 に挿入すれば func() をコンパイルエラーなしで呼べる宣言はどれか。"
+      },
+      "options": [
+        {
+          "en": "inter x = new testClass();",
+          "zh": "inter x = new testClass();",
+          "ja": "inter x = new testClass();"
+        },
+        {
+          "en": "inter x = new inter();",
+          "zh": "inter x = new inter();",
+          "ja": "inter x = new inter();"
+        },
+        {
+          "en": "Object x = new inter();",
+          "zh": "Object x = new inter();",
+          "ja": "Object x = new inter();"
+        },
+        {
+          "en": "testClass x;",
+          "zh": "testClass x;",
+          "ja": "testClass x;"
+        }
+      ],
+      "answer": "A",
+      "explanation": {
+        "en": "Assigning the implementing class to an interface reference is the standard polymorphic idiom. 'new inter()' is illegal either way; 'testClass x;' leaves the local variable uninitialised, so calling x.func() is also a compile error.",
+        "zh": "把实现类赋给接口类型的引用，正是标准的多态写法。new inter() 无论如何都非法；testClass x; 只是声明而未初始化局部变量，调用 x.func() 同样编译报错。",
+        "ja": "実装クラスをインターフェース型の参照に代入するのが標準的なポリモーフィズムの書き方。new inter() はどちらにしても不正。testClass x; は宣言だけでローカル変数が未初期化なので、x.func() の呼び出しもコンパイルエラー。"
+      }
+    },
+    {
+      "id": "jb-10",
+      "topic": "references",
+      "kind": "single",
+      "code": "public class xyz {\n  int a;\n  xyz(){\n    a=9;\n  }\n  xyz(int i){\n    a=i;\n  }\n  public static void main(String[] args) {\n    xyz obj1 = new xyz();\n    xyz obj2 = new xyz(10);\n    obj1=obj2;\n    System.out.println(obj1.a);\n  }\n}",
+      "prompt": {
+        "en": "What is printed?",
+        "zh": "程序的输出是什么？",
+        "ja": "何が出力されるか。"
+      },
+      "options": [
+        {
+          "en": "0",
+          "zh": "0",
+          "ja": "0"
+        },
+        {
+          "en": "9",
+          "zh": "9",
+          "ja": "9"
+        },
+        {
+          "en": "10",
+          "zh": "10",
+          "ja": "10"
+        },
+        {
+          "en": "Compilation error",
+          "zh": "编译错误",
+          "ja": "コンパイルエラー"
+        }
+      ],
+      "answer": "C",
+      "explanation": {
+        "en": "Two objects are built: one with a=9, one with a=10. 'obj1=obj2' copies the reference, not the object — both variables now point at the same object whose a is 10. The object with a=9 becomes unreachable.",
+        "zh": "先后创建了两个对象，a 分别是 9 和 10。obj1=obj2 复制的是引用而不是对象本身，此后两个变量指向同一个对象，其 a 为 10。原来那个 a=9 的对象失去引用，再也访问不到。",
+        "ja": "a=9 と a=10 の 2 つのオブジェクトが作られる。obj1=obj2 は参照をコピーするだけで、以後 2 つの変数は同じオブジェクト（a=10）を指す。a=9 のオブジェクトは参照を失い到達不能になる。"
+      }
+    },
+    {
+      "id": "jb-11",
+      "topic": "exceptions",
+      "kind": "single",
+      "code": "class abcd extends Exception{}\npublic class pqrs{\n  public void func1() {\n    try {\n      func2();\n    }\n    finally {\n      func3();\n    }\n    catch(abcd exp) {\n    }\n  }\n  public void func2() throws abcd{\n    throw new abcd();\n  }\n  public void func3() throws RuntimeException{\n    throw new RuntimeException();\n  }\n}",
+      "prompt": {
+        "en": "What is wrong with this code?",
+        "zh": "这段代码有什么错误？",
+        "ja": "このコードのどこが間違っているか。"
+      },
+      "options": [
+        {
+          "en": "func1() must declare RuntimeException because it does not catch what func3() throws.",
+          "zh": "func1() 没有捕获 func3() 抛出的异常，必须用 throws 声明 RuntimeException。",
+          "ja": "func1() は func3() の例外を捕捉しないので、throws RuntimeException が必要。"
+        },
+        {
+          "en": "A try block cannot have both a catch and a finally block.",
+          "zh": "一个 try 块不能同时拥有 catch 和 finally 块。",
+          "ja": "try ブロックに catch と finally を同時に付けることはできない。"
+        },
+        {
+          "en": "An empty catch block is not allowed.",
+          "zh": "不允许出现空的 catch 块。",
+          "ja": "空の catch ブロックは許可されない。"
+        },
+        {
+          "en": "A catch block cannot follow a finally block.",
+          "zh": "catch 块不能跟在 finally 块之后。",
+          "ja": "catch ブロックを finally ブロックの後に置くことはできない。"
+        }
+      ],
+      "answer": "D",
+      "explanation": {
+        "en": "The order after try must be catch blocks first, then the optional finally — so 'try ... finally ... catch' is illegal. Everything else here is fine: try may be followed by both catch and finally, an empty catch block is legal (if useless), and RuntimeException is unchecked so func1() need not declare it.",
+        "zh": "try 之后的顺序必须是先 catch、末尾才是可选的 finally，所以 try…finally…catch 这种写法非法。其余都没问题：try 可以同时配 catch 和 finally，空的 catch 块语法上合法（虽然没用），而 RuntimeException 是非受检异常，func1() 不需要用 throws 声明。",
+        "ja": "try の後はまず catch、最後に任意の finally という順序が必須のため、try … finally … catch は不正。他は問題なし。try に catch と finally を同時に付けることはでき、空の catch ブロックも文法上は合法。RuntimeException は非検査例外なので func1() に throws 宣言は不要。"
+      }
+    },
+    {
+      "id": "jb-12",
+      "topic": "string",
+      "kind": "single",
+      "code": "class testClass{\n  public static void main(String[] args) {\n    String str =\"restructure\";\n    System.out.println(str.substring(2, 3));\n  }\n}",
+      "prompt": {
+        "en": "What is written to standard output?",
+        "zh": "标准输出的内容是什么？",
+        "ja": "標準出力には何が出力されるか。"
+      },
+      "options": [
+        {
+          "en": "est",
+          "zh": "est",
+          "ja": "est"
+        },
+        {
+          "en": "es",
+          "zh": "es",
+          "ja": "es"
+        },
+        {
+          "en": "st",
+          "zh": "st",
+          "ja": "st"
+        },
+        {
+          "en": "s",
+          "zh": "s",
+          "ja": "s"
+        }
+      ],
+      "answer": "D",
+      "explanation": {
+        "en": "substring(begin, end) takes the begin index inclusive and the end index exclusive. For \"restructure\" the indices are r=0, e=1, s=2, so substring(2, 3) contains exactly the character at index 2 — the single letter s.",
+        "zh": "substring(begin, end) 的 begin 下标包含在内，end 下标不包含。字符串 restructure 的下标是 r=0、e=1、s=2，所以 substring(2, 3) 恰好只取下标 2 这一个字符，即字母 s。",
+        "ja": "substring(begin, end) は begin の添字を含み、end の添字を含まない。\"restructure\" は r=0, e=1, s=2 なので、substring(2, 3) は添字 2 の文字だけ、つまり s 1 文字になる。"
+      }
+    },
+    {
+      "id": "jb-13",
+      "topic": "operators",
+      "kind": "multi",
+      "code": "int x = 5;\nint a = x >> 1;\nint b = x >>> 1;\nint c = -1 >> 1;\nint d = -1 >>> 1;",
+      "prompt": {
+        "en": "Which statements about the >> and >>> operators are true? (select all that apply)",
+        "zh": "关于 >> 与 >>> 运算符，哪些说法正确？（多选）",
+        "ja": ">> 演算子と >>> 演算子について正しいものはどれか。（すべて選択）"
+      },
+      "options": [
+        {
+          "en": "For non-negative left operands, >> and >>> produce the same result.",
+          "zh": "左操作数为非负数时，>> 与 >>> 的结果相同。",
+          "ja": "左オペランドが非負なら、>> と >>> の結果は同じ。"
+        },
+        {
+          "en": "The result of (-1 >> 1) is 0.",
+          "zh": "(-1 >> 1) 的结果是 0。",
+          "ja": "(-1 >> 1) の結果は 0。"
+        },
+        {
+          "en": ">>> never returns a negative value when the left operand is non-negative.",
+          "zh": "左操作数为非负数时，>>> 的结果永远不会是负数。",
+          "ja": "左オペランドが非負なら、>>> の結果が負になることはない。"
+        },
+        {
+          "en": "With >>, the leftmost bit of the result always matches the sign bit of the left operand.",
+          "zh": "使用 >> 时，结果的最左位始终与左操作数的符号位一致。",
+          "ja": ">> では、結果の最上位ビットは常に左オペランドの符号ビットと一致する。"
+        }
+      ],
+      "answer": "A,C,D",
+      "explanation": {
+        "en": ">> keeps the sign bit when shifting (arithmetic shift), >>> fills with zero (logical shift). They agree as long as the sign bit is 0, which is why non-negative operands give identical results. For -1 the bit pattern is all ones, so -1 >> 1 is still -1 and -1 >>> 1 becomes the large positive value 2147483647 — certainly not 0.",
+        "zh": ">> 移位时保留符号位（算术移位），>>> 则补零（逻辑移位）。只要符号位是 0，两者结果就一致，这正是非负操作数结果相同的原因。-1 的位模式是全 1，所以 -1 >> 1 仍是 -1，而 -1 >>> 1 会变成很大的正数 2147483647，绝不是 0。",
+        "ja": ">> はシフト時に符号ビットを保持し（算術シフト）、>>> は 0 を埋める（論理シフト）。符号ビットが 0 なら結果は一致するため、非負のオペランドでは同じ結果になる。-1 のビット列は全ビット 1 なので、-1 >> 1 は -1 のままだが、-1 >>> 1 は大きな正の値 2147483647 になり、0 にはならない。"
+      }
+    },
+    {
+      "id": "jb-14",
+      "topic": "main",
+      "kind": "single",
+      "code": "// candidate entry points\nA: public void main(String args[])\nB: final public static void main(String [] array)\nC: public static void main(String[] args)\nD: void static public main(String args[])",
+      "prompt": {
+        "en": "Which declarations of main() are valid entry points for an application? (select all that apply)",
+        "zh": "下列哪些 main() 声明可以作为程序的合法入口？（多选）",
+        "ja": "プログラムの正しいエントリーポイントとして有効な main() の宣言はどれか。（すべて選択）"
+      },
+      "options": [
+        {
+          "en": "A only",
+          "zh": "只有 A",
+          "ja": "A のみ"
+        },
+        {
+          "en": "B and C",
+          "zh": "B 和 C",
+          "ja": "B と C"
+        },
+        {
+          "en": "A, B and C",
+          "zh": "A、B 和 C",
+          "ja": "A・B・C"
+        },
+        {
+          "en": "All of them are valid",
+          "zh": "全部都合法",
+          "ja": "すべて有効"
+        }
+      ],
+      "answer": "B",
+      "explanation": {
+        "en": "A valid entry point must be public, static, void and take a String array. Modifiers may appear in any order, so 'final public static void main' (B) is fine, as is the standard form (C). A lacks static, and in D the return type 'void' appears before the 'static' modifier — modifiers must all precede the return type, so it does not compile.",
+        "zh": "合法的入口必须是 public、static、void，并接收 String 数组参数。修饰符之间的顺序不限，所以 final public static void main（B）和标准写法（C）都合法。A 缺少 static；D 里返回类型 void 出现在 static 修饰符之前，而修饰符必须全部排在返回类型之前，因此无法编译。",
+        "ja": "有効なエントリーポイントは public・static・void で String 配列を受け取る必要がある。修飾子の順序は自由なので final public static void main（B）も標準形（C）も有効。A は static がない。D は戻り値型 void が static 修飾子より前にあり、修飾子は戻り値型より前に置く決まりなのでコンパイルできない。"
+      }
+    },
+    {
+      "id": "jb-15",
+      "topic": "loops",
+      "kind": "single",
+      "code": "class testClass{\n  public static void main(String[] args) {\n    for(int i=12;i>0;i-=3)\n      System.out.println(i);\n    System.out.println(\"\");\n  }\n}",
+      "prompt": {
+        "en": "What is the output (shown here without line breaks)?",
+        "zh": "程序的输出是什么（此处忽略换行）？",
+        "ja": "出力はどうなるか（改行は無視する）。"
+      },
+      "options": [
+        {
+          "en": "12",
+          "zh": "12",
+          "ja": "12"
+        },
+        {
+          "en": "12963",
+          "zh": "12963",
+          "ja": "12963"
+        },
+        {
+          "en": "36912",
+          "zh": "36912",
+          "ja": "36912"
+        },
+        {
+          "en": "129630",
+          "zh": "129630",
+          "ja": "129630"
+        }
+      ],
+      "answer": "B",
+      "explanation": {
+        "en": "i starts at 12 and drops by 3 each pass while staying above 0: 12, 9, 6, 3, then i becomes 0 and the loop ends. Each value is printed on its own line, followed by one empty line — so the digits read 12963.",
+        "zh": "i 从 12 开始每次减 3，并保持大于 0：12、9、6、3，之后 i 变为 0 循环结束。每个值单独占一行，最后再打印一个空行，因此连起来读作 12963。",
+        "ja": "i は 12 から始まり 0 より大きい間 3 ずつ減る：12, 9, 6, 3。その後 i は 0 になりループ終了。各値は 1 行ずつ出力され、最後に空行が 1 つ続くので、数字を並べると 12963 になる。"
+      }
+    },
+    {
+      "id": "jb-16",
+      "topic": "fields",
+      "kind": "single",
+      "code": "class testClass{\n  static int a;\n  int b;\n  public testClass() {\n    int c;\n    c=a;\n    a++;\n    b+=c;\n    System.out.println(\"c=\"+c +\"a=\"+a +\"b=\"+b);\n  }\n  public static void main(String[] args) {\n    new testClass();\n  }\n}",
+      "prompt": {
+        "en": "What is the result of attempting to compile and run this code?",
+        "zh": "编译并运行这段代码的结果是什么？",
+        "ja": "このコードをコンパイルして実行した結果はどうなるか。"
+      },
+      "options": [
+        {
+          "en": "Compile error — a constructor cannot access static members.",
+          "zh": "编译错误——构造器不能访问静态成员。",
+          "ja": "コンパイルエラー —— コンストラクタから static メンバには触れない。"
+        },
+        {
+          "en": "Compile error — 'a' is used before it is initialised.",
+          "zh": "编译错误——a 在初始化前被使用。",
+          "ja": "コンパイルエラー —— a が初期化前に使用されている。"
+        },
+        {
+          "en": "Compile error — the local variable 'c' is read before assignment.",
+          "zh": "编译错误——局部变量 c 在赋值前被读取。",
+          "ja": "コンパイルエラー —— ローカル変数 c が代入前に読み取られている。"
+        },
+        {
+          "en": "It runs and prints c=0a=1b=0",
+          "zh": "正常运行，输出 c=0a=1b=0",
+          "ja": "実行でき、c=0a=1b=0 と出力される"
+        }
+      ],
+      "answer": "D",
+      "explanation": {
+        "en": "Nothing here is an error. 'c' is assigned from 'a' on the line before it is read, and both fields already default to 0 — so the JVM prints c=0a=1b=0 instead of complaining.",
+        "zh": "这里没有任何错误。局部变量 c 在读取之前已经被 a 赋值，而两个字段也都默认为 0，所以 JVM 会正常输出 c=0a=1b=0，不会报错。",
+        "ja": "ここにエラーはない。c は読み取られる前の行で a から代入されており、2 つのフィールドも既定値 0 を持つ。そのため JVM はエラーにせず c=0a=1b=0 と出力する。"
+      }
+    },
+    {
+      "id": "jb-17",
+      "topic": "exceptions",
+      "kind": "multi",
+      "code": "public class xyz {\n  int a;\n  xyz() throws Exception{\n    a=9;\n  }\n  xyz(int i){\n    a=i;\n  }\n  public static void main(String[] args) {\n    xyz obj1 = new xyz();\n    xyz obj2 = new xyz(10);\n    obj1=obj2;\n    System.out.println(obj1.a);\n  }\n}",
+      "prompt": {
+        "en": "This program fails to compile with 'Unhandled exception type Exception'. Which changes fix it? (select all that apply)",
+        "zh": "程序因「Unhandled exception type Exception」无法编译。哪些修改可以修复？（多选）",
+        "ja": "このプログラムは Unhandled exception type Exception でコンパイルできない。修正方法として正しいものはどれか。（すべて選択）"
+      },
+      "options": [
+        {
+          "en": "Wrap the body of main in a try/catch block.",
+          "zh": "把 main 的方法体包进 try/catch。",
+          "ja": "main の本体を try/catch で囲む。"
+        },
+        {
+          "en": "Declare main as: public static void main(String[] args) throws Exception",
+          "zh": "把 main 声明为 public static void main(String[] args) throws Exception",
+          "ja": "main を public static void main(String[] args) throws Exception と宣言する"
+        },
+        {
+          "en": "Add a throws clause to the object creation: xyz obj1 = new xyz() throws Exception;",
+          "zh": "在创建对象语句上加 throws：xyz obj1 = new xyz() throws Exception;",
+          "ja": "生成文に throws を付ける：xyz obj1 = new xyz() throws Exception;"
+        },
+        {
+          "en": "Wrap just the creation statement in try/catch.",
+          "zh": "只把创建对象的那句包进 try/catch。",
+          "ja": "生成文だけを try/catch で囲む。"
+        }
+      ],
+      "answer": "A,B,D",
+      "explanation": {
+        "en": "A checked exception must either be caught in a try/catch or declared with throws, so wrapping the whole method or just the failing statement both work, as does declaring throws on main. Option C is not Java syntax at all — a throws clause belongs on a method declaration, never on an assignment statement.",
+        "zh": "受检异常必须在 try/catch 中被捕获，或者用 throws 声明。因此把整个方法包起来、只处理出错那句、或者给 main 加 throws 声明都能通过。而 C 根本不是 Java 语法——throws 子句只能出现在方法声明上，绝不能写在赋值语句之后。",
+        "ja": "検査例外は try/catch で捕捉するか throws で宣言する必要がある。そのためメソッド全体を囲む方法、問題の行だけを囲む方法、main に throws を付ける方法はいずれも有効。一方 C は Java の文法ではなく、throws 句はメソッド宣言に付くもので代入文には付けられない。"
+      }
+    },
+    {
+      "id": "jb-18",
+      "topic": "access",
+      "kind": "single",
+      "code": "// The method must be reachable only from classes\n// in the same package as the method's own class.",
+      "prompt": {
+        "en": "How should the method be declared to meet this requirement?",
+        "zh": "要让方法满足这个要求，应该如何声明？",
+        "ja": "この条件を満たすにはメソッドをどう宣言すべきか。"
+      },
+      "options": [
+        {
+          "en": "Declare it public",
+          "zh": "用 public 声明",
+          "ja": "public で宣言する"
+        },
+        {
+          "en": "Declare it protected",
+          "zh": "用 protected 声明",
+          "ja": "protected で宣言する"
+        },
+        {
+          "en": "Declare it private",
+          "zh": "用 private 声明",
+          "ja": "private で宣言する"
+        },
+        {
+          "en": "Declare it with no access modifier at all",
+          "zh": "完全不加任何访问修饰符",
+          "ja": "アクセス修飾子を何も付けずに宣言する"
+        }
+      ],
+      "answer": "D",
+      "explanation": {
+        "en": "Leaving off the access modifier gives package-private (default) access: visible inside the package, invisible outside it. public opens it everywhere, protected also admits subclasses in other packages, and private hides it even from the rest of its own package.",
+        "zh": "不写访问修饰符得到的是包级私有（默认）权限：同包内可见，包外不可见。public 会对所有地方开放，protected 还会额外允许其他包的子类访问，private 则连同一个包内的其他类都无法访问。",
+        "ja": "アクセス修飾子を書かないとパッケージプライベート（既定）アクセスになり、同一パッケージ内からのみ参照できる。public はどこからでも、protected は他パッケージのサブクラスからも許可し、private は同一パッケージの他クラスからも見えなくなる。"
+      }
+    },
+    {
+      "id": "jb-19",
+      "topic": "inner-class",
+      "kind": "multi",
+      "code": "class testClass{\n  int a=1;\n  int b=1;\n  int c=1;\n  class innerClassTest{\n    int a=2;\n    int get() {\n      int c=3;\n      // insert statement here\n      return c;\n    }\n  }\n  testClass(){\n    innerClassTest i = new innerClassTest();\n    System.out.println(i.get());\n  }\n  public static void main(String[] args) {\n    new testClass();\n  }\n}",
+      "prompt": {
+        "en": "Which statements make the program print 1? (select all that apply)",
+        "zh": "哪些语句能让程序输出 1？（多选）",
+        "ja": "プログラムに 1 を出力させる文はどれか。（すべて選択）"
+      },
+      "options": [
+        {
+          "en": "c = b;",
+          "zh": "c = b;",
+          "ja": "c = b;"
+        },
+        {
+          "en": "c = this.a;",
+          "zh": "c = this.a;",
+          "ja": "c = this.a;"
+        },
+        {
+          "en": "c = testClass.this.a;",
+          "zh": "c = testClass.this.a;",
+          "ja": "c = testClass.this.a;"
+        },
+        {
+          "en": "c = c;",
+          "zh": "c = c;",
+          "ja": "c = c;"
+        }
+      ],
+      "answer": "A,C",
+      "explanation": {
+        "en": "Inside the inner class, the simple names resolve to the innermost declaration first: the local c=3, then innerClassTest.a=2, then the outer fields. 'b' only exists on the outer object, so 'c = b' picks up the outer b=1. 'this.a' inside refers to the inner instance's own a=2, which prints 2, and 'testClass.this.a' reaches the outer a=1.",
+        "zh": "在内部类里，简单名会从最内层向外解析：先是局部变量 c=3，然后是 innerClassTest.a=2，最后才是外层字段。b 只存在于外层对象上，所以 c = b 取到的是外层的 b=1。this.a 指向内部实例自己的 a=2（会打印 2），而 testClass.this.a 才能访问外层的 a=1。",
+        "ja": "内部クラス内では単純名は内側から解決される：まずローカル変数 c=3、次に innerClassTest.a=2、最後に外側のフィールド。b は外側のオブジェクトにしかないので c = b は外側の b=1 を指す。this.a は内部インスタンス自身の a=2（2 が出力される）、testClass.this.a で外側の a=1 に到達する。"
+      }
+    },
+    {
+      "id": "jb-20",
+      "topic": "casting",
+      "kind": "multi",
+      "code": "int i = 10;\nlong l = ???;   // from i\nshort s = 5;\nchar ch = ???;  // from s\nfloat f = 1.5f;\nlong n = ???;   // from f",
+      "prompt": {
+        "en": "Which conversions can be performed without an explicit cast? (select all that apply)",
+        "zh": "下列哪些转换不需要显式强制转型？（多选）",
+        "ja": "明示的なキャストなしで行える変換はどれか。（すべて選択）"
+      },
+      "options": [
+        {
+          "en": "int to long",
+          "zh": "int 转 long",
+          "ja": "int から long"
+        },
+        {
+          "en": "byte to short",
+          "zh": "byte 转 short",
+          "ja": "byte から short"
+        },
+        {
+          "en": "float to long",
+          "zh": "float 转 long",
+          "ja": "float から long"
+        },
+        {
+          "en": "short to char",
+          "zh": "short 转 char",
+          "ja": "short から char"
+        }
+      ],
+      "answer": "A,B",
+      "explanation": {
+        "en": "Java allows implicit widening when no information is lost: int fits in long and byte fits in short, so both convert silently. Going the other way (float to long) may lose the fractional part and needs a cast; short and char are both 16-bit but neither is a subtype of the other, so that cast is required too.",
+        "zh": "Java 允许不丢失信息的隐式拓宽转换：int 装得进 long、byte 装得进 short，两者都能自动完成。反向的 float 转 long 会丢掉小数部分，必须显式转型；short 和 char 虽然都是 16 位，但互不兼容，转换也需要显式转型。",
+        "ja": "Java では情報が失われない拡大変換のみ暗黙的に行われる：int は long に、byte は short に収まるため自動変換される。逆方向の float から long は小数部が失われる可能性があり明示的キャストが必須。short と char はどちらも 16 ビットだが互いに包含関係がないため、この変換もキャストが必要。"
+      }
+    }
+  ]
+}

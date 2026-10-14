@@ -2164,5 +2164,12 @@
   "代码审查 · 样式": {"en": "Code review · Styling", "ja": "コードレビュー・スタイル"},
   "CSS 入门 · 代码审查训练": {"en": "CSS basics · Code review practice", "ja": "CSS入門・コードレビュー演習"},
   "盒模型、定位、层叠与布局。每题四选一，附答案与解析，中英日对照。": {"en": "Box model, positioning, stacking and layout. Four choices per question, with answers and explanations in English, Chinese and Japanese.", "ja": "ボックスモデル・配置・重なり・レイアウト。各問4択、解答・解説付き。英中日対応。"},
-  "CSS 是样式语言。本组练盒模型、定位与布局；示例只展示，不会执行。": {"en": "CSS is a styling language. Practice the box model, positioning and layout; examples are displayed, never executed.", "ja": "CSSはスタイル言語。ボックスモデル・配置・レイアウトを練習する。例のコードは表示するだけで実行しない。"}
+  "CSS 是样式语言。本组练盒模型、定位与布局；示例只展示，不会执行。": {"en": "CSS is a styling language. Practice the box model, positioning and layout; examples are displayed, never executed.", "ja": "CSSはスタイル言語。ボックスモデル・配置・レイアウトを練習する。例のコードは表示するだけで実行しない。"},
+  "Java 认证": {"en": "Java certification", "ja": "Java 認定"},
+  "Java Bronze · 备考练习": {"en": "Java Bronze · Practice", "ja": "Java Bronze · 対策演習"},
+  "Java Bronze 备考练习": {"en": "Java Bronze Practice", "ja": "Java Bronze 対策演習"},
+  "面向 Oracle Certified Java Programmer, Bronze SE（1Z0-818）的备考练习。收录 20 道经典认证真题风格题目：变量与初始化、final 修饰符、运算符、控制流程、字符串、接口与多态、异常。15 道单选 + 5 道多选，每题附中英日三语解析。": {"en": "Practice set for Oracle Certified Java Programmer, Bronze SE (1Z0-818). 20 classic certification-style questions covering variables and initialisation, final, operators, control flow, strings, interfaces and polymorphism, and exceptions. 15 single-answer and 5 multi-answer questions, each with explanations in English, Chinese and Japanese.", "ja": "Oracle Certified Java Programmer, Bronze SE（1Z0-818）向けの対策問題。変数と初期化・final・演算子・制御構文・文字列・インターフェースとポリモーフィズム・例外を扱う認定試験形式の問題 20 問。単一選択 15 問＋複数選択 5 問、各問に英中日の解説付き。"},
+  "20 题 · 单选 15 题 + 多选 5 题 · 面向 Oracle Certified Java Programmer Bronze SE（1Z0-818）": {"en": "20 questions · 15 single-answer + 5 multi-answer · for Oracle Certified Java Programmer Bronze SE (1Z0-818)", "ja": "20 問・単一選択 15 問＋複数選択 5 問・Oracle Certified Java Programmer Bronze SE（1Z0-818）対応"},
+  "考点：变量与初始化、修饰符、运算符、控制流程、字符串、接口与多态、继承、异常。": {"en": "Topics: variables and initialisation, modifiers, operators, control flow, strings, interfaces and polymorphism, inheritance, exceptions.", "ja": "出題範囲：変数と初期化、修飾子、演算子、制御構文、文字列、インターフェースとポリモーフィズム、継承、例外。"},
+  "11 个题库 · 共 4901 题次 · 可作答判分 · 登录后跨设备同步": {"en": "11 question banks · 4,901 attempts · instant scoring · sign in to sync across devices", "ja": "11の問題集・全4,901問・即時採点・ログインしてデバイス間で同期"}
 }

@@ -1,0 +1,1254 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Java Bronze 备考练习</title><style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;
+ padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.toolbar button.primary:hover{background:#0a5d33}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.badge.hot{color:#9a3412;background:#fff7ed;border-color:#fed7aa}
+.hothint{margin:11px 0 0;font-size:12.5px;color:#9a3412;background:#fff7ed;border:1px dashed #fed7aa;border-radius:8px;padding:8px 11px}
+.src{font-size:11px;color:#9ca3af;margin-left:auto;font-variant-numeric:tabular-nums}
+.stem p{margin:0 0 6px}
+.en{color:var(--en)}
+.zh{color:var(--zh);font-size:14px}
+.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}
+.opts{list-style:none;margin:12px 0 0;padding:0}
+.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}
+.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}
+details.ans .correct{font-size:14px;margin:4px 0 8px}
+details.ans .correct b{color:#047857;font-size:16px}
+details.ans .expl{padding-bottom:12px}
+@media print{
+ body{background:#fff}
+ .toolbar{display:none}
+ .wrap{max-width:none;padding:0}
+ .q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}
+ details.ans{border:1px solid #ccc;background:#fff;display:block}
+ details.ans .expl{display:block}
+}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* ===================== 手写填空（fill） ===================== */
+.q[data-kind="fill"] .fillrow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.q[data-kind="fill"] input.fill{font:inherit;font-size:15px;padding:8px 13px;border:1px solid #cbd5e1;
+ border-radius:8px;min-width:230px;max-width:100%;background:#fff;color:#0f172a}
+.q[data-kind="fill"] input.fill:focus{outline:none;border-color:#4a7fb5;box-shadow:0 0 0 3px rgba(74,127,181,.15)}
+.q[data-kind="fill"].done input.fill{background:#f1f5f9;color:#334155}
+.q[data-kind="fill"] input.fill.ok{border-color:#0b7a44;background:#eaf7ef;color:#0b5130;font-weight:600}
+.q[data-kind="fill"] input.fill.bad{border-color:#c0392b;background:#fdeeed;color:#8f2c20}
+.q[data-kind="fill"] .flabel{font-size:12px;color:#8b95a1}
+@media (max-width:560px){.q[data-kind="fill"] input.fill{min-width:0;width:100%}}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+
+/* Same three-language switch as the programming section: one language at a time. */
+.q [lang="zh"], .q [lang="ja"] { display: none; }
+html[data-lang="zh"] .q [lang="zh"], html[data-lang="ja"] .q [lang="ja"] { display: block; }
+html[data-lang="zh"] .q [lang="en"], html[data-lang="ja"] .q [lang="en"] { display: none; }
+.q .opt-lang[lang="zh"], .q .opt-lang[lang="ja"] { display: none; }
+html[data-lang="zh"] .q .opt-lang[lang="zh"],
+html[data-lang="ja"] .q .opt-lang[lang="ja"] { display: inline; }
+html[data-lang="zh"] .q .opt-lang[lang="en"],
+html[data-lang="ja"] .q .opt-lang[lang="en"] { display: none; }
+.jb-code {
+  padding: 14px 16px; margin: 12px 0; background: #f6f8fa;
+  border: 1px solid #d8dee4; border-left: 4px solid #2f6fdb;
+  border-radius: 8px; white-space: pre-wrap; overflow-wrap: anywhere;
+  font: 14px/1.65 Consolas, "SFMono-Regular", monospace;
+}
+.jb-topic { font-size: 12px; color: #57606a; border: 1px solid #d8dee4;
+  border-radius: 999px; padding: 2px 10px; }
+</style><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+<!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--></head><body><main class="wrap">
+<p class="sub"><a href="/">← 返回题库总览</a></p>
+<h1>Java Bronze 备考练习</h1>
+<p class="sub">20 题 · 单选 15 题 + 多选 5 题 · 面向 Oracle Certified Java Programmer Bronze SE（1Z0-818）</p>
+<p class="sub">考点：变量与初始化、修饰符、运算符、控制流程、字符串、接口与多态、继承、异常。</p>
+<div class="toolbar"><div class="btns"><button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>20</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<div class="q" id="q1" data-n="1" data-ans="B" data-review-id="jb-01" data-chat-context="Java Bronze practice question
+initialisation
+What is wrong with the following Java program?
+以下这段 Java 程序有什么问题？
+次の Java プログラムのどこに問題があるか。
+class testClass{
+  public static void main(String[] args) {
+    int a;
+    System.out.println(a);
+  }
+}
+A. The class &#x27;testClass&#x27; has no instance variables.
+B. The local variable &#x27;a&#x27; is used without being initialised.
+C. The class &#x27;testClass&#x27; has no access modifier.
+D. Nothing is wrong with the program.
+Local variables get no default value in Java. The compiler rejects any attempt to read one before a value has been assigned. Instance and static fields do receive defaults (0, false, null), but &#x27;a&#x27; here is declared inside main, so it stays uninitialised.
+Java 的局部变量没有默认值，任何「先赋值再读取」之外的用法都会被编译器直接拒绝。实例字段和静态字段才有默认值（0、false、null），但这里的 a 声明在 main 里面，属于局部变量，所以必须显式赋值后才能使用。
+Java のローカル変数には既定値がないため、値を代入する前に読み取ろうとするとコンパイルエラーになる。既定値（0・false・null）を持つのはインスタンス変数と static 変数だけ。ここで a は main の中のローカル変数なので初期化が必須。">
+<div class="qhead"><span class="qno">Question 1</span><span class="badge">单选</span><span class="jb-topic">initialisation</span></div>
+<div class="stem"><p lang="en">What is wrong with the following Java program?</p><p lang="zh">以下这段 Java 程序有什么问题？</p><p lang="ja">次の Java プログラムのどこに問題があるか。</p><pre class="jb-code i18n-noloc"><code>class testClass{
+  public static void main(String[] args) {
+    int a;
+    System.out.println(a);
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The class &#x27;testClass&#x27; has no instance variables.</span><span class="opt-lang" lang="zh">类 testClass 没有任何实例变量。</span><span class="opt-lang" lang="ja">クラス testClass にインスタンス変数がない。</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The local variable &#x27;a&#x27; is used without being initialised.</span><span class="opt-lang" lang="zh">局部变量 a 未初始化就被使用了。</span><span class="opt-lang" lang="ja">ローカル変数 a が初期化されずに使われている。</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The class &#x27;testClass&#x27; has no access modifier.</span><span class="opt-lang" lang="zh">类 testClass 没有访问修饰符。</span><span class="opt-lang" lang="ja">クラス testClass にアクセス修飾子がない。</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Nothing is wrong with the program.</span><span class="opt-lang" lang="zh">程序没有任何问题。</span><span class="opt-lang" lang="ja">プログラムに問題はない。</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">Local variables get no default value in Java. The compiler rejects any attempt to read one before a value has been assigned. Instance and static fields do receive defaults (0, false, null), but &#x27;a&#x27; here is declared inside main, so it stays uninitialised.</p><p lang="zh">Java 的局部变量没有默认值，任何「先赋值再读取」之外的用法都会被编译器直接拒绝。实例字段和静态字段才有默认值（0、false、null），但这里的 a 声明在 main 里面，属于局部变量，所以必须显式赋值后才能使用。</p><p lang="ja">Java のローカル変数には既定値がないため、値を代入する前に読み取ろうとするとコンパイルエラーになる。既定値（0・false・null）を持つのはインスタンス変数と static 変数だけ。ここで a は main の中のローカル変数なので初期化が必須。</p></div></details></div>
+<div class="q" id="q2" data-n="2" data-ans="A,C,D" data-review-id="jb-02" data-chat-context="Java Bronze practice question
+final
+Which of these are compile errors in the program above? (select all that apply)
+以上程序中，哪些会导致编译错误？（多选）
+このプログラムでコンパイルエラーになるものはどれか。（すべて選択）
+public class xyz {
+  int a;
+  final int b;
+  int c = 4;
+  final String str = &quot;hello world&quot;;
+  public void func() {
+    int d;
+    String localstring = &quot;hello everyone&quot;;
+    str = localstring;
+    System.out.println(str);
+    System.out.println(d);
+    System.out.println(a);
+  }
+}
+A. Assigning to the final variable &#x27;str&#x27; is not allowed.
+B. The variable &#x27;a&#x27; has not been initialised.
+C. The final field &#x27;b&#x27; must be initialised.
+D. The local variable &#x27;d&#x27; is used without being initialised.
+A final field or variable can only be assigned once: assigning to &#x27;str&#x27; inside func() is illegal. A final field also has to be assigned either at its declaration or in every constructor — &#x27;b&#x27; gets neither. Local variables have no default value, so printing &#x27;d&#x27; is an error. &#x27;a&#x27; is an instance field, so it defaults to 0 and printing it is perfectly legal.
+final 变量只能赋值一次，所以在 func() 里再次给 str 赋值是非法的。final 字段必须在声明时或每个构造器里完成初始化，b 两者都没有。局部变量没有默认值，所以打印 d 也是错误。而 a 是实例字段，默认值为 0，打印它完全合法。
+final 変数は一度しか代入できないため、func() 内での str への再代入は不正。final フィールドは宣言時か全コンストラクタで初期化が必要で、b はどちらも満たしていない。ローカル変数に既定値はないので d の出力もエラー。a はインスタンス変数で既定値 0 を持つため出力は問題なし。">
+<div class="qhead"><span class="qno">Question 2</span><span class="badge">多选</span><span class="jb-topic">final</span></div>
+<div class="stem"><p lang="en">Which of these are compile errors in the program above? (select all that apply)</p><p lang="zh">以上程序中，哪些会导致编译错误？（多选）</p><p lang="ja">このプログラムでコンパイルエラーになるものはどれか。（すべて選択）</p><pre class="jb-code i18n-noloc"><code>public class xyz {
+  int a;
+  final int b;
+  int c = 4;
+  final String str = &quot;hello world&quot;;
+  public void func() {
+    int d;
+    String localstring = &quot;hello everyone&quot;;
+    str = localstring;
+    System.out.println(str);
+    System.out.println(d);
+    System.out.println(a);
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Assigning to the final variable &#x27;str&#x27; is not allowed.</span><span class="opt-lang" lang="zh">不允许对 final 变量 str 重新赋值。</span><span class="opt-lang" lang="ja">final 変数 str への再代入は許可されない。</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The variable &#x27;a&#x27; has not been initialised.</span><span class="opt-lang" lang="zh">变量 a 没有被初始化。</span><span class="opt-lang" lang="ja">変数 a が初期化されていない。</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The final field &#x27;b&#x27; must be initialised.</span><span class="opt-lang" lang="zh">final 字段 b 必须被初始化。</span><span class="opt-lang" lang="ja">final フィールド b は初期化が必須。</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The local variable &#x27;d&#x27; is used without being initialised.</span><span class="opt-lang" lang="zh">局部变量 d 未初始化就被使用了。</span><span class="opt-lang" lang="ja">ローカル変数 d が初期化されずに使われている。</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A,C,D</b></p><div class="expl"><p lang="en">A final field or variable can only be assigned once: assigning to &#x27;str&#x27; inside func() is illegal. A final field also has to be assigned either at its declaration or in every constructor — &#x27;b&#x27; gets neither. Local variables have no default value, so printing &#x27;d&#x27; is an error. &#x27;a&#x27; is an instance field, so it defaults to 0 and printing it is perfectly legal.</p><p lang="zh">final 变量只能赋值一次，所以在 func() 里再次给 str 赋值是非法的。final 字段必须在声明时或每个构造器里完成初始化，b 两者都没有。局部变量没有默认值，所以打印 d 也是错误。而 a 是实例字段，默认值为 0，打印它完全合法。</p><p lang="ja">final 変数は一度しか代入できないため、func() 内での str への再代入は不正。final フィールドは宣言時か全コンストラクタで初期化が必要で、b はどちらも満たしていない。ローカル変数に既定値はないので d の出力もエラー。a はインスタンス変数で既定値 0 を持つため出力は問題なし。</p></div></details></div>
+<div class="q" id="q3" data-n="3" data-ans="B" data-review-id="jb-03" data-chat-context="Java Bronze practice question
+final
+What is wrong with the following Java program?
+以下这段 Java 程序有什么问题？
+次の Java プログラムのどこに問題があるか。
+final class test1{
+  protected static int a;
+}
+class test2 extends test1{
+  public static void main(String[] args) {
+    System.out.println(a);
+  }
+}
+A. The static variable &#x27;a&#x27; is not initialised.
+B. The final class &#x27;test1&#x27; cannot be inherited.
+C. Static variables are not allowed in a final class.
+D. There is nothing wrong with the program.
+A final class cannot be extended — that is exactly what the modifier is for. Everything else here is legal: a final class may hold static fields, and static fields default to 0 so &#x27;a&#x27; need not be assigned explicitly.
+被 final 修饰的类不能被继承，这正是它的用途。其余部分都合法：final 类里可以有静态字段，而静态字段有默认值 0，所以 a 不显式赋值也没问题。
+final クラスは継承できない —— それがこの修飾子の役割。他はすべて合法。final クラスに static フィールドを置くことはでき、static フィールドは既定値 0 を持つので a の明示的な初期化も不要。">
+<div class="qhead"><span class="qno">Question 3</span><span class="badge">单选</span><span class="jb-topic">final</span></div>
+<div class="stem"><p lang="en">What is wrong with the following Java program?</p><p lang="zh">以下这段 Java 程序有什么问题？</p><p lang="ja">次の Java プログラムのどこに問題があるか。</p><pre class="jb-code i18n-noloc"><code>final class test1{
+  protected static int a;
+}
+class test2 extends test1{
+  public static void main(String[] args) {
+    System.out.println(a);
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The static variable &#x27;a&#x27; is not initialised.</span><span class="opt-lang" lang="zh">静态变量 a 没有初始化。</span><span class="opt-lang" lang="ja">static 変数 a が初期化されていない。</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The final class &#x27;test1&#x27; cannot be inherited.</span><span class="opt-lang" lang="zh">final 类 test1 不能被继承。</span><span class="opt-lang" lang="ja">final クラス test1 は継承できない。</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Static variables are not allowed in a final class.</span><span class="opt-lang" lang="zh">final 类中不允许有静态变量。</span><span class="opt-lang" lang="ja">final クラスに static 変数は置けない。</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">There is nothing wrong with the program.</span><span class="opt-lang" lang="zh">程序没有任何问题。</span><span class="opt-lang" lang="ja">プログラムに問題はない。</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">A final class cannot be extended — that is exactly what the modifier is for. Everything else here is legal: a final class may hold static fields, and static fields default to 0 so &#x27;a&#x27; need not be assigned explicitly.</p><p lang="zh">被 final 修饰的类不能被继承，这正是它的用途。其余部分都合法：final 类里可以有静态字段，而静态字段有默认值 0，所以 a 不显式赋值也没问题。</p><p lang="ja">final クラスは継承できない —— それがこの修飾子の役割。他はすべて合法。final クラスに static フィールドを置くことはでき、static フィールドは既定値 0 を持つので a の明示的な初期化も不要。</p></div></details></div>
+<div class="q" id="q4" data-n="4" data-ans="A" data-review-id="jb-04" data-chat-context="Java Bronze practice question
+fields
+What default value does the variable &#x27;a&#x27; receive?
+变量 a 取得的默认值是多少？
+変数 a が持つ既定値はどれか。
+class testClass{
+  static int a;
+  public static void main(String[] args) {
+    System.out.println(a);
+  }
+}
+A. 0
+B. 1
+C. null
+D. It has no default value and fails to compile.
+Static and instance fields of numeric primitives default to 0, booleans to false, and object references to null. Defaults apply only to fields — local variables never receive one.
+静态字段和实例字段中，数值型基本类型默认为 0，布尔型为 false，引用类型为 null。默认值只给字段，局部变量永远不会自动获得默认值。
+static フィールドとインスタンスフィールドは、数値プリミティブが 0、boolean が false、参照型が null で初期化される。既定値が与えられるのはフィールドだけで、ローカル変数には与えられない。">
+<div class="qhead"><span class="qno">Question 4</span><span class="badge">单选</span><span class="jb-topic">fields</span></div>
+<div class="stem"><p lang="en">What default value does the variable &#x27;a&#x27; receive?</p><p lang="zh">变量 a 取得的默认值是多少？</p><p lang="ja">変数 a が持つ既定値はどれか。</p><pre class="jb-code i18n-noloc"><code>class testClass{
+  static int a;
+  public static void main(String[] args) {
+    System.out.println(a);
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">0</span><span class="opt-lang" lang="zh">0</span><span class="opt-lang" lang="ja">0</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">1</span><span class="opt-lang" lang="zh">1</span><span class="opt-lang" lang="ja">1</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">null</span><span class="opt-lang" lang="zh">null</span><span class="opt-lang" lang="ja">null</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">It has no default value and fails to compile.</span><span class="opt-lang" lang="zh">没有默认值，程序无法编译。</span><span class="opt-lang" lang="ja">既定値はなく、コンパイルできない。</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Static and instance fields of numeric primitives default to 0, booleans to false, and object references to null. Defaults apply only to fields — local variables never receive one.</p><p lang="zh">静态字段和实例字段中，数值型基本类型默认为 0，布尔型为 false，引用类型为 null。默认值只给字段，局部变量永远不会自动获得默认值。</p><p lang="ja">static フィールドとインスタンスフィールドは、数値プリミティブが 0、boolean が false、参照型が null で初期化される。既定値が与えられるのはフィールドだけで、ローカル変数には与えられない。</p></div></details></div>
+<div class="q" id="q5" data-n="5" data-ans="C" data-review-id="jb-05" data-chat-context="Java Bronze practice question
+initialisation
+Which statement CANNOT be inserted at position 1?
+哪条语句不能插在第 1 处？
+位置 1 に挿入できない文はどれか。
+class abcd{
+  int a;
+  int b=0;
+  static int c;
+  public void m() {
+    int d;
+    int e=0;
+    // position 1
+  }
+}
+A. a++;
+B. c++;
+C. d++;
+D. e++;
+m() is an instance method, so a, b, c and e are all reachable: instance fields default to 0 (a, b), static fields default to 0 (c), and e was explicitly set to 0. Only &#x27;d&#x27; is an uninitialised local variable, and reading it — which ++ does — is a compile error.
+m() 是实例方法，因此 a、b、c、e 都可用：实例字段 a、b 默认为 0，静态字段 c 默认为 0，e 被显式赋值为 0。只有 d 是未初始化的局部变量，而 ++ 需要先读取它的值，所以编译报错。
+m() はインスタンスメソッドなので a・b・c・e はすべて参照可能。インスタンスフィールド a, b は既定値 0、static フィールド c も 0、e は明示的に 0。d だけが未初期化のローカル変数で、++ は値の読み取りを伴うためコンパイルエラーになる。">
+<div class="qhead"><span class="qno">Question 5</span><span class="badge">单选</span><span class="jb-topic">initialisation</span></div>
+<div class="stem"><p lang="en">Which statement CANNOT be inserted at position 1?</p><p lang="zh">哪条语句不能插在第 1 处？</p><p lang="ja">位置 1 に挿入できない文はどれか。</p><pre class="jb-code i18n-noloc"><code>class abcd{
+  int a;
+  int b=0;
+  static int c;
+  public void m() {
+    int d;
+    int e=0;
+    // position 1
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">a++;</span><span class="opt-lang" lang="zh">a++;</span><span class="opt-lang" lang="ja">a++;</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">c++;</span><span class="opt-lang" lang="zh">c++;</span><span class="opt-lang" lang="ja">c++;</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">d++;</span><span class="opt-lang" lang="zh">d++;</span><span class="opt-lang" lang="ja">d++;</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">e++;</span><span class="opt-lang" lang="zh">e++;</span><span class="opt-lang" lang="ja">e++;</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>C</b></p><div class="expl"><p lang="en">m() is an instance method, so a, b, c and e are all reachable: instance fields default to 0 (a, b), static fields default to 0 (c), and e was explicitly set to 0. Only &#x27;d&#x27; is an uninitialised local variable, and reading it — which ++ does — is a compile error.</p><p lang="zh">m() 是实例方法，因此 a、b、c、e 都可用：实例字段 a、b 默认为 0，静态字段 c 默认为 0，e 被显式赋值为 0。只有 d 是未初始化的局部变量，而 ++ 需要先读取它的值，所以编译报错。</p><p lang="ja">m() はインスタンスメソッドなので a・b・c・e はすべて参照可能。インスタンスフィールド a, b は既定値 0、static フィールド c も 0、e は明示的に 0。d だけが未初期化のローカル変数で、++ は値の読み取りを伴うためコンパイルエラーになる。</p></div></details></div>
+<div class="q" id="q6" data-n="6" data-ans="C" data-review-id="jb-06" data-chat-context="Java Bronze practice question
+static
+Which statement is valid at position 1 inside this static main method?
+在这个静态 main 方法的第 1 处，哪条语句合法？
+この static な main メソッド内の位置 1 に入れてよい文はどれか。
+public class abc {
+  int a;
+  int b=0;
+  static int c;
+  public static void main(String[] args) {
+    int d;
+    int e=0;
+    // position 1
+  }
+}
+A. a++;
+B. b++;
+C. c++;
+D. d++;
+main is static, so it cannot touch instance fields directly — a++ and b++ fail to compile (no object exists to read them from). &#x27;d&#x27; is an uninitialised local variable. Only &#x27;c&#x27;, a static field, is reachable from a static context.
+main 是静态方法，不能直接访问实例字段——没有对象可以承载它们，所以 a++ 和 b++ 都无法编译。d 是未初始化的局部变量。只有静态字段 c 可以在静态上下文中被访问。
+main は static なのでインスタンスフィールドに直接触れられない —— a++ と b++ はコンパイルエラー（読み取る対象のインスタンスがない）。d は未初期化のローカル変数。static フィールド c だけが static コンテキストから参照できる。">
+<div class="qhead"><span class="qno">Question 6</span><span class="badge">单选</span><span class="jb-topic">static</span></div>
+<div class="stem"><p lang="en">Which statement is valid at position 1 inside this static main method?</p><p lang="zh">在这个静态 main 方法的第 1 处，哪条语句合法？</p><p lang="ja">この static な main メソッド内の位置 1 に入れてよい文はどれか。</p><pre class="jb-code i18n-noloc"><code>public class abc {
+  int a;
+  int b=0;
+  static int c;
+  public static void main(String[] args) {
+    int d;
+    int e=0;
+    // position 1
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">a++;</span><span class="opt-lang" lang="zh">a++;</span><span class="opt-lang" lang="ja">a++;</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">b++;</span><span class="opt-lang" lang="zh">b++;</span><span class="opt-lang" lang="ja">b++;</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">c++;</span><span class="opt-lang" lang="zh">c++;</span><span class="opt-lang" lang="ja">c++;</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">d++;</span><span class="opt-lang" lang="zh">d++;</span><span class="opt-lang" lang="ja">d++;</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>C</b></p><div class="expl"><p lang="en">main is static, so it cannot touch instance fields directly — a++ and b++ fail to compile (no object exists to read them from). &#x27;d&#x27; is an uninitialised local variable. Only &#x27;c&#x27;, a static field, is reachable from a static context.</p><p lang="zh">main 是静态方法，不能直接访问实例字段——没有对象可以承载它们，所以 a++ 和 b++ 都无法编译。d 是未初始化的局部变量。只有静态字段 c 可以在静态上下文中被访问。</p><p lang="ja">main は static なのでインスタンスフィールドに直接触れられない —— a++ と b++ はコンパイルエラー（読み取る対象のインスタンスがない）。d は未初期化のローカル変数。static フィールド c だけが static コンテキストから参照できる。</p></div></details></div>
+<div class="q" id="q7" data-n="7" data-ans="D" data-review-id="jb-07" data-chat-context="Java Bronze practice question
+types
+What is the result of compiling and running this program?
+编译并运行这段程序的结果是什么？
+このプログラムをコンパイルして実行した結果はどうなるか。
+class testClass{
+  public static void main(String[] args) {
+    int i=4;
+    float f = 4.3;
+    double d = 1.8;
+    int c =0;
+    if(i == f) c++;
+    if(((int)(f+d)) == ((int) f) + (int)d) c+= 2;
+    System.out.println(c);
+  }
+}
+A. 0 is printed
+B. 1 is printed
+C. 2 is printed
+D. The code fails to compile
+A decimal literal such as 4.3 is a double, and assigning a double to a float needs either a cast or an &#x27;f&#x27; suffix — so &#x27;float f = 4.3;&#x27; never compiles. Write 4.3f to make it legal; the loop conditions are red herrings you never reach.
+像 4.3 这样的小数字面量默认是 double 类型，把 double 赋给 float 必须做强制转型或加 f 后缀，所以 float f = 4.3; 这一行就编译不过。写成 4.3f 才合法——后面的判断全是干扰，根本执行不到。
+4.3 のような小数リテラルは double 型。double を float に代入するにはキャストか f サフィックスが必要なため、float f = 4.3; の時点でコンパイルできない。4.3f と書けば合法。後続の条件判定は到達しないので関係ない。">
+<div class="qhead"><span class="qno">Question 7</span><span class="badge">单选</span><span class="jb-topic">types</span></div>
+<div class="stem"><p lang="en">What is the result of compiling and running this program?</p><p lang="zh">编译并运行这段程序的结果是什么？</p><p lang="ja">このプログラムをコンパイルして実行した結果はどうなるか。</p><pre class="jb-code i18n-noloc"><code>class testClass{
+  public static void main(String[] args) {
+    int i=4;
+    float f = 4.3;
+    double d = 1.8;
+    int c =0;
+    if(i == f) c++;
+    if(((int)(f+d)) == ((int) f) + (int)d) c+= 2;
+    System.out.println(c);
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">0 is printed</span><span class="opt-lang" lang="zh">输出 0</span><span class="opt-lang" lang="ja">0 が出力される</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">1 is printed</span><span class="opt-lang" lang="zh">输出 1</span><span class="opt-lang" lang="ja">1 が出力される</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">2 is printed</span><span class="opt-lang" lang="zh">输出 2</span><span class="opt-lang" lang="ja">2 が出力される</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The code fails to compile</span><span class="opt-lang" lang="zh">代码无法通过编译</span><span class="opt-lang" lang="ja">コンパイルできない</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>D</b></p><div class="expl"><p lang="en">A decimal literal such as 4.3 is a double, and assigning a double to a float needs either a cast or an &#x27;f&#x27; suffix — so &#x27;float f = 4.3;&#x27; never compiles. Write 4.3f to make it legal; the loop conditions are red herrings you never reach.</p><p lang="zh">像 4.3 这样的小数字面量默认是 double 类型，把 double 赋给 float 必须做强制转型或加 f 后缀，所以 float f = 4.3; 这一行就编译不过。写成 4.3f 才合法——后面的判断全是干扰，根本执行不到。</p><p lang="ja">4.3 のような小数リテラルは double 型。double を float に代入するにはキャストか f サフィックスが必要なため、float f = 4.3; の時点でコンパイルできない。4.3f と書けば合法。後続の条件判定は到達しないので関係ない。</p></div></details></div>
+<div class="q" id="q8" data-n="8" data-ans="C" data-review-id="jb-08" data-chat-context="Java Bronze practice question
+interface
+What happens when this program runs?
+这段程序运行时会发生什么？
+このプログラムを実行するとどうなるか。
+interface inter{
+  void func();
+}
+class testClass implements inter{
+  public void func(){
+    System.out.println(&quot;hello world&quot;);
+  }
+  public static void main(String[] args) {
+    inter x = new inter();
+    x.func();
+  }
+}
+A. &quot;hello world&quot; is printed
+B. An ArrayIndexOutOfBoundsException is thrown
+C. Compilation error — an interface cannot be instantiated
+D. The output cannot be determined
+An interface declares behaviour without implementing it, so &#x27;new inter()&#x27; is meaningless and rejected by the compiler. You must instantiate a concrete class and hold it in an interface-typed reference: &#x27;inter x = new testClass();&#x27;.
+接口只声明行为而不提供实现，因此 new inter() 没有意义，编译器会直接报错。正确做法是实例化某个具体类，再用接口类型的引用去持有它：inter x = new testClass();
+インターフェースは実装を持たないため new inter() は意味を持たずコンパイラに拒否される。具象クラスをインスタンス化し、インターフェース型の参照で保持する必要がある：inter x = new testClass();">
+<div class="qhead"><span class="qno">Question 8</span><span class="badge">单选</span><span class="jb-topic">interface</span></div>
+<div class="stem"><p lang="en">What happens when this program runs?</p><p lang="zh">这段程序运行时会发生什么？</p><p lang="ja">このプログラムを実行するとどうなるか。</p><pre class="jb-code i18n-noloc"><code>interface inter{
+  void func();
+}
+class testClass implements inter{
+  public void func(){
+    System.out.println(&quot;hello world&quot;);
+  }
+  public static void main(String[] args) {
+    inter x = new inter();
+    x.func();
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">&quot;hello world&quot; is printed</span><span class="opt-lang" lang="zh">输出 hello world</span><span class="opt-lang" lang="ja">hello world が出力される</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">An ArrayIndexOutOfBoundsException is thrown</span><span class="opt-lang" lang="zh">抛出 ArrayIndexOutOfBoundsException</span><span class="opt-lang" lang="ja">ArrayIndexOutOfBoundsException が発生する</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Compilation error — an interface cannot be instantiated</span><span class="opt-lang" lang="zh">编译错误——接口不能被实例化</span><span class="opt-lang" lang="ja">コンパイルエラー —— インターフェースはインスタンス化できない</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The output cannot be determined</span><span class="opt-lang" lang="zh">输出无法确定</span><span class="opt-lang" lang="ja">出力は不定である</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>C</b></p><div class="expl"><p lang="en">An interface declares behaviour without implementing it, so &#x27;new inter()&#x27; is meaningless and rejected by the compiler. You must instantiate a concrete class and hold it in an interface-typed reference: &#x27;inter x = new testClass();&#x27;.</p><p lang="zh">接口只声明行为而不提供实现，因此 new inter() 没有意义，编译器会直接报错。正确做法是实例化某个具体类，再用接口类型的引用去持有它：inter x = new testClass();</p><p lang="ja">インターフェースは実装を持たないため new inter() は意味を持たずコンパイラに拒否される。具象クラスをインスタンス化し、インターフェース型の参照で保持する必要がある：inter x = new testClass();</p></div></details></div>
+<div class="q" id="q9" data-n="9" data-ans="A" data-review-id="jb-09" data-chat-context="Java Bronze practice question
+polymorphism
+Which declaration can be inserted at position 1 so that &#x27;func()&#x27; can be invoked without a compile error?
+在第 1 处插入哪条声明，可以让 func() 被调用且不产生编译错误？
+位置 1 に挿入すれば func() をコンパイルエラーなしで呼べる宣言はどれか。
+interface inter{
+  void func();
+}
+class testClass implements inter{
+  public void func(){
+    System.out.println(&quot;hello world&quot;);
+  }
+  public static void main(String[] args) {
+    // position 1
+    x.func();
+  }
+}
+A. inter x = new testClass();
+B. inter x = new inter();
+C. Object x = new inter();
+D. testClass x;
+Assigning the implementing class to an interface reference is the standard polymorphic idiom. &#x27;new inter()&#x27; is illegal either way; &#x27;testClass x;&#x27; leaves the local variable uninitialised, so calling x.func() is also a compile error.
+把实现类赋给接口类型的引用，正是标准的多态写法。new inter() 无论如何都非法；testClass x; 只是声明而未初始化局部变量，调用 x.func() 同样编译报错。
+実装クラスをインターフェース型の参照に代入するのが標準的なポリモーフィズムの書き方。new inter() はどちらにしても不正。testClass x; は宣言だけでローカル変数が未初期化なので、x.func() の呼び出しもコンパイルエラー。">
+<div class="qhead"><span class="qno">Question 9</span><span class="badge">单选</span><span class="jb-topic">polymorphism</span></div>
+<div class="stem"><p lang="en">Which declaration can be inserted at position 1 so that &#x27;func()&#x27; can be invoked without a compile error?</p><p lang="zh">在第 1 处插入哪条声明，可以让 func() 被调用且不产生编译错误？</p><p lang="ja">位置 1 に挿入すれば func() をコンパイルエラーなしで呼べる宣言はどれか。</p><pre class="jb-code i18n-noloc"><code>interface inter{
+  void func();
+}
+class testClass implements inter{
+  public void func(){
+    System.out.println(&quot;hello world&quot;);
+  }
+  public static void main(String[] args) {
+    // position 1
+    x.func();
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">inter x = new testClass();</span><span class="opt-lang" lang="zh">inter x = new testClass();</span><span class="opt-lang" lang="ja">inter x = new testClass();</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">inter x = new inter();</span><span class="opt-lang" lang="zh">inter x = new inter();</span><span class="opt-lang" lang="ja">inter x = new inter();</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Object x = new inter();</span><span class="opt-lang" lang="zh">Object x = new inter();</span><span class="opt-lang" lang="ja">Object x = new inter();</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">testClass x;</span><span class="opt-lang" lang="zh">testClass x;</span><span class="opt-lang" lang="ja">testClass x;</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A</b></p><div class="expl"><p lang="en">Assigning the implementing class to an interface reference is the standard polymorphic idiom. &#x27;new inter()&#x27; is illegal either way; &#x27;testClass x;&#x27; leaves the local variable uninitialised, so calling x.func() is also a compile error.</p><p lang="zh">把实现类赋给接口类型的引用，正是标准的多态写法。new inter() 无论如何都非法；testClass x; 只是声明而未初始化局部变量，调用 x.func() 同样编译报错。</p><p lang="ja">実装クラスをインターフェース型の参照に代入するのが標準的なポリモーフィズムの書き方。new inter() はどちらにしても不正。testClass x; は宣言だけでローカル変数が未初期化なので、x.func() の呼び出しもコンパイルエラー。</p></div></details></div>
+<div class="q" id="q10" data-n="10" data-ans="C" data-review-id="jb-10" data-chat-context="Java Bronze practice question
+references
+What is printed?
+程序的输出是什么？
+何が出力されるか。
+public class xyz {
+  int a;
+  xyz(){
+    a=9;
+  }
+  xyz(int i){
+    a=i;
+  }
+  public static void main(String[] args) {
+    xyz obj1 = new xyz();
+    xyz obj2 = new xyz(10);
+    obj1=obj2;
+    System.out.println(obj1.a);
+  }
+}
+A. 0
+B. 9
+C. 10
+D. Compilation error
+Two objects are built: one with a=9, one with a=10. &#x27;obj1=obj2&#x27; copies the reference, not the object — both variables now point at the same object whose a is 10. The object with a=9 becomes unreachable.
+先后创建了两个对象，a 分别是 9 和 10。obj1=obj2 复制的是引用而不是对象本身，此后两个变量指向同一个对象，其 a 为 10。原来那个 a=9 的对象失去引用，再也访问不到。
+a=9 と a=10 の 2 つのオブジェクトが作られる。obj1=obj2 は参照をコピーするだけで、以後 2 つの変数は同じオブジェクト（a=10）を指す。a=9 のオブジェクトは参照を失い到達不能になる。">
+<div class="qhead"><span class="qno">Question 10</span><span class="badge">单选</span><span class="jb-topic">references</span></div>
+<div class="stem"><p lang="en">What is printed?</p><p lang="zh">程序的输出是什么？</p><p lang="ja">何が出力されるか。</p><pre class="jb-code i18n-noloc"><code>public class xyz {
+  int a;
+  xyz(){
+    a=9;
+  }
+  xyz(int i){
+    a=i;
+  }
+  public static void main(String[] args) {
+    xyz obj1 = new xyz();
+    xyz obj2 = new xyz(10);
+    obj1=obj2;
+    System.out.println(obj1.a);
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">0</span><span class="opt-lang" lang="zh">0</span><span class="opt-lang" lang="ja">0</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">9</span><span class="opt-lang" lang="zh">9</span><span class="opt-lang" lang="ja">9</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">10</span><span class="opt-lang" lang="zh">10</span><span class="opt-lang" lang="ja">10</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Compilation error</span><span class="opt-lang" lang="zh">编译错误</span><span class="opt-lang" lang="ja">コンパイルエラー</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>C</b></p><div class="expl"><p lang="en">Two objects are built: one with a=9, one with a=10. &#x27;obj1=obj2&#x27; copies the reference, not the object — both variables now point at the same object whose a is 10. The object with a=9 becomes unreachable.</p><p lang="zh">先后创建了两个对象，a 分别是 9 和 10。obj1=obj2 复制的是引用而不是对象本身，此后两个变量指向同一个对象，其 a 为 10。原来那个 a=9 的对象失去引用，再也访问不到。</p><p lang="ja">a=9 と a=10 の 2 つのオブジェクトが作られる。obj1=obj2 は参照をコピーするだけで、以後 2 つの変数は同じオブジェクト（a=10）を指す。a=9 のオブジェクトは参照を失い到達不能になる。</p></div></details></div>
+<div class="q" id="q11" data-n="11" data-ans="D" data-review-id="jb-11" data-chat-context="Java Bronze practice question
+exceptions
+What is wrong with this code?
+这段代码有什么错误？
+このコードのどこが間違っているか。
+class abcd extends Exception{}
+public class pqrs{
+  public void func1() {
+    try {
+      func2();
+    }
+    finally {
+      func3();
+    }
+    catch(abcd exp) {
+    }
+  }
+  public void func2() throws abcd{
+    throw new abcd();
+  }
+  public void func3() throws RuntimeException{
+    throw new RuntimeException();
+  }
+}
+A. func1() must declare RuntimeException because it does not catch what func3() throws.
+B. A try block cannot have both a catch and a finally block.
+C. An empty catch block is not allowed.
+D. A catch block cannot follow a finally block.
+The order after try must be catch blocks first, then the optional finally — so &#x27;try ... finally ... catch&#x27; is illegal. Everything else here is fine: try may be followed by both catch and finally, an empty catch block is legal (if useless), and RuntimeException is unchecked so func1() need not declare it.
+try 之后的顺序必须是先 catch、末尾才是可选的 finally，所以 try…finally…catch 这种写法非法。其余都没问题：try 可以同时配 catch 和 finally，空的 catch 块语法上合法（虽然没用），而 RuntimeException 是非受检异常，func1() 不需要用 throws 声明。
+try の後はまず catch、最後に任意の finally という順序が必須のため、try … finally … catch は不正。他は問題なし。try に catch と finally を同時に付けることはでき、空の catch ブロックも文法上は合法。RuntimeException は非検査例外なので func1() に throws 宣言は不要。">
+<div class="qhead"><span class="qno">Question 11</span><span class="badge">单选</span><span class="jb-topic">exceptions</span></div>
+<div class="stem"><p lang="en">What is wrong with this code?</p><p lang="zh">这段代码有什么错误？</p><p lang="ja">このコードのどこが間違っているか。</p><pre class="jb-code i18n-noloc"><code>class abcd extends Exception{}
+public class pqrs{
+  public void func1() {
+    try {
+      func2();
+    }
+    finally {
+      func3();
+    }
+    catch(abcd exp) {
+    }
+  }
+  public void func2() throws abcd{
+    throw new abcd();
+  }
+  public void func3() throws RuntimeException{
+    throw new RuntimeException();
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">func1() must declare RuntimeException because it does not catch what func3() throws.</span><span class="opt-lang" lang="zh">func1() 没有捕获 func3() 抛出的异常，必须用 throws 声明 RuntimeException。</span><span class="opt-lang" lang="ja">func1() は func3() の例外を捕捉しないので、throws RuntimeException が必要。</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">A try block cannot have both a catch and a finally block.</span><span class="opt-lang" lang="zh">一个 try 块不能同时拥有 catch 和 finally 块。</span><span class="opt-lang" lang="ja">try ブロックに catch と finally を同時に付けることはできない。</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">An empty catch block is not allowed.</span><span class="opt-lang" lang="zh">不允许出现空的 catch 块。</span><span class="opt-lang" lang="ja">空の catch ブロックは許可されない。</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">A catch block cannot follow a finally block.</span><span class="opt-lang" lang="zh">catch 块不能跟在 finally 块之后。</span><span class="opt-lang" lang="ja">catch ブロックを finally ブロックの後に置くことはできない。</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>D</b></p><div class="expl"><p lang="en">The order after try must be catch blocks first, then the optional finally — so &#x27;try ... finally ... catch&#x27; is illegal. Everything else here is fine: try may be followed by both catch and finally, an empty catch block is legal (if useless), and RuntimeException is unchecked so func1() need not declare it.</p><p lang="zh">try 之后的顺序必须是先 catch、末尾才是可选的 finally，所以 try…finally…catch 这种写法非法。其余都没问题：try 可以同时配 catch 和 finally，空的 catch 块语法上合法（虽然没用），而 RuntimeException 是非受检异常，func1() 不需要用 throws 声明。</p><p lang="ja">try の後はまず catch、最後に任意の finally という順序が必須のため、try … finally … catch は不正。他は問題なし。try に catch と finally を同時に付けることはでき、空の catch ブロックも文法上は合法。RuntimeException は非検査例外なので func1() に throws 宣言は不要。</p></div></details></div>
+<div class="q" id="q12" data-n="12" data-ans="D" data-review-id="jb-12" data-chat-context="Java Bronze practice question
+string
+What is written to standard output?
+标准输出的内容是什么？
+標準出力には何が出力されるか。
+class testClass{
+  public static void main(String[] args) {
+    String str =&quot;restructure&quot;;
+    System.out.println(str.substring(2, 3));
+  }
+}
+A. est
+B. es
+C. st
+D. s
+substring(begin, end) takes the begin index inclusive and the end index exclusive. For &quot;restructure&quot; the indices are r=0, e=1, s=2, so substring(2, 3) contains exactly the character at index 2 — the single letter s.
+substring(begin, end) 的 begin 下标包含在内，end 下标不包含。字符串 restructure 的下标是 r=0、e=1、s=2，所以 substring(2, 3) 恰好只取下标 2 这一个字符，即字母 s。
+substring(begin, end) は begin の添字を含み、end の添字を含まない。&quot;restructure&quot; は r=0, e=1, s=2 なので、substring(2, 3) は添字 2 の文字だけ、つまり s 1 文字になる。">
+<div class="qhead"><span class="qno">Question 12</span><span class="badge">单选</span><span class="jb-topic">string</span></div>
+<div class="stem"><p lang="en">What is written to standard output?</p><p lang="zh">标准输出的内容是什么？</p><p lang="ja">標準出力には何が出力されるか。</p><pre class="jb-code i18n-noloc"><code>class testClass{
+  public static void main(String[] args) {
+    String str =&quot;restructure&quot;;
+    System.out.println(str.substring(2, 3));
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">est</span><span class="opt-lang" lang="zh">est</span><span class="opt-lang" lang="ja">est</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">es</span><span class="opt-lang" lang="zh">es</span><span class="opt-lang" lang="ja">es</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">st</span><span class="opt-lang" lang="zh">st</span><span class="opt-lang" lang="ja">st</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">s</span><span class="opt-lang" lang="zh">s</span><span class="opt-lang" lang="ja">s</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>D</b></p><div class="expl"><p lang="en">substring(begin, end) takes the begin index inclusive and the end index exclusive. For &quot;restructure&quot; the indices are r=0, e=1, s=2, so substring(2, 3) contains exactly the character at index 2 — the single letter s.</p><p lang="zh">substring(begin, end) 的 begin 下标包含在内，end 下标不包含。字符串 restructure 的下标是 r=0、e=1、s=2，所以 substring(2, 3) 恰好只取下标 2 这一个字符，即字母 s。</p><p lang="ja">substring(begin, end) は begin の添字を含み、end の添字を含まない。&quot;restructure&quot; は r=0, e=1, s=2 なので、substring(2, 3) は添字 2 の文字だけ、つまり s 1 文字になる。</p></div></details></div>
+<div class="q" id="q13" data-n="13" data-ans="A,C,D" data-review-id="jb-13" data-chat-context="Java Bronze practice question
+operators
+Which statements about the &gt;&gt; and &gt;&gt;&gt; operators are true? (select all that apply)
+关于 &gt;&gt; 与 &gt;&gt;&gt; 运算符，哪些说法正确？（多选）
+&gt;&gt; 演算子と &gt;&gt;&gt; 演算子について正しいものはどれか。（すべて選択）
+int x = 5;
+int a = x &gt;&gt; 1;
+int b = x &gt;&gt;&gt; 1;
+int c = -1 &gt;&gt; 1;
+int d = -1 &gt;&gt;&gt; 1;
+A. For non-negative left operands, &gt;&gt; and &gt;&gt;&gt; produce the same result.
+B. The result of (-1 &gt;&gt; 1) is 0.
+C. &gt;&gt;&gt; never returns a negative value when the left operand is non-negative.
+D. With &gt;&gt;, the leftmost bit of the result always matches the sign bit of the left operand.
+&gt;&gt; keeps the sign bit when shifting (arithmetic shift), &gt;&gt;&gt; fills with zero (logical shift). They agree as long as the sign bit is 0, which is why non-negative operands give identical results. For -1 the bit pattern is all ones, so -1 &gt;&gt; 1 is still -1 and -1 &gt;&gt;&gt; 1 becomes the large positive value 2147483647 — certainly not 0.
+&gt;&gt; 移位时保留符号位（算术移位），&gt;&gt;&gt; 则补零（逻辑移位）。只要符号位是 0，两者结果就一致，这正是非负操作数结果相同的原因。-1 的位模式是全 1，所以 -1 &gt;&gt; 1 仍是 -1，而 -1 &gt;&gt;&gt; 1 会变成很大的正数 2147483647，绝不是 0。
+&gt;&gt; はシフト時に符号ビットを保持し（算術シフト）、&gt;&gt;&gt; は 0 を埋める（論理シフト）。符号ビットが 0 なら結果は一致するため、非負のオペランドでは同じ結果になる。-1 のビット列は全ビット 1 なので、-1 &gt;&gt; 1 は -1 のままだが、-1 &gt;&gt;&gt; 1 は大きな正の値 2147483647 になり、0 にはならない。">
+<div class="qhead"><span class="qno">Question 13</span><span class="badge">多选</span><span class="jb-topic">operators</span></div>
+<div class="stem"><p lang="en">Which statements about the &gt;&gt; and &gt;&gt;&gt; operators are true? (select all that apply)</p><p lang="zh">关于 &gt;&gt; 与 &gt;&gt;&gt; 运算符，哪些说法正确？（多选）</p><p lang="ja">&gt;&gt; 演算子と &gt;&gt;&gt; 演算子について正しいものはどれか。（すべて選択）</p><pre class="jb-code i18n-noloc"><code>int x = 5;
+int a = x &gt;&gt; 1;
+int b = x &gt;&gt;&gt; 1;
+int c = -1 &gt;&gt; 1;
+int d = -1 &gt;&gt;&gt; 1;</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">For non-negative left operands, &gt;&gt; and &gt;&gt;&gt; produce the same result.</span><span class="opt-lang" lang="zh">左操作数为非负数时，&gt;&gt; 与 &gt;&gt;&gt; 的结果相同。</span><span class="opt-lang" lang="ja">左オペランドが非負なら、&gt;&gt; と &gt;&gt;&gt; の結果は同じ。</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">The result of (-1 &gt;&gt; 1) is 0.</span><span class="opt-lang" lang="zh">(-1 &gt;&gt; 1) 的结果是 0。</span><span class="opt-lang" lang="ja">(-1 &gt;&gt; 1) の結果は 0。</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">&gt;&gt;&gt; never returns a negative value when the left operand is non-negative.</span><span class="opt-lang" lang="zh">左操作数为非负数时，&gt;&gt;&gt; 的结果永远不会是负数。</span><span class="opt-lang" lang="ja">左オペランドが非負なら、&gt;&gt;&gt; の結果が負になることはない。</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">With &gt;&gt;, the leftmost bit of the result always matches the sign bit of the left operand.</span><span class="opt-lang" lang="zh">使用 &gt;&gt; 时，结果的最左位始终与左操作数的符号位一致。</span><span class="opt-lang" lang="ja">&gt;&gt; では、結果の最上位ビットは常に左オペランドの符号ビットと一致する。</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A,C,D</b></p><div class="expl"><p lang="en">&gt;&gt; keeps the sign bit when shifting (arithmetic shift), &gt;&gt;&gt; fills with zero (logical shift). They agree as long as the sign bit is 0, which is why non-negative operands give identical results. For -1 the bit pattern is all ones, so -1 &gt;&gt; 1 is still -1 and -1 &gt;&gt;&gt; 1 becomes the large positive value 2147483647 — certainly not 0.</p><p lang="zh">&gt;&gt; 移位时保留符号位（算术移位），&gt;&gt;&gt; 则补零（逻辑移位）。只要符号位是 0，两者结果就一致，这正是非负操作数结果相同的原因。-1 的位模式是全 1，所以 -1 &gt;&gt; 1 仍是 -1，而 -1 &gt;&gt;&gt; 1 会变成很大的正数 2147483647，绝不是 0。</p><p lang="ja">&gt;&gt; はシフト時に符号ビットを保持し（算術シフト）、&gt;&gt;&gt; は 0 を埋める（論理シフト）。符号ビットが 0 なら結果は一致するため、非負のオペランドでは同じ結果になる。-1 のビット列は全ビット 1 なので、-1 &gt;&gt; 1 は -1 のままだが、-1 &gt;&gt;&gt; 1 は大きな正の値 2147483647 になり、0 にはならない。</p></div></details></div>
+<div class="q" id="q14" data-n="14" data-ans="B" data-review-id="jb-14" data-chat-context="Java Bronze practice question
+main
+Which declarations of main() are valid entry points for an application? (select all that apply)
+下列哪些 main() 声明可以作为程序的合法入口？（多选）
+プログラムの正しいエントリーポイントとして有効な main() の宣言はどれか。（すべて選択）
+// candidate entry points
+A: public void main(String args[])
+B: final public static void main(String [] array)
+C: public static void main(String[] args)
+D: void static public main(String args[])
+A. A only
+B. B and C
+C. A, B and C
+D. All of them are valid
+A valid entry point must be public, static, void and take a String array. Modifiers may appear in any order, so &#x27;final public static void main&#x27; (B) is fine, as is the standard form (C). A lacks static, and in D the return type &#x27;void&#x27; appears before the &#x27;static&#x27; modifier — modifiers must all precede the return type, so it does not compile.
+合法的入口必须是 public、static、void，并接收 String 数组参数。修饰符之间的顺序不限，所以 final public static void main（B）和标准写法（C）都合法。A 缺少 static；D 里返回类型 void 出现在 static 修饰符之前，而修饰符必须全部排在返回类型之前，因此无法编译。
+有効なエントリーポイントは public・static・void で String 配列を受け取る必要がある。修飾子の順序は自由なので final public static void main（B）も標準形（C）も有効。A は static がない。D は戻り値型 void が static 修飾子より前にあり、修飾子は戻り値型より前に置く決まりなのでコンパイルできない。">
+<div class="qhead"><span class="qno">Question 14</span><span class="badge">单选</span><span class="jb-topic">main</span></div>
+<div class="stem"><p lang="en">Which declarations of main() are valid entry points for an application? (select all that apply)</p><p lang="zh">下列哪些 main() 声明可以作为程序的合法入口？（多选）</p><p lang="ja">プログラムの正しいエントリーポイントとして有効な main() の宣言はどれか。（すべて選択）</p><pre class="jb-code i18n-noloc"><code>// candidate entry points
+A: public void main(String args[])
+B: final public static void main(String [] array)
+C: public static void main(String[] args)
+D: void static public main(String args[])</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">A only</span><span class="opt-lang" lang="zh">只有 A</span><span class="opt-lang" lang="ja">A のみ</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">B and C</span><span class="opt-lang" lang="zh">B 和 C</span><span class="opt-lang" lang="ja">B と C</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">A, B and C</span><span class="opt-lang" lang="zh">A、B 和 C</span><span class="opt-lang" lang="ja">A・B・C</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">All of them are valid</span><span class="opt-lang" lang="zh">全部都合法</span><span class="opt-lang" lang="ja">すべて有効</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">A valid entry point must be public, static, void and take a String array. Modifiers may appear in any order, so &#x27;final public static void main&#x27; (B) is fine, as is the standard form (C). A lacks static, and in D the return type &#x27;void&#x27; appears before the &#x27;static&#x27; modifier — modifiers must all precede the return type, so it does not compile.</p><p lang="zh">合法的入口必须是 public、static、void，并接收 String 数组参数。修饰符之间的顺序不限，所以 final public static void main（B）和标准写法（C）都合法。A 缺少 static；D 里返回类型 void 出现在 static 修饰符之前，而修饰符必须全部排在返回类型之前，因此无法编译。</p><p lang="ja">有効なエントリーポイントは public・static・void で String 配列を受け取る必要がある。修飾子の順序は自由なので final public static void main（B）も標準形（C）も有効。A は static がない。D は戻り値型 void が static 修飾子より前にあり、修飾子は戻り値型より前に置く決まりなのでコンパイルできない。</p></div></details></div>
+<div class="q" id="q15" data-n="15" data-ans="B" data-review-id="jb-15" data-chat-context="Java Bronze practice question
+loops
+What is the output (shown here without line breaks)?
+程序的输出是什么（此处忽略换行）？
+出力はどうなるか（改行は無視する）。
+class testClass{
+  public static void main(String[] args) {
+    for(int i=12;i&gt;0;i-=3)
+      System.out.println(i);
+    System.out.println(&quot;&quot;);
+  }
+}
+A. 12
+B. 12963
+C. 36912
+D. 129630
+i starts at 12 and drops by 3 each pass while staying above 0: 12, 9, 6, 3, then i becomes 0 and the loop ends. Each value is printed on its own line, followed by one empty line — so the digits read 12963.
+i 从 12 开始每次减 3，并保持大于 0：12、9、6、3，之后 i 变为 0 循环结束。每个值单独占一行，最后再打印一个空行，因此连起来读作 12963。
+i は 12 から始まり 0 より大きい間 3 ずつ減る：12, 9, 6, 3。その後 i は 0 になりループ終了。各値は 1 行ずつ出力され、最後に空行が 1 つ続くので、数字を並べると 12963 になる。">
+<div class="qhead"><span class="qno">Question 15</span><span class="badge">单选</span><span class="jb-topic">loops</span></div>
+<div class="stem"><p lang="en">What is the output (shown here without line breaks)?</p><p lang="zh">程序的输出是什么（此处忽略换行）？</p><p lang="ja">出力はどうなるか（改行は無視する）。</p><pre class="jb-code i18n-noloc"><code>class testClass{
+  public static void main(String[] args) {
+    for(int i=12;i&gt;0;i-=3)
+      System.out.println(i);
+    System.out.println(&quot;&quot;);
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">12</span><span class="opt-lang" lang="zh">12</span><span class="opt-lang" lang="ja">12</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">12963</span><span class="opt-lang" lang="zh">12963</span><span class="opt-lang" lang="ja">12963</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">36912</span><span class="opt-lang" lang="zh">36912</span><span class="opt-lang" lang="ja">36912</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">129630</span><span class="opt-lang" lang="zh">129630</span><span class="opt-lang" lang="ja">129630</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>B</b></p><div class="expl"><p lang="en">i starts at 12 and drops by 3 each pass while staying above 0: 12, 9, 6, 3, then i becomes 0 and the loop ends. Each value is printed on its own line, followed by one empty line — so the digits read 12963.</p><p lang="zh">i 从 12 开始每次减 3，并保持大于 0：12、9、6、3，之后 i 变为 0 循环结束。每个值单独占一行，最后再打印一个空行，因此连起来读作 12963。</p><p lang="ja">i は 12 から始まり 0 より大きい間 3 ずつ減る：12, 9, 6, 3。その後 i は 0 になりループ終了。各値は 1 行ずつ出力され、最後に空行が 1 つ続くので、数字を並べると 12963 になる。</p></div></details></div>
+<div class="q" id="q16" data-n="16" data-ans="D" data-review-id="jb-16" data-chat-context="Java Bronze practice question
+fields
+What is the result of attempting to compile and run this code?
+编译并运行这段代码的结果是什么？
+このコードをコンパイルして実行した結果はどうなるか。
+class testClass{
+  static int a;
+  int b;
+  public testClass() {
+    int c;
+    c=a;
+    a++;
+    b+=c;
+    System.out.println(&quot;c=&quot;+c +&quot;a=&quot;+a +&quot;b=&quot;+b);
+  }
+  public static void main(String[] args) {
+    new testClass();
+  }
+}
+A. Compile error — a constructor cannot access static members.
+B. Compile error — &#x27;a&#x27; is used before it is initialised.
+C. Compile error — the local variable &#x27;c&#x27; is read before assignment.
+D. It runs and prints c=0a=1b=0
+Nothing here is an error. &#x27;c&#x27; is assigned from &#x27;a&#x27; on the line before it is read, and both fields already default to 0 — so the JVM prints c=0a=1b=0 instead of complaining.
+这里没有任何错误。局部变量 c 在读取之前已经被 a 赋值，而两个字段也都默认为 0，所以 JVM 会正常输出 c=0a=1b=0，不会报错。
+ここにエラーはない。c は読み取られる前の行で a から代入されており、2 つのフィールドも既定値 0 を持つ。そのため JVM はエラーにせず c=0a=1b=0 と出力する。">
+<div class="qhead"><span class="qno">Question 16</span><span class="badge">单选</span><span class="jb-topic">fields</span></div>
+<div class="stem"><p lang="en">What is the result of attempting to compile and run this code?</p><p lang="zh">编译并运行这段代码的结果是什么？</p><p lang="ja">このコードをコンパイルして実行した結果はどうなるか。</p><pre class="jb-code i18n-noloc"><code>class testClass{
+  static int a;
+  int b;
+  public testClass() {
+    int c;
+    c=a;
+    a++;
+    b+=c;
+    System.out.println(&quot;c=&quot;+c +&quot;a=&quot;+a +&quot;b=&quot;+b);
+  }
+  public static void main(String[] args) {
+    new testClass();
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Compile error — a constructor cannot access static members.</span><span class="opt-lang" lang="zh">编译错误——构造器不能访问静态成员。</span><span class="opt-lang" lang="ja">コンパイルエラー —— コンストラクタから static メンバには触れない。</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Compile error — &#x27;a&#x27; is used before it is initialised.</span><span class="opt-lang" lang="zh">编译错误——a 在初始化前被使用。</span><span class="opt-lang" lang="ja">コンパイルエラー —— a が初期化前に使用されている。</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Compile error — the local variable &#x27;c&#x27; is read before assignment.</span><span class="opt-lang" lang="zh">编译错误——局部变量 c 在赋值前被读取。</span><span class="opt-lang" lang="ja">コンパイルエラー —— ローカル変数 c が代入前に読み取られている。</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">It runs and prints c=0a=1b=0</span><span class="opt-lang" lang="zh">正常运行，输出 c=0a=1b=0</span><span class="opt-lang" lang="ja">実行でき、c=0a=1b=0 と出力される</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>D</b></p><div class="expl"><p lang="en">Nothing here is an error. &#x27;c&#x27; is assigned from &#x27;a&#x27; on the line before it is read, and both fields already default to 0 — so the JVM prints c=0a=1b=0 instead of complaining.</p><p lang="zh">这里没有任何错误。局部变量 c 在读取之前已经被 a 赋值，而两个字段也都默认为 0，所以 JVM 会正常输出 c=0a=1b=0，不会报错。</p><p lang="ja">ここにエラーはない。c は読み取られる前の行で a から代入されており、2 つのフィールドも既定値 0 を持つ。そのため JVM はエラーにせず c=0a=1b=0 と出力する。</p></div></details></div>
+<div class="q" id="q17" data-n="17" data-ans="A,B,D" data-review-id="jb-17" data-chat-context="Java Bronze practice question
+exceptions
+This program fails to compile with &#x27;Unhandled exception type Exception&#x27;. Which changes fix it? (select all that apply)
+程序因「Unhandled exception type Exception」无法编译。哪些修改可以修复？（多选）
+このプログラムは Unhandled exception type Exception でコンパイルできない。修正方法として正しいものはどれか。（すべて選択）
+public class xyz {
+  int a;
+  xyz() throws Exception{
+    a=9;
+  }
+  xyz(int i){
+    a=i;
+  }
+  public static void main(String[] args) {
+    xyz obj1 = new xyz();
+    xyz obj2 = new xyz(10);
+    obj1=obj2;
+    System.out.println(obj1.a);
+  }
+}
+A. Wrap the body of main in a try/catch block.
+B. Declare main as: public static void main(String[] args) throws Exception
+C. Add a throws clause to the object creation: xyz obj1 = new xyz() throws Exception;
+D. Wrap just the creation statement in try/catch.
+A checked exception must either be caught in a try/catch or declared with throws, so wrapping the whole method or just the failing statement both work, as does declaring throws on main. Option C is not Java syntax at all — a throws clause belongs on a method declaration, never on an assignment statement.
+受检异常必须在 try/catch 中被捕获，或者用 throws 声明。因此把整个方法包起来、只处理出错那句、或者给 main 加 throws 声明都能通过。而 C 根本不是 Java 语法——throws 子句只能出现在方法声明上，绝不能写在赋值语句之后。
+検査例外は try/catch で捕捉するか throws で宣言する必要がある。そのためメソッド全体を囲む方法、問題の行だけを囲む方法、main に throws を付ける方法はいずれも有効。一方 C は Java の文法ではなく、throws 句はメソッド宣言に付くもので代入文には付けられない。">
+<div class="qhead"><span class="qno">Question 17</span><span class="badge">多选</span><span class="jb-topic">exceptions</span></div>
+<div class="stem"><p lang="en">This program fails to compile with &#x27;Unhandled exception type Exception&#x27;. Which changes fix it? (select all that apply)</p><p lang="zh">程序因「Unhandled exception type Exception」无法编译。哪些修改可以修复？（多选）</p><p lang="ja">このプログラムは Unhandled exception type Exception でコンパイルできない。修正方法として正しいものはどれか。（すべて選択）</p><pre class="jb-code i18n-noloc"><code>public class xyz {
+  int a;
+  xyz() throws Exception{
+    a=9;
+  }
+  xyz(int i){
+    a=i;
+  }
+  public static void main(String[] args) {
+    xyz obj1 = new xyz();
+    xyz obj2 = new xyz(10);
+    obj1=obj2;
+    System.out.println(obj1.a);
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Wrap the body of main in a try/catch block.</span><span class="opt-lang" lang="zh">把 main 的方法体包进 try/catch。</span><span class="opt-lang" lang="ja">main の本体を try/catch で囲む。</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Declare main as: public static void main(String[] args) throws Exception</span><span class="opt-lang" lang="zh">把 main 声明为 public static void main(String[] args) throws Exception</span><span class="opt-lang" lang="ja">main を public static void main(String[] args) throws Exception と宣言する</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Add a throws clause to the object creation: xyz obj1 = new xyz() throws Exception;</span><span class="opt-lang" lang="zh">在创建对象语句上加 throws：xyz obj1 = new xyz() throws Exception;</span><span class="opt-lang" lang="ja">生成文に throws を付ける：xyz obj1 = new xyz() throws Exception;</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Wrap just the creation statement in try/catch.</span><span class="opt-lang" lang="zh">只把创建对象的那句包进 try/catch。</span><span class="opt-lang" lang="ja">生成文だけを try/catch で囲む。</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A,B,D</b></p><div class="expl"><p lang="en">A checked exception must either be caught in a try/catch or declared with throws, so wrapping the whole method or just the failing statement both work, as does declaring throws on main. Option C is not Java syntax at all — a throws clause belongs on a method declaration, never on an assignment statement.</p><p lang="zh">受检异常必须在 try/catch 中被捕获，或者用 throws 声明。因此把整个方法包起来、只处理出错那句、或者给 main 加 throws 声明都能通过。而 C 根本不是 Java 语法——throws 子句只能出现在方法声明上，绝不能写在赋值语句之后。</p><p lang="ja">検査例外は try/catch で捕捉するか throws で宣言する必要がある。そのためメソッド全体を囲む方法、問題の行だけを囲む方法、main に throws を付ける方法はいずれも有効。一方 C は Java の文法ではなく、throws 句はメソッド宣言に付くもので代入文には付けられない。</p></div></details></div>
+<div class="q" id="q18" data-n="18" data-ans="D" data-review-id="jb-18" data-chat-context="Java Bronze practice question
+access
+How should the method be declared to meet this requirement?
+要让方法满足这个要求，应该如何声明？
+この条件を満たすにはメソッドをどう宣言すべきか。
+// The method must be reachable only from classes
+// in the same package as the method&#x27;s own class.
+A. Declare it public
+B. Declare it protected
+C. Declare it private
+D. Declare it with no access modifier at all
+Leaving off the access modifier gives package-private (default) access: visible inside the package, invisible outside it. public opens it everywhere, protected also admits subclasses in other packages, and private hides it even from the rest of its own package.
+不写访问修饰符得到的是包级私有（默认）权限：同包内可见，包外不可见。public 会对所有地方开放，protected 还会额外允许其他包的子类访问，private 则连同一个包内的其他类都无法访问。
+アクセス修飾子を書かないとパッケージプライベート（既定）アクセスになり、同一パッケージ内からのみ参照できる。public はどこからでも、protected は他パッケージのサブクラスからも許可し、private は同一パッケージの他クラスからも見えなくなる。">
+<div class="qhead"><span class="qno">Question 18</span><span class="badge">单选</span><span class="jb-topic">access</span></div>
+<div class="stem"><p lang="en">How should the method be declared to meet this requirement?</p><p lang="zh">要让方法满足这个要求，应该如何声明？</p><p lang="ja">この条件を満たすにはメソッドをどう宣言すべきか。</p><pre class="jb-code i18n-noloc"><code>// The method must be reachable only from classes
+// in the same package as the method&#x27;s own class.</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Declare it public</span><span class="opt-lang" lang="zh">用 public 声明</span><span class="opt-lang" lang="ja">public で宣言する</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Declare it protected</span><span class="opt-lang" lang="zh">用 protected 声明</span><span class="opt-lang" lang="ja">protected で宣言する</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Declare it private</span><span class="opt-lang" lang="zh">用 private 声明</span><span class="opt-lang" lang="ja">private で宣言する</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">Declare it with no access modifier at all</span><span class="opt-lang" lang="zh">完全不加任何访问修饰符</span><span class="opt-lang" lang="ja">アクセス修飾子を何も付けずに宣言する</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>D</b></p><div class="expl"><p lang="en">Leaving off the access modifier gives package-private (default) access: visible inside the package, invisible outside it. public opens it everywhere, protected also admits subclasses in other packages, and private hides it even from the rest of its own package.</p><p lang="zh">不写访问修饰符得到的是包级私有（默认）权限：同包内可见，包外不可见。public 会对所有地方开放，protected 还会额外允许其他包的子类访问，private 则连同一个包内的其他类都无法访问。</p><p lang="ja">アクセス修飾子を書かないとパッケージプライベート（既定）アクセスになり、同一パッケージ内からのみ参照できる。public はどこからでも、protected は他パッケージのサブクラスからも許可し、private は同一パッケージの他クラスからも見えなくなる。</p></div></details></div>
+<div class="q" id="q19" data-n="19" data-ans="A,C" data-review-id="jb-19" data-chat-context="Java Bronze practice question
+inner-class
+Which statements make the program print 1? (select all that apply)
+哪些语句能让程序输出 1？（多选）
+プログラムに 1 を出力させる文はどれか。（すべて選択）
+class testClass{
+  int a=1;
+  int b=1;
+  int c=1;
+  class innerClassTest{
+    int a=2;
+    int get() {
+      int c=3;
+      // insert statement here
+      return c;
+    }
+  }
+  testClass(){
+    innerClassTest i = new innerClassTest();
+    System.out.println(i.get());
+  }
+  public static void main(String[] args) {
+    new testClass();
+  }
+}
+A. c = b;
+B. c = this.a;
+C. c = testClass.this.a;
+D. c = c;
+Inside the inner class, the simple names resolve to the innermost declaration first: the local c=3, then innerClassTest.a=2, then the outer fields. &#x27;b&#x27; only exists on the outer object, so &#x27;c = b&#x27; picks up the outer b=1. &#x27;this.a&#x27; inside refers to the inner instance&#x27;s own a=2, which prints 2, and &#x27;testClass.this.a&#x27; reaches the outer a=1.
+在内部类里，简单名会从最内层向外解析：先是局部变量 c=3，然后是 innerClassTest.a=2，最后才是外层字段。b 只存在于外层对象上，所以 c = b 取到的是外层的 b=1。this.a 指向内部实例自己的 a=2（会打印 2），而 testClass.this.a 才能访问外层的 a=1。
+内部クラス内では単純名は内側から解決される：まずローカル変数 c=3、次に innerClassTest.a=2、最後に外側のフィールド。b は外側のオブジェクトにしかないので c = b は外側の b=1 を指す。this.a は内部インスタンス自身の a=2（2 が出力される）、testClass.this.a で外側の a=1 に到達する。">
+<div class="qhead"><span class="qno">Question 19</span><span class="badge">多选</span><span class="jb-topic">inner-class</span></div>
+<div class="stem"><p lang="en">Which statements make the program print 1? (select all that apply)</p><p lang="zh">哪些语句能让程序输出 1？（多选）</p><p lang="ja">プログラムに 1 を出力させる文はどれか。（すべて選択）</p><pre class="jb-code i18n-noloc"><code>class testClass{
+  int a=1;
+  int b=1;
+  int c=1;
+  class innerClassTest{
+    int a=2;
+    int get() {
+      int c=3;
+      // insert statement here
+      return c;
+    }
+  }
+  testClass(){
+    innerClassTest i = new innerClassTest();
+    System.out.println(i.get());
+  }
+  public static void main(String[] args) {
+    new testClass();
+  }
+}</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">c = b;</span><span class="opt-lang" lang="zh">c = b;</span><span class="opt-lang" lang="ja">c = b;</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">c = this.a;</span><span class="opt-lang" lang="zh">c = this.a;</span><span class="opt-lang" lang="ja">c = this.a;</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">c = testClass.this.a;</span><span class="opt-lang" lang="zh">c = testClass.this.a;</span><span class="opt-lang" lang="ja">c = testClass.this.a;</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">c = c;</span><span class="opt-lang" lang="zh">c = c;</span><span class="opt-lang" lang="ja">c = c;</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A,C</b></p><div class="expl"><p lang="en">Inside the inner class, the simple names resolve to the innermost declaration first: the local c=3, then innerClassTest.a=2, then the outer fields. &#x27;b&#x27; only exists on the outer object, so &#x27;c = b&#x27; picks up the outer b=1. &#x27;this.a&#x27; inside refers to the inner instance&#x27;s own a=2, which prints 2, and &#x27;testClass.this.a&#x27; reaches the outer a=1.</p><p lang="zh">在内部类里，简单名会从最内层向外解析：先是局部变量 c=3，然后是 innerClassTest.a=2，最后才是外层字段。b 只存在于外层对象上，所以 c = b 取到的是外层的 b=1。this.a 指向内部实例自己的 a=2（会打印 2），而 testClass.this.a 才能访问外层的 a=1。</p><p lang="ja">内部クラス内では単純名は内側から解決される：まずローカル変数 c=3、次に innerClassTest.a=2、最後に外側のフィールド。b は外側のオブジェクトにしかないので c = b は外側の b=1 を指す。this.a は内部インスタンス自身の a=2（2 が出力される）、testClass.this.a で外側の a=1 に到達する。</p></div></details></div>
+<div class="q" id="q20" data-n="20" data-ans="A,B" data-review-id="jb-20" data-chat-context="Java Bronze practice question
+casting
+Which conversions can be performed without an explicit cast? (select all that apply)
+下列哪些转换不需要显式强制转型？（多选）
+明示的なキャストなしで行える変換はどれか。（すべて選択）
+int i = 10;
+long l = ???;   // from i
+short s = 5;
+char ch = ???;  // from s
+float f = 1.5f;
+long n = ???;   // from f
+A. int to long
+B. byte to short
+C. float to long
+D. short to char
+Java allows implicit widening when no information is lost: int fits in long and byte fits in short, so both convert silently. Going the other way (float to long) may lose the fractional part and needs a cast; short and char are both 16-bit but neither is a subtype of the other, so that cast is required too.
+Java 允许不丢失信息的隐式拓宽转换：int 装得进 long、byte 装得进 short，两者都能自动完成。反向的 float 转 long 会丢掉小数部分，必须显式转型；short 和 char 虽然都是 16 位，但互不兼容，转换也需要显式转型。
+Java では情報が失われない拡大変換のみ暗黙的に行われる：int は long に、byte は short に収まるため自動変換される。逆方向の float から long は小数部が失われる可能性があり明示的キャストが必須。short と char はどちらも 16 ビットだが互いに包含関係がないため、この変換もキャストが必要。">
+<div class="qhead"><span class="qno">Question 20</span><span class="badge">多选</span><span class="jb-topic">casting</span></div>
+<div class="stem"><p lang="en">Which conversions can be performed without an explicit cast? (select all that apply)</p><p lang="zh">下列哪些转换不需要显式强制转型？（多选）</p><p lang="ja">明示的なキャストなしで行える変換はどれか。（すべて選択）</p><pre class="jb-code i18n-noloc"><code>int i = 10;
+long l = ???;   // from i
+short s = 5;
+char ch = ???;  // from s
+float f = 1.5f;
+long n = ???;   // from f</code></pre></div><ol class="opts">
+<li class="opt" data-letter="A"><span class="letter">A</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">int to long</span><span class="opt-lang" lang="zh">int 转 long</span><span class="opt-lang" lang="ja">int から long</span></button></li>
+<li class="opt" data-letter="B"><span class="letter">B</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">byte to short</span><span class="opt-lang" lang="zh">byte 转 short</span><span class="opt-lang" lang="ja">byte から short</span></button></li>
+<li class="opt" data-letter="C"><span class="letter">C</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">float to long</span><span class="opt-lang" lang="zh">float 转 long</span><span class="opt-lang" lang="ja">float から long</span></button></li>
+<li class="opt" data-letter="D"><span class="letter">D</span><button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false"><span class="opt-lang" lang="en">short to char</span><span class="opt-lang" lang="zh">short 转 char</span><span class="opt-lang" lang="ja">short から char</span></button></li>
+</ol><div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div><div class="verdict" role="status"></div>
+<details class="ans"><summary>解析 / Explanation</summary><p class="correct">正确答案 <b>A,B</b></p><div class="expl"><p lang="en">Java allows implicit widening when no information is lost: int fits in long and byte fits in short, so both convert silently. Going the other way (float to long) may lose the fractional part and needs a cast; short and char are both 16-bit but neither is a subtype of the other, so that cast is required too.</p><p lang="zh">Java 允许不丢失信息的隐式拓宽转换：int 装得进 long、byte 装得进 short，两者都能自动完成。反向的 float 转 long 会丢掉小数部分，必须显式转型；short 和 char 虽然都是 16 位，但互不兼容，转换也需要显式转型。</p><p lang="ja">Java では情報が失われない拡大変換のみ暗黙的に行われる：int は long に、byte は short に収まるため自動変換される。逆方向の float から long は小数部が失われる可能性があり明示的キャストが必須。short と char はどちらも 16 ビットだが互いに包含関係がないため、この変換もキャストが必要。</p></div></details></div>
+</main><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:jb:practice:01";
+var TOTAL=20;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+/* 答案分隔：多选用 ","，填空的等价写法用 "|"（两种都支持） */
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(/[,|]/).map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+function norm(s){return String(s==null?"":s).replace(/\s+/g," ").trim().toUpperCase()}
+function isFill(q){return q.getAttribute("data-kind")==="fill"}
+function fillInput(q){return q1("input.fill",q)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  /* 填空题：复原/锁定输入框 */
+  var inp=q1("input.fill",q);
+  if(inp){
+    if(locked){ if(inp.value!==(sel[0]||""))inp.value=sel[0]||""; }
+    inp.disabled=locked;
+    inp.classList.remove("ok","bad");
+    if(judged)inp.classList.add(rec.ok?"ok":"bad");
+  }
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = isFill(q) ? !norm(sel[0]||"") : sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok&&!isFill(q))
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q),ok;
+  if(isFill(q)){var v=norm(sel[0]||"");ok=(v!==""&&A.indexOf(v)>=0);}
+  else{ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});}
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+/* 填空题输入：只存值、点亮"确认作答"，不重绘以免打断光标 */
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(!el||!el.classList||!el.classList.contains("fill"))return;
+  var q=el.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  S[nOf(q)]={s:[el.value],ok:null,revealed:false};
+  save();
+  var sub=q1(".js-submit",q);if(sub)sub.disabled=!norm(el.value);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script>
+<script type="module" src="/assets/aif-vocabulary.mjs"></script><script src="/assets/presence.js"></script><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+<!--i18n:sw-->
+<footer class="lang-foot">
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+</footer>
+<!--/i18n:sw--><!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--></body></html>
