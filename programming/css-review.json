@@ -228,10 +228,26 @@
     },
     "code": ".card {\n  width: 200px;\n  padding: 20px;\n  border: 1px solid #ccc;\n}",
     "options": [
-      "Change width to max-width: the declaration should be max-width: 200px;",
-      "With the default box model, padding and border are added on top of width; add box-sizing: border-box;",
-      "The border is too thick: change it to border: 0;",
-      "Padding should be a percentage: change it to padding: 10%;"
+      {
+        "en": "Change width to max-width: the declaration should be max-width: 200px;",
+        "zh": "把 width 改成 max-width：声明应写 max-width: 200px;",
+        "ja": "width を max-width に変更する：宣言は max-width: 200px; にすべき"
+      },
+      {
+        "en": "With the default box model, padding and border are added on top of width; add box-sizing: border-box;",
+        "zh": "默认盒模型下 padding 和 border 会加在 width 之外；应加 box-sizing: border-box;",
+        "ja": "既定のボックスモデルでは padding と border は width に加算される；box-sizing: border-box; を追加する"
+      },
+      {
+        "en": "The border is too thick: change it to border: 0;",
+        "zh": "边框太粗：改成 border: 0;",
+        "ja": "境界線が太すぎる：border: 0; に変更する"
+      },
+      {
+        "en": "Padding should be a percentage: change it to padding: 10%;",
+        "zh": "padding 应该用百分比：改成 padding: 10%;",
+        "ja": "padding はパーセント指定にすべき：padding: 10%; に変更する"
+      }
     ],
     "answer": "B",
     "explanation": {
@@ -250,10 +266,26 @@
     },
     "code": ".card {\n  background: #fff;\n}\n\n.badge {\n  position: absolute;\n  top: 0;\n  right: 0;\n}",
     "options": [
-      "top and right should be negative values",
-      "It should use position: fixed instead of absolute",
-      "z-index is missing, so another element pushes it away",
-      "An absolutely positioned box is placed relative to its nearest positioned ancestor; the card needs position: relative"
+      {
+        "en": "top and right should be negative values",
+        "zh": "top 和 right 应该用负值",
+        "ja": "top と right は負の値にすべき"
+      },
+      {
+        "en": "It should use position: fixed instead of absolute",
+        "zh": "应该用 position: fixed 而不是 absolute",
+        "ja": "absolute ではなく position: fixed を使うべき"
+      },
+      {
+        "en": "z-index is missing, so another element pushes it away",
+        "zh": "缺少 z-index，所以被其他元素挤开了",
+        "ja": "z-index がないため、他の要素に押しのけられている"
+      },
+      {
+        "en": "An absolutely positioned box is placed relative to its nearest positioned ancestor; the card needs position: relative",
+        "zh": "绝对定位元素相对最近的已定位祖先摆放；卡片需要加 position: relative",
+        "ja": "絶対配置のボックスは直近の配置済み祖先を基準に置かれる；カードに position: relative が必要"
+      }
     ],
     "answer": "D",
     "explanation": {
@@ -272,10 +304,26 @@
     },
     "code": ".modal {\n  z-index: 9999;\n}",
     "options": [
-      "z-index only applies to positioned elements, and position is missing here",
-      "9999 is not large enough and should be 999999",
-      "It needs !important to take effect",
-      "z-index cannot be used on a div and should be moved to a span"
+      {
+        "en": "z-index only applies to positioned elements, and position is missing here",
+        "zh": "z-index 只对已定位元素生效，这里缺少 position",
+        "ja": "z-index は配置済み要素にしか適用されず、ここでは position が欠けている"
+      },
+      {
+        "en": "9999 is not large enough and should be 999999",
+        "zh": "9999 不够大，应该改成 999999",
+        "ja": "9999 では十分でなく、999999 にすべき"
+      },
+      {
+        "en": "It needs !important to take effect",
+        "zh": "需要加 !important 才能生效",
+        "ja": "効果を持たせるには !important が必要"
+      },
+      {
+        "en": "z-index cannot be used on a div and should be moved to a span",
+        "zh": "z-index 不能用在 div 上，应该移到 span",
+        "ja": "z-index は div には使えず、span に移すべき"
+      }
     ],
     "answer": "A",
     "explanation": {
@@ -294,10 +342,26 @@
     },
     "code": ".section {\n  background: #f5f5f5;\n}\n\n.title {\n  margin-top: 20px;\n}",
     "options": [
-      "Move the spacing to padding: put padding-top: 20px; on .title",
-      "Add margin: 0; to .section",
-      "Adjacent margins collapse: add overflow: hidden; to .section to establish a block formatting context",
-      "Add display: inline; to .section"
+      {
+        "en": "Move the spacing to padding: put padding-top: 20px; on .title",
+        "zh": "把间距改成内边距：给 .title 加 padding-top: 20px;",
+        "ja": "間隔を padding に移す：.title に padding-top: 20px; を付ける"
+      },
+      {
+        "en": "Add margin: 0; to .section",
+        "zh": "给 .section 加 margin: 0;",
+        "ja": ".section に margin: 0; を追加する"
+      },
+      {
+        "en": "Adjacent margins collapse: add overflow: hidden; to .section to establish a block formatting context",
+        "zh": "相邻外边距发生了合并：给 .section 加 overflow: hidden; 建立块级格式化上下文",
+        "ja": "隣接するマージンは相殺される：.section に overflow: hidden; を追加してブロック整形コンテキストを作る"
+      },
+      {
+        "en": "Add display: inline; to .section",
+        "zh": "给 .section 加 display: inline;",
+        "ja": ".section に display: inline; を追加する"
+      }
     ],
     "answer": "C",
     "explanation": {
@@ -316,10 +380,26 @@
     },
     "code": ".row {\n  display: flex;\n}\n\n.name {\n  flex: 1;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}",
     "options": [
-      "Add flex-wrap: wrap; to the container so it wraps onto a new line",
-      "A flex item's min-width defaults to auto, so it will not shrink below its content width; set min-width: 0 on the item",
-      "Add overflow: visible; to the container",
-      "Add width: 100%; to the item"
+      {
+        "en": "Add flex-wrap: wrap; to the container so it wraps onto a new line",
+        "zh": "给容器加 flex-wrap: wrap; 让它换行",
+        "ja": "コンテナに flex-wrap: wrap; を追加して折り返させる"
+      },
+      {
+        "en": "A flex item's min-width defaults to auto, so it will not shrink below its content width; set min-width: 0 on the item",
+        "zh": "flex 子项的 min-width 默认为 auto，无法收缩到内容宽度以下；给子项设 min-width: 0",
+        "ja": "flex アイテムの min-width は既定で auto のため、内容幅より縮まらない；アイテムに min-width: 0 を設定する"
+      },
+      {
+        "en": "Add overflow: visible; to the container",
+        "zh": "给容器加 overflow: visible;",
+        "ja": "コンテナに overflow: visible; を追加する"
+      },
+      {
+        "en": "Add width: 100%; to the item",
+        "zh": "给子项加 width: 100%;",
+        "ja": "アイテムに width: 100%; を追加する"
+      }
     ],
     "answer": "B",
     "explanation": {
@@ -338,10 +418,26 @@
     },
     "code": ".tag::before {\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: #f00;\n}",
     "options": [
-      "It needs display: block; to become visible",
-      "Pseudo-elements must use the single-colon form :before",
-      "It needs position: absolute;",
-      "The content property is required; without it the pseudo-element is never generated"
+      {
+        "en": "It needs display: block; to become visible",
+        "zh": "需要 display: block; 才能显示",
+        "ja": "表示するには display: block; が必要"
+      },
+      {
+        "en": "Pseudo-elements must use the single-colon form :before",
+        "zh": "伪元素必须用单冒号写法 :before",
+        "ja": "疑似要素は単一コロン形式 :before を使わなければならない"
+      },
+      {
+        "en": "It needs position: absolute;",
+        "zh": "需要加 position: absolute;",
+        "ja": "position: absolute; が必要"
+      },
+      {
+        "en": "The content property is required; without it the pseudo-element is never generated",
+        "zh": "content 属性是必需的；没有它伪元素根本不会生成",
+        "ja": "content プロパティは必須で、これがないと疑似要素は生成されない"
+      }
     ],
     "answer": "D",
     "explanation": {
@@ -360,10 +456,26 @@
     },
     "code": "h1, h2 ,h3 {\n  color: #333;\n}",
     "options": [
-      "No — whitespace around commas is ignored either way, and all three headings are matched",
-      "Yes — a space is required after the comma, otherwise h3 is not matched",
-      "Yes — a space before the comma makes the selector fail to parse",
-      "Yes — there must be a space between h3 and the opening brace"
+      {
+        "en": "No — whitespace around commas is ignored either way, and all three headings are matched",
+        "zh": "不成立 —— 逗号周围的空白无论怎么写都会被忽略，三个标题都能匹配到",
+        "ja": "問題なし —— カンマ周囲の空白はどちらでも無視され、3 つの見出しはすべて一致する"
+      },
+      {
+        "en": "Yes — a space is required after the comma, otherwise h3 is not matched",
+        "zh": "成立 —— 逗号后必须有空格，否则 h3 匹配不到",
+        "ja": "問題あり —— カンマの後には空白が必須で、なければ h3 は一致しない"
+      },
+      {
+        "en": "Yes — a space before the comma makes the selector fail to parse",
+        "zh": "成立 —— 逗号前有空格会导致选择器解析失败",
+        "ja": "問題あり —— カンマの前の空白でセレクターの解析が失敗する"
+      },
+      {
+        "en": "Yes — there must be a space between h3 and the opening brace",
+        "zh": "成立 —— h3 和左花括号之间必须有空格",
+        "ja": "問題あり —— h3 と開き波括弧の間に空白が必須"
+      }
     ],
     "answer": "A",
     "explanation": {
@@ -382,10 +494,26 @@
     },
     "code": ".card { width: 25%; }\n\n@media (max-width: 1200px) {\n  .card { width: 33.33%; }\n}\n\n@media (max-width: 768px) {\n  .card { width: 50%; }\n}\n\n@media (max-width: 1200px) {\n  .card { width: 100%; }\n}",
     "options": [
-      "Media queries cannot be nested and must live in separate files",
-      "The media queries are out of order: max-width blocks must run from largest to smallest, otherwise the wider breakpoint overwrites the narrower one",
-      "max-width should be changed to min-width throughout",
-      ".card should be declared once outside the media queries"
+      {
+        "en": "Media queries cannot be nested and must live in separate files",
+        "zh": "媒体查询不能嵌套，必须放在不同文件里",
+        "ja": "メディアクエリはネストできず、別ファイルに置く必要がある"
+      },
+      {
+        "en": "The media queries are out of order: max-width blocks must run from largest to smallest, otherwise the wider breakpoint overwrites the narrower one",
+        "zh": "媒体查询顺序错了：max-width 块必须从大到小排列，否则宽断点会覆盖窄断点",
+        "ja": "メディアクエリの順序が逆：max-width ブロックは大きい順に並べる必要があり、そうしないと広いブレイクポイントが狭いものを上書きする"
+      },
+      {
+        "en": "max-width should be changed to min-width throughout",
+        "zh": "应该把 max-width 全部改成 min-width",
+        "ja": "max-width をすべて min-width に変更すべき"
+      },
+      {
+        "en": ".card should be declared once outside the media queries",
+        "zh": ".card 应该在媒体查询之外只声明一次",
+        "ja": ".card はメディアクエリの外で一度だけ宣言すべき"
+      }
     ],
     "answer": "B",
     "explanation": {
@@ -404,10 +532,26 @@
     },
     "code": ".panel {\n  transform: translateX(0);\n}\n\n.tip {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n}",
     "options": [
-      "bottom and right should be negative values",
-      "z-index is missing",
-      "An ancestor uses transform, filter or will-change, which makes it the containing block for fixed elements",
-      "The parent has overflow: hidden"
+      {
+        "en": "bottom and right should be negative values",
+        "zh": "bottom 和 right 应该用负值",
+        "ja": "bottom と right は負の値にすべき"
+      },
+      {
+        "en": "z-index is missing",
+        "zh": "缺少 z-index",
+        "ja": "z-index がない"
+      },
+      {
+        "en": "An ancestor uses transform, filter or will-change, which makes it the containing block for fixed elements",
+        "zh": "祖先元素用了 transform、filter 或 will-change，使其成为 fixed 元素的包含块",
+        "ja": "祖先が transform・filter・will-change を使っており、fixed 要素の包含ブロックになっている"
+      },
+      {
+        "en": "The parent has overflow: hidden",
+        "zh": "父元素有 overflow: hidden",
+        "ja": "親要素に overflow: hidden がある"
+      }
     ],
     "answer": "C",
     "explanation": {
@@ -426,10 +570,26 @@
     },
     "code": "#submit {\n  background: #1677ff;\n}\n\n.btn:hover {\n  background: #0958d9;\n}",
     "options": [
-      ":hover only works on anchor elements",
-      ".btn needs cursor: pointer; for hover to trigger",
-      "background cannot be changed on hover and background-color must be used instead",
-      "Specificity: the ID selector #submit outranks .btn:hover, so hover loses; raise the hover rule to equal or higher specificity"
+      {
+        "en": ":hover only works on anchor elements",
+        "zh": ":hover 只对链接元素生效",
+        "ja": ":hover はアンカー要素にしか効かない"
+      },
+      {
+        "en": ".btn needs cursor: pointer; for hover to trigger",
+        "zh": ".btn 需要 cursor: pointer; 才能触发 hover",
+        "ja": "hover を発動させるには .btn に cursor: pointer; が必要"
+      },
+      {
+        "en": "background cannot be changed on hover and background-color must be used instead",
+        "zh": "hover 时不能改 background，必须改用 background-color",
+        "ja": "hover では background は変更できず、background-color を使う必要がある"
+      },
+      {
+        "en": "Specificity: the ID selector #submit outranks .btn:hover, so hover loses; raise the hover rule to equal or higher specificity",
+        "zh": "优先级问题：ID 选择器 #submit 高于 .btn:hover，hover 会输；把 hover 规则提升到同等或更高优先级",
+        "ja": "詳細度の問題：ID セレクター #submit は .btn:hover より優先され、hover が負ける；hover 規則の詳細度を同等以上に上げる"
+      }
     ],
     "answer": "D",
     "explanation": {

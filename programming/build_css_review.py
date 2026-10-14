@@ -8,6 +8,10 @@ via html[data-lang]).
 Questions where the reviewer only has to choose an implementation carry an
 empty "code" field; those skip the code block and show the four snippets as
 choices instead.
+
+An option is either a plain string (a code snippet — identical in every
+language) or an {en, zh, ja} object (prose describing a cause or a fix —
+translated, and switched by programming-review.css via html[data-lang]).
 """
 import json
 import re
@@ -23,6 +27,18 @@ import theme_inject
 
 def trilang(values):
     return "".join(f'<p lang="{lang}">{Q.esc(values[lang])}</p>' for lang in ("en", "zh", "ja"))
+
+
+def opt_text(opt):
+    """Code snippets are language-neutral; prose options fall back to English."""
+    return opt["en"] if isinstance(opt, dict) else opt
+
+
+def opt_html(opt):
+    if not isinstance(opt, dict):
+        return f"<code>{Q.esc(opt)}</code>"
+    return "".join(f'<span class="opt-lang" lang="{lang}">{Q.esc(opt[lang])}</span>'
+                   for lang in ("en", "zh", "ja"))
 
 
 def render(data):
@@ -49,7 +65,7 @@ def render(data):
             raise ValueError("stable IDs and exactly four choices are required")
         # The shared context reader removes buttons; retain the code choices explicitly.
         context = "\n".join(["CSS code review", *q["prompt"].values(), q.get("code") or "",
-                             *(f"{letter}. {code}" for letter, code in zip("ABCD", q["options"])),
+                             *(f"{letter}. {opt_text(o)}" for letter, o in zip("ABCD", q["options"])),
                              "Reference answer: " + q["answer"],
                              *q["explanation"].values(), q["source"]])
         codeblock = ('<pre class="review-code i18n-noloc"><code>' + Q.esc(q["code"]) + '</code></pre>'
@@ -59,10 +75,10 @@ def render(data):
                 f'<div class="qhead"><span class="qno">Question {n}</span>'
                 f'<span class="badge">单选</span><span class="src">CSS · Code review</span></div>',
                 '<div class="stem">' + trilang(q["prompt"]) + codeblock + '</div><ol class="opts">']
-        for letter, code in zip("ABCD", q["options"]):
+        for letter, opt in zip("ABCD", q["options"]):
             out.append(f'<li class="opt" data-letter="{letter}"><span class="letter">{letter}</span>'
                        f'<button type="button" class="otext vocab-pick i18n-noloc" aria-pressed="false">'
-                       f'<code>{Q.esc(code)}</code></button></li>')
+                       f'{opt_html(opt)}</button></li>')
         out += ['</ol>' + Q.act_html(1) + '<div class="verdict" role="status"></div>',
                 '<details class="ans"><summary>解析 / Explanation</summary>'
                 '<p class="correct">正确答案 <b>' + q["answer"] + '</b></p>'

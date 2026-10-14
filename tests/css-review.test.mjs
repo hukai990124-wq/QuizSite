@@ -13,7 +13,8 @@ test('CSS review has 20 stable four-choice questions with three-language explana
   for (const [i, q] of data.entries()) {
     assert.equal(q.id, `css-${String(i + 1).padStart(2, '0')}`);
     assert.equal(q.options.length, 4);
-    assert.equal(new Set(q.options).size, 4);
+    const texts = q.options.map(o => (typeof o === 'string' ? o : o.en));
+    assert.equal(new Set(texts).size, 4, `${q.id} has duplicate options`);
     assert.match(q.answer, /^[ABCD]$/);
     answers[q.answer] = (answers[q.answer] || 0) + 1;
     for (const lang of ['en','zh','ja']) {
@@ -23,6 +24,41 @@ test('CSS review has 20 stable four-choice questions with three-language explana
     assert.match(q.source, /^https:\/\/developer\.mozilla\.org\/en-US\//);
   }
   assert.deepEqual(Object.values(answers).sort(), [5,5,5,5]);
+});
+
+test('defect-review options are translated; implementation-choice options stay code', async () => {
+  const data = JSON.parse(await load('programming/css-review.json'));
+  const defect = data.filter(q => (q.code || '').trim());
+  const impl = data.filter(q => !(q.code || '').trim());
+  assert.ok(defect.length && impl.length, 'the set mixes both question styles');
+  for (const q of defect) {
+    for (const opt of q.options) {
+      assert.equal(typeof opt, 'object', `${q.id}: prose options need {en,zh,ja}`);
+      for (const lang of ['en', 'zh', 'ja']) {
+        assert.ok(opt[lang]?.trim(), `${q.id}: option missing ${lang} text`);
+      }
+    }
+  }
+  // Snippets are language-neutral, so a bare string is the right shape for them.
+  for (const q of impl) {
+    for (const opt of q.options) {
+      assert.equal(typeof opt, 'string', `${q.id}: code options must stay strings`);
+    }
+  }
+});
+
+test('rendered prose options carry three languages and the theme switches them', async () => {
+  const page = await load('site/programming/css.html');
+  const data = JSON.parse(await load('programming/css-review.json'));
+  const proseOptions = data.filter(q => (q.code || '').trim()).length * 4;
+  for (const lang of ['en', 'zh', 'ja']) {
+    assert.equal((page.match(new RegExp(`class="opt-lang" lang="${lang}"`, 'g')) || []).length,
+      proseOptions, `every prose option needs a ${lang} rendering`);
+  }
+  const css = await load('site/assets/programming-review.css');
+  assert.match(css, /html\[data-lang="zh"\][^{]*\[lang="en"\][^{]*\{[^}]*display:\s*none/,
+    'switching to Chinese must hide the English line instead of stacking on it');
+  assert.match(css, /\.opt-lang\[lang="(?:zh|ja)"\]/);
 });
 
 test('CSS review reuses the shared engine, red theme and safe snippets', async () => {

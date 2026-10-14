@@ -38,6 +38,12 @@ h1 { color: var(--review-dark); }
 .stem p, .expl p { margin: 8px 0; }
 .q [lang="zh"], .q [lang="ja"] { display: none; }
 html[data-lang="zh"] .q [lang="zh"], html[data-lang="ja"] .q [lang="ja"] { display: block; }
+/* Switching languages must replace the English line, not stack on top of it. */
+html[data-lang="zh"] .q [lang="en"], html[data-lang="ja"] .q [lang="en"] { display: none; }
+/* Answer choices: prose options carry three languages, code snippets do not. */
+.q .opt-lang[lang="zh"], .q .opt-lang[lang="ja"] { display: none; }
+html[data-lang="zh"] .q .opt-lang[lang="zh"], html[data-lang="ja"] .q .opt-lang[lang="ja"] { display: inline; }
+html[data-lang="zh"] .q .opt-lang[lang="en"], html[data-lang="ja"] .q .opt-lang[lang="en"] { display: none; }
 @media (max-width: 560px) {
   main.wrap { padding: 24px 12px 80px; }
   .review-code { padding: 12px; }
