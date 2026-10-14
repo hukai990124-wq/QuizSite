@@ -115,23 +115,23 @@ function concatPath(value) {
   return path.resolve(value).replaceAll('\\', '/').replaceAll("'", "'\\''");
 }
 
-async function installM6(jobs, outputDir) {
+async function installMock(jobs, outputDir, mock) {
   const allJobs = JSON.parse(await fs.readFile(path.join(BASE, 'data/extra-audio-jobs.json'), 'utf8'));
-  const m6Jobs = allJobs.filter((job) => job.audio.startsWith('audio/m6/'));
+  const selectedJobs = allJobs.filter((job) => job.audio.startsWith(`audio/m${mock}/`));
   const manifestPath = path.join(BASE, 'data/audio-manifest.json');
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
-  if (jobs.length !== 54 || m6Jobs.length !== 54 || manifest.length !== 108) {
-    throw new Error('Install requires all 54 Test 06 jobs and the existing 108-entry manifest');
+  if (jobs.length !== 54 || selectedJobs.length !== 54 || manifest.length !== 108) {
+    throw new Error(`Install requires all 54 Test ${mock} jobs and the existing 108-entry manifest`);
   }
-  if (jobs.some((job) => !job.audio.startsWith('audio/m6/'))) {
-    throw new Error('Install only supports Test 06 audio');
+  if (jobs.some((job) => !job.audio.startsWith(`audio/m${mock}/`))) {
+    throw new Error(`Install only supports the selected Test ${mock} audio`);
   }
 
   const manifestByAudio = new Map(manifest.map((entry) => [entry.audio, entry]));
   const updates = new Map();
   const sourceDir = BASE;
   const siteDir = path.resolve(BASE, '../site/toeic-listening');
-  for (const job of m6Jobs) {
+  for (const job of selectedJobs) {
     const stagedPath = path.join(outputDir, job.audio);
     const audio = await fs.readFile(stagedPath);
     if (audio.length < 1_000) throw new Error(`Staged audio is empty: ${job.audio}`);
@@ -170,7 +170,7 @@ async function installM6(jobs, outputDir) {
   const manifestText = JSON.stringify(mergedManifest, null, 2)
     .replace(/"lengthScale": 1(?=\n)/g, '"lengthScale": 1.0');
   await fs.writeFile(manifestPath, `${manifestText}\n`, 'utf8');
-  console.log('Installed 54 Test 06 tracks and updated both audio copies plus their manifest.');
+  console.log(`Installed 54 Test ${mock} tracks and updated both audio copies plus their manifest.`);
 }
 
 async function main() {
@@ -178,15 +178,17 @@ async function main() {
   const ffmpeg = option('--ffmpeg');
   const only = option('--only');
   const install = process.argv.includes('--install');
+  const mock = Number(option('--mock', '6'));
+  if (![5,6].includes(mock)) throw new Error('--mock must be 5 or 6');
   if (!outputDir || !ffmpeg) {
-    throw new Error('Usage: node synthesize_kokoro_m6.mjs --out-dir <staging-dir> --ffmpeg <ffmpeg.exe> [--only audio/m6/p3-1.mp3] [--install]');
+    throw new Error('Usage: node synthesize_kokoro_m6.mjs --mock 5|6 --out-dir <staging-dir> --ffmpeg <ffmpeg.exe> [--only audio/m5/p3-1.mp3] [--install]');
   }
-  if (install && only) throw new Error('--install requires a complete Test 06 run; do not combine it with --only');
+  if (install && only) throw new Error('--install requires a complete selected paper; do not combine it with --only');
 
   const allJobs = JSON.parse(await fs.readFile(path.join(BASE, 'data/extra-audio-jobs.json'), 'utf8'));
-  let jobs = allJobs.filter((job) => job.audio.startsWith('audio/m6/'));
+  let jobs = allJobs.filter((job) => job.audio.startsWith(`audio/m${mock}/`));
   if (only) jobs = jobs.filter((job) => job.audio === only);
-  if (!jobs.length) throw new Error(`No Test 06 audio job found${only ? ` for ${only}` : ''}`);
+  if (!jobs.length) throw new Error(`No Test ${mock} audio job found${only ? ` for ${only}` : ''}`);
 
   const wavDir = path.join(outputDir, '_segments');
   await fs.mkdir(wavDir, { recursive: true });
@@ -207,18 +209,29 @@ async function main() {
         console.log(`[${index + 1}/${jobs.length}] already staged ${job.audio}`);
         continue;
       }
-    } catch {}
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+    }
 
     const tasks = getTasks(job);
     const wavPaths = [];
     let expectedDuration = 0;
     for (const [segmentIndex, task] of tasks.entries()) {
-      calls += 1;
-      console.log(`[${index + 1}/${jobs.length}] Kokoro ${calls} · ${job.audio} · ${task.voice}`);
-      const wav = await fetchSpeech(task.text, task.voice);
+      const fingerprint = createHash('sha256').update(JSON.stringify({...task,speed:SPEED})).digest('hex').slice(0,16);
+      const wavPath = path.join(wavDir, `${path.basename(job.audio, '.mp3')}-${segmentIndex + 1}-${fingerprint}.wav`);
+      let wav;
+      try {
+        wav = await fs.readFile(wavPath);
+        wavDuration(wav);
+      } catch (error) {
+        if (error.code !== 'ENOENT') throw error;
+        calls += 1;
+        console.log(`[${index + 1}/${jobs.length}] Kokoro ${calls} · ${job.audio} · ${task.voice}`);
+        wav = await fetchSpeech(task.text, task.voice);
+        wavDuration(wav);
+        await fs.writeFile(wavPath, wav);
+      }
       expectedDuration += wavDuration(wav);
-      const wavPath = path.join(wavDir, `${path.basename(job.audio, '.mp3')}-${segmentIndex + 1}.wav`);
-      await fs.writeFile(wavPath, wav);
       wavPaths.push(wavPath);
     }
 
@@ -247,7 +260,7 @@ async function main() {
   }
 
   console.log(`Finished ${jobs.length} track(s) with ${calls} Kokoro synthesis call(s).`);
-  if (install) await installM6(jobs, outputDir);
+  if (install) await installMock(jobs, outputDir, mock);
 }
 
 main().catch((error) => {
