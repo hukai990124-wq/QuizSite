@@ -68,6 +68,9 @@ def render(data):
                single, len(questions) - single),
            '<p class="sub">考点：变量与初始化、修饰符、运算符、控制流程、字符串、'
            '接口与多态、继承、异常。</p>',
+           '<p class="sub">练完这 20 题，可进入 '
+           '<a href="/java-bronze/exam.html"><b>Java Bronze 全真模拟卷</b></a>'
+           '（60 题 · 65 分钟 · 60 分及格）。</p>',
            '<div class="toolbar"><div class="btns">'
            '<button class="primary" id="btn-sheet" type="button">答题卡</button>'
            '<button id="btn-wrong" type="button">只看错题</button>'

@@ -64,13 +64,61 @@ test('homepage lists the Java Bronze bank and registers its progress', async () 
   const page = await load('site/index.html');
   assert.match(page, /href="java-bronze\/index\.html"/);
   assert.match(page, /data-site="java-bronze"/);
-  assert.match(page, /"java-bronze":\{keys:\[\["jb:practice:01",20\]\]\}/);
-  assert.match(page, /11 个题库 · 共 4901 题次/);
-  assert.match(page, /id="ov-txt">0 \/ 4901</);
+  assert.ok(page.includes('"java-bronze":{keys:[["jb:practice:01",20],["jb:exam:60",60]]}'),
+    'the bank must register both sets');
+  assert.match(page, /11 个题库 · 共 4961 题次/);
+  assert.match(page, /id="ov-txt">0 \/ 4961</);
   // OPC stays the last card of the main bank area, as requested.
   const opc = page.indexOf('href="workbuddy-opc/index.html"');
   const jb = page.indexOf('href="java-bronze/index.html"');
   assert.ok(opc > jb, 'Java Bronze must come before the final OPC card');
   const section = page.indexOf('id="programming-practice"');
   assert.ok(opc < section, 'OPC must remain the last card before the programming section');
+});
+
+test('Java Bronze mock exam has 60 questions with balanced answers and a timer', async () => {
+  const data = JSON.parse(await load('java-bronze/java-bronze-exam.json'));
+  const qs = data.questions;
+  assert.equal(qs.length, 60);
+  assert.equal(new Set(qs.map(q => q.id)).size, 60);
+  for (const [i, q] of qs.entries()) {
+    assert.equal(q.id, `jbe-${String(i + 1).padStart(2, '0')}`);
+    assert.ok(q.options.length >= 2 && q.options.length <= 5,
+      `${q.id} has ${q.options.length} choices`);
+    for (const lang of ['en', 'zh', 'ja']) {
+      assert.ok(q.prompt[lang]?.trim(), `${q.id} prompt missing ${lang}`);
+      assert.ok(q.explanation[lang]?.trim(), `${q.id} explanation missing ${lang}`);
+      for (const o of q.options) assert.ok(o[lang]?.trim(), `${q.id} option missing ${lang}`);
+    }
+  }
+  // A paper where nearly every answer sits on A is guessable, so the rendered
+  // page is checked instead of the source data.
+  const page = await load('site/java-bronze/exam.html');
+  const answers = [...page.matchAll(/data-ans="([A-E,]+)"/g)].map(m => m[1]);
+  assert.equal(answers.length, 60);
+  const singles = answers.filter(a => !a.includes(',')).map(a => a);
+  const tally = {};
+  for (const a of singles) tally[a] = (tally[a] || 0) + 1;
+  const counts = Object.values(tally);
+  assert.ok(Math.max(...counts) <= 20,
+    `one letter carries too many answers: ${JSON.stringify(tally)}`);
+  assert.ok(Object.keys(tally).length >= 4, 'answers should use at least four letters');
+  // Shuffling must never touch position-sensitive choices.
+  assert.equal((page.match(/None of the above|All of the above/g) || []).length > 0, true);
+  assert.match(page, /id="btn-exam"/);
+  assert.match(page, /id="timer"/);
+  assert.match(page, /60 \* 60|\b3900\b|LIMIT=65\*60/);
+  assert.match(page, /quiz:jb:exam:60/);
+  assert.match(page, /body\.exam details\.ans/);
+});
+
+test('practice page links to the mock exam and the homepage counts both', async () => {
+  const practice = await load('site/java-bronze/index.html');
+  assert.match(practice, /href="\/java-bronze\/exam\.html"/);
+  const home = await load('site/index.html');
+  assert.ok(home.includes('"java-bronze":{keys:[["jb:practice:01",20],["jb:exam:60",60]]}'),
+    'homepage must register both the practice set and the mock exam');
+  assert.match(home, /11 个题库 · 共 4961 题次/);
+  assert.match(home, /id="ov-txt">0 \/ 4961</);
+  assert.match(home, />80 题</);
 });

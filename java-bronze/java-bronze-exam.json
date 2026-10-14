@@ -1,0 +1,2235 @@
+{
+ "id": "jbe",
+ "questions": [
+  {
+   "id": "jbe-01",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "String s1 = \"Hello\";\nString s2 = \"John\";\nSystem.out.println(s1.concat(s2));",
+   "prompt": {
+    "en": "What will be the output of the below code snippet?",
+    "zh": "下面这段代码的输出是什么？",
+    "ja": "次のコードの出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "HelloJohn",
+     "zh": "HelloJohn",
+     "ja": "HelloJohn"
+    },
+    {
+     "en": "Hello",
+     "zh": "Hello",
+     "ja": "Hello"
+    },
+    {
+     "en": "John",
+     "zh": "John",
+     "ja": "John"
+    },
+    {
+     "en": "Run time error",
+     "zh": "运行时错误",
+     "ja": "実行時エラー"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "concat() returns a new string with the argument appended; it does not modify s1. So the call prints HelloJohn.",
+    "zh": "concat() 会返回一个把参数拼接到末尾的新字符串，并不会修改 s1。因此输出 HelloJohn。",
+    "ja": "concat() は引数を連結した新しい文字列を返すだけで、s1 自体は変更しない。よって出力は HelloJohn。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-02",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "StringBuffer sb = new StringBuffer();\nsb.append(\"Hi\");\nsb.append(\"John\");\nSystem.out.println(sb.length());",
+   "prompt": {
+    "en": "What will be the output of the below code snippet?",
+    "zh": "下面这段代码的输出是什么？",
+    "ja": "次のコードの出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "2",
+     "zh": "2",
+     "ja": "2"
+    },
+    {
+     "en": "3",
+     "zh": "3",
+     "ja": "3"
+    },
+    {
+     "en": "5",
+     "zh": "5",
+     "ja": "5"
+    },
+    {
+     "en": "6",
+     "zh": "6",
+     "ja": "6"
+    }
+   ],
+   "answer": "D",
+   "explanation": {
+    "en": "The buffer starts empty and receives \"Hi\" (2 characters) then \"John\" (4 more), so length() reports 6.",
+    "zh": "缓冲区初始为空，先追加 \"Hi\"（2 个字符）再追加 \"John\"（4 个字符），所以 length() 返回 6。",
+    "ja": "バッファは空の状態から \"Hi\"（2 文字）と \"John\"（4 文字）を順に追加するため、length() は 6 を返す。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-03",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "String class in Java is immutable.",
+    "zh": "Java 中 String 类是不可变的。这句话是什么意思？",
+    "ja": "Java の String クラスは不変（immutable）である。この文の意味はどれか。"
+   },
+   "options": [
+    {
+     "en": "Once a String is created, a String object can be changed.",
+     "zh": "一旦 String 被创建，String 对象的内容还可以被修改。",
+     "ja": "一度 String を生成した後も、String オブジェクトの内容は変更できる。"
+    },
+    {
+     "en": "Once a String is created, a String object cannot be changed.",
+     "zh": "一旦 String 被创建，String 对象的内容就不能再被修改。",
+     "ja": "一度 String を生成すると、String オブジェクトの内容は変更できない。"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "Immutable means that once a String object exists its content never changes. Any method that appears to modify it actually returns a brand-new object.",
+    "zh": "不可变指的是 String 对象一旦创建，其内容就不会再改变。任何看起来在修改它的方法，实际上都是返回了一个全新的对象。",
+    "ja": "不変とは、一度生成された String オブジェクトの内容が決して変化しないことを指す。変更しているように見えるメソッドも、実際には新しいオブジェクトを返している。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-04",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "multi",
+   "code": "",
+   "prompt": {
+    "en": "Which of the following are valid string functions?",
+    "zh": "下列哪些是有效的 String 方法？（多选）",
+    "ja": "有効な String のメソッドはどれか。（すべて選択）"
+   },
+   "options": [
+    {
+     "en": "isBlank()",
+     "zh": "isBlank()",
+     "ja": "isBlank()"
+    },
+    {
+     "en": "isEmpty()",
+     "zh": "isEmpty()",
+     "ja": "isEmpty()"
+    },
+    {
+     "en": "concatenate()",
+     "zh": "concatenate()",
+     "ja": "concatenate()"
+    },
+    {
+     "en": "length()",
+     "zh": "length()",
+     "ja": "length()"
+    },
+    {
+     "en": "size()",
+     "zh": "size()",
+     "ja": "size()"
+    }
+   ],
+   "answer": "A,B,D",
+   "explanation": {
+    "en": "isBlank(), isEmpty() and length() all exist on String. concatenate() is not a String method (the real one is concat()), and size() belongs to collections such as List and Map, not to String.",
+    "zh": "isBlank()、isEmpty()、length() 都是 String 上真实存在的方法。concatenate() 并不存在（真正的是 concat()）；size() 属于 List、Map 这类集合，String 没有这个方法。",
+    "ja": "isBlank()・isEmpty()・length() はいずれも String に存在するメソッド。concatenate() は存在せず（正しくは concat()）、size() は List や Map といったコレクションのもので String にはない。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-05",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "1. String teststr = \"test\";\n2. String teststr2 = new String (\"test2\");",
+   "prompt": {
+    "en": "Which of the following string initialization is correct?",
+    "zh": "下列哪种 String 初始化写法是正确的？",
+    "ja": "次のうち正しい String の初期化はどれか。"
+   },
+   "options": [
+    {
+     "en": "Only 1",
+     "zh": "只有 1 正确",
+     "ja": "1 のみ正しい"
+    },
+    {
+     "en": "Only 2",
+     "zh": "只有 2 正确",
+     "ja": "2 のみ正しい"
+    },
+    {
+     "en": "Both 1 and 2 are correct",
+     "zh": "1 和 2 都正确",
+     "ja": "1 と 2 の両方が正しい"
+    },
+    {
+     "en": "Can't say",
+     "zh": "无法判断",
+     "ja": "判断できない"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "Both forms compile and run. The literal form uses the string pool while new String() creates a separate heap object, but both are valid initialisation.",
+    "zh": "两种写法都能编译运行。字面量写法使用字符串常量池，new String() 则在堆上另建对象——但两种都是合法的初始化。",
+    "ja": "どちらの書き方もコンパイル・実行できる。リテラル形式は文字列プールを使い、new String() はヒープに別オブジェクトを作るが、どちらも正しい初期化。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-06",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "String s1 = \"Hello\";\nString s2 = \"John\";\nSystem.out.println(s1.equals(s2));",
+   "prompt": {
+    "en": "What will be the output of the below code snippet?",
+    "zh": "下面这段代码的输出是什么？",
+    "ja": "次のコードの出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "true",
+     "zh": "true",
+     "ja": "true"
+    },
+    {
+     "en": "John",
+     "zh": "John",
+     "ja": "John"
+    },
+    {
+     "en": "false",
+     "zh": "false",
+     "ja": "false"
+    },
+    {
+     "en": "Hello",
+     "zh": "Hello",
+     "ja": "Hello"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "equals() compares the contents of the two strings. \"Hello\" and \"John\" differ, so it returns false.",
+    "zh": "equals() 比较的是两个字符串的内容。\"Hello\" 与 \"John\" 内容不同，所以返回 false。",
+    "ja": "equals() は 2 つの文字列の内容を比較する。\"Hello\" と \"John\" は内容が異なるため false を返す。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-07",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "String teststr = \"testing\";\nchar[] arr=teststr.toCharArray();\nfor(int p=arr.length-1;p>=0;p--) {\nSystem.out.print(arr[p]);\n}",
+   "prompt": {
+    "en": "What will be the output of the below code snippet?",
+    "zh": "下面这段代码的输出是什么？",
+    "ja": "次のコードの出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "testing",
+     "zh": "testing",
+     "ja": "testing"
+    },
+    {
+     "en": "tnitseg",
+     "zh": "tnitseg",
+     "ja": "tnitseg"
+    },
+    {
+     "en": "gnistet",
+     "zh": "gnistet",
+     "ja": "gnistet"
+    },
+    {
+     "en": "gnitset",
+     "zh": "gnitset",
+     "ja": "gnitset"
+    }
+   ],
+   "answer": "D",
+   "explanation": {
+    "en": "The loop walks the character array from the last index down to 0, so it prints the string backwards: gnitset.",
+    "zh": "循环从字符数组的最后一个下标一路递减到 0，因此把字符串倒序打印出来：gnitset。",
+    "ja": "ループは文字配列の最後の添字から 0 まで逆順にたどるため、文字列を逆順に出力する：gnitset。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-08",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "String str = \"Hi\";\nstr.concat(\"John\");\nSystem.out.println(str.length());",
+   "prompt": {
+    "en": "Select the correct output of the below code snippet:",
+    "zh": "下面这段代码的输出是什么？",
+    "ja": "次のコードの出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "6",
+     "zh": "6",
+     "ja": "6"
+    },
+    {
+     "en": "4",
+     "zh": "4",
+     "ja": "4"
+    },
+    {
+     "en": "2",
+     "zh": "2",
+     "ja": "2"
+    },
+    {
+     "en": "5",
+     "zh": "5",
+     "ja": "5"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "concat() does not change the original string, and here the returned value is discarded. str is still \"Hi\", so length() is 2.",
+    "zh": "concat() 不会改变原字符串，而这里连返回值都被丢弃了。str 依然是 \"Hi\"，所以 length() 为 2。",
+    "ja": "concat() は元の文字列を変更せず、ここでは戻り値も捨てられている。str は \"Hi\" のままなので length() は 2。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-09",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "String[] strArr = {\"hi\",\"john\",\"how\",\"are\", \"you\"};\nSystem.out.println(strArr.length);",
+   "prompt": {
+    "en": "Select the correct output of the below code snippet:",
+    "zh": "下面这段代码的输出是什么？",
+    "ja": "次のコードの出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "4",
+     "zh": "4",
+     "ja": "4"
+    },
+    {
+     "en": "5",
+     "zh": "5",
+     "ja": "5"
+    },
+    {
+     "en": "6",
+     "zh": "6",
+     "ja": "6"
+    },
+    {
+     "en": "15",
+     "zh": "15",
+     "ja": "15"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "Arrays expose their size through the length field (no parentheses). The array holds five elements, so it prints 5.",
+    "zh": "数组通过 length 字段暴露长度（不带括号）。这里数组有 5 个元素，所以输出 5。",
+    "ja": "配列の長さは length フィールドで参照する（括弧は付けない）。要素は 5 つなので 5 が出力される。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-10",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Which of the following methods is used to find the length of a String in Java?",
+    "zh": "Java 中用哪个方法获取字符串的长度？",
+    "ja": "Java で文字列の長さを得るメソッドはどれか。"
+   },
+   "options": [
+    {
+     "en": "size()",
+     "zh": "size()",
+     "ja": "size()"
+    },
+    {
+     "en": "getLength()",
+     "zh": "getLength()",
+     "ja": "getLength()"
+    },
+    {
+     "en": "length()",
+     "zh": "length()",
+     "ja": "length()"
+    },
+    {
+     "en": "StringLength()",
+     "zh": "StringLength()",
+     "ja": "StringLength()"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "String.length() returns the number of characters. size() is for collections, and getLength()/StringLength() do not exist.",
+    "zh": "String.length() 返回字符个数。size() 是集合用的，getLength() 和 StringLength() 根本不存在。",
+    "ja": "String.length() が文字数を返す。size() はコレクション用で、getLength() や StringLength() は存在しない。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-11",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Which of the following is not a valid string function in Java?",
+    "zh": "下列哪个不是 Java 中有效的 String 方法？",
+    "ja": "Java の String メソッドとして存在しないものはどれか。"
+   },
+   "options": [
+    {
+     "en": "length()",
+     "zh": "length()",
+     "ja": "length()"
+    },
+    {
+     "en": "chars()",
+     "zh": "chars()",
+     "ja": "chars()"
+    },
+    {
+     "en": "size()",
+     "zh": "size()",
+     "ja": "size()"
+    },
+    {
+     "en": "intern()",
+     "zh": "intern()",
+     "ja": "intern()"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "String has length(), intern() and (since Java 9) chars(). size() is the odd one out — it belongs to the collection framework.",
+    "zh": "String 有 length()、intern()，以及 Java 9 起提供的 chars()。只有 size() 不属于 String——它是集合框架的方法。",
+    "ja": "String には length()・intern()、そして Java 9 以降は chars() がある。size() だけは String のものではなく、コレクションフレームワークに属する。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-12",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Which method removes whitespace from the beginning and end of a String in Java?",
+    "zh": "Java 中哪个方法会去掉字符串首尾的空白？",
+    "ja": "文字列の前後の空白を除去するメソッドはどれか。"
+   },
+   "options": [
+    {
+     "en": "trim()",
+     "zh": "trim()",
+     "ja": "trim()"
+    },
+    {
+     "en": "removeWhiteSpace()",
+     "zh": "removeWhiteSpace()",
+     "ja": "removeWhiteSpace()"
+    },
+    {
+     "en": "delete()",
+     "zh": "delete()",
+     "ja": "delete()"
+    },
+    {
+     "en": "strip()",
+     "zh": "strip()",
+     "ja": "strip()"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "trim() strips leading and trailing whitespace and is the classic answer here. removeWhiteSpace() and delete() do not exist on String.",
+    "zh": "trim() 会去掉首尾空白，是这类题的标准答案。removeWhiteSpace() 和 delete() 在 String 上都不存在。",
+    "ja": "trim() は前後の空白を除去する。removeWhiteSpace() と delete() は String に存在しない。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-13",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "String str7 = \"orange\";\nString str8 = \"orange\";\nSystem.out.println(str7 == str8);",
+   "prompt": {
+    "en": "Select the correct output of the below code snippet:",
+    "zh": "下面这段代码的输出是什么？",
+    "ja": "次のコードの出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "orange",
+     "zh": "orange",
+     "ja": "orange"
+    },
+    {
+     "en": "NullPointerException",
+     "zh": "NullPointerException",
+     "ja": "NullPointerException"
+    },
+    {
+     "en": "false",
+     "zh": "false",
+     "ja": "false"
+    },
+    {
+     "en": "true",
+     "zh": "true",
+     "ja": "true"
+    }
+   ],
+   "answer": "D",
+   "explanation": {
+    "en": "Two identical string literals point at the same interned object, so == compares the same reference and prints true. Contrast this with the next question, which uses new String().",
+    "zh": "两个完全相同的字符串字面量指向同一个常量池对象，所以 == 比较的是同一个引用，输出 true。可以与下一题对比——那题用了 new String()。",
+    "ja": "同一の文字列リテラルは同じプール内オブジェクトを指すため、== は同じ参照を比較し true を出力する。new String() を使う次の問題と対比するとよい。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-14",
+   "topic": "字符串",
+   "topicKey": "string",
+   "kind": "single",
+   "code": "String str7 = \"orange\";\nString str8 = new String(\"orange\");\nSystem.out.println(str7 == str8);",
+   "prompt": {
+    "en": "Select the correct output of the below code snippet:",
+    "zh": "下面这段代码的输出是什么？",
+    "ja": "次のコードの出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "orange",
+     "zh": "orange",
+     "ja": "orange"
+    },
+    {
+     "en": "NullPointerException",
+     "zh": "NullPointerException",
+     "ja": "NullPointerException"
+    },
+    {
+     "en": "false",
+     "zh": "false",
+     "ja": "false"
+    },
+    {
+     "en": "true",
+     "zh": "true",
+     "ja": "true"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "new String() always builds a fresh heap object, so str8 is not the pooled instance str7 refers to. == compares references, not contents, and prints false.",
+    "zh": "new String() 一定会在堆上新建对象，所以 str8 与 str7 指向的常量池实例不是同一个。== 比较的是引用而非内容，输出 false。",
+    "ja": "new String() は常にヒープに新しいオブジェクトを作るため、str8 は str7 が指すプール内のインスタンスではない。== は参照を比較するので false が出力される。"
+   },
+   "ref": "Java-String-MCQ"
+  },
+  {
+   "id": "jbe-15",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "If exception condition is not handled explicitly in a java program, then in case of occurrence of an exception,",
+    "zh": "如果程序中未显式处理异常，那么异常发生时由谁处理？",
+    "ja": "例外が明示的に処理されない場合、発生時にどのように処理されるか。"
+   },
+   "options": [
+    {
+     "en": "the uncaught exception will be handled by main thread's default exception handler.",
+     "zh": "未捕获的异常将由 main 线程的默认异常处理器处理。",
+     "ja": "捕捉されなかった例外は main スレッドの既定の例外ハンドラが処理する。"
+    },
+    {
+     "en": "It will never be handled and the program ends abruptly.",
+     "zh": "异常不会被处理，程序会突然终止。",
+     "ja": "例外は処理されず、プログラムは突然終了する。"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "An uncaught exception is handed to the default handler of the thread it was thrown in — for a plain application that is the main thread, which prints a stack trace and terminates the program.",
+    "zh": "未捕获的异常会交给抛出它的那个线程的默认异常处理器。对于普通应用程序，也就是 main 线程——它会打印堆栈跟踪并结束程序。",
+    "ja": "捕捉されなかった例外は、それを投げたスレッドの既定の例外ハンドラに渡される。通常のアプリケーションでは main スレッドが該当し、スタックトレースを出力してプログラムを終了する。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-16",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "A checked exception is the one that:",
+    "zh": "受检异常（checked exception）是……",
+    "ja": "検査例外（checked exception）とはどのようなものか。"
+   },
+   "options": [
+    {
+     "en": "Needs to be dealt with explicitly by the method either by using try-catch or by propagating the exception to the caller",
+     "zh": "必须由方法显式处理：要么用 try-catch 捕获，要么把异常传播给调用方",
+     "ja": "メソッドが明示的に処理する必要がある。try-catch で捕捉するか、呼び出し元へ伝播させる。"
+    },
+    {
+     "en": "Need not have to be dealt with explicitly by the method.",
+     "zh": "不需要由方法显式处理。",
+     "ja": "メソッドが明示的に処理する必要はない。"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "A checked exception must be handled explicitly: either caught in a try/catch or declared in the method signature with throws. Unchecked exceptions carry no such obligation.",
+    "zh": "受检异常必须被显式处理：要么用 try/catch 捕获，要么在方法签名上用 throws 声明。非受检异常没有这个义务。",
+    "ja": "検査例外は明示的な処理が必須で、try/catch で捕捉するか、throws でメソッド宣言に記す必要がある。非検査例外にはその義務がない。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-17",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "'finally' block will never execute if the 'catch' block is missing",
+    "zh": "如果缺少 catch 块，finally 块就永远不会执行。",
+    "ja": "catch ブロックがなければ finally ブロックは決して実行されない。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "False. try-finally without any catch is perfectly legal, and the finally block runs whether or not an exception is thrown.",
+    "zh": "错误。try-finally 不写 catch 完全合法，而且无论是否发生异常，finally 块都会执行。",
+    "ja": "誤り。catch を伴わない try-finally は合法であり、例外の有無にかかわらず finally は実行される。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-18",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "A 'try' block can have multiple 'catch' blocks",
+    "zh": "一个 try 块可以有多个 catch 块。",
+    "ja": "1 つの try ブロックに複数の catch ブロックを置ける。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "True. Several catch clauses can follow one try, each handling a different exception type — that is the standard way to handle multiple failure modes.",
+    "zh": "正确。一个 try 后面可以跟多个 catch 子句，各自处理不同的异常类型——这正是处理多种失败情况的标准写法。",
+    "ja": "正しい。1 つの try に複数の catch 句を続け、それぞれ別の例外型を処理できる。複数の失敗パターンに対処する標準的な書き方。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-19",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "A 'try' block can have multiple 'finally' blocks?",
+    "zh": "一个 try 块可以有多个 finally 块吗？",
+    "ja": "1 つの try ブロックに複数の finally ブロックを置けるか。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "False. A try may be followed by at most one finally block; that single block is guaranteed to run in either case.",
+    "zh": "错误。一个 try 后面最多只能有一个 finally 块，它保证无论哪种情况都会执行。",
+    "ja": "誤り。try の後に置ける finally は最大 1 つで、どちらの場合でも必ず実行される。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-20",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "'catch' and 'finally' both blocks are necessary following the 'try' block",
+    "zh": "try 块之后必须同时有 catch 和 finally 两个块。",
+    "ja": "try ブロックの後には catch と finally の両方が必須である。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "False. You need at least one of them, never both by requirement: try-catch, try-finally and try-catch-finally are all legal.",
+    "zh": "错误。两者至少要有其一，但从不需要同时具备：try-catch、try-finally、try-catch-finally 都合法。",
+    "ja": "誤り。少なくとも一方が必要なだけで、両方が必須ではない。try-catch・try-finally・try-catch-finally はいずれも合法。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-21",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "'try', 'catch', 'finally' construct can be nested in any other 'try' or 'catch' or 'finally' blocks",
+    "zh": "try/catch/finally 结构可以嵌套在任意的 try、catch 或 finally 块中。",
+    "ja": "try/catch/finally 構文は、他の try・catch・finally ブロックの内部にネストできる。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "True. The construct nests freely, which is how you handle an exception that occurs while handling another one.",
+    "zh": "正确。这套结构可以自由嵌套，处理\"处理异常时又发生异常\"的情况正是靠它。",
+    "ja": "正しい。この構文は自由にネストでき、例外処理中に別の例外が起きた場合の対処に使われる。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-22",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "'finally' block will never execute if no exception occurs in the 'try' block",
+    "zh": "如果 try 块中没有发生异常，finally 块就永远不会执行。",
+    "ja": "try ブロックで例外が発生しなければ、finally ブロックは決して実行されない。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "False. finally runs on every exit path — normal completion, exception, even a return statement — which is exactly why it is used for cleanup.",
+    "zh": "错误。finally 在任何退出路径上都会执行——正常结束、抛异常、甚至遇到 return 语句——这正是它被用来做清理的原因。",
+    "ja": "誤り。finally はどの終了経路でも実行される —— 正常終了、例外発生、return 文の場合も含む。だからこそ後処理に使われる。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-23",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "'catch' block gets skipped if no exception occurred in the 'try' block",
+    "zh": "如果 try 块中没有发生异常，catch 块会被跳过。",
+    "ja": "try ブロックで例外が発生しなければ、catch ブロックはスキップされる。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "True. catch clauses are only entered to handle a matching thrown exception; with nothing thrown, control passes straight on.",
+    "zh": "正确。catch 子句只在需要处理匹配的异常时才进入；没有异常抛出时，控制直接往下走。",
+    "ja": "正しい。catch 句は対応する例外を処理するときだけ実行される。何も投げられなければ、そのまま次へ進む。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-24",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "'throw' keyword is used to _______",
+    "zh": "throw 关键字用于 ______",
+    "ja": "throw キーワードの用途は ______。"
+   },
+   "options": [
+    {
+     "en": "Propagate the exception to the caller of the method",
+     "zh": "把异常传播给方法的调用方",
+     "ja": "例外をメソッドの呼び出し元へ伝播させる"
+    },
+    {
+     "en": "Define a new exception type",
+     "zh": "定义一个新的异常类型",
+     "ja": "新しい例外型を定義する"
+    },
+    {
+     "en": "Throw an exception explicitly",
+     "zh": "显式地抛出一个异常",
+     "ja": "例外を明示的にスローする"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "throw raises an exception object explicitly at the point it appears. Declaring that a method may let one escape is the job of throws, not throw.",
+    "zh": "throw 是在它出现的位置显式抛出一个异常对象。声明\"方法可能向外抛出异常\"是 throws 的职责，不是 throw。",
+    "ja": "throw はその位置で例外オブジェクトを明示的に投げる。メソッドが例外を外へ送出しうることを宣言するのは throws の役割で、throw ではない。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-25",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "'throws' keyword is used to ______",
+    "zh": "throws 关键字用于 ______",
+    "ja": "throws キーワードの用途は ______。"
+   },
+   "options": [
+    {
+     "en": "Propagate the exception to the caller of the method",
+     "zh": "把异常传播给方法的调用方",
+     "ja": "例外をメソッドの呼び出し元へ伝播させる"
+    },
+    {
+     "en": "Define a new exception type",
+     "zh": "定义一个新的异常类型",
+     "ja": "新しい例外型を定義する"
+    },
+    {
+     "en": "Throw an exception explicitly",
+     "zh": "显式地抛出一个异常",
+     "ja": "例外を明示的にスローする"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "throws appears in a method signature and tells callers which checked exceptions may propagate out. It does not throw anything by itself.",
+    "zh": "throws 出现在方法签名中，告诉调用方哪些受检异常可能会向外传播。它本身并不抛出任何异常。",
+    "ja": "throws はメソッド宣言に記し、どの検査例外が外へ伝播しうるかを呼び出し側に伝える。それ自体は何も投げない。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-26",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "All exceptions in java are derived from ________",
+    "zh": "Java 中所有异常都派生自 ______",
+    "ja": "Java のすべての例外の派生元は ______。"
+   },
+   "options": [
+    {
+     "en": "Throwable class",
+     "zh": "Throwable 类",
+     "ja": "Throwable クラス"
+    },
+    {
+     "en": "Exception class",
+     "zh": "Exception 类",
+     "ja": "Exception クラス"
+    },
+    {
+     "en": "Error class",
+     "zh": "Error 类",
+     "ja": "Error クラス"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "Throwable sits at the root. Error and Exception are its two direct branches, so every throwable object is a Throwable.",
+    "zh": "Throwable 位于继承体系的根部。Error 和 Exception 是它的两个直接分支，所以一切可抛出的对象都是 Throwable。",
+    "ja": "Throwable が階層の根にある。Error と Exception はその直下の 2 系統であり、投げられるものはすべて Throwable。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-27",
+   "topic": "异常处理",
+   "topicKey": "exception",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Exceptions defined by 'Error' and 'RuntimeException' classes and their subclasses are known as",
+    "zh": "由 Error 和 RuntimeException 及其子类定义的异常称为 ______",
+    "ja": "Error と RuntimeException およびそのサブクラスが表す例外は ______ と呼ばれる。"
+   },
+   "options": [
+    {
+     "en": "Unchecked exception",
+     "zh": "非受检异常",
+     "ja": "非検査例外"
+    },
+    {
+     "en": "Checked exception",
+     "zh": "受检异常",
+     "ja": "検査例外"
+    },
+    {
+     "en": "Can be checked or unchecked both",
+     "zh": "既可以是受检也可以是非受检",
+     "ja": "検査例外にも非検査例外にもなりうる"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "They are unchecked: the compiler does not force you to catch or declare them. Everything else under Exception is checked.",
+    "zh": "它们是非受检异常：编译器不会强制你捕获或声明。Exception 之下其余的都是受检异常。",
+    "ja": "これらは非検査例外で、コンパイラは捕捉や宣言を強制しない。Exception 配下のそれ以外は検査例外となる。"
+   },
+   "ref": "Java_MCQ_on_Exception_handling"
+  },
+  {
+   "id": "jbe-28",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "A reference variable in Java is _________",
+    "zh": "Java 中的引用变量是 ______",
+    "ja": "Java の参照変数とは ______。"
+   },
+   "options": [
+    {
+     "en": "A variable referring or pointing to an object of a class",
+     "zh": "指向某个类对象的变量",
+     "ja": "クラスのオブジェクトを指す変数"
+    },
+    {
+     "en": "An alias to the instance variable of the class",
+     "zh": "该类实例变量的别名",
+     "ja": "そのクラスのインスタンス変数の別名"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "A reference variable stores the address of an object rather than the object itself, which is why two references can point at the same instance.",
+    "zh": "引用变量存放的是对象的地址，而不是对象本身——这也是两个引用能指向同一个实例的原因。",
+    "ja": "参照変数はオブジェクトそのものではなく、そのアドレスを保持する。だから 2 つの参照が同じインスタンスを指せる。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-29",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "An instance variable in Java is _______",
+    "zh": "Java 中的实例变量是 ______",
+    "ja": "Java のインスタンス変数とは ______。"
+   },
+   "options": [
+    {
+     "en": "An alias to a reference variable of a class",
+     "zh": "类引用变量的别名",
+     "ja": "クラスの参照変数の別名"
+    },
+    {
+     "en": "A variable belonging to the class and can be accessed through the class name",
+     "zh": "属于类、可以通过类名访问的变量",
+     "ja": "クラスに属し、クラス名を通じてアクセスできる変数"
+    },
+    {
+     "en": "A variable belonging to an instance of a class and can be accessed through the reference variable of the class",
+     "zh": "属于类的实例、可以通过该类的引用变量访问的变量",
+     "ja": "クラスのインスタンスに属し、そのクラスの参照変数を通じてアクセスできる変数"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "An instance variable belongs to each object separately: every instance gets its own copy, and it exists as long as that object does.",
+    "zh": "实例变量属于每一个对象：每个实例都持有自己的一份，其生命周期与对象相同。",
+    "ja": "インスタンス変数は各オブジェクトに属し、インスタンスごとに独立したコピーを持つ。オブジェクトが存在する間だけ有効。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-30",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "A static variable in Java is _______",
+    "zh": "Java 中的静态变量是 ______",
+    "ja": "Java の static 変数とは ______。"
+   },
+   "options": [
+    {
+     "en": "A variable belonging to an instance of a class and can be accessed by the reference variable of the class",
+     "zh": "属于类的实例、可以通过该类的引用变量访问的变量",
+     "ja": "クラスのインスタンスに属し、そのクラスの参照変数からアクセスできる変数"
+    },
+    {
+     "en": "A variable belonging to a class and can be accessed by the class name",
+     "zh": "属于类、可以通过类名访问的变量",
+     "ja": "クラスに属し、クラス名からアクセスできる変数"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "A static variable belongs to the class, not to any instance: one copy is shared by every object and it can be reached through the class name.",
+    "zh": "静态变量属于类而不属于任何实例：所有对象共用同一份，可以通过类名直接访问。",
+    "ja": "static 変数はクラスに属し、インスタンスには属さない。全オブジェクトで 1 つを共有し、クラス名から参照できる。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-31",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "An anonymous class in Java is _____?",
+    "zh": "Java 中的匿名类是 _____？",
+    "ja": "Java の匿名クラスとは _____。"
+   },
+   "options": [
+    {
+     "en": "A type of inner class without a name",
+     "zh": "一种没有名字的内部类",
+     "ja": "名前を持たない内部クラスの一種"
+    },
+    {
+     "en": "A class without a definition",
+     "zh": "没有定义的类",
+     "ja": "定義を持たないクラス"
+    },
+    {
+     "en": "An abstract class",
+     "zh": "抽象类",
+     "ja": "抽象クラス"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "An anonymous class is an inner class declared and instantiated in one expression without a name — common when implementing a single-method interface on the spot.",
+    "zh": "匿名类是在一个表达式里同时声明并实例化、且没有名字的内部类——常用于就地实现只有一个方法的接口。",
+    "ja": "匿名クラスは、名前を持たず 1 つの式の中で宣言とインスタンス化を同時に行う内部クラス。単一メソッドのインターフェースをその場で実装する際によく使う。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-32",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Garbage collection in Java is _____",
+    "zh": "Java 中的垃圾回收是 _____",
+    "ja": "Java のガベージコレクションとは _____。"
+   },
+   "options": [
+    {
+     "en": "Initialization of unused local variables",
+     "zh": "初始化未使用的局部变量",
+     "ja": "使われていないローカル変数の初期化"
+    },
+    {
+     "en": "Reclaiming the memory occupied by the object that is no longer referenced by any reference variable",
+     "zh": "回收不再被任何引用变量引用的对象所占用的内存",
+     "ja": "どの参照変数からも参照されなくなったオブジェクトのメモリを回収すること"
+    },
+    {
+     "en": "Assigning null to reference variables",
+     "zh": "给引用变量赋 null",
+     "ja": "参照変数に null を代入すること"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "Garbage collection reclaims the heap memory of objects that are no longer reachable. The JVM decides when, so you never free memory by hand.",
+    "zh": "垃圾回收负责收回那些已经不可达的对象所占的堆内存。时机由 JVM 决定，因此你不需要手动释放内存。",
+    "ja": "ガベージコレクションは、到達不能になったオブジェクトのヒープ領域を回収する。実行時期は JVM が決めるため、手動でメモリを解放することはない。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-33",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Object Finalization in Java is __________",
+    "zh": "Java 中的对象终结（finalization）是 __________",
+    "ja": "Java のオブジェクトのファイナライズとは __________。"
+   },
+   "options": [
+    {
+     "en": "Apply final keyword before the object declaration",
+     "zh": "在对象声明前加上 final 关键字",
+     "ja": "オブジェクト宣言の前に final キーワードを付けること"
+    },
+    {
+     "en": "The last resort for an object to perform some tasks before it is being garbage collected",
+     "zh": "对象在被垃圾回收之前执行某些任务的最后机会",
+     "ja": "ガベージコレクションされる前にオブジェクトが処理を行う最後の手段"
+    },
+    {
+     "en": "Making an object of the final class",
+     "zh": "创建 final 类的对象",
+     "ja": "final クラスのオブジェクトを生成すること"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "finalize() was the last chance for an object to release resources before being collected — a rarely used hook, and deprecated since Java 9.",
+    "zh": "finalize() 曾是对象在被回收前释放资源的最后机会——这个钩子极少使用，且自 Java 9 起已被弃用。",
+    "ja": "finalize() は回収前にオブジェクトがリソースを解放する最後の機会だった。ほとんど使われない仕組みで、Java 9 以降は非推奨。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-34",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "A final class in java is _______",
+    "zh": "Java 中的 final 类是 _______",
+    "ja": "Java の final クラスとは _______。"
+   },
+   "options": [
+    {
+     "en": "A class that cannot be extended",
+     "zh": "不能被继承的类",
+     "ja": "継承できないクラス"
+    },
+    {
+     "en": "A class that cannot be instantiated",
+     "zh": "不能被实例化的类",
+     "ja": "インスタンス化できないクラス"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "final on a class blocks inheritance. It can still be instantiated — that is what abstract classes cannot do.",
+    "zh": "final 修饰类表示禁止继承。它依然可以被实例化——那是抽象类做不到的事。",
+    "ja": "final を付けたクラスは継承できない。インスタンス化は可能で、できないのは抽象クラスの方。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-35",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "An abstract class cannot be instantiated:",
+    "zh": "抽象类不能被实例化。",
+    "ja": "抽象クラスはインスタンス化できない。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "True. An abstract class may leave methods unimplemented, so the compiler refuses to create an instance of it directly.",
+    "zh": "正确。抽象类可能留有没有实现的方法，因此编译器不允许直接创建它的实例。",
+    "ja": "正しい。抽象クラスは未実装のメソッドを持ちうるため、コンパイラは直接インスタンス化を許さない。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-36",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "System.gc() is a method used to _______",
+    "zh": "System.gc() 是一个用来 _______ 的方法。",
+    "ja": "System.gc() は _______ ためのメソッドである。"
+   },
+   "options": [
+    {
+     "en": "Invoke garbage collection explicitly",
+     "zh": "显式地调用垃圾回收",
+     "ja": "ガベージコレクションを明示的に呼び出す"
+    },
+    {
+     "en": "Invoke object finalization",
+     "zh": "调用对象终结",
+     "ja": "オブジェクトのファイナライズを呼び出す"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "System.gc() asks the JVM to run garbage collection. It is only a suggestion — the runtime may ignore it.",
+    "zh": "System.gc() 用于请求 JVM 执行垃圾回收，但这只是一个建议——运行时不一定会照做。",
+    "ja": "System.gc() は JVM にガベージコレクションの実行を促す。あくまで提案であり、実行時に無視されることもある。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-37",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "An object in java can be referenced by multiple reference variables:",
+    "zh": "Java 中的一个对象可以被多个引用变量引用。",
+    "ja": "Java の 1 つのオブジェクトを複数の参照変数から参照できる。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "True. Assigning one reference to another copies the address, so several variables can name the same object — the source of many aliasing bugs.",
+    "zh": "正确。把引用赋给另一个变量只是复制了地址，因此多个变量可以指向同一个对象——这也是不少别名 bug 的根源。",
+    "ja": "正しい。参照の代入はアドレスをコピーするだけなので、複数の変数が同じオブジェクトを指せる。これがエイリアス由来のバグの原因になる。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-38",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "A local class in java is ________",
+    "zh": "Java 中的局部类是 ________",
+    "ja": "Java のローカルクラスとは ________。"
+   },
+   "options": [
+    {
+     "en": "A class having all its methods as abstract",
+     "zh": "所有方法都是抽象方法的类",
+     "ja": "すべてのメソッドが抽象メソッドであるクラス"
+    },
+    {
+     "en": "A class having all the members belonging to a method or a block",
+     "zh": "所有成员都属于某个方法或块的类",
+     "ja": "すべてのメンバがメソッドまたはブロックに属するクラス"
+    },
+    {
+     "en": "A type of inner class specified inside a block for e.g. inside a constructor, a method, or an initializer",
+     "zh": "定义在块内部的内部类，例如写在构造器、方法或初始化块里",
+     "ja": "ブロックの内部で定義される内部クラス。例：コンストラクタ・メソッド・初期化ブロック内"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "A local class is an inner class declared inside a block, typically a method body, and it is visible only within that block.",
+    "zh": "局部类是声明在某个块（通常是方法体）内部的内部类，只在该块范围内可见。",
+    "ja": "ローカルクラスはブロック（通常はメソッド本体）の内部で宣言される内部クラスで、そのブロック内でのみ参照できる。"
+   },
+   "ref": "Java_MCQ_online_test_1"
+  },
+  {
+   "id": "jbe-39",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "An identifier in java is ________",
+    "zh": "Java 中的标识符（identifier）是 ________",
+    "ja": "Java の識別子（identifier）とは ________。"
+   },
+   "options": [
+    {
+     "en": "A keyword in java",
+     "zh": "Java 的关键字",
+     "ja": "Java のキーワード"
+    },
+    {
+     "en": "A name given to a variable, class, method, and labels",
+     "zh": "给变量、类、方法或标签起的名字",
+     "ja": "変数・クラス・メソッド・ラベルに付ける名前"
+    },
+    {
+     "en": "A value denoting a constant",
+     "zh": "表示常量的值",
+     "ja": "定数を表す値"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "An identifier is simply a name you give to a variable, class, method or package. Keywords are reserved words and cannot be used as identifiers.",
+    "zh": "标识符就是你给变量、类、方法或包起的名字。关键字是保留字，不能拿来当标识符。",
+    "ja": "識別子は変数・クラス・メソッド・パッケージに付ける名前のこと。キーワードは予約語であり、識別子には使えない。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-40",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Which of the following is not a keyword in java ______",
+    "zh": "下列哪个不是 Java 的关键字 ______",
+    "ja": "Java のキーワードでないものはどれか ______。"
+   },
+   "options": [
+    {
+     "en": "new",
+     "zh": "new",
+     "ja": "new"
+    },
+    {
+     "en": "identifier",
+     "zh": "identifier",
+     "ja": "identifier"
+    },
+    {
+     "en": "void",
+     "zh": "void",
+     "ja": "void"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "new and void are reserved keywords; identifier is an ordinary term describing names you invent, and is not reserved.",
+    "zh": "new 和 void 都是保留关键字；identifier 只是一个描述\"你自己起的名字\"的普通术语，并没有被保留。",
+    "ja": "new と void は予約されたキーワード。identifier は自分で付ける名前を指す一般用語であり、予約語ではない。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-41",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Which of the following is Not an Integer data type?",
+    "zh": "下列哪个不是整数类型？",
+    "ja": "整数型でないものはどれか。"
+   },
+   "options": [
+    {
+     "en": "int",
+     "zh": "int",
+     "ja": "int"
+    },
+    {
+     "en": "double",
+     "zh": "double",
+     "ja": "double"
+    },
+    {
+     "en": "long",
+     "zh": "long",
+     "ja": "long"
+    },
+    {
+     "en": "byte",
+     "zh": "byte",
+     "ja": "byte"
+    },
+    {
+     "en": "short",
+     "zh": "short",
+     "ja": "short"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "int, long, byte and short are all integral types. double is a floating-point type, so it is the exception.",
+    "zh": "int、long、byte、short 都是整数类型，只有 double 是浮点类型。",
+    "ja": "int・long・byte・short はすべて整数型。double だけが浮動小数点型。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-42",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Object class in java is ____?",
+    "zh": "Java 中的 Object 类是 ____？",
+    "ja": "Java の Object クラスとは ____。"
+   },
+   "options": [
+    {
+     "en": "Super class of all the classes i.e. every class in java extends object class by default",
+     "zh": "所有类的父类：Java 中每个类都默认继承 Object",
+     "ja": "すべてのクラスのスーパークラス。Java のすべてのクラスは既定で Object を継承する"
+    },
+    {
+     "en": "A class used to manipulate any final variable of the class",
+     "zh": "用于操作类中 final 变量的类",
+     "ja": "クラスの final 変数を操作するためのクラス"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "Object is the root of the class hierarchy: every class implicitly extends it, which is why any object can be assigned to an Object reference.",
+    "zh": "Object 是类层次结构的根：每个类都隐式继承它，所以任何对象都能赋给 Object 类型的引用。",
+    "ja": "Object はクラス階層の根で、すべてのクラスが暗黙にこれを継承する。だから任意のオブジェクトを Object 型の参照に代入できる。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-43",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Select the correct statement for the lifetime of an instance variable ____",
+    "zh": "关于实例变量的生命周期，正确的说法是 ____",
+    "ja": "インスタンス変数の寿命について正しい記述は ____。"
+   },
+   "options": [
+    {
+     "en": "An instance variable remain alive till the execution of the instance method",
+     "zh": "实例变量活到实例方法执行结束",
+     "ja": "インスタンス変数はインスタンスメソッドの実行が終わるまで生存する"
+    },
+    {
+     "en": "An instance variable remain alive as long as the object it belongs to is alive",
+     "zh": "实例变量与它所属的对象同生共死",
+     "ja": "インスタンス変数は、それが属するオブジェクトが生存する限り生存する"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "An instance variable lives exactly as long as the object that owns it. Once the object becomes unreachable it can be collected along with its fields.",
+    "zh": "实例变量的生命周期与持有它的对象完全一致。对象一旦不可达，它连同它的字段就可能被回收。",
+    "ja": "インスタンス変数の寿命は、それを保持するオブジェクトと同じ。オブジェクトが到達不能になれば、フィールドごと回収されうる。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-44",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "public class finalTest {\nfinal static int r=9;\npublic static void main(String[] args) {\nr++;\nSystem.out.println(r);\n}\n}",
+   "prompt": {
+    "en": "What is the output of the below program:",
+    "zh": "下面程序的输出是什么？",
+    "ja": "次のプログラムの出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "10",
+     "zh": "10",
+     "ja": "10"
+    },
+    {
+     "en": "9",
+     "zh": "9",
+     "ja": "9"
+    },
+    {
+     "en": "Compilation error.",
+     "zh": "编译错误",
+     "ja": "コンパイルエラー"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "r is declared final, so r++ attempts to reassign a constant and the compiler rejects it. A final variable may be read as often as you like, never written twice.",
+    "zh": "r 被声明为 final，r++ 试图给常量重新赋值，编译器直接拒绝。final 变量可以随意读取，但绝不能再写第二次。",
+    "ja": "r は final なので、r++ は定数への再代入となりコンパイルエラーになる。final 変数は何度読んでもよいが、二度目の代入はできない。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-45",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "public class finalTest {\nfinalTest func1() {\nSystem.out.println(\"This is func1\");\nreturn new finalTest();\n}\nString func2() {\nreturn \"returning string2\";\n}\npublic static void main(String[] args) {\nfinalTest obj2;\nobj2=new finalTest();\nSystem.out.println(obj2.func1().func2());\n}\n}",
+   "prompt": {
+    "en": "Select the correct console output of the below program:",
+    "zh": "下面程序的正确控制台输出是？",
+    "ja": "次のプログラムの正しいコンソール出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "This is func1",
+     "zh": "This is func1",
+     "ja": "This is func1"
+    },
+    {
+     "en": "returning string2",
+     "zh": "returning string2",
+     "ja": "returning string2"
+    },
+    {
+     "en": "returning string2",
+     "zh": "returning string2",
+     "ja": "returning string2"
+    },
+    {
+     "en": "This is func1",
+     "zh": "This is func1",
+     "ja": "This is func1"
+    },
+    {
+     "en": "Compilation error",
+     "zh": "编译错误",
+     "ja": "コンパイルエラー"
+    }
+   ],
+   "answer": "E",
+   "explanation": {
+    "en": "One of the methods declared in this class is named func2 but the code calls a method whose name does not exist, so the file never compiles.",
+    "zh": "类中声明的方法名与实际调用的方法名不一致，调用了一个不存在的方法，因此这个文件根本无法编译。",
+    "ja": "宣言されているメソッド名と呼び出している名前が一致せず、存在しないメソッドを呼んでいるためコンパイルできない。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-46",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "judge",
+   "code": "public void func2() {\nint var1;\nvar1=5;\nSystem.out.println(var1);\n}",
+   "prompt": {
+    "en": "A local variable (belonging to a method, as shown below) must be initialized in the method before it is being used. True or False?",
+    "zh": "属于方法的局部变量必须在方法中使用前初始化（如下所示）。",
+    "ja": "メソッドに属するローカル変数は、使用前にメソッド内で初期化しなければならない（以下参照）。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "True. Unlike fields, local variables receive no default value, so the compiler insists that a value is assigned before any read.",
+    "zh": "正确。与字段不同，局部变量没有默认值，因此编译器要求任何读取之前必须已经赋值。",
+    "ja": "正しい。フィールドと違いローカル変数に既定値はないため、読み取り前に代入が必須とコンパイラが要求する。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-47",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "An instance or static variable, if not initialized explicitly, then?",
+    "zh": "实例变量或静态变量如果没有被显式初始化，会怎样？",
+    "ja": "インスタンス変数や static 変数を明示的に初期化しないとどうなるか。"
+   },
+   "options": [
+    {
+     "en": "It will throw a runtime error if not initialized explicitly.",
+     "zh": "如果不显式初始化，会抛出运行时错误。",
+     "ja": "明示的に初期化しないと実行時エラーになる。"
+    },
+    {
+     "en": "It will acquire or initialized with a default value and executes successfully.",
+     "zh": "会获得默认值，程序正常执行。",
+     "ja": "既定値が設定され、そのまま正常に実行される。"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "Fields are always given a default: 0 for numeric primitives, false for boolean, null for references. Only local variables are left uninitialised.",
+    "zh": "字段总会获得默认值：数值型为 0，boolean 为 false，引用类型为 null。只有局部变量才会处于未初始化状态。",
+    "ja": "フィールドには必ず既定値が入る。数値は 0、boolean は false、参照型は null。未初期化のままなのはローカル変数だけ。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-48",
+   "topic": "类与对象",
+   "topicKey": "objects",
+   "kind": "single",
+   "code": "public class finalTest {\nint var1;\npublic void func2() {\nSystem.out.println(var1);\n}\npublic static void main(String[] args) {\nfinalTest obj2=new finalTest();\nobj2.func2();\n}\n}",
+   "prompt": {
+    "en": "Select the correct output of the below program:",
+    "zh": "下面程序的正确输出是？",
+    "ja": "次のプログラムの正しい出力はどれか。"
+   },
+   "options": [
+    {
+     "en": "0",
+     "zh": "0",
+     "ja": "0"
+    },
+    {
+     "en": "Run time error",
+     "zh": "运行时错误",
+     "ja": "実行時エラー"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "var1 is an instance field, so it defaults to 0 and printing it is legal — no initialisation is required for fields.",
+    "zh": "var1 是实例字段，默认值为 0，打印它完全合法——字段不需要显式初始化。",
+    "ja": "var1 はインスタンスフィールドなので既定値 0 を持ち、出力は合法。フィールドに初期化は不要。"
+   },
+   "ref": "Java_MCQ_test_2"
+  },
+  {
+   "id": "jbe-49",
+   "topic": "类型转换",
+   "topicKey": "casting",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "A type conversion in which the value of a narrower primitive data type is converted to a value of a broader primitive data type is called ________",
+    "zh": "把较窄的原始数据类型的值转换成较宽类型的值的类型转换称为 ______",
+    "ja": "狭いプリミティブ型の値を広いプリミティブ型へ変換することを ______ と呼ぶ。"
+   },
+   "options": [
+    {
+     "en": "Widening reference conversion (Upcasting)",
+     "zh": "引用类型的拓宽转换（向上转型）",
+     "ja": "参照型の拡大変換（アップキャスト）"
+    },
+    {
+     "en": "Narrowing reference conversion (Downcasting)",
+     "zh": "引用类型的窄化转换（向下转型）",
+     "ja": "参照型の縮小変換（ダウンキャスト）"
+    },
+    {
+     "en": "Narrowing primitive conversions",
+     "zh": "原始类型的窄化转换",
+     "ja": "プリミティブ型の縮小変換"
+    },
+    {
+     "en": "Widening primitive conversions",
+     "zh": "原始类型的拓宽转换",
+     "ja": "プリミティブ型の拡大変換"
+    }
+   ],
+   "answer": "D",
+   "explanation": {
+    "en": "Widening primitive conversion. Going from a smaller to a larger type never loses information, so no cast is needed.",
+    "zh": "这是拓宽原始类型转换。从小类型转到大类型不会丢失信息，因此不需要强制转型。",
+    "ja": "拡大プリミティブ変換。小さい型から大きい型への変換では情報が失われないため、キャストは不要。"
+   },
+   "ref": "java-mcq-test-type-casting"
+  },
+  {
+   "id": "jbe-50",
+   "topic": "类型转换",
+   "topicKey": "casting",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "A type conversion in which a broader primitive datatype is assigned to a narrower (smaller) data type is called ________",
+    "zh": "把较宽的原始数据类型赋给较窄（较小）类型的转换称为 ______",
+    "ja": "広いプリミティブ型をより狭い型へ代入する変換を ______ と呼ぶ。"
+   },
+   "options": [
+    {
+     "en": "Widening reference conversion (Upcasting)",
+     "zh": "引用类型的拓宽转换（向上转型）",
+     "ja": "参照型の拡大変換（アップキャスト）"
+    },
+    {
+     "en": "Narrowing reference conversion (Downcasting)",
+     "zh": "引用类型的窄化转换（向下转型）",
+     "ja": "参照型の縮小変換（ダウンキャスト）"
+    },
+    {
+     "en": "Narrowing primitive conversions",
+     "zh": "原始类型的窄化转换",
+     "ja": "プリミティブ型の縮小変換"
+    },
+    {
+     "en": "Widening primitive conversions",
+     "zh": "原始类型的拓宽转换",
+     "ja": "プリミティブ型の拡大変換"
+    }
+   ],
+   "answer": "C",
+   "explanation": {
+    "en": "Narrowing primitive conversion. It can lose information, so the compiler demands an explicit cast.",
+    "zh": "这是窄化原始类型转换。它可能丢失信息，所以编译器要求显式强制转型。",
+    "ja": "縮小プリミティブ変換。情報が失われる可能性があるため、明示的なキャストが必要。"
+   },
+   "ref": "java-mcq-test-type-casting"
+  },
+  {
+   "id": "jbe-51",
+   "topic": "类型转换",
+   "topicKey": "casting",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Assigning an int data type to a double data type will be considered as ________",
+    "zh": "把 int 类型赋给 double 类型属于 ________",
+    "ja": "int 型を double 型へ代入するのは ________ に当たる。"
+   },
+   "options": [
+    {
+     "en": "Widening primitive conversion",
+     "zh": "原始类型的拓宽转换",
+     "ja": "プリミティブ型の拡大変換"
+    },
+    {
+     "en": "Narrowing primitive conversion",
+     "zh": "原始类型的窄化转换",
+     "ja": "プリミティブ型の縮小変換"
+    },
+    {
+     "en": "Widening reference conversion (Upcasting)",
+     "zh": "引用类型的拓宽转换（向上转型）",
+     "ja": "参照型の拡大変換（アップキャスト）"
+    },
+    {
+     "en": "Narrowing reference conversion (Downcasting)",
+     "zh": "引用类型的窄化转换（向下转型）",
+     "ja": "参照型の縮小変換（ダウンキャスト）"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "int to double is a widening primitive conversion: double has a wider range, so the assignment happens silently.",
+    "zh": "int 转 double 属于拓宽原始类型转换：double 的范围更大，所以赋值会自动完成。",
+    "ja": "int から double は拡大プリミティブ変換。double の方が範囲が広いため、代入は暗黙に行われる。"
+   },
+   "ref": "java-mcq-test-type-casting"
+  },
+  {
+   "id": "jbe-52",
+   "topic": "类型转换",
+   "topicKey": "casting",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "Assigning a double type of data to an int type will be considered as _________",
+    "zh": "把 double 类型赋给 int 类型属于 _________",
+    "ja": "double 型を int 型へ代入するのは _________ に当たる。"
+   },
+   "options": [
+    {
+     "en": "Widening primitive conversion",
+     "zh": "原始类型的拓宽转换",
+     "ja": "プリミティブ型の拡大変換"
+    },
+    {
+     "en": "Narrowing primitive conversion",
+     "zh": "原始类型的窄化转换",
+     "ja": "プリミティブ型の縮小変換"
+    },
+    {
+     "en": "Widening reference conversion (Upcasting)",
+     "zh": "引用类型的拓宽转换（向上转型）",
+     "ja": "参照型の拡大変換（アップキャスト）"
+    },
+    {
+     "en": "Narrowing reference conversion (Downcasting)",
+     "zh": "引用类型的窄化转换（向下转型）",
+     "ja": "参照型の縮小変換（ダウンキャスト）"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "Narrowing primitive conversion: the fractional part would be discarded, so an explicit cast is required.",
+    "zh": "窄化原始类型转换：小数部分会被丢弃，因此必须写显式强制转型。",
+    "ja": "縮小プリミティブ変換。小数部が切り捨てられるため、明示的なキャストが必須。"
+   },
+   "ref": "java-mcq-test-type-casting"
+  },
+  {
+   "id": "jbe-53",
+   "topic": "类型转换",
+   "topicKey": "casting",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "The conversions between reference types where super type gets converted to subtype are called _______",
+    "zh": "引用类型之间，把父类型转换成子类型的转换称为 ______",
+    "ja": "参照型どうしで、スーパー型をサブ型へ変換することを ______ と呼ぶ。"
+   },
+   "options": [
+    {
+     "en": "Widening primitive conversion",
+     "zh": "原始类型的拓宽转换",
+     "ja": "プリミティブ型の拡大変換"
+    },
+    {
+     "en": "Narrowing primitive conversion",
+     "zh": "原始类型的窄化转换",
+     "ja": "プリミティブ型の縮小変換"
+    },
+    {
+     "en": "Widening reference conversion (Upcasting)",
+     "zh": "引用类型的拓宽转换（向上转型）",
+     "ja": "参照型の拡大変換（アップキャスト）"
+    },
+    {
+     "en": "Narrowing reference conversion (Downcasting)",
+     "zh": "引用类型的窄化转换（向下转型）",
+     "ja": "参照型の縮小変換（ダウンキャスト）"
+    }
+   ],
+   "answer": "D",
+   "explanation": {
+    "en": "Narrowing reference conversion, known as downcasting. The compiler allows it only with a cast, and the JVM checks the real object type at runtime.",
+    "zh": "这是窄化引用转换，也就是向下转型。编译器只允许在写强制转型时通过，而 JVM 会在运行时检查对象的真实类型。",
+    "ja": "縮小参照変換、いわゆるダウンキャスト。キャストを書いた場合のみコンパイルが通り、実行時に JVM が実際の型を検査する。"
+   },
+   "ref": "java-mcq-test-type-casting"
+  },
+  {
+   "id": "jbe-54",
+   "topic": "类型转换",
+   "topicKey": "casting",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "Casting between a primitive data type and a reference type is not permitted in Java.",
+    "zh": "在 Java 中，原始类型和引用类型之间不允许互相转换。",
+    "ja": "Java では、プリミティブ型と参照型の間でキャストは許されない。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "True. The two type systems are separate; you cannot cast an int to a String or an object to a primitive.",
+    "zh": "正确。两套类型系统彼此独立，不能把 int 转成 String，也不能把对象转成原始类型。",
+    "ja": "正しい。2 つの型体系は別系統であり、int を String に、オブジェクトをプリミティブにキャストすることはできない。"
+   },
+   "ref": "java-mcq-test-type-casting"
+  },
+  {
+   "id": "jbe-55",
+   "topic": "类型转换",
+   "topicKey": "casting",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "Boolean values can also be cast to other data values and vice versa:",
+    "zh": "boolean 值可以转换（cast）成其他数据类型的值，反之亦然。",
+    "ja": "boolean 値は他のデータ型へキャストでき、その逆もできる。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "False. boolean is not convertible to or from any numeric type in Java — not even with a cast.",
+    "zh": "错误。在 Java 中 boolean 不能与任何数值类型互相转换——即使写强制转型也不行。",
+    "ja": "誤り。Java では boolean をいかなる数値型とも相互変換できない。キャストを書いても不可。"
+   },
+   "ref": "java-mcq-test-type-casting"
+  },
+  {
+   "id": "jbe-56",
+   "topic": "类型转换",
+   "topicKey": "casting",
+   "kind": "judge",
+   "code": "",
+   "prompt": {
+    "en": "Assigning a broader datatype to a smaller datatype requires an explicit cast:",
+    "zh": "把较宽的数据类型赋给较小的数据类型需要显式强制转型。",
+    "ja": "広いデータ型を狭い型へ代入するには明示的なキャストが必要である。"
+   },
+   "options": [
+    {
+     "en": "True",
+     "zh": "正确",
+     "ja": "正しい"
+    },
+    {
+     "en": "False",
+     "zh": "错误",
+     "ja": "誤り"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "True. Narrowing conversions can lose information, so Java never performs them implicitly.",
+    "zh": "正确。窄化转换可能丢失信息，因此 Java 从不隐式执行它。",
+    "ja": "正しい。縮小変換は情報が失われうるため、Java が暗黙に行うことはない。"
+   },
+   "ref": "java-mcq-test-type-casting"
+  },
+  {
+   "id": "jbe-57",
+   "topic": "访问修饰符",
+   "topicKey": "access",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "The private member of a class can be accessible",
+    "zh": "类的 private 成员可以在哪里访问？",
+    "ja": "クラスの private メンバにはどこからアクセスできるか。"
+   },
+   "options": [
+    {
+     "en": "Within the class in which it is declared",
+     "zh": "仅在声明它的类内部",
+     "ja": "宣言したクラスの内部のみ"
+    },
+    {
+     "en": "Within all the sub-classes of its class in any package where this class is visible",
+     "zh": "在该类可见的任意包中的所有子类内",
+     "ja": "そのクラスが見えるすべてのパッケージにある全サブクラス内"
+    },
+    {
+     "en": "Within all the classes in the package containing its class",
+     "zh": "在该类所在包的所有类内",
+     "ja": "そのクラスを含むパッケージ内のすべてのクラス"
+    },
+    {
+     "en": "None of the above",
+     "zh": "以上都不对",
+     "ja": "いずれも該当しない"
+    }
+   ],
+   "answer": "A",
+   "explanation": {
+    "en": "private is the most restrictive modifier: the member is visible only inside the class that declares it — not to subclasses, not to the same package.",
+    "zh": "private 是最严格的修饰符：成员只在声明它的类内部可见——子类不行，同一个包里的其他类也不行。",
+    "ja": "private は最も制限の強い修飾子で、宣言したクラスの内部からのみ参照できる。サブクラスからも同一パッケージからも不可。"
+   },
+   "ref": "java_practice_test_on_scope_rules_and_accessibility_modifiers"
+  },
+  {
+   "id": "jbe-58",
+   "topic": "访问修饰符",
+   "topicKey": "access",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "The protected member of a class can be accessible",
+    "zh": "类的 protected 成员可以在哪里访问？",
+    "ja": "クラスの protected メンバにはどこからアクセスできるか。"
+   },
+   "options": [
+    {
+     "en": "Within the class in which it is declared",
+     "zh": "仅在声明它的类内部",
+     "ja": "宣言したクラスの内部のみ"
+    },
+    {
+     "en": "Within all the sub-classes of its class in any package where this class is visible",
+     "zh": "在该类可见的任意包中的所有子类内",
+     "ja": "そのクラスが見えるすべてのパッケージにある全サブクラス内"
+    },
+    {
+     "en": "Within all the classes in the package containing its class",
+     "zh": "在该类所在包的所有类内",
+     "ja": "そのクラスを含むパッケージ内のすべてのクラス"
+    },
+    {
+     "en": "A and B",
+     "zh": "A 和 B",
+     "ja": "A と B"
+    },
+    {
+     "en": "A, B, and C",
+     "zh": "A、B 和 C",
+     "ja": "A・B・C"
+    }
+   ],
+   "answer": "D",
+   "explanation": {
+    "en": "protected combines package access with inheritance: classes in the same package plus subclasses anywhere. That is options A and B together.",
+    "zh": "protected 兼具包内访问和继承访问：同包的类，以及任意位置（哪怕不同包）的子类。也就是选项 A 与 B 的合并。",
+    "ja": "protected はパッケージ内アクセスと継承アクセスを兼ねる。同一パッケージのクラスに加え、どこにあるサブクラスからも参照できる。つまり A と B の両方。"
+   },
+   "ref": "java_practice_test_on_scope_rules_and_accessibility_modifiers"
+  },
+  {
+   "id": "jbe-59",
+   "topic": "访问修饰符",
+   "topicKey": "access",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "The public member of a class can be accessible",
+    "zh": "类的 public 成员可以在哪里访问？",
+    "ja": "クラスの public メンバにはどこからアクセスできるか。"
+   },
+   "options": [
+    {
+     "en": "Within the class in which it is declared",
+     "zh": "仅在声明它的类内部",
+     "ja": "宣言したクラスの内部のみ"
+    },
+    {
+     "en": "Within the package containing its class",
+     "zh": "在该类所在的包内",
+     "ja": "そのクラスを含むパッケージ内"
+    },
+    {
+     "en": "Other packages where this class is visible",
+     "zh": "该类可见的其他包",
+     "ja": "そのクラスが見える他のパッケージ"
+    },
+    {
+     "en": "All of the above",
+     "zh": "以上全部",
+     "ja": "上記すべて"
+    }
+   ],
+   "answer": "D",
+   "explanation": {
+    "en": "public imposes no restriction at all: the declaring class, its package, other packages, subclasses — everywhere.",
+    "zh": "public 不施加任何限制：声明它的类、同包、其他包、子类——处处可访问。",
+    "ja": "public は一切の制限を課さない。宣言したクラス・同一パッケージ・他パッケージ・サブクラス、どこからでも参照できる。"
+   },
+   "ref": "java_practice_test_on_scope_rules_and_accessibility_modifiers"
+  },
+  {
+   "id": "jbe-60",
+   "topic": "访问修饰符",
+   "topicKey": "access",
+   "kind": "single",
+   "code": "",
+   "prompt": {
+    "en": "The default member of a class (with no explicit member accessibility modifier) can be accessible",
+    "zh": "类的默认成员（没有写任何访问修饰符）可以在哪里访问？",
+    "ja": "クラスの既定メンバ（アクセス修飾子を何も書かない場合）にはどこからアクセスできるか。"
+   },
+   "options": [
+    {
+     "en": "Within the class in which it is declared",
+     "zh": "仅在声明它的类内部",
+     "ja": "宣言したクラスの内部のみ"
+    },
+    {
+     "en": "Within the package containing its class",
+     "zh": "在该类所在的包内",
+     "ja": "そのクラスを含むパッケージ内"
+    },
+    {
+     "en": "Other packages where this class is visible",
+     "zh": "该类可见的其他包",
+     "ja": "そのクラスが見える他のパッケージ"
+    },
+    {
+     "en": "A & B only",
+     "zh": "仅 A 和 B",
+     "ja": "A と B のみ"
+    },
+    {
+     "en": "All of the above",
+     "zh": "以上全部",
+     "ja": "上記すべて"
+    }
+   ],
+   "answer": "B",
+   "explanation": {
+    "en": "No modifier means package-private: visible to every class in the same package, to nobody outside it.",
+    "zh": "不写修饰符就是包级私有：同包的所有类都能访问，包外一律不行。",
+    "ja": "修飾子を書かない場合はパッケージプライベートとなり、同一パッケージの全クラスから参照でき、外からは参照できない。"
+   },
+   "ref": "java_practice_test_on_scope_rules_and_accessibility_modifiers"
+  }
+ ]
+}

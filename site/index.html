@@ -155,7 +155,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">11 个题库 · 共 4901 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <p class="sub">11 个题库 · 共 4961 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
@@ -199,7 +199,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4901</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4961</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -259,9 +259,9 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
       </a>
 
       <a class="card" href="java-bronze/index.html" data-site="java-bronze">
-        <div class="top"><span class="tg b">Java 认证</span><span class="cnt">20 题</span></div>
-        <h3>Java Bronze · 备考练习</h3>
-        <p class="sd">面向 Oracle Certified Java Programmer, Bronze SE（1Z0-818）的备考练习。收录 20 道经典认证真题风格题目：变量与初始化、final 修饰符、运算符、控制流程、字符串、接口与多态、异常。15 道单选 + 5 道多选，每题附中英日三语解析。</p>
+        <div class="top"><span class="tg b">Java 认证</span><span class="cnt">80 题</span></div>
+        <h3>Java Bronze · 备考练习 + 全真模拟</h3>
+        <p class="sd">面向 Oracle Certified Java Programmer, Bronze SE（1Z0-818）的备考练习。共计 80 题：20 道分考点练习 + 60 道全真模拟卷：变量与初始化、final 修饰符、运算符、控制流程、字符串、接口与多态、异常。15 道单选 + 5 道多选，每题附中英日三语解析。模拟卷按真实机考规格（60 题 · 65 分钟 · 60 分及格）编排，带计时模考模式。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
 
@@ -405,7 +405,7 @@ var SITES={
               ["fe:b:2022",20],["fe:b:2023",6],["fe:b:2024",6],["fe:b:2025",6],["fe:b:2026",6],
               ["fe:a:paper-2",60],["fe:a:paper-3",60],["fe:b:paper-2",20],["fe:b:paper-3",20]]},
   "workbuddy-opc":{keys:[["wb-opc-m01",10],["wb-opc-m02",10],["wb-opc-m03",10],["wb-opc-m04",10],["wb-opc-m05",10],["wb-opc-m06",10],["wb-opc-m07",10],["wb-opc-m08",10],["wb-opc-m09",10],["wb-opc-m10",10],["wb-opc-m11",10],["wb-opc-paper-1",60]]},
-  "java-bronze":{keys:[["jb:practice:01",20]]}
+  "java-bronze":{keys:[["jb:practice:01",20],["jb:exam:60",60]]}
 };
 function read(keys){
   var d=0,o=0;
