@@ -12,6 +12,7 @@
 
 import { handleAccountRequest } from "./account.mjs";
 import { handleChatRequest } from "./chat.mjs";
+import { handleStudyTimeRequest, clearExpiredStudyTime } from "./weekly-study.mjs";
 
 // 心跳超时：超过这个时长没有任何消息就当作已离开
 const TIMEOUT_MS = 90 * 1000;
@@ -63,6 +64,7 @@ const CC = {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.pathname === "/api/study-time") return handleStudyTimeRequest(request, env);
     if (url.pathname === "/api/chat" || url.pathname === "/api/chat/status") {
       return handleChatRequest(request, env, ctx);
     }
@@ -75,6 +77,9 @@ export default {
     }
     if (env.ASSETS) return env.ASSETS.fetch(request);
     return new Response("Not found", { status: 404 });
+  },
+  async scheduled(_controller, env) {
+    await clearExpiredStudyTime(env);
   },
 };
 

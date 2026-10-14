@@ -1,3 +1,5 @@
+import './weekly-study.mjs';
+
 export interface StudyTimeState { day: string; totalMs: number; lastEnd: number }
 export const STUDY_TIME_KEY = "quizbank:study-time:v1";
 const DAY_MS = 86400000;
@@ -60,6 +62,7 @@ function mountStudyTime(): void {
       : (lang.startsWith("ja") ? "保存できないため、このページを開いている間のみ記録します。" : lang.startsWith("en") ? "Browser storage is unavailable; time is kept for this page session only." : "浏览器无法保存数据，学习时间仅保留在当前页面会话。" );
   }
   function record(start: number, end: number): void {
+    window.dispatchEvent(new CustomEvent('quizbank:study-interval', {detail:{start:Math.max(start,end-5000),end}}));
     const save = (): void => {
       memory = advanceStudyTime(read(), start, end);
       try { localStorage.setItem(STUDY_TIME_KEY, JSON.stringify(memory)); }
@@ -73,6 +76,7 @@ function mountStudyTime(): void {
   function flush(now: number): void {
     if (lastTick !== null) record(lastTick, now);
     lastTick = null;
+    window.dispatchEvent(new Event('quizbank:study-flush'));
   }
   function tick(): void {
     const now = Date.now();
