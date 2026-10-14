@@ -1,0 +1,442 @@
+[
+  {
+    "id": "css-01",
+    "prompt": {
+      "en": "Requirement: centre .card both horizontally and vertically inside its parent .wrap. Which implementation is correct?",
+      "zh": "需求：让 .card 在其父容器 .wrap 内既水平居中、又垂直居中。下列实现正确的是：",
+      "ja": "要件：.card を親要素 .wrap の中で水平・垂直ともに中央に配置したい。正しい実装はどれか。"
+    },
+    "code": "",
+    "options": [
+      ".card {\n  margin: auto;\n}",
+      ".wrap {\n  text-align: center;\n  vertical-align: middle;\n}",
+      ".wrap {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}",
+      ".card {\n  justify-content: center;\n  align-items: center;\n}"
+    ],
+    "answer": "C",
+    "explanation": {
+      "en": "On a flex container, justify-content aligns along the main axis (horizontal by default) and align-items along the cross axis (vertical by default); both are needed for two-axis centring. margin:auto only centres vertically when the parent is a flex or grid container — with a plain block parent it does nothing vertically. text-align affects inline content only, and vertical-align has no effect on block-level children. justify-content and align-items are container properties; written on the child they do nothing.",
+      "zh": "flex 容器上 justify-content 管主轴（默认横向）、align-items 管交叉轴（默认纵向），两个都给才能两轴居中。margin:auto 只在父级是 flex/grid 容器时才会垂直居中，父容器是普通块级时垂直方向完全不动。text-align 只影响行内内容，vertical-align 对块级子元素无效。justify-content 与 align-items 是容器属性，写在子项上不产生任何效果。",
+      "ja": "flex コンテナでは justify-content が主軸（既定は横）、align-items が交差軸（既定は縦）を揃える。両軸で中央に置くには両方が必要。margin:auto が縦に効くのは親が flex/grid コンテナのときだけで、通常のブロック親では縦方向には何も起きない。text-align はインライン内容にしか効かず、vertical-align はブロックレベルの子要素には無効。justify-content と align-items はコンテナのプロパティで、子要素に書いても効果はない。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Aligning_items_in_a_flex_container"
+  },
+  {
+    "id": "css-02",
+    "prompt": {
+      "en": "Requirement: three .col children should split the row into exactly equal widths, regardless of how long their text is. Which implementation is correct?",
+      "zh": "需求：三个 .col 在容器内等宽平分，且不受各自文字长度影响。下列实现正确的是：",
+      "ja": "要件：3 つの .col を、それぞれの文字量に関係なく完全に等幅で分割したい。正しい実装はどれか。"
+    },
+    "code": "",
+    "options": [
+      ".col {\n  flex-grow: 1;\n}",
+      ".col {\n  flex: 1;\n}",
+      ".col {\n  width: 33.33%;\n}",
+      ".row {\n  justify-content: space-between;\n}"
+    ],
+    "answer": "B",
+    "explanation": {
+      "en": "flex:1 expands to flex-grow:1; flex-shrink:1; flex-basis:0%. The key part is flex-basis:0% — every child starts from zero width and then receives an equal share of the free space, so text length cannot change the result. flex-grow:1 alone leaves flex-basis at auto, so the browser first allocates each child its content width and only splits what is left; columns drift apart as text lengths differ. width:33.33% ignores gaps and padding, and justify-content:space-between distributes spacing, not width.",
+      "zh": "flex:1 展开为 flex-grow:1; flex-shrink:1; flex-basis:0%。关键在 flex-basis:0% —— 先把所有子项基础宽度归零，再按比例平分剩余空间，所以文字长短不影响结果。只写 flex-grow:1 时 flex-basis 仍是 auto，浏览器会先按内容宽度分配、再分剩余空间，三列会随文字长度漂移。width:33.33% 没算间距和 padding；justify-content:space-between 分配的是间距而不是宽度。",
+      "ja": "flex:1 は flex-grow:1; flex-shrink:1; flex-basis:0% に展開される。要点は flex-basis:0%。すべての子の基準幅を 0 にしてから余白を等分するため、文字量に影響されない。flex-grow:1 だけだと flex-basis は auto のままなので、ブラウザーはまず内容幅を割り当て、残りを分ける。文字量が違えば列幅もずれる。width:33.33% は余白や padding を考慮せず、justify-content:space-between が配分するのは間隔であって幅ではない。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/flex"
+  },
+  {
+    "id": "css-03",
+    "prompt": {
+      "en": "Requirement: a single line of text that is too long should end with an ellipsis (…). Which implementation is correct?",
+      "zh": "需求：单行文字超出容器宽度时显示省略号（…）。下列实现正确的是：",
+      "ja": "要件：1 行のテキストが幅を超えたときに省略記号（…）を表示したい。正しい実装はどれか。"
+    },
+    "code": "",
+    "options": [
+      ".title {\n  text-overflow: ellipsis;\n}",
+      ".title {\n  overflow: hidden;\n  text-overflow: ellipsis;\n}",
+      ".title {\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}",
+      ".title {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}"
+    ],
+    "answer": "D",
+    "explanation": {
+      "en": "These three declarations work as a set and all are required. white-space:nowrap forces the text onto one line so that it can actually overflow; overflow:hidden performs the clipping; text-overflow:ellipsis only draws the ellipsis once clipping has already happened. Drop overflow:hidden and the text simply spills out of the box with no ellipsis. Drop white-space:nowrap and the text wraps normally, so there is no overflow and no ellipsis either. When reviewing, seeing text-overflow should send you looking two lines up to confirm the other two.",
+      "zh": "这三个属性是绑定套装，缺一不可。white-space:nowrap 强制不换行，制造「一行放不下」的前提；overflow:hidden 真正把超出部分裁掉；text-overflow:ellipsis 只在已经发生裁剪时才画省略号。少了 overflow:hidden，文字直接溢出容器，省略号不出现；少了 white-space:nowrap，文字正常折行，压根不产生溢出。审查要点：看到 text-overflow 就往上翻两行，确认另外两个在不在。",
+      "ja": "この 3 つはセットで、すべて必要。white-space:nowrap が 1 行に固定して「入りきらない」状態を作り、overflow:hidden がはみ出しを切り、text-overflow:ellipsis は切り取られたときにだけ省略記号を描く。overflow:hidden がなければ文字はそのままあふれ、省略記号は出ない。white-space:nowrap がなければ普通に折り返すので、あふれ自体が起きず省略記号も出ない。レビューでは text-overflow を見たら 2 行上を確認する。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow"
+  },
+  {
+    "id": "css-04",
+    "prompt": {
+      "en": "Requirement: an image should scale down proportionally without distortion and never exceed its container width. Which implementation is correct?",
+      "zh": "需求：让图片在容器内等比缩放、不变形，且不超过容器宽度。下列实现正确的是：",
+      "ja": "要件：画像を縦横比を保ったまま縮小し、コンテナ幅を超えないようにしたい。正しい実装はどれか。"
+    },
+    "code": "",
+    "options": [
+      ".figure img {\n  max-width: 100%;\n  height: auto;\n}",
+      ".figure img {\n  width: 100%;\n}",
+      ".figure img {\n  object-fit: contain;\n}",
+      ".figure img {\n  max-width: 100%;\n  height: 100%;\n}"
+    ],
+    "answer": "A",
+    "explanation": {
+      "en": "max-width:100% caps the width without ever enlarging, and height:auto keeps the ratio — this is the only combination that neither distorts nor overflows nor upscales. width:100% forces the image to fill the container unconditionally, so a 200px image is stretched and blurred. object-fit controls how an image fills its own box; it does not constrain the box, so an already-oversized image still overflows. height:100% falls back to auto when the parent has no fixed height, and even when it applies it stretches the image and breaks the aspect ratio.",
+      "zh": "max-width:100% 只压上限、不放大，height:auto 让高度按比例走 —— 只有这个组合同时满足「不变形 + 不溢出 + 不放大」。width:100% 是无条件拉伸，200px 的小图会被拉满容器变模糊。object-fit 管的是图片在自身盒子内怎么填充，不约束盒子尺寸，图片本身超宽时照样溢出。height:100% 在父容器没有固定高度时会被解析成 auto；就算生效也是强制拉伸，长宽比直接崩。",
+      "ja": "max-width:100% は上限だけを抑えて拡大はせず、height:auto が比率を保つ。変形・はみ出し・拡大のどれも起きないのはこの組み合わせだけ。width:100% は無条件に引き伸ばすので、200px の画像はぼやける。object-fit は画像が自分のボックス内をどう埋めるかの指定で、ボックス自体は拘束しないため、もともと大きい画像はやはりはみ出す。height:100% は親に高さがなければ auto になり、効いても縦横比が崩れる。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/max-width"
+  },
+  {
+    "id": "css-05",
+    "prompt": {
+      "en": "Requirement: an element must be invisible, must not respond to mouse clicks, and must still keep the space it occupies in the layout. Which declaration does that?",
+      "zh": "需求：让一个元素不可见、不响应鼠标点击，但仍保留它占据的布局空间。应该用：",
+      "ja": "要件：要素を見えなくし、クリックにも反応させず、ただしレイアウト上の占有スペースは残したい。どれを使うか。"
+    },
+    "code": "",
+    "options": [
+      ".item {\n  opacity: 0;\n}",
+      ".item {\n  display: none;\n}",
+      ".item {\n  visibility: hidden;\n}",
+      ".item {\n  position: absolute;\n  left: -9999px;\n}"
+    ],
+    "answer": "C",
+    "explanation": {
+      "en": "visibility:hidden keeps the box in the layout, blocks pointer events and is skipped by screen readers. opacity:0 is the trap here — the element stays in the layout and still receives clicks, so an invisible layer above a button produces a puzzling 'the button does not work' bug. display:none removes the element from the layout entirely and surrounding content jumps. Pushing it off-screen with position:absolute creates a phantom scroll area and should not appear in new code.",
+      "zh": "visibility:hidden 保留占位、不响应点击、屏幕阅读器跳过。opacity:0 是最隐蔽的坑 —— 元素照样占位、照样接收点击，如果它盖在按钮上方，用户会遇到「点不动」的诡异问题。display:none 会让元素彻底移出布局，周围内容会跳位。用 position:absolute 把它推到屏幕外的老式写法会凭空撑出滚动区域，新代码里不该再出现。",
+      "ja": "visibility:hidden はレイアウト上の場所を保ち、ポインター操作を受け付けず、スクリーンリーダーも読み飛ばす。落とし穴は opacity:0。場所は保たれ、クリックも受け付けるため、ボタンの上に重なっていると「ボタンが押せない」という不可解な不具合になる。display:none はレイアウトから完全に外れ、周囲がずれる。position:absolute で画面外へ飛ばす旧式の手法は不要なスクロール領域を生む。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/visibility"
+  },
+  {
+    "id": "css-06",
+    "prompt": {
+      "en": "Requirement: add a 0.2-second transition. From a performance standpoint, which declaration is the best choice?",
+      "zh": "需求：给元素加一个 0.2 秒的过渡动画。从性能角度看，下列写法最合理的是：",
+      "ja": "要件：0.2 秒のトランジションを付けたい。パフォーマンスの観点で最も適切な指定はどれか。"
+    },
+    "code": "",
+    "options": [
+      ".box {\n  transition: opacity .2s, transform .2s;\n}",
+      ".box {\n  transition: all .2s;\n}",
+      ".box {\n  transition: width .2s, height .2s,\n              top .2s, left .2s;\n}",
+      ".box {\n  transition: 0.2s;\n}"
+    ],
+    "answer": "A",
+    "explanation": {
+      "en": "transition:all is the one to stop in review: it watches every animatable property, so any unexpected change (a stray padding tweak from JavaScript, for instance) starts animating, and the browser does far more interpolation work. opacity and transform are compositor properties — their transitions can run entirely on the GPU without triggering layout or paint. width, height, top and left all trigger layout recalculation on every frame, which is the most expensive option. transition: 0.2s is simply invalid syntax: a property and a duration are both required.",
+      "zh": "transition:all 是 review 里见到就该拦下的写法：它会监听每一个可动画属性，元素上任何意料之外的样式变化都会触发过渡，浏览器的插值计算量成倍上升。opacity 与 transform 是合成属性，过渡可以完全交给 GPU，不触发重排和重绘。width / height / top / left 全部会触发重排，每帧都要重新计算布局，是最贵的写法。transition: 0.2s 是语法错误：属性和时长都必须给。",
+      "ja": "transition:all はレビューで止めるべき書き方。すべてのアニメーション可能なプロパティを監視するため、想定外の変更（JavaScript による padding の微修正など）でもアニメーションが走り、補間の計算量が跳ね上がる。opacity と transform はコンポジターのプロパティで、GPU だけで処理でき、レイアウトも描画も発生しない。width / height / top / left は毎フレーム再レイアウトを起こす最も高コストな指定。transition: 0.2s はプロパティと時間の両方が必要なため文法エラー。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/transition"
+  },
+  {
+    "id": "css-07",
+    "prompt": {
+      "en": "Requirement: font sizes must scale with the root font size the user sets in the browser (an accessibility requirement). Which unit should be used?",
+      "zh": "需求：字号要能跟随用户在浏览器里设置的根字号统一缩放（无障碍要求）。应该用哪个单位？",
+      "ja": "要件：ブラウザーでユーザーが設定したルートフォントサイズに合わせて文字を拡縮したい（アクセシビリティ要件）。どの単位を使うべきか。"
+    },
+    "code": "",
+    "options": [
+      ".text {\n  font-size: 1em;\n}",
+      ".text {\n  font-size: 120%;\n}",
+      ".text {\n  font-size: 2vw;\n}",
+      ".text {\n  font-size: 1rem;\n}"
+    ],
+    "answer": "D",
+    "explanation": {
+      "en": "rem is always relative to the root element's font size, giving one site-wide baseline, and it respects the default size the user has configured in the browser. em and percentages are both relative to the parent's font size and therefore compound: nested lists with font-size:0.9em three levels deep end up at roughly 0.9³ ≈ 0.73 times. vw follows the viewport width, not the user's font setting, and on very wide screens it grows out of control unless clamped.",
+      "zh": "rem 始终相对根元素字号，全站一个基准，并且尊重用户在浏览器里调整的默认字号 —— 这是无障碍场景的标配。em 和百分比都相对父元素字号，会层层累积：嵌套列表里写三层 font-size:0.9em，文字会缩到 0.9³ ≈ 0.73 倍。vw 跟随视口宽度，与用户设置的字号无关，而且在超宽屏上会大到失控（通常要配 clamp() 夹住）。",
+      "ja": "rem は常にルート要素のフォントサイズを基準にするため、サイト全体で基準が 1 つになり、ユーザーがブラウザーで設定した既定サイズも尊重される。em と % は親のフォントサイズ基準で累積するため、リストを 3 段ネストして font-size:0.9em と書くと約 0.9³ ≈ 0.73 倍まで縮む。vw はビューポート幅に従い、ユーザーの文字サイズ設定とは無関係。広い画面では clamp() で上下限を付けないと大きくなりすぎる。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units"
+  },
+  {
+    "id": "css-08",
+    "prompt": {
+      "en": "Which of these CSS properties is NOT inherited by child elements?",
+      "zh": "下列 CSS 属性中，不会被子元素继承的是：",
+      "ja": "次の CSS プロパティのうち、子要素に継承されないものはどれか。"
+    },
+    "code": "",
+    "options": [
+      ".box {\n  font-size: 15px;\n}",
+      ".box {\n  width: 320px;\n}",
+      ".box {\n  color: #333;\n}",
+      ".box {\n  line-height: 1.6;\n}"
+    ],
+    "answer": "B",
+    "explanation": {
+      "en": "Box-model properties — width, height, margin, padding and border — are never inherited. That is deliberate: if they were, setting one width on a parent would lock every descendant to the same width. Inheritance covers mostly typographic properties: font-size, color, line-height, font-family, letter-spacing and text-align. A related review note: a rule such as * { font-size: 14px } added to 'unify font sizes' is redundant, because fonts already inherit; only the non-inherited properties need to be set explicitly.",
+      "zh": "盒模型类属性 —— width、height、margin、padding、border —— 都不继承。这是 CSS 的刻意设计：否则给父元素设一个宽度，所有后代都会被同一个宽度锁死。会继承的主要是文字相关属性：font-size、color、line-height、font-family、letter-spacing、text-align。一条相关的审查意见：为了「统一字号」写 * { font-size: 14px } 是多余的，字号本来就继承；真正需要显式设置的是那些不继承的属性。",
+      "ja": "ボックスモデル系のプロパティ（width、height、margin、padding、border）は継承されない。これは意図的な設計で、もし継承されると親の幅がすべての子孫を縛ってしまう。継承されるのは主に文字関連（font-size、color、line-height、font-family、letter-spacing、text-align）。関連するレビュー指摘として、「文字サイズを統一する」ために * { font-size: 14px } と書くのは冗長。文字サイズはもともと継承されるので、明示が必要なのは継承されないプロパティだけ。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Inheritance"
+  },
+  {
+    "id": "css-09",
+    "prompt": {
+      "en": "Requirement: define a brand-colour variable and fall back to a safe value when that variable is undefined. Which declaration is correct?",
+      "zh": "需求：定义一个品牌色变量，并在该变量未定义时回退到一个安全值。正确写法是：",
+      "ja": "要件：ブランドカラーの変数を定義し、未定義のときは安全な値にフォールバックさせたい。正しい書き方はどれか。"
+    },
+    "code": "",
+    "options": [
+      ".btn {\n  color: var(--brand) #333;\n}",
+      ".btn {\n  color: var(--brand || #333);\n}",
+      ".btn {\n  color: var(--brand, #333);\n}",
+      ".btn {\n  color: var(--brand, --safe);\n}"
+    ],
+    "answer": "C",
+    "explanation": {
+      "en": "var() takes the fallback as its second argument, separated by a comma; the fallback is used when the variable is undefined or its value is invalid. This is very handy in component libraries: the component ships a default colour and consumers can override --brand or not. var(--brand) #333 is two adjacent values, so the whole declaration is discarded. CSS has no || operator — that is JavaScript syntax. A fallback must be a concrete value, not another variable name: var(--brand, --safe) would literally try to use the string --safe as a colour. Chained fallbacks need var(--brand, var(--safe, #333)).",
+      "zh": "var() 的第二个参数是回退值，用逗号分隔：变量未定义或值无效时取它。这在组件库里很实用 —— 组件自带一套兜底色，接入方可以选择性覆盖 --brand。var(--brand) #333 是两个并排的值，整条声明会被丢弃。CSS 里没有 || 运算符，那是 JS 写法。回退值必须是具体值而不是另一个变量名，var(--brand, --safe) 会真的拿字符串 --safe 当颜色用；要链式兜底得写 var(--brand, var(--safe, #333))。",
+      "ja": "var() の第 2 引数がフォールバック値で、カンマで区切る。変数が未定義、または値が無効なときに使われる。コンポーネントライブラリーでは便利で、部品側が既定色を持ち、利用側が --brand を上書きするかどうかを選べる。var(--brand) #333 は値が 2 つ並ぶため宣言ごと破棄される。CSS に || 演算子はなく、それは JavaScript の書き方。フォールバックは具体的な値でなければならず、var(--brand, --safe) は文字列 --safe を色として解釈してしまう。連鎖させるなら var(--brand, var(--safe, #333))。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties"
+  },
+  {
+    "id": "css-10",
+    "prompt": {
+      "en": "Requirement: build a two-column grid with equal column widths. Which declaration is correct?",
+      "zh": "需求：用 Grid 做一个两列等宽布局。下列写法正确的是：",
+      "ja": "要件：Grid で 2 列の等幅レイアウトを作りたい。正しい書き方はどれか。"
+    },
+    "code": "",
+    "options": [
+      ".grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n}",
+      ".grid {\n  display: grid;\n  grid: 2 / 1fr;\n}",
+      ".grid {\n  display: grid;\n  grid-template-columns: repeat(2 1fr);\n}",
+      ".grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n}"
+    ],
+    "answer": "A",
+    "explanation": {
+      "en": "1fr means one share of the free space, so repeat(2, 1fr) gives two equal columns. The easiest mistake to miss is in the third option: repeat() requires a comma between its two arguments, and writing a space makes the whole grid-template-columns declaration invalid — silently, with no console error. The page just collapses to a single stacked column, which is easy to wave through in review. 1fr 1fr 1fr defines three columns rather than two, and in the grid shorthand the slash separates rows from columns, so grid: 2 / 1fr means two rows and one column — the opposite of the requirement.",
+      "zh": "1fr 表示一份剩余空间，repeat(2, 1fr) 即两列各占一半。最容易漏看的是第三项：repeat() 的两个参数之间必须是逗号，写成空格会导致整条 grid-template-columns 声明无效，而且不会报错 —— 页面只是悄悄退化成单列堆叠，很容易在 review 中被放行。1fr 1fr 1fr 定义的是三列。grid 简写里斜杠分隔的是行与列，grid: 2 / 1fr 的含义是「两行、一列」，跟需求正好相反。",
+      "ja": "1fr は余白 1 つ分を意味し、repeat(2, 1fr) で等幅 2 列になる。見落としやすいのは 3 番目で、repeat() の 2 引数の間にはカンマが必要。空白にすると grid-template-columns の宣言全体が無効になるが、エラーは出ない。ページは黙って 1 列に退化するだけで、レビューでは流されやすい。1fr 1fr 1fr は 3 列の定義。grid 省略記法のスラッシュは行と列の区切りなので、grid: 2 / 1fr は「2 行 1 列」となり要件と正反対。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/repeat"
+  },
+  {
+    "id": "css-11",
+    "prompt": {
+      "en": "Review this CSS. The design says the card's total width must be exactly 200px, but it measures 242px. What is wrong and how should it be fixed?",
+      "zh": "审查下面这段 CSS：设计稿要求卡片总宽正好 200px，但实测占了 242px。问题出在哪，该怎么改？",
+      "ja": "次の CSS をレビューする。設計ではカードの全幅をちょうど 200px にするはずが、実測は 242px だった。原因と正しい修正はどれか。"
+    },
+    "code": ".card {\n  width: 200px;\n  padding: 20px;\n  border: 1px solid #ccc;\n}",
+    "options": [
+      "Change width to max-width: the declaration should be max-width: 200px;",
+      "With the default box model, padding and border are added on top of width; add box-sizing: border-box;",
+      "The border is too thick: change it to border: 0;",
+      "Padding should be a percentage: change it to padding: 10%;"
+    ],
+    "answer": "B",
+    "explanation": {
+      "en": "With the default box-sizing: content-box, width constrains the content box only, and padding and border are added outside it: 200 + 20×2 + 1×2 = 242px, which matches the measurement exactly. Adding box-sizing: border-box makes width mean the border box, so padding and border eat into the content area and the total stays at 200px. Using max-width just caps the box while the content area shrinks to 158px, so the layout is still wrong. Removing the border or switching padding to a percentage works around the symptom instead of fixing the cause. A useful review habit: if the project has no global *, *::before, *::after { box-sizing: border-box } reset, treat every hand-written width as suspect.",
+      "zh": "默认 box-sizing: content-box 时，width 只约束内容区，padding 和 border 往外叠加：200 + 20×2 + 1×2 = 242px，正好对上实测值。加上 box-sizing: border-box 后，width 变成边框盒总宽，padding 和 border 向内挤压内容区，总宽锁定 200px。改成 max-width 只是把上限压住，内容区实际只剩 158px，布局仍然错位。去掉 border 或把 padding 换成百分比都是在绕开症状，不是解决原因。一条有用的审查习惯：如果项目里没有全局的 *, *::before, *::after { box-sizing: border-box } 重置，那么每一处手写的 width 都值得怀疑。",
+      "ja": "既定の box-sizing: content-box では width は内容領域だけを拘束し、padding と border は外側に加算される。200 + 20×2 + 1×2 = 242px で実測値と一致する。box-sizing: border-box を加えると width はボーダーボックス全体の幅になり、padding と border が内側に食い込んで合計は 200px に固定される。max-width に変えても上限を押さえるだけで内容領域は 158px になり、レイアウトは依然としてずれる。border を外したり padding を % にするのは症状を避けているだけで原因は解決しない。有用な習慣として、プロジェクトに *, *::before, *::after { box-sizing: border-box } の全体リセットがなければ、手書きの width はすべて疑ってよい。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing"
+  },
+  {
+    "id": "css-12",
+    "prompt": {
+      "en": "Review this CSS. .badge should sit in the top-right corner of the card, but it is positioned in the top-right of the whole page instead. Why?",
+      "zh": "审查下面这段 CSS：.badge 想定位在卡片右上角，实际却跑到了整个页面的右上角。原因是什么？",
+      "ja": "次の CSS をレビューする。.badge はカードの右上に置きたいのに、ページ全体の右上に表示される。原因はどれか。"
+    },
+    "code": ".card {\n  background: #fff;\n}\n\n.badge {\n  position: absolute;\n  top: 0;\n  right: 0;\n}",
+    "options": [
+      "top and right should be negative values",
+      "It should use position: fixed instead of absolute",
+      "z-index is missing, so another element pushes it away",
+      "An absolutely positioned box is placed relative to its nearest positioned ancestor; the card needs position: relative"
+    ],
+    "answer": "D",
+    "explanation": {
+      "en": "For position:absolute, top/right/bottom/left are resolved against the nearest ancestor whose position is not static. If no such ancestor exists the box is placed against the initial containing block, which is the viewport — so the badge ends up pinned to the page corner. This is one of the most frequent CSS bugs there is. The fix is to add position: relative to the card; relative alone does not move the card because it has no offsets, it only establishes the reference frame. Switching to position: fixed would make it worse, since fixed always resolves against the viewport. z-index controls stacking order, not which box is used for positioning.",
+      "zh": "position:absolute 的 top/right/bottom/left 是相对最近的、position 不为 static 的祖先计算的。找不到这样的祖先时，就退到初始包含块（视口），于是 badge 贴到了页面右上角 —— 这是出现频率最高的一类 CSS bug。修法是给卡片加 position: relative；relative 本身没有偏移量，不会移动卡片，只是为子元素提供参照系。改成 position: fixed 只会让问题更严重，因为 fixed 始终相对视口。z-index 管的是层叠顺序，跟「相对谁定位」是两件事。",
+      "ja": "position:absolute の top/right/bottom/left は、position が static でない最も近い祖先を基準に解決される。該当する祖先がなければ初期包含ブロック（ビューポート）が基準になり、バッジはページの隅に貼り付く。これは最も頻繁に起きる CSS の不具合の一つ。修正はカードに position: relative を加えること。relative はオフセットを持たないのでカード自体は動かず、子要素の基準枠を作るだけ。position: fixed に変えると、常にビューポート基準になるため悪化する。z-index は重なり順を決めるもので、どのボックスを基準にするかとは無関係。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/position"
+  },
+  {
+    "id": "css-13",
+    "prompt": {
+      "en": "Review this CSS. .modal sets a very large z-index but is still covered by other elements. What is the most likely cause?",
+      "zh": "审查下面这段 CSS：.modal 设了很大的 z-index，却仍然被别的元素盖住。最可能的原因是什么？",
+      "ja": "次の CSS をレビューする。.modal は非常に大きな z-index を指定しているのに、他の要素に隠れてしまう。最も可能性が高い原因はどれか。"
+    },
+    "code": ".modal {\n  z-index: 9999;\n}",
+    "options": [
+      "z-index only applies to positioned elements, and position is missing here",
+      "9999 is not large enough and should be 999999",
+      "It needs !important to take effect",
+      "z-index cannot be used on a div and should be moved to a span"
+    ],
+    "answer": "A",
+    "explanation": {
+      "en": "z-index only takes effect on elements that participate in stacking, and an element with the default position: static does not — the declaration is simply ignored. Adding position: relative, absolute or fixed makes it apply. Raising 9999 to 999999 is the classic wasted attempt: the number was never the problem. Note too that if an element sits inside a stacking context created by an ancestor (transform, opacity below 1, filter, will-change, isolation), no z-index can lift it above elements outside that context — in that case you have to look at the ancestor. !important raises declaration priority, not stacking order.",
+      "zh": "z-index 只对参与层叠排序的元素生效，而 position: static（默认值）的元素不参与 —— 属性会被直接忽略。加上 position: relative / absolute / fixed 之后才生效。把 9999 加到 999999 是典型的无效尝试：数值从来不是问题所在。另外要注意，如果元素处在某个祖先创建的层叠上下文内部（transform、opacity 小于 1、filter、will-change、isolation 都会创建），它的 z-index 再大也无法盖过该上下文之外的元素 —— 这时候要看的是祖先。!important 提升的是声明优先级，不是层叠顺序。",
+      "ja": "z-index はスタッキングに参加する要素にしか効かず、既定の position: static の要素は参加しないため、指定は単純に無視される。position: relative / absolute / fixed のいずれかを加えると有効になる。9999 を 999999 にするのは典型的な無駄な試みで、数値は元々問題ではない。また、祖先が作ったスタッキングコンテキスト（transform、1 未満の opacity、filter、will-change、isolation で生成される）の内側にある要素は、z-index をいくら大きくしてもそのコンテキストの外側にある要素より上には出せない。その場合は祖先を調べる。!important が上げるのは宣言の優先度で、重なり順ではない。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/z-index"
+  },
+  {
+    "id": "css-14",
+    "prompt": {
+      "en": "Review this CSS. The intent is a 20px top margin for the heading, but the whole .section is pushed down instead and no gap appears between the heading and the top of its parent. What is the problem and how should it be fixed?",
+      "zh": "审查下面这段 CSS：本意是给标题加 20px 上边距，结果整个 .section 被一起顶了下去，标题相对父容器顶部并没有间距。这是什么问题，怎么修？",
+      "ja": "次の CSS をレビューする。見出しに 20px の上マージンを付けたいのに、.section 全体が押し下げられ、見出しと親の上端の間隔は現れない。原因と正しい修正はどれか。"
+    },
+    "code": ".section {\n  background: #f5f5f5;\n}\n\n.title {\n  margin-top: 20px;\n}",
+    "options": [
+      "Move the spacing to padding: put padding-top: 20px; on .title",
+      "Add margin: 0; to .section",
+      "Adjacent margins collapse: add overflow: hidden; to .section to establish a block formatting context",
+      "Add display: inline; to .section"
+    ],
+    "answer": "C",
+    "explanation": {
+      "en": "When a parent has no border, padding or block formatting context separating it from its first child, the child's margin-top collapses with the parent's margin-top. The visible effect is that the spacing moves outside the parent, which is pushed down while the heading has no gap from the parent's top edge. Any of these fixes works: overflow: hidden on the parent (most common and least invasive), a 1px padding or transparent border on the parent, or switching the parent to flex or grid — margins do not collapse inside a flex or grid container. Switching to padding-top changes the box size and the meaning of the spacing, so it is only correct if the design intends an inner gap. display: inline would break block layout entirely.",
+      "zh": "当父元素没有 border、padding 或 BFC 与第一个子元素隔断时，子元素的 margin-top 会与父元素的 margin-top 合并。表现就是间距「跑到了父元素外面」：父容器被顶下去，而标题相对父容器顶部并没有间距。以下任一改法都可行：给父元素 overflow: hidden（最常用、副作用最小）、给父元素加 1px padding 或透明 border、或把父元素改成 flex / grid —— flex 与 grid 容器内不发生外边距合并。换成 padding-top 会改变盒子尺寸和间距语义，只有当设计本来就要求内边距时才正确。display: inline 会让块级布局彻底失效。",
+      "ja": "親に border も padding もブロック整形コンテキストもなく、最初の子要素と区切られていないと、子の margin-top が親の margin-top と相殺（マージン相殺）される。見た目には間隔が親の外側へ出て、親が押し下げられ、見出しと親の上端には間隔が現れない。修正は次のいずれでもよい：親に overflow: hidden（最も一般的で影響が小さい）、親に 1px の padding か透明な border、親を flex か grid にする（flex/grid コンテナ内ではマージン相殺が起きない）。padding-top に変えるとボックスの大きさと間隔の意味が変わるため、設計が内側の余白を意図しているときだけ正しい。display: inline はブロックレイアウトを壊す。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Mastering_margin_collapsing"
+  },
+  {
+    "id": "css-15",
+    "prompt": {
+      "en": "Review this CSS. A long unbroken string in the flex row bursts the container and produces a horizontal scrollbar. What is the root cause and the fix?",
+      "zh": "审查下面这段 CSS：flex 布局里有一段很长的连续文本，把容器撑破了（出现了横向滚动条）。问题的根源和修法是？",
+      "ja": "次の CSS をレビューする。flex 行の中の長い連続文字列がコンテナを押し広げ、横スクロールバーが出てしまう。根本原因と修正はどれか。"
+    },
+    "code": ".row {\n  display: flex;\n}\n\n.name {\n  flex: 1;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}",
+    "options": [
+      "Add flex-wrap: wrap; to the container so it wraps onto a new line",
+      "A flex item's min-width defaults to auto, so it will not shrink below its content width; set min-width: 0 on the item",
+      "Add overflow: visible; to the container",
+      "Add width: 100%; to the item"
+    ],
+    "answer": "B",
+    "explanation": {
+      "en": "This is the classic case of three correct-looking declarations that do nothing. A flex item's min-width starts at auto, and for a flex item auto means 'never smaller than the content's minimum size'. So even with flex:1 the item refuses to shrink below its content, the long text pushes the container open, and overflow: hidden never gets a chance to clip. Setting min-width: 0 removes that floor and the ellipsis finally appears. Review shortcut: whenever text-overflow: ellipsis appears on a flex item, look for min-width: 0 nearby. flex-wrap: wrap would move the whole item to a new line, which changes the design intent rather than truncating the text.",
+      "zh": "这是「三个属性都写对了却不生效」的经典案例。flex 子项的 min-width 初始值是 auto，而 auto 对 flex 子项的含义是「不小于内容的最小尺寸」。所以哪怕写了 flex:1，子项也不会收缩到内容宽度以下，长文本把容器顶开，overflow: hidden 根本没机会生效。设 min-width: 0 解除这个下限，省略号才会出现。审查口诀：flex 子项上出现 text-overflow: ellipsis，就往下找 min-width: 0。flex-wrap: wrap 会让整个子项换行，改变的是设计意图，不是截断文本。",
+      "ja": "これは「3 つとも正しく見えるのに効かない」典型例。flex 子要素の min-width の初期値は auto で、flex 子要素における auto は「内容の最小サイズより小さくならない」という意味になる。そのため flex:1 と書いても内容幅より小さくはならず、長いテキストがコンテナを押し広げ、overflow: hidden は働く機会を得られない。min-width: 0 を指定すると下限が外れ、省略記号が出る。レビューの合図として、flex 子要素に text-overflow: ellipsis があれば min-width: 0 を探す。flex-wrap: wrap は項目ごと折り返す指定で、テキストの切り詰めではなく設計意図を変えてしまう。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/min-width"
+  },
+  {
+    "id": "css-16",
+    "prompt": {
+      "en": "Review this CSS. The ::before pseudo-element is styled but nothing appears on the page. What is missing?",
+      "zh": "审查下面这段 CSS：伪元素 ::before 写好了样式，但页面上什么都不显示。缺了什么？",
+      "ja": "次の CSS をレビューする。::before 疑似要素のスタイルは書いてあるのに、ページには何も表示されない。何が欠けているか。"
+    },
+    "code": ".tag::before {\n  display: inline-block;\n  width: 8px;\n  height: 8px;\n  background: #f00;\n}",
+    "options": [
+      "It needs display: block; to become visible",
+      "Pseudo-elements must use the single-colon form :before",
+      "It needs position: absolute;",
+      "The content property is required; without it the pseudo-element is never generated"
+    ],
+    "answer": "D",
+    "explanation": {
+      "en": "content is the condition for generating a pseudo-element, not an optional decoration. Without it the browser never creates the box, so every other declaration has nothing to apply to. The fix is to add content: \"\" even when no text is needed. On the single-colon point: :before is the old CSS2 syntax and browsers still support it, so it is not a defect worth reporting — modern style guides prefer ::before to distinguish pseudo-elements from pseudo-classes, but a legacy single colon only matters if project conventions require it. display and position are not generation conditions.",
+      "zh": "content 是伪元素的生成条件，不是可选装饰。缺了它浏览器压根不会创建这个盒子，后面所有样式都没有作用对象。修法是补上 content: \"\"，即使不需要显示文字。关于单冒号：:before 是 CSS2 的老写法，浏览器仍然支持，不该当成缺陷报出去；现代规范推荐双冒号 ::before 以区分伪元素与伪类，但老代码里的单冒号只有在项目规范要求统一时才值得提。display 和 position 都不是生成条件。",
+      "ja": "content は疑似要素を生成するための条件であり、任意の装飾ではない。これがなければブラウザーはボックスを作らないため、他の宣言は適用対象を失う。文字を出さない場合でも content: \"\" を補うのが修正。単一コロンについて：:before は CSS2 の古い書き方でブラウザーは今も対応しているため、欠陥として報告すべきではない。現代の指針は疑似要素と疑似クラスを区別するため ::before を推奨するが、旧コードの単一コロンはプロジェクト規約で統一が求められている場合にのみ指摘する。display と position は生成条件ではない。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/content"
+  },
+  {
+    "id": "css-17",
+    "prompt": {
+      "en": "A colleague raises a review comment saying the spacing around the commas in this selector is irregular and will stop h3 from matching. Is the comment correct?",
+      "zh": "同事在 review 里提出：下面这段选择器逗号周围的空格不规范，会导致 h3 选不中。这个意见对吗？",
+      "ja": "同僚がレビューで、次のセレクターのカンマ周りの空白が不揃いで h3 が選択されなくなると指摘した。この指摘は正しいか。"
+    },
+    "code": "h1, h2 ,h3 {\n  color: #333;\n}",
+    "options": [
+      "No — whitespace around commas is ignored either way, and all three headings are matched",
+      "Yes — a space is required after the comma, otherwise h3 is not matched",
+      "Yes — a space before the comma makes the selector fail to parse",
+      "Yes — there must be a space between h3 and the opening brace"
+    ],
+    "answer": "A",
+    "explanation": {
+      "en": "The comment is a false positive and should be rejected. In a selector list the comma is a separator and any surrounding whitespace is ignored, so h1, h2 ,h3, h1,h2,h3 and h1 , h2 , h3 are all equivalent and match every heading. The deeper point of this question is that review itself can be noisy: reporting a formatting preference as a bug burns the team's attention for real defects and turns review into box-ticking. Style and spacing belong to Prettier or Stylelint; human review should focus on whether the behaviour is correct. Nothing here changes rendering.",
+      "zh": "这条意见是误报，应该驳回。CSS 选择器列表里逗号是分隔符，周围的空白字符全部被忽略，所以 h1, h2 ,h3 与 h1,h2,h3、h1 , h2 , h3 完全等价，三个标题都会被选中。这道题真正想说明的是：审查本身也会产生噪音。把格式偏好包装成 bug 报出去，会消耗团队对真正缺陷的注意力，让 review 变成形式主义。格式问题交给 Prettier 或 Stylelint 自动处理，人工 review 只关注行为是否正确。这条代码不影响任何渲染结果。",
+      "ja": "この指摘は誤検知であり、却下すべき。セレクターリストにおいてカンマは区切り文字で、周囲の空白はすべて無視される。したがって h1, h2 ,h3 は h1,h2,h3 や h1 , h2 , h3 と等価で、3 つの見出しすべてが選択される。この問題の本意は、レビュー自体がノイズを生むという点にある。書式の好みをバグとして報告すると、本当の欠陥に向ける注意力を消耗し、レビューが形式化する。書式は Prettier や Stylelint に任せ、人間のレビューは挙動が正しいかどうかに集中すべき。ここには描画結果を変える要素は何もない。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Selector_list"
+  },
+  {
+    "id": "css-18",
+    "prompt": {
+      "en": "Review this desktop-first stylesheet. .card has the wrong width on medium screens. What is the problem?",
+      "zh": "审查下面这段桌面优先的样式表：中等屏幕上 .card 的宽度不对。问题在于：",
+      "ja": "次のデスクトップファーストのスタイルシートをレビューする。中程度の画面幅で .card の幅が正しくない。問題はどこか。"
+    },
+    "code": ".card { width: 25%; }\n\n@media (max-width: 1200px) {\n  .card { width: 33.33%; }\n}\n\n@media (max-width: 768px) {\n  .card { width: 50%; }\n}\n\n@media (max-width: 1200px) {\n  .card { width: 100%; }\n}",
+    "options": [
+      "Media queries cannot be nested and must live in separate files",
+      "The media queries are out of order: max-width blocks must run from largest to smallest, otherwise the wider breakpoint overwrites the narrower one",
+      "max-width should be changed to min-width throughout",
+      ".card should be declared once outside the media queries"
+    ],
+    "answer": "B",
+    "explanation": {
+      "en": "Media queries do not carry special specificity: a rule inside one competes on equal terms with any other rule, and with equal weight the later one wins. On a 1000px screen the second and fourth blocks both match, so the fourth — which comes later — overwrites it and .card becomes 100%. A screen that should show three columns ends up showing one, and the second block is dead code that looks alive. Desktop-first max-width breakpoints must run in a single descending sequence (1200 → 768 → 480), each appearing once. Mobile-first min-width queries must run ascending. Mixing both systems is a maintenance hazard; pick one.",
+      "zh": "媒体查询没有特殊的优先级：查询块里的规则和普通规则一样参与层叠，同权重时后写的赢。在 1000px 宽的屏幕上，第 2 块和第 4 块同时命中，后写的第 4 块覆盖前者，.card 变成 100%。本该显示三列的屏幕变成了单列，而第 2 块成了「看起来在、永远不生效」的死代码。桌面优先的 max-width 断点必须从大到小单向排列（1200 → 768 → 480），每个只出现一次。移动优先的 min-width 则必须从小到大排列。两套混用是维护噩梦，项目里应该统一选一种。",
+      "ja": "メディアクエリに特別な優先度はない。クエリ内の規則は他の規則と対等に競合し、同じ重みなら後に書いた方が勝つ。幅 1000px では 2 番目と 4 番目のブロックが両方一致し、後にある 4 番目が上書きして .card は 100% になる。3 列のはずが 1 列になり、2 番目のブロックは「存在するのに永遠に効かない」デッドコードになる。デスクトップファーストの max-width は大きい順に一方向で並べ（1200 → 768 → 480）、各ブレークポイントを 1 回だけ書く。モバイルファーストの min-width は小さい順に並べる。両者の混在は保守の負担になるので、どちらかに統一する。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries"
+  },
+  {
+    "id": "css-19",
+    "prompt": {
+      "en": "Review this CSS. .tip is meant to stay pinned to the bottom-right of the viewport with position: fixed, but it scrolls with a parent container and sits in the wrong place. What is the most likely cause?",
+      "zh": "审查下面这段 CSS：.tip 想用 position: fixed 固定在视口右下角，实际却跟着某个父容器一起滚动、定位也不对。最可能的原因是？",
+      "ja": "次の CSS をレビューする。.tip は position: fixed でビューポートの右下に固定したいのに、親コンテナと一緒にスクロールし、位置もずれる。最も可能性が高い原因はどれか。"
+    },
+    "code": ".panel {\n  transform: translateX(0);\n}\n\n.tip {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n}",
+    "options": [
+      "bottom and right should be negative values",
+      "z-index is missing",
+      "An ancestor uses transform, filter or will-change, which makes it the containing block for fixed elements",
+      "The parent has overflow: hidden"
+    ],
+    "answer": "C",
+    "explanation": {
+      "en": "This is the most counter-intuitive part of the fixed-position spec: an ancestor carrying transform, filter, backdrop-filter, perspective, contain: paint or will-change: transform becomes the containing block for fixed descendants, so they behave like absolutes anchored to that ancestor. The nastiest part when debugging is that transform: translateX(0) — a declaration that appears to do nothing, often left behind by an animation library or added to trigger GPU compositing — triggers it too. Nothing in the code mentions positioning, yet fixed stops working. Fix it by moving .tip out of the transformed ancestor (a React portal to body is the usual approach) or by removing the unnecessary transform. overflow: hidden is a common misdiagnosis: it clips the fixed element's content but does not change its containing block.",
+      "zh": "这是 fixed 定位最反直觉的一处规范：祖先元素上的 transform、filter、backdrop-filter、perspective、contain: paint、will-change: transform 都会成为 fixed 后代的包含块，让它表现得像 absolute 一样相对该祖先定位。排查时最坑的是 transform: translateX(0) 这种「看起来什么都没做」的声明 —— 常是动画库的残留，或为了触发 GPU 合成加上的 —— 同样会触发。代码里没有任何定位相关的字眼，但 fixed 就是失效了。修法是把 .tip 移出带 transform 的祖先（常用做法是挂到 body 下），或去掉那个不必要的 transform。overflow: hidden 是常见误判：它会裁剪 fixed 元素的内容，但不改变定位参照系。",
+      "ja": "これは fixed 指定の最も直感に反する部分。祖先に transform、filter、backdrop-filter、perspective、contain: paint、will-change: transform のいずれかがあると、その祖先が fixed の子孫の包含ブロックになり、absolute のようにその祖先を基準に配置される。デバッグで厄介なのは transform: translateX(0) のような「何もしていないように見える」指定（アニメーションライブラリの名残や GPU 合成を促すために付けたもの）でも発動すること。コードに配置関連の記述はないのに fixed が効かなくなる。修正は .tip を transform を持つ祖先の外へ移す（body 直下にポータルするのが一般的）か、不要な transform を外すこと。overflow: hidden はよくある誤診で、fixed 要素の内容を切り取るだけで包含ブロックは変わらない。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block"
+  },
+  {
+    "id": "css-20",
+    "prompt": {
+      "en": "Review this CSS. .btn:hover is supposed to recolour the button on hover, but hovering does nothing. What is wrong?",
+      "zh": "审查下面这段 CSS：.btn:hover 想让按钮在悬停时变色，但悬停时完全没反应。问题是什么？",
+      "ja": "次の CSS をレビューする。.btn:hover でボタンの色を変えたいのに、ホバーしても何も起きない。問題はどこか。"
+    },
+    "code": "#submit {\n  background: #1677ff;\n}\n\n.btn:hover {\n  background: #0958d9;\n}",
+    "options": [
+      ":hover only works on anchor elements",
+      ".btn needs cursor: pointer; for hover to trigger",
+      "background cannot be changed on hover and background-color must be used instead",
+      "Specificity: the ID selector #submit outranks .btn:hover, so hover loses; raise the hover rule to equal or higher specificity"
+    ],
+    "answer": "D",
+    "explanation": {
+      "en": "Specificity compares four positions in order. #submit is (0,1,0,0) — one ID. .btn:hover is (0,0,2,0) — one class plus one pseudo-class. The ID position outranks the class position, so #submit always wins and the hover colour never applies. Best fix: convert the base rule to a class selector, .btn { ... }, taking IDs out of the stylesheet entirely. Renaming the hover rule to #submit:hover also works but keeps accumulating ID debt; !important works too but makes all later overrides fail and is a technical debt starter. Review signal: an ID selector in a stylesheet is itself worth flagging, because its weight makes every later class-based override fail. That is why BEM, CSS Modules and Tailwind all avoid IDs. The other options are wrong: :hover applies to any element, cursor only changes the pointer shape, and the background shorthand participates in the cascade normally.",
+      "zh": "优先级要逐位比较。 #submit 是 (0,1,0,0) —— 一个 ID；.btn:hover 是 (0,0,2,0) —— 一个类加一个伪类。ID 位压过类位，所以 #submit 无条件胜出，hover 的颜色永远不生效。首选修法是把基础样式也改成类选择器 .btn { ... }，把 ID 从样式表里彻底拿掉。把 hover 规则改成 #submit:hover 也能生效，但会继续积累 ID 债务；用 !important 同样能生效，却会让后续所有覆盖失效，是技术债的起点。审查信号：样式表里出现 ID 选择器本身就该被标记，因为它权重太高，会让后面所有基于类的覆盖都失效 —— 这也是 BEM、CSS Modules、Tailwind 都刻意避开 ID 的原因。其余选项都不对：:hover 对所有元素生效，cursor 只改鼠标指针形状，background 简写完全可以参与层叠。",
+      "ja": "詳細度は 4 つの位置を順に比較する。#submit は (0,1,0,0) で ID が 1 つ。.btn:hover は (0,0,2,0) でクラス 1 つと疑似クラス 1 つ。ID の位置がクラスの位置に勝つため、#submit が常に優先し、ホバー時の色は適用されない。最善の修正は基本側もクラスセレクターにして .btn { ... } とし、スタイルシートから ID を完全に排除すること。#submit:hover に変えても効くが ID の負債が積み上がる。!important も効くが、以降の上書きがすべて失敗するようになり技術的負債の始まりになる。レビューの合図として、スタイルシート内の ID セレクター自体が指摘対象になる。重みが高すぎて、後から書くクラスベースの上書きがすべて効かなくなるためだ。BEM、CSS Modules、Tailwind が ID を避けるのはこの理由による。他の選択肢は誤り：:hover はどの要素にも効き、cursor はポインターの形を変えるだけで、background の省略記法は通常どおりカスケードに参加する。"
+    },
+    "source": "https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity"
+  }
+]

@@ -149,6 +149,7 @@
         '<div id="qb-account-view" hidden>' +
           '<p class="qb-account-eyebrow" id="qb-profile-label"></p>' +
           '<p class="qb-account-profile" id="qb-profile-name"></p>' +
+          '<section class="qb-weekly-study" id="qb-weekly-study" hidden><p id="qb-weekly-caption"></p><p class="qb-weekly-total" id="qb-weekly-total"></p><p class="qb-account-note" id="qb-weekly-note"></p></section>' +
           '<p class="qb-account-status" id="qb-sync-status" role="status" aria-live="polite"></p>' +
           '<div class="qb-account-actions"><button type="button" id="qb-logout"></button><button type="button" class="qb-account-delete" id="qb-show-delete"></button></div>' +
           '<div class="qb-account-delete-panel" id="qb-delete-panel" hidden>' +
@@ -227,6 +228,7 @@
   }
 
   function updateTrigger() {
+    global.dispatchEvent(new global.CustomEvent("quizbank:account-changed", { detail: { username: accountUser ? accountUser.username : null } }));
     if (!trigger) return;
     var c = words();
     var label = accountUser ? c.accountLabel + accountUser.username : c.loginLabel;
@@ -256,6 +258,7 @@
     applyCopy();
     if (typeof dialog.showModal === "function") dialog.showModal();
     else dialog.setAttribute("open", "open");
+    global.dispatchEvent(new global.Event("quizbank:account-opened"));
     if (accountUser) byId("qb-logout").focus();
     else byId("qb-username").focus();
   }
@@ -584,6 +587,8 @@
         : errorCopy(failure, words().deleteFailed);
     }).finally(function () { setBusy(button, false); });
   }
+
+  global.QuizBankAccount = Object.freeze({ getUser: function () { return accountUser ? { username: accountUser.username } : null; } });
 
   function startBackgroundSync() {
     global.addEventListener("online", function () { queueSync(false, 0); });

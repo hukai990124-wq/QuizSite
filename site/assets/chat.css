@@ -18,6 +18,11 @@
 .qb-chat-message { border: 1px solid #e3e9ee; border-radius: .5rem; margin: .5rem 0; padding: .75rem; white-space: pre-wrap; overflow-wrap: anywhere; }
 .qb-chat-message--user { background: #eff6ff; }
 .qb-chat-message strong { display: block; margin-bottom: .25rem; }
+.qb-chat-message.is-streaming > .i18n-noloc::after { content: ""; display: inline-block; width: .45rem; height: 1em; margin-left: .2rem; vertical-align: -.1em; background: #123c5e; animation: qb-chat-caret 1s steps(2, start) infinite; }
+.qb-chat-message.is-incomplete { border-style: dashed; }
+.qb-chat-message.is-incomplete small { display: block; color: #b42318; margin-top: .5rem; }
+@keyframes qb-chat-caret { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .qb-chat-message.is-streaming > .i18n-noloc::after { animation: none; } }
 #qb-chat-status { color: #5b6570; margin: .5rem 0; }
 #qb-chat-status::before { content: ""; display: none; }
 .qb-chat-dialog.is-thinking #qb-chat-status { display: flex; align-items: center; gap: .5rem; }

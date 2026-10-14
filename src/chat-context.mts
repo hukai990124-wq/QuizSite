@@ -12,6 +12,8 @@ function materialText(element: HTMLElement): string {
 
 export function extractQuestionContext(question: HTMLElement | null | undefined): string {
   if (!question) return "";
+  // Image-based viewers provide extracted PDF text instead of UI controls.
+  if (question.dataset.chatContext) return question.dataset.chatContext.slice(0, 10000);
   const materials: string[] = [];
   // Shared reading/listening material may precede several question siblings.
   let sibling = question.previousElementSibling as HTMLElement | null;

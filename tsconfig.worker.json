@@ -4,5 +4,5 @@
     "rootDir": "./worker",
     "noEmit": false
   },
-  "include": ["worker/chat.mts", "worker/account.d.mts"]
+  "include": ["worker/chat.mts", "worker/weekly-study.mts", "worker/account.d.mts"]
 }

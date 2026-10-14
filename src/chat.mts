@@ -2,6 +2,8 @@ import { extractQuestionContext } from "./chat-context.mjs";
 import { submitChatOnEnter } from "./chat-keyboard.mjs";
 import { ChatApiError, parseChatAnswer, parseChatStatus } from "./chat-protocol.mjs";
 import type { ChatHistoryEntry, ChatRequestPayload } from "./chat-protocol.mjs";
+import {readChatStream} from "./chat-stream.mjs";
+import {createChatRenderer} from "./chat-renderer.mjs";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -34,7 +36,7 @@ dialog.innerHTML = `<header class="qb-chat-header"><h2 id="qb-chat-title">题库
 <div id="qb-chat-log" role="log" aria-label="学习对话" aria-live="polite"></div>
 <p id="qb-chat-status" role="status">正在检查登录状态……</p><p id="qb-chat-error" role="alert"></p>
 <button type="button" id="qb-chat-login" hidden>登录 / 注册</button>
-<form id="qb-chat-form"><label for="qb-chat-input">你的问题</label><textarea id="qb-chat-input" rows="3" maxlength="2000" required placeholder="例如：为什么选 B？请逐项解释，并举一个例子。"></textarea><small class="qb-chat-input-hint">Enter 发送，Shift+Enter 换行</small>
+<form id="qb-chat-form"><label for="qb-chat-input">你的问题</label><textarea id="qb-chat-input" rows="3" maxlength="2000" required placeholder="例如：这道题选什么？简要说明理由。"></textarea><small class="qb-chat-input-hint">Enter 发送，Shift+Enter 换行</small>
 <div class="qb-chat-actions"><button type="button" id="qb-chat-clear">清空对话</button><button type="submit" id="qb-chat-send">发送问题</button></div></form></div>`;
 document.body.appendChild(dialog);
 const select = byId<HTMLSelectElement>("qb-chat-question");
@@ -52,9 +54,9 @@ let returnFocus: HTMLElement = trigger;
 let questionContext = "";
 let requestSequence = 0;
 const draftPrompts = {
-  zh: "请详细讲解这道题，说明正确答案、各选项为什么对或错，并总结考点。",
-  en: "Please explain this question in detail, identify the correct answer, explain why each option is right or wrong, and summarize the key concepts.",
-  ja: "この問題を詳しく解説し、正解と各選択肢が正しい・誤っている理由を説明して、重要なポイントをまとめてください。",
+  zh: "请简要说明这道题的正确答案和主要理由。",
+  en: "Briefly give the correct answer and the main reason for this question.",
+  ja: "この問題の正解と主な理由を簡潔に説明してください。",
 };
 function draftPrompt(): string {
   const language = document.documentElement.getAttribute("data-lang");
@@ -65,7 +67,7 @@ document.addEventListener("quizbank:language-changed", () => {
   if (Object.values(draftPrompts).includes(input.value)) input.value = draftPrompt();
 });
 
-function appendMessage(role: ChatHistoryEntry["role"], text: string): void {
+function appendMessage(role: ChatHistoryEntry["role"], text: string): HTMLDivElement {
   const message = document.createElement("div");
   message.className = `qb-chat-message qb-chat-message--${role}`;
   const label = document.createElement("strong");
@@ -77,14 +79,18 @@ function appendMessage(role: ChatHistoryEntry["role"], text: string): void {
   message.append(label, content);
   log.appendChild(message);
   log.scrollTop = log.scrollHeight;
+  return content;
 }
 
-async function api<T>(path: string, body: ChatRequestPayload | undefined, parse: (value: unknown) => T): Promise<T> {
+async function api<T>(path: string, body: ChatRequestPayload | undefined, parse: (value: unknown) => T, onText?: (text: string) => void): Promise<T> {
   const response = await fetch(path, {
     method: body ? "POST" : "GET", credentials: "same-origin", cache: "no-store",
-    headers: body ? { "Content-Type": "application/json" } : {},
+    headers: body ? { "Content-Type": "application/json", ...(onText ? {Accept:"application/x-ndjson"} : {}) } : {},
     body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(100000),
   });
+  if (response.ok && onText && response.headers.get("Content-Type")?.includes("application/x-ndjson")) {
+    return parse(await readChatStream(response, onText));
+  }
   const data: unknown = await response.json().catch(() => null);
   if (!response.ok) {
     const message = isRecord(data) && typeof data.error === "string" ? data.error : "服务暂不可用。";
@@ -103,7 +109,9 @@ function controls(enabled: boolean): void {
 function setBusy(value: boolean): void {
   busy = value;
   dialog.classList.toggle("is-thinking", value);
+  if (!value) dialog.classList.remove("is-generating");
   form.setAttribute("aria-busy", String(value));
+  log.setAttribute("aria-busy", String(value));
 }
 
 async function checkStatus(): Promise<void> {
@@ -146,7 +154,7 @@ function open(question: HTMLElement | null = null, source: HTMLElement = trigger
     clearConversation();
   }
   if (!dialog.open) dialog.showModal();
-  void checkStatus();
+  if (!busy) void checkStatus();
 }
 trigger.addEventListener("click", () => open());
 byId<HTMLButtonElement>("qb-chat-close").addEventListener("click", () => dialog.close());
@@ -176,9 +184,24 @@ function indexQuestions(): void {
     button.addEventListener("click", () => open(question, button));
     (question.querySelector<HTMLElement>(".qact") || question).appendChild(button);
   });
+  // Dynamic single-question viewers keep a hidden, stable question catalogue
+  // and expose a visible action targeting the corresponding catalogue entry.
+  document.querySelectorAll<HTMLElement>("[data-chat-question]").forEach(target => {
+    if (target.dataset.chatIndexed) return;
+    const question = document.getElementById(target.dataset.chatQuestion || "");
+    if (!question) return;
+    target.dataset.chatIndexed = "true";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "qb-question-chat";
+    button.textContent = "AI 讲解";
+    button.addEventListener("click", () => open(question, button));
+    target.appendChild(button);
+  });
 }
 indexQuestions();
-new MutationObserver(indexQuestions).observe(document.querySelector(".wrap") || document.body, { childList: true, subtree: true });
+// Some viewers have a header .wrap before their dynamically rendered main.
+new MutationObserver(indexQuestions).observe(document.body, { childList: true, subtree: true });
 
 form.addEventListener("submit", async event => {
   event.preventDefault();
@@ -188,17 +211,43 @@ form.addEventListener("submit", async event => {
   controls(false);
   error.textContent = "";
   status.textContent = "正在整理讲解……";
+  appendMessage("user", question);
+  let reply: HTMLDivElement | null = null;
+  const renderer = createChatRenderer(text => {
+    if (!reply) {
+      reply = appendMessage("assistant", "");
+      reply.parentElement?.classList.add("is-streaming");
+      dialog.classList.remove("is-thinking");
+      dialog.classList.add("is-generating");
+      status.textContent = "正在生成讲解……";
+    }
+    const nearBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 64;
+    reply.textContent = text;
+    if (nearBottom) log.scrollTop = log.scrollHeight;
+  }, () => document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   try {
-    const data = await api("/api/chat", { question, context: questionContext, history: history.slice(-6).map(item => ({ role: item.role, content: item.content.slice(0, 2000) })) }, parseChatAnswer);
-    appendMessage("user", question);
-    appendMessage("assistant", data.answer);
+    const data = await api("/api/chat", { question, context: questionContext, history: history.slice(-6).map(item => ({ role: item.role, content: item.content.slice(0, 2000) })) }, parseChatAnswer, text => renderer.append(text));
+    // Old cached deployments/mocks can still return a complete JSON answer.
+    if (!reply) renderer.append(data.answer);
+    await renderer.finish();
+    const completedReply = log.querySelector<HTMLDivElement>(".qb-chat-message--assistant:last-child .i18n-noloc");
+    if (completedReply) completedReply.textContent = data.answer;
     history.push({ role: "user", content: question }, { role: "assistant", content: data.answer });
     history = history.slice(-6);
     input.value = "";
     if (data.truncated) error.textContent = "本次讲解达到长度上限，可继续追问其中一部分。";
   } catch (failure: unknown) {
+    await renderer.finish();
     error.textContent = failure instanceof ChatApiError ? failure.message : "连接中断，请稍后重试。";
+    const partial = log.querySelector(".qb-chat-message--assistant.is-streaming");
+    if (partial) {
+      const warning = document.createElement("small");
+      warning.textContent = "回答未完成，以上内容可能不完整。";
+      partial.classList.add("is-incomplete");
+      partial.appendChild(warning);
+    }
   } finally {
+    log.querySelectorAll(".is-streaming").forEach(node => node.classList.remove("is-streaming"));
     setBusy(false);
     await checkStatus();
     if (!input.disabled) input.focus();

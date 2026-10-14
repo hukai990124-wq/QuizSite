@@ -19,9 +19,9 @@ class ExtraSetsTest(unittest.TestCase):
             self.assertEqual(recording['accents'], [s['accent'] for s in job['segments']])
             if job['audio'].startswith('audio/m5/'):
                 self.assertEqual(recording['voiceSettings']['en-GB'],
-                                 {'engine':'Piper en_GB-vctk-medium p225', 'speakerId':107, 'lengthScale':0.95})
+                                 {'engine':'Kokoro-82M', 'voice':'bf_emma', 'speed':1.1})
                 self.assertEqual(recording['voiceSettings']['en-US'],
-                                 {'engine':'Piper en_US-ryan-medium', 'lengthScale':1.0})
+                                 {'engine':'Kokoro-82M', 'voice':'am_michael', 'speed':1.1})
             else:
                 self.assertEqual(recording['generator'], 'Kokoro-82M via Hugging Face Spaces')
                 self.assertEqual(recording['service'], 'https://huggingface.co/spaces/hexgrad/Kokoro-TTS')

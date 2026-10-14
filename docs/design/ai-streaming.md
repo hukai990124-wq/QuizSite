@@ -1,0 +1,21 @@
+# Incremental AI replies
+
+2026-10-13 Japanese follow-up: explicitly avoid です／ます／でしょう／ございます sentence endings in explanation prose, return to plain form even when history used polite form, and include a compact before/after example. Preserve honorific exercises, quotations and explicit polite-style requests. This is prompt guidance, not deterministic output rewriting; no live inference is required for the prompt regression test.
+
+2026-10-13 Japanese style: prefer concise plain-form explanations (だ／である), reduce honorific/humble language, repeated polite endings, ceremonial introductions and closings, while remaining respectful. Preserve correct honorific forms in language-learning examples and source quotations, and honor an explicit request for polite style. Do not change language selection, length targets, quota or streaming behavior.
+
+2026-10-13 owner adjustment: double the reference lengths to Chinese 160–300 characters, English 80–160 words and Japanese 200–400 characters. Increase the model output cap from 512 to 1024 tokens, with matching budget reservation. Keep simple answers shorter and preserve concise summaries, follow-up expansion, streaming and daily request counts. This overrides the earlier length settings below.
+
+The site builds its chat frontend and backend modules from strict TypeScript. The streaming change kept the existing model, credentials, prompts, quotas, UTC-8 reset, input bounds and reservation rules unchanged. No new provider or paid calls are needed to verify streaming.
+
+2026-10-13 concise replies: default to a 2–4 sentence overview. Reference length: Chinese about 80–150 characters, English 40–80 words, Japanese 100–200 characters; other languages use comparable information density. Simple questions may be shorter. These are soft targets, not mechanical character cutoffs. Answer first, then core reasoning. Do not proactively analyze every option, give examples or add repeated summaries. Expand only the part explicitly requested in a follow-up. Change the question button's auto-draft and textarea example accordingly in all three languages. Enforce max_tokens=512 for each model call, down from 4096, and use that same cap in conservative token reservation. Token caps are not exact character limits. Keep the existing truncation notice, streaming, daily request counts and global token budget.
+
+POST /api/chat remains JSON by default for existing clients. Opt-in Accept: application/x-ndjson returns UTF-8 newline-delimited frames: delta {type, text}, done {type, truncated, remaining, dailyLimit, authenticated, available, configured}, or error {type, error}. Errors before streaming retain existing HTTP status and JSON bodies. A done frame is required for a complete answer. Only public content passes through; reasoning, keys and provider metadata never do.
+
+Reserve once before contacting Qwen. Forward validated content deltas as received. After provider completion, settle actual usage (or retain the full reservation when unknown), then emit done. Interrupted responses retain budget and mark the request failed. Client cancellation aborts upstream; ctx.waitUntil keeps settlement alive after disconnect, within Cloudflare's lifetime limit. Do not automatically retry paid requests.
+
+Frontend: show the user's question immediately and a spinner until first text. Then show text in short adaptive batches with a caret. Reduced-motion/hidden tabs bypass typing animation. Render model text with textContent, never HTML. Preserve partial interrupted text with an explicit incomplete notice; only successfully finished replies enter history. Keep controls locked throughout the request. Screen readers use aria-busy to avoid announcing every tiny update. Preserve the user's scroll position if reading earlier text.
+
+Tests: delayed upstream demonstrates text arrives before completion, usage charged once, interruption/unknown usage, UTF-8 split frames, malformed/oversized streams, legacy JSON fallback, browser progressive arrival, reduced motion, error/retry, safe HTML text, and existing shared UI regressions.
+
+Sources: [Qwen streaming](https://www.alibabacloud.com/help/en/model-studio/stream), [Cloudflare streams](https://developers.cloudflare.com/workers/runtime-apis/streams/), [execution lifetime](https://developers.cloudflare.com/workers/runtime-apis/context/).

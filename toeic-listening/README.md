@@ -34,7 +34,7 @@ python toeic-listening/add_tmt_sets.py render       # 渲染 HTML/md 并同步�
 打印机图片题重写了干扰项和解析，以增强动作、状态辨别，已人工检查图片。
 
 短题逐题英美交替；每段长对话的男声固定美式、女声固定英式；独白按段交替。
-第 05 套使用 Piper Ryan（美式男声）和 Piper VCTK p225（英式女声）；第 06 套改用 Kokoro-82M，分别使用 `am_michael`（美式男声）和 `bf_emma`（英式女声），语速 1.1。
+第 05 / 06 套均使用 Kokoro-82M，分别使用 `am_michael`（美式男声）和 `bf_emma`（英式女声），语速 1.1。第 05 套于 2026-10-15 从旧 Piper 音频替换为 Kokoro；题文、答案、口音分配和进度键不变。
 均为合成音，不是官方或真人录音。模型不在网页端运行；网站播放的是 108 个本地 MP3 文件。
 语音来源及许可信息见 `AUDIO-NOTICES.md`。
 网页加载和首次播放需要网络；下载完整 HTML 和资源目录后可离线打开。
@@ -43,11 +43,10 @@ python toeic-listening/add_tmt_sets.py render       # 渲染 HTML/md 并同步�
 
 1. 将题源仓库检出到上述固定版本。
 2. `node toeic-listening/import_ocean.cjs ../toeic-question-ocean`
-3. Python 安装 `piper-tts==1.8.0`，准备 FFmpeg。
-4. 下载 Piper 的 `en_GB-vctk-medium` 与 `en_US-ryan-medium` ONNX 模型及同名 `.onnx.json`，执行
-   `python toeic-listening/synthesize_accent_audio.py --british-model <英式模型路径> --american-model <美式模型路径> --ffmpeg <FFmpeg路径>`（只重生成第 05 套）。
-5. 第 06 套通过 Kokoro 公共 Space 合成并暂存、校验后安装：
-   `node toeic-listening/synthesize_kokoro_m6.mjs --out-dir <暂存目录> --ffmpeg <FFmpeg路径> --install`。
+3. 准备 Node.js 和 FFmpeg；无需 Piper 模型或密钥。
+4. 第 05 套通过 Kokoro 公共 Space 合成并暂存、校验后安装：
+   `node toeic-listening/synthesize_kokoro_m6.mjs --mock 5 --out-dir <第五套独立暂存目录> --ffmpeg <FFmpeg路径> --install`。
+5. 第 06 套使用相同命令，但传入 `--mock 6` 和独立暂存目录（不传 `--mock` 时仍默认第 06 套，兼容旧命令）。语音片段按文本、声音和语速的指纹缓存，中断重跑可以复用已生成片段。旧 `synthesize_accent_audio.py` 仅供历史 Piper 版本复现，勿用其覆盖当前音频。
 6. `python toeic-listening/build_extra_sets.py`
 7. `python -m unittest discover -s toeic-listening -p test_extra_sets.py -v`
 
@@ -55,6 +54,8 @@ python toeic-listening/add_tmt_sets.py render       # 渲染 HTML/md 并同步�
 原四套题目、音频和进度键不会重建或迁移。
 
 ### 发布与回退
+
+2026-10-15 的 Kokoro 补录仅替换第五套 54 个同名 MP3（源目录和 `site/` 各一份）并更新音频清单与来源说明，不重建题页、翻译或题库数据。完成后运行 `pnpm test`、音频清单/口音测试和 `node toeic-listening/kokoro_playback_audit.cjs`；后者需通过 `QUIZBANK_BROWSER_MODULES` 指定隔离浏览器依赖，可用 `QUIZBANK_TEST_BASE` 检查已部署站点。回退本次音频提交即可恢复旧录音，不需要删除进度或修改数据库。页面播放的是静态 MP3，不会实时调用 Kokoro。
 
 Cloudflare 继续由主分支自动部署，无新增服务或密钥。发布后检查六套目录、05/06 题页、音频播放和判分。
 如新增题页无法加载、播放或保存进度，停止推广新增入口；回退本次 TOEIC 功能提交及合并中的总数调整，
@@ -122,7 +123,7 @@ img/                               ← Part 1 照片（01–04、07–10 各 6 �
 | 套号 | 来源 |
 |---|---|
 | 01–04 | **TOEIC Mock Tests**（toeicmocktests.com）—— 免费模拟，官方 2026 格式，无需注册 |
-| 05–06 | **TOEIC Question Ocean**（MIT 许可原创模拟题；05 使用 Piper，06 使用 Kokoro-82M） |
+| 05–06 | **TOEIC Question Ocean**（MIT 许可原创模拟题；均使用 Kokoro-82M） |
 | 07–10 | **TOEIC Mock Tests**（toeicmocktests.com）—— 与 01–04 同源，追加套 |
 
 - Part 1 照片为该站用 AI 生成的仿真商务场景图（05–06 除外，用 Ocean 的原创图）。

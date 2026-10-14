@@ -1,0 +1,44 @@
+/* Local theme: never loaded by existing question banks. */
+:root {
+  --review-accent: #a51d32;
+  --review-dark: #75152a;
+  --review-soft: #fff1f2;
+  --qb-page: #fff8f8;
+  --qb-blue: var(--review-accent);
+  --qb-navy: var(--review-dark);
+  --qb-green: var(--review-accent);
+  --qb-border: #ecdde0;
+}
+main.wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 90px; }
+h1 { color: var(--review-dark); }
+.qb-sitebar { border-bottom-color: #e9a1ab; }
+.badge { color: var(--review-dark); background: var(--review-soft); border-color: #ecc0c7; }
+.toolbar button.primary, .qact button.primary,
+:root .lang-switch button[aria-pressed="true"] {
+  background: var(--review-accent); border-color: var(--review-accent); color: #fff;
+}
+.toolbar button.primary:hover, .qact button.primary:hover { background: var(--review-dark); }
+.qact button.primary:disabled { background: #ccd5db; border-color: #ccd5db; }
+.pbar i { background: var(--review-accent); }
+.q:not(.done) li.opt.sel { border-color: var(--review-accent); background: var(--review-soft); }
+.review-code {
+  padding: 16px; margin: 16px 0; background: #fff5f5;
+  border: 1px solid var(--qb-border); border-left: 4px solid var(--review-accent);
+  border-radius: 8px; white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.review-code code, .vocab-pick code { font: 14px/1.65 Consolas, "SFMono-Regular", monospace; }
+.vocab-pick {
+  display: block; width: 100%; min-width: 0; padding: 0; text-align: left;
+  border: 0; background: transparent; color: inherit; cursor: pointer;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.vocab-pick:disabled { color: inherit; cursor: default; }
+.vocab-pick:focus-visible { outline: 3px solid var(--review-accent); outline-offset: 4px; }
+.opt .otext { min-width: 0; }
+.stem p, .expl p { margin: 8px 0; }
+.q [lang="zh"], .q [lang="ja"] { display: none; }
+html[data-lang="zh"] .q [lang="zh"], html[data-lang="ja"] .q [lang="ja"] { display: block; }
+@media (max-width: 560px) {
+  main.wrap { padding: 24px 12px 80px; }
+  .review-code { padding: 12px; }
+}

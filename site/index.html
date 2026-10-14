@@ -76,7 +76,6 @@ a.card .top{display:flex;justify-content:space-between;align-items:center;gap:8p
 .tg.p{border-color:#ddd6fe;background:#f5f3ff;color:#6d28d9}
 .tg.o{border-color:#fde68a;background:#fffbeb;color:#b45309}
 .tg.g{border-color:#bbf7d0;background:#f0fdf4;color:#047857}
-.tg.c{border-color:#a5f3fc;background:#ecfeff;color:#0e7490}
 .cnt{font-size:12px;color:#8b95a1;font-variant-numeric:tabular-nums}
 a.card h3{margin:0 0 7px;font-size:16.5px;line-height:1.4;color:#0f172a}
 a.card .sd{margin:0 0 15px;font-size:13.2px;color:#5b6570;flex:1 1 auto}
@@ -86,6 +85,12 @@ a.card .sd{margin:0 0 15px;font-size:13.2px;color:#5b6570;flex:1 1 auto}
 .pg span{display:block;font-size:12px;color:#8b95a1;margin-top:7px;font-variant-numeric:tabular-nums}
 .pg.on span{color:#0b6b3a;font-weight:600}
 
+.practice-section{margin:28px 0;padding:20px;border:1px solid #ecc0c7;border-top:4px solid #a51d32;border-radius:14px;background:#fff8f8}
+.practice-section h2{margin:0 0 8px;color:#75152a;font-size:20px}
+.practice-section>.sub{margin:0 0 16px;color:#5b6570;font-size:14px}
+.practice-section .cards{margin-bottom:0}
+.practice-section .tg{color:#75152a;background:#fff1f2;border-color:#ecc0c7}
+.practice-section a.card:hover{border-color:#a51d32}
 .howto{background:#fff;border:1px solid #e3e9ee;border-radius:14px;padding:18px 20px}
 .howto h2{margin:0 0 10px;font-size:16px}
 .howto ol{margin:0;padding-left:20px;font-size:13.8px;color:#334155}
@@ -150,7 +155,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">10 个题库 · 共 4811 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <p class="sub">10 个题库 · 共 4881 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
@@ -194,7 +199,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4811</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4881</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -241,9 +246,9 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="aws-aif/index.html" data-site="aws-aif">
-        <div class="top"><span class="tg g">AI 认证</span><span class="cnt">732 题</span></div>
+        <div class="top"><span class="tg g">AI 认证</span><span class="cnt">782 题</span></div>
         <h3>AWS AIF-C01 · AI Practitioner</h3>
-        <p class="sd">真题库 452 题 + 练习卷 230 题 + 专业术语 50 题，附答案与解析。</p>
+        <p class="sd">真题库 452 题 + 练习卷 230 题 + 专业术语 100 题，附答案与解析。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="fe/index.html" data-site="fe">
@@ -259,14 +264,26 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <p class="sd">面向腾讯云「效率智能体 OPC 从业者」认证的备考题库。按官方课程地图 11 个模块编排（110 题）用于边看课边查漏，另有 1 套全真模拟卷（60 题：单选 40 + 多选 20），带 90 分钟模考模式、按官方分值换算、70 分及格线。题目依据官方文档自编，每题附解析与出处。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
-
-      <a class="card" href="coding/index.html" data-site="coding">
-        <div class="top"><span class="tg c">编程实操</span><span class="cnt">20 题</span></div>
-        <h3>编程入门实操 · 代码审查</h3>
-        <p class="sd">练的是代码审查，不是写代码。两种题型各 10 题：给效果选实现、给问题代码找原因。覆盖盒模型、定位与包含块、层叠上下文、flex/grid 陷阱、优先级、渲染性能。</p>
-        <div class="pg"><i></i><span>未开始</span></div>
-      </a>
     </div>
+
+    <section class="practice-section" id="programming-practice" aria-labelledby="programming-title">
+      <h2 id="programming-title">编程入门实操</h2>
+      <p class="sub">先学会看懂 AI 写的代码：发现问题，选出正确修复。</p>
+      <div class="cards">
+        <a class="card" href="programming/index.html" data-site="programming">
+          <div class="top"><span class="tg">代码审查 · 入门</span><span class="cnt">20 题</span></div>
+          <h3>HTML 入门 · 代码审查训练</h3>
+          <p class="sd">标签、图片、链接与表单基础。每题四选一，附答案与解析，中英日对照。</p>
+          <div class="pg"><i></i><span>未开始</span></div>
+        </a>
+        <a class="card" href="programming/css.html" data-site="programming-css">
+          <div class="top"><span class="tg">代码审查 · 样式</span><span class="cnt">20 题</span></div>
+          <h3>CSS 入门 · 代码审查训练</h3>
+          <p class="sd">盒模型、定位、层叠与布局。每题四选一，附答案与解析，中英日对照。</p>
+          <div class="pg"><i></i><span>未开始</span></div>
+        </a>
+      </div>
+    </section>
 
     <div class="howto">
       <h2>怎么用</h2>
@@ -361,11 +378,13 @@ function aifKeys(){
   a.push(["aws:aifbank:10",2]);
   for(i=1;i<=4;i++)a.push(["aws:aifprac:"+pad2(i),50]);
   a.push(["aws:aifprac:05",30]);
-  a.push(["aws:aifvocab:01",50]);
+  a.push(["aws:aifvocab:01",100]);
   return a;
 }
 /* 各题库的 localStorage key 与其题量（key 实际存储为 "quiz:"+key） */
 var SITES={
+  "programming":{keys:[["programming:html:01",20]]},
+  "programming-css":{keys:[["programming:css:01",20]]},
   "dele-a1":{keys:[["dele-a1-a1-modelo0-2020",50],["dele-a1-a1-modelo0-2008",50],
                    ["dele-a1-a1-0720",25],["dele-a1-a1-2009-0516",50],
                    ["dele-a1-a1-2011",50]]},
@@ -378,8 +397,7 @@ var SITES={
   "fe":{keys:[["fe:a:2022",60],["fe:a:2023",20],["fe:a:2024",20],["fe:a:2025",20],["fe:a:2026",20],
               ["fe:b:2022",20],["fe:b:2023",6],["fe:b:2024",6],["fe:b:2025",6],["fe:b:2026",6],
               ["fe:a:paper-2",60],["fe:a:paper-3",60],["fe:b:paper-2",20],["fe:b:paper-3",20]]},
-  "workbuddy-opc":{keys:[["wb-opc-m01",10],["wb-opc-m02",10],["wb-opc-m03",10],["wb-opc-m04",10],["wb-opc-m05",10],["wb-opc-m06",10],["wb-opc-m07",10],["wb-opc-m08",10],["wb-opc-m09",10],["wb-opc-m10",10],["wb-opc-m11",10],["wb-opc-paper-1",60]]},
-  "coding":{keys:[["coding-css",20]]}
+  "workbuddy-opc":{keys:[["wb-opc-m01",10],["wb-opc-m02",10],["wb-opc-m03",10],["wb-opc-m04",10],["wb-opc-m05",10],["wb-opc-m06",10],["wb-opc-m07",10],["wb-opc-m08",10],["wb-opc-m09",10],["wb-opc-m10",10],["wb-opc-m11",10],["wb-opc-paper-1",60]]}
 };
 function read(keys){
   var d=0,o=0;

@@ -158,7 +158,7 @@ async function main() {
   await page.locator('#q114 .qb-question-chat').click();
   for (const language of ['en', 'ja', 'zh']) {
     await page.evaluate(language => window.__I18N__.setLang(language), language);
-    assert.ok((await page.locator('#qb-chat-input').inputValue()).startsWith(({ en: 'Please explain', ja: 'この問題を', zh: '请详细讲解' })[language]));
+    assert.equal(await page.locator('#qb-chat-input').inputValue(), ({ en: 'Briefly give the correct answer and the main reason for this question.', ja: 'この問題の正解と主な理由を簡潔に説明してください。', zh: '请简要说明这道题的正确答案和主要理由。' })[language]);
   }
   await page.locator('#qb-chat-close').click();
   await page.evaluate(() => window.__I18N__.setLang('en'));
