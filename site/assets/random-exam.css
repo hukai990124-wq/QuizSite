@@ -1,0 +1,25 @@
+/* Pending marker is set before document.write, so answers never flash on load. */
+html[data-exam-status="pending"] details.ans,
+html[data-exam-status="pending"] .verdict,
+html[data-exam-status="pending"] .correct,
+html[data-exam-status="pending"] #mask,
+html[data-exam-status="pending"] .js-submit,
+html[data-exam-status="pending"] .js-reveal,
+html[data-exam-status="pending"] .js-redo,
+html[data-exam-status="pending"] #btn-wrong,
+html[data-exam-status="pending"] #btn-expand,
+html[data-exam-status="pending"] .qbar>span:nth-child(2),
+html[data-exam-status="pending"] .qbar>span:nth-child(3),
+html[data-exam-status="pending"] .qbar>span:nth-child(4),
+html[data-exam-status="pending"] #sheet .hd>span:nth-child(2),
+html[data-exam-status="pending"] .qb-chat-trigger,
+html[data-exam-status="pending"] .qb-chat-dialog,
+html[data-exam-status="pending"] .qb-question-chat { display: none !important; }
+html[data-exam-status] .js-next { display: inline-block; }
+html[data-exam-status] .js-submit,
+html[data-exam-status] .js-reveal,
+html[data-exam-status] .js-redo,
+html[data-exam-status] #btn-reset { display: none !important; }
+.sheet .grid a.exam-answered { background: #eef5fc; border-color: #4a7fb5; color: #123c5e; }
+.exam-notice { padding: 12px 16px; border: 1px solid #bfdbfe; border-left: 4px solid #1d4e79; border-radius: 8px; background: #eff6ff; color: #123c5e; font-size: 14px; }
+html[data-exam-status="submitted"] .q li.opt { cursor: default; }

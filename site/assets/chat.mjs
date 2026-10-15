@@ -17,6 +17,8 @@ stylesheet.rel = "stylesheet";
 stylesheet.href = "/assets/chat.css";
 document.head.appendChild(stylesheet);
 const trigger = document.createElement("button");
+function examPending() { return document.documentElement.dataset.examStatus === "pending"; }
+trigger.hidden = examPending();
 trigger.className = "qb-chat-trigger";
 trigger.type = "button";
 trigger.textContent = "AI 答疑";
@@ -143,6 +145,8 @@ select.addEventListener("change", () => {
 });
 clear.addEventListener("click", clearConversation);
 function open(question = null, source = trigger) {
+    if (examPending())
+        return;
     returnFocus = source;
     if (question && !busy) {
         select.value = question.id;
@@ -172,6 +176,8 @@ login.addEventListener("click", () => {
     document.getElementById("qb-mode-register")?.click();
 });
 function indexQuestions() {
+    if (examPending())
+        return;
     document.querySelectorAll(".q[id], .question[id]").forEach(question => {
         if (question.dataset.chatIndexed)
             return;
@@ -205,10 +211,23 @@ function indexQuestions() {
     });
 }
 indexQuestions();
+function updateExamAvailability() {
+    trigger.hidden = examPending();
+    if (examPending()) {
+        dialog.close();
+        clearConversation();
+    }
+    else
+        indexQuestions();
+}
+document.addEventListener("quizbank:exam-submitted", updateExamAvailability);
+document.addEventListener("quizbank:exam-state-changed", updateExamAvailability);
 // Some viewers have a header .wrap before their dynamically rendered main.
 new MutationObserver(indexQuestions).observe(document.body, { childList: true, subtree: true });
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (examPending())
+        return;
     const question = input.value.trim();
     if (busy || !question)
         return;

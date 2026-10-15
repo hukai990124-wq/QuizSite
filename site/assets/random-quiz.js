@@ -153,7 +153,7 @@
   function render(base, selected, quotas) {
     const doc = base.doc;
     const wrap = doc.querySelector(".wrap");
-    const title = `${config.title} · 随机练习 ${size} 题`;
+    const title = `${config.title} · 随机考试 ${size} 题`;
     doc.title = title;
     wrap.querySelector("h1").textContent = title;
     const intro = wrap.querySelector("p.sub, p.meta");
@@ -197,7 +197,17 @@
     const scripts = Array.from(doc.querySelectorAll("script:not([src])"));
     const engine = scripts.find(script => /var KEY="quiz:/.test(script.textContent));
     if (!engine) throw new Error("原试卷缺少答题程序");
-    engine.textContent = engine.textContent.replace(/var KEY="[^"]+";/, `var KEY="quiz:random:${poolName}:${size}:${seed}";`).replace(/var TOTAL=\d+;/, `var TOTAL=${size};`);
+    // Random papers have their own controller: never execute the practice engine.
+    doc.documentElement.dataset.examStatus = "pending";
+    doc.documentElement.dataset.examKey = `quiz:random-exam:${poolName}:${size}:${seed}`;
+    doc.documentElement.dataset.examTitle = config.title;
+    const examStyle = doc.createElement("link");
+    examStyle.rel = "stylesheet";
+    examStyle.href = "/assets/random-exam.css";
+    doc.head.append(examStyle);
+    engine.textContent = "";
+    engine.type = "module";
+    engine.src = "/assets/random-exam.mjs";
     doc.querySelectorAll("[src],[href]").forEach(el => {
       ["src", "href"].forEach(name => {
         const value = el.getAttribute(name);
