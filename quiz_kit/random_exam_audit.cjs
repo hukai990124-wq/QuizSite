@@ -22,10 +22,13 @@ async function main(){
         return route.fulfill({json:name==='/api/auth/me'?{user:null}:{configured:true,available:true,authenticated:false,dailyLimit:10,remaining:10}});
       });
       await ctx.routeWebSocket('**/api/presence**',socket=>socket.close());
+      if(pool==='aws-clf')await ctx.route('**/aws-clf/part*.html',async route=>{
+        await new Promise(resolve=>setTimeout(resolve,1200));await route.continue();
+      });
       const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
       await page.goto(`${base}/random.html?pool=${pool}&size=${size}&seed=12345678`);
       await page.waitForSelector('.exam-notice');
-      await page.waitForSelector('.qb-chat-trigger',{state:'attached'});
+      await page.waitForSelector('.qb-chat-trigger',{state:'attached',timeout:7000});
       assert.equal(await page.locator('.q').count(),size);
       assert.equal(await page.locator('html').getAttribute('data-exam-status'),'pending');
       assert.equal(await page.locator('.qb-chat-trigger').isVisible(),false);
