@@ -2204,5 +2204,17 @@
   "领域四 · 监控、维护与安全": {"en": "Domain 4 · Monitoring, maintenance and security", "ja": "分野4・監視・保守・セキュリティ"},
   "正确答案 / Answer:": {"en": "Correct answer / Answer:", "ja": "正解 / 解答:"},
   "题目来自公开备考资料，非 AWS 官方内容，也不代表官方题库。中文与日文为机器翻译，仅供对照。考试领域权重：数据准备 28%、模型开发 26%、监控与安全 24%、部署与编排 22%。": {"en": "Questions are taken from public study material. They are not AWS official content and do not represent the official question bank. Chinese and Japanese are machine translated, for reference only. Official domain weightings: data preparation 28%, model development 26%, monitoring and security 24%, deployment and orchestration 22%.", "ja": "問題は公開されている学習教材からの転載で、AWS公式コンテンツではなく、公式問題集でもありません。中文・日本語は機械翻訳で、参照用です。公式の分野比重：データ準備28%、モデル開発26%、監視とセキュリティ24%、デプロイとオーケストレーション22%。"},
-  "12 个题库 · 共 5026 题次 · 可作答判分 · 登录后跨设备同步": {"en": "12 question banks · 5,026 attempts · instant scoring · sign in to sync across devices", "ja": "12の問題集・全5,026問・即時採点・ログインしてデバイス間で同期"}
+  "12 个题库 · 共 5026 题次 · 可作答判分 · 登录后跨设备同步": {"en": "12 question banks · 5,026 attempts · instant scoring · sign in to sync across devices", "ja": "12の問題集・全5,026問・即時採点・ログインしてデバイス間で同期"},
+  "13 个题库 · 共 5162 题次 · 可作答判分 · 登录后跨设备同步": {"en": "13 question banks · 5,162 attempts · instant scoring · sign in to sync across devices", "ja": "13の問題集・全5,162問・即時採点・ログインしてデバイス間で同期"},
+  "136 题": {"en": "136 questions", "ja": "136問"},
+  "136 题，按 50／50／36 分卷，含单选与多选。英文原题配中文、日文机器翻译。": {"en": "136 questions in three papers of 50, 50 and 36, with single and multiple answers. Original English plus Chinese and Japanese machine translations.", "ja": "全136問を50・50・36問に分割。単一選択と複数選択に対応。英語原文に中文・日本語の機械翻訳を併記。"},
+  "题目与参考答案来自用户提供的 PDF，非 AWS 官方内容。讨论为考生观点，可能有争议；按资料参考答案判分。": {"en": "Questions and reference answers come from the user-supplied PDFs, not official AWS content. Discussions reflect candidates' opinions and may be disputed; scoring follows the supplied answer key.", "ja": "問題と参考解答はユーザー提供のPDFに基づく非公式教材。議論は受験者の見解で、異論がある場合もある。採点は資料の参考解答に従う。"},
+  "原始讨论（英文，仅供参考）": {"en": "Original discussion (English, for reference)", "ja": "元の議論（英語・参考用）"},
+  "原资料未附讨论；以上为参考答案对应选项。": {"en": "No discussion was supplied; the text above is the option selected by the reference answer.", "ja": "元資料に議論なし。上記は参考解答に対応する選択肢。"},
+  "AWS AIP-C01 练习卷 · 第 01 套": {"en": "AWS AIP-C01 Practice · Paper 01", "ja": "AWS AIP-C01 演習・第01セット"},
+  "AWS AIP-C01 练习卷 · 第 02 套": {"en": "AWS AIP-C01 Practice · Paper 02", "ja": "AWS AIP-C01 演習・第02セット"},
+  "AWS AIP-C01 练习卷 · 第 03 套": {"en": "AWS AIP-C01 Practice · Paper 03", "ja": "AWS AIP-C01 演習・第03セット"},
+  "50 题 · #001–#050": {"en": "50 questions · #001–#050", "ja": "50問・#001–#050"},
+  "50 题 · #051–#100": {"en": "50 questions · #051–#100", "ja": "50問・#051–#100"},
+  "36 题 · #101–#136": {"en": "36 questions · #101–#136", "ja": "36問・#101–#136"}
 }
