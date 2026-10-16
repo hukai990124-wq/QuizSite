@@ -81,7 +81,7 @@ async function main(){
     }
     await page.goto(base+'/');
     assert.match(await page.locator('[data-site="aws-aip"] .pg span').textContent(),/136\/136/);
-    assert.match(await page.locator('#ov-txt').textContent(),/136 \/ 5162/);
+    assert.match(await page.locator('#ov-txt').textContent(),/136 \/ 5192/);
     await page.goto(base+'/aws-aip/index.html');
     assert.equal(await page.locator('[data-quiz-key^="aws:aip:"]').count(),3);
     for(const lang of ['en','ja','zh']){

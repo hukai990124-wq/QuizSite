@@ -1,0 +1,452 @@
+[
+  {
+    "id":"typescript-01",
+    "prompt":{"en":"The price must be a number used in calculations. Which review comment fixes this declaration?","zh":"price 要作为数字参与计算。哪条审查意见能修复这个声明？","ja":"price は計算に使う数値。どのレビュー指摘で宣言を修正できるか。"},
+    "code":"const price: number = \"19\";",
+    "options":[
+      {"en":"Replace number with Number; the quoted value then becomes numeric.","zh":"把 number 改成 Number，带引号的值就会变成数字。","ja":"number を Number にすれば、引用符付きの値も数値になる。"},
+      {"en":"Replace const with let; assignment types will no longer matter.","zh":"把 const 改成 let，就不需要考虑赋值类型了。","ja":"const を let にすれば代入の型は問われなくなる。"},
+      {"en":"Use the numeric literal 19 instead of the string \"19\".","zh":"使用数字字面量 19，而不是字符串 \"19\"。","ja":"文字列 \"19\" ではなく数値リテラル 19 を使う。"},
+      {"en":"Keep it; the annotation converts the string at runtime.","zh":"保持不变，类型标注会在运行时把字符串转换为数字。","ja":"そのままでよい。型注釈が実行時に文字列を数値へ変換する。"}
+    ],
+    "answer":"C",
+    "explanation":{"en":"Quoted \"19\" is a string, not a number. Type annotations check values; they do not convert them. Use 19 for a numeric price, or explicitly parse and validate external text before assigning it.","zh":"带引号的 \"19\" 是字符串。类型标注负责检查，不负责转换。数字价格应写成 19；若数据来自外部文本，应先明确解析并验证，再赋给数字变量。","ja":"\"19\" は文字列。型注釈は検査であり変換ではない。数値の価格なら 19 と書く。外部テキストなら明示的に解析・検証してから代入する。"},
+    "fixed":"const price: number = 19;","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean"
+  },
+  {
+    "id":"typescript-02",
+    "prompt":{"en":"enabled should remain a boolean flag. What is the appropriate correction?","zh":"enabled 应始终是布尔开关。正确的修复是什么？","ja":"enabled を真偽値のフラグとして保ちたい。適切な修正はどれか。"},
+    "code":"let enabled = true;\nenabled = \"false\";",
+    "options":[
+      {"en":"Assign false without quotes; the initial value inferred boolean.","zh":"赋值为不带引号的 false；初始值已让类型被推断为 boolean。","ja":"引用符なしの false を代入する。初期値から boolean と推論されている。"},
+      {"en":"Add more quotes because a boolean is stored as text.","zh":"增加引号，因为布尔值本来就是文本。","ja":"真偽値は文字列なので引用符を増やす。"},
+      {"en":"Rename enabled to isEnabled to change its type.","zh":"改名为 isEnabled 即可改变类型。","ja":"isEnabled に改名すれば型が変わる。"},
+      {"en":"Replace let with const and keep the reassignment.","zh":"把 let 改成 const，同时保留重新赋值。","ja":"let を const にし、再代入は残す。"}
+    ],
+    "answer":"A",
+    "explanation":{"en":"Type inference gives enabled the boolean type. The string \"false\" is neither the boolean false nor a valid boolean assignment. It is also truthy at runtime, so using text can reverse an intended condition.","zh":"类型推断使 enabled 成为 boolean。字符串 \"false\" 不等于布尔值 false，也不能赋给 boolean。它在运行时还是 truthy，用文本代替布尔值可能使条件判断出现反效果。","ja":"enabled は boolean と推論される。文字列 \"false\" は真偽値 false ではなく、boolean に代入できない。実行時には truthy なので条件の意図も崩れる。"},
+    "fixed":"let enabled = true;\nenabled = false;","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-annotations-on-variables"
+  },
+  {
+    "id":"typescript-03",
+    "prompt":{"en":"This array must contain only numbers. Which change keeps that contract?","zh":"数组应只包含数字。哪项修改能保持这个约定？","ja":"数値だけを入れる配列。どの変更が型の契約を守るか。"},
+    "code":"const scores: number[] = [70, 80];\nscores.push(\"90\");",
+    "options":[
+      {"en":"Rename push to append; strings then become numbers.","zh":"把 push 改名为 append，字符串就会转成数字。","ja":"push を append にすれば文字列が数値になる。"},
+      {"en":"Declare scores as string[] but keep its numeric initial values.","zh":"把 scores 声明为 string[]，但保留数字初始值。","ja":"数値の初期値を残して scores を string[] にする。"},
+      {"en":"Remove the array brackets from the number[] annotation.","zh":"删除 number[] 中的数组方括号。","ja":"number[] の角括弧を削除する。"},
+      {"en":"Push the numeric value 90 instead of the string \"90\".","zh":"压入数字 90，而不是字符串 \"90\"。","ja":"文字列 \"90\" ではなく数値 90 を追加する。"}
+    ],
+    "answer":"D",
+    "explanation":{"en":"number[] constrains each element to number, including later push calls. const prevents rebinding the array variable; it does not freeze the array or permit incompatible element types.","zh":"number[] 限制每个元素都为 number，后续 push 也必须遵守。const 禁止变量重新指向另一个数组，但不会冻结数组，更不会放宽元素类型。","ja":"number[] は後から push する要素にも number を要求する。const は変数の再代入を禁じるだけで、配列を凍結したり要素の型を緩めたりはしない。"},
+    "fixed":"const scores: number[] = [70, 80];\nscores.push(90);","diagnostic":2345,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays"
+  },
+  {
+    "id":"typescript-04",
+    "prompt":{"en":"The tuple stores a person's name followed by their age. Which review comment is correct?","zh":"元组用于按顺序保存姓名、年龄。哪条审查意见正确？","ja":"名前、年齢の順で格納するタプル。正しい指摘はどれか。"},
+    "code":"const person: [string, number] = [20, \"Kai\"];",
+    "options":[
+      {"en":"Tuples ignore element order, so there is no problem.","zh":"元组不关心元素顺序，所以没有问题。","ja":"タプルは要素の順序を問わないので問題ない。"},
+      {"en":"Swap the values to [\"Kai\", 20] to match the positional types.","zh":"改成 [\"Kai\", 20]，使各位置的值与类型对应。","ja":"[\"Kai\", 20] に入れ替え、位置ごとの型に合わせる。"},
+      {"en":"Replace the comma with a semicolon in the type.","zh":"把类型中的逗号改成分号。","ja":"型のカンマをセミコロンにする。"},
+      {"en":"A tuple can only contain two values of the same type.","zh":"元组的两个值必须是同一种类型。","ja":"タプルの2要素は必ず同じ型でなければならない。"}
+    ],
+    "answer":"B",
+    "explanation":{"en":"A tuple describes types by position: index 0 must be string and index 1 number. A union array such as (string | number)[] would not express this fixed name-then-age contract.","zh":"元组按位置约束类型：第 0 项必须是 string，第 1 项必须是 number。(string | number)[] 只约束元素属于两种类型之一，不能表达固定的“姓名在前、年龄在后”。","ja":"タプルは位置ごとに型を決める。0番目は string、1番目は number。(string | number)[] では名前と年齢の固定順序までは表せない。"},
+    "fixed":"const person: [string, number] = [\"Kai\", 20];","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/objects.html#tuple-types"
+  },
+  {
+    "id":"typescript-05",
+    "prompt":{"en":"With strict checking enabled, this numeric function has an implicit-any parameter. What should the reviewer request?","zh":"开启严格检查后，这个数字处理函数的参数出现隐式 any。应要求怎样修复？","ja":"strict 有効時、数値処理関数の引数が暗黙の any になる。何を修正すべきか。"},
+    "code":"function double(value) {\n  return value * 2;\n}",
+    "options":[
+      {"en":"Annotate the parameter as value: number.","zh":"给参数添加 value: number 类型标注。","ja":"引数を value: number と注釈する。"},
+      {"en":"Annotate only the return type; that automatically types value.","zh":"只标注返回类型，参数就会自动变为 number。","ja":"戻り値だけを注釈すれば value も自動で number になる。"},
+      {"en":"Change function to an arrow; parameters can never be implicit any there.","zh":"改成箭头函数；箭头函数的参数不可能是隐式 any。","ja":"アロー関数にすれば引数が暗黙の any になることはない。"},
+      {"en":"Rename value to number to declare its type.","zh":"把参数名改成 number 就是在声明类型。","ja":"引数名を number にすれば型宣言になる。"}
+    ],
+    "answer":"A",
+    "explanation":{"en":"Arithmetic in the body does not supply a declared parameter type for this standalone function. value: number documents and checks callers. A return annotation alone does not remove the parameter's implicit any.","zh":"对于这个独立函数，函数体里的乘法不会替参数声明类型。value: number 能约束调用者并说明约定；仅标注返回类型不能消除参数的隐式 any。","ja":"独立した関数では、本体の掛け算から引数型は宣言されない。value: number で呼び出しを検査する。戻り値だけの注釈では引数の暗黙の any は解消しない。"},
+    "fixed":"function double(value: number) {\n  return value * 2;\n}","diagnostic":7006,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#parameter-type-annotations"
+  },
+  {
+    "id":"typescript-06",
+    "prompt":{"en":"total must return a numeric total, not formatted text. Which fix preserves that promise?","zh":"total 应返回数字总额，而非格式化文本。哪项修复符合这个约定？","ja":"total は表示用文字列ではなく数値の合計を返す。契約を守る修正はどれか。"},
+    "code":"function total(): number {\n  return \"30\";\n}",
+    "options":[
+      {"en":"Keep the string because the return annotation converts it.","zh":"保留字符串，返回类型标注会负责转换。","ja":"戻り値の注釈が変換するので文字列を残す。"},
+      {"en":"Remove return; number functions do not need a value.","zh":"删除 return；返回 number 的函数不需要实际返回值。","ja":"number 関数に値は不要なので return を削除する。"},
+      {"en":"Return the numeric literal 30.","zh":"返回数字字面量 30。","ja":"数値リテラル 30 を返す。"},
+      {"en":"Change number to void while still returning \"30\".","zh":"把 number 改成 void，但继续返回 \"30\"。","ja":"number を void にし、\"30\" を返し続ける。"}
+    ],
+    "answer":"C",
+    "explanation":{"en":"The declared number return type requires a number on this return path. Return 30 for a numeric total; convert to display text separately. Changing the contract to string would not satisfy the stated requirement.","zh":"声明返回 number 后，这条返回路径必须提供数字。应返回 30，显示格式化另行处理。把返回类型改成 string 虽可能通过检查，却不符合题目要求的数字总额。","ja":"number の戻り値には数値が必要。合計は 30 として返し、表示用変換は別に行う。型を string に変えるだけでは数値を返す要件を満たさない。"},
+    "fixed":"function total(): number {\n  return 30;\n}","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#return-type-annotations"
+  },
+  {
+    "id":"typescript-07",
+    "prompt":{"en":"greet expects a person's name as text. Which call is appropriate?","zh":"greet 接收文本形式的姓名。正确的调用应是什么？","ja":"greet は文字列の名前を受け取る。適切な呼び出しはどれか。"},
+    "code":"function greet(name: string) {\n  return name.toUpperCase();\n}\ngreet(7);",
+    "options":[
+      {"en":"Keep greet(7); string parameters accept every primitive.","zh":"保留 greet(7)，string 参数接受所有基本类型。","ja":"string は全プリミティブを受け取れるので greet(7) を残す。"},
+      {"en":"Pass a string name, for example greet(\"Kai\").","zh":"传入字符串姓名，例如 greet(\"Kai\")。","ja":"greet(\"Kai\") のように文字列の名前を渡す。"},
+      {"en":"Call greet with no argument because name is optional.","zh":"不传参数调用 greet，因为 name 是可选的。","ja":"name は任意なので引数なしで呼ぶ。"},
+      {"en":"Pass null; it is always assignable to string under strict checking.","zh":"传入 null，严格检查下 null 总能赋给 string。","ja":"strict でも null は常に string に代入できるので null を渡す。"}
+    ],
+    "answer":"B",
+    "explanation":{"en":"The argument must match string. The annotation neither makes name optional nor adds a runtime conversion. A real text name such as \"Kai\" respects the function contract without weakening its parameter type.","zh":"实参必须符合 string。类型标注不会把 name 变成可选参数，也不会添加运行时转换。传入 \"Kai\" 这样的文本姓名即可，无需放宽参数类型。","ja":"引数は string に合う必要がある。型注釈で省略可能になったり実行時変換が追加されたりはしない。\"Kai\" のような名前を渡せばよい。"},
+    "fixed":"function greet(name: string) {\n  return name.toUpperCase();\n}\ngreet(\"Kai\");","diagnostic":2345,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#functions"
+  },
+  {
+    "id":"typescript-08",
+    "prompt":{"en":"Every User must have an id and a name. What is missing from this object literal?","zh":"每个 User 都必须有 id 和 name。这个对象字面量缺少什么？","ja":"User には id と name が必須。このオブジェクトリテラルには何が足りないか。"},
+    "code":"type User = { id: number; name: string };\nconst user: User = { name: \"Kai\" };",
+    "options":[
+      {"en":"A class constructor; type aliases cannot describe objects.","zh":"缺少类构造器；类型别名不能描述对象。","ja":"型エイリアスはオブジェクトを表せないのでコンストラクターが必要。"},
+      {"en":"A semicolon between name and its value inside the object.","zh":"应在对象的 name 和值之间使用分号。","ja":"オブジェクトの name と値の間にセミコロンが必要。"},
+      {"en":"An import for the built-in User type.","zh":"需要导入内置的 User 类型。","ja":"組み込みの User 型をインポートする必要がある。"},
+      {"en":"The required numeric id property, for example id: 1.","zh":"缺少必填的数字 id 属性，例如 id: 1。","ja":"id: 1 のような必須の数値プロパティ id が足りない。"}
+    ],
+    "answer":"D",
+    "explanation":{"en":"Both properties are required because neither has a ? marker. Add a numeric id rather than making a required business field optional merely to silence the compiler. A type alias does not create missing runtime properties.","zh":"两个属性都没有 ?，因此都必填。应补上数字 id，而不是为消除报错就把业务必填字段改成可选。类型别名也不会在运行时自动补齐属性。","ja":"? がないため両方とも必須。エラーを消すだけの目的で必須項目を任意にせず、数値の id を追加する。型エイリアスが実行時に属性を補うことはない。"},
+    "fixed":"type User = { id: number; name: string };\nconst user: User = { id: 1, name: \"Kai\" };","diagnostic":2741,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#object-types"
+  },
+  {
+    "id":"typescript-09",
+    "prompt":{"en":"A missing nickname should display as an empty string. What safe fix handles the optional property?","zh":"没有昵称时应显示空字符串。如何安全处理这个可选属性？","ja":"ニックネームがなければ空文字を表示したい。任意プロパティを安全に扱う修正はどれか。"},
+    "code":"function label(user: { nickname?: string }): string {\n  return user.nickname.toUpperCase();\n}",
+    "options":[
+      {"en":"Use user.nickname!; the exclamation mark supplies an empty string.","zh":"使用 user.nickname!；感叹号会自动提供空字符串。","ja":"user.nickname! を使う。! が空文字を補う。"},
+      {"en":"Make the return type optional and leave the unsafe access.","zh":"把返回类型改为可选，但保留不安全的访问。","ja":"戻り値を任意にして危険なアクセスは残す。"},
+      {"en":"Return user.nickname?.toUpperCase() ?? \"\".","zh":"返回 user.nickname?.toUpperCase() ?? \"\"。","ja":"user.nickname?.toUpperCase() ?? \"\" を返す。"},
+      {"en":"Replace nickname? with nickname! in the object type.","zh":"把对象类型中的 nickname? 改为 nickname!。","ja":"オブジェクト型の nickname? を nickname! にする。"}
+    ],
+    "answer":"C",
+    "explanation":{"en":"Reading nickname may produce undefined. Optional chaining skips the method call in that case, and ?? supplies the required empty string. A non-null assertion only suppresses a check; it does not add a value or a runtime guard.","zh":"读取 nickname 时可能得到 undefined。可选链会在此时跳过方法调用，再由 ?? 补上要求的空字符串。非空断言只影响类型检查，不会添加值或运行时保护。","ja":"nickname は undefined の可能性がある。?. で呼び出しを避け、?? で空文字を補う。非 null アサーションは検査を抑えるだけで値や実行時ガードを追加しない。"},
+    "fixed":"function label(user: { nickname?: string }): string {\n  return user.nickname?.toUpperCase() ?? \"\";\n}","diagnostic":18048,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#optional-properties"
+  },
+  {
+    "id":"typescript-10",
+    "prompt":{"en":"The function accepts a number or a string and must format both. Which review comment is correct?","zh":"函数接收数字或字符串，并且都要支持格式化。哪条审查意见正确？","ja":"数値と文字列の両方を整形したい。正しいレビュー指摘はどれか。"},
+    "code":"function format(value: string | number): string {\n  return value.toUpperCase();\n}",
+    "options":[
+      {"en":"Both types have toUpperCase, so no change is necessary.","zh":"两种类型都有 toUpperCase，无需修改。","ja":"両方の型に toUpperCase があるので修正不要。"},
+      {"en":"Check typeof value === \"string\"; uppercase that branch and convert numbers to text.","zh":"先判断 typeof value === \"string\"；字符串分支转大写，数字分支转成文本。","ja":"typeof value === \"string\" で分岐し、文字列は大文字化、数値は文字列化する。"},
+      {"en":"A union automatically converts every number to a string.","zh":"联合类型会自动把每个数字转换为字符串。","ja":"ユニオン型が数値を自動的に文字列へ変換する。"},
+      {"en":"Change | to &; the accepted inputs remain exactly the same.","zh":"把 | 改成 &，接收的输入范围完全不变。","ja":"| を & にしても受け取れる入力は全く同じ。"}
+    ],
+    "answer":"B",
+    "explanation":{"en":"A union permits only operations safe for every possible member until narrowed. typeof is a runtime check that narrows the string branch. Numbers need their own handling, such as String(value), rather than an unsafe assertion.","zh":"联合类型在被缩窄前，只允许对所有可能成员都安全的操作。typeof 是运行时判断，可把字符串分支缩窄为 string；数字分支应单独处理，例如 String(value)，而不是强行断言。","ja":"ユニオンは絞り込み前には全メンバーに安全な操作しか許さない。typeof で文字列の分岐を絞り込み、数値側は String(value) などで処理する。危険な型アサーションは不要。"},
+    "fixed":"function format(value: string | number): string {\n  return typeof value === \"string\" ? value.toUpperCase() : String(value);\n}","diagnostic":2339,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards"
+  },
+  {
+    "id":"typescript-11",
+    "prompt":{"en":"The heading might not exist. Which review comment prevents a null dereference?","zh":"页面上可能不存在这个标题。哪项修改可防止访问 null？","ja":"見出しが存在しない場合もある。null へのアクセスを防ぐ修正はどれか。"},
+    "code":"const heading = document.querySelector(\"h1\");\nheading.textContent = \"Ready\";",
+    "options":[
+      {"en":"Move the selector into a type annotation to create the element.","zh":"把选择器放进类型标注即可创建该元素。","ja":"セレクターを型注釈に入れれば要素が作られる。"},
+      {"en":"Replace h1 with H1; uppercase selectors cannot return null.","zh":"把 h1 改成 H1，大写选择器不会返回 null。","ja":"h1 を H1 にすれば null は返らない。"},
+      {"en":"Cast heading to string and assign textContent on that string.","zh":"把 heading 断言为 string，再在字符串上设置 textContent。","ja":"heading を string にアサートし、文字列の textContent を設定する。"},
+      {"en":"Check heading !== null before assigning textContent.","zh":"先检查 heading !== null，再设置 textContent。","ja":"heading !== null を確認してから textContent を設定する。"}
+    ],
+    "answer":"D",
+    "explanation":{"en":"querySelector returns an element or null. A real null check narrows the type and protects the runtime operation. Adding ! would remove a compiler warning but would not create a missing heading.","zh":"querySelector 返回元素或 null。实际的空值检查既能缩窄类型，也能保护运行时操作。添加 ! 只会消除类型报错，不会让缺失的标题凭空出现。","ja":"querySelector は要素か null を返す。実際に null を確認すれば型も絞られ、実行時にも安全になる。! を付けても存在しない見出しは作られない。"},
+    "fixed":"const heading = document.querySelector(\"h1\");\nif (heading !== null) {\n  heading.textContent = \"Ready\";\n}","diagnostic":18047,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/narrowing.html#equality-narrowing"
+  },
+  {
+    "id":"typescript-12",
+    "prompt":{"en":"The input is untrusted and may be any type. Which correction safely trims strings and rejects other values?","zh":"输入不可信，可能是任意类型。如何安全地裁掉字符串首尾空白，并拒绝其他类型？","ja":"信頼できない入力の型は不明。文字列だけを trim し、それ以外を拒否する修正はどれか。"},
+    "code":"function normalize(value: unknown): string {\n  return value.trim();\n}",
+    "options":[
+      {"en":"Check typeof value === \"string\", then trim; otherwise throw an error.","zh":"先检查 typeof value === \"string\"，再 trim；否则抛错。","ja":"typeof value === \"string\" を確認して trim し、それ以外はエラーにする。"},
+      {"en":"Rename unknown to any because that validates external input.","zh":"把 unknown 改成 any，因为 any 会验证外部输入。","ja":"any は外部入力を検証するので unknown を any にする。"},
+      {"en":"Use value as string; assertions reject non-strings at runtime.","zh":"使用 value as string，断言会在运行时拒绝非字符串。","ja":"value as string にすれば実行時に文字列以外を拒否できる。"},
+      {"en":"Call trim before the type check; unknown methods are always safe.","zh":"先调用 trim 再检查类型，unknown 上的方法总是安全的。","ja":"unknown のメソッドは安全なので型確認前に trim する。"}
+    ],
+    "answer":"A",
+    "explanation":{"en":"unknown requires narrowing before property or method access. A typeof guard performs an actual runtime check. Neither any nor a type assertion validates data arriving from users, JSON or an API.","zh":"unknown 必须先缩窄才能访问属性或方法。typeof 判断会真正检查运行时类型；any 和类型断言都不会验证用户输入、JSON 或 API 数据。","ja":"unknown の属性やメソッドを使う前に型を絞り込む。typeof は実行時にも検査する。any や型アサーションはユーザー入力、JSON、APIの値を検証しない。"},
+    "fixed":"function normalize(value: unknown): string {\n  if (typeof value !== \"string\") throw new TypeError(\"Expected text\");\n  return value.trim();\n}","diagnostic":18046,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/functions.html#unknown"
+  },
+  {
+    "id":"typescript-13",
+    "prompt":{"en":"Only left and right are supported directions. Which correction respects the allowed values?","zh":"系统只支持 left 和 right 两个方向。哪项修复符合允许值约定？","ja":"方向は left と right のみ。許可された値を守る修正はどれか。"},
+    "code":"type Direction = \"left\" | \"right\";\nconst direction: Direction = \"up\";",
+    "options":[
+      {"en":"Change the variable name to left; the assigned value can stay up.","zh":"把变量名改成 left，值仍可保留 up。","ja":"変数名を left にすれば値は up のままでよい。"},
+      {"en":"Use uppercase UP because literal unions ignore case.","zh":"改成大写 UP，因为字面量联合类型不区分大小写。","ja":"リテラル型は大文字小文字を区別しないので UP にする。"},
+      {"en":"Assign \"left\" or \"right\" instead of \"up\".","zh":"将值改成 \"left\" 或 \"right\"，而不是 \"up\"。","ja":"\"up\" ではなく \"left\" または \"right\" を代入する。"},
+      {"en":"Replace | with a comma to add up implicitly.","zh":"把 | 改成逗号，就会隐式允许 up。","ja":"| をカンマにすれば up も暗黙に許可される。"}
+    ],
+    "answer":"C",
+    "explanation":{"en":"A string-literal union is a finite set of exact values. \"up\" is outside that set. Do not widen the type to string merely to accept an input the application does not support.","zh":"字符串字面量联合表示一组精确的允许值，\"up\" 不在其中。不要为了接受系统不支持的输入，就简单把类型放宽成 string。","ja":"文字列リテラルのユニオンは値を厳密に限定する。\"up\" は範囲外。未対応の入力を通すだけのために string へ広げない。"},
+    "fixed":"type Direction = \"left\" | \"right\";\nconst direction: Direction = \"left\";","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types"
+  },
+  {
+    "id":"typescript-14",
+    "prompt":{"en":"The id is intentionally readonly. How should code represent a copy with a different id without mutating the original?","zh":"id 有意设为只读。如何得到不同 id 的副本，同时不修改原对象？","ja":"id は意図的に読み取り専用。元のオブジェクトを変更せず別の id のコピーを作るにはどうするか。"},
+    "code":"type User = { readonly id: number; name: string };\nconst user: User = { id: 1, name: \"Kai\" };\nuser.id = 2;",
+    "options":[
+      {"en":"Replace const with let; readonly no longer applies.","zh":"把 const 改成 let，readonly 就会失效。","ja":"const を let にすれば readonly は無効になる。"},
+      {"en":"Use user.id++; increment is exempt from readonly.","zh":"改为 user.id++，自增不受 readonly 限制。","ja":"インクリメントは readonly の対象外なので user.id++ にする。"},
+      {"en":"Add ! to user.id to make it writable.","zh":"给 user.id 加 ! 就能使它可写。","ja":"user.id に ! を付ければ書き込める。"},
+      {"en":"Create const updated: User = { ...user, id: 2 }.","zh":"创建 const updated: User = { ...user, id: 2 }。","ja":"const updated: User = { ...user, id: 2 } で新しい値を作る。"}
+    ],
+    "answer":"D",
+    "explanation":{"en":"readonly forbids assigning to id through this typed reference after creation. Object spread builds a new object with its own initial id. const and readonly address different things; neither is a general deep runtime freeze.","zh":"readonly 禁止在创建后通过这个类型引用重新赋值 id。对象展开会创建新对象，可为其设置初始 id。const 和 readonly 约束的对象不同，也都不等于通用的运行时深冻结。","ja":"readonly は作成後、この型の参照から id に再代入することを禁じる。スプレッドなら別のオブジェクトの初期値として id を設定できる。const も readonly も汎用の実行時ディープフリーズではない。"},
+    "fixed":"type User = { readonly id: number; name: string };\nconst user: User = { id: 1, name: \"Kai\" };\nconst updated: User = { ...user, id: 2 };","diagnostic":2540,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/objects.html#readonly-properties"
+  },
+  {
+    "id":"typescript-15",
+    "prompt":{"en":"Do not mutate the readonly input list. Which change creates a new list containing \"new\"?","zh":"不要修改只读输入数组。哪项修改会创建一个包含 \"new\" 的新数组？","ja":"読み取り専用の入力配列は変更しない。\"new\" を含む新しい配列を作る修正はどれか。"},
+    "code":"function append(items: readonly string[]) {\n  items.push(\"new\");\n  return items;\n}",
+    "options":[
+      {"en":"Return [...items, \"new\"] instead of calling push.","zh":"不要调用 push，改为返回 [...items, \"new\"]。","ja":"push せず [...items, \"new\"] を返す。"},
+      {"en":"Use items[items.length] = \"new\"; indexed writes are readonly-safe.","zh":"使用 items[items.length] = \"new\"，下标写入不受只读限制。","ja":"添字の書き込みは読み取り専用でも安全なので items[items.length] = \"new\" にする。"},
+      {"en":"Use pop first to temporarily unlock the readonly array.","zh":"先调用 pop，就能暂时解锁只读数组。","ja":"先に pop すれば一時的に読み取り専用が解除される。"},
+      {"en":"Change the return annotation only; push will become legal.","zh":"只修改返回类型，就能让 push 合法。","ja":"戻り値の型だけ変えれば push できる。"}
+    ],
+    "answer":"A",
+    "explanation":{"en":"readonly string[] exposes read operations but not mutation methods such as push. Spread reads the input into a new array, then adds the new element. It preserves the input contract without casting away readonly.","zh":"readonly string[] 提供读取操作，但没有 push 这样的修改方法。展开语法把输入读入新数组，再加入新元素，无需通过断言绕过只读约定。","ja":"readonly string[] では push などの変更操作は使えない。スプレッドで新しい配列へ読み出し、要素を追加する。readonly をアサーションで消す必要はない。"},
+    "fixed":"function append(items: readonly string[]) {\n  return [...items, \"new\"];\n}","diagnostic":2339,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/objects.html#the-readonlyarray-type"
+  },
+  {
+    "id":"typescript-16",
+    "prompt":{"en":"identity should return the same value and type it receives. Which change repairs its generic contract?","zh":"identity 应返回传入的原值，并保留其类型。哪项修改能修复泛型约定？","ja":"identity は受け取った値と型をそのまま返す。ジェネリックの契約を直す変更はどれか。"},
+    "code":"function identity<T>(value: T): T {\n  return \"fixed\";\n}",
+    "options":[
+      {"en":"Replace T with string everywhere and claim all input types are still supported.","zh":"把所有 T 改成 string，并声称仍支持任意输入类型。","ja":"T をすべて string にしても任意の入力型を保てる。"},
+      {"en":"Return value instead of the hard-coded string.","zh":"返回 value，而不是写死的字符串。","ja":"固定文字列ではなく value を返す。"},
+      {"en":"Rename T to String; parameter names cause runtime conversion.","zh":"把 T 改名为 String，类型参数名会触发运行时转换。","ja":"T を String に改名すれば実行時に変換される。"},
+      {"en":"Remove value and keep returning a string as T for every caller.","zh":"删除 value，并继续对所有调用者把固定字符串作为 T 返回。","ja":"value を削除し、全呼び出しに固定文字列を T として返す。"}
+    ],
+    "answer":"B",
+    "explanation":{"en":"T can be number, an object or another type, so a fixed string cannot satisfy every T. Returning value preserves the relationship between input and output. Generics describe that relationship rather than converting data.","zh":"T 可能是 number、对象或其他类型，因此固定字符串不可能满足所有 T。返回 value 才能保留输入输出的类型关系。泛型用于描述关系，不会自动转换数据。","ja":"T は number やオブジェクトなどにもなるため、固定文字列を常に T として返せない。value を返せば入力と出力の型の関係が保たれる。ジェネリックは変換機能ではない。"},
+    "fixed":"function identity<T>(value: T): T {\n  return value;\n}","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/generics.html"
+  },
+  {
+    "id":"typescript-17",
+    "prompt":{"en":"key must be a key actually declared on User. Which assignment is valid?","zh":"key 必须是 User 实际声明的键。哪项赋值有效？","ja":"key は User で宣言したキーに限定する。有効な代入はどれか。"},
+    "code":"type User = { name: string; age: number };\nconst key: keyof User = \"email\";",
+    "options":[
+      {"en":"Assign \"name\" or \"age\"; keyof User is their literal union.","zh":"赋值为 \"name\" 或 \"age\"；keyof User 是这两个字面量的联合。","ja":"\"name\" または \"age\" を代入する。keyof User はこの2つのリテラルのユニオン。"},
+      {"en":"Assign \"string\" because one property has the string type.","zh":"赋值为 \"string\"，因为一个属性的类型是 string。","ja":"プロパティの型に string があるので \"string\" を代入する。"},
+      {"en":"Assign 20 because keyof extracts numeric property values.","zh":"赋值为 20，因为 keyof 提取数字属性值。","ja":"keyof は数値の属性値を取り出すので 20 を代入する。"},
+      {"en":"Keep \"email\"; keyof automatically adds missing object properties.","zh":"保留 \"email\"，keyof 会自动新增缺少的属性。","ja":"keyof が不足属性を追加するので \"email\" のままでよい。"}
+    ],
+    "answer":"A",
+    "explanation":{"en":"For this type, keyof User is \"name\" | \"age\". It refers to property names, not their value types or values. It does not change the runtime object or invent an email field.","zh":"这里 keyof User 为 \"name\" | \"age\"，表示属性名，而非属性值或属性值的类型。它不会修改运行时对象，也不会创造 email 字段。","ja":"この keyof User は \"name\" | \"age\"。属性名を表し、属性の値や値の型ではない。実行時のオブジェクトを変更したり email を作ったりはしない。"},
+    "fixed":"type User = { name: string; age: number };\nconst key: keyof User = \"name\";","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/keyof-types.html"
+  },
+  {
+    "id":"typescript-18",
+    "prompt":{"en":"The greeting table requires both English and Japanese entries. What is the correct review finding?","zh":"问候表必须同时提供英语和日语条目。正确的审查结论是什么？","ja":"挨拶の表には英語と日本語の両方が必須。正しい指摘はどれか。"},
+    "code":"type Locale = \"en\" | \"ja\";\nconst greetings: Record<Locale, string> = { en: \"Hello\" };",
+    "options":[
+      {"en":"Record automatically generates the Japanese translation.","zh":"Record 会自动生成日语翻译。","ja":"Record が日本語訳を自動生成する。"},
+      {"en":"Only one key is required because Locale is a union.","zh":"Locale 是联合类型，因此只需要提供其中一个键。","ja":"Locale はユニオンなのでキーは片方だけでよい。"},
+      {"en":"The en value must be a number, not text.","zh":"en 的值必须是数字，而不是文本。","ja":"en の値は文字列ではなく数値が必要。"},
+      {"en":"Add a ja entry with a string value.","zh":"补上字符串值的 ja 条目。","ja":"文字列の値を持つ ja 項目を追加する。"}
+    ],
+    "answer":"D",
+    "explanation":{"en":"Record<Locale, string> requires every key in Locale, each mapping to a string. A union in the key position does not mean that one key may be omitted. Types do not generate translations at runtime.","zh":"Record<Locale, string> 要求 Locale 中每个键都存在，且值为字符串。键类型中的联合不表示允许缺少其中一个键，类型也不会在运行时生成翻译。","ja":"Record<Locale, string> は Locale の全キーに文字列の値を要求する。キーのユニオンは一方を省略できるという意味ではない。型が実行時に翻訳を作ることもない。"},
+    "fixed":"type Locale = \"en\" | \"ja\";\nconst greetings: Record<Locale, string> = { en: \"Hello\", ja: \"こんにちは\" };","diagnostic":2741,
+    "source":"https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type"
+  },
+  {
+    "id":"typescript-19",
+    "prompt":{"en":"An update may omit theme. If omitted, the label should use LIGHT. Which change is safe?","zh":"更新对象可能省略 theme。省略时标签应使用 LIGHT。哪项修复安全？","ja":"更新では theme が省略されることもある。その場合は LIGHT を使う。安全な修正はどれか。"},
+    "code":"type Settings = { theme: string };\nfunction themeLabel(update: Partial<Settings>): string {\n  return update.theme.toUpperCase();\n}",
+    "options":[
+      {"en":"Partial leaves all fields required, so keep the code.","zh":"Partial 不会改变必填属性，所以保持不变。","ja":"Partial でも全項目は必須なので修正しない。"},
+      {"en":"Return (update.theme ?? \"light\").toUpperCase().","zh":"返回 (update.theme ?? \"light\").toUpperCase()。","ja":"(update.theme ?? \"light\").toUpperCase() を返す。"},
+      {"en":"Rename Partial to Required without changing the accepted input contract.","zh":"把 Partial 换成 Required，接收的输入约定不会变化。","ja":"Partial を Required にしても入力の契約は変わらない。"},
+      {"en":"Call toUpperCase first, then test whether theme is undefined.","zh":"先调用 toUpperCase，再判断 theme 是否为 undefined。","ja":"先に toUpperCase を呼び、その後 theme が undefined か調べる。"}
+    ],
+    "answer":"B",
+    "explanation":{"en":"Partial makes every property optional; reading theme can therefore yield undefined. Apply the default before calling a string method. Changing the parameter to Required would reject the intentionally supported empty update.","zh":"Partial 会把所有属性变成可选，因此读取 theme 可能得到 undefined。应先提供默认值，再调用字符串方法。把参数改成 Required 会拒绝原本允许的空更新对象。","ja":"Partial は全属性を任意にするので theme は undefined の可能性がある。文字列メソッドの前に既定値を補う。Required にすると、許容したい空の更新を拒否してしまう。"},
+    "fixed":"type Settings = { theme: string };\nfunction themeLabel(update: Partial<Settings>): string {\n  return (update.theme ?? \"light\").toUpperCase();\n}","diagnostic":18048,
+    "source":"https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype"
+  },
+  {
+    "id":"typescript-20",
+    "prompt":{"en":"This object literal must contain only the id field selected by PublicUser. What should be changed?","zh":"这个对象字面量应只包含 PublicUser 选取的 id 字段。应该修改什么？","ja":"このオブジェクトリテラルには PublicUser が選んだ id だけを含めたい。何を変更すべきか。"},
+    "code":"type User = { id: number; name: string };\ntype PublicUser = Pick<User, \"id\">;\nconst user: PublicUser = { id: 1, name: \"Kai\" };",
+    "options":[
+      {"en":"Pick always retains every field, so there is no excess property.","zh":"Pick 会保留所有字段，因此不存在多余属性。","ja":"Pick は全属性を残すので余分な属性はない。"},
+      {"en":"Remove id and retain only name.","zh":"删除 id，只保留 name。","ja":"id を削除し name だけを残す。"},
+      {"en":"Remove name from this fresh object literal.","zh":"从这个新对象字面量中移除 name。","ja":"この新しいオブジェクトリテラルから name を削除する。"},
+      {"en":"Use Pick<User, \"missing\"> to hide the compiler error.","zh":"使用 Pick<User, \"missing\"> 隐藏编译错误。","ja":"Pick<User, \"missing\"> でコンパイルエラーを隠す。"}
+    ],
+    "answer":"C",
+    "explanation":{"en":"Pick<User, \"id\"> describes only id, so this fresh literal gets an excess-property error for name. Remove the field here. Pick is a compile-time type operation, not a runtime filter that strips fields from existing objects.","zh":"Pick<User, \"id\"> 只描述 id，因此这个新对象字面量中的 name 会触发多余属性检查。应在这里移除该字段。Pick 只是编译期类型操作，不会从现有运行时对象中自动过滤字段。","ja":"Pick<User, \"id\"> が表すのは id のみ。この新しいリテラルの name は余分な属性として検査される。ここでは name を削除する。Pick は既存オブジェクトの属性を実行時に除去する機能ではない。"},
+    "fixed":"type User = { id: number; name: string };\ntype PublicUser = Pick<User, \"id\">;\nconst user: PublicUser = { id: 1 };","diagnostic":2353,
+    "source":"https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys"
+  },
+  {
+    "id":"typescript-21",
+    "prompt":{"en":"An async function resolves to a number. Which return annotation is correct?","zh":"异步函数最终得到一个数字。正确的返回类型标注是什么？","ja":"async 関数が最終的に数値を返す。正しい戻り値の注釈はどれか。"},
+    "code":"async function loadCount(): number {\n  return 42;\n}",
+    "options":[
+      {"en":"number; async returns the number synchronously.","zh":"number；async 会同步返回这个数字。","ja":"number。async でも数値を同期的に返す。"},
+      {"en":"Promise<string>; every resolved number becomes a string.","zh":"Promise<string>；异步得到的数字都会变成字符串。","ja":"Promise<string>。解決された数値は必ず文字列になる。"},
+      {"en":"Promise<number>; async wraps the returned value in a promise.","zh":"Promise<number>；async 会把返回值包装在 Promise 中。","ja":"Promise<number>。async は戻り値を Promise で包む。"},
+      {"en":"void; an async function cannot have a useful result.","zh":"void；异步函数不能返回有用的结果。","ja":"void。async 関数は結果を返せない。"}
+    ],
+    "answer":"C",
+    "explanation":{"en":"The caller receives a Promise<number>, not an immediate number. Inside an async function, returning 42 resolves that promise with 42. The annotation should describe what callers receive.","zh":"调用者得到的是 Promise<number>，而非立刻得到数字。在 async 函数内 return 42，会让该 Promise 以 42 为结果完成。返回标注应描述调用者实际收到的类型。","ja":"呼び出し側が受け取るのは即座の数値ではなく Promise<number>。async 内の return 42 は Promise を 42 で解決する。注釈も呼び出し側が受け取る型に合わせる。"},
+    "fixed":"async function loadCount(): Promise<number> {\n  return 42;\n}","diagnostic":1064,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#functions-which-return-promises"
+  },
+  {
+    "id":"typescript-22",
+    "prompt":{"en":"This function should uppercase the resolved text. Which fix handles the promise correctly?","zh":"函数应把异步得到的文本转成大写。哪项修复正确处理了 Promise？","ja":"解決後のテキストを大文字にしたい。Promise を正しく扱う修正はどれか。"},
+    "code":"async function readLabel(): Promise<string> {\n  const value: Promise<string> = Promise.resolve(\"ready\");\n  return value.toUpperCase();\n}",
+    "options":[
+      {"en":"Rename value to text; its type changes to string.","zh":"把 value 改名为 text，类型就会变成 string。","ja":"value を text に改名すれば string になる。"},
+      {"en":"Await value, then call toUpperCase on the resolved string.","zh":"先 await value，再对得到的字符串调用 toUpperCase。","ja":"value を await してから解決後の文字列に toUpperCase を呼ぶ。"},
+      {"en":"Remove async while leaving the promise and return statement unchanged.","zh":"删除 async，但保留 Promise 和原返回语句。","ja":"Promise と return はそのままで async だけ削除する。"},
+      {"en":"Use value as string; this waits for the promise.","zh":"使用 value as string，这会等待 Promise 完成。","ja":"value as string にすれば Promise の完了を待てる。"}
+    ],
+    "answer":"B",
+    "explanation":{"en":"Promise<string> is a promise object, not the eventual string. await obtains the resolved value inside this async function. A type assertion does not wait, unwrap or transform a promise at runtime.","zh":"Promise<string> 是 Promise 对象，不是最终的字符串。在该 async 函数里，await 才会取得完成后的值。类型断言不会在运行时等待、解包或转换 Promise。","ja":"Promise<string> は Promise オブジェクトであり、最終的な文字列ではない。async 内で await すると解決した値を得られる。型アサーションには待機や実行時の取り出し機能はない。"},
+    "fixed":"async function readLabel(): Promise<string> {\n  const value: Promise<string> = Promise.resolve(\"ready\");\n  return (await value).toUpperCase();\n}","diagnostic":2339,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#functions-which-return-promises"
+  },
+  {
+    "id":"typescript-23",
+    "prompt":{"en":"If no user named Kai exists, return an empty string. Which correction handles find safely?","zh":"若没有名叫 Kai 的用户，应返回空字符串。如何安全处理 find？","ja":"Kai という利用者がいなければ空文字を返す。find を安全に扱う修正はどれか。"},
+    "code":"function findName(users: { name: string }[]): string {\n  return users.find(user => user.name === \"Kai\").name;\n}",
+    "options":[
+      {"en":"find always returns the first array item, even when there is no match.","zh":"即使没有匹配，find 也总会返回数组首项。","ja":"一致がなくても find は必ず先頭要素を返す。"},
+      {"en":"Replace find with filter and keep reading .name from the result.","zh":"把 find 改为 filter，仍直接读取返回结果的 .name。","ja":"find を filter にして、結果の .name をそのまま読む。"},
+      {"en":"Append ! to the result because it creates a missing user.","zh":"给返回结果加 !，它会创建缺失的用户。","ja":"結果に ! を付ければ利用者が存在しなくても作られる。"},
+      {"en":"Use users.find(...)?.name ?? \"\".","zh":"使用 users.find(...)?.name ?? \"\"。","ja":"users.find(...)?.name ?? \"\" を使う。"}
+    ],
+    "answer":"D",
+    "explanation":{"en":"find may return undefined. Optional chaining protects the property access, and ?? supplies the required fallback. filter returns an array, not a single user. A non-null assertion would not handle the missing-user case.","zh":"find 可能返回 undefined。可选链保护属性读取，?? 提供约定的默认值。filter 返回数组而非单个用户；非空断言也不能真正处理找不到用户的情况。","ja":"find は undefined を返すことがある。?. で属性アクセスを守り、?? で既定値を補う。filter が返すのは配列。非 null アサーションは利用者不在の処理にはならない。"},
+    "fixed":"function findName(users: { name: string }[]): string {\n  return users.find(user => user.name === \"Kai\")?.name ?? \"\";\n}","diagnostic":2532,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#strictnullchecks-on"
+  },
+  {
+    "id":"typescript-24",
+    "prompt":{"en":"Under strict checking, the caught value is unknown. What should the reviewer request before accessing message?","zh":"严格检查下，catch 捕获的值是 unknown。访问 message 前应做什么？","ja":"strict では catch した値は unknown。message を読む前に何をすべきか。"},
+    "code":"try {\n  throw new Error(\"Network unavailable\");\n} catch (error) {\n  console.log(error.message);\n}",
+    "options":[
+      {"en":"Check error instanceof Error; otherwise handle the non-Error value separately.","zh":"检查 error instanceof Error；否则单独处理非 Error 的值。","ja":"error instanceof Error を確認し、Error 以外は別に処理する。"},
+      {"en":"Assume every thrown JavaScript value is an Error instance.","zh":"假设 JavaScript 抛出的任何值都是 Error 实例。","ja":"JavaScript で投げられる値はすべて Error だと仮定する。"},
+      {"en":"Declare catch (error: Error); JavaScript will convert thrown strings.","zh":"写成 catch (error: Error)，JavaScript 就会转换抛出的字符串。","ja":"catch (error: Error) と書けば投げられた文字列が変換される。"},
+      {"en":"Use error!; that proves message exists on every caught value.","zh":"使用 error!，这能证明每个捕获值都有 message。","ja":"error! を使えば全ての捕捉値に message があると証明できる。"}
+    ],
+    "answer":"A",
+    "explanation":{"en":"JavaScript can throw non-Error values too. instanceof Error narrows the caught value and makes message access safe; provide a fallback for other values. A type assertion alone would not validate what was thrown.","zh":"JavaScript 也可以抛出非 Error 值。instanceof Error 能缩窄捕获值，让 message 访问安全；其他值应有备用处理。仅靠类型断言无法验证实际抛出的内容。","ja":"JavaScript は Error 以外も throw できる。instanceof Error で絞り込めば message を安全に読める。その他の値には別の処理を用意する。アサーションだけでは実際の値を検証できない。"},
+    "fixed":"try {\n  throw new Error(\"Network unavailable\");\n} catch (error) {\n  console.log(error instanceof Error ? error.message : String(error));\n}","diagnostic":18046,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing"
+  },
+  {
+    "id":"typescript-25",
+    "prompt":{"en":"A successful result has value; a failed result has error. Which review comment handles both variants?","zh":"成功结果有 value，失败结果有 error。哪条意见正确处理了两个分支？","ja":"成功なら value、失敗なら error を持つ。両方を処理する正しい指摘はどれか。"},
+    "code":"type Result =\n  | { ok: true; value: string }\n  | { ok: false; error: string };\nfunction read(result: Result): string {\n  return result.value;\n}",
+    "options":[
+      {"en":"Read value first; a missing field automatically becomes the error string.","zh":"直接读取 value，缺失时会自动变成错误字符串。","ja":"value を先に読めば、なければ自動的にエラー文字列になる。"},
+      {"en":"Branch on result.ok, using value for success and error for failure.","zh":"根据 result.ok 分支，成功读取 value，失败读取 error。","ja":"result.ok で分岐し、成功側は value、失敗側は error を読む。"},
+      {"en":"Change | to & to keep the same two-variant model.","zh":"把 | 改为 &，仍可保留相同的两分支模型。","ja":"| を & にしても同じ2パターンのモデルを保てる。"},
+      {"en":"Rename value to error on the return line; every variant has error.","zh":"把返回行的 value 改成 error，因为所有分支都有 error。","ja":"全パターンに error があるので return の value を error にする。"}
+    ],
+    "answer":"B",
+    "explanation":{"en":"The literal ok property is a discriminator. Checking it narrows Result to the matching member, so only that member's fields are read. Neither value nor error exists on every possible result.","zh":"字面量属性 ok 是判别字段。判断它后，Result 会缩窄到对应成员，才能读取该成员独有的字段。value 和 error 都不是所有结果共有的属性。","ja":"リテラルの ok が判別子になる。その値で分岐すると対応するメンバーに絞り込まれ、専用の属性を読める。value も error も全パターン共通ではない。"},
+    "fixed":"type Result =\n  | { ok: true; value: string }\n  | { ok: false; error: string };\nfunction read(result: Result): string {\n  return result.ok ? result.value : result.error;\n}","diagnostic":2339,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions"
+  },
+  {
+    "id":"typescript-26",
+    "prompt":{"en":"Reporter promises callers a callback accepting text. What is wrong with this implementation?","zh":"Reporter 向调用者承诺回调接受文本。这个实现的问题是什么？","ja":"Reporter のコールバックは文字列を受け取る契約。この実装の問題はどれか。"},
+    "code":"type Reporter = { report: (message: string) => void };\nconst reporter: Reporter = {\n  report: (message: number) => { console.log(message); }\n};",
+    "options":[
+      {"en":"void means the function cannot accept parameters.","zh":"void 表示函数不能接受参数。","ja":"void は引数を取れないという意味。"},
+      {"en":"Change console.log to console.info to fix the parameter mismatch.","zh":"把 console.log 改为 console.info 即可修复参数类型。","ja":"console.log を console.info にすれば引数の型不一致が直る。"},
+      {"en":"A property callback must always be declared with function instead of an arrow.","zh":"对象属性回调必须使用 function，不能用箭头函数。","ja":"属性のコールバックにはアロー関数を使えず、必ず function が必要。"},
+      {"en":"The implementation accepts number, but the contract requires string; type message as string.","zh":"实现接受 number，但约定要求 string；应把 message 标注为 string。","ja":"実装は number、契約は string を要求する。message を string にする。"}
+    ],
+    "answer":"D",
+    "explanation":{"en":"A caller is entitled to call reporter.report with a string. A number-only implementation cannot fulfill that contract. void describes the return value's usage, not the number or type of parameters.","zh":"调用者有权给 reporter.report 传入字符串。只接受 number 的实现无法履行此约定。void 描述返回值的用途，并不决定参数数量或参数类型。","ja":"呼び出し側は reporter.report に文字列を渡せる。number 専用の実装では契約を満たせない。void は戻り値の扱いを表し、引数の数や型を決めるものではない。"},
+    "fixed":"type Reporter = { report: (message: string) => void };\nconst reporter: Reporter = {\n  report: (message: string) => { console.log(message); }\n};","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/functions.html#function-type-expressions"
+  },
+  {
+    "id":"typescript-27",
+    "prompt":{"en":"Every palette value must be a string. How should the reviewer fix this satisfies check?","zh":"palette 的每个值都必须是字符串。应如何修复这个 satisfies 检查？","ja":"palette の各値は文字列にしたい。satisfies の検査を直す修正はどれか。"},
+    "code":"const palette = {\n  red: \"#ff0000\",\n  blue: 123\n} satisfies Record<string, string>;",
+    "options":[
+      {"en":"Use a string color such as \"#0000ff\" for blue.","zh":"把 blue 改为 \"#0000ff\" 这样的字符串颜色。","ja":"blue を \"#0000ff\" などの文字列の色にする。"},
+      {"en":"Keep 123; satisfies converts it to text.","zh":"保留 123，satisfies 会把它转成文本。","ja":"satisfies が文字列へ変換するので 123 を残す。"},
+      {"en":"Add as const; a readonly number becomes a string.","zh":"添加 as const，只读数字就会变成字符串。","ja":"as const を付ければ読み取り専用の数値は文字列になる。"},
+      {"en":"Rename blue to blueText; property names determine value types.","zh":"把 blue 改名为 blueText，属性名会决定值的类型。","ja":"blue を blueText にすれば名前によって値の型が決まる。"}
+    ],
+    "answer":"A",
+    "explanation":{"en":"satisfies checks compatibility without performing a runtime conversion. The number 123 violates the string-value contract. Fix the data rather than removing a useful check or casting the mismatch away.","zh":"satisfies 检查类型兼容性，不会进行运行时转换。数字 123 不符合字符串值的约定。应修复数据，而不是删掉有效检查或用断言掩盖不匹配。","ja":"satisfies は型の適合を検査し、実行時変換はしない。数値 123 は文字列という契約に違反する。検査を消したりアサーションで隠したりせずデータを直す。"},
+    "fixed":"const palette = {\n  red: \"#ff0000\",\n  blue: \"#0000ff\"\n} satisfies Record<string, string>;","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html#the-satisfies-operator"
+  },
+  {
+    "id":"typescript-28",
+    "prompt":{"en":"With noUncheckedIndexedAccess enabled, the list may be empty. How can firstLabel safely return an uppercase string or an empty string?","zh":"开启 noUncheckedIndexedAccess，列表可能为空。firstLabel 如何安全返回大写文本或空字符串？","ja":"noUncheckedIndexedAccess 有効で、配列は空かもしれない。大文字の文字列か空文字を安全に返すにはどうするか。"},
+    "code":"function firstLabel(items: string[]): string {\n  return items[0].toUpperCase();\n}",
+    "options":[
+      {"en":"Use items[-1]; negative indexes guarantee an element.","zh":"使用 items[-1]，负下标保证元素存在。","ja":"items[-1] なら要素が必ず存在する。"},
+      {"en":"Use items[0]?.toUpperCase() ?? \"\".","zh":"使用 items[0]?.toUpperCase() ?? \"\"。","ja":"items[0]?.toUpperCase() ?? \"\" を使う。"},
+      {"en":"Change string[] to readonly string[]; readonly means nonempty.","zh":"改为 readonly string[]，readonly 意味着数组非空。","ja":"readonly string[] にすれば空でないことが保証される。"},
+      {"en":"Call toUpperCase before checking whether index 0 exists.","zh":"先调用 toUpperCase，再检查下标 0 是否存在。","ja":"toUpperCase の呼び出し後に0番目の存在を調べる。"}
+    ],
+    "answer":"B",
+    "explanation":{"en":"With this flag, an unchecked array lookup may yield undefined. Optional chaining and a fallback handle empty input. readonly prevents mutation through a reference; it does not promise a nonempty array.","zh":"该选项启用后，未经检查的数组取值可能为 undefined。可选链和默认值可以处理空输入。readonly 限制通过引用修改数组，不保证数组非空。","ja":"この設定では未確認の添字アクセスは undefined を含む。?. と既定値で空入力を扱える。readonly は参照からの変更を制限するだけで、配列が空でないとは保証しない。"},
+    "fixed":"function firstLabel(items: string[]): string {\n  return items[0]?.toUpperCase() ?? \"\";\n}","diagnostic":2532,
+    "source":"https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html"
+  },
+  {
+    "id":"typescript-29",
+    "prompt":{"en":"With exactOptionalPropertyTypes enabled, omit an absent nickname rather than explicitly assigning undefined. Which object matches that requirement?","zh":"开启 exactOptionalPropertyTypes；昵称缺失时应省略属性，而不是显式赋值 undefined。哪个对象符合要求？","ja":"exactOptionalPropertyTypes 有効。ニックネームがなければ undefined を代入せず属性を省略する。どのオブジェクトが要件に合うか。"},
+    "code":"type User = { nickname?: string };\nconst user: User = { nickname: undefined };",
+    "options":[
+      {"en":"Use { nickname: false }; ? allows every value.","zh":"使用 { nickname: false }，? 允许任意值。","ja":"? は全ての値を許すので { nickname: false } にする。"},
+      {"en":"Use { nickname: null }; null and absence are identical in this type.","zh":"使用 { nickname: null }，这个类型中 null 等于省略。","ja":"{ nickname: null } を使う。この型では null と省略は同じ。"},
+      {"en":"Use const user: User = {}; the optional property is absent.","zh":"使用 const user: User = {}，真正省略该可选属性。","ja":"const user: User = {} とし、任意属性を省略する。"},
+      {"en":"Keep the assignment; the flag makes no distinction between missing and undefined.","zh":"保持不变，该选项不会区分缺失和 undefined。","ja":"そのままでよい。この設定も省略と undefined を区別しない。"}
+    ],
+    "answer":"C",
+    "explanation":{"en":"Under this flag, nickname?: string allows omission or a present string, not a present undefined. {} meets the requirement. If explicit undefined were part of the API contract, it would need to be included in the property's value type.","zh":"该选项下，nickname?: string 允许省略属性，或提供字符串值，但不允许属性存在且值为 undefined。{} 符合要求。如果 API 确实约定允许显式 undefined，应把它写进属性值类型。","ja":"この設定の nickname?: string は省略か文字列を許すが、属性が存在して値が undefined という形は許さない。{} が要件に合う。明示的な undefined を許す契約なら値の型に含める必要がある。"},
+    "fixed":"type User = { nickname?: string };\nconst user: User = {};","diagnostic":2375,
+    "source":"https://www.typescriptlang.org/tsconfig/exactOptionalPropertyTypes.html"
+  },
+  {
+    "id":"typescript-30",
+    "prompt":{"en":"This never assignment checks that every action was handled. Which missing implementation should the reviewer request?","zh":"这里的 never 赋值用于检查是否处理了所有动作。审查者应要求补上哪个实现？","ja":"never への代入で全アクションの処理漏れを検査している。何を追加すべきか。"},
+    "code":"type Action = { type: \"save\" } | { type: \"delete\" };\nfunction handle(action: Action): string {\n  switch (action.type) {\n    case \"save\": return \"saved\";\n    default: {\n      const unhandled: never = action;\n      return unhandled;\n    }\n  }\n}",
+    "options":[
+      {"en":"Add case \"delete\" with its own return path, leaving the never check.","zh":"补上 case \"delete\" 及其返回分支，保留 never 检查。","ja":"case \"delete\" と戻り値を追加し、never の検査は残す。"},
+      {"en":"Delete the never check and silently treat delete as save.","zh":"删除 never 检查，并悄悄把 delete 当作 save。","ja":"never の検査を消し、delete を黙って save と同じに扱う。"},
+      {"en":"Rename unhandled to handled; names control exhaustive checking.","zh":"把 unhandled 改名为 handled，变量名会控制穷尽检查。","ja":"unhandled を handled に改名すれば網羅性の検査が変わる。"},
+      {"en":"Replace never with any because any proves every case is handled.","zh":"把 never 改为 any，因为 any 能证明所有分支已处理。","ja":"any は全ケースの処理済みを証明するので never を any にする。"}
+    ],
+    "answer":"A",
+    "explanation":{"en":"After save returns, delete still reaches default, so action is not never. Add the missing delete branch. Keeping the never check makes a future unhandled action a type error instead of a silent fall-through.","zh":"save 返回后，delete 仍会进入 default，因此 action 还不是 never。应补上 delete 分支。保留 never 检查，可以让未来新增但未处理的动作触发类型错误，而非悄悄漏掉。","ja":"save の処理後も delete が default に到達するので action は never ではない。delete 分岐を追加する。never の検査を残せば、将来の追加時も処理漏れを型エラーとして検出できる。"},
+    "fixed":"type Action = { type: \"save\" } | { type: \"delete\" };\nfunction handle(action: Action): string {\n  switch (action.type) {\n    case \"save\": return \"saved\";\n    case \"delete\": return \"deleted\";\n    default: {\n      const unhandled: never = action;\n      return unhandled;\n    }\n  }\n}","diagnostic":2322,
+    "source":"https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking"
+  }
+]

@@ -155,7 +155,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">13 个题库 · 共 5162 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <p class="sub">13 个题库 · 共 5192 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
@@ -200,7 +200,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 5162</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 5192</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -300,6 +300,12 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
           <div class="top"><span class="tg">代码审查 · 样式</span><span class="cnt">20 题</span></div>
           <h3>CSS 入门 · 代码审查训练</h3>
           <p class="sd">盒模型、定位、层叠与布局。每题四选一，附答案与解析，中英日对照。</p>
+          <div class="pg"><i></i><span>未开始</span></div>
+        </a>
+        <a class="card" href="programming/typescript.html" data-site="programming-typescript">
+          <div class="top"><span class="tg">代码审查 · 类型</span><span class="cnt">30 题</span></div>
+          <h3>TypeScript 入门 · 代码审查训练</h3>
+          <p class="sd">类型、函数、空值检查与异步基础。30 道四选一，附中英日题干、选项与解析。</p>
           <div class="pg"><i></i><span>未开始</span></div>
         </a>
       </div>
@@ -405,6 +411,7 @@ function aifKeys(){
 var SITES={
   "programming":{keys:[["programming:html:01",20]]},
   "programming-css":{keys:[["programming:css:01",20]]},
+  "programming-typescript":{keys:[["programming:typescript:01",30]]},
   "dele-a1":{keys:[["dele-a1-a1-modelo0-2020",50],["dele-a1-a1-modelo0-2008",50],
                    ["dele-a1-a1-0720",25],["dele-a1-a1-2009-0516",50],
                    ["dele-a1-a1-2011",50]]},

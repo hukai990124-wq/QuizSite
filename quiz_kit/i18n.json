@@ -2216,5 +2216,12 @@
   "AWS AIP-C01 练习卷 · 第 03 套": {"en": "AWS AIP-C01 Practice · Paper 03", "ja": "AWS AIP-C01 演習・第03セット"},
   "50 题 · #001–#050": {"en": "50 questions · #001–#050", "ja": "50問・#001–#050"},
   "50 题 · #051–#100": {"en": "50 questions · #051–#100", "ja": "50問・#051–#100"},
-  "36 题 · #101–#136": {"en": "36 questions · #101–#136", "ja": "36問・#101–#136"}
+  "36 题 · #101–#136": {"en": "36 questions · #101–#136", "ja": "36問・#101–#136"},
+  "13 个题库 · 共 5192 题次 · 可作答判分 · 登录后跨设备同步": {"en": "13 question banks · 5,192 attempts · instant scoring · sign in to sync across devices", "ja": "13の問題集・全5,192問・即時採点・ログインしてデバイス間で同期"},
+  "TypeScript 入门 · 代码审查训练": {"en": "TypeScript basics · Code review practice", "ja": "TypeScript入門・コードレビュー演習"},
+  "代码审查 · 类型": {"en": "Code review · Types", "ja": "コードレビュー・型"},
+  "30 题": {"en": "30 questions", "ja": "30問"},
+  "30 道四选一 · 阅读代码，辨认问题，选择修复 · 原创练习": {"en": "30 four-choice questions · read code, identify defects and choose fixes · original practice", "ja": "4択30問・コードを読み、問題点と修正を選ぶ・オリジナル演習"},
+  "类型、函数、空值检查与异步基础。30 道四选一，附中英日题干、选项与解析。": {"en": "Types, functions, null checks and async basics. 30 four-choice questions with English, Chinese and Japanese prompts, choices and explanations.", "ja": "型、関数、nullチェック、非同期の基礎。4択30問。問題文・選択肢・解説は英中日対応。"},
+  "按 strict 模式审查；第 28–29 题注明额外配置。示例只展示，不会执行。": {"en": "Review in strict mode; questions 28–29 specify extra compiler settings. Examples are displayed, never executed.", "ja": "strict モードでレビューする。28–29問は追加設定を明記。例は表示のみで実行しない。"}
 }

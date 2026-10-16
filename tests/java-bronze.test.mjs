@@ -66,8 +66,8 @@ test('homepage lists the Java Bronze bank and registers its progress', async () 
   assert.match(page, /data-site="java-bronze"/);
   assert.ok(page.includes('"java-bronze":{keys:[["jb:practice:01",20],["jb:exam:60",60]]}'),
     'the bank must register both sets');
-  assert.match(page, /13 个题库 · 共 5162 题次/);
-  assert.match(page, /id="ov-txt">0 \/ 5162</);
+  assert.match(page, /13 个题库 · 共 5192 题次/);
+  assert.match(page, /id="ov-txt">0 \/ 5192</);
   // OPC stays the last card of the main bank area, as requested.
   const opc = page.indexOf('href="workbuddy-opc/index.html"');
   const jb = page.indexOf('href="java-bronze/index.html"');
@@ -118,7 +118,7 @@ test('practice page links to the mock exam and the homepage counts both', async 
   const home = await load('site/index.html');
   assert.ok(home.includes('"java-bronze":{keys:[["jb:practice:01",20],["jb:exam:60",60]]}'),
     'homepage must register both the practice set and the mock exam');
-  assert.match(home, /13 个题库 · 共 5162 题次/);
-  assert.match(home, /id="ov-txt">0 \/ 5162</);
+  assert.match(home, /13 个题库 · 共 5192 题次/);
+  assert.match(home, /id="ov-txt">0 \/ 5192</);
   assert.match(home, />80 题</);
 });
