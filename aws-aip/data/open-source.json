@@ -1,0 +1,105 @@
+{
+  "repository": "https://github.com/JeremyEngineer/aws-aip-c01-practice-exam",
+  "commit": "509c7e42a0da2ad7af4a2ac4ca4df6a0f17ea615",
+  "files": [
+    {
+      "tier": "easy",
+      "sha256": "b521604eb891056791aa91ef8ab7dd44d4276ac17a7bd112d7173575d5f6d078",
+      "count": 196
+    },
+    {
+      "tier": "hard",
+      "sha256": "f5a792c999fc5f7c11bd17f00918c673335b7f7d9b5ca0a2c7c3a83c16cfb322",
+      "count": 135
+    },
+    {
+      "tier": "veryhard",
+      "sha256": "dea6383e059862b721cc4d9a21aa6dab11958565adb8b89926ed3644bc536ca2",
+      "count": 131
+    }
+  ],
+  "excluded": [
+    {
+      "id": "hard:bp-1",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-2",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-3",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-4",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-5",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-6",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-7",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-8",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-9",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-10",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-11",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-12",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-13",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-14",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-15",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-16",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-17",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-18",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-19",
+      "source": "BenchPrep"
+    },
+    {
+      "id": "hard:bp-20",
+      "source": "BenchPrep"
+    }
+  ],
+  "duplicates": [],
+  "imported": 442
+}

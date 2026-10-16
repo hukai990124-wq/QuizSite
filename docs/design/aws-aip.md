@@ -1,5 +1,7 @@
 # AIP-C01 supplied PDF bank
 
+The additional English/Chinese open-practice bank, licensing exclusions and current aggregate counts are described in [aip-open-practice.md](aip-open-practice.md). The original PDF questions and progress keys below remain unchanged.
+
 ## Scope and acceptance
 
 - Add a separate AWS AIP-C01 category beside the existing AWS categories. Retain WorkBuddy's MLA and Java pages unchanged.

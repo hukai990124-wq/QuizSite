@@ -1,0 +1,1323 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AWS AIP-C01 开源练习 · 基础 · 第 04 套</title><style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.stem p{margin:0 0 6px}.en{color:var(--en)}.zh,.ja{font-size:14px}.zh{color:var(--zh)}.ja{color:#6b3fa0;display:none}.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}.ja:before{content:"日訳 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}html[data-lang="ja"] .zh{display:none}html[data-lang="ja"] .ja{display:block}
+.opts{list-style:none;margin:12px 0 0;padding:0}.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}details.ans .correct{font-size:14px;margin:4px 0 8px}details.ans .correct b{color:#047857;font-size:16px}details.ans .expl{padding-bottom:12px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:15px 18px;margin-bottom:10px;text-decoration:none;color:#111827}
+a.card:hover{border-color:#93c5fd;background:#f8fbff}a.card .n{font-weight:700}.r{color:#6b7280;font-size:13px;margin-top:3px}
+.pg{position:relative;margin-top:9px}.pg::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:#e9eef2;border-radius:99px}
+.pg i{position:relative;display:block;height:5px;width:0;background:#0b6b3a;border-radius:99px;transition:width .3s}.pg span{display:block;font-size:12px;color:#8b95a1;margin-top:6px}.pg.on span{color:#0b6b3a;font-weight:600}
+@media print{body{background:#fff}.toolbar{display:none}.wrap{max-width:none;padding:0}.q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}details.ans{border:1px solid #ccc;background:#fff;display:block}details.ans .expl{display:block}}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* ===================== 手写填空（fill） ===================== */
+.q[data-kind="fill"] .fillrow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.q[data-kind="fill"] input.fill{font:inherit;font-size:15px;padding:8px 13px;border:1px solid #cbd5e1;
+ border-radius:8px;min-width:230px;max-width:100%;background:#fff;color:#0f172a}
+.q[data-kind="fill"] input.fill:focus{outline:none;border-color:#4a7fb5;box-shadow:0 0 0 3px rgba(74,127,181,.15)}
+.q[data-kind="fill"].done input.fill{background:#f1f5f9;color:#334155}
+.q[data-kind="fill"] input.fill.ok{border-color:#0b7a44;background:#eaf7ef;color:#0b5130;font-weight:600}
+.q[data-kind="fill"] input.fill.bad{border-color:#c0392b;background:#fdeeed;color:#8f2c20}
+.q[data-kind="fill"] .flabel{font-size:12px;color:#8b95a1}
+@media (max-width:560px){.q[data-kind="fill"] input.fill{min-width:0;width:100%}}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+
+html[data-lang="en"] .zh,html[data-lang="en"] .ja{display:none}
+.q{overflow-wrap:anywhere}
+.source-discussion{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;color:var(--muted)}
+.reference-note{font-size:13px;color:var(--muted)}
+.opt:focus-visible{outline:3px solid #2563eb;outline-offset:2px}
+</style><!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+</head><body><main class="wrap"><h1>AWS AIP-C01 开源练习 · 基础 · 第 04 套</h1><p class="sub">英文原题与中文机器翻译。本批暂不提供日文题文；日语界面显示英文原文。</p><p class="sub">开源练习，非 AWS 官方试题。按作者参考答案判分，解析附官方文档链接。</p><p class="sub"><a href="/aws-aip/index.html">← 题库目录</a></p><div class="toolbar"><div class="btns"><button id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>46</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div><div class="q" id="q1" data-source-id="easy:2.1-14" data-chat-context="AWS AIP-C01 · easy:2.1-14<br>Reference answer: A,B<br>A team must deploy existing Python agent code to Amazon Bedrock AgentCore Runtime with minimal overhead. It must auto-handle the HTTP server, /invocations and /ping endpoints, and support both sub-second and streaming responses. Which TWO approaches fit best?<br>团队必须以最小的开销将现有的 Python 代理代码部署到 Amazon Bedrock AgentCore Runtime。它必须自动处理 HTTP 服务器、/incalls 和 /ping 端点，并支持亚秒级和流式响应。哪两种方法最适合？<br>A. Use the AgentCore SDK with the @app.entrypoint decorator to auto-create the server and required endpoints<br>使用 AgentCore SDK 和 @app.entrypoint 装饰器来自动创建服务器和所需的端点<br>B. Use the AgentCore starter toolkit to package, containerize (ARM64), push to ECR, and deploy<br>使用 AgentCore 入门工具包进行打包、容器化 (ARM64)、推送到 ECR 和部署<br>C. Hand-build a FastAPI server with custom /invocations and /ping and your own container orchestration<br>使用自定义/调用和/ping以及您自己的容器编排手动构建FastAPI服务器<br>D. Deploy on Amazon ECS Fargate with a fully custom container image and task definitions<br>使用完全自定义的容器映像和任务定义在 Amazon ECS Fargate 上部署<br>E. Deploy on a SageMaker real-time endpoint with a custom inference container<br>使用自定义推理容器在 SageMaker 实时端点上部署" data-n="1" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 1</span><span class="badge">Domain 2 · Task 2.1 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A team must deploy existing Python agent code to Amazon Bedrock AgentCore Runtime with minimal overhead. It must auto-handle the HTTP server, /invocations and /ping endpoints, and support both sub-second and streaming responses. Which TWO approaches fit best?</p><p class="zh" lang="zh-CN">团队必须以最小的开销将现有的 Python 代理代码部署到 Amazon Bedrock AgentCore Runtime。它必须自动处理 HTTP 服务器、/incalls 和 /ping 端点，并支持亚秒级和流式响应。哪两种方法最适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use the AgentCore SDK with the @app.entrypoint decorator to auto-create the server and required endpoints</p><p class="zh" lang="zh-CN">使用 AgentCore SDK 和 @app.entrypoint 装饰器来自动创建服务器和所需的端点</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Use the AgentCore starter toolkit to package, containerize (ARM64), push to ECR, and deploy</p><p class="zh" lang="zh-CN">使用 AgentCore 入门工具包进行打包、容器化 (ARM64)、推送到 ECR 和部署</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Hand-build a FastAPI server with custom /invocations and /ping and your own container orchestration</p><p class="zh" lang="zh-CN">使用自定义/调用和/ping以及您自己的容器编排手动构建FastAPI服务器</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Deploy on Amazon ECS Fargate with a fully custom container image and task definitions</p><p class="zh" lang="zh-CN">使用完全自定义的容器映像和任务定义在 Amazon ECS Fargate 上部署</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Deploy on a SageMaker real-time endpoint with a custom inference container</p><p class="zh" lang="zh-CN">使用自定义推理容器在 SageMaker 实时端点上部署</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. The SDK auto-creates an HTTP server (port 8080), implements /invocations and /ping, and supports JSON and streaming responses.<br><br>B. The starter toolkit automates packaging, container build, ECR push, and CreateAgentRuntime deployment.<br><br>C. Manual FastAPI/Docker/orchestration adds the overhead AgentCore is meant to remove.<br><br>D. Custom ECS deployment increases operational overhead versus AgentCore&#x27;s managed flow.<br><br>E. A custom inference container adds infrastructure work AgentCore avoids.</p><p class="zh" lang="zh-CN">A. SDK 自动创建 HTTP 服务器（端口 8080），实现 /incalls 和 /ping，并支持 JSON 和流式响应。<br><br>B. 入门工具包可自动执行打包、容器构建、ECR 推送和 CreateAgentRuntime 部署。<br><br>C. 手动 FastAPI/Docker/编排增加了 AgentCore 本应消除的开销。<br><br>D. 与 AgentCore 的托管流程相比，自定义 ECS 部署增加了运营开销。<br><br>E. 自定义推理容器添加了 AgentCore 避免的基础设施工作。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q2" data-source-id="easy:2.1-15" data-chat-context="AWS AIP-C01 · easy:2.1-15<br>Reference answer: A<br>What does the AgentCore SDK&#x27;s @app.entrypoint decorator automatically provide?<br>AgentCore SDK 的 @app.entrypoint 装饰器自动提供什么？<br>A. An HTTP server (port 8080) with the required /invocations and /ping endpoints and content/streaming handling<br>具有所需的 /incalls 和 /ping 端点以及内容/流处理的 HTTP 服务器（端口 8080）<br>B. A managed vector database<br>托管矢量数据库<br>C. Automatic 7-year log retention<br>自动保留 7 年日志<br>D. A no-code visual workflow builder<br>无代码可视化工作流程构建器" data-n="2" data-ans="A">
+<div class="qhead"><span class="qno">Question 2</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">What does the AgentCore SDK&#x27;s @app.entrypoint decorator automatically provide?</p><p class="zh" lang="zh-CN">AgentCore SDK 的 @app.entrypoint 装饰器自动提供什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">An HTTP server (port 8080) with the required /invocations and /ping endpoints and content/streaming handling</p><p class="zh" lang="zh-CN">具有所需的 /incalls 和 /ping 端点以及内容/流处理的 HTTP 服务器（端口 8080）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">A managed vector database</p><p class="zh" lang="zh-CN">托管矢量数据库</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Automatic 7-year log retention</p><p class="zh" lang="zh-CN">自动保留 7 年日志</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A no-code visual workflow builder</p><p class="zh" lang="zh-CN">无代码可视化工作流程构建器</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. The decorator wires up the server, endpoints, content types, and JSON/streaming responses automatically.<br><br>B. It does not provision a vector store.<br><br>C. Retention is configured via logging/S3 Object Lock, not this decorator.<br><br>D. That is Prompt Flows, not the AgentCore SDK.</p><p class="zh" lang="zh-CN">A. 装饰器自动连接服务器、端点、内容类型和 JSON/流响应。<br><br>B. 它不提供矢量存储。<br><br>C. 保留是通过logging/S3 Object Lock配置的，而不是这个装饰器。<br><br>D. 那是提示流，而不是 AgentCore SDK。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q3" data-source-id="easy:2.1-16" data-chat-context="AWS AIP-C01 · easy:2.1-16<br>Reference answer: A<br>Which describes the AgentCore starter toolkit&#x27;s primary benefit?<br>哪项描述了 AgentCore 入门工具包的主要优点？<br>A. Automated packaging, ARM64 container build, ECR repository creation/push, and deployment via CreateAgentRuntime<br>自动打包、ARM64 容器构建、ECR 存储库创建/推送以及通过 CreateAgentRuntime 进行部署<br>B. It trains a foundation model from scratch<br>它从头开始训练基础模型<br>C. It redacts PII from documents<br>它从文档中编辑 PII<br>D. It is a vector reranker<br>这是一个向量重排序器" data-n="3" data-ans="A">
+<div class="qhead"><span class="qno">Question 3</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">Which describes the AgentCore starter toolkit&#x27;s primary benefit?</p><p class="zh" lang="zh-CN">哪项描述了 AgentCore 入门工具包的主要优点？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Automated packaging, ARM64 container build, ECR repository creation/push, and deployment via CreateAgentRuntime</p><p class="zh" lang="zh-CN">自动打包、ARM64 容器构建、ECR 存储库创建/推送以及通过 CreateAgentRuntime 进行部署</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">It trains a foundation model from scratch</p><p class="zh" lang="zh-CN">它从头开始训练基础模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">It redacts PII from documents</p><p class="zh" lang="zh-CN">它从文档中编辑 PII</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">It is a vector reranker</p><p class="zh" lang="zh-CN">这是一个向量重排序器</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. The toolkit streamlines build-and-deploy so you avoid manual containerization and deployment steps.<br><br>B. It deploys agents; it does not train base models.<br><br>C. PII redaction is Comprehend&#x27;s job.<br><br>D. Reranking is the Rerank API, not the starter toolkit.</p><p class="zh" lang="zh-CN">A. 该工具包简化了构建和部署，因此您可以避免手动容器化和部署步骤。<br><br>B. 它部署代理；它不训练基础模型。<br><br>C. PII 编辑是 Comprehend 的工作。<br><br>D. Reranking 是 Rerank API，而不是入门工具包。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q4" data-source-id="easy:2.1-17" data-chat-context="AWS AIP-C01 · easy:2.1-17<br>Reference answer: A<br>A developer wants an open-source SDK that builds agents with a &quot;model-driven&quot; approach — defining just a model, a system prompt, and a set of tools, and letting the model plan and call tools. Which is this?<br>A developer wants an open-source SDK that builds agents with a &quot;model-driven&quot; approach — defining just a model, a system prompt, and a set of tools, and letting the model plan and call tools.这是哪个？<br>A. Strands Agents<br>股线代理<br>B. Amazon Macie<br>亚马逊麦西<br>C. AWS Glue Data Quality<br>AWS Glue 数据质量<br>D. Amazon Polly<br>亚马逊波莉" data-n="4" data-ans="A">
+<div class="qhead"><span class="qno">Question 4</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">A developer wants an open-source SDK that builds agents with a &quot;model-driven&quot; approach — defining just a model, a system prompt, and a set of tools, and letting the model plan and call tools. Which is this?</p><p class="zh" lang="zh-CN">A developer wants an open-source SDK that builds agents with a &quot;model-driven&quot; approach — defining just a model, a system prompt, and a set of tools, and letting the model plan and call tools.这是哪个？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Strands Agents</p><p class="zh" lang="zh-CN">股线代理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon Macie</p><p class="zh" lang="zh-CN">亚马逊麦西</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">AWS Glue Data Quality</p><p class="zh" lang="zh-CN">AWS Glue 数据质量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon Polly</p><p class="zh" lang="zh-CN">亚马逊波莉</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Strands takes a model-driven approach centered on a model, a system prompt, and tools, letting the model direct its own steps.<br><br>B. Macie is data discovery, not an agent SDK.<br><br>C. That scores datasets; it is not an agent SDK.<br><br>D. Polly is text-to-speech, not an agent SDK.</p><p class="zh" lang="zh-CN">A. Strands 采用以模型、系统提示和工具为中心的模型驱动方法，让模型指导自己的步骤。<br><br>B. Macie 是数据发现，而不是代理 SDK。<br><br>C. 对数据集进行评分；它不是代理 SDK。<br><br>D. Polly 是文本转语音，而不是代理 SDK。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q5" data-source-id="easy:2.1-18" data-chat-context="AWS AIP-C01 · easy:2.1-18<br>Reference answer: A<br>What are the three core components of the Strands Agents model-driven approach?<br>Strands Agent 模型驱动方法的三个核心组成部分是什么？<br>A. A language model, a system prompt, and a set of tools<br>一个语言模型、一个系统提示符和一套工具<br>B. A vector store, a reranker, and a chunker<br>向量存储、重排序器和分块器<br>C. A VPC, a subnet, and a route table<br>VPC、子网和路由表<br>D. A bucket, an index, and a metric<br>一个桶、一个索引和一个指标" data-n="5" data-ans="A">
+<div class="qhead"><span class="qno">Question 5</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">What are the three core components of the Strands Agents model-driven approach?</p><p class="zh" lang="zh-CN">Strands Agent 模型驱动方法的三个核心组成部分是什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">A language model, a system prompt, and a set of tools</p><p class="zh" lang="zh-CN">一个语言模型、一个系统提示符和一套工具</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">A vector store, a reranker, and a chunker</p><p class="zh" lang="zh-CN">向量存储、重排序器和分块器</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">A VPC, a subnet, and a route table</p><p class="zh" lang="zh-CN">VPC、子网和路由表</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A bucket, an index, and a metric</p><p class="zh" lang="zh-CN">一个桶、一个索引和一个指标</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Strands centers on model + system prompt + tools, relying on the model to plan and call tools.<br><br>B. Those are RAG components, not the Strands agent triad.<br><br>C. Those are networking constructs, unrelated to Strands.<br><br>D. Those describe S3 Vectors, not Strands.</p><p class="zh" lang="zh-CN">A. Strands以模型+系统提示+工具为中心，依靠模型来规划和调用工具。<br><br>B. 这些是 RAG 组件，而不是 Strands 代理三元组。<br><br>C. 这些是网络结构，与 Strand 无关。<br><br>D. 这些描述的是 S3 矢量，而不是链。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q6" data-source-id="easy:2.1-19" data-chat-context="AWS AIP-C01 · easy:2.1-19<br>Reference answer: A<br>Which statement about Strands Agents tool integration is correct?<br>关于 Strands Agents 工具集成的哪种说法是正确的？<br>A. Strands can use thousands of Model Context Protocol (MCP) servers as tools<br>Strands 可以使用数千个模型上下文协议 (MCP) 服务器作为工具<br>B. Strands only works with a single proprietary tool format<br>Strands 仅适用于单一专有工具格式<br>C. Strands cannot call any external tools<br>Strands 无法调用任何外部工具<br>D. Strands requires Provisioned Throughput to define tools<br>Strands 需要预置吞吐量来定义工具" data-n="6" data-ans="A">
+<div class="qhead"><span class="qno">Question 6</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">Which statement about Strands Agents tool integration is correct?</p><p class="zh" lang="zh-CN">关于 Strands Agents 工具集成的哪种说法是正确的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Strands can use thousands of Model Context Protocol (MCP) servers as tools</p><p class="zh" lang="zh-CN">Strands 可以使用数千个模型上下文协议 (MCP) 服务器作为工具</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Strands only works with a single proprietary tool format</p><p class="zh" lang="zh-CN">Strands 仅适用于单一专有工具格式</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Strands cannot call any external tools</p><p class="zh" lang="zh-CN">Strands 无法调用任何外部工具</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Strands requires Provisioned Throughput to define tools</p><p class="zh" lang="zh-CN">Strands 需要预置吞吐量来定义工具</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Strands integrates with MCP, letting agents use a large ecosystem of MCP tool servers.<br><br>B. It supports MCP and flexible tool definitions.<br><br>C. Calling tools is central to its model-driven design.<br><br>D. Tool definitions are code; they do not require provisioned capacity.</p><p class="zh" lang="zh-CN">A. Strands 与 MCP 集成，让代理可以使用 MCP 工具服务器的大型生态系统。<br><br>B. 它支持 MCP 和灵活的工具定义。<br><br>C. 调用工具是其模型驱动设计的核心。<br><br>D. 工具定义就是代码；它们不需要预配置容量。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q7" data-source-id="easy:2.1-20" data-chat-context="AWS AIP-C01 · easy:2.1-20<br>Reference answer: A<br>Which model providers can Strands Agents work with?<br>Strands Agents 可以与哪些模型提供商合作？<br>A. Any Amazon Bedrock model supporting tool use and streaming, plus Anthropic, Llama, Ollama, and others via LiteLLM<br>任何支持工具使用和流式传输的 Amazon Bedrock 模型，以及 Anthropic、Llama、Ollama 和其他通过 LiteLLM 的模型<br>B. Only Amazon Titan models<br>仅亚马逊泰坦型号<br>C. Only models hosted on-premises<br>仅在本地托管模型<br>D. Only image-generation models<br>仅图像生成模型" data-n="7" data-ans="A">
+<div class="qhead"><span class="qno">Question 7</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">Which model providers can Strands Agents work with?</p><p class="zh" lang="zh-CN">Strands Agents 可以与哪些模型提供商合作？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Any Amazon Bedrock model supporting tool use and streaming, plus Anthropic, Llama, Ollama, and others via LiteLLM</p><p class="zh" lang="zh-CN">任何支持工具使用和流式传输的 Amazon Bedrock 模型，以及 Anthropic、Llama、Ollama 和其他通过 LiteLLM 的模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Only Amazon Titan models</p><p class="zh" lang="zh-CN">仅亚马逊泰坦型号</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Only models hosted on-premises</p><p class="zh" lang="zh-CN">仅在本地托管模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Only image-generation models</p><p class="zh" lang="zh-CN">仅图像生成模型</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Strands is model-flexible across Bedrock and many external providers.<br><br>B. It is not limited to Titan.<br><br>C. It supports cloud and local models, not on-prem only.<br><br>D. It targets tool-using LLMs, not just image models.</p><p class="zh" lang="zh-CN">A. Strands 在 Bedrock 和许多外部提供商之间具有模型灵活性。<br><br>B. 它不仅限于泰坦。<br><br>C. 它支持云和本地模型，而不仅仅是本地模型。<br><br>D. 它针对的是使用工具的法学硕士，而不仅仅是图像模型。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q8" data-source-id="easy:2.1-21" data-chat-context="AWS AIP-C01 · easy:2.1-21<br>Reference answer: A<br>How does Strands typically deploy in AWS for serverless or orchestrated workflows?<br>Strands 通常如何在 AWS 中部署以实现无服务器或编排工作流程？<br>A. It works with AWS Lambda for serverless deployments and AWS Step Functions to embed an agent call in a larger workflow<br>它与 AWS Lambda 配合进行无服务器部署，并与 AWS Step Functions 配合使用，将代理调用嵌入到更大的工作流程中<br>B. It can only run on bare-metal servers<br>只能运行在裸机服务器上<br>C. It must run inside Amazon QuickSight<br>它必须在 Amazon QuickSight 内运行<br>D. It runs exclusively in the browser<br>它只在浏览器中运行" data-n="8" data-ans="A">
+<div class="qhead"><span class="qno">Question 8</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">How does Strands typically deploy in AWS for serverless or orchestrated workflows?</p><p class="zh" lang="zh-CN">Strands 通常如何在 AWS 中部署以实现无服务器或编排工作流程？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">It works with AWS Lambda for serverless deployments and AWS Step Functions to embed an agent call in a larger workflow</p><p class="zh" lang="zh-CN">它与 AWS Lambda 配合进行无服务器部署，并与 AWS Step Functions 配合使用，将代理调用嵌入到更大的工作流程中</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">It can only run on bare-metal servers</p><p class="zh" lang="zh-CN">只能运行在裸机服务器上</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">It must run inside Amazon QuickSight</p><p class="zh" lang="zh-CN">它必须在 Amazon QuickSight 内运行</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">It runs exclusively in the browser</p><p class="zh" lang="zh-CN">它只在浏览器中运行</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Being Python, Strands runs on Lambda and integrates into Step Functions workflows.<br><br>B. It runs on serverless and managed compute, not bare metal only.<br><br>C. QuickSight is BI; it does not host agents.<br><br>D. It is a server-side SDK, not browser-only.</p><p class="zh" lang="zh-CN">A. 作为 Python，Strands 在 Lambda 上运行并集成到 Step Functions 工作流程中。<br><br>B. 它在无服务器和托管计算上运行，而不仅仅是裸机。<br><br>C. QuickSight 是 BI；它不托管代理。<br><br>D. 它是一个服务器端 SDK，而不是仅限浏览器。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q9" data-source-id="easy:2.1-22" data-chat-context="AWS AIP-C01 · easy:2.1-22<br>Reference answer: A<br>A &quot;model-driven&quot; agent framework differs from a workflow-heavy framework in what key way?<br>“模型驱动”代理框架与工作流密集型框架的主要区别是什么？<br>A. The model dynamically plans steps and decides tool use, instead of developers hand-coding complex fixed workflows<br>该模型动态规划步骤并决定工具的使用，而不是开发人员手动编码复杂的固定工作流程<br>B. It removes the need for any model<br>它消除了对任何模型的需要<br>C. It forbids using tools<br>禁止使用工具<br>D. It only supports deterministic if/else graphs<br>它仅支持确定性 if/else 图" data-n="9" data-ans="A">
+<div class="qhead"><span class="qno">Question 9</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">A &quot;model-driven&quot; agent framework differs from a workflow-heavy framework in what key way?</p><p class="zh" lang="zh-CN">“模型驱动”代理框架与工作流密集型框架的主要区别是什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The model dynamically plans steps and decides tool use, instead of developers hand-coding complex fixed workflows</p><p class="zh" lang="zh-CN">该模型动态规划步骤并决定工具的使用，而不是开发人员手动编码复杂的固定工作流程</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">It removes the need for any model</p><p class="zh" lang="zh-CN">它消除了对任何模型的需要</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">It forbids using tools</p><p class="zh" lang="zh-CN">禁止使用工具</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">It only supports deterministic if/else graphs</p><p class="zh" lang="zh-CN">它仅支持确定性 if/else 图</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Model-driven agents let the model reason and orchestrate, reducing hand-built workflow logic.<br><br>B. The model is central to a model-driven approach.<br><br>C. Tool use is a core capability.<br><br>D. That describes the workflow-heavy approach it contrasts with.</p><p class="zh" lang="zh-CN">A. 模型驱动代理让模型进行推理和编排，减少手工构建的工作流逻辑。<br><br>B. 该模型是模型驱动方法的核心。<br><br>C. 工具使用是一项核心能力。<br><br>D. 这描述了与之相反的工作流程繁重的方法。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q10" data-source-id="easy:2.1-23" data-chat-context="AWS AIP-C01 · easy:2.1-23<br>Reference answer: A<br>A team wants to run a Strands-built agent in a managed, secure, serverless environment at production scale without managing servers. Which is a natural fit?<br>团队希望在生产规模的托管、安全、无服务器环境中运行 Strands 构建的代理，而无需管理服务器。哪个是天生的适合？<br>A. Deploy it on Amazon Bedrock AgentCore Runtime<br>将其部署在 Amazon Bedrock AgentCore 运行时上<br>B. Run it only on a developer&#x27;s laptop<br>仅在开发人员的笔记本电脑上运行<br>C. Store the code in S3 and never run it<br>将代码存储在 S3 中并且从不运行它<br>D. Embed it in a CloudFront cache<br>将其嵌入 CloudFront 缓存中" data-n="10" data-ans="A">
+<div class="qhead"><span class="qno">Question 10</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">A team wants to run a Strands-built agent in a managed, secure, serverless environment at production scale without managing servers. Which is a natural fit?</p><p class="zh" lang="zh-CN">团队希望在生产规模的托管、安全、无服务器环境中运行 Strands 构建的代理，而无需管理服务器。哪个是天生的适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Deploy it on Amazon Bedrock AgentCore Runtime</p><p class="zh" lang="zh-CN">将其部署在 Amazon Bedrock AgentCore 运行时上</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Run it only on a developer&#x27;s laptop</p><p class="zh" lang="zh-CN">仅在开发人员的笔记本电脑上运行</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Store the code in S3 and never run it</p><p class="zh" lang="zh-CN">将代码存储在 S3 中并且从不运行它</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Embed it in a CloudFront cache</p><p class="zh" lang="zh-CN">将其嵌入 CloudFront 缓存中</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. AgentCore Runtime hosts agents from frameworks like Strands in a managed serverless runtime.<br><br>B. A laptop is not production-scale managed hosting.<br><br>C. Storing code does not run the agent.<br><br>D. CloudFront is a CDN, not an agent runtime.</p><p class="zh" lang="zh-CN">A. AgentCore Runtime 在托管无服务器运行时中托管来自 Strands 等框架的代理。<br><br>B. 笔记本电脑不是生产规模的托管主机。<br><br>C. 存储代码不会运行代理。<br><br>D. CloudFront 是 CDN，而不是代理运行时。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q11" data-source-id="easy:2.1-24" data-chat-context="AWS AIP-C01 · easy:2.1-24<br>Reference answer: A,B<br>Which TWO are accurate about Amazon Bedrock Agents&#x27; capabilities?<br>关于 Amazon Bedrock Agents 的功能，哪两项是准确的？<br>A. They can invoke tools/APIs defined via an OpenAPI schema or function definitions<br>他们可以调用通过 OpenAPI 模式或函数定义定义的工具/API<br>B. They can integrate a knowledge base for retrieval-augmented responses<br>他们可以整合知识库以进行检索增强响应<br>C. They require you to write the orchestration/reasoning loop yourself<br>他们要求您自己编写编排/推理循环<br>D. They are only for image generation<br>它们仅用于图像生成<br>E. They store vectors as a database<br>他们将向量存储为数据库" data-n="11" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 11</span><span class="badge">Domain 2 · Task 2.1 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">Which TWO are accurate about Amazon Bedrock Agents&#x27; capabilities?</p><p class="zh" lang="zh-CN">关于 Amazon Bedrock Agents 的功能，哪两项是准确的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">They can invoke tools/APIs defined via an OpenAPI schema or function definitions</p><p class="zh" lang="zh-CN">他们可以调用通过 OpenAPI 模式或函数定义定义的工具/API</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">They can integrate a knowledge base for retrieval-augmented responses</p><p class="zh" lang="zh-CN">他们可以整合知识库以进行检索增强响应</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">They require you to write the orchestration/reasoning loop yourself</p><p class="zh" lang="zh-CN">他们要求您自己编写编排/推理循环</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">They are only for image generation</p><p class="zh" lang="zh-CN">它们仅用于图像生成</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">They store vectors as a database</p><p class="zh" lang="zh-CN">他们将向量存储为数据库</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Agents call actions defined by OpenAPI schemas or function definitions.<br><br>B. Bedrock Agents can use Knowledge Bases to ground answers.<br><br>C. The managed agent handles the orchestration loop.<br><br>D. Agents handle reasoning and tool use, not just images.<br><br>E. Vector storage is a separate vector-store concern.</p><p class="zh" lang="zh-CN">A. 代理调用由 OpenAPI 架构或函数定义定义的操作。<br><br>B. 基岩代理可以使用知识库来确定答案。<br><br>C. 托管代理处理编排循环。<br><br>D. 代理处理推理和工具使用，而不仅仅是图像。<br><br>E. 矢量存储是一个单独的矢量存储问题。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q12" data-source-id="easy:2.1-25" data-chat-context="AWS AIP-C01 · easy:2.1-25<br>Reference answer: A<br>A production agent platform must provide identity/access to tools, persistent memory, tool gateways, and end-to-end observability across agents built in different frameworks. Which single AWS offering is designed to deliver all of these?<br>生产代理平台必须提供对工具、持久内存、工具网关的身份/访问，以及跨不同框架中构建的代理的端到端可观察性。哪种 AWS 产品旨在提供所有这些功能？<br>A. Amazon Bedrock AgentCore<br>亚马逊基岩代理核心<br>B. Amazon Bedrock Guardrails<br>亚马逊基岩护栏<br>C. Amazon Kendra<br>亚马逊肯德拉<br>D. Amazon SageMaker Model Registry<br>Amazon SageMaker 模型注册表" data-n="12" data-ans="A">
+<div class="qhead"><span class="qno">Question 12</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">A production agent platform must provide identity/access to tools, persistent memory, tool gateways, and end-to-end observability across agents built in different frameworks. Which single AWS offering is designed to deliver all of these?</p><p class="zh" lang="zh-CN">生产代理平台必须提供对工具、持久内存、工具网关的身份/访问，以及跨不同框架中构建的代理的端到端可观察性。哪种 AWS 产品旨在提供所有这些功能？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock AgentCore</p><p class="zh" lang="zh-CN">亚马逊基岩代理核心</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock Guardrails</p><p class="zh" lang="zh-CN">亚马逊基岩护栏</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Amazon Kendra</p><p class="zh" lang="zh-CN">亚马逊肯德拉</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon SageMaker Model Registry</p><p class="zh" lang="zh-CN">Amazon SageMaker 模型注册表</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. AgentCore bundles Runtime, Identity, Gateway, Memory, and Observability for production agents across frameworks.<br><br>B. Guardrails are safety policies only.<br><br>C. Kendra is enterprise search, not an agent platform.<br><br>D. The registry versions models; it is not an agent operations platform.</p><p class="zh" lang="zh-CN">A. AgentCore 跨框架捆绑了生产代理的运行时、身份、网关、内存和可观察性。<br><br>B. 护栏只是安全政策。<br><br>C. Kendra 是企业搜索，而不是代理平台。<br><br>D. 注册表版本模型；它不是代理运营平台。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q13" data-source-id="easy:OFF-1" data-chat-context="AWS AIP-C01 · easy:OFF-1<br>Reference answer: A,B<br>An education company built a content generation system on Amazon Bedrock that generates practice questions from a mix of curated and scraped data. Reviewers must verify content credibility, so the company wants to add source lineage. Which combination of steps meets this with the LEAST operational overhead? (Select TWO.)<br>一家教育公司在 Amazon Bedrock 上构建了一个内容生成系统，该系统根据精选和抓取的数据生成练习问题。审阅者必须验证内容的可信度，因此该公司希望添加源沿袭。哪种步骤组合能够以最少的运营开销满足这一要求？ （选择两项。）<br>A. Tag FM outputs with metadata from the data source<br>使用数据源中的元数据标记 FM 输出<br>B. Register the curated and scraped input datasets with AWS Glue Data Catalog<br>使用 AWS Glue 数据目录注册整理和抓取的输入数据集<br>C. Enable Amazon Bedrock invocation logging and correlate logs with the data source<br>启用 Amazon Bedrock 调用日志记录并将日志与数据源关联<br>D. Use Amazon SageMaker Clarify to explain model predictions<br>使用 Amazon SageMaker Clarify 解释模型预测<br>E. Use AWS CloudTrail to log reviewer feedback actions<br>使用 AWS CloudTrail 记录审阅者反馈操作" data-n="13" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 13</span><span class="badge">Domain 1 · Task 1.3 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">An education company built a content generation system on Amazon Bedrock that generates practice questions from a mix of curated and scraped data. Reviewers must verify content credibility, so the company wants to add source lineage. Which combination of steps meets this with the LEAST operational overhead? (Select TWO.)</p><p class="zh" lang="zh-CN">一家教育公司在 Amazon Bedrock 上构建了一个内容生成系统，该系统根据精选和抓取的数据生成练习问题。审阅者必须验证内容的可信度，因此该公司希望添加源沿袭。哪种步骤组合能够以最少的运营开销满足这一要求？ （选择两项。）</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Tag FM outputs with metadata from the data source</p><p class="zh" lang="zh-CN">使用数据源中的元数据标记 FM 输出</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Register the curated and scraped input datasets with AWS Glue Data Catalog</p><p class="zh" lang="zh-CN">使用 AWS Glue 数据目录注册整理和抓取的输入数据集</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Enable Amazon Bedrock invocation logging and correlate logs with the data source</p><p class="zh" lang="zh-CN">启用 Amazon Bedrock 调用日志记录并将日志与数据源关联</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Use Amazon SageMaker Clarify to explain model predictions</p><p class="zh" lang="zh-CN">使用 Amazon SageMaker Clarify 解释模型预测</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Use AWS CloudTrail to log reviewer feedback actions</p><p class="zh" lang="zh-CN">使用 AWS CloudTrail 记录审阅者反馈操作</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Tagging outputs with source metadata gives reviewers direct, automated traceability between generated content and its origin.<br><br>B. The Data Catalog creates a searchable, managed inventory of sources with minimal overhead.<br><br>C. Correlating logs to sources requires manual or custom work and does not directly establish lineage.<br><br>D. Clarify is for explainability/bias, not source lineage.<br><br>E. CloudTrail logs API actions, not content source lineage.</p><p class="zh" lang="zh-CN">A. 使用源元数据标记输出可以让审阅者在生成的内容及其来源之间进行直接、自动的跟踪。<br><br>B. 数据目录以最小的开销创建可搜索、受管理的源清单。<br><br>C. 将日志与源关联起来需要手动或自定义工作，并且不会直接建立沿袭。<br><br>D. 澄清是为了可解释性/偏见，而不是源系。<br><br>E. CloudTrail 记录 API 操作，而不是内容源沿袭。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q14" data-source-id="easy:OFF-2" data-chat-context="AWS AIP-C01 · easy:OFF-2<br>Reference answer: A<br>A company must replace a production FM only if a new model performs better, following a sequential, reviewed validation process. Which ordering of the five steps is correct?<br>仅当新模型性能更好且遵循顺序、经过审查的验证流程后，公司才必须更换生产 FM。这五个步骤中哪一个顺序是正确的？<br>A. Define metrics → Create test dataset → A/B test vs production → Automated quality gates (Step Functions) → Analyze &amp; report<br>定义指标 → 创建测试数据集 → A/B 测试与生产 → 自动质量门（步骤功能）→ 分析和报告<br>B. Create test dataset → Define metrics → Analyze &amp; report → A/B test → Quality gates<br>创建测试数据集 → 定义指标 → 分析和报告 → A/B 测试 → 质量门<br>C. A/B test → Define metrics → Create dataset → Analyze &amp; report → Quality gates<br>A/B 测试 → 定义指标 → 创建数据集 → 分析和报告 → 质量门<br>D. Quality gates → A/B test → Analyze &amp; report → Define metrics → Create dataset<br>质量门控 → A/B 测试 → 分析和报告 → 定义指标 → 创建数据集" data-n="14" data-ans="A">
+<div class="qhead"><span class="qno">Question 14</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A company must replace a production FM only if a new model performs better, following a sequential, reviewed validation process. Which ordering of the five steps is correct?</p><p class="zh" lang="zh-CN">仅当新模型性能更好且遵循顺序、经过审查的验证流程后，公司才必须更换生产 FM。这五个步骤中哪一个顺序是正确的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Define metrics → Create test dataset → A/B test vs production → Automated quality gates (Step Functions) → Analyze &amp; report</p><p class="zh" lang="zh-CN">定义指标 → 创建测试数据集 → A/B 测试与生产 → 自动质量门（步骤功能）→ 分析和报告</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Create test dataset → Define metrics → Analyze &amp; report → A/B test → Quality gates</p><p class="zh" lang="zh-CN">创建测试数据集 → 定义指标 → 分析和报告 → A/B 测试 → 质量门</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">A/B test → Define metrics → Create dataset → Analyze &amp; report → Quality gates</p><p class="zh" lang="zh-CN">A/B 测试 → 定义指标 → 创建数据集 → 分析和报告 → 质量门</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Quality gates → A/B test → Analyze &amp; report → Define metrics → Create dataset</p><p class="zh" lang="zh-CN">质量门控 → A/B 测试 → 分析和报告 → 定义指标 → 创建数据集</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Decide how to measure, get data, compare, gate the rollout, then document — the correct sequence.<br><br>B. You must define metrics before building the dataset and analyze after testing, not before.<br><br>C. You cannot A/B test before defining metrics and preparing data.<br><br>D. Gates and testing cannot precede defining metrics and data.</p><p class="zh" lang="zh-CN">A. 决定如何测量、获取数据、比较、控制部署，然后记录——正确的顺序。<br><br>B. 您必须在构建数据集之前定义指标，并在测试之后而不是之前进行分析。<br><br>C. 在定义指标和准备数据之前，您无法进行 A/B 测试。<br><br>D. 门控和测试不能先于定义指标和数据。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q15" data-source-id="easy:OFF-3" data-chat-context="AWS AIP-C01 · easy:OFF-3<br>Reference answer: A,B<br>A third-party application needs secure authentication to use Amazon Bedrock: integrate the existing IdP, keep audit logs, eliminate long-lived credentials, and provide temporary access. Which TWO solutions meet these requirements?<br>第三方应用程序需要安全身份验证才能使用 Amazon Bedrock：集成现有 IdP、保留审核日志、消除长期凭证并提供临时访问。哪两种解决方案满足这些要求？<br>A. Use Amazon Cognito with OIDC to authenticate via the IdP and exchange tokens for temporary AWS credentials<br>将 Amazon Cognito 与 OIDC 结合使用，通过 IdP 进行身份验证并用令牌交换临时 AWS 凭证<br>B. Deploy AWS IAM Identity Center with SAML federation to the IdP and grant Bedrock via permission sets<br>将具有 SAML 联合的 AWS IAM Identity Center 部署到 IdP 并通过权限集授予 Bedrock<br>C. Create IAM users per employee and rotate keys with Secrets Manager<br>为每个员工创建 IAM 用户并使用 Secrets Manager 轮换密钥<br>D. Create an IAM role with STS AssumeRole but store IAM user credentials in app config<br>使用 STS AssumeRole 创建 IAM 角色，但将 IAM 用户凭证存储在应用程序配置中<br>E. Use an API Gateway Lambda authorizer validating against LDAP and issuing JWTs<br>使用 API Gateway Lambda 授权方根据 LDAP 进行验证并颁发 JWT" data-n="15" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 15</span><span class="badge">Domain 1 · Task 1.x · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A third-party application needs secure authentication to use Amazon Bedrock: integrate the existing IdP, keep audit logs, eliminate long-lived credentials, and provide temporary access. Which TWO solutions meet these requirements?</p><p class="zh" lang="zh-CN">第三方应用程序需要安全身份验证才能使用 Amazon Bedrock：集成现有 IdP、保留审核日志、消除长期凭证并提供临时访问。哪两种解决方案满足这些要求？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use Amazon Cognito with OIDC to authenticate via the IdP and exchange tokens for temporary AWS credentials</p><p class="zh" lang="zh-CN">将 Amazon Cognito 与 OIDC 结合使用，通过 IdP 进行身份验证并用令牌交换临时 AWS 凭证</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Deploy AWS IAM Identity Center with SAML federation to the IdP and grant Bedrock via permission sets</p><p class="zh" lang="zh-CN">将具有 SAML 联合的 AWS IAM Identity Center 部署到 IdP 并通过权限集授予 Bedrock</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Create IAM users per employee and rotate keys with Secrets Manager</p><p class="zh" lang="zh-CN">为每个员工创建 IAM 用户并使用 Secrets Manager 轮换密钥</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Create an IAM role with STS AssumeRole but store IAM user credentials in app config</p><p class="zh" lang="zh-CN">使用 STS AssumeRole 创建 IAM 角色，但将 IAM 用户凭证存储在应用程序配置中</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Use an API Gateway Lambda authorizer validating against LDAP and issuing JWTs</p><p class="zh" lang="zh-CN">使用 API Gateway Lambda 授权方根据 LDAP 进行验证并颁发 JWT</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Cognito OIDC federates the IdP, issues temporary credentials, and audits via CloudTrail.<br><br>B. IAM Identity Center with SAML federates the IdP, uses temporary credentials, and logs via CloudTrail.<br><br>C. IAM users use long-lived keys and do not federate the IdP.<br><br>D. Storing IAM user credentials violates the no-long-lived-credentials requirement.<br><br>E. Custom LDAP/JWT does not provide temporary AWS credentials or native IdP federation.</p><p class="zh" lang="zh-CN">A. Cognito OIDC 联合 IdP、颁发临时凭证并通过 CloudTrail 进行审核。<br><br>B. 具有 SAML 的 IAM Identity Center 联合 IdP、使用临时凭证并通过 CloudTrail 进行日志记录。<br><br>C. IAM 用户使用长期密钥并且不联合 IdP。<br><br>D. 存储 IAM 用户凭证违反了无长期凭证的要求。<br><br>E. 自定义 LDAP/JWT 不提供临时 AWS 凭证或本机 IdP 联合。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/security.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q16" data-source-id="easy:OFF-4" data-chat-context="AWS AIP-C01 · easy:OFF-4<br>Reference answer: A,B<br>A Bedrock RAG app retrieves many relevant docs, but the most relevant info often appears lower in results. Which TWO steps improve relevance ranking with MINIMAL operational overhead? (Select TWO.)<br>Bedrock RAG 应用程序会检索许多相关文档，但最相关的信息通常出现在结果中较低的位置。哪两个步骤可以以最小的运营开销提高相关性排名？ （选择两项。）<br>A. Use Amazon Bedrock reranker models with Amazon OpenSearch Service to reorder results by semantic relevance<br>将 Amazon Bedrock 重新排序器模型与 Amazon OpenSearch Service 结合使用，按语义相关性对结果重新排序<br>B. Use Knowledge Bases with hybrid search and OpenSearch Serverless to combine vectors with keyword matching<br>使用知识库与混合搜索和 OpenSearch Serverless 将向量与关键字匹配相结合<br>C. Configure OpenSearch Serverless with Learning to Rank for relevance scoring<br>配置 OpenSearch Serverless 并学习排名以进行相关性评分<br>D. Create Aurora PostgreSQL with pgvector and a custom similarity scoring algorithm<br>使用 pgvector 和自定义相似度评分算法创建 Aurora PostgreSQL<br>E. Use SageMaker JumpStart FMs with Kendra Intelligent Ranking and custom relevancy algorithms<br>将 SageMaker JumpStart FM 与 Kendra 智能排名和自定义相关性算法结合使用" data-n="16" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 16</span><span class="badge">Domain 1 · Task 1.5 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A Bedrock RAG app retrieves many relevant docs, but the most relevant info often appears lower in results. Which TWO steps improve relevance ranking with MINIMAL operational overhead? (Select TWO.)</p><p class="zh" lang="zh-CN">Bedrock RAG 应用程序会检索许多相关文档，但最相关的信息通常出现在结果中较低的位置。哪两个步骤可以以最小的运营开销提高相关性排名？ （选择两项。）</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use Amazon Bedrock reranker models with Amazon OpenSearch Service to reorder results by semantic relevance</p><p class="zh" lang="zh-CN">将 Amazon Bedrock 重新排序器模型与 Amazon OpenSearch Service 结合使用，按语义相关性对结果重新排序</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Use Knowledge Bases with hybrid search and OpenSearch Serverless to combine vectors with keyword matching</p><p class="zh" lang="zh-CN">使用知识库与混合搜索和 OpenSearch Serverless 将向量与关键字匹配相结合</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Configure OpenSearch Serverless with Learning to Rank for relevance scoring</p><p class="zh" lang="zh-CN">配置 OpenSearch Serverless 并学习排名以进行相关性评分</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Create Aurora PostgreSQL with pgvector and a custom similarity scoring algorithm</p><p class="zh" lang="zh-CN">使用 pgvector 和自定义相似度评分算法创建 Aurora PostgreSQL</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Use SageMaker JumpStart FMs with Kendra Intelligent Ranking and custom relevancy algorithms</p><p class="zh" lang="zh-CN">将 SageMaker JumpStart FM 与 Kendra 智能排名和自定义相关性算法结合使用</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Bedrock rerankers are purpose-built to reorder results so the most relevant surface first.<br><br>B. Hybrid search improves retrieval relevance by blending semantic and keyword matching.<br><br>C. Learning to Rank requires custom trained/maintained models — more overhead.<br><br>D. Custom scoring and DB management add operational overhead.<br><br>E. Bedrock built-in reranking is simpler and more integrated than custom ranking.</p><p class="zh" lang="zh-CN">A. 基岩重新排序器是专门为重新排序结果而设计的，因此最相关的表面首先出现。<br><br>B. 混合搜索通过混合语义和关键字匹配来提高检索相关性。<br><br>C. 学习排名需要定制训练/维护的模型——更多的开销。<br><br>D. 自定义评分和数据库管理增加了运营开销。<br><br>E. Bedrock 内置重新排名比自定义排名更简单、更集成。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-chunking.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q17" data-source-id="easy:OFF-5" data-chat-context="AWS AIP-C01 · easy:OFF-5<br>Reference answer: A,B<br>A company must deploy existing Python agent code to Amazon Bedrock AgentCore Runtime with minimal overhead, auto-managing HTTP server, endpoint routing, and health monitoring, supporting sub-second and streaming responses. Which TWO approaches fit? (Select TWO.)<br>公司必须以最小的开销将现有的 Python 代理代码部署到 Amazon Bedrock AgentCore Runtime，自动管理 HTTP 服务器、终端节点路由和运行状况监控，支持亚秒级和流式响应。哪两种方法适合？ （选择两项。）<br>A. Use the AgentCore SDK with the @app.entrypoint decorator to auto-handle server setup and endpoints<br>使用 AgentCore SDK 和 @app.entrypoint 装饰器来自动处理服务器设置和端点<br>B. Use the AgentCore starter toolkit for automated packaging, containerization, and deployment<br>使用 AgentCore 入门工具包进行自动化打包、容器化和部署<br>C. Implement a FastAPI server with /invocations and /ping and container orchestration<br>使用 /incalls 和 /ping 以及容器编排实现 FastAPI 服务器<br>D. Deploy on Amazon ECS Fargate using a custom container image running the AgentCore SDK<br>使用运行 AgentCore SDK 的自定义容器映像在 Amazon ECS Fargate 上部署<br>E. Deploy on Amazon SageMaker real-time endpoints with a custom inference container<br>使用自定义推理容器在 Amazon SageMaker 实时终端节点上部署" data-n="17" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 17</span><span class="badge">Domain 2 · Task 2.1 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A company must deploy existing Python agent code to Amazon Bedrock AgentCore Runtime with minimal overhead, auto-managing HTTP server, endpoint routing, and health monitoring, supporting sub-second and streaming responses. Which TWO approaches fit? (Select TWO.)</p><p class="zh" lang="zh-CN">公司必须以最小的开销将现有的 Python 代理代码部署到 Amazon Bedrock AgentCore Runtime，自动管理 HTTP 服务器、终端节点路由和运行状况监控，支持亚秒级和流式响应。哪两种方法适合？ （选择两项。）</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use the AgentCore SDK with the @app.entrypoint decorator to auto-handle server setup and endpoints</p><p class="zh" lang="zh-CN">使用 AgentCore SDK 和 @app.entrypoint 装饰器来自动处理服务器设置和端点</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Use the AgentCore starter toolkit for automated packaging, containerization, and deployment</p><p class="zh" lang="zh-CN">使用 AgentCore 入门工具包进行自动化打包、容器化和部署</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Implement a FastAPI server with /invocations and /ping and container orchestration</p><p class="zh" lang="zh-CN">使用 /incalls 和 /ping 以及容器编排实现 FastAPI 服务器</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Deploy on Amazon ECS Fargate using a custom container image running the AgentCore SDK</p><p class="zh" lang="zh-CN">使用运行 AgentCore SDK 的自定义容器映像在 Amazon ECS Fargate 上部署</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Deploy on Amazon SageMaker real-time endpoints with a custom inference container</p><p class="zh" lang="zh-CN">使用自定义推理容器在 Amazon SageMaker 实时终端节点上部署</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. The SDK auto-creates the server on port 8080, the /invocations and /ping endpoints, and handles JSON/streaming.<br><br>B. The toolkit automates ARM64 build, ECR push, and CreateAgentRuntime deployment with minimal overhead.<br><br>C. Manual FastAPI/Docker/orchestration adds overhead.<br><br>D. Custom containers/task definitions add management overhead with no auto server/health setup.<br><br>E. Custom inference containers and autoscaling add infrastructure overhead.</p><p class="zh" lang="zh-CN">A. SDK 在端口 8080、/incalls 和 /ping 端点上自动创建服务器，并处理 JSON/流。<br><br>B. 该工具包以最小的开销自动执行 ARM64 构建、ECR 推送和 CreateAgentRuntime 部署。<br><br>C. 手动 FastAPI/Docker/编排会增加开销。<br><br>D. 自定义容器/任务定义会增加管理开销，而无需自动服务器/运行状况设置。<br><br>E. 自定义推理容器和自动缩放会增加基础设施开销。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q18" data-source-id="easy:OFF-6" data-chat-context="AWS AIP-C01 · easy:OFF-6<br>Reference answer: A<br>A diagnostic imaging app must run similarity searches across 50 million images, processed daily but searched infrequently, with a cost-effective, responsive, no-infrastructure solution. Which is MOST cost-effective?<br>诊断成像应用程序必须使用经济高效、响应迅速、无基础设施的解决方案，对每天处理但搜索频率较低的 5000 万张图像进行相似性搜索。哪个最划算？<br>A. Create an Amazon S3 vector bucket with vector indexes to store image embeddings and perform similarity searches<br>使用矢量索引创建 Amazon S3 矢量存储桶来存储图像嵌入并执行相似性搜索<br>B. Store vectors in Amazon OpenSearch Serverless and use vector search<br>在 Amazon OpenSearch Serverless 中存储矢量并使用矢量搜索<br>C. Use DynamoDB to store vectors and custom similarity logic in Lambda<br>使用 DynamoDB 在 Lambda 中存储向量和自定义相似性逻辑<br>D. Store vectors in RDS for PostgreSQL with pgvector<br>使用 pgvector 在 RDS for PostgreSQL 中存储向量" data-n="18" data-ans="A">
+<div class="qhead"><span class="qno">Question 18</span><span class="badge">Domain 1 · Task 1.4</span></div>
+<div class="stem"><p class="en" lang="en">A diagnostic imaging app must run similarity searches across 50 million images, processed daily but searched infrequently, with a cost-effective, responsive, no-infrastructure solution. Which is MOST cost-effective?</p><p class="zh" lang="zh-CN">诊断成像应用程序必须使用经济高效、响应迅速、无基础设施的解决方案，对每天处理但搜索频率较低的 5000 万张图像进行相似性搜索。哪个最划算？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Create an Amazon S3 vector bucket with vector indexes to store image embeddings and perform similarity searches</p><p class="zh" lang="zh-CN">使用矢量索引创建 Amazon S3 矢量存储桶来存储图像嵌入并执行相似性搜索</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Store vectors in Amazon OpenSearch Serverless and use vector search</p><p class="zh" lang="zh-CN">在 Amazon OpenSearch Serverless 中存储矢量并使用矢量搜索</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Use DynamoDB to store vectors and custom similarity logic in Lambda</p><p class="zh" lang="zh-CN">使用 DynamoDB 在 Lambda 中存储向量和自定义相似性逻辑</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Store vectors in RDS for PostgreSQL with pgvector</p><p class="zh" lang="zh-CN">使用 pgvector 在 RDS for PostgreSQL 中存储向量</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. S3 Vectors is serverless, scales to billions of vectors, and is cost-optimized for infrequent searches.<br><br>B. OpenSearch Serverless suits frequent low-latency search; provisioned capacity is underused for rare searches.<br><br>C. DynamoDB has no native vector search; custom logic adds latency and cost.<br><br>D. RDS requires managing instances and is not cost-effective for infrequent workloads.</p><p class="zh" lang="zh-CN">A. S3 Vectors 是无服务器的，可扩展到数十亿个向量，并且针对不频繁的搜索进行了成本优化。<br><br>B. OpenSearch Serverless 适合频繁的低延迟搜索；对于罕见的搜索，配置的容量未得到充分利用。<br><br>C. DynamoDB 没有原生矢量搜索；自定义逻辑会增加延迟和成本。<br><br>D. RDS 需要管理实例，对于不频繁的工作负载来说不具有成本效益。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q19" data-source-id="easy:OFF-7" data-chat-context="AWS AIP-C01 · easy:OFF-7<br>Reference answer: A<br>A single-Region Bedrock app gets &quot;Too many requests&quot; at peak. The company must increase throughput without extra operational overhead, keep the same API, and use the same FM. Which is MOST cost-effective?<br>单区域基岩应用程序在高峰期收到“太多请求”。公司必须在不产生额外运营开销的情况下提高吞吐量、保持相同的 API 并使用相同的 FM。哪个最划算？<br>A. Use cross-Region inference to distribute traffic across multiple Regions in the geography<br>使用跨区域推理在地理上的多个区域之间分配流量<br>B. Use prompt routing to distribute traffic across multiple FMs from the same family<br>使用提示路由在同一系列的多个 FM 之间分配流量<br>C. Use provisioned throughput to provision higher throughput<br>使用预配置的吞吐量来预配置更高的吞吐量<br>D. Create a Lambda that defaults to the original Region and falls back to a secondary Region<br>创建一个默认为原始区域并回退到辅助区域的 Lambda" data-n="19" data-ans="A">
+<div class="qhead"><span class="qno">Question 19</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A single-Region Bedrock app gets &quot;Too many requests&quot; at peak. The company must increase throughput without extra operational overhead, keep the same API, and use the same FM. Which is MOST cost-effective?</p><p class="zh" lang="zh-CN">单区域基岩应用程序在高峰期收到“太多请求”。公司必须在不产生额外运营开销的情况下提高吞吐量、保持相同的 API 并使用相同的 FM。哪个最划算？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use cross-Region inference to distribute traffic across multiple Regions in the geography</p><p class="zh" lang="zh-CN">使用跨区域推理在地理上的多个区域之间分配流量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Use prompt routing to distribute traffic across multiple FMs from the same family</p><p class="zh" lang="zh-CN">使用提示路由在同一系列的多个 FM 之间分配流量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Use provisioned throughput to provision higher throughput</p><p class="zh" lang="zh-CN">使用预配置的吞吐量来预配置更高的吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Create a Lambda that defaults to the original Region and falls back to a secondary Region</p><p class="zh" lang="zh-CN">创建一个默认为原始区域并回退到辅助区域的 Lambda</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Cross-Region inference automatically spreads load across Regions, same model and API, no extra ops.<br><br>B. Prompt routing needs two different models; the requirement is the same FM.<br><br>C. Provisioned throughput suits steady usage, not occasional peaks.<br><br>D. A custom Lambda failover adds operational overhead.</p><p class="zh" lang="zh-CN">A. 跨区域推理自动跨区域分散负载，相同的模型和 API，无需额外操作。<br><br>B. 提示路由需要两种不同的模型；要求是相同的FM。<br><br>C. 预配置吞吐量适合稳定使用，而不适合偶尔出现的峰值。<br><br>D. 自定义 Lambda 故障转移会增加运营开销。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q20" data-source-id="easy:OFF-8" data-chat-context="AWS AIP-C01 · easy:OFF-8<br>Reference answer: A<br>An AI assistant must include new S3 documents ASAP and exclude deleted ones ASAP, using a Bedrock Knowledge Base with S3 as the data source. Which solution is scalable, event-driven, and resilient?<br>AI 助手必须使用以 S3 作为数据源的基岩知识库，尽快包含新的 S3 文档并尽快排除已删除的文档。哪种解决方案具有可扩展性、事件驱动性和弹性？<br>A. S3 Event Notifications → Amazon SQS → Lambda calling IngestKnowledgeBaseDocuments / DeleteKnowledgeBaseDocuments<br>S3 事件通知 → Amazon SQS → Lambda 调用 IngestKnowledgeBaseDocuments / DeleteKnowledgeBaseDocuments<br>B. S3 Event Notifications → Lambda directly calling the ingest/delete APIs<br>S3 事件通知 → Lambda 直接调用摄取/删除 API<br>C. EventBridge Scheduler every 5 minutes → Lambda that tracks S3 changes<br>EventBridge Scheduler 每 5 分钟 → 跟踪 S3 更改的 Lambda<br>D. EventBridge Scheduler every 5 minutes → Lambda that runs StartIngestionJob<br>每 5 分钟一次的 EventBridge Scheduler → 运行 StartIngestionJob 的 Lambda" data-n="20" data-ans="A">
+<div class="qhead"><span class="qno">Question 20</span><span class="badge">Domain 1 · Task 1.4</span></div>
+<div class="stem"><p class="en" lang="en">An AI assistant must include new S3 documents ASAP and exclude deleted ones ASAP, using a Bedrock Knowledge Base with S3 as the data source. Which solution is scalable, event-driven, and resilient?</p><p class="zh" lang="zh-CN">AI 助手必须使用以 S3 作为数据源的基岩知识库，尽快包含新的 S3 文档并尽快排除已删除的文档。哪种解决方案具有可扩展性、事件驱动性和弹性？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">S3 Event Notifications → Amazon SQS → Lambda calling IngestKnowledgeBaseDocuments / DeleteKnowledgeBaseDocuments</p><p class="zh" lang="zh-CN">S3 事件通知 → Amazon SQS → Lambda 调用 IngestKnowledgeBaseDocuments / DeleteKnowledgeBaseDocuments</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">S3 Event Notifications → Lambda directly calling the ingest/delete APIs</p><p class="zh" lang="zh-CN">S3 事件通知 → Lambda 直接调用摄取/删除 API</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">EventBridge Scheduler every 5 minutes → Lambda that tracks S3 changes</p><p class="zh" lang="zh-CN">EventBridge Scheduler 每 5 分钟 → 跟踪 S3 更改的 Lambda</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">EventBridge Scheduler every 5 minutes → Lambda that runs StartIngestionJob</p><p class="zh" lang="zh-CN">每 5 分钟一次的 EventBridge Scheduler → 运行 StartIngestionJob 的 Lambda</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. SQS buffers spikes and retries between S3 events and Lambda, ensuring no updates are missed.<br><br>B. Direct invocation lacks buffering/retry and can fail under load.<br><br>C. Time-based polling is not near-real-time and is inefficient.<br><br>D. Periodic full re-sync is inefficient and not event-driven.</p><p class="zh" lang="zh-CN">A. SQS 缓冲 S3 事件和 Lambda 之间的峰值和重试，确保不会错过任何更新。<br><br>B. 直接调用缺乏缓冲/重试，并且可能在负载下失败。<br><br>C. 基于时间的轮询不是近乎实时的并且效率低下。<br><br>D. 定期完全重新同步效率低下且不是事件驱动的。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q21" data-source-id="easy:OFF-9" data-chat-context="AWS AIP-C01 · easy:OFF-9<br>Reference answer: A<br>A RAG app returns generic &quot;no relevant information found&quot; after a code update. No errors, FM invokes successfully (X-Ray), OpenSearch is healthy, latency normal. What is the cause?<br>代码更新后，RAG 应用程序会返回通用的“未找到相关信息”。没有错误，FM 调用成功（X 射线），OpenSearch 运行正常，延迟正常。原因是什么？<br>A. The updated Lambda uses a different version of the embedding model than was used to index documents<br>更新后的 Lambda 使用与用于索引文档的嵌入模型不同的版本<br>B. The embeddings were deleted during the update and not re-indexed<br>嵌入在更新期间被删除并且未重新索引<br>C. The Lambda role is missing bedrock:InvokeModel<br>Lambda 角色缺少基础：InvokeModel<br>D. The FM temperature parameter was increased<br>FM温度参数增加" data-n="21" data-ans="A">
+<div class="qhead"><span class="qno">Question 21</span><span class="badge">Domain 1 · Task 1.5</span></div>
+<div class="stem"><p class="en" lang="en">A RAG app returns generic &quot;no relevant information found&quot; after a code update. No errors, FM invokes successfully (X-Ray), OpenSearch is healthy, latency normal. What is the cause?</p><p class="zh" lang="zh-CN">代码更新后，RAG 应用程序会返回通用的“未找到相关信息”。没有错误，FM 调用成功（X 射线），OpenSearch 运行正常，延迟正常。原因是什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The updated Lambda uses a different version of the embedding model than was used to index documents</p><p class="zh" lang="zh-CN">更新后的 Lambda 使用与用于索引文档的嵌入模型不同的版本</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">The embeddings were deleted during the update and not re-indexed</p><p class="zh" lang="zh-CN">嵌入在更新期间被删除并且未重新索引</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">The Lambda role is missing bedrock:InvokeModel</p><p class="zh" lang="zh-CN">Lambda 角色缺少基础：InvokeModel</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">The FM temperature parameter was increased</p><p class="zh" lang="zh-CN">FM温度参数增加</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Embedding drift creates a vector-space mismatch between queries and stored vectors, silently breaking retrieval.<br><br>B. Deleted embeddings would surface as errors or failed queries; none are observed.<br><br>C. The model invokes successfully, so the permission exists.<br><br>D. Temperature affects generation, not retrieval.</p><p class="zh" lang="zh-CN">A. 嵌入漂移会在查询和存储的向量之间造成向量空间不匹配，从而默默地破坏检索。<br><br>B. 删除的嵌入将显示为错误或失败的查询；没有观察到。<br><br>C. 模型调用成功，权限存在。<br><br>D. 温度影响生成，而不影响检索。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-chunking.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q22" data-source-id="easy:OFF-10" data-chat-context="AWS AIP-C01 · easy:OFF-10<br>Reference answer: A<br>A Bedrock AI assistant uses multiple guardrails (prompt injection, sensitive info filtering, denied topics). When content is blocked, the developer needs the MOST detailed analysis of which specific guardrail rule was invoked. Which configuration provides it?<br>Bedrock AI 助手使用多个护栏（提示注入、敏感信息过滤、拒绝主题）。当内容被阻止时，开发人员需要对调用了哪个特定护栏规则进行最详细的分析。 Which configuration provides it?<br>A. Enable guardrail tracing ({&quot;trace&quot;:&quot;enabled&quot;}) and monitor InvocationsIntervened filtered by GuardrailPolicyType (ContentPolicy, TopicPolicy, SensitiveInformationPolicy)<br>启用护栏跟踪 ({&quot;trace&quot;:&quot;enabled&quot;}) 并监控按 GuardrailPolicyType (ContentPolicy、TopicPolicy、SensitiveInformationPolicy) 过滤的 IncallsIntervened<br>B. Enable guardrail tracing and filter InvocationsIntervened by GuardrailContentSource<br>启用护栏跟踪并过滤由 GuardrailContentSource 干预的调用<br>C. Enable model invocation logging with CloudWatch alarms on InvocationsIntervened by GuardrailContentSource<br>通过 GuardrailContentSource 干预的调用上的 CloudWatch 警报启用模型调用日志记录<br>D. Enable Bedrock model evaluation jobs with guardrail assessment metrics<br>使用护栏评估指标启用基岩模型评估作业" data-n="22" data-ans="A">
+<div class="qhead"><span class="qno">Question 22</span><span class="badge">Domain 1 · Task 1.x</span></div>
+<div class="stem"><p class="en" lang="en">A Bedrock AI assistant uses multiple guardrails (prompt injection, sensitive info filtering, denied topics). When content is blocked, the developer needs the MOST detailed analysis of which specific guardrail rule was invoked. Which configuration provides it?</p><p class="zh" lang="zh-CN">Bedrock AI 助手使用多个护栏（提示注入、敏感信息过滤、拒绝主题）。当内容被阻止时，开发人员需要对调用了哪个特定护栏规则进行最详细的分析。 Which configuration provides it?</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Enable guardrail tracing ({&quot;trace&quot;:&quot;enabled&quot;}) and monitor InvocationsIntervened filtered by GuardrailPolicyType (ContentPolicy, TopicPolicy, SensitiveInformationPolicy)</p><p class="zh" lang="zh-CN">启用护栏跟踪 ({&quot;trace&quot;:&quot;enabled&quot;}) 并监控按 GuardrailPolicyType (ContentPolicy、TopicPolicy、SensitiveInformationPolicy) 过滤的 IncallsIntervened</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Enable guardrail tracing and filter InvocationsIntervened by GuardrailContentSource</p><p class="zh" lang="zh-CN">启用护栏跟踪并过滤由 GuardrailContentSource 干预的调用</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Enable model invocation logging with CloudWatch alarms on InvocationsIntervened by GuardrailContentSource</p><p class="zh" lang="zh-CN">通过 GuardrailContentSource 干预的调用上的 CloudWatch 警报启用模型调用日志记录</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Enable Bedrock model evaluation jobs with guardrail assessment metrics</p><p class="zh" lang="zh-CN">使用护栏评估指标启用基岩模型评估作业</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. GuardrailPolicyType reveals which policy intervened, the most detailed breakdown.<br><br>B. GuardrailContentSource only distinguishes input vs output, not which policy fired.<br><br>C. Invocation logging lacks per-policy intervention detail.<br><br>D. Model evaluation runs offline tests, not per-inference guardrail tracing.</p><p class="zh" lang="zh-CN">A. GuardrailPolicyType 揭示了哪个策略进行了干预，最详细的细分。<br><br>B. GuardrailContentSource 仅区分输入与输出，而不区分触发的策略。<br><br>C. 调用日志记录缺乏每个策略的干预细节。<br><br>D. 模型评估运行离线测试，而不是按推理护栏跟踪。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/security.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q23" data-source-id="easy:OFF-11" data-chat-context="AWS AIP-C01 · easy:OFF-11<br>Reference answer: A<br>A financial services company wants a mobile app for account inquiries built from large volumes of customer-support email stored in S3 that contains PII which must not appear in search results. Which solution meets these requirements?<br>一家金融服务公司想要一款用于帐户查询的移动应用程序，该应用程序是根据 S3 中存储的大量客户支持电子邮件构建的，其中包含不得出现在搜索结果中的 PII。哪种解决方案满足这些要求？<br>A. Use Amazon Comprehend to detect and redact PII from the email data, then integrate with Amazon Kendra for enterprise search<br>使用 Amazon Comprehend 从电子邮件数据中检测和编辑 PII，然后与 Amazon Kendra 集成以进行企业搜索<br>B. Use Amazon Kendra and a Bedrock FM system prompt to remove PII during query processing<br>使用 Amazon Kendra 和 Bedrock FM 系统提示在查询处理期间删除 PII<br>C. Use Amazon Textract to extract text, Amazon Macie to scan for PII, integrate with Kendra<br>使用 Amazon Textract 提取文本、Amazon Macie 扫描 PII、与 Kendra 集成<br>D. Use Amazon Comprehend to redact PII and integrate with Amazon DocumentDB for queries<br>使用 Amazon Comprehend 编辑 PII 并与 Amazon DocumentDB 集成以进行查询" data-n="23" data-ans="A">
+<div class="qhead"><span class="qno">Question 23</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">A financial services company wants a mobile app for account inquiries built from large volumes of customer-support email stored in S3 that contains PII which must not appear in search results. Which solution meets these requirements?</p><p class="zh" lang="zh-CN">一家金融服务公司想要一款用于帐户查询的移动应用程序，该应用程序是根据 S3 中存储的大量客户支持电子邮件构建的，其中包含不得出现在搜索结果中的 PII。哪种解决方案满足这些要求？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use Amazon Comprehend to detect and redact PII from the email data, then integrate with Amazon Kendra for enterprise search</p><p class="zh" lang="zh-CN">使用 Amazon Comprehend 从电子邮件数据中检测和编辑 PII，然后与 Amazon Kendra 集成以进行企业搜索</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Use Amazon Kendra and a Bedrock FM system prompt to remove PII during query processing</p><p class="zh" lang="zh-CN">使用 Amazon Kendra 和 Bedrock FM 系统提示在查询处理期间删除 PII</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Use Amazon Textract to extract text, Amazon Macie to scan for PII, integrate with Kendra</p><p class="zh" lang="zh-CN">使用 Amazon Textract 提取文本、Amazon Macie 扫描 PII、与 Kendra 集成</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Use Amazon Comprehend to redact PII and integrate with Amazon DocumentDB for queries</p><p class="zh" lang="zh-CN">使用 Amazon Comprehend 编辑 PII 并与 Amazon DocumentDB 集成以进行查询</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Comprehend redacts PII before indexing; Kendra provides managed enterprise search of the processed data.<br><br>B. System prompts cannot reliably remove PII and can be bypassed.<br><br>C. Macie discovers/classifies PII but does not redact it for GenAI; Textract targets scanned docs, not raw email.<br><br>D. DocumentDB needs custom search and lacks NLP for natural-language enterprise search.</p><p class="zh" lang="zh-CN">A. 在索引之前理解编辑 PII； Kendra 提供已处理数据的托管企业搜索。<br><br>B. 系统提示无法可靠地删除 PII，并且可以被绕过。<br><br>C. Macie 发现/分类 PII，但不会针对 GenAI 对其进行编辑； Textract 的目标是扫描文档，而不是原始电子邮件。<br><br>D. DocumentDB 需要自定义搜索，并且缺乏用于自然语言企业搜索的 NLP。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q24" data-source-id="easy:OFF-12" data-chat-context="AWS AIP-C01 · easy:OFF-12<br>Reference answer: A<br>A company must analyze videos and photos from public fashion shows to extract style elements, store results, and present a trend dashboard, with the LEAST operational overhead. Which solution fits?<br>公司必须分析公共时装秀的视频和照片，以提取风格元素、存储结果并呈现趋势仪表板，并以最少的运营开销。哪种解决方案适合？<br>A. Use Step Functions to process media with Amazon Bedrock multimodal FMs; store results in S3; visualize with Amazon QuickSight<br>使用 Step Functions 通过 Amazon Bedrock 多模式 FM 处理媒体；将结果存储在S3中； visualize with Amazon QuickSight<br>B. Use EventBridge + Lambda with Amazon QuickSight Q to analyze videos/photos and a QuickSight dashboard<br>将 EventBridge + Lambda 与 Amazon QuickSight Q 结合使用来分析视频/照片和 QuickSight 控制面板<br>C. Use Rekognition Custom Labels (trained model), store in DynamoDB, build a Managed Grafana dashboard with custom plugins<br>使用 Rekognition 自定义标签（经过训练的模型），存储在 DynamoDB 中，使用自定义插件构建托管 Grafana 仪表板<br>D. Use Claude for text analysis and Stable Diffusion for images, store in OpenSearch, build Managed Grafana<br>使用 Claude 进行文本分析，使用稳定扩散进行图像，存储在 OpenSearch 中，构建托管 Grafana" data-n="24" data-ans="A">
+<div class="qhead"><span class="qno">Question 24</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A company must analyze videos and photos from public fashion shows to extract style elements, store results, and present a trend dashboard, with the LEAST operational overhead. Which solution fits?</p><p class="zh" lang="zh-CN">公司必须分析公共时装秀的视频和照片，以提取风格元素、存储结果并呈现趋势仪表板，并以最少的运营开销。哪种解决方案适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use Step Functions to process media with Amazon Bedrock multimodal FMs; store results in S3; visualize with Amazon QuickSight</p><p class="zh" lang="zh-CN">使用 Step Functions 通过 Amazon Bedrock 多模式 FM 处理媒体；将结果存储在S3中； visualize with Amazon QuickSight</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Use EventBridge + Lambda with Amazon QuickSight Q to analyze videos/photos and a QuickSight dashboard</p><p class="zh" lang="zh-CN">将 EventBridge + Lambda 与 Amazon QuickSight Q 结合使用来分析视频/照片和 QuickSight 控制面板</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Use Rekognition Custom Labels (trained model), store in DynamoDB, build a Managed Grafana dashboard with custom plugins</p><p class="zh" lang="zh-CN">使用 Rekognition 自定义标签（经过训练的模型），存储在 DynamoDB 中，使用自定义插件构建托管 Grafana 仪表板</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Use Claude for text analysis and Stable Diffusion for images, store in OpenSearch, build Managed Grafana</p><p class="zh" lang="zh-CN">使用 Claude 进行文本分析，使用稳定扩散进行图像，存储在 OpenSearch 中，构建托管 Grafana</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Bedrock multimodal FMs analyze media directly with no custom model training; Step Functions + QuickSight are serverless.<br><br>B. QuickSight Q answers questions about existing dashboard data; it cannot analyze media.<br><br>C. Custom model training and Grafana plugins add overhead.<br><br>D. Managing OpenSearch, multiple FMs, and custom dashboards adds overhead, and it analyzes text rather than visuals.</p><p class="zh" lang="zh-CN">A. Bedrock 多模态 FM 直接分析媒体，无需自定义模型训练； Step Functions + QuickSight are serverless.<br><br>B. QuickSight Q 回答有关现有仪表板数据的问题；它无法分析媒体。<br><br>C. 自定义模型训练和 Grafana 插件会增加开销。<br><br>D. 管理 OpenSearch、多个 FM 和自定义仪表板会增加开销，并且它分析文本而不是视觉效果。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q25" data-source-id="easy:OFF-13" data-chat-context="AWS AIP-C01 · easy:OFF-13<br>Reference answer: A,B<br>A financial company needs Bedrock prompt templates governed via approval workflows and comprehensive logging of all model invocations with 7-year retention. Which TWO steps meet this with MINIMAL overhead? (Select TWO.)<br>一家金融公司需要 Bedrock 提示模板，该模板通过审批工作流程进行管理，并全面记录所有模型调用并保留 7 年。哪两个步骤可以以最小的开销满足这个要求？ （选择两项。）<br>A. Use Amazon Bedrock Prompt Management with multi-stage approval workflows and IAM multi-party authorization<br>将 Amazon Bedrock Prompt Management 与多阶段审批工作流程和 IAM 多方授权结合使用<br>B. Enable Bedrock model invocation logging to S3 with S3 Object Lock (compliance mode) for 7 years, with per-business-unit prefixes<br>使用 S3 对象锁定（合规模式）将 Bedrock 模型调用日志记录到 S3，有效期为 7 年，并带有每个业务部门的前缀<br>C. Store prompt templates in DynamoDB with item-level permissions for approvals<br>在 DynamoDB 中存储提示模板，并具有项目级审批权限<br>D. Use EventBridge to capture invocation events to CloudWatch Logs then export to S3 Object Lock<br>使用 EventBridge 将调用事件捕获到 CloudWatch Logs，然后导出到 S3 Object Lock<br>E. Enable CloudTrail data events for all Bedrock APIs into CloudTrail Lake with 7-year retention<br>将所有 Bedrock API 的 CloudTrail 数据事件启用到 CloudTrail Lake 中并保留 7 年" data-n="25" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 25</span><span class="badge">Domain 1 · Task 1.6 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A financial company needs Bedrock prompt templates governed via approval workflows and comprehensive logging of all model invocations with 7-year retention. Which TWO steps meet this with MINIMAL overhead? (Select TWO.)</p><p class="zh" lang="zh-CN">一家金融公司需要 Bedrock 提示模板，该模板通过审批工作流程进行管理，并全面记录所有模型调用并保留 7 年。哪两个步骤可以以最小的开销满足这个要求？ （选择两项。）</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use Amazon Bedrock Prompt Management with multi-stage approval workflows and IAM multi-party authorization</p><p class="zh" lang="zh-CN">将 Amazon Bedrock Prompt Management 与多阶段审批工作流程和 IAM 多方授权结合使用</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Enable Bedrock model invocation logging to S3 with S3 Object Lock (compliance mode) for 7 years, with per-business-unit prefixes</p><p class="zh" lang="zh-CN">使用 S3 对象锁定（合规模式）将 Bedrock 模型调用日志记录到 S3，有效期为 7 年，并带有每个业务部门的前缀</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Store prompt templates in DynamoDB with item-level permissions for approvals</p><p class="zh" lang="zh-CN">在 DynamoDB 中存储提示模板，并具有项目级审批权限</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Use EventBridge to capture invocation events to CloudWatch Logs then export to S3 Object Lock</p><p class="zh" lang="zh-CN">使用 EventBridge 将调用事件捕获到 CloudWatch Logs，然后导出到 S3 Object Lock</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Enable CloudTrail data events for all Bedrock APIs into CloudTrail Lake with 7-year retention</p><p class="zh" lang="zh-CN">将所有 Bedrock API 的 CloudTrail 数据事件启用到 CloudTrail Lake 中并保留 7 年</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Prompt Management natively handles versioned templates with multi-stage approvals.<br><br>B. Invocation logging plus immutable Object Lock storage meets comprehensive 7-year retention with low overhead.<br><br>C. Custom approval logic in DynamoDB adds development overhead.<br><br>D. Custom pipelines add failure points and do not provide a complete audit trail.<br><br>E. CloudTrail captures API metadata, not full prompt/response content.</p><p class="zh" lang="zh-CN">A. 提示管理本身可以处理具有多阶段批准的版本化模板。<br><br>B. 调用日志记录加上不可变的对象锁存储可以以较低的开销满足 7 年的全面保留。<br><br>C. DynamoDB 中的自定义审批逻辑增加了开发开销。<br><br>D. 自定义管道会添加故障点，并且不提供完整的审核跟踪。<br><br>E. CloudTrail 捕获 API 元数据，而不是完整的提示/响应内容。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q26" data-source-id="easy:OFF-14" data-chat-context="AWS AIP-C01 · easy:OFF-14<br>Reference answer: A<br>A company requires that all InvokeModel and Converse calls apply Bedrock guardrails, enforced in the MOST operationally efficient way. Which solution fits?<br>公司要求所有 InvokeModel 和 Converse 调用都应用 Bedrock 护栏，并以最高效的运营方式执行。 Which solution fits?<br>A. Configure IAM policies for InvokeModel/Converse with the bedrock:GuardrailIdentifier condition key on all roles that access Bedrock FMs<br>使用访问 Bedrock FM 的所有角色上的 bedrock:GuardrailIdentifier 条件键为 InvokeModel/Converse 配置 IAM 策略<br>B. Create a Lambda that validates guardrails before proxying all requests to Bedrock<br>创建一个 Lambda，在将所有请求代理到 Bedrock 之前验证护栏<br>C. Store guardrail IDs in SSM Parameter Store and have a Lambda fetch them per call<br>将护栏 ID 存储在 SSM 参数存储中，并让 Lambda 在每次调用时获取它们<br>D. Configure IAM policies with both GuardrailIdentifier and PromptRouterArn condition keys<br>使用 GuardrailIdentifier 和 PromptRouterArn 条件键配置 IAM 策略" data-n="26" data-ans="A">
+<div class="qhead"><span class="qno">Question 26</span><span class="badge">Domain 1 · Task 1.x</span></div>
+<div class="stem"><p class="en" lang="en">A company requires that all InvokeModel and Converse calls apply Bedrock guardrails, enforced in the MOST operationally efficient way. Which solution fits?</p><p class="zh" lang="zh-CN">公司要求所有 InvokeModel 和 Converse 调用都应用 Bedrock 护栏，并以最高效的运营方式执行。 Which solution fits?</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Configure IAM policies for InvokeModel/Converse with the bedrock:GuardrailIdentifier condition key on all roles that access Bedrock FMs</p><p class="zh" lang="zh-CN">使用访问 Bedrock FM 的所有角色上的 bedrock:GuardrailIdentifier 条件键为 InvokeModel/Converse 配置 IAM 策略</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Create a Lambda that validates guardrails before proxying all requests to Bedrock</p><p class="zh" lang="zh-CN">创建一个 Lambda，在将所有请求代理到 Bedrock 之前验证护栏</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Store guardrail IDs in SSM Parameter Store and have a Lambda fetch them per call</p><p class="zh" lang="zh-CN">将护栏 ID 存储在 SSM 参数存储中，并让 Lambda 在每次调用时获取它们</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Configure IAM policies with both GuardrailIdentifier and PromptRouterArn condition keys</p><p class="zh" lang="zh-CN">使用 GuardrailIdentifier 和 PromptRouterArn 条件键配置 IAM 策略</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. The GuardrailIdentifier condition key centrally enforces guardrail usage with no custom code.<br><br>B. A proxy Lambda adds a bottleneck/failure point and custom maintenance.<br><br>C. Per-call lookups add latency and Lambda maintenance.<br><br>D. PromptRouterArn is unrelated to guardrail enforcement and adds needless complexity.</p><p class="zh" lang="zh-CN">A. GuardrailIdentifier 条件键集中强制使用护栏，无需自定义代码。<br><br>B. 代理 Lambda 添加了瓶颈/故障点和自定义维护。<br><br>C. 每次调用查找会增加延迟和 Lambda 维护。<br><br>D. PromptRouterArn 与护栏实施无关，并且增加了不必要的复杂性。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/security.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q27" data-source-id="easy:OFF-15" data-chat-context="AWS AIP-C01 · easy:OFF-15<br>Reference answer: A<br>A virtual assistant using Anthropic Claude on Bedrock must stop generating output after a specific phrase appears in the response. Which solution meets this?<br>在响应中出现特定短语后，在 Bedrock 上使用 Anthropic Claude 的虚拟助手必须停止生成输出。哪种解决方案可以满足这个要求？<br>A. Use the stop sequences parameter in the inference call to specify the trigger phrase<br>在推理调用中使用停止序列参数来指定触发短语<br>B. Add the trigger phrase &quot;stop at this phrase&quot; in the user prompt<br>在用户提示中添加触发短语“stop at thisphrase”<br>C. Use the top-k parameter to control token diversity<br>使用top-k参数控制token多样性<br>D. Use the temperature parameter to control the phrase likelihood<br>使用温度参数来控制短语似然" data-n="27" data-ans="A">
+<div class="qhead"><span class="qno">Question 27</span><span class="badge">Domain 1 · Task 1.6</span></div>
+<div class="stem"><p class="en" lang="en">A virtual assistant using Anthropic Claude on Bedrock must stop generating output after a specific phrase appears in the response. Which solution meets this?</p><p class="zh" lang="zh-CN">在响应中出现特定短语后，在 Bedrock 上使用 Anthropic Claude 的虚拟助手必须停止生成输出。哪种解决方案可以满足这个要求？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use the stop sequences parameter in the inference call to specify the trigger phrase</p><p class="zh" lang="zh-CN">在推理调用中使用停止序列参数来指定触发短语</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Add the trigger phrase &quot;stop at this phrase&quot; in the user prompt</p><p class="zh" lang="zh-CN">在用户提示中添加触发短语“stop at thisphrase”</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Use the top-k parameter to control token diversity</p><p class="zh" lang="zh-CN">使用top-k参数控制token多样性</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Use the temperature parameter to control the phrase likelihood</p><p class="zh" lang="zh-CN">使用温度参数来控制短语似然</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Stop sequences are a built-in, reliable API mechanism that halts generation at the specified string.<br><br>B. Relying on the model to follow the instruction is unreliable.<br><br>C. top-k controls sampling, not stopping.<br><br>D. Temperature controls randomness, not the stopping point.</p><p class="zh" lang="zh-CN">A. 停止序列是一种内置的、可靠的 API 机制，可在指定字符串处停止生成。<br><br>B. 依靠模型来遵循指令是不可靠的。<br><br>C. top-k 控制采样，而不是停止。<br><br>D. 温度控制随机性，而不是停止点。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q28" data-source-id="easy:OFF-16" data-chat-context="AWS AIP-C01 · easy:OFF-16<br>Reference answer: A,B<br>A cross-functional team wants to use Amazon Q Developer to optimize productivity, enforce integration patterns, automate performance tuning, and accelerate testing. Which TWO steps meet these requirements? (Select TWO.)<br>跨职能团队希望使用 Amazon Q Developer 来优化生产力、实施集成模式、自动执行性能调整并加速测试。哪两个步骤满足这些要求？ （选择两项。）<br>A. Configure Q Developer to auto-generate/refactor integration code, give targeted API guidance, and suggest performance optimizations across the codebase<br>配置 Q Developer 以自动生成/重构集成代码，提供有针对性的 API 指导，并提出整个代码库的性能优化建议<br>B. Integrate Q Developer automated unit/integration test generation into the CI/CD pipelines<br>将 Q Developer 自动化单元/集成测试生成集成到 CI/CD 管道中<br>C. Use Q Developer for security analysis but require manual security-team approval of all changes<br>使用 Q Developer 进行安全分析，但需要安全团队手动批准所有更改<br>D. Use Q Developer to retrospectively document integration patterns across codebases<br>使用 Q Developer 回顾性地记录跨代码库的集成模式<br>E. Limit Q Developer to merge-request fixes with periodic manual refactoring cycles<br>通过定期手动重构周期限制 Q Developer 合并请求修复" data-n="28" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 28</span><span class="badge">Domain 2 · Task 2.x · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A cross-functional team wants to use Amazon Q Developer to optimize productivity, enforce integration patterns, automate performance tuning, and accelerate testing. Which TWO steps meet these requirements? (Select TWO.)</p><p class="zh" lang="zh-CN">跨职能团队希望使用 Amazon Q Developer 来优化生产力、实施集成模式、自动执行性能调整并加速测试。哪两个步骤满足这些要求？ （选择两项。）</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Configure Q Developer to auto-generate/refactor integration code, give targeted API guidance, and suggest performance optimizations across the codebase</p><p class="zh" lang="zh-CN">配置 Q Developer 以自动生成/重构集成代码，提供有针对性的 API 指导，并提出整个代码库的性能优化建议</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Integrate Q Developer automated unit/integration test generation into the CI/CD pipelines</p><p class="zh" lang="zh-CN">将 Q Developer 自动化单元/集成测试生成集成到 CI/CD 管道中</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Use Q Developer for security analysis but require manual security-team approval of all changes</p><p class="zh" lang="zh-CN">使用 Q Developer 进行安全分析，但需要安全团队手动批准所有更改</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Use Q Developer to retrospectively document integration patterns across codebases</p><p class="zh" lang="zh-CN">使用 Q Developer 回顾性地记录跨代码库的集成模式</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Limit Q Developer to merge-request fixes with periodic manual refactoring cycles</p><p class="zh" lang="zh-CN">通过定期手动重构周期限制 Q Developer 合并请求修复</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Real-time generation, refactoring, and optimization boost productivity and reduce integration errors.<br><br>B. Embedding test generation in CI/CD continuously validates components and catches defects early.<br><br>C. Mandatory manual approval of everything creates a bottleneck.<br><br>D. Reactive analysis misses real-time assistance benefits.<br><br>E. Restricting to merge time slows resolution and underuses its capabilities.</p><p class="zh" lang="zh-CN">A. 实时生成、重构和优化可提高生产力并减少集成错误。<br><br>B. 在 CI/CD 中嵌入测试生成可以持续验证组件并及早发现缺陷。<br><br>C. 对所有事情的强制手动批准会造成瓶颈。<br><br>D. 反应性分析错过了实时援助的好处。<br><br>E. 限制合并时间会减慢解析速度并未充分利用其功能。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q29" data-source-id="easy:OFF-17" data-chat-context="AWS AIP-C01 · easy:OFF-17<br>Reference answer: A,B<br>A DJL-served LLM on 8-GPU instances is underutilized: real max sequence length is 10x smaller than configured, concurrency is low, and the model fits within 4 GPUs. Which TWO steps improve resource utilization? (Select TWO.)<br>A DJL-served LLM on 8-GPU instances is underutilized: real max sequence length is 10x smaller than configured, concurrency is low, and the model fits within 4 GPUs.哪两个步骤可以提高资源利用率？ （选择两项。）<br>A. Reduce the model&#x27;s maximum sequence length to allow a higher rolling batch size per GPU<br>减少模型的最大序列长度，以允许每个 GPU 具有更高的滚动批量大小<br>B. Use tensor parallelism with a degree of 4 to deploy two model replicas per instance<br>使用度数为 4 的张量并行度为每个实例部署两个模型副本<br>C. Increase the number of instances and spread requests more evenly<br>增加实例数量并更均匀地分布请求<br>D. Enable speculative decoding to reduce per-request latency<br>启用推测解码以减少每个请求的延迟<br>E. Use tensor parallelism degree 8 to split the model across all GPUs<br>使用张量并行度 8 将模型拆分到所有 GPU 上" data-n="29" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 29</span><span class="badge">Domain 2 · Task 2.x · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A DJL-served LLM on 8-GPU instances is underutilized: real max sequence length is 10x smaller than configured, concurrency is low, and the model fits within 4 GPUs. Which TWO steps improve resource utilization? (Select TWO.)</p><p class="zh" lang="zh-CN">A DJL-served LLM on 8-GPU instances is underutilized: real max sequence length is 10x smaller than configured, concurrency is low, and the model fits within 4 GPUs.哪两个步骤可以提高资源利用率？ （选择两项。）</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Reduce the model&#x27;s maximum sequence length to allow a higher rolling batch size per GPU</p><p class="zh" lang="zh-CN">减少模型的最大序列长度，以允许每个 GPU 具有更高的滚动批量大小</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Use tensor parallelism with a degree of 4 to deploy two model replicas per instance</p><p class="zh" lang="zh-CN">使用度数为 4 的张量并行度为每个实例部署两个模型副本</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Increase the number of instances and spread requests more evenly</p><p class="zh" lang="zh-CN">增加实例数量并更均匀地分布请求</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Enable speculative decoding to reduce per-request latency</p><p class="zh" lang="zh-CN">启用推测解码以减少每个请求的延迟</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Use tensor parallelism degree 8 to split the model across all GPUs</p><p class="zh" lang="zh-CN">使用张量并行度 8 将模型拆分到所有 GPU 上</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Freeing memory by lowering max sequence length increases batch size, throughput, and concurrency.<br><br>B. Since the model fits in 4 GPUs, degree 4 packs two replicas across 8 GPUs for full utilization.<br><br>C. This does not raise per-instance concurrency or reduce the memory footprint.<br><br>D. Speculative decoding improves latency, not utilization.<br><br>E. Degree 8 serves only one replica across 8 GPUs, leaving half idle since the model fits in 4.</p><p class="zh" lang="zh-CN">A. 通过降低最大序列长度来释放内存会增加批处理大小、吞吐量和并发性。<br><br>B. 由于该模型适合 4 个 GPU，因此 4 级在 8 个 GPU 上打包两个副本以实现充分利用。<br><br>C. 这不会提高每个实例的并发性或减少内存占用。<br><br>D. 推测性解码会改善延迟，而不是利用率。<br><br>E. 8 度仅在 8 个 GPU 上提供一个副本，由于模型适合 4 个 GPU，因此留下了一半空闲。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q30" data-source-id="easy:OFF-18" data-chat-context="AWS AIP-C01 · easy:OFF-18<br>Reference answer: A<br>A developer must deploy a Hugging Face text-to-image model (tested in SageMaker JumpStart) for on-demand generation. It must use GPUs, handle text datasets up to 50 MB, and respond within 15 minutes. Which deployment strategy fits?<br>开发人员必须部署 Hugging Face 文本到图像模型（在 SageMaker JumpStart 中测试）以进行按需生成。它必须使用 GPU，处理最大 50 MB 的文本数据集，并在 15 分钟内做出响应。哪种部署策略适合？<br>A. Deploy a SageMaker Asynchronous Inference endpoint on an accelerated (GPU) instance, invoked on demand via Lambda<br>在加速 (GPU) 实例上部署 SageMaker 异步推理端点，通过 Lambda 按需调用<br>B. Deploy a SageMaker Serverless Inference endpoint on a general-purpose instance<br>在通用实例上部署 SageMaker Serverless Inference 端点<br>C. Deploy a SageMaker Real-Time endpoint on a GPU instance<br>在 GPU 实例上部署 SageMaker Real-Time 终端节点<br>D. Create a SageMaker batch transform job on a GPU instance<br>在 GPU 实例上创建 SageMaker 批量转换作业" data-n="30" data-ans="A">
+<div class="qhead"><span class="qno">Question 30</span><span class="badge">Domain 2 · Task 2.x</span></div>
+<div class="stem"><p class="en" lang="en">A developer must deploy a Hugging Face text-to-image model (tested in SageMaker JumpStart) for on-demand generation. It must use GPUs, handle text datasets up to 50 MB, and respond within 15 minutes. Which deployment strategy fits?</p><p class="zh" lang="zh-CN">开发人员必须部署 Hugging Face 文本到图像模型（在 SageMaker JumpStart 中测试）以进行按需生成。它必须使用 GPU，处理最大 50 MB 的文本数据集，并在 15 分钟内做出响应。哪种部署策略适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Deploy a SageMaker Asynchronous Inference endpoint on an accelerated (GPU) instance, invoked on demand via Lambda</p><p class="zh" lang="zh-CN">在加速 (GPU) 实例上部署 SageMaker 异步推理端点，通过 Lambda 按需调用</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Deploy a SageMaker Serverless Inference endpoint on a general-purpose instance</p><p class="zh" lang="zh-CN">在通用实例上部署 SageMaker Serverless Inference 端点</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Deploy a SageMaker Real-Time endpoint on a GPU instance</p><p class="zh" lang="zh-CN">在 GPU 实例上部署 SageMaker Real-Time 终端节点</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Create a SageMaker batch transform job on a GPU instance</p><p class="zh" lang="zh-CN">在 GPU 实例上创建 SageMaker 批量转换作业</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Async endpoints support up to ~15-minute runtimes, large payloads (up to ~1 GB), and GPUs.<br><br>B. Serverless inference does not support GPUs.<br><br>C. Real-time endpoints cap payloads near 25 MB, failing the 50 MB requirement.<br><br>D. Batch transform is offline, not on-demand within 15 minutes.</p><p class="zh" lang="zh-CN">A. 异步端点支持长达约 15 分钟的运行时间、大负载（高达约 1 GB）和 GPU。<br><br>B. Serverless 推理不支持 GPU。<br><br>C. 实时端点将有效负载上限限制为接近 25 MB，未能满足 50 MB 的要求。<br><br>D. 批量转换是离线的，不是15分钟内按需转换。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q31" data-source-id="easy:OFF-19" data-chat-context="AWS AIP-C01 · easy:OFF-19<br>Reference answer: A<br>A news company wants a web editor where journalists click &quot;analyze&quot; and immediately receive streamed style-guide revisions; articles carry content-category metadata. Which architecture meets this with the LEAST operational overhead?<br>一家新闻公司想要一个网页编辑器，记者可以在其中单击“分析”并立即收到流式传输的风格指南修订版；文章携带内容类别元数据。哪种架构能够以最少的运营开销满足这一要求？<br>A. API Gateway WebSocket API → Lambda reads the category metadata, routes to the right Bedrock model, uses Prompt Management for style rules, and streams suggestions via the Bedrock streaming API<br>API Gateway WebSocket API → Lambda 读取类别元数据，路由到正确的 Bedrock 模型，使用提示管理进行样式规则，并通过 Bedrock 流 API 流式传输建议<br>B. SQS ingestion → Step Functions → Lambda → DynamoDB → API Gateway WebSocket streaming<br>SQS 摄取 → Step Functions → Lambda → DynamoDB → API Gateway WebSocket 流式传输<br>C. API Gateway REST API with Lambda function URLs and chunked transfer encoding<br>具有 Lambda 函数 URL 和分块传输编码的 API Gateway REST API<br>D. Application Load Balancer with ECS tasks running custom routing/style containers<br>具有运行自定义路由/样式容器的 ECS 任务的应用程序负载均衡器" data-n="31" data-ans="A">
+<div class="qhead"><span class="qno">Question 31</span><span class="badge">Domain 1 · Task 1.6</span></div>
+<div class="stem"><p class="en" lang="en">A news company wants a web editor where journalists click &quot;analyze&quot; and immediately receive streamed style-guide revisions; articles carry content-category metadata. Which architecture meets this with the LEAST operational overhead?</p><p class="zh" lang="zh-CN">一家新闻公司想要一个网页编辑器，记者可以在其中单击“分析”并立即收到流式传输的风格指南修订版；文章携带内容类别元数据。哪种架构能够以最少的运营开销满足这一要求？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">API Gateway WebSocket API → Lambda reads the category metadata, routes to the right Bedrock model, uses Prompt Management for style rules, and streams suggestions via the Bedrock streaming API</p><p class="zh" lang="zh-CN">API Gateway WebSocket API → Lambda 读取类别元数据，路由到正确的 Bedrock 模型，使用提示管理进行样式规则，并通过 Bedrock 流 API 流式传输建议</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">SQS ingestion → Step Functions → Lambda → DynamoDB → API Gateway WebSocket streaming</p><p class="zh" lang="zh-CN">SQS 摄取 → Step Functions → Lambda → DynamoDB → API Gateway WebSocket 流式传输</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">API Gateway REST API with Lambda function URLs and chunked transfer encoding</p><p class="zh" lang="zh-CN">具有 Lambda 函数 URL 和分块传输编码的 API Gateway REST API</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Application Load Balancer with ECS tasks running custom routing/style containers</p><p class="zh" lang="zh-CN">具有运行自定义路由/样式容器的 ECS 任务的应用程序负载均衡器</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. WebSockets give serverless real-time streaming; Prompt Management governs rules; streaming returns suggestions immediately.<br><br>B. SQS polling adds latency, defeating immediate feedback on click.<br><br>C. REST is poorly suited to long-lived real-time streaming.<br><br>D. Custom ECS containers add infrastructure management overhead.</p><p class="zh" lang="zh-CN">A. WebSockets 提供无服务器实时流；及时管理管理规则；流立即返回建议。<br><br>B. SQS 轮询会增加延迟，从而影响点击时的即时反馈。<br><br>C. REST 不太适合长期实时流。<br><br>D. 自定义 ECS 容器增加了基础设施管理开销。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q32" data-source-id="easy:OFF-20" data-chat-context="AWS AIP-C01 · easy:OFF-20<br>Reference answer: A<br>A Bedrock Knowledge Base ingests documents from multiple S3 buckets, and the team needs to monitor ingestion to identify and troubleshoot document-processing issues. Which solution meets this?<br>Bedrock 知识库从多个 S3 存储桶获取文档，团队需要监控获取情况以识别文档处理问题并进行故障排除。哪种解决方案可以满足这个要求？<br>A. Configure knowledge base logging to Amazon CloudWatch Logs and use Logs Insights to query for failed document processing<br>配置知识库日志记录到 Amazon CloudWatch Logs 并使用 Logs Insights 查询失败的文档处理<br>B. Enable CloudWatch Application Signals to detect knowledge base performance issues<br>启用 CloudWatch 应用程序信号来检测知识库性能问题<br>C. Enable AWS CloudTrail to track API calls related to ingestion<br>启用 AWS CloudTrail 跟踪与提取相关的 API 调用<br>D. Implement Bedrock model invocation logging to capture document processing metrics<br>实施 Bedrock 模型调用日志记录以捕获文档处理指标" data-n="32" data-ans="A">
+<div class="qhead"><span class="qno">Question 32</span><span class="badge">Domain 1 · Task 1.4</span></div>
+<div class="stem"><p class="en" lang="en">A Bedrock Knowledge Base ingests documents from multiple S3 buckets, and the team needs to monitor ingestion to identify and troubleshoot document-processing issues. Which solution meets this?</p><p class="zh" lang="zh-CN">Bedrock 知识库从多个 S3 存储桶获取文档，团队需要监控获取情况以识别文档处理问题并进行故障排除。哪种解决方案可以满足这个要求？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Configure knowledge base logging to Amazon CloudWatch Logs and use Logs Insights to query for failed document processing</p><p class="zh" lang="zh-CN">配置知识库日志记录到 Amazon CloudWatch Logs 并使用 Logs Insights 查询失败的文档处理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Enable CloudWatch Application Signals to detect knowledge base performance issues</p><p class="zh" lang="zh-CN">启用 CloudWatch 应用程序信号来检测知识库性能问题</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Enable AWS CloudTrail to track API calls related to ingestion</p><p class="zh" lang="zh-CN">启用 AWS CloudTrail 跟踪与提取相关的 API 调用</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Implement Bedrock model invocation logging to capture document processing metrics</p><p class="zh" lang="zh-CN">实施 Bedrock 模型调用日志记录以捕获文档处理指标</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. KB logging records per-file status (e.g., RESOURCE_IGNORED, EMBEDDING_FAILED, INDEXING_FAILED) for troubleshooting.<br><br>B. Application Signals monitors app performance, not KB ingestion.<br><br>C. CloudTrail logs API calls, not document-level processing status.<br><br>D. Invocation logging captures inference calls, not ingestion.</p><p class="zh" lang="zh-CN">A. KB 日志记录每个文件的状态（例如 RESOURCE_IGNORED、EMBEDDING_FAILED、INDEXING_FAILED）以进行故障排除。<br><br>B. 应用程序信号监视应用程序性能，而不是 KB 摄取。<br><br>C. CloudTrail 记录 API 调用，而不是文档级处理状态。<br><br>D. 调用日志记录捕获推理调用，而不是摄取。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q33" data-source-id="easy:2.1-26" data-chat-context="AWS AIP-C01 · easy:2.1-26<br>Reference answer: A<br>A customer-support solution needs to route each user query to one of several specialized agents (billing, technical, account) and keep a coherent conversation across them. Which AWS open-source framework is purpose-built for multi-agent orchestration and routing?<br>客户支持解决方案需要将每个用户查询路由到多个专业代理（计费、技术、帐户）之一，并在他们之间保持一致的对话。哪个 AWS 开源框架是专门为多代理编排和路由而构建的？<br>A. AWS Agent Squad (multi-agent orchestrator)<br>AWS Agent Squad（多代理协调器）<br>B. Amazon Bedrock Guardrails<br>亚马逊基岩护栏<br>C. Amazon Bedrock Knowledge Bases<br>亚马逊基岩知识库<br>D. Amazon Comprehend<br>亚马逊理解" data-n="33" data-ans="A">
+<div class="qhead"><span class="qno">Question 33</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">A customer-support solution needs to route each user query to one of several specialized agents (billing, technical, account) and keep a coherent conversation across them. Which AWS open-source framework is purpose-built for multi-agent orchestration and routing?</p><p class="zh" lang="zh-CN">客户支持解决方案需要将每个用户查询路由到多个专业代理（计费、技术、帐户）之一，并在他们之间保持一致的对话。哪个 AWS 开源框架是专门为多代理编排和路由而构建的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">AWS Agent Squad (multi-agent orchestrator)</p><p class="zh" lang="zh-CN">AWS Agent Squad（多代理协调器）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock Guardrails</p><p class="zh" lang="zh-CN">亚马逊基岩护栏</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock Knowledge Bases</p><p class="zh" lang="zh-CN">亚马逊基岩知识库</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon Comprehend</p><p class="zh" lang="zh-CN">亚马逊理解</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Agent Squad orchestrates multiple specialized agents, routing each query to the best-suited agent while maintaining unified conversation context.<br><br>B. Guardrails enforce content safety; they do not orchestrate multiple agents.<br><br>C. Knowledge Bases provide RAG retrieval, not multi-agent routing.<br><br>D. Comprehend is NLP analysis, not an agent orchestration framework.</p><p class="zh" lang="zh-CN">A. Agent Squad 协调多个专业代理，将每个查询路由到最适合的代理，同时维护统一的对话上下文。<br><br>B. 护栏加强内容安全；他们不协调多个代理。<br><br>C. 知识库提供 RAG 检索，而不是多代理路由。<br><br>D. Comprehend 是 NLP 分析，而不是代理编排框架。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q34" data-source-id="easy:2.1-27" data-chat-context="AWS AIP-C01 · easy:2.1-27<br>Reference answer: A<br>In AWS Agent Squad, how is each incoming user request assigned to the right specialized agent?<br>在 AWS Agent Squad 中，如何将每个传入用户请求分配给正确的专业代理？<br>A. An LLM-powered classifier analyzes the input, agent descriptions, and conversation history to select the best-suited agent<br>由 LLM 支持的分类器分析输入、代理描述和对话历史记录，以选择最适合的代理<br>B. Requests are assigned round-robin regardless of content<br>无论内容如何，​​请求都会循环分配<br>C. The user must manually pick an agent each turn<br>用户必须每轮手动选择一个代理<br>D. Agents are chosen by alphabetical order of their names<br>代理人按姓名字母顺序选出" data-n="34" data-ans="A">
+<div class="qhead"><span class="qno">Question 34</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">In AWS Agent Squad, how is each incoming user request assigned to the right specialized agent?</p><p class="zh" lang="zh-CN">在 AWS Agent Squad 中，如何将每个传入用户请求分配给正确的专业代理？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">An LLM-powered classifier analyzes the input, agent descriptions, and conversation history to select the best-suited agent</p><p class="zh" lang="zh-CN">由 LLM 支持的分类器分析输入、代理描述和对话历史记录，以选择最适合的代理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Requests are assigned round-robin regardless of content</p><p class="zh" lang="zh-CN">无论内容如何，​​请求都会循环分配</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">The user must manually pick an agent each turn</p><p class="zh" lang="zh-CN">用户必须每轮手动选择一个代理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Agents are chosen by alphabetical order of their names</p><p class="zh" lang="zh-CN">代理人按姓名字母顺序选出</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Agent Squad uses a classifier (e.g., the default Bedrock Classifier) to route requests by intent.<br><br>B. Routing is intent-based via the classifier, not blind round-robin.<br><br>C. Routing is automatic; users do not hand-pick agents per turn.<br><br>D. Selection is based on classification of intent/context, not naming order.</p><p class="zh" lang="zh-CN">A. Agent Squad 使用分类器（例如，默认的基岩分类器）按意图路由请求。<br><br>B. 路由是通过分类器基于意图的，而不是盲目循环。<br><br>C. 路由是自动的；用户不会每次都亲自挑选代理。<br><br>D. 选择基于意图/上下文的分类，而不是命名顺序。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q35" data-source-id="easy:2.1-28" data-chat-context="AWS AIP-C01 · easy:2.1-28<br>Reference answer: A,B<br>Which TWO are accurate about AWS Agent Squad?<br>关于 AWS Agent Squad，哪两项是准确的？<br>A. Member agents can be different types, such as Amazon Bedrock model agents, Amazon Lex bots, or AWS Lambda functions<br>成员代理可以是不同类型，例如 Amazon Bedrock 模型代理、Amazon Lex 机器人或 AWS Lambda 函数<br>B. It maintains unified conversation context across agents for coherent multi-turn interactions<br>它维护跨代理的统一对话上下文，以实现连贯的多轮交互<br>C. It can only run a single agent at a time and has no routing<br>它一次只能运行一个代理并且没有路由<br>D. It is a vector database<br>这是一个矢量数据库<br>E. It requires Provisioned Throughput to classify requests<br>它需要预配置吞吐量来对请求进行分类" data-n="35" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 35</span><span class="badge">Domain 2 · Task 2.1 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">Which TWO are accurate about AWS Agent Squad?</p><p class="zh" lang="zh-CN">关于 AWS Agent Squad，哪两项是准确的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Member agents can be different types, such as Amazon Bedrock model agents, Amazon Lex bots, or AWS Lambda functions</p><p class="zh" lang="zh-CN">成员代理可以是不同类型，例如 Amazon Bedrock 模型代理、Amazon Lex 机器人或 AWS Lambda 函数</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">It maintains unified conversation context across agents for coherent multi-turn interactions</p><p class="zh" lang="zh-CN">它维护跨代理的统一对话上下文，以实现连贯的多轮交互</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">It can only run a single agent at a time and has no routing</p><p class="zh" lang="zh-CN">它一次只能运行一个代理并且没有路由</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">It is a vector database</p><p class="zh" lang="zh-CN">这是一个矢量数据库</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">It requires Provisioned Throughput to classify requests</p><p class="zh" lang="zh-CN">它需要预配置吞吐量来对请求进行分类</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Agent Squad supports heterogeneous agents including Bedrock, Lex, and Lambda-backed agents.<br><br>B. The orchestrator keeps shared context so conversations stay coherent as routing changes.<br><br>C. Its entire purpose is routing across multiple agents.<br><br>D. Agent Squad is an orchestration framework, not a vector store.<br><br>E. Classification uses a model/classifier; it does not mandate provisioned capacity.</p><p class="zh" lang="zh-CN">A. Agent Squad 支持异构代理，包括 Bedrock、Lex 和 Lambda 支持的代理。<br><br>B. 编排器保持共享上下文，以便在路由更改时对话保持一致。<br><br>C. 它的全部目的是跨多个代理进行路由。<br><br>D. Agent Squad 是一个编排框架，而不是矢量存储。<br><br>E. 分类使用模型/分类器；它不强制要求配置容量。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q36" data-source-id="easy:2.1-29" data-chat-context="AWS AIP-C01 · easy:2.1-29<br>Reference answer: A<br>In Agent Squad, what is the difference between the classifier&#x27;s view and an individual agent&#x27;s view of conversation history?<br>在《特工小队》中，分类器的视图和单个特工的对话历史视图有什么区别？<br>A. The classifier has a global view across agents, while each agent sees only its own conversation history<br>分类器具有跨代理的全局视图，而每个代理只能看到自己的对话历史记录<br>B. Every agent always sees the full global history<br>每个特工总是能看到完整的全球历史<br>C. The classifier sees nothing and routes blindly<br>分类器什么也看不见，盲目地进行路由<br>D. History is never retained anywhere<br>历史永远不会被保留在任何地方" data-n="36" data-ans="A">
+<div class="qhead"><span class="qno">Question 36</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">In Agent Squad, what is the difference between the classifier&#x27;s view and an individual agent&#x27;s view of conversation history?</p><p class="zh" lang="zh-CN">在《特工小队》中，分类器的视图和单个特工的对话历史视图有什么区别？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The classifier has a global view across agents, while each agent sees only its own conversation history</p><p class="zh" lang="zh-CN">分类器具有跨代理的全局视图，而每个代理只能看到自己的对话历史记录</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Every agent always sees the full global history</p><p class="zh" lang="zh-CN">每个特工总是能看到完整的全球历史</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">The classifier sees nothing and routes blindly</p><p class="zh" lang="zh-CN">分类器什么也看不见，盲目地进行路由</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">History is never retained anywhere</p><p class="zh" lang="zh-CN">历史永远不会被保留在任何地方</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. This lets the classifier route with full context while keeping each agent focused on its domain.<br><br>B. Agents see only their own history; the global view belongs to the classifier.<br><br>C. The classifier specifically uses global context to route.<br><br>D. Agent Squad maintains conversation context.</p><p class="zh" lang="zh-CN">A. 这使得分类器能够根据完整的上下文进行路由，同时使每个代理专注于其域。<br><br>B. 特工只能看到自己的历史；全局视图属于分类器。<br><br>C. 分类器专门使用全局上下文来进行路由。<br><br>D. 特工小队维护对话上下文。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q37" data-source-id="easy:2.1-30" data-chat-context="AWS AIP-C01 · easy:2.1-30<br>Reference answer: A<br>How do AWS Strands Agents and AWS Agent Squad differ in purpose?<br>AWS Strands Agent 和 AWS Agent Squad 的用途有何不同？<br>A. Strands is a model-driven SDK for building an individual agent; Agent Squad orchestrates and routes across multiple specialized agents<br>Strands 是一个模型驱动的 SDK，用于构建个体代理；特工小队在多个专业特工之间进行协调和路由<br>B. They are identical products<br>它们是相同的产品<br>C. Strands routes between many agents and Agent Squad builds one agent<br>在多个特工之间分配路线，特工小队建立一个特工<br>D. Both are vector stores<br>两者都是矢量商店" data-n="37" data-ans="A">
+<div class="qhead"><span class="qno">Question 37</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">How do AWS Strands Agents and AWS Agent Squad differ in purpose?</p><p class="zh" lang="zh-CN">AWS Strands Agent 和 AWS Agent Squad 的用途有何不同？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Strands is a model-driven SDK for building an individual agent; Agent Squad orchestrates and routes across multiple specialized agents</p><p class="zh" lang="zh-CN">Strands 是一个模型驱动的 SDK，用于构建个体代理；特工小队在多个专业特工之间进行协调和路由</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">They are identical products</p><p class="zh" lang="zh-CN">它们是相同的产品</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Strands routes between many agents and Agent Squad builds one agent</p><p class="zh" lang="zh-CN">在多个特工之间分配路线，特工小队建立一个特工</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Both are vector stores</p><p class="zh" lang="zh-CN">两者都是矢量商店</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Strands builds single agents (model + prompt + tools); Agent Squad coordinates many agents.<br><br>B. They serve different roles: single-agent SDK vs multi-agent orchestration.<br><br>C. This reverses their roles.<br><br>D. Neither is a vector store.</p><p class="zh" lang="zh-CN">A. Strands构建单一代理（模型+提示+工具）；特工小队协调众多特工。<br><br>B. 它们扮演不同的角色：单代理 SDK 与多代理编排。<br><br>C. 这颠倒了他们的角色。<br><br>D. 两者都不是矢量存储。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q38" data-source-id="easy:2.1-31" data-chat-context="AWS AIP-C01 · easy:2.1-31<br>Reference answer: A<br>A team wants an agent to interleave reasoning with tool actions (think, act, observe, repeat) using structured steps orchestrated on AWS. Which pattern/approach matches?<br>团队希望代理使用 AWS 上编排的结构化步骤将推理与工具操作（思考、行动、观察、重复）交织在一起。哪种模式/方法匹配？<br>A. The ReAct pattern, which can be implemented with AWS Step Functions to structure reasoning and tool-use steps<br>ReAct 模式，可以使用 AWS Step Functions 来实现，以构建推理和工具使用步骤<br>B. A single one-shot prompt with no tools<br>无需任何工具的一次性提示<br>C. Provisioned Throughput scaling<br>预配置吞吐量扩展<br>D. Sharding the vector index<br>对向量索引进行分片" data-n="38" data-ans="A">
+<div class="qhead"><span class="qno">Question 38</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">A team wants an agent to interleave reasoning with tool actions (think, act, observe, repeat) using structured steps orchestrated on AWS. Which pattern/approach matches?</p><p class="zh" lang="zh-CN">团队希望代理使用 AWS 上编排的结构化步骤将推理与工具操作（思考、行动、观察、重复）交织在一起。哪种模式/方法匹配？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The ReAct pattern, which can be implemented with AWS Step Functions to structure reasoning and tool-use steps</p><p class="zh" lang="zh-CN">ReAct 模式，可以使用 AWS Step Functions 来实现，以构建推理和工具使用步骤</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">A single one-shot prompt with no tools</p><p class="zh" lang="zh-CN">无需任何工具的一次性提示</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput scaling</p><p class="zh" lang="zh-CN">预配置吞吐量扩展</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Sharding the vector index</p><p class="zh" lang="zh-CN">对向量索引进行分片</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. ReAct (Reason + Act) interleaves reasoning and actions; Step Functions can structure these steps.<br><br>B. One-shot prompting does not interleave reasoning and tool actions.<br><br>C. That reserves capacity; it is not a reasoning pattern.<br><br>D. Sharding is storage tuning, unrelated to agent reasoning.</p><p class="zh" lang="zh-CN">A. ReAct（理性+行动）将推理与行动交织在一起； Step Functions 可以构建这些步骤。<br><br>B. 一次性提示不会将推理和工具操作交织在一起。<br><br>C. 即储备能力；它不是一种推理模式。<br><br>D. 分片是存储调优，与代理推理无关。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q39" data-source-id="easy:2.1-32" data-chat-context="AWS AIP-C01 · easy:2.1-32<br>Reference answer: A<br>A complex task benefits from breaking the problem into intermediate reasoning steps before producing a final answer. Which prompting technique is this?<br>在产生最终答案之前将问题分解为中间推理步骤可以使复杂的任务受益。这是哪一种提示技巧？<br>A. Chain-of-thought reasoning<br>思维链推理<br>B. Stop sequences<br>停止序列<br>C. Top-k sampling<br>Top-k 采样<br>D. Hybrid search<br>混合搜索" data-n="39" data-ans="A">
+<div class="qhead"><span class="qno">Question 39</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">A complex task benefits from breaking the problem into intermediate reasoning steps before producing a final answer. Which prompting technique is this?</p><p class="zh" lang="zh-CN">在产生最终答案之前将问题分解为中间推理步骤可以使复杂的任务受益。这是哪一种提示技巧？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Chain-of-thought reasoning</p><p class="zh" lang="zh-CN">思维链推理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Stop sequences</p><p class="zh" lang="zh-CN">停止序列</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Top-k sampling</p><p class="zh" lang="zh-CN">Top-k 采样</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Hybrid search</p><p class="zh" lang="zh-CN">混合搜索</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Chain-of-thought prompts the model to reason through intermediate steps, improving complex task performance.<br><br>B. Stop sequences end generation; they do not elicit step-by-step reasoning.<br><br>C. top-k controls candidate tokens, not reasoning structure.<br><br>D. Hybrid search is a retrieval technique, not a reasoning method.</p><p class="zh" lang="zh-CN">A. 思维链促使模型通过中间步骤进行推理，从而提高复杂任务的性能。<br><br>B. 停止序列结束生成；它们不会引发逐步的推理。<br><br>C. top-k 控制候选标记，而不是推理结构。<br><br>D. 混合搜索是一种检索技术，而不是推理方法。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q40" data-source-id="easy:2.1-33" data-chat-context="AWS AIP-C01 · easy:2.1-33<br>Reference answer: A<br>An agentic workflow must pause for a human to review and approve high-impact actions before continuing. Which approach implements this human-in-the-loop control on AWS?<br>代理工作流程必须暂停，以便人员在继续之前审查和批准高影响力的操作。哪种方法在 AWS 上实现这种人机交互控制？<br>A. Use AWS Step Functions to orchestrate a review/approval step (e.g., with a callback) before the agent proceeds<br>在代理继续之前，使用 AWS Step Functions 协调审核/批准步骤（例如，使用回调）<br>B. Increase the model temperature so it self-approves<br>提高模型温度，使其自我认可<br>C. Remove all guardrails to speed approvals<br>拆除所有护栏以加快审批速度<br>D. Store the action in S3 and hope a human notices<br>将动作存储在 S3 中并希望有人注意到" data-n="40" data-ans="A">
+<div class="qhead"><span class="qno">Question 40</span><span class="badge">Domain 2 · Task 2.1</span></div>
+<div class="stem"><p class="en" lang="en">An agentic workflow must pause for a human to review and approve high-impact actions before continuing. Which approach implements this human-in-the-loop control on AWS?</p><p class="zh" lang="zh-CN">代理工作流程必须暂停，以便人员在继续之前审查和批准高影响力的操作。哪种方法在 AWS 上实现这种人机交互控制？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use AWS Step Functions to orchestrate a review/approval step (e.g., with a callback) before the agent proceeds</p><p class="zh" lang="zh-CN">在代理继续之前，使用 AWS Step Functions 协调审核/批准步骤（例如，使用回调）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Increase the model temperature so it self-approves</p><p class="zh" lang="zh-CN">提高模型温度，使其自我认可</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Remove all guardrails to speed approvals</p><p class="zh" lang="zh-CN">拆除所有护栏以加快审批速度</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Store the action in S3 and hope a human notices</p><p class="zh" lang="zh-CN">将动作存储在 S3 中并希望有人注意到</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Step Functions can pause for human approval (task tokens/callbacks) to gate sensitive actions.<br><br>B. Temperature affects randomness, not human approval.<br><br>C. Removing safeguards is the opposite of controlled human review.<br><br>D. Passive storage is not an orchestrated approval mechanism.</p><p class="zh" lang="zh-CN">A. Step Functions 可以暂停以供人工批准（任务令牌/回调）以控制敏感操作。<br><br>B. 温度影响随机性，而不是人类认可度。<br><br>C. 取消保障措施与受控人工审查相反。<br><br>D. 被动存储不是精心策划的审批机制。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q41" data-source-id="easy:1.3-21" data-chat-context="AWS AIP-C01 · easy:1.3-21<br>Reference answer: A<br>A developer calls Amazon Bedrock with the InvokeModel API across several providers and finds each model expects a different request body. What is the most accurate statement?<br>开发人员通过多个提供商的 InvokeModel API 调用 Amazon Bedrock，并发现每个模型需要不同的请求正文。最准确的说法是什么？<br>A. InvokeModel request/response bodies are model-specific, so the JSON payload must match each model&#x27;s schema<br>InvokeModel 请求/响应主体是特定于模型的，因此 JSON 有效负载必须与每个模型的架构匹配<br>B. InvokeModel uses one identical body for every model<br>InvokeModel 为每个模型使用一个相同的主体<br>C. InvokeModel only accepts CSV<br>InvokeModel 仅接受 CSV<br>D. InvokeModel cannot be used for text models<br>InvokeModel 不能用于文本模型" data-n="41" data-ans="A">
+<div class="qhead"><span class="qno">Question 41</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">A developer calls Amazon Bedrock with the InvokeModel API across several providers and finds each model expects a different request body. What is the most accurate statement?</p><p class="zh" lang="zh-CN">开发人员通过多个提供商的 InvokeModel API 调用 Amazon Bedrock，并发现每个模型需要不同的请求正文。最准确的说法是什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">InvokeModel request/response bodies are model-specific, so the JSON payload must match each model&#x27;s schema</p><p class="zh" lang="zh-CN">InvokeModel 请求/响应主体是特定于模型的，因此 JSON 有效负载必须与每个模型的架构匹配</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">InvokeModel uses one identical body for every model</p><p class="zh" lang="zh-CN">InvokeModel 为每个模型使用一个相同的主体</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">InvokeModel only accepts CSV</p><p class="zh" lang="zh-CN">InvokeModel 仅接受 CSV</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">InvokeModel cannot be used for text models</p><p class="zh" lang="zh-CN">InvokeModel 不能用于文本模型</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. With InvokeModel you format the body to the chosen model&#x27;s native request schema.<br><br>B. Native InvokeModel bodies differ per provider/model.<br><br>C. Bedrock requests are JSON, and the schema is model-specific.<br><br>D. InvokeModel is a primary API for text models.</p><p class="zh" lang="zh-CN">A. 使用 InvokeModel，您可以将正文格式化为所选模型的本机请求架构。<br><br>B. 本机 InvokeModel 主体因提供者/模型而异。<br><br>C. Bedrock 请求是 JSON，并且架构是特定于模型的。<br><br>D. InvokeModel 是文本模型的主要 API。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q42" data-source-id="easy:1.3-22" data-chat-context="AWS AIP-C01 · easy:1.3-22<br>Reference answer: A<br>A team wants a single, consistent request/response format for multi-turn chat that works across multiple Bedrock models without hand-coding each model&#x27;s native schema. Which API should they use?<br>团队希望为多回合聊天提供单一、一致的请求/响应格式，该格式可以跨多个 Bedrock 模型运行，而无需手动编码每个模型的本机架构。他们应该使用哪个 API？<br>A. The Amazon Bedrock Converse API, which provides a unified messages interface across supported models<br>Amazon Bedrock Converse API，为支持的模型提供统一的消息接口<br>B. InvokeModel with a model-specific body for each model<br>InvokeModel 为每个模型提供特定于模型的主体<br>C. StartIngestionJob<br>开始摄取作业<br>D. The Rerank API<br>重新排序 API" data-n="42" data-ans="A">
+<div class="qhead"><span class="qno">Question 42</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">A team wants a single, consistent request/response format for multi-turn chat that works across multiple Bedrock models without hand-coding each model&#x27;s native schema. Which API should they use?</p><p class="zh" lang="zh-CN">团队希望为多回合聊天提供单一、一致的请求/响应格式，该格式可以跨多个 Bedrock 模型运行，而无需手动编码每个模型的本机架构。他们应该使用哪个 API？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The Amazon Bedrock Converse API, which provides a unified messages interface across supported models</p><p class="zh" lang="zh-CN">Amazon Bedrock Converse API，为支持的模型提供统一的消息接口</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">InvokeModel with a model-specific body for each model</p><p class="zh" lang="zh-CN">InvokeModel 为每个模型提供特定于模型的主体</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">StartIngestionJob</p><p class="zh" lang="zh-CN">开始摄取作业</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">The Rerank API</p><p class="zh" lang="zh-CN">重新排序 API</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Converse abstracts model-specific formats into a consistent messages structure with roles, simplifying portability.<br><br>B. InvokeModel requires per-model formatting, which is what they want to avoid.<br><br>C. That ingests data into a Knowledge Base; it is not a chat inference API.<br><br>D. Rerank reorders retrieved documents; it is not a chat interface.</p><p class="zh" lang="zh-CN">A. Converse 将特定于模型的格式抽象为具有角色的一致消息结构，从而简化了可移植性。<br><br>B. InvokeModel 需要每个模型的格式化，这是他们想要避免的。<br><br>C. 将数据提取到知识库中；它不是聊天推理 API。<br><br>D. Rerank 对检索到的文档重新排序；它不是聊天界面。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q43" data-source-id="easy:1.3-23" data-chat-context="AWS AIP-C01 · easy:1.3-23<br>Reference answer: A<br>When formatting input for a dialog-based application using the Bedrock Converse API, how is the conversation typically structured?<br>使用 Bedrock Converse API 格式化基于对话框的应用程序的输入时，对话通常是如何构建的？<br>A. As a sequence of messages with roles (e.g., user and assistant), plus an optional system instruction<br>作为具有角色（例如用户和助理）的消息序列，加上可选的系统指令<br>B. As a single concatenated string with no roles<br>作为没有角色的单个串联字符串<br>C. As a CSV of tokens<br>作为令牌的 CSV<br>D. As a vector embedding only<br>仅作为向量嵌入" data-n="43" data-ans="A">
+<div class="qhead"><span class="qno">Question 43</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">When formatting input for a dialog-based application using the Bedrock Converse API, how is the conversation typically structured?</p><p class="zh" lang="zh-CN">使用 Bedrock Converse API 格式化基于对话框的应用程序的输入时，对话通常是如何构建的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">As a sequence of messages with roles (e.g., user and assistant), plus an optional system instruction</p><p class="zh" lang="zh-CN">作为具有角色（例如用户和助理）的消息序列，加上可选的系统指令</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">As a single concatenated string with no roles</p><p class="zh" lang="zh-CN">作为没有角色的单个串联字符串</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">As a CSV of tokens</p><p class="zh" lang="zh-CN">作为令牌的 CSV</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">As a vector embedding only</p><p class="zh" lang="zh-CN">仅作为向量嵌入</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Conversation formatting uses role-tagged messages (user/assistant) and an optional system prompt.<br><br>B. Dialog formatting uses structured role-tagged turns, not one undifferentiated string.<br><br>C. Conversations are structured messages, not token CSVs.<br><br>D. Embeddings are for retrieval, not the chat message structure.</p><p class="zh" lang="zh-CN">A. 对话格式使用角色标记的消息（用户/助理）和可选的系统提示。<br><br>B. 对话框格式使用结构化的角色标记回合，而不是无差别的字符串。<br><br>C. 对话是结构化消息，而不是令牌 CSV。<br><br>D. 嵌入用于检索，而不是聊天消息结构。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q44" data-source-id="easy:1.3-24" data-chat-context="AWS AIP-C01 · easy:1.3-24<br>Reference answer: A<br>A pipeline sends requests to an Amazon SageMaker AI real-time endpoint. What determines the required input data format?<br>管道将请求发送到 Amazon SageMaker AI 实时终端节点。什么决定了所需的输入数据格式？<br>A. The endpoint/container&#x27;s expected content type and serializer (e.g., application/json or text/csv) per the model&#x27;s contract<br>根据模型合同，端点/容器的预期内容类型和序列化程序（例如 application/json 或 text/csv）<br>B. All SageMaker endpoints require the Bedrock Converse schema<br>所有 SageMaker 端点都需要 Bedrock Converse 架构<br>C. SageMaker endpoints accept any format without serialization<br>SageMaker 端点接受任何格式，无需序列化<br>D. SageMaker endpoints only accept audio<br>SageMaker 端点仅接受音频" data-n="44" data-ans="A">
+<div class="qhead"><span class="qno">Question 44</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">A pipeline sends requests to an Amazon SageMaker AI real-time endpoint. What determines the required input data format?</p><p class="zh" lang="zh-CN">管道将请求发送到 Amazon SageMaker AI 实时终端节点。什么决定了所需的输入数据格式？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The endpoint/container&#x27;s expected content type and serializer (e.g., application/json or text/csv) per the model&#x27;s contract</p><p class="zh" lang="zh-CN">根据模型合同，端点/容器的预期内容类型和序列化程序（例如 application/json 或 text/csv）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">All SageMaker endpoints require the Bedrock Converse schema</p><p class="zh" lang="zh-CN">所有 SageMaker 端点都需要 Bedrock Converse 架构</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">SageMaker endpoints accept any format without serialization</p><p class="zh" lang="zh-CN">SageMaker 端点接受任何格式，无需序列化</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">SageMaker endpoints only accept audio</p><p class="zh" lang="zh-CN">SageMaker 端点仅接受音频</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. SageMaker endpoints expect input matching the container&#x27;s content type and the model&#x27;s input contract.<br><br>B. SageMaker input depends on the container, not the Bedrock Converse format.<br><br>C. Input must match the endpoint&#x27;s expected content type/serializer.<br><br>D. Format depends on the model; it is not audio-only.</p><p class="zh" lang="zh-CN">A. SageMaker 端点期望输入与容器的内容类型和模型的输入协定相匹配。<br><br>B. SageMaker 输入取决于容器，而不是 Bedrock Converse 格式。<br><br>C. 输入必须与端点的预期内容类型/序列化器匹配。<br><br>D. Format depends on the model;它不仅仅是音频。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q45" data-source-id="easy:1.3-25" data-chat-context="AWS AIP-C01 · easy:1.3-25<br>Reference answer: A<br>Inconsistent, messy text is degrading FM response quality. A team wants to normalize and reformat inputs before inference with minimal custom infrastructure. Which approach fits?<br>不一致、混乱的文本会降低 FM 响应质量。团队希望在推理之前使用最少的自定义基础设施对输入进行标准化和重新格式化。哪种方法适合？<br>A. Use AWS Lambda functions to normalize/reformat the data (and optionally Amazon Comprehend to extract entities) before calling the FM<br>在调用 FM 之前，使用 AWS Lambda 函数对数据进行规范化/重新格式化（以及可选的 Amazon Comprehend 来提取实体）<br>B. Send raw messy text directly and raise temperature<br>直接发送原始乱码，升温<br>C. Provision a large GPU cluster to compensate<br>配置大型 GPU 集群来进行补偿<br>D. Disable all preprocessing to save cost<br>禁用所有预处理以节省成本" data-n="45" data-ans="A">
+<div class="qhead"><span class="qno">Question 45</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">Inconsistent, messy text is degrading FM response quality. A team wants to normalize and reformat inputs before inference with minimal custom infrastructure. Which approach fits?</p><p class="zh" lang="zh-CN">不一致、混乱的文本会降低 FM 响应质量。团队希望在推理之前使用最少的自定义基础设施对输入进行标准化和重新格式化。哪种方法适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use AWS Lambda functions to normalize/reformat the data (and optionally Amazon Comprehend to extract entities) before calling the FM</p><p class="zh" lang="zh-CN">在调用 FM 之前，使用 AWS Lambda 函数对数据进行规范化/重新格式化（以及可选的 Amazon Comprehend 来提取实体）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Send raw messy text directly and raise temperature</p><p class="zh" lang="zh-CN">直接发送原始乱码，升温</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Provision a large GPU cluster to compensate</p><p class="zh" lang="zh-CN">配置大型 GPU 集群来进行补偿</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Disable all preprocessing to save cost</p><p class="zh" lang="zh-CN">禁用所有预处理以节省成本</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Lambda is a low-overhead way to clean and reformat inputs; Comprehend can enrich them prior to inference.<br><br>B. Higher temperature adds randomness and does not fix input quality.<br><br>C. Hardware does not fix input formatting/quality issues.<br><br>D. Skipping preprocessing worsens response quality.</p><p class="zh" lang="zh-CN">A. Lambda 是一种低开销的方式来清理和重新格式化输入；理解可以在推理之前丰富它们。<br><br>B. 较高的温度会增加随机性，并且不会固定输入质量。<br><br>C. 硬件无法修复输入格式/质量问题。<br><br>D. 跳过预处理会降低响应质量。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q46" data-source-id="easy:1.3-26" data-chat-context="AWS AIP-C01 · easy:1.3-26<br>Reference answer: A<br>Why is correct input formatting important when integrating foundation models?<br>为什么在集成基础模型时正确的输入格式很重要？<br>A. Models have model-specific input requirements; malformed or mismatched formatting causes errors or poor responses<br>模型具有特定于模型的输入要求；格式错误或不匹配会导致错误或响应不佳<br>B. Formatting only affects billing, not behavior<br>格式化仅影响计费，不影响行为<br>C. All models accept identical raw input, so formatting never matters<br>所有模型都接受相同的原始输入，因此格式并不重要<br>D. Formatting is only relevant for image models<br>格式化仅与图像模型相关" data-n="46" data-ans="A">
+<div class="qhead"><span class="qno">Question 46</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">Why is correct input formatting important when integrating foundation models?</p><p class="zh" lang="zh-CN">为什么在集成基础模型时正确的输入格式很重要？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Models have model-specific input requirements; malformed or mismatched formatting causes errors or poor responses</p><p class="zh" lang="zh-CN">模型具有特定于模型的输入要求；格式错误或不匹配会导致错误或响应不佳</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Formatting only affects billing, not behavior</p><p class="zh" lang="zh-CN">格式化仅影响计费，不影响行为</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">All models accept identical raw input, so formatting never matters</p><p class="zh" lang="zh-CN">所有模型都接受相同的原始输入，因此格式并不重要</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Formatting is only relevant for image models</p><p class="zh" lang="zh-CN">格式化仅与图像模型相关</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Matching each model&#x27;s expected request/message format is necessary for valid calls and good output quality.<br><br>B. Formatting affects whether the call succeeds and the quality of the response.<br><br>C. Input requirements vary by model/API; formatting matters.<br><br>D. It applies to text, chat, and other modalities, not just images.</p><p class="zh" lang="zh-CN">A. 匹配每个模型的预期请求/消息格式对于有效的调用和良好的输出质量是必要的。<br><br>B. 格式化影响调用是否成功以及响应的质量。<br><br>C. 输入要求因型号/API 而异；格式问题。<br><br>D. 它适用于文本、聊天和其他模式，而不仅仅是图像。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div><footer class="sub">JeremyEngineer · <a href="https://github.com/JeremyEngineer/aws-aip-c01-practice-exam">GitHub</a> · <a href="/aws-aip/LICENSE-JeremyEngineer.txt">MIT License</a><!--i18n:sw-->
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+<!--/i18n:sw--></footer></main><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:aws:aip:open:easy:04";
+var TOTAL=46;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+/* 答案分隔：多选用 ","，填空的等价写法用 "|"（两种都支持） */
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(/[,|]/).map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+function norm(s){return String(s==null?"":s).replace(/\s+/g," ").trim().toUpperCase()}
+function isFill(q){return q.getAttribute("data-kind")==="fill"}
+function fillInput(q){return q1("input.fill",q)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  /* 填空题：复原/锁定输入框 */
+  var inp=q1("input.fill",q);
+  if(inp){
+    if(locked){ if(inp.value!==(sel[0]||""))inp.value=sel[0]||""; }
+    inp.disabled=locked;
+    inp.classList.remove("ok","bad");
+    if(judged)inp.classList.add(rec.ok?"ok":"bad");
+  }
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = isFill(q) ? !norm(sel[0]||"") : sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok&&!isFill(q))
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q),ok;
+  if(isFill(q)){var v=norm(sel[0]||"");ok=(v!==""&&A.indexOf(v)>=0);}
+  else{ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});}
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+/* 填空题输入：只存值、点亮"确认作答"，不重绘以免打断光标 */
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(!el||!el.classList||!el.classList.contains("fill"))return;
+  var q=el.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  S[nOf(q)]={s:[el.value],ok:null,revealed:false};
+  save();
+  var sub=q1(".js-submit",q);if(sub)sub.disabled=!norm(el.value);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script><script type="module" src="/assets/aip-options.mjs"></script><script src="/assets/presence.js"></script><!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+</body></html>

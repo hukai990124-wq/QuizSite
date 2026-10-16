@@ -51,7 +51,7 @@ test('AIP pages reuse the AWS engine with 50/50/36 questions, AI and shared shel
 test('AIP is reachable from home and its random pool uses all three papers',async()=>{
   const home=await load('site/index.html');
   assert.match(home,/href="aws-aip\/index.html"/);
-  assert.match(home,/"aws-aip":\{keys:\[\["aws:aip:01",50\],\["aws:aip:02",50\],\["aws:aip:03",36\]\]\}/);
+  assert.match(home,/"aws-aip":\{keys:\[\["aws:aip:01",50\],\["aws:aip:02",50\],\["aws:aip:03",36\],/);
   const index=await load('site/aws-aip/index.html');
   for(const part of ['01','02','03']) assert.ok(index.includes(`href="part${part}.html"`));
   assert.match(index,/pool=aws-aip&amp;size=50/);

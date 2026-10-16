@@ -80,10 +80,10 @@ async function main(){
       }
     }
     await page.goto(base+'/');
-    assert.match(await page.locator('[data-site="aws-aip"] .pg span').textContent(),/136\/136/);
-    assert.match(await page.locator('#ov-txt').textContent(),/136 \/ 5199/);
+    assert.match(await page.locator('[data-site="aws-aip"] .pg span').textContent(),/136\/578/);
+    assert.match(await page.locator('#ov-txt').textContent(),/136 \/ 5641/);
     await page.goto(base+'/aws-aip/index.html');
-    assert.equal(await page.locator('[data-quiz-key^="aws:aip:"]').count(),3);
+    assert.equal(await page.locator('[data-quiz-key^="aws:aip:0"]').count(),3);
     for(const lang of ['en','ja','zh']){
       await page.locator(`[data-set-lang="${lang}"]`).click();
       const range=await page.locator('.card .r').first().textContent();

@@ -1,0 +1,714 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AWS AIP-C01 开源练习 · 困难 · 第 03 套</title><style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.stem p{margin:0 0 6px}.en{color:var(--en)}.zh,.ja{font-size:14px}.zh{color:var(--zh)}.ja{color:#6b3fa0;display:none}.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}.ja:before{content:"日訳 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}html[data-lang="ja"] .zh{display:none}html[data-lang="ja"] .ja{display:block}
+.opts{list-style:none;margin:12px 0 0;padding:0}.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}details.ans .correct{font-size:14px;margin:4px 0 8px}details.ans .correct b{color:#047857;font-size:16px}details.ans .expl{padding-bottom:12px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:15px 18px;margin-bottom:10px;text-decoration:none;color:#111827}
+a.card:hover{border-color:#93c5fd;background:#f8fbff}a.card .n{font-weight:700}.r{color:#6b7280;font-size:13px;margin-top:3px}
+.pg{position:relative;margin-top:9px}.pg::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:#e9eef2;border-radius:99px}
+.pg i{position:relative;display:block;height:5px;width:0;background:#0b6b3a;border-radius:99px;transition:width .3s}.pg span{display:block;font-size:12px;color:#8b95a1;margin-top:6px}.pg.on span{color:#0b6b3a;font-weight:600}
+@media print{body{background:#fff}.toolbar{display:none}.wrap{max-width:none;padding:0}.q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}details.ans{border:1px solid #ccc;background:#fff;display:block}details.ans .expl{display:block}}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* ===================== 手写填空（fill） ===================== */
+.q[data-kind="fill"] .fillrow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.q[data-kind="fill"] input.fill{font:inherit;font-size:15px;padding:8px 13px;border:1px solid #cbd5e1;
+ border-radius:8px;min-width:230px;max-width:100%;background:#fff;color:#0f172a}
+.q[data-kind="fill"] input.fill:focus{outline:none;border-color:#4a7fb5;box-shadow:0 0 0 3px rgba(74,127,181,.15)}
+.q[data-kind="fill"].done input.fill{background:#f1f5f9;color:#334155}
+.q[data-kind="fill"] input.fill.ok{border-color:#0b7a44;background:#eaf7ef;color:#0b5130;font-weight:600}
+.q[data-kind="fill"] input.fill.bad{border-color:#c0392b;background:#fdeeed;color:#8f2c20}
+.q[data-kind="fill"] .flabel{font-size:12px;color:#8b95a1}
+@media (max-width:560px){.q[data-kind="fill"] input.fill{min-width:0;width:100%}}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+
+html[data-lang="en"] .zh,html[data-lang="en"] .ja{display:none}
+.q{overflow-wrap:anywhere}
+.source-discussion{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;color:var(--muted)}
+.reference-note{font-size:13px;color:var(--muted)}
+.opt:focus-visible{outline:3px solid #2563eb;outline-offset:2px}
+</style><!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+</head><body><main class="wrap"><h1>AWS AIP-C01 开源练习 · 困难 · 第 03 套</h1><p class="sub">英文原题与中文机器翻译。本批暂不提供日文题文；日语界面显示英文原文。</p><p class="sub">开源练习，非 AWS 官方试题。按作者参考答案判分，解析附官方文档链接。</p><p class="sub"><a href="/aws-aip/index.html">← 题库目录</a></p><div class="toolbar"><div class="btns"><button id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>15</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div><div class="q" id="q1" data-source-id="hard:3.1-h5" data-chat-context="AWS AIP-C01 · hard:3.1-h5<br>Reference answer: A<br>An agent&#x27;s AWS Lambda function must call a third-party API that requires a secret API key, which must be stored securely and rotated without code changes. Which service should hold the key?<br>代理的 AWS Lambda 函数必须调用需要秘密 API 密钥的第三方 API，该密钥必须安全存储并在不更改代码的情况下轮换。哪个服务应该掌握关键？<br>A. AWS Secrets Manager.<br>AWS 秘密管理器。<br>B. A plaintext environment variable committed to source control.<br>致力于源代码控制的纯文本环境变量。<br>C. A hard-coded constant in the Lambda code.<br>Lambda 代码中的硬编码常量。<br>D. An unencrypted object in a public S3 bucket.<br>公共 S3 存储桶中未加密的对象。" data-n="1" data-ans="A">
+<div class="qhead"><span class="qno">Question 1</span><span class="badge">Domain 3 · Task 3.1</span></div>
+<div class="stem"><p class="en" lang="en">An agent&#x27;s AWS Lambda function must call a third-party API that requires a secret API key, which must be stored securely and rotated without code changes. Which service should hold the key?</p><p class="zh" lang="zh-CN">代理的 AWS Lambda 函数必须调用需要秘密 API 密钥的第三方 API，该密钥必须安全存储并在不更改代码的情况下轮换。哪个服务应该掌握关键？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">AWS Secrets Manager.</p><p class="zh" lang="zh-CN">AWS 秘密管理器。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">A plaintext environment variable committed to source control.</p><p class="zh" lang="zh-CN">致力于源代码控制的纯文本环境变量。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">A hard-coded constant in the Lambda code.</p><p class="zh" lang="zh-CN">Lambda 代码中的硬编码常量。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">An unencrypted object in a public S3 bucket.</p><p class="zh" lang="zh-CN">公共 S3 存储桶中未加密的对象。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Secrets Manager securely stores credentials, controls access via IAM, and supports rotation without changing application code.<br><br>B. Committing secrets to source control exposes them and provides no rotation.<br><br>C. Hard-coded secrets cannot be rotated safely and risk exposure.<br><br>D. Public, unencrypted storage of a secret is a serious vulnerability.</p><p class="zh" lang="zh-CN">A. Secrets Manager 安全地存储凭证、通过 IAM 控制访问并支持轮换，而无需更改应用程序代码。<br><br>B. 将机密提交给源代码管理会暴露它们并且不提供轮换。<br><br>C. 硬编码的秘密无法安全地轮换并存在暴露的风险。<br><br>D. 公开的、未加密的秘密存储是一个严重的漏洞。</p></div>
+<p><a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q2" data-source-id="hard:3.1-h6" data-chat-context="AWS AIP-C01 · hard:3.1-h6<br>Reference answer: A<br>Security policy requires that a given IAM role be allowed to invoke only one specific approved foundation model in Amazon Bedrock and no others. How is this BEST enforced?<br>安全策略要求给定 IAM 角色只能调用 Amazon Bedrock 中一个特定的经批准的基础模型，而不能调用其他模型。这是如何最好地执行的？<br>A. Write a least-privilege IAM policy that allows invoke actions only on the approved model&#x27;s resource ARN.<br>编写一个最低权限 IAM 策略，仅允许对已批准模型的资源 ARN 调用操作。<br>B. Allow all Bedrock models and remind developers to use only the approved one.<br>允许所有基岩模型并提醒开发者仅使用经批准的模型。<br>C. Lower the temperature on the disallowed models.<br>降低不允许的型号上的温度。<br>D. Rely on the application code to choose the right model.<br>依靠应用程序代码来选择正确的模型。" data-n="2" data-ans="A">
+<div class="qhead"><span class="qno">Question 2</span><span class="badge">Domain 3 · Task 3.1</span></div>
+<div class="stem"><p class="en" lang="en">Security policy requires that a given IAM role be allowed to invoke only one specific approved foundation model in Amazon Bedrock and no others. How is this BEST enforced?</p><p class="zh" lang="zh-CN">安全策略要求给定 IAM 角色只能调用 Amazon Bedrock 中一个特定的经批准的基础模型，而不能调用其他模型。这是如何最好地执行的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Write a least-privilege IAM policy that allows invoke actions only on the approved model&#x27;s resource ARN.</p><p class="zh" lang="zh-CN">编写一个最低权限 IAM 策略，仅允许对已批准模型的资源 ARN 调用操作。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Allow all Bedrock models and remind developers to use only the approved one.</p><p class="zh" lang="zh-CN">允许所有基岩模型并提醒开发者仅使用经批准的模型。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Lower the temperature on the disallowed models.</p><p class="zh" lang="zh-CN">降低不允许的型号上的温度。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Rely on the application code to choose the right model.</p><p class="zh" lang="zh-CN">依靠应用程序代码来选择正确的模型。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Scoping the IAM policy to the specific model ARN enforces that the role can invoke only the approved model, following least privilege.<br><br>B. A broad allow with a verbal reminder does not technically restrict access.<br><br>C. Temperature does not restrict which models a role may call.<br><br>D. Application-side selection is not an access control and can be bypassed.</p><p class="zh" lang="zh-CN">A. 将 IAM 策略的范围限定为特定模型 ARN，强制角色只能按照最低权限调用已批准的模型。<br><br>B. 带有口头提醒的广泛允许在技术上并不限制访问。<br><br>C. 温度不限制角色可以调用哪些模型。<br><br>D. 应用程序端选择不是访问控制，可以绕过。</p></div>
+<p><a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q3" data-source-id="hard:3.1-h7" data-chat-context="AWS AIP-C01 · hard:3.1-h7<br>Reference answer: A<br>A compliance team must ensure that customer prompts are processed only within an approved AWS Region and are not used to train the base foundation models. Which statement and configuration are correct?<br>合规团队必须确保客户提示仅在批准的 AWS 区域内处理，并且不用于训练基本基础模型。哪种说法和配置是正确的？<br>A. Use Amazon Bedrock in the approved Region; Bedrock processes data in that Region and does not use your prompts or outputs to train the base models.<br>在批准的区域使用 Amazon Bedrock； Bedrock 处理该区域中的数据，并且不使用您的提示或输出来训练基础模型。<br>B. You must file a support ticket or it will train on your data by default.<br>您必须提交支持票证，否则默认情况下它将根据您的数据进行训练。<br>C. Data is always processed globally regardless of Region.<br>无论区域如何，数据始终在全球范围内处理。<br>D. Only running your own self-hosted model can prevent base-model training on your data.<br>仅运行您自己的自托管模型可以防止对数据进行基础模型训练。" data-n="3" data-ans="A">
+<div class="qhead"><span class="qno">Question 3</span><span class="badge">Domain 3 · Task 3.1</span></div>
+<div class="stem"><p class="en" lang="en">A compliance team must ensure that customer prompts are processed only within an approved AWS Region and are not used to train the base foundation models. Which statement and configuration are correct?</p><p class="zh" lang="zh-CN">合规团队必须确保客户提示仅在批准的 AWS 区域内处理，并且不用于训练基本基础模型。哪种说法和配置是正确的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use Amazon Bedrock in the approved Region; Bedrock processes data in that Region and does not use your prompts or outputs to train the base models.</p><p class="zh" lang="zh-CN">在批准的区域使用 Amazon Bedrock； Bedrock 处理该区域中的数据，并且不使用您的提示或输出来训练基础模型。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">You must file a support ticket or it will train on your data by default.</p><p class="zh" lang="zh-CN">您必须提交支持票证，否则默认情况下它将根据您的数据进行训练。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Data is always processed globally regardless of Region.</p><p class="zh" lang="zh-CN">无论区域如何，数据始终在全球范围内处理。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Only running your own self-hosted model can prevent base-model training on your data.</p><p class="zh" lang="zh-CN">仅运行您自己的自托管模型可以防止对数据进行基础模型训练。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Bedrock keeps inference data within the Region you call and does not use customer inputs/outputs to train base models, so selecting the approved Region meets the requirement.<br><br>B. Bedrock does not use your inputs/outputs to train base models, so no opt-out ticket is required for that.<br><br>C. Bedrock processes your inference data in the Region where you invoke the model, not globally.<br><br>D. Using Bedrock already prevents your data from training the base models; self-hosting is not required for that guarantee.</p><p class="zh" lang="zh-CN">A. Bedrock 将推理数据保留在您调用的区域内，并且不使用客户输入/输出来训练基础模型，因此选择批准的区域即可满足要求。<br><br>B. Bedrock 不会使用您的输入/输出来训练基本模型，因此不需要选择退出票证。<br><br>C. Bedrock 在您调用模型的区域（而不是全局）处理您的推理数据。<br><br>D. 使用 Bedrock 已经可以防止您的数据训练基础模型；该保证不需要自托管。</p></div>
+<p><a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q4" data-source-id="hard:3.2-h1" data-chat-context="AWS AIP-C01 · hard:3.2-h1<br>Reference answer: A<br>A team needs to filter harmful content (hate, insults, violence, sexual content, and misconduct) in both prompts and responses, with adjustable strictness per category. Which Amazon Bedrock Guardrails feature provides this?<br>团队需要过滤提示和响应中的有害内容（仇恨、侮辱、暴力、性内容和不当行为），并按类别调整严格程度。哪个 Amazon Bedrock Guardrails 功能可以提供此功能？<br>A. Content filters with configurable strength thresholds per harmful category.<br>每个有害类别具有可配置强度阈值的内容过滤器。<br>B. Stop sequences.<br>停止序列。<br>C. Lowering the temperature.<br>降低温度。<br>D. Provisioned Throughput.<br>预置吞吐量。" data-n="4" data-ans="A">
+<div class="qhead"><span class="qno">Question 4</span><span class="badge">Domain 3 · Task 3.2</span></div>
+<div class="stem"><p class="en" lang="en">A team needs to filter harmful content (hate, insults, violence, sexual content, and misconduct) in both prompts and responses, with adjustable strictness per category. Which Amazon Bedrock Guardrails feature provides this?</p><p class="zh" lang="zh-CN">团队需要过滤提示和响应中的有害内容（仇恨、侮辱、暴力、性内容和不当行为），并按类别调整严格程度。哪个 Amazon Bedrock Guardrails 功能可以提供此功能？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Content filters with configurable strength thresholds per harmful category.</p><p class="zh" lang="zh-CN">每个有害类别具有可配置强度阈值的内容过滤器。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Stop sequences.</p><p class="zh" lang="zh-CN">停止序列。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Lowering the temperature.</p><p class="zh" lang="zh-CN">降低温度。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput.</p><p class="zh" lang="zh-CN">预置吞吐量。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Guardrails content filters detect and block harmful categories in input and output, with adjustable filter strengths per category.<br><br>B. Stop sequences end generation at a phrase; they do not classify or block harmful categories.<br><br>C. Temperature does not filter harmful content.<br><br>D. Provisioned Throughput is a capacity feature, unrelated to content filtering.</p><p class="zh" lang="zh-CN">A. Guardrails 内容过滤器可检测并阻止输入和输出中的有害类别，并且每个类别的过滤器强度均可调整。<br><br>B. 停止序列在短语处结束生成；它们不会对有害类别进行分类或阻止。<br><br>C. 温度不会过滤有害内容。<br><br>D. 预配置吞吐量是一项容量功能，与内容过滤无关。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q5" data-source-id="hard:3.2-h2" data-chat-context="AWS AIP-C01 · hard:3.2-h2<br>Reference answer: A<br>A banking assistant must never discuss a specific prohibited subject (for example, giving individualized investment advice), even when users phrase the request in new ways. Which Guardrails feature is designed for this?<br>银行助理绝不能讨论特定的禁止主题（例如，提供个性化的投资建议），即使用户以新的方式表达请求。哪些护栏功能是为此设计的？<br>A. Denied topics, defined with a description and examples so the guardrail blocks that subject.<br>拒绝的主题，使用描述和示例进行定义，以便护栏阻止该主题。<br>B. Increasing max tokens.<br>增加最大令牌。<br>C. A higher temperature.<br>温度较高。<br>D. A larger context window.<br>更大的上下文窗口。" data-n="5" data-ans="A">
+<div class="qhead"><span class="qno">Question 5</span><span class="badge">Domain 3 · Task 3.2</span></div>
+<div class="stem"><p class="en" lang="en">A banking assistant must never discuss a specific prohibited subject (for example, giving individualized investment advice), even when users phrase the request in new ways. Which Guardrails feature is designed for this?</p><p class="zh" lang="zh-CN">银行助理绝不能讨论特定的禁止主题（例如，提供个性化的投资建议），即使用户以新的方式表达请求。哪些护栏功能是为此设计的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Denied topics, defined with a description and examples so the guardrail blocks that subject.</p><p class="zh" lang="zh-CN">拒绝的主题，使用描述和示例进行定义，以便护栏阻止该主题。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Increasing max tokens.</p><p class="zh" lang="zh-CN">增加最大令牌。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">A higher temperature.</p><p class="zh" lang="zh-CN">温度较高。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A larger context window.</p><p class="zh" lang="zh-CN">更大的上下文窗口。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Denied topics let you define subjects to block by description and examples, so the guardrail refuses related requests regardless of phrasing.<br><br>B. Output length does not block a subject.<br><br>C. Temperature does not enforce topic restrictions.<br><br>D. Context size does not prevent a prohibited topic from being discussed.</p><p class="zh" lang="zh-CN">A. 拒绝主题允许您通过描述和示例定义要阻止的主题，因此无论措辞如何，护栏都会拒绝相关请求。<br><br>B. 输出长度不会遮挡主题。<br><br>C. 温度不强制执行主题限制。<br><br>D. 上下文大小并不妨碍讨论禁止的主题。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q6" data-source-id="hard:3.2-h3" data-chat-context="AWS AIP-C01 · hard:3.2-h3<br>Reference answer: A<br>An assistant must ensure that any personally identifiable information appearing in model responses is masked or blocked before reaching users. Which Guardrails capability addresses this?<br>助理必须确保模型响应中出现的任何个人身份信息在到达用户之前都被屏蔽或阻止。哪种 Guardrails 功能可以解决这个问题？<br>A. The sensitive information (PII) filter, which can mask or block PII in inputs and outputs.<br>敏感信息 (PII) 过滤器，可以屏蔽或阻止输入和输出中的 PII。<br>B. Stop sequences on names.<br>停止名称序列。<br>C. Lowering the temperature.<br>降低温度。<br>D. A custom font in the UI.<br>UI 中的自定义字体。" data-n="6" data-ans="A">
+<div class="qhead"><span class="qno">Question 6</span><span class="badge">Domain 3 · Task 3.2</span></div>
+<div class="stem"><p class="en" lang="en">An assistant must ensure that any personally identifiable information appearing in model responses is masked or blocked before reaching users. Which Guardrails capability addresses this?</p><p class="zh" lang="zh-CN">助理必须确保模型响应中出现的任何个人身份信息在到达用户之前都被屏蔽或阻止。哪种 Guardrails 功能可以解决这个问题？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The sensitive information (PII) filter, which can mask or block PII in inputs and outputs.</p><p class="zh" lang="zh-CN">敏感信息 (PII) 过滤器，可以屏蔽或阻止输入和输出中的 PII。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Stop sequences on names.</p><p class="zh" lang="zh-CN">停止名称序列。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Lowering the temperature.</p><p class="zh" lang="zh-CN">降低温度。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A custom font in the UI.</p><p class="zh" lang="zh-CN">UI 中的自定义字体。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Guardrails can detect PII and either mask it (for example, redact) or block the response, protecting users from exposure.<br><br>B. Stop sequences cannot reliably detect and redact varied PII entities.<br><br>C. Temperature does not detect or mask PII.<br><br>D. Presentation styling does not remove PII from the content.</p><p class="zh" lang="zh-CN">A. Guardrails 可以检测 PII 并对其进行屏蔽（例如，编辑）或阻止响应，从而保护用户免遭暴露。<br><br>B. 停止序列无法可靠地检测和编辑各种 PII 实体。<br><br>C. 温度不会检测或掩盖 PII。<br><br>D. 演示文稿样式不会从内容中删除 PII。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q7" data-source-id="hard:3.2-h4" data-chat-context="AWS AIP-C01 · hard:3.2-h4<br>Reference answer: A<br>A public chatbot is targeted by users trying to override its instructions and extract restricted behavior. Which Amazon Bedrock Guardrails capability specifically helps detect these attempts?<br>公共聊天机器人是试图超越其指令并提取受限行为的用户的目标。 Amazon Bedrock Guardrails 的哪些功能专门帮助检测这些尝试？<br>A. The prompt attack filter, which detects prompt injection and jailbreak attempts.<br>提示攻击过滤器，检测提示注入和越狱尝试。<br>B. Increasing the temperature to confuse attackers.<br>提高温度以迷惑攻击者。<br>C. Adding more few-shot examples of jokes.<br>添加更多笑话的小镜头示例。<br>D. Switching to batch inference.<br>切换到批量推理。" data-n="7" data-ans="A">
+<div class="qhead"><span class="qno">Question 7</span><span class="badge">Domain 3 · Task 3.2</span></div>
+<div class="stem"><p class="en" lang="en">A public chatbot is targeted by users trying to override its instructions and extract restricted behavior. Which Amazon Bedrock Guardrails capability specifically helps detect these attempts?</p><p class="zh" lang="zh-CN">公共聊天机器人是试图超越其指令并提取受限行为的用户的目标。 Amazon Bedrock Guardrails 的哪些功能专门帮助检测这些尝试？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The prompt attack filter, which detects prompt injection and jailbreak attempts.</p><p class="zh" lang="zh-CN">提示攻击过滤器，检测提示注入和越狱尝试。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Increasing the temperature to confuse attackers.</p><p class="zh" lang="zh-CN">提高温度以迷惑攻击者。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Adding more few-shot examples of jokes.</p><p class="zh" lang="zh-CN">添加更多笑话的小镜头示例。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Switching to batch inference.</p><p class="zh" lang="zh-CN">切换到批量推理。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Guardrails include a prompt attack filter that flags prompt injection and jailbreak inputs so they can be blocked.<br><br>B. Temperature does not detect or stop prompt attacks.<br><br>C. Unrelated examples do not provide injection detection.<br><br>D. Batch inference is a serving mode and does not detect prompt attacks.</p><p class="zh" lang="zh-CN">A. 护栏包括一个提示攻击过滤器，可以标记提示注入和越狱输入，以便可以阻止它们。<br><br>B. 温度不能检测或阻止即时攻击。<br><br>C. 不相关的示例不提供注入检测。<br><br>D. 批量推理是一种服务模式，不检测即时攻击。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q8" data-source-id="hard:3.2-h5" data-chat-context="AWS AIP-C01 · hard:3.2-h5<br>Reference answer: A<br>A company runs a self-managed RAG pipeline and even calls a model hosted outside Amazon Bedrock, but it wants to apply the same Bedrock guardrail policies to arbitrary text at chosen points in the flow. Which capability enables this?<br>一家公司运行自我管理的 RAG 管道，甚至调用 Amazon Bedrock 外部托管的模型，但它希望将相同的 Bedrock 护栏策略应用于流程中选定点的任意文本。哪种能力可以实现这一点？<br>A. The ApplyGuardrail API, which evaluates text against a guardrail independently of a model invocation.<br>ApplyGuardrail API，它独立于模型调用根据护栏评估文本。<br>B. Only inline guardrails on Bedrock InvokeModel.<br>Bedrock InvokeModel 上仅内联护栏。<br>C. Raising the temperature.<br>提高温度。<br>D. Provisioned Throughput.<br>预置吞吐量。" data-n="8" data-ans="A">
+<div class="qhead"><span class="qno">Question 8</span><span class="badge">Domain 3 · Task 3.2</span></div>
+<div class="stem"><p class="en" lang="en">A company runs a self-managed RAG pipeline and even calls a model hosted outside Amazon Bedrock, but it wants to apply the same Bedrock guardrail policies to arbitrary text at chosen points in the flow. Which capability enables this?</p><p class="zh" lang="zh-CN">一家公司运行自我管理的 RAG 管道，甚至调用 Amazon Bedrock 外部托管的模型，但它希望将相同的 Bedrock 护栏策略应用于流程中选定点的任意文本。哪种能力可以实现这一点？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The ApplyGuardrail API, which evaluates text against a guardrail independently of a model invocation.</p><p class="zh" lang="zh-CN">ApplyGuardrail API，它独立于模型调用根据护栏评估文本。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Only inline guardrails on Bedrock InvokeModel.</p><p class="zh" lang="zh-CN">Bedrock InvokeModel 上仅内联护栏。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Raising the temperature.</p><p class="zh" lang="zh-CN">提高温度。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput.</p><p class="zh" lang="zh-CN">预置吞吐量。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. ApplyGuardrail lets you assess input or output text against a guardrail at any point, including content from models not hosted in Bedrock.<br><br>B. Inline-only guardrails would not cover text from external models or arbitrary pipeline points, which ApplyGuardrail handles.<br><br>C. Temperature is unrelated to applying guardrail policies.<br><br>D. Provisioned Throughput is a capacity feature, not a guardrail evaluation API.</p><p class="zh" lang="zh-CN">A. ApplyGuardrail 可让您随时根据护栏评估输入或输出文本，包括来自未托管在 Bedrock 中的模型的内容。<br><br>B. 仅内联护栏不会覆盖来自ApplyGuardrail 处理的外部模型或任意管道点的文本。<br><br>C. 温度与应用护栏政策无关。<br><br>D. 预置吞吐量是一项容量功能，而不是护栏评估 API。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q9" data-source-id="hard:3.2-h6" data-chat-context="AWS AIP-C01 · hard:3.2-h6<br>Reference answer: A<br>In a RAG assistant, the team wants the guardrail itself to block responses that are not supported by the retrieved source or that stray from the user&#x27;s query, using a tunable threshold. Which Guardrails capability fits?<br>在 RAG 助手中，团队希望护栏本身使用可调阈值来阻止检索源不支持的响应或偏离用户查询的响应。哪种护栏功能适合？<br>A. The contextual grounding and relevance checks, with configurable thresholds.<br>上下文基础和相关性检查，具有可配置的阈值。<br>B. Denied topics only.<br>仅拒绝主题。<br>C. Stop sequences.<br>停止序列。<br>D. A larger model temperature.<br>较大的模型温度。" data-n="9" data-ans="A">
+<div class="qhead"><span class="qno">Question 9</span><span class="badge">Domain 3 · Task 3.2</span></div>
+<div class="stem"><p class="en" lang="en">In a RAG assistant, the team wants the guardrail itself to block responses that are not supported by the retrieved source or that stray from the user&#x27;s query, using a tunable threshold. Which Guardrails capability fits?</p><p class="zh" lang="zh-CN">在 RAG 助手中，团队希望护栏本身使用可调阈值来阻止检索源不支持的响应或偏离用户查询的响应。哪种护栏功能适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The contextual grounding and relevance checks, with configurable thresholds.</p><p class="zh" lang="zh-CN">上下文基础和相关性检查，具有可配置的阈值。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Denied topics only.</p><p class="zh" lang="zh-CN">仅拒绝主题。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Stop sequences.</p><p class="zh" lang="zh-CN">停止序列。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A larger model temperature.</p><p class="zh" lang="zh-CN">较大的模型温度。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Guardrails contextual grounding and relevance checks score whether a response is grounded in the source and relevant to the query, and can block low-scoring responses based on thresholds you set.<br><br>B. Denied topics block subjects but do not measure grounding in the retrieved source.<br><br>C. Stop sequences end generation and cannot assess grounding.<br><br>D. Temperature does not assess or enforce grounding.</p><p class="zh" lang="zh-CN">A. Guardrails 上下文基础和相关性检查对响应是否基于源以及与查询相关进行评分，并且可以根据您设置的阈值阻止低分响应。<br><br>B. 被拒绝的主题会阻止主题，但不会衡量检索到的来源的基础。<br><br>C. 停止序列结束生成并且无法评估接地。<br><br>D. 温度不评估或强制接地。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q10" data-source-id="hard:3.2-h7" data-chat-context="AWS AIP-C01 · hard:3.2-h7<br>Reference answer: A<br>A regulated insurer needs strong assurance that policy-related answers conform to its written rules, with verifiable checks rather than only probabilistic filtering. Which newer Amazon Bedrock Guardrails capability is designed to mathematically verify outputs against encoded policies?<br>受监管的保险公司需要强有力的保证，确保保单相关的答案符合其书面规则，并进行可验证的检查，而不仅仅是概率过滤。哪种较新的 Amazon Bedrock Guardrails 功能旨在根据编码策略以数学方式验证输出？<br>A. Automated Reasoning checks.<br>自动推理检查。<br>B. Increasing the temperature.<br>提高温度。<br>C. Stop sequences.<br>停止序列。<br>D. Provisioned Throughput.<br>预置吞吐量。" data-n="10" data-ans="A">
+<div class="qhead"><span class="qno">Question 10</span><span class="badge">Domain 3 · Task 3.2</span></div>
+<div class="stem"><p class="en" lang="en">A regulated insurer needs strong assurance that policy-related answers conform to its written rules, with verifiable checks rather than only probabilistic filtering. Which newer Amazon Bedrock Guardrails capability is designed to mathematically verify outputs against encoded policies?</p><p class="zh" lang="zh-CN">受监管的保险公司需要强有力的保证，确保保单相关的答案符合其书面规则，并进行可验证的检查，而不仅仅是概率过滤。哪种较新的 Amazon Bedrock Guardrails 功能旨在根据编码策略以数学方式验证输出？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Automated Reasoning checks.</p><p class="zh" lang="zh-CN">自动推理检查。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Increasing the temperature.</p><p class="zh" lang="zh-CN">提高温度。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Stop sequences.</p><p class="zh" lang="zh-CN">停止序列。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput.</p><p class="zh" lang="zh-CN">预置吞吐量。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Automated Reasoning checks use formal, logic-based verification against an encoded policy to validate whether responses are consistent with the rules, reducing factual errors in regulated domains.<br><br>B. Temperature does not verify outputs against policy.<br><br>C. Stop sequences end generation; they do not verify policy conformance.<br><br>D. Provisioned Throughput is a capacity feature, not a verification capability.</p><p class="zh" lang="zh-CN">A. 自动推理检查使用针对编码策略的基于逻辑的正式验证来验证响应是否与规则一致，从而减少受监管领域中的事实错误。<br><br>B. 温度不会根据策略验证输出。<br><br>C. 停止序列结束生成；他们不验证策略的一致性。<br><br>D. 预置吞吐量是一项容量功能，而不是验证功能。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q11" data-source-id="hard:3.3-h1" data-chat-context="AWS AIP-C01 · hard:3.3-h1<br>Reference answer: A<br>A financial firm must store generated compliance records so they cannot be altered or deleted for a mandated retention period, even by administrators. Which configuration meets this requirement?<br>金融公司必须存储生成的合规记录，以便在规定的保留期内无法更改或删除这些记录，即使是管理员也是如此。哪种配置可以满足这个要求？<br>A. Store records in Amazon S3 with Object Lock in compliance mode for the required retention period.<br>在合规模式下使用对象锁定在 Amazon S3 中存储记录所需的保留期。<br>B. Store records in a standard S3 bucket and ask staff not to delete them.<br>将记录存储在标准 S3 存储桶中，并要求员工不要删除它们。<br>C. Keep records only in application memory.<br>仅将记录保留在应用程序内存中。<br>D. Use S3 versioning alone without Object Lock.<br>单独使用 S3 版本控制，无需对象锁定。" data-n="11" data-ans="A">
+<div class="qhead"><span class="qno">Question 11</span><span class="badge">Domain 3 · Task 3.3</span></div>
+<div class="stem"><p class="en" lang="en">A financial firm must store generated compliance records so they cannot be altered or deleted for a mandated retention period, even by administrators. Which configuration meets this requirement?</p><p class="zh" lang="zh-CN">金融公司必须存储生成的合规记录，以便在规定的保留期内无法更改或删除这些记录，即使是管理员也是如此。哪种配置可以满足这个要求？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Store records in Amazon S3 with Object Lock in compliance mode for the required retention period.</p><p class="zh" lang="zh-CN">在合规模式下使用对象锁定在 Amazon S3 中存储记录所需的保留期。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Store records in a standard S3 bucket and ask staff not to delete them.</p><p class="zh" lang="zh-CN">将记录存储在标准 S3 存储桶中，并要求员工不要删除它们。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Keep records only in application memory.</p><p class="zh" lang="zh-CN">仅将记录保留在应用程序内存中。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Use S3 versioning alone without Object Lock.</p><p class="zh" lang="zh-CN">单独使用 S3 版本控制，无需对象锁定。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. S3 Object Lock compliance mode enforces write-once-read-many (WORM) immutability so objects cannot be modified or deleted, even by the root user, until retention expires.<br><br>B. A policy request does not technically prevent modification or deletion.<br><br>C. In-memory storage is volatile and provides no durable, immutable retention.<br><br>D. Versioning preserves prior versions but does not prevent deletion or enforce a compliance retention lock.</p><p class="zh" lang="zh-CN">A. S3 对象锁定合规模式强制执行一次写入多次读取 (WORM) 不变性，因此在保留到期之前，即使是 root 用户也无法修改或删除对象。<br><br>B. 策略请求在技术上并不能阻止修改或删除。<br><br>C. 内存存储是易失性的，并且不提供持久、不可变的保留。<br><br>D. 版本控制会保留以前的版本，但不会阻止删除或强制执行合规性保留锁定。</p></div>
+<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q12" data-source-id="hard:3.3-h2" data-chat-context="AWS AIP-C01 · hard:3.3-h2<br>Reference answer: A<br>An auditor must determine which IAM principals called which Amazon Bedrock APIs, and when, across the account. Which service provides this audit trail?<br>审核员必须确定整个账户中哪些 IAM 委托人调用了哪些 Amazon Bedrock API 以及何时调用。哪个服务提供此审计跟踪？<br>A. AWS CloudTrail.<br>AWS CloudTrail。<br>B. Amazon CloudWatch dashboards only.<br>仅限 Amazon CloudWatch 控制面板。<br>C. Amazon Macie.<br>亚马逊麦西.<br>D. Amazon Comprehend.<br>亚马逊理解。" data-n="12" data-ans="A">
+<div class="qhead"><span class="qno">Question 12</span><span class="badge">Domain 3 · Task 3.3</span></div>
+<div class="stem"><p class="en" lang="en">An auditor must determine which IAM principals called which Amazon Bedrock APIs, and when, across the account. Which service provides this audit trail?</p><p class="zh" lang="zh-CN">审核员必须确定整个账户中哪些 IAM 委托人调用了哪些 Amazon Bedrock API 以及何时调用。哪个服务提供此审计跟踪？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">AWS CloudTrail.</p><p class="zh" lang="zh-CN">AWS CloudTrail。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon CloudWatch dashboards only.</p><p class="zh" lang="zh-CN">仅限 Amazon CloudWatch 控制面板。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Amazon Macie.</p><p class="zh" lang="zh-CN">亚马逊麦西.</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon Comprehend.</p><p class="zh" lang="zh-CN">亚马逊理解。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. CloudTrail records API calls including the principal, action, time, and source, providing the management/audit trail of who did what.<br><br>B. Dashboards visualize metrics but do not provide the per-call identity and action audit trail.<br><br>C. Macie classifies sensitive data; it does not record API caller identity and actions.<br><br>D. Comprehend analyzes text and is not an API audit service.</p><p class="zh" lang="zh-CN">A. CloudTrail 记录 API 调用，包括主体、操作、时间和来源，提供谁做了什么的管理/审计跟踪。<br><br>B. 仪表板可视化指标，但不提供每次调用的身份和操作审计跟踪。<br><br>C. Macie 对敏感数据进行分类；它不记录 API 调用者身份和操作。<br><br>D. Comprehend 分析文本，不是 API 审核服务。</p></div>
+<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q13" data-source-id="hard:3.3-h3" data-chat-context="AWS AIP-C01 · hard:3.3-h3<br>Reference answer: A<br>For regulatory reconstruction, a company must retain the actual prompt content and model responses (not just API metadata) for every Bedrock call, in immutable storage. Which combination meets this?<br>对于监管重建，公司必须在不可变存储中保留每个 Bedrock 调用的实际提示内容和模型响应（而不仅仅是 API 元数据）。哪种组合符合这个要求？<br>A. Enable Amazon Bedrock model invocation logging to Amazon S3 and apply S3 Object Lock for the retention period.<br>启用 Amazon Bedrock 模型调用日志记录到 Amazon S3 并在保留期内应用 S3 对象锁定。<br>B. Enable AWS CloudTrail alone.<br>单独启用 AWS CloudTrail。<br>C. Print prompts to the application console only.<br>仅将提示打印到应用程序控制台。<br>D. Rely on CloudWatch metrics for content.<br>依赖 CloudWatch 内容指标。" data-n="13" data-ans="A">
+<div class="qhead"><span class="qno">Question 13</span><span class="badge">Domain 3 · Task 3.3</span></div>
+<div class="stem"><p class="en" lang="en">For regulatory reconstruction, a company must retain the actual prompt content and model responses (not just API metadata) for every Bedrock call, in immutable storage. Which combination meets this?</p><p class="zh" lang="zh-CN">对于监管重建，公司必须在不可变存储中保留每个 Bedrock 调用的实际提示内容和模型响应（而不仅仅是 API 元数据）。哪种组合符合这个要求？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Enable Amazon Bedrock model invocation logging to Amazon S3 and apply S3 Object Lock for the retention period.</p><p class="zh" lang="zh-CN">启用 Amazon Bedrock 模型调用日志记录到 Amazon S3 并在保留期内应用 S3 对象锁定。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Enable AWS CloudTrail alone.</p><p class="zh" lang="zh-CN">单独启用 AWS CloudTrail。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Print prompts to the application console only.</p><p class="zh" lang="zh-CN">仅将提示打印到应用程序控制台。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Rely on CloudWatch metrics for content.</p><p class="zh" lang="zh-CN">依赖 CloudWatch 内容指标。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Invocation logging captures full prompt and response content, and Object Lock makes the stored logs immutable for the mandated retention.<br><br>B. CloudTrail captures API metadata, not the full prompt and response content required for reconstruction.<br><br>C. Console output is not durable, complete, or immutable for compliance.<br><br>D. Metrics are numeric aggregates and do not store prompt or response text.</p><p class="zh" lang="zh-CN">A. 调用日志记录捕获完整的提示和响应内容，对象锁定使存储的日志不可变，以实现强制保留。<br><br>B. CloudTrail 捕获 API 元数据，而不是重建所需的完整提示和响应内容。<br><br>C. 控制台输出不是持久的、完整的或不可变的以保证合规性。<br><br>D. 指标是数字聚合，不存储提示或响应文本。</p></div>
+<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q14" data-source-id="hard:3.3-h4" data-chat-context="AWS AIP-C01 · hard:3.3-h4<br>Reference answer: A<br>A company wants to keep customer chat transcripts for analytics but must comply with privacy rules that prohibit retaining personally identifiable information. What is the BEST approach before storing the transcripts?<br>一家公司希望保留客户聊天记录用于分析，但必须遵守禁止保留个人身份信息的隐私规则。存储成绩单之前最好的方法是什么？<br>A. Redact PII from the transcripts with Amazon Comprehend before storing the sanitized text.<br>在存储经过清理的文本之前，使用 Amazon Comprehend 从记录中编辑 PII。<br>B. Store the raw transcripts unchanged for completeness.<br>为了完整性，存储原始转录本不变。<br>C. Raise the model temperature to obscure PII.<br>提高模型温度以掩盖 PII。<br>D. Encrypt the bucket and keep all PII indefinitely.<br>加密存储桶并无限期保留所有 PII。" data-n="14" data-ans="A">
+<div class="qhead"><span class="qno">Question 14</span><span class="badge">Domain 3 · Task 3.3</span></div>
+<div class="stem"><p class="en" lang="en">A company wants to keep customer chat transcripts for analytics but must comply with privacy rules that prohibit retaining personally identifiable information. What is the BEST approach before storing the transcripts?</p><p class="zh" lang="zh-CN">一家公司希望保留客户聊天记录用于分析，但必须遵守禁止保留个人身份信息的隐私规则。存储成绩单之前最好的方法是什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Redact PII from the transcripts with Amazon Comprehend before storing the sanitized text.</p><p class="zh" lang="zh-CN">在存储经过清理的文本之前，使用 Amazon Comprehend 从记录中编辑 PII。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Store the raw transcripts unchanged for completeness.</p><p class="zh" lang="zh-CN">为了完整性，存储原始转录本不变。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Raise the model temperature to obscure PII.</p><p class="zh" lang="zh-CN">提高模型温度以掩盖 PII。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Encrypt the bucket and keep all PII indefinitely.</p><p class="zh" lang="zh-CN">加密存储桶并无限期保留所有 PII。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Detecting and redacting PII with Comprehend before storage lets the company keep useful analytics data while complying with privacy requirements.<br><br>B. Storing raw PII violates the privacy requirement.<br><br>C. Temperature does not remove PII from stored text.<br><br>D. Encryption protects data at rest but does not satisfy a rule against retaining PII at all.</p><p class="zh" lang="zh-CN">A. 在存储之前使用 Comprehend 检测和编辑 PII，使公司能够保留有用的分析数据，同时遵守隐私要求。<br><br>B. 存储原始 PII 违反了隐私要求。<br><br>C. 温度不会从存储的文本中删除 PII。<br><br>D. 加密可以保护静态数据，但根本不满足保留 PII 的规则。</p></div>
+<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q15" data-source-id="hard:3.3-h5" data-chat-context="AWS AIP-C01 · hard:3.3-h5<br>Reference answer: A<br>Stored embeddings and invocation logs contain sensitive business data, and the security team must control and audit the encryption keys used to protect them at rest. Which approach should they adopt?<br>存储的嵌入和调用日志包含敏感的业务数据，安全团队必须控制和审核用于静态保护它们的加密密钥。他们应该采取哪种方法？<br>A. Encrypt the data with AWS KMS customer managed keys and restrict and audit key usage via key policies and CloudTrail.<br>使用 AWS KMS 客户管理的密钥加密数据，并通过密钥策略和 CloudTrail 限制和审核密钥的使用。<br>B. Leave the data unencrypted to simplify access.<br>保持数据未加密以简化访问。<br>C. Use a single shared password stored in code.<br>使用存储在代码中的单个共享密码。<br>D. Make the storage public so keys are unnecessary.<br>将存储公开，这样就不需要密钥了。" data-n="15" data-ans="A">
+<div class="qhead"><span class="qno">Question 15</span><span class="badge">Domain 3 · Task 3.3</span></div>
+<div class="stem"><p class="en" lang="en">Stored embeddings and invocation logs contain sensitive business data, and the security team must control and audit the encryption keys used to protect them at rest. Which approach should they adopt?</p><p class="zh" lang="zh-CN">存储的嵌入和调用日志包含敏感的业务数据，安全团队必须控制和审核用于静态保护它们的加密密钥。他们应该采取哪种方法？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Encrypt the data with AWS KMS customer managed keys and restrict and audit key usage via key policies and CloudTrail.</p><p class="zh" lang="zh-CN">使用 AWS KMS 客户管理的密钥加密数据，并通过密钥策略和 CloudTrail 限制和审核密钥的使用。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Leave the data unencrypted to simplify access.</p><p class="zh" lang="zh-CN">保持数据未加密以简化访问。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Use a single shared password stored in code.</p><p class="zh" lang="zh-CN">使用存储在代码中的单个共享密码。</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Make the storage public so keys are unnecessary.</p><p class="zh" lang="zh-CN">将存储公开，这样就不需要密钥了。</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Customer managed KMS keys give the team control over rotation and access, and CloudTrail records key usage for auditing.<br><br>B. Unencrypted sensitive data fails the data-protection requirement.<br><br>C. A hard-coded shared secret is insecure and not an auditable managed key.<br><br>D. Public storage exposes the sensitive data and is the opposite of the requirement.</p><p class="zh" lang="zh-CN">A. 客户管理的 KMS 密钥使团队能够控制轮换和访问，CloudTrail 记录密钥使用情况以供审核。<br><br>B. 未加密的敏感数据不符合数据保护要求。<br><br>C. 硬编码的共享密钥是不安全的，并且不是可审计的托管密钥。<br><br>D. 公共存储暴露了敏感数据，与要求相反。</p></div>
+<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div><footer class="sub">JeremyEngineer · <a href="https://github.com/JeremyEngineer/aws-aip-c01-practice-exam">GitHub</a> · <a href="/aws-aip/LICENSE-JeremyEngineer.txt">MIT License</a><!--i18n:sw-->
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+<!--/i18n:sw--></footer></main><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:aws:aip:open:hard:03";
+var TOTAL=15;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+/* 答案分隔：多选用 ","，填空的等价写法用 "|"（两种都支持） */
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(/[,|]/).map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+function norm(s){return String(s==null?"":s).replace(/\s+/g," ").trim().toUpperCase()}
+function isFill(q){return q.getAttribute("data-kind")==="fill"}
+function fillInput(q){return q1("input.fill",q)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  /* 填空题：复原/锁定输入框 */
+  var inp=q1("input.fill",q);
+  if(inp){
+    if(locked){ if(inp.value!==(sel[0]||""))inp.value=sel[0]||""; }
+    inp.disabled=locked;
+    inp.classList.remove("ok","bad");
+    if(judged)inp.classList.add(rec.ok?"ok":"bad");
+  }
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = isFill(q) ? !norm(sel[0]||"") : sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok&&!isFill(q))
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q),ok;
+  if(isFill(q)){var v=norm(sel[0]||"");ok=(v!==""&&A.indexOf(v)>=0);}
+  else{ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});}
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+/* 填空题输入：只存值、点亮"确认作答"，不重绘以免打断光标 */
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(!el||!el.classList||!el.classList.contains("fill"))return;
+  var q=el.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  S[nOf(q)]={s:[el.value],ok:null,revealed:false};
+  save();
+  var sub=q1(".js-submit",q);if(sub)sub.disabled=!norm(el.value);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script><script type="module" src="/assets/aip-options.mjs"></script><script src="/assets/presence.js"></script><!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+</body></html>

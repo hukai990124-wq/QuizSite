@@ -65,7 +65,8 @@ def index_html():
     title = "AWS AIP-C01 · Generative AI Developer – Professional"
     body = f'<main class="wrap"><h1>{title}</h1><p class="sub">{NOTICE}</p>'
     body += '<p class="sub">' + DISCLAIMER + '</p>'
-    body += '<div class="toolbar"><a href="../random.html?pool=aws-aip&amp;size=50">随机 50 题</a></div>'
+    # An ID protects the enclosing toolbar from whole-sentence i18n replacement.
+    body += '<div class="toolbar"><a id="aip-random" href="../random.html?pool=aws-aip&amp;size=50">随机 50 题</a></div>'
     for part, count in ((1, 50), (2, 50), (3, 36)):
         body += (f'<a class="card" href="part{part:02d}.html" data-quiz-key="aws:aip:{part:02d}" data-quiz-total="{count}">'
                  f'<div class="n">第 {part:02d} 套</div><div class="r">{count} 题 · #{(part-1)*50+1:03d}–#{min(part*50,136):03d}</div>'
@@ -94,3 +95,6 @@ def build():
 
 if __name__ == "__main__":
     build()
+    if ROOT.joinpath("aws-aip/data/open-questions.json").exists():
+        from build_open_aip import build as build_open
+        build_open()

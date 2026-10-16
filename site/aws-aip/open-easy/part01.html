@@ -1,0 +1,1387 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AWS AIP-C01 开源练习 · 基础 · 第 01 套</title><style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.stem p{margin:0 0 6px}.en{color:var(--en)}.zh,.ja{font-size:14px}.zh{color:var(--zh)}.ja{color:#6b3fa0;display:none}.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}.ja:before{content:"日訳 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}html[data-lang="ja"] .zh{display:none}html[data-lang="ja"] .ja{display:block}
+.opts{list-style:none;margin:12px 0 0;padding:0}.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}details.ans .correct{font-size:14px;margin:4px 0 8px}details.ans .correct b{color:#047857;font-size:16px}details.ans .expl{padding-bottom:12px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:15px 18px;margin-bottom:10px;text-decoration:none;color:#111827}
+a.card:hover{border-color:#93c5fd;background:#f8fbff}a.card .n{font-weight:700}.r{color:#6b7280;font-size:13px;margin-top:3px}
+.pg{position:relative;margin-top:9px}.pg::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:#e9eef2;border-radius:99px}
+.pg i{position:relative;display:block;height:5px;width:0;background:#0b6b3a;border-radius:99px;transition:width .3s}.pg span{display:block;font-size:12px;color:#8b95a1;margin-top:6px}.pg.on span{color:#0b6b3a;font-weight:600}
+@media print{body{background:#fff}.toolbar{display:none}.wrap{max-width:none;padding:0}.q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}details.ans{border:1px solid #ccc;background:#fff;display:block}details.ans .expl{display:block}}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* ===================== 手写填空（fill） ===================== */
+.q[data-kind="fill"] .fillrow{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.q[data-kind="fill"] input.fill{font:inherit;font-size:15px;padding:8px 13px;border:1px solid #cbd5e1;
+ border-radius:8px;min-width:230px;max-width:100%;background:#fff;color:#0f172a}
+.q[data-kind="fill"] input.fill:focus{outline:none;border-color:#4a7fb5;box-shadow:0 0 0 3px rgba(74,127,181,.15)}
+.q[data-kind="fill"].done input.fill{background:#f1f5f9;color:#334155}
+.q[data-kind="fill"] input.fill.ok{border-color:#0b7a44;background:#eaf7ef;color:#0b5130;font-weight:600}
+.q[data-kind="fill"] input.fill.bad{border-color:#c0392b;background:#fdeeed;color:#8f2c20}
+.q[data-kind="fill"] .flabel{font-size:12px;color:#8b95a1}
+@media (max-width:560px){.q[data-kind="fill"] input.fill{min-width:0;width:100%}}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+
+html[data-lang="en"] .zh,html[data-lang="en"] .ja{display:none}
+.q{overflow-wrap:anywhere}
+.source-discussion{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;color:var(--muted)}
+.reference-note{font-size:13px;color:var(--muted)}
+.opt:focus-visible{outline:3px solid #2563eb;outline-offset:2px}
+</style><!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+</head><body><main class="wrap"><h1>AWS AIP-C01 开源练习 · 基础 · 第 01 套</h1><p class="sub">英文原题与中文机器翻译。本批暂不提供日文题文；日语界面显示英文原文。</p><p class="sub">开源练习，非 AWS 官方试题。按作者参考答案判分，解析附官方文档链接。</p><p class="sub"><a href="/aws-aip/index.html">← 题库目录</a></p><div class="toolbar"><div class="btns"><button id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>50</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div><div class="q" id="q1" data-source-id="easy:1.1-1" data-chat-context="AWS AIP-C01 · easy:1.1-1<br>Reference answer: A<br>A team is reviewing a new Amazon Bedrock workload and wants AWS-curated best practices that are specific to generative AI (prompt engineering, RAG accuracy, responsible AI, model selection) rather than generic guidance. Which resource should they use?<br>一个团队正在审查新的 Amazon Bedrock 工作负载，并希望获得 AWS 策划的专门针对生成式 AI 的最佳实践（快速工程、RAG 准确性、负责任的 AI、模型选择），而不是通用指南。他们应该使用哪种资源？<br>A. The AWS Well-Architected Generative AI Lens<br>AWS 架构完善的生成式 AI 镜头<br>B. The AWS Well-Architected Framework six pillars only<br>AWS 架构完善的框架只有六大支柱<br>C. AWS Trusted Advisor<br>AWS 值得信赖的顾问<br>D. AWS Config conformance packs<br>AWS Config 一致性包" data-n="1" data-ans="A">
+<div class="qhead"><span class="qno">Question 1</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">A team is reviewing a new Amazon Bedrock workload and wants AWS-curated best practices that are specific to generative AI (prompt engineering, RAG accuracy, responsible AI, model selection) rather than generic guidance. Which resource should they use?</p><p class="zh" lang="zh-CN">一个团队正在审查新的 Amazon Bedrock 工作负载，并希望获得 AWS 策划的专门针对生成式 AI 的最佳实践（快速工程、RAG 准确性、负责任的 AI、模型选择），而不是通用指南。他们应该使用哪种资源？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The AWS Well-Architected Generative AI Lens</p><p class="zh" lang="zh-CN">AWS 架构完善的生成式 AI 镜头</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">The AWS Well-Architected Framework six pillars only</p><p class="zh" lang="zh-CN">AWS 架构完善的框架只有六大支柱</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">AWS Trusted Advisor</p><p class="zh" lang="zh-CN">AWS 值得信赖的顾问</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">AWS Config conformance packs</p><p class="zh" lang="zh-CN">AWS Config 一致性包</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. The Generative AI Lens extends the Well-Architected Framework with design principles and best practices tailored to GenAI workloads.<br><br>B. The core pillars are general-purpose; the GenAI-specific guidance lives in the Generative AI Lens.<br><br>C. Trusted Advisor gives cost/security/limits checks, not GenAI architectural best practices.<br><br>D. Config evaluates resource compliance against rules; it is not a source of GenAI design guidance.</p><p class="zh" lang="zh-CN">A. 生成式 AI 镜头通过针对 GenAI 工作负载量身定制的设计原则和最佳实践扩展了架构完善的框架。<br><br>B. 核心支柱是通用的； GenAI 特定的指导存在于 Generative AI Lens 中。<br><br>C. Trusted Advisor 提供成本/安全/限制检查，而不是 GenAI 架构最佳实践。<br><br>D. Config 根据规则评估资源合规性；它不是 GenAI 设计指导的来源。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q2" data-source-id="easy:1.1-2" data-chat-context="AWS AIP-C01 · easy:1.1-2<br>Reference answer: A<br>A company wants to formally review a generative AI workload against AWS best practices, identify high-risk issues (HRIs), and produce an improvement plan. Which tool should they use?<br>一家公司希望根据 AWS 最佳实践正式审查生成式 AI 工作负载、识别高风险问题 (HRI) 并制定改进计划。他们应该使用哪种工具？<br>A. AWS Well-Architected Tool with the Generative AI Lens applied<br>应用了生成式 AI 镜头的 AWS 架构完善的工具<br>B. Amazon CloudWatch dashboards<br>Amazon CloudWatch 仪表板<br>C. AWS Cost Explorer<br>AWS 成本管理器<br>D. AWS Artifact<br>AWS 神器" data-n="2" data-ans="A">
+<div class="qhead"><span class="qno">Question 2</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">A company wants to formally review a generative AI workload against AWS best practices, identify high-risk issues (HRIs), and produce an improvement plan. Which tool should they use?</p><p class="zh" lang="zh-CN">一家公司希望根据 AWS 最佳实践正式审查生成式 AI 工作负载、识别高风险问题 (HRI) 并制定改进计划。他们应该使用哪种工具？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">AWS Well-Architected Tool with the Generative AI Lens applied</p><p class="zh" lang="zh-CN">应用了生成式 AI 镜头的 AWS 架构完善的工具</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon CloudWatch dashboards</p><p class="zh" lang="zh-CN">Amazon CloudWatch 仪表板</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">AWS Cost Explorer</p><p class="zh" lang="zh-CN">AWS 成本管理器</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">AWS Artifact</p><p class="zh" lang="zh-CN">AWS 神器</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. The WA Tool runs a structured review against the framework and any selected lens, surfaces HRIs, and generates an improvement plan.<br><br>B. CloudWatch monitors runtime metrics; it does not perform architectural reviews or produce improvement plans.<br><br>C. Cost Explorer analyzes spend, not architectural risk.<br><br>D. Artifact provides compliance reports/agreements, not workload reviews.</p><p class="zh" lang="zh-CN">A. WA 工具对框架和任何选定的镜头进行结构化审查，显示 HRI，并生成改进计划。<br><br>B. CloudWatch监控运行时指标；它不执行架构审查或制定改进计划。<br><br>C. Cost Explorer 分析支出，而不是架构风险。<br><br>D. Artifact 提供合规性报告/协议，而不是工作负载审查。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q3" data-source-id="easy:1.1-3" data-chat-context="AWS AIP-C01 · easy:1.1-3<br>Reference answer: A<br>A generative AI application sometimes receives more requests than the foundation model endpoint can serve, and the team wants the system to degrade gracefully rather than fail outright. Which Well-Architected pillar most directly addresses this design goal?<br>生成式 AI 应用程序有时会收到比基础模型端点可以服务的请求更多的请求，团队希望系统能够正常降级而不是彻底失败。哪个架构完善的支柱最直接地解决了这个设计目标？<br>A. Reliability<br>可靠性<br>B. Cost Optimization<br>成本优化<br>C. Sustainability<br>可持续发展<br>D. Operational Excellence<br>卓越运营" data-n="3" data-ans="A">
+<div class="qhead"><span class="qno">Question 3</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">A generative AI application sometimes receives more requests than the foundation model endpoint can serve, and the team wants the system to degrade gracefully rather than fail outright. Which Well-Architected pillar most directly addresses this design goal?</p><p class="zh" lang="zh-CN">生成式 AI 应用程序有时会收到比基础模型端点可以服务的请求更多的请求，团队希望系统能够正常降级而不是彻底失败。哪个架构完善的支柱最直接地解决了这个设计目标？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Reliability</p><p class="zh" lang="zh-CN">可靠性</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Cost Optimization</p><p class="zh" lang="zh-CN">成本优化</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Sustainability</p><p class="zh" lang="zh-CN">可持续发展</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Operational Excellence</p><p class="zh" lang="zh-CN">卓越运营</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Graceful degradation, failover, and handling throttling are Reliability-pillar concerns.<br><br>B. Cost Optimization is about spending efficiently, not resilience to load.<br><br>C. Sustainability targets environmental impact, not failure handling.<br><br>D. Operational Excellence covers run/observe/improve processes; resilient behavior under failure maps to Reliability.</p><p class="zh" lang="zh-CN">A. 优雅降级、故障转移和处理限制是可靠性支柱问题。<br><br>B. 成本优化是关于有效支出，而不是负载弹性。<br><br>C. 可持续性的目标是环境影响，而不是故障处理。<br><br>D. 卓越运营涵盖运行/观察/改进流程；故障下的弹性行为映射到可靠性。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q4" data-source-id="easy:1.1-4" data-chat-context="AWS AIP-C01 · easy:1.1-4<br>Reference answer: A<br>To control generative AI inference spend, an architect routes simple prompts to a smaller model and reserves a larger model for complex prompts, and uses distillation to create cheaper task-specific models. Which Well-Architected pillar do these decisions primarily serve?<br>为了控制生成式人工智能推理支出，架构师将简单的提示路由到较小的模型，并为复杂的提示保留较大的模型，并使用蒸馏来创建更便宜的特定于任务的模型。这些决策主要服务于哪个架构完善的支柱？<br>A. Cost Optimization<br>成本优化<br>B. Security<br>安全<br>C. Reliability<br>可靠性<br>D. Performance Efficiency<br>性能效率" data-n="4" data-ans="A">
+<div class="qhead"><span class="qno">Question 4</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">To control generative AI inference spend, an architect routes simple prompts to a smaller model and reserves a larger model for complex prompts, and uses distillation to create cheaper task-specific models. Which Well-Architected pillar do these decisions primarily serve?</p><p class="zh" lang="zh-CN">为了控制生成式人工智能推理支出，架构师将简单的提示路由到较小的模型，并为复杂的提示保留较大的模型，并使用蒸馏来创建更便宜的特定于任务的模型。这些决策主要服务于哪个架构完善的支柱？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Cost Optimization</p><p class="zh" lang="zh-CN">成本优化</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Security</p><p class="zh" lang="zh-CN">安全</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Reliability</p><p class="zh" lang="zh-CN">可靠性</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Performance Efficiency</p><p class="zh" lang="zh-CN">性能效率</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Right-sizing model choice, prompt routing, and distillation to cut inference cost are Cost Optimization practices.<br><br>B. Security covers protecting data and workloads, not spend.<br><br>C. Reliability is about resilience and recovery, not cost.<br><br>D. Performance Efficiency is related (model selection) but the explicit goal here is reducing cost.</p><p class="zh" lang="zh-CN">A. 正确调整模型大小、快速路由和精炼以降低推理成本是成本优化实践。<br><br>B. 安全性涵盖保护数据和工作负载，而不是保护支出。<br><br>C. 可靠性涉及弹性和恢复，而不是成本。<br><br>D. 性能效率是相关的（模型选择），但这里的明确目标是降低成本。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q5" data-source-id="easy:1.1-5" data-chat-context="AWS AIP-C01 · easy:1.1-5<br>Reference answer: A,B<br>A team is applying the Reliability pillar to a Bedrock-based application that calls foundation models. Which TWO patterns improve resilience to FM call failures and regional issues?<br>一个团队正在将可靠性支柱应用于调用基础模型的基于 Bedrock 的应用程序。哪两种模式可以提高对 FM 呼叫失败和区域问题的恢复能力？<br>A. Implement circuit breakers in an AWS Step Functions workflow that stop calling the FM when error rates spike<br>在 AWS Step Functions 工作流程中实施断路器，当错误率激增时停止调用 FM<br>B. Configure cross-Region failover so requests shift to a healthy Region<br>配置跨区域故障转移，以便请求转移到健康区域<br>C. Increase the model temperature to add response variety<br>提高模型温度以增加响应多样性<br>D. Store all prompts in a single Amazon S3 bucket in one Region<br>将所有提示存储在一个区域的单个 Amazon S3 存储桶中<br>E. Disable retries to reduce latency<br>禁用重试以减少延迟" data-n="5" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 5</span><span class="badge">Domain 1 · Task 1.1 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A team is applying the Reliability pillar to a Bedrock-based application that calls foundation models. Which TWO patterns improve resilience to FM call failures and regional issues?</p><p class="zh" lang="zh-CN">一个团队正在将可靠性支柱应用于调用基础模型的基于 Bedrock 的应用程序。哪两种模式可以提高对 FM 呼叫失败和区域问题的恢复能力？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Implement circuit breakers in an AWS Step Functions workflow that stop calling the FM when error rates spike</p><p class="zh" lang="zh-CN">在 AWS Step Functions 工作流程中实施断路器，当错误率激增时停止调用 FM</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Configure cross-Region failover so requests shift to a healthy Region</p><p class="zh" lang="zh-CN">配置跨区域故障转移，以便请求转移到健康区域</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Increase the model temperature to add response variety</p><p class="zh" lang="zh-CN">提高模型温度以增加响应多样性</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Store all prompts in a single Amazon S3 bucket in one Region</p><p class="zh" lang="zh-CN">将所有提示存储在一个区域的单个 Amazon S3 存储桶中</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Disable retries to reduce latency</p><p class="zh" lang="zh-CN">禁用重试以减少延迟</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Circuit breakers prevent cascading failures by halting calls to a failing dependency.<br><br>B. Cross-Region failover keeps the workload available during a regional impairment.<br><br>C. Temperature affects output randomness, not reliability.<br><br>D. A single-Region store is a single point of failure, the opposite of resilient design.<br><br>E. Removing retries reduces, not improves, resilience to transient failures.</p><p class="zh" lang="zh-CN">A. 断路器通过停止对失败依赖项的调用来防止级联故障。<br><br>B. 跨区域故障转移可在区域故障期间保持工作负载可用。<br><br>C. 温度影响输出随机性，而不是可靠性。<br><br>D. 单区域存储是单点故障，与弹性设计相反。<br><br>E. 取消重试会降低而不是提高对瞬时故障的恢复能力。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q6" data-source-id="easy:1.1-6" data-chat-context="AWS AIP-C01 · easy:1.1-6<br>Reference answer: A<br>When an FM call fails, a system returns a cheaper cached or templated response instead of erroring out, preserving a usable experience. What is this pattern called?<br>当 FM 调用失败时，系统会返回更便宜的缓存或模板化响应，而不是出错，从而保留可用的体验。这种模式叫什么？<br>A. Graceful degradation<br>优雅降级<br>B. Provisioned throughput<br>预置吞吐量<br>C. Blue/green deployment<br>蓝/绿部署<br>D. Continued pre-training<br>继续预训练" data-n="6" data-ans="A">
+<div class="qhead"><span class="qno">Question 6</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">When an FM call fails, a system returns a cheaper cached or templated response instead of erroring out, preserving a usable experience. What is this pattern called?</p><p class="zh" lang="zh-CN">当 FM 调用失败时，系统会返回更便宜的缓存或模板化响应，而不是出错，从而保留可用的体验。这种模式叫什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Graceful degradation</p><p class="zh" lang="zh-CN">优雅降级</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Provisioned throughput</p><p class="zh" lang="zh-CN">预置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Blue/green deployment</p><p class="zh" lang="zh-CN">蓝/绿部署</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Continued pre-training</p><p class="zh" lang="zh-CN">继续预训练</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Falling back to a reduced-quality but functional response when a dependency fails is graceful degradation.<br><br>B. Provisioned throughput reserves model capacity; it is not a fallback pattern.<br><br>C. Blue/green is a deployment-cutover strategy, unrelated to runtime fallback.<br><br>D. That is a model-training technique, not a resilience pattern.</p><p class="zh" lang="zh-CN">A. 当依赖失败时，回退到质量降低但功能正常的响应是优雅的降级。<br><br>B. 预置吞吐量预留模型容量；这不是后备模式。<br><br>C. 蓝/绿是一种部署切换策略，与运行时回退无关。<br><br>D. 这是一种模型训练技术，而不是弹性模式。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q7" data-source-id="easy:1.1-7" data-chat-context="AWS AIP-C01 · easy:1.1-7<br>Reference answer: A<br>A reviewer wants to ensure a GenAI workload encrypts data, enforces least-privilege access to models, and filters harmful content. Which Well-Architected pillar groups these concerns?<br>审核者希望确保 GenAI 工作负载加密数据、强制对模型进行最低权限访问并过滤有害内容。这些问题由哪些架构完善的支柱组成？<br>A. Security<br>安全<br>B. Operational Excellence<br>卓越运营<br>C. Performance Efficiency<br>性能效率<br>D. Reliability<br>可靠性" data-n="7" data-ans="A">
+<div class="qhead"><span class="qno">Question 7</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">A reviewer wants to ensure a GenAI workload encrypts data, enforces least-privilege access to models, and filters harmful content. Which Well-Architected pillar groups these concerns?</p><p class="zh" lang="zh-CN">审核者希望确保 GenAI 工作负载加密数据、强制对模型进行最低权限访问并过滤有害内容。这些问题由哪些架构完善的支柱组成？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Security</p><p class="zh" lang="zh-CN">安全</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Operational Excellence</p><p class="zh" lang="zh-CN">卓越运营</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Performance Efficiency</p><p class="zh" lang="zh-CN">性能效率</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Reliability</p><p class="zh" lang="zh-CN">可靠性</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Data protection, least-privilege IAM, and content safeguards (guardrails) are Security-pillar best practices.<br><br>B. Operational Excellence is about running and improving workloads, not data protection controls.<br><br>C. Performance Efficiency targets effective resource use, not protection.<br><br>D. Reliability concerns availability and recovery, not access control and encryption.</p><p class="zh" lang="zh-CN">A. 数据保护、最低权限 IAM 和内容保护（护栏）是安全支柱最佳实践。<br><br>B. 卓越运营是指运行和改进工作负载，而不是数据保护控制。<br><br>C. 性能效率的目标是有效地利用资源，而不是保护。<br><br>D. 可靠性涉及可用性和恢复，而不是访问控制和加密。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q8" data-source-id="easy:1.1-8" data-chat-context="AWS AIP-C01 · easy:1.1-8<br>Reference answer: A<br>An ML platform team wants to standardize model versioning and tie model promotion into a CI/CD pipeline so deployments are repeatable and auditable. Which Well-Architected pillar does this best support, and with which service?<br>ML 平台团队希望标准化模型版本控制并将模型升级绑定到 CI/CD 管道中，以便部署可重复且可审核。这最能支持哪个架构完善的支柱，以及哪种服务？<br>A. Operational Excellence — using the SageMaker Model Registry in a CI/CD pipeline<br>卓越运营 - 在 CI/CD 管道中使用 SageMaker Model Registry<br>B. Cost Optimization — using AWS Budgets<br>成本优化 - 使用 AWS 预算<br>C. Security — using AWS WAF<br>安全性 — 使用 AWS WAF<br>D. Reliability — using Amazon Route 53<br>可靠性 — 使用 Amazon Route 53" data-n="8" data-ans="A">
+<div class="qhead"><span class="qno">Question 8</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">An ML platform team wants to standardize model versioning and tie model promotion into a CI/CD pipeline so deployments are repeatable and auditable. Which Well-Architected pillar does this best support, and with which service?</p><p class="zh" lang="zh-CN">ML 平台团队希望标准化模型版本控制并将模型升级绑定到 CI/CD 管道中，以便部署可重复且可审核。这最能支持哪个架构完善的支柱，以及哪种服务？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Operational Excellence — using the SageMaker Model Registry in a CI/CD pipeline</p><p class="zh" lang="zh-CN">卓越运营 - 在 CI/CD 管道中使用 SageMaker Model Registry</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Cost Optimization — using AWS Budgets</p><p class="zh" lang="zh-CN">成本优化 - 使用 AWS 预算</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Security — using AWS WAF</p><p class="zh" lang="zh-CN">安全性 — 使用 AWS WAF</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Reliability — using Amazon Route 53</p><p class="zh" lang="zh-CN">可靠性 — 使用 Amazon Route 53</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Versioned model catalogs feeding CI/CD are an Operational Excellence practice; the Model Registry provides this.<br><br>B. Budgets track spend; they do not provide model versioning or deployment automation.<br><br>C. WAF protects web apps from exploits; it is unrelated to model versioning.<br><br>D. Route 53 is DNS/failover; it does not manage model versions or CI/CD.</p><p class="zh" lang="zh-CN">A. 提供 CI/CD 的版本化模型目录是一种卓越运营实践；模型注册表提供了这一点。<br><br>B. 预算跟踪支出；它们不提供模型版本控制或部署自动化。<br><br>C. WAF 保护 Web 应用程序免受攻击；它与模型版本控制无关。<br><br>D. 路由 53 是 DNS/故障转移；它不管理模型版本或 CI/CD。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q9" data-source-id="easy:1.1-9" data-chat-context="AWS AIP-C01 · easy:1.1-9<br>Reference answer: A<br>A team wants to change which foundation model a production application uses without redeploying application code. Which AWS service enables this configuration-driven change, supporting the Operational Excellence pillar?<br>团队希望更改生产应用程序使用的基础模型而不重新部署应用程序代码。哪种 AWS 服务能够实现这种配置驱动的变革，支持卓越运营支柱？<br>A. AWS AppConfig<br>AWS 应用程序配置<br>B. AWS CodeDeploy<br>AWS 代码部署<br>C. Amazon Bedrock Provisioned Throughput<br>Amazon Bedrock 预置吞吐量<br>D. AWS Systems Manager Patch Manager<br>AWS Systems Manager 补丁管理器" data-n="9" data-ans="A">
+<div class="qhead"><span class="qno">Question 9</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">A team wants to change which foundation model a production application uses without redeploying application code. Which AWS service enables this configuration-driven change, supporting the Operational Excellence pillar?</p><p class="zh" lang="zh-CN">团队希望更改生产应用程序使用的基础模型而不重新部署应用程序代码。哪种 AWS 服务能够实现这种配置驱动的变革，支持卓越运营支柱？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">AWS AppConfig</p><p class="zh" lang="zh-CN">AWS 应用程序配置</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">AWS CodeDeploy</p><p class="zh" lang="zh-CN">AWS 代码部署</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock Provisioned Throughput</p><p class="zh" lang="zh-CN">Amazon Bedrock 预置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">AWS Systems Manager Patch Manager</p><p class="zh" lang="zh-CN">AWS Systems Manager 补丁管理器</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. AppConfig externalizes runtime configuration (such as the model ID) so it can change without a code deployment.<br><br>B. CodeDeploy automates deployments of new code/artifacts, which is exactly what the team wants to avoid here.<br><br>C. Provisioned Throughput reserves model capacity; it does not switch models via config.<br><br>D. Patch Manager handles OS patching, unrelated to model selection.</p><p class="zh" lang="zh-CN">A. AppConfig 外部化运行时配置（例如模型 ID），因此无需部署代码即可更改它。<br><br>B. CodeDeploy 自动部署新代码/工件，这正是团队想要避免的。<br><br>C. 预配置吞吐量储备模型容量；它不通过配置切换模型。<br><br>D. 补丁管理器处理操作系统补丁，与模型选择无关。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q10" data-source-id="easy:1.1-10" data-chat-context="AWS AIP-C01 · easy:1.1-10<br>Reference answer: A<br>A sustainability-focused review of a GenAI workload asks the team to minimize the environmental impact of inference. Which action best aligns with the Sustainability pillar?<br>对 GenAI 工作负载进行以可持续性为重点的审查要求团队尽量减少推理对环境的影响。哪项行动最符合可持续发展支柱？<br>A. Choose the smallest model that meets accuracy needs and use managed, efficiently-utilized services<br>选择满足精度需求的最小模型并使用托管、高效利用的服务<br>B. Always select the largest available model for every task<br>始终为每项任务选择最大的可用模型<br>C. Run idle GPU endpoints continuously to avoid cold starts<br>持续运行空闲 GPU 端点以避免冷启动<br>D. Duplicate the workload into every Region<br>将工作负载复制到每个区域" data-n="10" data-ans="A">
+<div class="qhead"><span class="qno">Question 10</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">A sustainability-focused review of a GenAI workload asks the team to minimize the environmental impact of inference. Which action best aligns with the Sustainability pillar?</p><p class="zh" lang="zh-CN">对 GenAI 工作负载进行以可持续性为重点的审查要求团队尽量减少推理对环境的影响。哪项行动最符合可持续发展支柱？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Choose the smallest model that meets accuracy needs and use managed, efficiently-utilized services</p><p class="zh" lang="zh-CN">选择满足精度需求的最小模型并使用托管、高效利用的服务</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Always select the largest available model for every task</p><p class="zh" lang="zh-CN">始终为每项任务选择最大的可用模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Run idle GPU endpoints continuously to avoid cold starts</p><p class="zh" lang="zh-CN">持续运行空闲 GPU 端点以避免冷启动</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Duplicate the workload into every Region</p><p class="zh" lang="zh-CN">将工作负载复制到每个区域</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Right-sizing models and maximizing utilization of managed infrastructure reduces energy/resource consumption.<br><br>B. Oversized models waste compute and energy, contradicting sustainability.<br><br>C. Keeping idle accelerators running wastes resources.<br><br>D. Unnecessary global duplication increases resource consumption.</p><p class="zh" lang="zh-CN">A. 正确调整模型规模并最大限度地利用托管基础设施可以减少能源/资源消耗。<br><br>B. 过大的模型会浪费计算和能源，与可持续性相矛盾。<br><br>C. 保持闲置加速器运行会浪费资源。<br><br>D. 不必要的全局重复会增加资源消耗。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q11" data-source-id="easy:1.1-11" data-chat-context="AWS AIP-C01 · easy:1.1-11<br>Reference answer: A<br>During a Well-Architected review, the WA Tool flags several &quot;High Risk Issues&quot; (HRIs) for a GenAI workload. What is the correct interpretation of an HRI?<br>在 Well-Architected 审核期间，WA 工具会标记 GenAI 工作负载的几个“高风险问题”(HRI)。 HRI 的正确解释是什么？<br>A. An issue likely to have a significant negative impact that should be prioritized for remediation<br>可能产生重大负面影响且应优先修复的问题<br>B. A billing anomaly detected in Cost Explorer<br>Cost Explorer 中检测到计费异常<br>C. A model hallucination logged at runtime<br>运行时记录的模型幻觉<br>D. A mandatory AWS service quota increase<br>强制增加 AWS 服务配额" data-n="11" data-ans="A">
+<div class="qhead"><span class="qno">Question 11</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">During a Well-Architected review, the WA Tool flags several &quot;High Risk Issues&quot; (HRIs) for a GenAI workload. What is the correct interpretation of an HRI?</p><p class="zh" lang="zh-CN">在 Well-Architected 审核期间，WA 工具会标记 GenAI 工作负载的几个“高风险问题”(HRI)。 HRI 的正确解释是什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">An issue likely to have a significant negative impact that should be prioritized for remediation</p><p class="zh" lang="zh-CN">可能产生重大负面影响且应优先修复的问题</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">A billing anomaly detected in Cost Explorer</p><p class="zh" lang="zh-CN">Cost Explorer 中检测到计费异常</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">A model hallucination logged at runtime</p><p class="zh" lang="zh-CN">运行时记录的模型幻觉</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A mandatory AWS service quota increase</p><p class="zh" lang="zh-CN">强制增加 AWS 服务配额</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. HRIs are the highest-priority findings the WA Tool surfaces for an improvement plan.<br><br>B. HRIs come from the architectural review, not billing analysis.<br><br>C. HRIs are review findings about design, not runtime model outputs.<br><br>D. HRIs are risk findings, not quota requests.</p><p class="zh" lang="zh-CN">A. HRI 是 WA 工具为改进计划提供的最高优先级发现。<br><br>B. HRI 来自架构审查，而不是计费分析。<br><br>C. HRI 是关于设计的审查结果，而不是运行时模型输出。<br><br>D. HRI 是风险发现，而不是配额请求。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q12" data-source-id="easy:1.1-12" data-chat-context="AWS AIP-C01 · easy:1.1-12<br>Reference answer: A<br>An architect wants to reduce p95 latency for a chat application by selecting an appropriately sized model and adding response caching for repeated prompts. Which pillar best describes this work?<br>架构师希望通过选择适当大小的模型并为重复提示添加响应缓存来减少聊天应用程序的 p95 延迟。哪个支柱最能描述这项工作？<br>A. Performance Efficiency<br>性能效率<br>B. Sustainability<br>可持续发展<br>C. Security<br>安全<br>D. Reliability<br>可靠性" data-n="12" data-ans="A">
+<div class="qhead"><span class="qno">Question 12</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">An architect wants to reduce p95 latency for a chat application by selecting an appropriately sized model and adding response caching for repeated prompts. Which pillar best describes this work?</p><p class="zh" lang="zh-CN">架构师希望通过选择适当大小的模型并为重复提示添加响应缓存来减少聊天应用程序的 p95 延迟。哪个支柱最能描述这项工作？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Performance Efficiency</p><p class="zh" lang="zh-CN">性能效率</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Sustainability</p><p class="zh" lang="zh-CN">可持续发展</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Security</p><p class="zh" lang="zh-CN">安全</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Reliability</p><p class="zh" lang="zh-CN">可靠性</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Selecting the right model and using caching to meet latency targets is core Performance Efficiency.<br><br>B. While related, the explicit goal here is meeting performance targets, not environmental impact.<br><br>C. Security is unrelated to latency optimization.<br><br>D. Reliability addresses availability/recovery, not latency tuning.</p><p class="zh" lang="zh-CN">A. 选择正确的模型并使用缓存来满足延迟目标是核心性能效率。<br><br>B. 虽然相关，但这里的明确目标是满足绩效目标，而不是环境影响。<br><br>C. 安全性与延迟优化无关。<br><br>D. 可靠性涉及可用性/恢复，而不是延迟调整。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q13" data-source-id="easy:1.1-13" data-chat-context="AWS AIP-C01 · easy:1.1-13<br>Reference answer: A,B<br>A company is building responsible-AI controls into a Bedrock workload during a Well-Architected review. Which TWO are appropriate Security/responsible-AI best practices?<br>一家公司正在 Well-Architected 审核期间将负责任的 AI 控制构建到 Bedrock 工作负载中。哪两个是适当的安全/负责任的人工智能最佳实践？<br>A. Apply Amazon Bedrock Guardrails to block denied topics and filter harmful content<br>应用 Amazon Bedrock Guardrails 阻止拒绝的主题并过滤有害内容<br>B. Redact PII from source data before indexing it for retrieval<br>在为检索建立索引之前，从源数据中编辑 PII<br>C. Grant the application a wildcard IAM policy for all Bedrock actions<br>为应用程序授予所有 Bedrock 操作的通配符 IAM 策略<br>D. Log nothing to reduce storage costs<br>不记录任何内容以降低存储成本<br>E. Disable encryption to speed up inference<br>禁用加密以加快推理速度" data-n="13" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 13</span><span class="badge">Domain 1 · Task 1.1 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A company is building responsible-AI controls into a Bedrock workload during a Well-Architected review. Which TWO are appropriate Security/responsible-AI best practices?</p><p class="zh" lang="zh-CN">一家公司正在 Well-Architected 审核期间将负责任的 AI 控制构建到 Bedrock 工作负载中。哪两个是适当的安全/负责任的人工智能最佳实践？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Apply Amazon Bedrock Guardrails to block denied topics and filter harmful content</p><p class="zh" lang="zh-CN">应用 Amazon Bedrock Guardrails 阻止拒绝的主题并过滤有害内容</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Redact PII from source data before indexing it for retrieval</p><p class="zh" lang="zh-CN">在为检索建立索引之前，从源数据中编辑 PII</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Grant the application a wildcard IAM policy for all Bedrock actions</p><p class="zh" lang="zh-CN">为应用程序授予所有 Bedrock 操作的通配符 IAM 策略</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Log nothing to reduce storage costs</p><p class="zh" lang="zh-CN">不记录任何内容以降低存储成本</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Disable encryption to speed up inference</p><p class="zh" lang="zh-CN">禁用加密以加快推理速度</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Guardrails enforce content policies, a key responsible-AI safeguard.<br><br>B. Removing PII before use limits exposure of sensitive data, a Security best practice.<br><br>C. Wildcard permissions violate least privilege.<br><br>D. Disabling audit logging undermines security and compliance.<br><br>E. Turning off encryption directly violates the Security pillar.</p><p class="zh" lang="zh-CN">A. 护栏执行内容策略，这是负责任的人工智能的一项关键保障措施。<br><br>B. 在使用前删除 PII 可限制敏感数据的暴露，这是一种安全最佳实践。<br><br>C. 通配符权限违反了最小权限。<br><br>D. 禁用审核日志记录会破坏安全性和合规性。<br><br>E. 关闭加密直接违反了安全支柱。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q14" data-source-id="easy:1.1-14" data-chat-context="AWS AIP-C01 · easy:1.1-14<br>Reference answer: A<br>Which statement best describes the relationship between the Well-Architected Framework and a Lens such as the Generative AI Lens?<br>哪种说法最能描述架构完善的框架与生成式 AI 镜头等镜头之间的关系？<br>A. A Lens extends the framework with domain-specific design principles and best practices for a particular workload type<br>Lens 通过特定领域的设计原则和特定工作负载类型的最佳实践扩展了框架<br>B. A Lens replaces the six pillars entirely for that workload<br>镜头完全取代了该工作量的六大支柱<br>C. A Lens is a billing construct that discounts the workload<br>Lens 是一种计费结构，可减少工作量<br>D. A Lens is a runtime guardrail enforced by Bedrock<br>Lens 是由 Bedrock 强制实施的运行时护栏" data-n="14" data-ans="A">
+<div class="qhead"><span class="qno">Question 14</span><span class="badge">Domain 1 · Task 1.1</span></div>
+<div class="stem"><p class="en" lang="en">Which statement best describes the relationship between the Well-Architected Framework and a Lens such as the Generative AI Lens?</p><p class="zh" lang="zh-CN">哪种说法最能描述架构完善的框架与生成式 AI 镜头等镜头之间的关系？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">A Lens extends the framework with domain-specific design principles and best practices for a particular workload type</p><p class="zh" lang="zh-CN">Lens 通过特定领域的设计原则和特定工作负载类型的最佳实践扩展了框架</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">A Lens replaces the six pillars entirely for that workload</p><p class="zh" lang="zh-CN">镜头完全取代了该工作量的六大支柱</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">A Lens is a billing construct that discounts the workload</p><p class="zh" lang="zh-CN">Lens 是一种计费结构，可减少工作量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A Lens is a runtime guardrail enforced by Bedrock</p><p class="zh" lang="zh-CN">Lens 是由 Bedrock 强制实施的运行时护栏</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Lenses layer specialized guidance (e.g., GenAI, Serverless, ML) on top of the six general pillars.<br><br>B. Lenses augment, not replace, the core pillars.<br><br>C. Lenses are guidance, not pricing mechanisms.<br><br>D. Lenses are review guidance, not enforced runtime controls.</p><p class="zh" lang="zh-CN">A. 镜头在六个一般支柱之上提供了专门的指导（例如 GenAI、Serverless、ML）。<br><br>B. 镜头增强而不是取代核心支柱。<br><br>C. 镜头是指导，而不是定价机制。<br><br>D. 镜头是审查指导，而不是强制的运行时控制。</p></div>
+<p><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q15" data-source-id="easy:1.2-1" data-chat-context="AWS AIP-C01 · easy:1.2-1<br>Reference answer: A<br>A developer can invoke Anthropic Claude, Meta Llama, Cohere, AI21, Stability AI, and Amazon Nova/Titan models through one consistent interface. What does Amazon Bedrock provide to make this possible?<br>开发人员可以通过一个一致的界面调用 Anthropic Claude、Meta Llama、Cohere、AI21、Stability AI 和 Amazon Nova/Titan 模型。 Amazon Bedrock 提供了什么来实现这一目标？<br>A. A single unified API to access multiple foundation models from different providers<br>一个统一的 API 可访问来自不同提供商的多个基础模型<br>B. A separate SDK that must be installed per model provider<br>每个模型提供商必须安装单独的 SDK<br>C. Direct SSH access to each provider&#x27;s servers<br>直接 SSH 访问每个提供商的服务器<br>D. A requirement to self-host each model on Amazon EC2<br>在 Amazon EC2 上自行托管每个模型的要求" data-n="15" data-ans="A">
+<div class="qhead"><span class="qno">Question 15</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A developer can invoke Anthropic Claude, Meta Llama, Cohere, AI21, Stability AI, and Amazon Nova/Titan models through one consistent interface. What does Amazon Bedrock provide to make this possible?</p><p class="zh" lang="zh-CN">开发人员可以通过一个一致的界面调用 Anthropic Claude、Meta Llama、Cohere、AI21、Stability AI 和 Amazon Nova/Titan 模型。 Amazon Bedrock 提供了什么来实现这一目标？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">A single unified API to access multiple foundation models from different providers</p><p class="zh" lang="zh-CN">一个统一的 API 可访问来自不同提供商的多个基础模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">A separate SDK that must be installed per model provider</p><p class="zh" lang="zh-CN">每个模型提供商必须安装单独的 SDK</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Direct SSH access to each provider&#x27;s servers</p><p class="zh" lang="zh-CN">直接 SSH 访问每个提供商的服务器</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A requirement to self-host each model on Amazon EC2</p><p class="zh" lang="zh-CN">在 Amazon EC2 上自行托管每个模型的要求</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Bedrock exposes one API surface (e.g., InvokeModel/Converse) across many providers&#x27; models.<br><br>B. Bedrock&#x27;s value is one API, not per-provider SDKs.<br><br>C. Bedrock is a fully managed service; you never access provider servers.<br><br>D. Bedrock is serverless and managed; self-hosting is not required.</p><p class="zh" lang="zh-CN">A. Bedrock 在许多提供商的模型中公开一个 API 表面（例如 InvokeModel/Converse）。<br><br>B. Bedrock 的价值在于一个 API，而不是每个提供商的 SDK。<br><br>C. Bedrock 是一项完全托管的服务；您永远不会访问提供商服务器。<br><br>D. Bedrock 是无服务器且托管的；不需要自托管。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q16" data-source-id="easy:1.2-2" data-chat-context="AWS AIP-C01 · easy:1.2-2<br>Reference answer: A<br>A team enabled a foundation model in us-east-1 but gets an access error when calling the same model in eu-west-1. What is the most likely cause?<br>一个团队在 us-east-1 中启用了基础模型，但在 eu-west-1 中调用相同模型时出现访问错误。最可能的原因是什么？<br>A. Model access in Amazon Bedrock is granted per Region and must be enabled in each Region<br>Amazon Bedrock 中的模型访问权限按区域授予，并且必须在每个区域中启用<br>B. Foundation models can only ever run in us-east-1<br>基础模型只能在 us-east-1 中运行<br>C. The account must switch to a different AWS partition<br>该账户必须切换到不同的 AWS 分区<br>D. Provisioned Throughput is required before any Region works<br>任何区域运行之前都需要预配置吞吐量" data-n="16" data-ans="A">
+<div class="qhead"><span class="qno">Question 16</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A team enabled a foundation model in us-east-1 but gets an access error when calling the same model in eu-west-1. What is the most likely cause?</p><p class="zh" lang="zh-CN">一个团队在 us-east-1 中启用了基础模型，但在 eu-west-1 中调用相同模型时出现访问错误。最可能的原因是什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Model access in Amazon Bedrock is granted per Region and must be enabled in each Region</p><p class="zh" lang="zh-CN">Amazon Bedrock 中的模型访问权限按区域授予，并且必须在每个区域中启用</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Foundation models can only ever run in us-east-1</p><p class="zh" lang="zh-CN">基础模型只能在 us-east-1 中运行</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">The account must switch to a different AWS partition</p><p class="zh" lang="zh-CN">该账户必须切换到不同的 AWS 分区</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput is required before any Region works</p><p class="zh" lang="zh-CN">任何区域运行之前都需要预配置吞吐量</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Bedrock model access is a per-Region setting; enabling it in one Region does not enable it elsewhere.<br><br>B. Models are available in many Regions; access is just granted per Region.<br><br>C. Partitions are unrelated; this is a per-Region access grant.<br><br>D. On-demand access works once granted; the issue is the per-Region grant, not throughput.</p><p class="zh" lang="zh-CN">A. 基岩模型访问是按区域设置的；在一个区域启用它不会在其他地方启用它。<br><br>B. 许多地区都有型号可供选择；仅按区域授予访问权限。<br><br>C. 分区不相关；这是按区域的访问授权。<br><br>D. 一旦获得授权，即可按需访问；问题是每个区域的授权，而不是吞吐量。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q17" data-source-id="easy:1.2-3" data-chat-context="AWS AIP-C01 · easy:1.2-3<br>Reference answer: A<br>During peak load a single-Region Bedrock application is throttled (&quot;Too many requests&quot;). The team must raise throughput using the same model and same API with minimal operational overhead. What should they use?<br>在峰值负载期间，单区域 Bedrock 应用程序会受到限制（“请求过多”）。团队必须使用相同的模型和相同的 API 以最小的运营开销来提高吞吐量。 What should they use?<br>A. A cross-Region inference profile to distribute traffic across Regions in the geography<br>跨区域推理配置文件，用于在地理上跨区域分配流量<br>B. Intelligent Prompt Routing across two different models<br>跨两种不同模型的智能提示路由<br>C. Provisioned Throughput sized for the peak<br>针对峰值的预配置吞吐量<br>D. A custom Lambda that retries in another Region<br>在另一个区域重试的自定义 Lambda" data-n="17" data-ans="A">
+<div class="qhead"><span class="qno">Question 17</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">During peak load a single-Region Bedrock application is throttled (&quot;Too many requests&quot;). The team must raise throughput using the same model and same API with minimal operational overhead. What should they use?</p><p class="zh" lang="zh-CN">在峰值负载期间，单区域 Bedrock 应用程序会受到限制（“请求过多”）。团队必须使用相同的模型和相同的 API 以最小的运营开销来提高吞吐量。 What should they use?</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">A cross-Region inference profile to distribute traffic across Regions in the geography</p><p class="zh" lang="zh-CN">跨区域推理配置文件，用于在地理上跨区域分配流量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Intelligent Prompt Routing across two different models</p><p class="zh" lang="zh-CN">跨两种不同模型的智能提示路由</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput sized for the peak</p><p class="zh" lang="zh-CN">针对峰值的预配置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A custom Lambda that retries in another Region</p><p class="zh" lang="zh-CN">在另一个区域重试的自定义 Lambda</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Cross-Region inference profiles automatically route invocations across Regions to absorb spikes, with no code or model change.<br><br>B. Prompt routing uses different models in a family; the requirement is the same model.<br><br>C. Provisioned Throughput suits steady high volume and adds cost for occasional peaks.<br><br>D. A custom failover Lambda adds operational overhead vs the built-in profile.</p><p class="zh" lang="zh-CN">A. 跨区域推理配置文件会自动跨区域路由调用以吸收峰值，无需更改代码或模型。<br><br>B. 快速路由使用一个系列中的不同型号；要求是同型号。<br><br>C. 预置吞吐量适合稳定的高容量，但会增加偶尔高峰的成本。<br><br>D. 与内置配置文件相比，自定义故障转移 Lambda 增加了运营开销。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q18" data-source-id="easy:1.2-4" data-chat-context="AWS AIP-C01 · easy:1.2-4<br>Reference answer: A<br>A platform team wants to track and attribute Bedrock inference costs per internal team while using cross-Region inference. Which capability lets them tag usage for cost tracking?<br>平台团队希望在使用跨区域推理时跟踪并归因每个内部团队的 Bedrock 推理成本。哪种功能可以让他们标记使用情况以进行成本跟踪？<br>A. Application inference profiles, which are user-created and support tagging for cost allocation<br>应用程序推理配置文件，由用户创建，支持成本分配标记<br>B. System-defined inference profiles, which you create and tag yourself<br>系统定义的推理配置文件，您自己创建并标记<br>C. AWS Cost Anomaly Detection profiles<br>AWS 成本异常检测配置文件<br>D. Provisioned Throughput model units<br>预置吞吐量模型单位" data-n="18" data-ans="A">
+<div class="qhead"><span class="qno">Question 18</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A platform team wants to track and attribute Bedrock inference costs per internal team while using cross-Region inference. Which capability lets them tag usage for cost tracking?</p><p class="zh" lang="zh-CN">平台团队希望在使用跨区域推理时跟踪并归因每个内部团队的 Bedrock 推理成本。哪种功能可以让他们标记使用情况以进行成本跟踪？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Application inference profiles, which are user-created and support tagging for cost allocation</p><p class="zh" lang="zh-CN">应用程序推理配置文件，由用户创建，支持成本分配标记</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">System-defined inference profiles, which you create and tag yourself</p><p class="zh" lang="zh-CN">系统定义的推理配置文件，您自己创建并标记</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">AWS Cost Anomaly Detection profiles</p><p class="zh" lang="zh-CN">AWS 成本异常检测配置文件</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput model units</p><p class="zh" lang="zh-CN">预置吞吐量模型单位</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Application inference profiles are custom profiles you create and tag, enabling cost tracking; system-defined profiles are AWS-managed.<br><br>B. System-defined profiles are predefined by AWS and are not user-tagged; application profiles are the taggable, custom ones.<br><br>C. That detects spend anomalies; it does not create taggable inference routing profiles.<br><br>D. Model Units reserve capacity; they are not the per-team tagging mechanism for cross-Region inference.</p><p class="zh" lang="zh-CN">A. 应用程序推理配置文件是您创建和标记的自定义配置文件，可实现成本跟踪；系统定义的配置文件由 AWS 管理。<br><br>B. 系统定义的配置文件由 AWS 预定义，没有用户标记；应用程序配置文件是可标记的、自定义的。<br><br>C. 检测支出异常；它不会创建可标记的推理路由配置文件。<br><br>D. 模型单位储备容量；它们不是用于跨区域推理的每团队标记机制。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q19" data-source-id="easy:1.2-5" data-chat-context="AWS AIP-C01 · easy:1.2-5<br>Reference answer: A<br>An IAM policy must restrict a role so it can only invoke a specific application inference profile. Which condition key is appropriate?<br>IAM 策略必须限制角色，使其只能调用特定的应用程序推理配置文件。哪个条件键合适？<br>A. bedrock:InferenceProfileArn<br>基岩：InferenceProfileArn<br>B. bedrock:GuardrailIdentifier<br>基岩：GuardrailIdentifier<br>C. bedrock:PromptRouterArn<br>基岩：PromptRouterArn<br>D. aws:SourceVpce<br>aws:SourceVpce" data-n="19" data-ans="A">
+<div class="qhead"><span class="qno">Question 19</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">An IAM policy must restrict a role so it can only invoke a specific application inference profile. Which condition key is appropriate?</p><p class="zh" lang="zh-CN">IAM 策略必须限制角色，使其只能调用特定的应用程序推理配置文件。哪个条件键合适？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">bedrock:InferenceProfileArn</p><p class="zh" lang="zh-CN">基岩：InferenceProfileArn</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">bedrock:GuardrailIdentifier</p><p class="zh" lang="zh-CN">基岩：GuardrailIdentifier</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">bedrock:PromptRouterArn</p><p class="zh" lang="zh-CN">基岩：PromptRouterArn</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">aws:SourceVpce</p><p class="zh" lang="zh-CN">aws:SourceVpce</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. This condition key scopes access to a particular inference profile ARN.<br><br>B. That enforces guardrail usage, not inference-profile scoping.<br><br>C. That scopes access to a prompt router, not an inference profile.<br><br>D. That restricts by VPC endpoint, unrelated to inference profiles.</p><p class="zh" lang="zh-CN">A. 此条件键范围限制对特定推理配置文件 ARN 的访问。<br><br>B. 这强制使用护栏，而不是推理配置文件范围。<br><br>C. 这限制了对提示路由器的访问，而不是推理配置文件。<br><br>D. 这受 VPC 端点限制，与推理配置文件无关。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q20" data-source-id="easy:1.2-6" data-chat-context="AWS AIP-C01 · easy:1.2-6<br>Reference answer: A<br>A company needs guaranteed, consistent model capacity for a high-volume production workload and predictable performance. Which Amazon Bedrock option fits best?<br>公司需要有保证、一致的模型容量来实现大批量生产工作负载和可预测的性能。哪种 Amazon Bedrock 选项最适合？<br>A. Provisioned Throughput, which reserves capacity measured in Model Units<br>预置吞吐量，预留以模型单位测量的容量<br>B. On-demand inference only<br>仅按需推理<br>C. Intelligent Prompt Routing<br>智能提示路由<br>D. A cross-Region inference profile<br>跨区域推理配置文件" data-n="20" data-ans="A">
+<div class="qhead"><span class="qno">Question 20</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A company needs guaranteed, consistent model capacity for a high-volume production workload and predictable performance. Which Amazon Bedrock option fits best?</p><p class="zh" lang="zh-CN">公司需要有保证、一致的模型容量来实现大批量生产工作负载和可预测的性能。哪种 Amazon Bedrock 选项最适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput, which reserves capacity measured in Model Units</p><p class="zh" lang="zh-CN">预置吞吐量，预留以模型单位测量的容量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">On-demand inference only</p><p class="zh" lang="zh-CN">仅按需推理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Intelligent Prompt Routing</p><p class="zh" lang="zh-CN">智能提示路由</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A cross-Region inference profile</p><p class="zh" lang="zh-CN">跨区域推理配置文件</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Provisioned Throughput guarantees dedicated capacity (per Model Unit) for steady, predictable workloads.<br><br>B. On-demand is convenient but does not guarantee reserved capacity at peak.<br><br>C. Prompt routing optimizes cost/quality across a family; it does not reserve capacity.<br><br>D. Profiles spread load but do not reserve guaranteed capacity per model unit.</p><p class="zh" lang="zh-CN">A. 预置吞吐量保证了稳定、可预测的工作负载的专用容量（每个模型单元）。<br><br>B. 按需提供虽然方便，但不能保证高峰时的预留容量。<br><br>C. 快速路由可优化整个家庭的成本/质量；它不保留容量。<br><br>D. 配置文件分散负载，但不保留每个模型单元的保证容量。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q21" data-source-id="easy:1.2-7" data-chat-context="AWS AIP-C01 · easy:1.2-7<br>Reference answer: A<br>A team wants to deploy and serve a custom model they fine-tuned in Amazon Bedrock. Which prerequisite must they satisfy to run inference on the customized model?<br>一个团队想要部署并提供他们在 Amazon Bedrock 中微调的自定义模型。他们必须满足哪些先决条件才能对定制模型进行推理？<br>A. Purchase Provisioned Throughput for the customized model<br>为定制模型购买预置吞吐量<br>B. Nothing — fine-tuned models are always available on-demand for free<br>没什么——微调模型总是可以按需免费提供<br>C. Convert the model to ONNX and host on EC2<br>将模型转换为 ONNX 并托管在 EC2 上<br>D. Enable a cross-Region inference profile<br>启用跨区域推理配置文件" data-n="21" data-ans="A">
+<div class="qhead"><span class="qno">Question 21</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A team wants to deploy and serve a custom model they fine-tuned in Amazon Bedrock. Which prerequisite must they satisfy to run inference on the customized model?</p><p class="zh" lang="zh-CN">一个团队想要部署并提供他们在 Amazon Bedrock 中微调的自定义模型。他们必须满足哪些先决条件才能对定制模型进行推理？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Purchase Provisioned Throughput for the customized model</p><p class="zh" lang="zh-CN">为定制模型购买预置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Nothing — fine-tuned models are always available on-demand for free</p><p class="zh" lang="zh-CN">没什么——微调模型总是可以按需免费提供</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Convert the model to ONNX and host on EC2</p><p class="zh" lang="zh-CN">将模型转换为 ONNX 并托管在 EC2 上</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Enable a cross-Region inference profile</p><p class="zh" lang="zh-CN">启用跨区域推理配置文件</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Customized (fine-tuned) Bedrock models are served via Provisioned Throughput, which is required to host them.<br><br>B. Custom models require Provisioned Throughput to serve, unlike base models on-demand.<br><br>C. Bedrock manages serving; manual EC2 hosting is not the mechanism.<br><br>D. Profiles route base-model traffic; they are not the requirement for serving a custom model.</p><p class="zh" lang="zh-CN">A. 定制（微调）基岩模型通过托管它们所需的预配置吞吐量提供服务。<br><br>B. 与按需基本模型不同，自定义模型需要预置吞吐量才能提供服务。<br><br>C. Bedrock 管理服务；手动 EC2 托管不是该机制。<br><br>D. 配置文件路由基本模型流量；它们不是服务自定义模型的要求。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q22" data-source-id="easy:1.2-8" data-chat-context="AWS AIP-C01 · easy:1.2-8<br>Reference answer: A<br>An application receives a mix of trivial and complex prompts. The team wants to send easy prompts to a cheaper model and hard prompts to a stronger model in the same family, through one endpoint, to cut cost ~30% without losing quality. What should they use?<br>应用程序会收到一些简单和复杂的提示。该团队希望通过一个端点向同系列中更便宜的型号发送简单提示，向同系列中更强大的型号发送硬提示，以在不损失质量的情况下降低成本约 30%。他们应该使用什么？<br>A. Amazon Bedrock Intelligent Prompt Routing (a prompt router)<br>Amazon Bedrock 智能提示路由（提示路由器）<br>B. Provisioned Throughput on the larger model<br>较大型号上的预配置吞吐量<br>C. Two unrelated models with manual if/else in code<br>两个不相关的模型，在代码中手动使用 if/else<br>D. A cross-Region inference profile<br>跨区域推理配置文件" data-n="22" data-ans="A">
+<div class="qhead"><span class="qno">Question 22</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">An application receives a mix of trivial and complex prompts. The team wants to send easy prompts to a cheaper model and hard prompts to a stronger model in the same family, through one endpoint, to cut cost ~30% without losing quality. What should they use?</p><p class="zh" lang="zh-CN">应用程序会收到一些简单和复杂的提示。该团队希望通过一个端点向同系列中更便宜的型号发送简单提示，向同系列中更强大的型号发送硬提示，以在不损失质量的情况下降低成本约 30%。他们应该使用什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock Intelligent Prompt Routing (a prompt router)</p><p class="zh" lang="zh-CN">Amazon Bedrock 智能提示路由（提示路由器）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput on the larger model</p><p class="zh" lang="zh-CN">较大型号上的预配置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Two unrelated models with manual if/else in code</p><p class="zh" lang="zh-CN">两个不相关的模型，在代码中手动使用 if/else</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">A cross-Region inference profile</p><p class="zh" lang="zh-CN">跨区域推理配置文件</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. A prompt router analyzes each prompt and routes to the best model within the same family via a single serverless endpoint, reducing cost.<br><br>B. That reserves capacity but does not route by complexity or save cost on easy prompts.<br><br>C. Hand-rolled routing adds maintenance; the managed prompt router is the intended solution.<br><br>D. Profiles spread load across Regions; they do not route by prompt complexity.</p><p class="zh" lang="zh-CN">A. 提示路由器分析每个提示并通过单个无服务器端点路由到同一系列中的最佳模型，从而降低成本。<br><br>B. 这保留了容量，但不会按复杂性进行布线，也不会根据简单的提示节省成本。<br><br>C. 手工布线增加了维护；托管提示路由器是预期的解决方案。<br><br>D. 配置文件将负载分散到各个区域；它们不会按即时复杂性进行路由。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q23" data-source-id="easy:1.2-9" data-chat-context="AWS AIP-C01 · easy:1.2-9<br>Reference answer: A<br>A configuration restricts which prompt router a role can invoke. Which IAM condition key applies?<br>配置限制角色可以调用哪个提示路由器。适用哪个 IAM 条件键？<br>A. bedrock:PromptRouterArn<br>基岩：PromptRouterArn<br>B. bedrock:InferenceProfileArn<br>基岩：InferenceProfileArn<br>C. bedrock:ModelId<br>基岩：模型 ID<br>D. bedrock:GuardrailVersion<br>基岩：Guardrail版本" data-n="23" data-ans="A">
+<div class="qhead"><span class="qno">Question 23</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A configuration restricts which prompt router a role can invoke. Which IAM condition key applies?</p><p class="zh" lang="zh-CN">配置限制角色可以调用哪个提示路由器。适用哪个 IAM 条件键？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">bedrock:PromptRouterArn</p><p class="zh" lang="zh-CN">基岩：PromptRouterArn</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">bedrock:InferenceProfileArn</p><p class="zh" lang="zh-CN">基岩：InferenceProfileArn</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">bedrock:ModelId</p><p class="zh" lang="zh-CN">基岩：模型 ID</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">bedrock:GuardrailVersion</p><p class="zh" lang="zh-CN">基岩：Guardrail版本</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. This condition key scopes invocation to a specific prompt router ARN.<br><br>B. That scopes inference profiles, not prompt routers.<br><br>C. There is no router-scoping behavior in a plain model-id key for this purpose.<br><br>D. That pins a guardrail version, unrelated to routers.</p><p class="zh" lang="zh-CN">A. 此条件键的范围是对特定提示路由器 ARN 的调用。<br><br>B. 该范围适用于推理配置文件，而不是提示路由器。<br><br>C. 为此目的，普通 model-id 键中没有路由器作用域行为。<br><br>D. 这固定了护栏版本，与路由器无关。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q24" data-source-id="easy:1.2-10" data-chat-context="AWS AIP-C01 · easy:1.2-10<br>Reference answer: A<br>A requirement for Intelligent Prompt Routing must be respected when configuring a router. Which statement is correct?<br>配置路由器时必须遵守智能提示路由的要求。哪种说法是正确的？<br>A. The router routes between two or more models from the same model family<br>路由器在同一型号系列的两个或多个型号之间路由<br>B. The router can route between any models from any providers<br>路由器可以在任何提供商的任何模型之间进行路由<br>C. The router requires Provisioned Throughput on both models<br>路由器在两种型号上都需要预置吞吐量<br>D. The router only works for embeddings models<br>路由器仅适用于嵌入模型" data-n="24" data-ans="A">
+<div class="qhead"><span class="qno">Question 24</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A requirement for Intelligent Prompt Routing must be respected when configuring a router. Which statement is correct?</p><p class="zh" lang="zh-CN">配置路由器时必须遵守智能提示路由的要求。哪种说法是正确的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">The router routes between two or more models from the same model family</p><p class="zh" lang="zh-CN">路由器在同一型号系列的两个或多个型号之间路由</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">The router can route between any models from any providers</p><p class="zh" lang="zh-CN">路由器可以在任何提供商的任何模型之间进行路由</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">The router requires Provisioned Throughput on both models</p><p class="zh" lang="zh-CN">路由器在两种型号上都需要预置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">The router only works for embeddings models</p><p class="zh" lang="zh-CN">路由器仅适用于嵌入模型</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Prompt routers operate within a single family (e.g., Anthropic, Llama, or Nova variants).<br><br>B. Routing is constrained to one model family, not arbitrary cross-provider mixing.<br><br>C. Routing is serverless and does not mandate provisioned capacity.<br><br>D. Prompt routing targets text-generation models, not embeddings.</p><p class="zh" lang="zh-CN">A. 提示路由器在单个系列中运行（例如，Anthropic、Llama 或 Nova 变体）。<br><br>B. 路由仅限于一个模型系列，而不是任意的跨提供商混合。<br><br>C. 路由是无服务器的，并且不强制要求配置容量。<br><br>D. 提示路由的目标是文本生成模型，而不是嵌入。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q25" data-source-id="easy:1.2-11" data-chat-context="AWS AIP-C01 · easy:1.2-11<br>Reference answer: A<br>A company has thousands of labeled prompt-and-response examples and wants the model to adapt to their specific task using that supervised data. Which Bedrock customization technique fits?<br>一家公司拥有数千个带标签的提示和响应示例，并希望模型使用监督数据来适应其特定任务。哪种基岩定制技术适合？<br>A. Fine-tuning (supervised, using labeled examples)<br>微调（监督，使用标记示例）<br>B. Continued pre-training (unsupervised on raw text)<br>持续预训练（原始文本无监督）<br>C. Model distillation<br>模型蒸馏<br>D. Retrieval-augmented generation<br>检索增强生成" data-n="25" data-ans="A">
+<div class="qhead"><span class="qno">Question 25</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A company has thousands of labeled prompt-and-response examples and wants the model to adapt to their specific task using that supervised data. Which Bedrock customization technique fits?</p><p class="zh" lang="zh-CN">一家公司拥有数千个带标签的提示和响应示例，并希望模型使用监督数据来适应其特定任务。哪种基岩定制技术适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Fine-tuning (supervised, using labeled examples)</p><p class="zh" lang="zh-CN">微调（监督，使用标记示例）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Continued pre-training (unsupervised on raw text)</p><p class="zh" lang="zh-CN">持续预训练（原始文本无监督）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Model distillation</p><p class="zh" lang="zh-CN">模型蒸馏</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Retrieval-augmented generation</p><p class="zh" lang="zh-CN">检索增强生成</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Fine-tuning trains on labeled input/output pairs to specialize a model for a task.<br><br>B. Continued pre-training uses unlabeled domain text, not labeled task examples.<br><br>C. Distillation transfers knowledge from a teacher to a smaller student; it is not the labeled-data adaptation described.<br><br>D. RAG augments prompts at inference time; it does not train the model.</p><p class="zh" lang="zh-CN">A. 对标记的输入/输出对进行微调训练，以专门针对任务的模型。<br><br>B. 继续预训练使用未标记的域文本，而不是标记的任务示例。<br><br>C. 蒸馏将知识从教师转移给较小的学生；它不是所描述的标记数据适应。<br><br>D. RAG 增强了推理时的提示；它不训练模型。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q26" data-source-id="easy:1.2-12" data-chat-context="AWS AIP-C01 · easy:1.2-12<br>Reference answer: A<br>A company has a large corpus of unlabeled internal documents in a specialized domain and wants the base model to absorb domain knowledge and vocabulary. Which technique is most appropriate?<br>一家公司在特定领域拥有大量未标记的内部文档，并希望基础模型能够吸收领域知识和词汇。哪种技术最合适？<br>A. Continued pre-training on the raw domain text (unsupervised)<br>继续对原始域文本进行预训练（无监督）<br>B. Fine-tuning with labeled examples<br>使用标记示例进行微调<br>C. Prompt engineering only<br>仅限即时工程<br>D. Distillation from a teacher model<br>从教师模型中提炼出来" data-n="26" data-ans="A">
+<div class="qhead"><span class="qno">Question 26</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A company has a large corpus of unlabeled internal documents in a specialized domain and wants the base model to absorb domain knowledge and vocabulary. Which technique is most appropriate?</p><p class="zh" lang="zh-CN">一家公司在特定领域拥有大量未标记的内部文档，并希望基础模型能够吸收领域知识和词汇。哪种技术最合适？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Continued pre-training on the raw domain text (unsupervised)</p><p class="zh" lang="zh-CN">继续对原始域文本进行预训练（无监督）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Fine-tuning with labeled examples</p><p class="zh" lang="zh-CN">使用标记示例进行微调</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Prompt engineering only</p><p class="zh" lang="zh-CN">仅限即时工程</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Distillation from a teacher model</p><p class="zh" lang="zh-CN">从教师模型中提炼出来</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Continued pre-training ingests unlabeled domain data to build domain familiarity.<br><br>B. Fine-tuning needs labeled task pairs; here the data is unlabeled.<br><br>C. Prompt engineering does not add domain knowledge to the model weights.<br><br>D. Distillation compresses a model; it does not inject a new unlabeled domain corpus.</p><p class="zh" lang="zh-CN">A. 持续的预训练会摄取未标记的领域数据以建立领域熟悉度。<br><br>B. 微调需要标记任务对；这里的数据是未标记的。<br><br>C. 即时工程不会将领域知识添加到模型权重中。<br><br>D. 蒸馏压缩模型；它不会注入新的未标记域语料库。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q27" data-source-id="easy:1.2-13" data-chat-context="AWS AIP-C01 · easy:1.2-13<br>Reference answer: A<br>A team wants a smaller, cheaper, faster model that mimics the behavior of a larger high-quality model on their task. Which approach does Amazon Bedrock offer for this?<br>团队想要一个更小、更便宜、更快的模型来模仿更大的高质量模型在其任务中的行为。 Amazon Bedrock 为此提供了哪种方法？<br>A. Model distillation — train a smaller &quot;student&quot; model using outputs from a larger &quot;teacher&quot; model<br>模型蒸馏——使用较大“教师”模型的输出来训练较小的“学生”模型<br>B. Continued pre-training on raw data<br>继续对原始数据进行预训练<br>C. Provisioned Throughput<br>预置吞吐量<br>D. Hybrid search<br>混合搜索" data-n="27" data-ans="A">
+<div class="qhead"><span class="qno">Question 27</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A team wants a smaller, cheaper, faster model that mimics the behavior of a larger high-quality model on their task. Which approach does Amazon Bedrock offer for this?</p><p class="zh" lang="zh-CN">团队想要一个更小、更便宜、更快的模型来模仿更大的高质量模型在其任务中的行为。 Amazon Bedrock 为此提供了哪种方法？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Model distillation — train a smaller &quot;student&quot; model using outputs from a larger &quot;teacher&quot; model</p><p class="zh" lang="zh-CN">模型蒸馏——使用较大“教师”模型的输出来训练较小的“学生”模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Continued pre-training on raw data</p><p class="zh" lang="zh-CN">继续对原始数据进行预训练</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput</p><p class="zh" lang="zh-CN">预置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Hybrid search</p><p class="zh" lang="zh-CN">混合搜索</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Distillation transfers a teacher model&#x27;s behavior into a smaller student for lower cost/latency.<br><br>B. That broadens domain knowledge but does not compress a teacher into a student.<br><br>C. That reserves capacity; it does not produce a smaller model.<br><br>D. Hybrid search is a retrieval technique, not a model-compression method.</p><p class="zh" lang="zh-CN">A. 蒸馏将教师模型的行为转移到较小的学生中，以降低成本/延迟。<br><br>B. 这拓宽了领域知识，但不会将教师压缩为学生。<br><br>C. 即储备能力；它不会生产更小的模型。<br><br>D. 混合搜索是一种检索技术，而不是模型压缩方法。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q28" data-source-id="easy:1.2-14" data-chat-context="AWS AIP-C01 · easy:1.2-14<br>Reference answer: A,B<br>A team wants to customize a foundation model while training only a small number of parameters to reduce cost, and to maintain several lightweight task variants on one base model. Which TWO parameter-efficient fine-tuning (PEFT) techniques apply?<br>团队希望定制一个基础模型，同时仅训练少量参数以降低成本，并在一个基础模型上维护多个轻量级任务变体。适用哪两种参数高效微调 (PEFT) 技术？<br>A. LoRA (Low-Rank Adaptation), which adds small trainable matrices into model layers<br>LoRA（低阶适应），将小型可训练矩阵添加到模型层中<br>B. Adapters, which insert small trainable layers between frozen model layers<br>适配器，在冻结模型层之间插入小型可训练层<br>C. Full-parameter retraining of the entire base model<br>整个基础模型的全参数再训练<br>D. Increasing the temperature parameter<br>增加温度参数<br>E. Switching to on-demand inference<br>切换到按需推理" data-n="28" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 28</span><span class="badge">Domain 1 · Task 1.2 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">A team wants to customize a foundation model while training only a small number of parameters to reduce cost, and to maintain several lightweight task variants on one base model. Which TWO parameter-efficient fine-tuning (PEFT) techniques apply?</p><p class="zh" lang="zh-CN">团队希望定制一个基础模型，同时仅训练少量参数以降低成本，并在一个基础模型上维护多个轻量级任务变体。适用哪两种参数高效微调 (PEFT) 技术？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">LoRA (Low-Rank Adaptation), which adds small trainable matrices into model layers</p><p class="zh" lang="zh-CN">LoRA（低阶适应），将小型可训练矩阵添加到模型层中</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Adapters, which insert small trainable layers between frozen model layers</p><p class="zh" lang="zh-CN">适配器，在冻结模型层之间插入小型可训练层</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Full-parameter retraining of the entire base model</p><p class="zh" lang="zh-CN">整个基础模型的全参数再训练</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Increasing the temperature parameter</p><p class="zh" lang="zh-CN">增加温度参数</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Switching to on-demand inference</p><p class="zh" lang="zh-CN">切换到按需推理</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. LoRA injects low-rank matrices so only a small set of parameters is trained, cutting cost.<br><br>B. Adapter modules add a few trainable layers while the base model stays frozen, enabling multiple variants.<br><br>C. Full retraining is the opposite of parameter-efficient; it updates all weights at high cost.<br><br>D. Temperature is an inference setting, not a training technique.<br><br>E. Inference mode is unrelated to PEFT training.</p><p class="zh" lang="zh-CN">A. LoRA 注入低秩矩阵，因此仅训练一小部分参数，从而降低成本。<br><br>B. 适配器模块添加了一些可训练层，同时基本模型保持冻结，从而实现多种变体。<br><br>C. 完全再训练与参数高效相反；它以高成本更新所有权重。<br><br>D. 温度是一种推理设置，而不是一种训练技术。<br><br>E. 推理模式与 PEFT 训练无关。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q29" data-source-id="easy:1.2-15" data-chat-context="AWS AIP-C01 · easy:1.2-15<br>Reference answer: A<br>What is a key practical benefit of using adapters/LoRA (PEFT) rather than full fine-tuning when serving many task-specific behaviors?<br>在服务许多特定于任务的行为时，使用适配器/LoRA (PEFT) 而不是完全微调的关键实际好处是什么？<br>A. Several small adapters can be maintained for one base model to provide different &quot;flavors&quot; at lower training cost<br>可以为一个基本模型维护多个小型适配器，以较低的培训成本提供不同的“风味”<br>B. It guarantees the model will never hallucinate<br>它保证模型永远不会产生幻觉<br>C. It removes the need for any training data<br>它消除了对任何训练数据的需要<br>D. It eliminates the need for Provisioned Throughput for custom models<br>它消除了自定义模型的预配置吞吐量的需要" data-n="29" data-ans="A">
+<div class="qhead"><span class="qno">Question 29</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">What is a key practical benefit of using adapters/LoRA (PEFT) rather than full fine-tuning when serving many task-specific behaviors?</p><p class="zh" lang="zh-CN">在服务许多特定于任务的行为时，使用适配器/LoRA (PEFT) 而不是完全微调的关键实际好处是什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Several small adapters can be maintained for one base model to provide different &quot;flavors&quot; at lower training cost</p><p class="zh" lang="zh-CN">可以为一个基本模型维护多个小型适配器，以较低的培训成本提供不同的“风味”</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">It guarantees the model will never hallucinate</p><p class="zh" lang="zh-CN">它保证模型永远不会产生幻觉</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">It removes the need for any training data</p><p class="zh" lang="zh-CN">它消除了对任何训练数据的需要</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">It eliminates the need for Provisioned Throughput for custom models</p><p class="zh" lang="zh-CN">它消除了自定义模型的预配置吞吐量的需要</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. PEFT lets you keep one base model and swap small adapters, reducing training cost and storage per variant.<br><br>B. No training method guarantees zero hallucination.<br><br>C. PEFT still requires task data; it just trains fewer parameters.<br><br>D. Serving customized models still uses Provisioned Throughput.</p><p class="zh" lang="zh-CN">A. PEFT 可让您保留一个基本模型并更换小型适配器，从而降低每个变体的培训成本和存储成本。<br><br>B. 没有任何训练方法可以保证零幻觉。<br><br>C. PEFT仍然需要任务数据；它只是训练更少的参数。<br><br>D. 为定制模型提供服务仍使用预配置吞吐量。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q30" data-source-id="easy:1.2-16" data-chat-context="AWS AIP-C01 · easy:1.2-16<br>Reference answer: A<br>An MLOps team needs a versioned catalog of trained models with approval status that integrates into their CI/CD release process. Which service provides this?<br>MLOps 团队需要一个经过训练的模型的版本目录，该目录具有批准状态，并集成到他们的 CI/CD 发布流程中。哪个服务提供这个？<br>A. Amazon SageMaker Model Registry<br>Amazon SageMaker 模型注册表<br>B. Amazon Bedrock Prompt Management<br>亚马逊基岩提示管理<br>C. AWS CodeArtifact<br>AWS 代码神器<br>D. Amazon ECR<br>亚马逊ECR" data-n="30" data-ans="A">
+<div class="qhead"><span class="qno">Question 30</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">An MLOps team needs a versioned catalog of trained models with approval status that integrates into their CI/CD release process. Which service provides this?</p><p class="zh" lang="zh-CN">MLOps 团队需要一个经过训练的模型的版本目录，该目录具有批准状态，并集成到他们的 CI/CD 发布流程中。哪个服务提供这个？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon SageMaker Model Registry</p><p class="zh" lang="zh-CN">Amazon SageMaker 模型注册表</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock Prompt Management</p><p class="zh" lang="zh-CN">亚马逊基岩提示管理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">AWS CodeArtifact</p><p class="zh" lang="zh-CN">AWS 代码神器</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon ECR</p><p class="zh" lang="zh-CN">亚马逊ECR</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. The Model Registry stores versioned models with approval states and integrates with CI/CD pipelines.<br><br>B. Prompt Management versions prompts, not trained models.<br><br>C. CodeArtifact is a software package repository, not a model registry.<br><br>D. ECR stores container images; the model-versioning/approval catalog is the Model Registry.</p><p class="zh" lang="zh-CN">A. 模型注册表存储具有批准状态的版本化模型，并与 CI/CD 管道集成。<br><br>B. 提示管理版本提示，而不是经过训练的模型。<br><br>C. CodeArtifact 是一个软件包存储库，而不是模型注册表。<br><br>D. ECR存储容器镜像；模型版本控制/批准目录是模型注册表。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q31" data-source-id="easy:1.2-17" data-chat-context="AWS AIP-C01 · easy:1.2-17<br>Reference answer: A<br>A team must choose a foundation model and wants to compare candidates on accuracy, robustness, and toxicity using both automatic metrics and human review before committing. Which Bedrock capability supports this?<br>A team must choose a foundation model and wants to compare candidates on accuracy, robustness, and toxicity using both automatic metrics and human review before committing.哪种基岩功能支持此功能？<br>A. Amazon Bedrock model evaluation (automatic and human-based evaluation jobs)<br>Amazon Bedrock 模型评估（自动和人工评估作业）<br>B. Provisioned Throughput<br>预置吞吐量<br>C. AWS Glue Data Quality<br>AWS Glue 数据质量<br>D. Cross-Region inference profiles<br>跨区域推理配置文件" data-n="31" data-ans="A">
+<div class="qhead"><span class="qno">Question 31</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A team must choose a foundation model and wants to compare candidates on accuracy, robustness, and toxicity using both automatic metrics and human review before committing. Which Bedrock capability supports this?</p><p class="zh" lang="zh-CN">A team must choose a foundation model and wants to compare candidates on accuracy, robustness, and toxicity using both automatic metrics and human review before committing.哪种基岩功能支持此功能？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock model evaluation (automatic and human-based evaluation jobs)</p><p class="zh" lang="zh-CN">Amazon Bedrock 模型评估（自动和人工评估作业）</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput</p><p class="zh" lang="zh-CN">预置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">AWS Glue Data Quality</p><p class="zh" lang="zh-CN">AWS Glue 数据质量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Cross-Region inference profiles</p><p class="zh" lang="zh-CN">跨区域推理配置文件</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Bedrock model evaluation runs automatic and human evaluations to compare models on quality and responsible-AI metrics.<br><br>B. That reserves capacity; it does not evaluate model quality.<br><br>C. Glue Data Quality checks datasets, not model output quality.<br><br>D. Profiles route traffic; they do not evaluate models.</p><p class="zh" lang="zh-CN">A. Bedrock 模型评估运行自动评估和人工评估，以比较模型的质量和负责任的 AI 指标。<br><br>B. 即储备能力；它不评估模型质量。<br><br>C. Glue 数据质量检查数据集，而不是模型输出质量。<br><br>D. 配置文件路由流量；他们不评估模型。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q32" data-source-id="easy:1.2-18" data-chat-context="AWS AIP-C01 · easy:1.2-18<br>Reference answer: A<br>A startup has spiky, unpredictable, low-to-moderate Bedrock usage and wants to pay only for what it uses without reserving capacity. Which inference option is most appropriate?<br>一家初创公司的 Bedrock 使用量尖峰、不可预测、低至中等，并且希望只按其使用量付费，而不保留容量。哪种推理选项最合适？<br>A. On-demand inference<br>按需推理<br>B. Provisioned Throughput<br>预置吞吐量<br>C. A dedicated EC2 GPU fleet<br>专用 EC2 GPU 队列<br>D. Batch transform on SageMaker<br>SageMaker 上的批量转换" data-n="32" data-ans="A">
+<div class="qhead"><span class="qno">Question 32</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A startup has spiky, unpredictable, low-to-moderate Bedrock usage and wants to pay only for what it uses without reserving capacity. Which inference option is most appropriate?</p><p class="zh" lang="zh-CN">一家初创公司的 Bedrock 使用量尖峰、不可预测、低至中等，并且希望只按其使用量付费，而不保留容量。哪种推理选项最合适？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">On-demand inference</p><p class="zh" lang="zh-CN">按需推理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput</p><p class="zh" lang="zh-CN">预置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">A dedicated EC2 GPU fleet</p><p class="zh" lang="zh-CN">专用 EC2 GPU 队列</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Batch transform on SageMaker</p><p class="zh" lang="zh-CN">SageMaker 上的批量转换</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. On-demand bills per request and needs no capacity reservation, ideal for variable low/moderate usage.<br><br>B. Provisioned Throughput reserves (and bills for) capacity, wasteful for spiky low usage.<br><br>C. Self-managed GPUs add cost and operational overhead versus on-demand Bedrock.<br><br>D. Batch transform is for offline bulk jobs, not interactive on-demand calls.</p><p class="zh" lang="zh-CN">A. 按请求按需计费，无需容量预留，非常适合可变的低/中等使用量。<br><br>B. 预配置吞吐量保留（和计费）容量，对于尖峰低使用率来说是浪费。<br><br>C. 与按需 Bedrock 相比，自管理 GPU 增加了成本和运营开销。<br><br>D. 批量转换适用于离线批量作业，而不是交互式按需调用。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q33" data-source-id="easy:1.2-19" data-chat-context="AWS AIP-C01 · easy:1.2-19<br>Reference answer: A<br>A team needs to process millions of documents through a foundation model overnight at the lowest cost, with no latency requirement. Which Amazon Bedrock approach fits best?<br>团队需要通过基础模型以最低的成本在一夜之间处理数百万个文档，并且没有延迟要求。哪种 Amazon Bedrock 方法最适合？<br>A. Amazon Bedrock batch inference<br>Amazon Bedrock 批量推理<br>B. Synchronous on-demand InvokeModel per document in a tight loop<br>紧密循环中每个文档的同步按需 InvokeModel<br>C. Provisioned Throughput sized for daytime peaks<br>针对白天峰值配置的吞吐量<br>D. Intelligent Prompt Routing<br>智能提示路由" data-n="33" data-ans="A">
+<div class="qhead"><span class="qno">Question 33</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A team needs to process millions of documents through a foundation model overnight at the lowest cost, with no latency requirement. Which Amazon Bedrock approach fits best?</p><p class="zh" lang="zh-CN">团队需要通过基础模型以最低的成本在一夜之间处理数百万个文档，并且没有延迟要求。哪种 Amazon Bedrock 方法最适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock batch inference</p><p class="zh" lang="zh-CN">Amazon Bedrock 批量推理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Synchronous on-demand InvokeModel per document in a tight loop</p><p class="zh" lang="zh-CN">紧密循环中每个文档的同步按需 InvokeModel</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Provisioned Throughput sized for daytime peaks</p><p class="zh" lang="zh-CN">针对白天峰值配置的吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Intelligent Prompt Routing</p><p class="zh" lang="zh-CN">智能提示路由</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Batch inference processes large datasets asynchronously at lower cost than real-time, ideal when latency does not matter.<br><br>B. Real-time per-call invocation is costlier and slower for huge offline volumes.<br><br>C. Reserving real-time capacity is unnecessary and costlier for an offline batch.<br><br>D. Routing optimizes per-prompt model choice; it is not a bulk offline mechanism.</p><p class="zh" lang="zh-CN">A. 批量推理以比实时更低的成本异步处理大型数据集，是延迟不重要时的理想选择。<br><br>B. 对于巨大的离线量来说，实时的每次调用调用成本更高且速度更慢。<br><br>C. 对于离线批量来说，预留实时容量是不必要的，而且成本更高。<br><br>D. 路由优化了每个提示的模型选择；它不是批量离线机制。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q34" data-source-id="easy:1.2-20" data-chat-context="AWS AIP-C01 · easy:1.2-20<br>Reference answer: A<br>A company already trained a custom large language model with open weights outside AWS and wants to serve it through the Amazon Bedrock API alongside managed models. Which feature enables this?<br>一家公司已经在 AWS 之外使用开放权重训练了自定义大型语言模型，并希望通过 Amazon Bedrock API 与托管模型一起提供服务。哪个功能可以实现此功能？<br>A. Amazon Bedrock Custom Model Import<br>Amazon Bedrock 自定义模型导入<br>B. Continued pre-training<br>继续预训练<br>C. Prompt Flows<br>提示流程<br>D. Knowledge Bases<br>知识库" data-n="34" data-ans="A">
+<div class="qhead"><span class="qno">Question 34</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A company already trained a custom large language model with open weights outside AWS and wants to serve it through the Amazon Bedrock API alongside managed models. Which feature enables this?</p><p class="zh" lang="zh-CN">一家公司已经在 AWS 之外使用开放权重训练了自定义大型语言模型，并希望通过 Amazon Bedrock API 与托管模型一起提供服务。哪个功能可以实现此功能？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon Bedrock Custom Model Import</p><p class="zh" lang="zh-CN">Amazon Bedrock 自定义模型导入</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Continued pre-training</p><p class="zh" lang="zh-CN">继续预训练</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Prompt Flows</p><p class="zh" lang="zh-CN">提示流程</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Knowledge Bases</p><p class="zh" lang="zh-CN">知识库</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Custom Model Import lets you bring supported open-weight custom models and serve them via Bedrock.<br><br>B. That trains a Bedrock base model further; it does not import external weights.<br><br>C. Prompt Flows orchestrate prompts; they do not import models.<br><br>D. Knowledge Bases provide RAG, not model import.</p><p class="zh" lang="zh-CN">A. 自定义模型导入可让您引入受支持的开放重量自定义模型并通过 Bedrock 提供服务。<br><br>B. 进一步训练基岩基础模型；它不导入外部权重。<br><br>C. 提示流编排提示；他们不导入模型。<br><br>D. 知识库提供 RAG，而不是模型导入。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q35" data-source-id="easy:1.2-21" data-chat-context="AWS AIP-C01 · easy:1.2-21<br>Reference answer: A<br>A model selection review weighs latency, cost, context window, modality, and quality for a summarization feature. Which statement reflects sound model-selection practice?<br>模型选择审查会权衡摘要功能的延迟、成本、上下文窗口、模态和质量。哪项陈述反映了合理的模型选择实践？<br>A. Choose the smallest/cheapest model that meets the task&#x27;s quality and latency requirements<br>选择满足任务质量和延迟要求的最小/最便宜的模型<br>B. Always pick the model with the largest parameter count<br>始终选择参数数量最多的模型<br>C. Pick whichever model was released most recently<br>选择最近发布的型号<br>D. Choose based only on provider brand<br>仅根据提供商品牌进行选择" data-n="35" data-ans="A">
+<div class="qhead"><span class="qno">Question 35</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A model selection review weighs latency, cost, context window, modality, and quality for a summarization feature. Which statement reflects sound model-selection practice?</p><p class="zh" lang="zh-CN">模型选择审查会权衡摘要功能的延迟、成本、上下文窗口、模态和质量。哪项陈述反映了合理的模型选择实践？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Choose the smallest/cheapest model that meets the task&#x27;s quality and latency requirements</p><p class="zh" lang="zh-CN">选择满足任务质量和延迟要求的最小/最便宜的模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Always pick the model with the largest parameter count</p><p class="zh" lang="zh-CN">始终选择参数数量最多的模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Pick whichever model was released most recently</p><p class="zh" lang="zh-CN">选择最近发布的型号</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Choose based only on provider brand</p><p class="zh" lang="zh-CN">仅根据提供商品牌进行选择</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Right-sizing to requirements balances cost, latency, and quality rather than defaulting to the biggest model.<br><br>B. Bigger is not always better; it raises cost/latency without guaranteed task benefit.<br><br>C. Recency alone is not a selection criterion; fit to requirements matters.<br><br>D. Brand is not a substitute for evaluating fit, cost, and performance.</p><p class="zh" lang="zh-CN">A. 根据需求调整规模可以平衡成本、延迟和质量，而不是默认使用最大的模型。<br><br>B. 越大并不总是越好；它会增加成本/延迟，而无法保证任务收益。<br><br>C. 仅仅新近度并不是选择标准；符合要求很重要。<br><br>D. 品牌不能替代评估适合性、成本和性能。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q36" data-source-id="easy:1.2-22" data-chat-context="AWS AIP-C01 · easy:1.2-22<br>Reference answer: A<br>Which description best fits the Amazon Titan and Amazon Nova model families available in Bedrock?<br>哪项描述最适合基岩版中提供的 Amazon Titan 和 Amazon Nova 模型系列？<br>A. Amazon&#x27;s own first-party foundation models (text, embeddings, and multimodal options) offered through Bedrock<br>亚马逊自己的第一方基础模型（文本、嵌入和多模式选项）通过 Bedrock 提供<br>B. Third-party models that require a separate Anthropic account<br>需要单独 Anthropic 帐户的第三方模型<br>C. On-premises-only models<br>仅本地模型<br>D. Tools for managing IAM roles<br>用于管理 IAM 角色的工具" data-n="36" data-ans="A">
+<div class="qhead"><span class="qno">Question 36</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">Which description best fits the Amazon Titan and Amazon Nova model families available in Bedrock?</p><p class="zh" lang="zh-CN">哪项描述最适合基岩版中提供的 Amazon Titan 和 Amazon Nova 模型系列？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon&#x27;s own first-party foundation models (text, embeddings, and multimodal options) offered through Bedrock</p><p class="zh" lang="zh-CN">亚马逊自己的第一方基础模型（文本、嵌入和多模式选项）通过 Bedrock 提供</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Third-party models that require a separate Anthropic account</p><p class="zh" lang="zh-CN">需要单独 Anthropic 帐户的第三方模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">On-premises-only models</p><p class="zh" lang="zh-CN">仅本地模型</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Tools for managing IAM roles</p><p class="zh" lang="zh-CN">用于管理 IAM 角色的工具</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Titan and Nova are Amazon-built FMs accessible via the Bedrock unified API, including multimodal Nova variants.<br><br>B. Titan/Nova are Amazon&#x27;s own models, not Anthropic&#x27;s.<br><br>C. They are cloud models served through Bedrock.<br><br>D. They are foundation models, not IAM tooling.</p><p class="zh" lang="zh-CN">A. Titan 和 Nova 是 Amazon 构建的 FM，可通过 Bedrock 统一 API 访问，包括多模式 Nova 变体。<br><br>B. Titan/Nova 是亚马逊自己的模型，而不是 Anthropic 的。<br><br>C. 它们是通过 Bedrock 提供服务的云模型。<br><br>D. 它们是基础模型，而不是 IAM 工具。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q37" data-source-id="easy:1.2-23" data-chat-context="AWS AIP-C01 · easy:1.2-23<br>Reference answer: A<br>Before fine-tuning a base model in Amazon Bedrock, which statement about capacity is correct?<br>在 Amazon Bedrock 中微调基本模型之前，关于容量的哪种说法是正确的？<br>A. Serving the resulting fine-tuned model requires Provisioned Throughput<br>为生成的微调模型提供服务需要预置吞吐量<br>B. Fine-tuned models are always served on-demand at no extra cost<br>微调模型始终按需提供，无需额外费用<br>C. Fine-tuning is impossible in Bedrock<br>在基岩中无法进行微调<br>D. Fine-tuning requires migrating to Amazon EC2<br>微调需要迁移到 Amazon EC2" data-n="37" data-ans="A">
+<div class="qhead"><span class="qno">Question 37</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">Before fine-tuning a base model in Amazon Bedrock, which statement about capacity is correct?</p><p class="zh" lang="zh-CN">在 Amazon Bedrock 中微调基本模型之前，关于容量的哪种说法是正确的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Serving the resulting fine-tuned model requires Provisioned Throughput</p><p class="zh" lang="zh-CN">为生成的微调模型提供服务需要预置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Fine-tuned models are always served on-demand at no extra cost</p><p class="zh" lang="zh-CN">微调模型始终按需提供，无需额外费用</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Fine-tuning is impossible in Bedrock</p><p class="zh" lang="zh-CN">在基岩中无法进行微调</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Fine-tuning requires migrating to Amazon EC2</p><p class="zh" lang="zh-CN">微调需要迁移到 Amazon EC2</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Custom/fine-tuned Bedrock models are hosted via Provisioned Throughput.<br><br>B. Custom models need Provisioned Throughput, unlike base models on-demand.<br><br>C. Bedrock supports fine-tuning for supported models.<br><br>D. Bedrock manages the training; EC2 migration is not required.</p><p class="zh" lang="zh-CN">A. 自定义/微调的基岩模型通过预配置吞吐量托管。<br><br>B. 与按需基本模型不同，自定义模型需要预置吞吐量。<br><br>C. Bedrock 支持对支持的模型进行微调。<br><br>D. Bedrock 管理培训；不需要 EC2 迁移。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q38" data-source-id="easy:1.2-24" data-chat-context="AWS AIP-C01 · easy:1.2-24<br>Reference answer: A,B<br>An architect is designing for resilience of FM calls in a critical workflow. Which TWO are valid resilience patterns?<br>架构师正在设计关键工作流程中 FM 呼叫的弹性。哪两种是有效的弹性模式？<br>A. Use a Step Functions circuit breaker to stop calling the FM when failures exceed a threshold<br>当故障超过阈值时，使用 Step Functions 断路器停止调用 FM<br>B. Fall back to a cheaper or cached response (graceful degradation) when the FM is unavailable<br>当 FM 不可用时，回退到更便宜的或缓存的响应（优雅降级）<br>C. Remove all timeouts so calls wait indefinitely<br>删除所有超时，以便调用无限期等待<br>D. Hard-code a single Region with no failover<br>对单个区域进行硬编码，无需故障转移<br>E. Increase top-p to improve uptime<br>增加 top-p 以延长正常运行时间" data-n="38" data-ans="A,B">
+<div class="qhead"><span class="qno">Question 38</span><span class="badge">Domain 1 · Task 1.2 · Select 2</span></div>
+<div class="stem"><p class="en" lang="en">An architect is designing for resilience of FM calls in a critical workflow. Which TWO are valid resilience patterns?</p><p class="zh" lang="zh-CN">架构师正在设计关键工作流程中 FM 呼叫的弹性。哪两种是有效的弹性模式？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Use a Step Functions circuit breaker to stop calling the FM when failures exceed a threshold</p><p class="zh" lang="zh-CN">当故障超过阈值时，使用 Step Functions 断路器停止调用 FM</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Fall back to a cheaper or cached response (graceful degradation) when the FM is unavailable</p><p class="zh" lang="zh-CN">当 FM 不可用时，回退到更便宜的或缓存的响应（优雅降级）</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Remove all timeouts so calls wait indefinitely</p><p class="zh" lang="zh-CN">删除所有超时，以便调用无限期等待</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Hard-code a single Region with no failover</p><p class="zh" lang="zh-CN">对单个区域进行硬编码，无需故障转移</p></div></li>
+<li class="opt" tabindex="0" role="checkbox" aria-checked="false" data-letter="E"><span class="letter">E</span><div class="otext">
+<p class="en" lang="en">Increase top-p to improve uptime</p><p class="zh" lang="zh-CN">增加 top-p 以延长正常运行时间</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A,B</b></p>
+<div class="expl"><p class="en" lang="en">A. Circuit breakers protect the system from a failing dependency.<br><br>B. Graceful degradation preserves a usable experience during failures.<br><br>C. Unbounded waits worsen reliability and can exhaust resources.<br><br>D. A single Region with no failover is a single point of failure.<br><br>E. top-p is an inference parameter and has nothing to do with availability.</p><p class="zh" lang="zh-CN">A. 断路器可以保护系统免受失败的依赖关系的影响。<br><br>B. 优雅的降级可以在故障期间保留可用的体验。<br><br>C. 无限制的等待会降低可靠性并耗尽资源。<br><br>D. 没有故障转移的单个区域是单点故障。<br><br>E. top-p是一个推理参数，与可用性无关。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q39" data-source-id="easy:1.2-25" data-chat-context="AWS AIP-C01 · easy:1.2-25<br>Reference answer: A<br>A developer wants the difference between a system-defined inference profile and an application inference profile. Which is correct?<br>开发人员想要了解系统定义的推理配置文件和应用程序推理配置文件之间的差异。哪个是正确的？<br>A. System-defined profiles are predefined by AWS; application profiles are user-created and support tagging for cost tracking<br>系统定义的配置文件由AWS预定义；应用程序配置文件是用户创建的，并支持成本跟踪标记<br>B. System-defined profiles are user-created; application profiles are AWS-managed<br>系统定义的配置文件是用户创建的；应用程序配置文件由 AWS 管理<br>C. Both are identical and interchangeable<br>两者相同且可以互换<br>D. Only application profiles can route across Regions<br>只有应用程序配置文件可以跨区域路由" data-n="39" data-ans="A">
+<div class="qhead"><span class="qno">Question 39</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A developer wants the difference between a system-defined inference profile and an application inference profile. Which is correct?</p><p class="zh" lang="zh-CN">开发人员想要了解系统定义的推理配置文件和应用程序推理配置文件之间的差异。哪个是正确的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">System-defined profiles are predefined by AWS; application profiles are user-created and support tagging for cost tracking</p><p class="zh" lang="zh-CN">系统定义的配置文件由AWS预定义；应用程序配置文件是用户创建的，并支持成本跟踪标记</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">System-defined profiles are user-created; application profiles are AWS-managed</p><p class="zh" lang="zh-CN">系统定义的配置文件是用户创建的；应用程序配置文件由 AWS 管理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Both are identical and interchangeable</p><p class="zh" lang="zh-CN">两者相同且可以互换</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Only application profiles can route across Regions</p><p class="zh" lang="zh-CN">只有应用程序配置文件可以跨区域路由</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. System-defined = automatic/AWS-managed; application = custom and taggable for cost allocation.<br><br>B. This reverses the definitions.<br><br>C. They differ in who creates them and whether they support custom tagging.<br><br>D. Both can support cross-Region routing; the distinction is creation/tagging.</p><p class="zh" lang="zh-CN">A. 系统定义=自动/AWS管理；应用程序 = 自定义且可标记以进行成本分配。<br><br>B. 这颠倒了定义。<br><br>C. 它们的不同之处在于谁创建了它们以及它们是否支持自定义标记。<br><br>D. 两者都可以支持跨Region路由；区别在于创建/标记。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q40" data-source-id="easy:1.2-26" data-chat-context="AWS AIP-C01 · easy:1.2-26<br>Reference answer: A<br>A FinOps team wants per-application cost attribution for Bedrock inference without changing application code that already calls a model directly. Which is the most appropriate first step?<br>FinOps 团队希望在不更改已直接调用模型的应用程序代码的情况下，对 Bedrock 推理进行每个应用程序的成本归因。哪一个是最合适的第一步？<br>A. Route calls through application inference profiles and tag them per application<br>通过应用程序推理配置文件路由调用并按应用程序标记它们<br>B. Switch every model to Provisioned Throughput<br>将每个模型切换到预置吞吐量<br>C. Disable model invocation logging<br>禁用模型调用日志记录<br>D. Move to a single shared IAM user<br>移动到单个共享 IAM 用户" data-n="40" data-ans="A">
+<div class="qhead"><span class="qno">Question 40</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A FinOps team wants per-application cost attribution for Bedrock inference without changing application code that already calls a model directly. Which is the most appropriate first step?</p><p class="zh" lang="zh-CN">FinOps 团队希望在不更改已直接调用模型的应用程序代码的情况下，对 Bedrock 推理进行每个应用程序的成本归因。哪一个是最合适的第一步？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Route calls through application inference profiles and tag them per application</p><p class="zh" lang="zh-CN">通过应用程序推理配置文件路由调用并按应用程序标记它们</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Switch every model to Provisioned Throughput</p><p class="zh" lang="zh-CN">将每个模型切换到预置吞吐量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Disable model invocation logging</p><p class="zh" lang="zh-CN">禁用模型调用日志记录</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Move to a single shared IAM user</p><p class="zh" lang="zh-CN">移动到单个共享 IAM 用户</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Application inference profiles add taggable, attributable usage for cost tracking across applications.<br><br>B. That reserves capacity and changes cost model but does not provide per-app tagging by itself.<br><br>C. Removing logging reduces visibility, the opposite of what is needed.<br><br>D. Sharing identities harms attribution and security.</p><p class="zh" lang="zh-CN">A. 应用程序推理配置文件添加了可标记、可归因的使用情况，用于跨应用程序的成本跟踪。<br><br>B. 这保留了容量并改变了成本模型，但本身不提供每个应用程序标记。<br><br>C. 删除日志记录会降低可见性，这与所需的相反。<br><br>D. 共享身份会损害归属和安全。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q41" data-source-id="easy:1.2-27" data-chat-context="AWS AIP-C01 · easy:1.2-27<br>Reference answer: A<br>Which scenario is the best fit for Provisioned Throughput rather than on-demand inference?<br>哪种场景最适合预置吞吐量而不是按需推理？<br>A. A consistently high-volume production workload needing predictable, guaranteed capacity<br>持续的大批量生产工作负载需要可预测、有保证的容量<br>B. An internal proof-of-concept with a few requests per day<br>每天有几个请求的内部概念验证<br>C. A one-time overnight bulk job<br>一次性夜间批量工作<br>D. Occasional traffic spikes a few hours per week<br>每周偶尔有几个小时出现流量高峰" data-n="41" data-ans="A">
+<div class="qhead"><span class="qno">Question 41</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">Which scenario is the best fit for Provisioned Throughput rather than on-demand inference?</p><p class="zh" lang="zh-CN">哪种场景最适合预置吞吐量而不是按需推理？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">A consistently high-volume production workload needing predictable, guaranteed capacity</p><p class="zh" lang="zh-CN">持续的大批量生产工作负载需要可预测、有保证的容量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">An internal proof-of-concept with a few requests per day</p><p class="zh" lang="zh-CN">每天有几个请求的内部概念验证</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">A one-time overnight bulk job</p><p class="zh" lang="zh-CN">一次性夜间批量工作</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Occasional traffic spikes a few hours per week</p><p class="zh" lang="zh-CN">每周偶尔有几个小时出现流量高峰</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Provisioned Throughput shines for steady, high, predictable demand.<br><br>B. On-demand is cheaper for sporadic low usage.<br><br>C. Batch inference is better for one-off offline volume.<br><br>D. Cross-Region inference profiles better absorb occasional spikes without reserving capacity.</p><p class="zh" lang="zh-CN">A. 预配置吞吐量因稳定、高且可预测的需求而大放异彩。<br><br>B. 对于零星的低使用量来说，按需服务更便宜。<br><br>C. 批量推理更适合一次性离线量。<br><br>D. 跨区域推理配置文件可以更好地吸收偶尔的峰值，而无需保留容量。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q42" data-source-id="easy:1.2-28" data-chat-context="AWS AIP-C01 · easy:1.2-28<br>Reference answer: A<br>A team wants to swap the Bedrock model ID used by a running application based on an operational decision, with an auditable rollout and quick rollback, and no redeploy. Which combination is best?<br>团队希望根据操作决策交换正在运行的应用程序使用的基岩模型 ID，并进行可审核的部署和快速回滚，并且无需重新部署。哪种组合最好？<br>A. Store the model ID in AWS AppConfig and read it at runtime<br>将模型 ID 存储在 AWS AppConfig 中并在运行时读取<br>B. Hard-code the model ID and redeploy each time<br>硬编码模型 ID 并每次重新部署<br>C. Embed the model ID in a Lambda layer<br>将模型 ID 嵌入 Lambda 层<br>D. Use Provisioned Throughput to change the model<br>使用预配置吞吐量来更改模型" data-n="42" data-ans="A">
+<div class="qhead"><span class="qno">Question 42</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A team wants to swap the Bedrock model ID used by a running application based on an operational decision, with an auditable rollout and quick rollback, and no redeploy. Which combination is best?</p><p class="zh" lang="zh-CN">团队希望根据操作决策交换正在运行的应用程序使用的基岩模型 ID，并进行可审核的部署和快速回滚，并且无需重新部署。哪种组合最好？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Store the model ID in AWS AppConfig and read it at runtime</p><p class="zh" lang="zh-CN">将模型 ID 存储在 AWS AppConfig 中并在运行时读取</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Hard-code the model ID and redeploy each time</p><p class="zh" lang="zh-CN">硬编码模型 ID 并每次重新部署</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Embed the model ID in a Lambda layer</p><p class="zh" lang="zh-CN">将模型 ID 嵌入 Lambda 层</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Use Provisioned Throughput to change the model</p><p class="zh" lang="zh-CN">使用预配置吞吐量来更改模型</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. AppConfig externalizes the model choice for safe, no-redeploy, rollback-friendly changes.<br><br>B. Redeploying for each change is exactly what AppConfig avoids.<br><br>C. Layers still require redeployment to change values.<br><br>D. Provisioned Throughput reserves capacity; it is not a config switch.</p><p class="zh" lang="zh-CN">A. AppConfig 将模型选择具体化，以实现安全、无需重新部署、易于回滚的更改。<br><br>B. AppConfig 恰恰避免了针对每次更改进行重新部署。<br><br>C. 层仍然需要重新部署才能更改值。<br><br>D. 预留吞吐量储备能力；它不是一个配置开关。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q43" data-source-id="easy:1.2-29" data-chat-context="AWS AIP-C01 · easy:1.2-29<br>Reference answer: A<br>Distillation in Amazon Bedrock is described as training a &quot;student&quot; using a &quot;teacher.&quot; What is the primary motivation?<br>亚马逊基岩中的蒸馏被描述为使用“老师”来训练“学生”。主要动机是什么？<br>A. Produce a smaller, lower-cost, lower-latency model that approximates the teacher&#x27;s quality on the task<br>生成一个更小、成本更低、延迟更低的模型，该模型接近教师的任务质量<br>B. Increase the model&#x27;s parameter count for higher accuracy<br>增加模型的参数数量以获得更高的精度<br>C. Add unlabeled domain data to the base model<br>将未标记的域数据添加到基础模型中<br>D. Guarantee zero hallucinations<br>保证零幻觉" data-n="43" data-ans="A">
+<div class="qhead"><span class="qno">Question 43</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">Distillation in Amazon Bedrock is described as training a &quot;student&quot; using a &quot;teacher.&quot; What is the primary motivation?</p><p class="zh" lang="zh-CN">亚马逊基岩中的蒸馏被描述为使用“老师”来训练“学生”。主要动机是什么？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Produce a smaller, lower-cost, lower-latency model that approximates the teacher&#x27;s quality on the task</p><p class="zh" lang="zh-CN">生成一个更小、成本更低、延迟更低的模型，该模型接近教师的任务质量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Increase the model&#x27;s parameter count for higher accuracy</p><p class="zh" lang="zh-CN">增加模型的参数数量以获得更高的精度</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Add unlabeled domain data to the base model</p><p class="zh" lang="zh-CN">将未标记的域数据添加到基础模型中</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Guarantee zero hallucinations</p><p class="zh" lang="zh-CN">保证零幻觉</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Distillation trades a little quality for big cost/latency savings by compressing the teacher into a student.<br><br>B. Distillation reduces size, not increases it.<br><br>C. That describes continued pre-training, not distillation.<br><br>D. No technique guarantees zero hallucination.</p><p class="zh" lang="zh-CN">A. 蒸馏通过将教师压缩为学生，以牺牲一点质量来节省大量成本/延迟。<br><br>B. 蒸馏会减小尺寸，而不是增大尺寸。<br><br>C. 这描述的是持续的预训练，而不是蒸馏。<br><br>D. 没有任何技术可以保证零幻觉。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q44" data-source-id="easy:1.2-30" data-chat-context="AWS AIP-C01 · easy:1.2-30<br>Reference answer: A<br>A team must enforce that a particular role can only call models through one approved cross-Region inference profile. Which approach is correct?<br>团队必须强制规定特定角色只能通过一个批准的跨区域推理配置文件调用模型。哪种方法是正确的？<br>A. Attach an IAM policy using the bedrock:InferenceProfileArn condition key scoped to that profile<br>使用作用域为该配置文件的 bedrock:InferenceProfileArn 条件键附加 IAM 策略<br>B. Rely on the application code to call the right profile<br>依靠应用程序代码调用正确的配置文件<br>C. Use bedrock:GuardrailIdentifier<br>使用基岩：GuardrailIdentifier<br>D. Disable on-demand inference account-wide<br>在帐户范围内禁用按需推理" data-n="44" data-ans="A">
+<div class="qhead"><span class="qno">Question 44</span><span class="badge">Domain 1 · Task 1.2</span></div>
+<div class="stem"><p class="en" lang="en">A team must enforce that a particular role can only call models through one approved cross-Region inference profile. Which approach is correct?</p><p class="zh" lang="zh-CN">团队必须强制规定特定角色只能通过一个批准的跨区域推理配置文件调用模型。哪种方法是正确的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Attach an IAM policy using the bedrock:InferenceProfileArn condition key scoped to that profile</p><p class="zh" lang="zh-CN">使用作用域为该配置文件的 bedrock:InferenceProfileArn 条件键附加 IAM 策略</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Rely on the application code to call the right profile</p><p class="zh" lang="zh-CN">依靠应用程序代码调用正确的配置文件</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Use bedrock:GuardrailIdentifier</p><p class="zh" lang="zh-CN">使用基岩：GuardrailIdentifier</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Disable on-demand inference account-wide</p><p class="zh" lang="zh-CN">在帐户范围内禁用按需推理</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. The condition key restricts invocation to the approved inference profile ARN.<br><br>B. Code-only controls are not enforceable security; use IAM conditions.<br><br>C. That enforces guardrails, not inference-profile scoping.<br><br>D. That is a blunt change unrelated to scoping a specific profile.</p><p class="zh" lang="zh-CN">A. 条件键将调用限制为已批准的推理配置文件 ARN。<br><br>B. 仅代码控制不是可执行的安全性；使用 IAM 条件。<br><br>C. 这加强了护栏，而不是推理配置文件范围。<br><br>D. 这是一个与确定特定配置文件范围无关的直接更改。</p></div>
+<p><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html" target="_blank" rel="noopener noreferrer">AWS Docs</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q45" data-source-id="easy:1.3-1" data-chat-context="AWS AIP-C01 · easy:1.3-1<br>Reference answer: A<br>A data engineering team wants to automatically detect anomalies and measure the quality of data in their data lake/ETL pipelines before it is used for training. Which service is purpose-built for this?<br>数据工程团队希望在将数据用于训练之前自动检测异常情况并测量数据湖/ETL 管道中的数据质量。哪种服务是专门为此构建的？<br>A. AWS Glue Data Quality<br>AWS Glue 数据质量<br>B. Amazon Textract<br>亚马逊文本<br>C. Amazon Transcribe<br>亚马逊转录<br>D. Amazon Comprehend<br>亚马逊理解" data-n="45" data-ans="A">
+<div class="qhead"><span class="qno">Question 45</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">A data engineering team wants to automatically detect anomalies and measure the quality of data in their data lake/ETL pipelines before it is used for training. Which service is purpose-built for this?</p><p class="zh" lang="zh-CN">数据工程团队希望在将数据用于训练之前自动检测异常情况并测量数据湖/ETL 管道中的数据质量。哪种服务是专门为此构建的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">AWS Glue Data Quality</p><p class="zh" lang="zh-CN">AWS Glue 数据质量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon Textract</p><p class="zh" lang="zh-CN">亚马逊文本</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Amazon Transcribe</p><p class="zh" lang="zh-CN">亚马逊转录</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon Comprehend</p><p class="zh" lang="zh-CN">亚马逊理解</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Glue Data Quality computes rules and automatically detects anomalies in datasets within Glue pipelines.<br><br>B. Textract extracts text from documents; it does not measure dataset quality.<br><br>C. Transcribe converts speech to text; unrelated to data-quality checks.<br><br>D. Comprehend performs NLP analysis, not pipeline data-quality scoring.</p><p class="zh" lang="zh-CN">A. Glue 数据质量计算规则并自动检测 Glue 管道内数据集中的异常情况。<br><br>B. Textract 从文档中提取文本；它不衡量数据集质量。<br><br>C. Transcribe 将语音转换为文本；与数据质量检查无关。<br><br>D. Comprehend 执行 NLP 分析，而不是管道数据质量评分。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q46" data-source-id="easy:1.3-2" data-chat-context="AWS AIP-C01 · easy:1.3-2<br>Reference answer: A<br>A data scientist wants a visual, GUI-based tool to import, explore, transform, and prepare tabular data for ML with minimal code. Which tool fits best?<br>数据科学家想要一个基于 GUI 的可视化工具，以最少的代码导入、探索、转换和准备用于 ML 的表格数据。哪种工具最适合？<br>A. Amazon SageMaker Data Wrangler<br>Amazon SageMaker 数据牧马人<br>B. Amazon SageMaker Processing<br>Amazon SageMaker 处理<br>C. AWS Glue Data Quality<br>AWS Glue 数据质量<br>D. Amazon Comprehend<br>亚马逊理解" data-n="46" data-ans="A">
+<div class="qhead"><span class="qno">Question 46</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">A data scientist wants a visual, GUI-based tool to import, explore, transform, and prepare tabular data for ML with minimal code. Which tool fits best?</p><p class="zh" lang="zh-CN">数据科学家想要一个基于 GUI 的可视化工具，以最少的代码导入、探索、转换和准备用于 ML 的表格数据。哪种工具最适合？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon SageMaker Data Wrangler</p><p class="zh" lang="zh-CN">Amazon SageMaker 数据牧马人</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon SageMaker Processing</p><p class="zh" lang="zh-CN">Amazon SageMaker 处理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">AWS Glue Data Quality</p><p class="zh" lang="zh-CN">AWS Glue 数据质量</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon Comprehend</p><p class="zh" lang="zh-CN">亚马逊理解</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Data Wrangler is the low-code GUI for importing, visualizing, and transforming data for ML.<br><br>B. Processing runs code-based processing jobs; it is not the GUI prep tool.<br><br>C. Glue Data Quality scores data quality; it is not a visual data-prep canvas.<br><br>D. Comprehend analyzes text; it is not a tabular data-prep GUI.</p><p class="zh" lang="zh-CN">A. Data Wrangler 是用于导入、可视化和转换 ML 数据的低代码 GUI。<br><br>B. 处理运行基于代码的处理作业；它不是 GUI 准备工具。<br><br>C. Glue Data Quality 对数据质量进行评分；它不是一个可视化的数据准备画布。<br><br>D. 理解分析文本；它不是一个表格数据准备 GUI。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q47" data-source-id="easy:1.3-3" data-chat-context="AWS AIP-C01 · easy:1.3-3<br>Reference answer: A<br>A team needs to run scalable, code-based data processing jobs (cleaning, feature transforms, batch scoring) on managed infrastructure as part of an ML workflow. Which service is designed for this?<br>作为 ML 工作流程的一部分，团队需要在托管基础设施上运行可扩展的、基于代码的数据处理作业（清理、特征转换、批量评分）。哪种服务是为此设计的？<br>A. Amazon SageMaker Processing<br>Amazon SageMaker 处理<br>B. Amazon SageMaker Data Wrangler<br>Amazon SageMaker 数据牧马人<br>C. Amazon Transcribe<br>亚马逊转录<br>D. Amazon Kendra<br>亚马逊肯德拉" data-n="47" data-ans="A">
+<div class="qhead"><span class="qno">Question 47</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">A team needs to run scalable, code-based data processing jobs (cleaning, feature transforms, batch scoring) on managed infrastructure as part of an ML workflow. Which service is designed for this?</p><p class="zh" lang="zh-CN">作为 ML 工作流程的一部分，团队需要在托管基础设施上运行可扩展的、基于代码的数据处理作业（清理、特征转换、批量评分）。哪种服务是为此设计的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon SageMaker Processing</p><p class="zh" lang="zh-CN">Amazon SageMaker 处理</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon SageMaker Data Wrangler</p><p class="zh" lang="zh-CN">Amazon SageMaker 数据牧马人</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Amazon Transcribe</p><p class="zh" lang="zh-CN">亚马逊转录</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon Kendra</p><p class="zh" lang="zh-CN">亚马逊肯德拉</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. SageMaker Processing runs containerized data-processing/feature-engineering jobs on managed compute.<br><br>B. Data Wrangler is interactive GUI prep; Processing is for programmatic jobs at scale.<br><br>C. Transcribe is speech-to-text, not a processing-job service.<br><br>D. Kendra is enterprise search, not a data-processing job runner.</p><p class="zh" lang="zh-CN">A. SageMaker Processing 在托管计算上运行容器化数据处理/特征工程作业。<br><br>B. Data Wrangler 是交互式 GUI 准备工具；处理适用于大规模的程序化作业。<br><br>C. 转录是语音到文本的服务，而不是处理作业服务。<br><br>D. Kendra 是企业搜索，而不是数据处理作业运行程序。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q48" data-source-id="easy:1.3-4" data-chat-context="AWS AIP-C01 · easy:1.3-4<br>Reference answer: A<br>A pipeline must convert recorded customer support phone calls into text so the transcripts can be fed to a foundation model. Which service performs the speech-to-text step?<br>管道必须将录制的客户支持电话转换为文本，以便将记录输入基础模型。哪个服务执行语音转文本步骤？<br>A. Amazon Transcribe<br>亚马逊转录<br>B. Amazon Polly<br>亚马逊波莉<br>C. Amazon Textract<br>亚马逊文本<br>D. Amazon Comprehend<br>亚马逊理解" data-n="48" data-ans="A">
+<div class="qhead"><span class="qno">Question 48</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">A pipeline must convert recorded customer support phone calls into text so the transcripts can be fed to a foundation model. Which service performs the speech-to-text step?</p><p class="zh" lang="zh-CN">管道必须将录制的客户支持电话转换为文本，以便将记录输入基础模型。哪个服务执行语音转文本步骤？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon Transcribe</p><p class="zh" lang="zh-CN">亚马逊转录</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon Polly</p><p class="zh" lang="zh-CN">亚马逊波莉</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Amazon Textract</p><p class="zh" lang="zh-CN">亚马逊文本</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon Comprehend</p><p class="zh" lang="zh-CN">亚马逊理解</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Transcribe converts audio speech to text, ideal for preparing call transcripts.<br><br>B. Polly is text-to-speech, the reverse operation.<br><br>C. Textract extracts text from documents/images, not audio.<br><br>D. Comprehend analyzes text; it does not transcribe audio.</p><p class="zh" lang="zh-CN">A. 转录将音频语音转换为文本，非常适合准备通话记录。<br><br>B. Polly 是文本转语音，即相反的操作。<br><br>C. Textract 从文档/图像中提取文本，而不是音频。<br><br>D. 理解分析文本；它不转录音频。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q49" data-source-id="easy:1.3-5" data-chat-context="AWS AIP-C01 · easy:1.3-5<br>Reference answer: A<br>A company must extract text, forms, and tables from scanned PDF invoices to feed downstream processing. Which service is purpose-built for this?<br>公司必须从扫描的 PDF 发票中提取文本、表格和表格以供下游处理使用。哪种服务是专门为此构建的？<br>A. Amazon Textract<br>亚马逊文本<br>B. Amazon Transcribe<br>亚马逊转录<br>C. Amazon Comprehend<br>亚马逊理解<br>D. Amazon Rekognition<br>亚马逊重新识别" data-n="49" data-ans="A">
+<div class="qhead"><span class="qno">Question 49</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">A company must extract text, forms, and tables from scanned PDF invoices to feed downstream processing. Which service is purpose-built for this?</p><p class="zh" lang="zh-CN">公司必须从扫描的 PDF 发票中提取文本、表格和表格以供下游处理使用。哪种服务是专门为此构建的？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon Textract</p><p class="zh" lang="zh-CN">亚马逊文本</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon Transcribe</p><p class="zh" lang="zh-CN">亚马逊转录</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Amazon Comprehend</p><p class="zh" lang="zh-CN">亚马逊理解</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon Rekognition</p><p class="zh" lang="zh-CN">亚马逊重新识别</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Textract extracts printed/handwritten text, forms, and tables from scanned documents.<br><br>B. Transcribe handles audio, not documents.<br><br>C. Comprehend analyzes already-extracted text; it does not OCR documents.<br><br>D. Rekognition analyzes images/video for objects and faces, not structured document text extraction.</p><p class="zh" lang="zh-CN">A. Textract 从扫描文档中提取打印/手写文本、表格和表格。<br><br>B. Transcribe 处理音频，而不是文档。<br><br>C. 理解分析已提取的文本；它不支持 OCR 文档。<br><br>D. Rekognition 分析图像/视频中的对象和面部，而不是结构化文档文本提取。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div>
+<div class="q" id="q50" data-source-id="easy:1.3-6" data-chat-context="AWS AIP-C01 · easy:1.3-6<br>Reference answer: A<br>Before indexing customer emails for a GenAI search app, a team must detect and redact personally identifiable information (PII) from the text. Which managed NLP service does this?<br>在为 GenAI 搜索应用程序索引客户电子邮件之前，团队必须检测并编辑文本中的个人身份信息 (PII)。哪个托管 NLP 服务执行此操作？<br>A. Amazon Comprehend<br>亚马逊理解<br>B. Amazon Macie<br>亚马逊麦西<br>C. Amazon Textract<br>亚马逊文本<br>D. Amazon Transcribe<br>亚马逊转录" data-n="50" data-ans="A">
+<div class="qhead"><span class="qno">Question 50</span><span class="badge">Domain 1 · Task 1.3</span></div>
+<div class="stem"><p class="en" lang="en">Before indexing customer emails for a GenAI search app, a team must detect and redact personally identifiable information (PII) from the text. Which managed NLP service does this?</p><p class="zh" lang="zh-CN">在为 GenAI 搜索应用程序索引客户电子邮件之前，团队必须检测并编辑文本中的个人身份信息 (PII)。哪个托管 NLP 服务执行此操作？</p></div>
+<ol class="opts">
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="A"><span class="letter">A</span><div class="otext">
+<p class="en" lang="en">Amazon Comprehend</p><p class="zh" lang="zh-CN">亚马逊理解</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="B"><span class="letter">B</span><div class="otext">
+<p class="en" lang="en">Amazon Macie</p><p class="zh" lang="zh-CN">亚马逊麦西</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="C"><span class="letter">C</span><div class="otext">
+<p class="en" lang="en">Amazon Textract</p><p class="zh" lang="zh-CN">亚马逊文本</p></div></li>
+<li class="opt" tabindex="0" role="radio" aria-checked="false" data-letter="D"><span class="letter">D</span><div class="otext">
+<p class="en" lang="en">Amazon Transcribe</p><p class="zh" lang="zh-CN">亚马逊转录</p></div></li>
+</ol>
+<div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button></div>
+<div class="verdict"></div>
+<details class="ans"><summary>解析 / Explanation</summary>
+<p class="correct">正确答案 / Answer: <b>A</b></p>
+<div class="expl"><p class="en" lang="en">A. Comprehend detects and can redact PII entities from text, suited to pre-processing for FMs.<br><br>B. Macie discovers/classifies sensitive data in S3 for security posture; it is not a text PII-redaction step for GenAI pipelines.<br><br>C. Textract extracts text; it does not redact PII.<br><br>D. Transcribe converts audio to text; it is not a PII redactor for documents.</p><p class="zh" lang="zh-CN">A. Comprehend 检测并可以从文本中编辑 PII 实体，适合 FM 的预处理。<br><br>B. Macie 发现/分类 S3 中的敏感数据以确保安全；它不是 GenAI 管道的文本 PII 编辑步骤。<br><br>C. Textract 提取文本；它不会编辑 PII。<br><br>D. Transcribe 将音频转换为文本；它不是文档的 PII 编辑器。</p></div>
+<p><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html" target="_blank" rel="noopener noreferrer">AWS Docs</a></p></details></div><footer class="sub">JeremyEngineer · <a href="https://github.com/JeremyEngineer/aws-aip-c01-practice-exam">GitHub</a> · <a href="/aws-aip/LICENSE-JeremyEngineer.txt">MIT License</a><!--i18n:sw-->
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+<!--/i18n:sw--></footer></main><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:aws:aip:open:easy:01";
+var TOTAL=50;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+/* 答案分隔：多选用 ","，填空的等价写法用 "|"（两种都支持） */
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(/[,|]/).map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+function norm(s){return String(s==null?"":s).replace(/\s+/g," ").trim().toUpperCase()}
+function isFill(q){return q.getAttribute("data-kind")==="fill"}
+function fillInput(q){return q1("input.fill",q)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  /* 填空题：复原/锁定输入框 */
+  var inp=q1("input.fill",q);
+  if(inp){
+    if(locked){ if(inp.value!==(sel[0]||""))inp.value=sel[0]||""; }
+    inp.disabled=locked;
+    inp.classList.remove("ok","bad");
+    if(judged)inp.classList.add(rec.ok?"ok":"bad");
+  }
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = isFill(q) ? !norm(sel[0]||"") : sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok&&!isFill(q))
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q),ok;
+  if(isFill(q)){var v=norm(sel[0]||"");ok=(v!==""&&A.indexOf(v)>=0);}
+  else{ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});}
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+/* 填空题输入：只存值、点亮"确认作答"，不重绘以免打断光标 */
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(!el||!el.classList||!el.classList.contains("fill"))return;
+  var q=el.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  S[nOf(q)]={s:[el.value],ok:null,revealed:false};
+  save();
+  var sub=q1(".js-submit",q);if(sub)sub.disabled=!norm(el.value);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script><script type="module" src="/assets/aip-options.mjs"></script><script src="/assets/presence.js"></script><!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+</body></html>
