@@ -1,4 +1,5 @@
 import { scryptSync } from "node:crypto";
+import { registrationConfig, verifyRegistration } from "./registration-turnstile.mjs";
 
 const MIN_CREDENTIAL_LENGTH = 6;
 const MAX_CREDENTIAL_LENGTH = 15;
@@ -329,6 +330,8 @@ async function handleRegister(request, env) {
   if (allowed === null) return apiUnavailable();
   if (!allowed) return jsonResponse({ error: "操作过于频繁，请稍后重试" }, 429);
 
+  const verification = await verifyRegistration(request, env, body.turnstileToken);
+  if (verification.status !== 200) return jsonResponse({ error: verification.error }, verification.status);
   const credentials = await hashPassword(body.password);
   const userId = crypto.randomUUID();
   const now = Date.now();
@@ -528,6 +531,7 @@ async function handleProgressSync(request, env) {
 export async function handleAccountRequest(request, env) {
   const pathname = new URL(request.url).pathname;
   const routes = {
+    "/api/auth/registration-config": { method: "GET", handler: (_request, environment) => jsonResponse(registrationConfig(environment)) },
     "/api/auth/register": { method: "POST", handler: handleRegister },
     "/api/auth/login": { method: "POST", handler: handleLogin },
     "/api/auth/logout": { method: "POST", handler: handleLogout },
@@ -540,7 +544,7 @@ export async function handleAccountRequest(request, env) {
   if (request.method !== route.method) {
     return jsonResponse({ error: "Method not allowed" }, 405, { Allow: route.method });
   }
-  if (!env.DB && pathname !== "/api/auth/logout") return apiUnavailable();
+  if (!env.DB && pathname !== "/api/auth/logout" && pathname !== "/api/auth/registration-config") return apiUnavailable();
   if (request.method !== "GET" && !validateMutationRequest(request)) {
     return jsonResponse({ error: "同源请求校验失败" }, 403);
   }

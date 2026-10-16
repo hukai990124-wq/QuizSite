@@ -16,12 +16,33 @@
   var retryTimer = null;
   var storageTrackingInstalled = false;
   var authMode = "login";
+  var registrationChallenge = null;
+  var registrationModule = null;
+  var verificationMessage = null;
+  function refreshRegistrationChallenge() {
+    if (!dialog || authMode !== "register" || accountUser || !dialog.open) {
+      if (registrationChallenge) registrationChallenge.deactivate();
+      return;
+    }
+    if (!registrationModule) registrationModule = import("/assets/registration-turnstile.mjs").catch(function () { registrationModule = null; throw new Error("Verification unavailable"); });
+    registrationModule.then(function (module) {
+      if (!registrationChallenge) registrationChallenge = new module.RegistrationChallenge(byId("qb-registration-challenge"), language);
+      if (authMode === "register" && !accountUser && dialog.open) return registrationChallenge.activate();
+    }).catch(function () { if (dialog && authMode === "register") { verificationMessage = "unavailable"; byId("qb-auth-error").textContent = verificationCopy().unavailable; } });
+  }
+  function verificationCopy() {
+    return {
+      zh: {required:"请先完成人机验证。",failed:"人机验证失败或已过期，请重新验证。",unavailable:"人机验证暂不可用，请稍后重试。"},
+      en: {required:"Complete human verification first.",failed:"Verification failed or expired. Please verify again.",unavailable:"Human verification is unavailable. Please try again later."},
+      ja: {required:"先に認証を完了する。",failed:"認証に失敗、または期限切れ。再認証する。",unavailable:"認証を利用できない。後で再試行する。"}
+    }[language()];
+  }
   var dialog = null;
   var trigger = null;
 
   var COPY = {
     zh: {
-      eyebrow: "QuizBank 账号", title: "登录或注册", description: "登录后，学习进度会在设备间同步。注册无需邮箱或验证码。",
+      eyebrow: "QuizBank 账号", title: "登录或注册", description: "登录后，学习进度会在设备间同步。注册无需邮箱或短信验证码，需完成人机验证。",
       login: "登录", register: "注册", username: "账号（6–15 个字符）", password: "密码（6–15 个字符）",
       loginButton: "登录", registerButton: "创建账号", forgot: "忘记密码无法自助找回。",
       close: "关闭", account: "当前账号", logout: "退出登录", delete: "删除账号",
@@ -37,7 +58,7 @@
       loading: "正在检查账号状态……", accountLabel: "账号：", loginLabel: "登录 / 注册",
     },
     en: {
-      eyebrow: "QuizBank account", title: "Sign in or register", description: "Sign in to sync study progress across devices. No email or verification code is needed.",
+      eyebrow: "QuizBank account", title: "Sign in or register", description: "Sign in to sync study progress. Registration requires human verification, but no email or SMS code.",
       login: "Sign in", register: "Register", username: "Account (6–15 characters)", password: "Password (6–15 characters)",
       loginButton: "Sign in", registerButton: "Create account", forgot: "Forgot passwords cannot be recovered automatically.",
       close: "Close", account: "Signed-in account", logout: "Sign out", delete: "Delete account",
@@ -53,7 +74,7 @@
       loading: "Checking account status…", accountLabel: "Account: ", loginLabel: "Sign in / Register",
     },
     ja: {
-      eyebrow: "QuizBank アカウント", title: "ログインまたは登録", description: "ログインすると学習進捗をデバイス間で同期できます。メールや認証コードは不要です。",
+      eyebrow: "QuizBank アカウント", title: "ログインまたは登録", description: "ログインすると学習進捗を同期。登録には人間による操作の確認が必要。メールやSMSコードは不要。",
       login: "ログイン", register: "登録", username: "アカウント（6～15文字）", password: "パスワード（6～15文字）",
       loginButton: "ログイン", registerButton: "アカウントを作成", forgot: "パスワードを忘れた場合、自分では再設定できません。",
       close: "閉じる", account: "ログイン中のアカウント", logout: "ログアウト", delete: "アカウントを削除",
@@ -141,6 +162,7 @@
             '<label class="qb-account-field"><span id="qb-username-caption"></span><input id="qb-username" type="text" required autocomplete="username" spellcheck="false"></label>' +
             '<label class="qb-account-field"><span id="qb-password-caption"></span><input id="qb-password" type="password" required autocomplete="current-password"></label>' +
           '</div>' +
+          '<div class="qb-registration-challenge" id="qb-registration-challenge" hidden></div>' +
           '<p class="qb-account-error" id="qb-auth-error" role="alert" aria-live="polite"></p>' +
           '<p class="qb-account-status" id="qb-auth-status" role="status" aria-live="polite"></p>' +
           '<button class="qb-account-submit" id="qb-auth-submit" type="submit"></button>' +
@@ -166,11 +188,15 @@
     dialog.querySelector("#qb-mode-login").addEventListener("click", function () { setMode("login"); });
     dialog.querySelector("#qb-mode-register").addEventListener("click", function () { setMode("register"); });
     dialog.querySelector("#qb-auth-form").addEventListener("submit", submitAuth);
+    byId("qb-registration-challenge").addEventListener("quizbank:verification-ready", function () {
+      if (verificationMessage) { verificationMessage = null; byId("qb-auth-error").textContent = ""; }
+    });
     dialog.querySelector("#qb-logout").addEventListener("click", logout);
     dialog.querySelector("#qb-show-delete").addEventListener("click", showDelete);
     dialog.querySelector("#qb-cancel-delete").addEventListener("click", hideDelete);
     dialog.querySelector("#qb-delete-form").addEventListener("submit", deleteAccount);
     dialog.addEventListener("click", function (event) { if (event.target === dialog) closeDialog(); });
+    dialog.addEventListener("close", function () { if (registrationChallenge) registrationChallenge.deactivate(); });
     applyCopy();
   }
 
@@ -196,6 +222,7 @@
   function applyCopy() {
     if (!dialog) return;
     var c = words();
+    if (verificationMessage) byId("qb-auth-error").textContent = verificationCopy()[verificationMessage];
     setText("qb-account-eyebrow", c.eyebrow);
     setText("qb-account-title", c.title);
     setText("qb-account-description", c.description);
@@ -239,13 +266,16 @@
   }
 
   function setMode(mode) {
+    verificationMessage = null;
     authMode = mode === "register" ? "register" : "login";
     byId("qb-auth-error").textContent = "";
     byId("qb-auth-status").textContent = "";
     applyCopy();
+    refreshRegistrationChallenge();
   }
 
   function showSignedIn(signedIn) {
+    if (signedIn && registrationChallenge) registrationChallenge.deactivate();
     byId("qb-auth-form").hidden = signedIn;
     byId("qb-account-switch").hidden = signedIn;
     byId("qb-account-view").hidden = !signedIn;
@@ -261,9 +291,11 @@
     global.dispatchEvent(new global.Event("quizbank:account-opened"));
     if (accountUser) byId("qb-logout").focus();
     else byId("qb-username").focus();
+    refreshRegistrationChallenge();
   }
 
   function closeDialog() {
+    if (registrationChallenge) registrationChallenge.deactivate();
     if (!dialog) return;
     if (typeof dialog.close === "function" && dialog.open) dialog.close();
     else dialog.removeAttribute("open");
@@ -318,16 +350,21 @@
     var button = byId("qb-auth-submit");
     error.textContent = "";
     status.textContent = "";
+    verificationMessage = null;
     if (credentialLength(username) < USERNAME_MIN || credentialLength(username) > USERNAME_MAX ||
         credentialLength(password) < USERNAME_MIN || credentialLength(password) > USERNAME_MAX) {
       error.textContent = c.invalidRange;
       return;
     }
+    var submittingMode = authMode;
+    var turnstileToken = submittingMode === "register" && registrationChallenge ? registrationChallenge.getToken() : "";
+    if (submittingMode === "register" && !turnstileToken) { verificationMessage = "required"; error.textContent = verificationCopy().required; return; }
 
     setBusy(button, true);
     requestJson(authMode === "register" ? "/api/auth/register" : "/api/auth/login", "POST", {
       username: username,
       password: password,
+      ...(submittingMode === "register" ? { turnstileToken: turnstileToken } : {}),
     }).then(function (result) {
       accountUser = result.user;
       byId("qb-password").value = "";
@@ -337,8 +374,11 @@
       setSyncStatus(c.syncing);
       queueSync(true, 0);
     }).catch(function (failure) {
-      error.textContent = errorCopy(failure, c.invalidCredentials);
-    }).finally(function () { setBusy(button, false); });
+      if (submittingMode === "register" && (failure.status === 403 || failure.status === 503)) {
+        verificationMessage = failure.status === 403 ? "failed" : "unavailable";
+        error.textContent = verificationCopy()[verificationMessage];
+      } else error.textContent = errorCopy(failure, c.invalidCredentials);
+    }).finally(function () { setBusy(button, false); if (submittingMode === "register" && registrationChallenge) registrationChallenge.reset(); });
   }
 
   function setSyncStatus(message) {
@@ -603,6 +643,7 @@
       new MutationObserver(function (mutations) {
         if (mutations.some(function (mutation) { return mutation.attributeName === "data-lang"; })) {
           applyCopy();
+          if (registrationChallenge) registrationChallenge.localize();
           updateTrigger();
         }
       }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] });

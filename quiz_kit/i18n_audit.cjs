@@ -280,6 +280,10 @@ async function main() {
   regressions.push('AI spinner animates only during requests, respects reduced motion, and stops on success/error/retry');
   for (const paper of ['aws-clf/part01.html', 'aws-saa/real/part01.html', 'aws-aif/practice/part01.html', 'toeic-listening/TOEIC_Listening_Test_06.html', 'toeic-reading/TOEIC_Reading_Test_01.html', 'dele-a1/a1-2009-0516.html', 'dele-a2/a2-modelo0-2020.html', 'random.html?pool=toeic-listening&size=50&seed=12345678']) {
     await page.goto(base + '/' + paper, {waitUntil:'domcontentloaded'});
+    if (paper.startsWith('random.html')) {
+      await page.waitForSelector('.exam-notice');
+      page.once('dialog', dialog => dialog.accept());
+    }
     await page.locator('#btn-report').click();
     const link = page.locator('#mask .qb-report-home');
     await link.waitFor({state:'visible'});
