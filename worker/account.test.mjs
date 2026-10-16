@@ -1,4 +1,4 @@
-import test from "node:test";
+import test, {beforeEach} from "node:test";
 import assert from "node:assert/strict";
 import { pbkdf2Sync, scryptSync } from "node:crypto";
 import {
@@ -254,6 +254,11 @@ function createMemoryDatabase() {
   return database;
 }
 
+beforeEach(t=>t.mock.method(globalThis,'fetch',async url=>{
+  assert.equal(url,'https://challenges.cloudflare.com/turnstile/v0/siteverify');
+  return Response.json({success:true,hostname:'quizbank.example',action:'register'});
+}));
+
 function makeRequest(path, method, body, headers = {}) {
   const origin = "https://quizbank.example";
   return new Request(origin + path, {
@@ -262,13 +267,15 @@ function makeRequest(path, method, body, headers = {}) {
       ...(body === undefined ? {} : { "Content-Type": "application/json", Origin: origin }),
       ...headers,
     },
-    ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+    ...(body === undefined ? {} : { body: JSON.stringify(path === '/api/auth/register' ? {turnstileToken:'unit-test-token',...body} : body) }),
   });
 }
 
 function makeEnvironment(allowed = true) {
   return {
     DB: createMemoryDatabase(),
+    TURNSTILE_SITE_KEY:'unit-test-public-key',
+    TURNSTILE_SECRET_KEY:'unit-test-private-value',
     AUTH_LIMIT: { limit: async () => ({ success: allowed }) },
   };
 }
@@ -295,6 +302,15 @@ test("registration creates a case-sensitive account and an HttpOnly secure sessi
     password: "secret1",
   }), env);
   assert.equal(lowerCaseLogin.status, 401);
+});
+
+test('registration endpoint rejects missing verification before creating users/sessions, while config stays public',async()=>{
+  const env=makeEnvironment();
+  const response=await handleAccountRequest(makeRequest('/api/auth/register','POST',{username:'Tester1',password:'secret1',turnstileToken:null}),env);
+  assert.equal(response.status,403);assert.equal(env.DB.users.size,0);assert.equal(env.DB.sessions.size,0);
+  const config=await handleAccountRequest(makeRequest('/api/auth/registration-config','GET'),env);
+  assert.deepEqual(await config.json(),{configured:true,siteKey:env.TURNSTILE_SITE_KEY});
+  assert.equal(config.headers.get('Cache-Control'),'no-store');
 });
 
 test("login, session lookup, logout, and account deletion use the server-side session", async () => {
