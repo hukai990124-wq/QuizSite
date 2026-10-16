@@ -2190,5 +2190,19 @@
   "类与对象": {"en": "Classes and objects", "ja": "クラスとオブジェクト"},
   "类型转换": {"en": "Type conversion", "ja": "型変換"},
   "访问修饰符": {"en": "Access modifiers", "ja": "アクセス修飾子"},
-  "综合": {"en": "Mixed", "ja": "総合"}
+  "综合": {"en": "Mixed", "ja": "総合"},
+  "AWS MLA-C01 备考练习": {"en": "AWS MLA-C01 Practice", "ja": "AWS MLA-C01 対策演習"},
+  "ML 认证": {"en": "ML certification", "ja": "ML 認定"},
+  "65 题": {"en": "65 questions", "ja": "65 問"},
+  "AWS MLA-C01 · 机器学习工程师": {"en": "AWS MLA-C01 · Machine Learning Engineer", "ja": "AWS MLA-C01 · 機械学習エンジニア"},
+  "65 题全真模拟 · 130 分钟 · 720 分及格。按官方四大领域配比，中英对照，含 130 分钟计时模考。": {"en": "A 65-question mock paper · 130 minutes · 720 to pass. Weighted to the four official domains, English and Chinese side by side, with a 130-minute timed mode.", "ja": "全65問の模擬試験・130分・720点で合格。公式4分野の比率に合わせ、英中併記。130分の制限時間モード付き。"},
+  "65 题 · 130 分钟 · 满分 1000 分（720 分及格）· 中英对照 · 答案与解析 · 非官方题目，中文为机器翻译 · 官方考试：65 题（50 道计分 + 15 道不计分）· 130 分钟": {"en": "65 questions · 130 minutes · scored out of 1,000 (720 to pass) · English and Chinese side by side · answers with explanations · unofficial questions, Chinese machine translated · real exam: 65 questions (50 scored + 15 unscored) in 130 minutes", "ja": "65問・130分・1000点満点（720点で合格）・英中併記・解答と解説付き・非公式問題、中文は機械翻訳・本番：65問（採点50問＋非採点15問）／130分"},
+  "点「开始模考」进入 130 分钟计时，期间隐藏对错与解析；交卷后按 100–1000 换算分给出得分与是否达到 720 分及格线。": {"en": "Press Start to begin a 130-minute countdown. Correctness and explanations stay hidden while the exam runs; on submission you get a scaled score out of 1,000 and a verdict against the 720 pass mark.", "ja": "「模試を開始」を押すと130分のカウントダウンが始まる。実施中は正誤と解説を非表示。提出後に1000点満点の換算得点と720点の合否を表示する。"},
+  "领域一 · 数据准备": {"en": "Domain 1 · Data preparation", "ja": "分野1・データ準備"},
+  "领域二 · 模型开发": {"en": "Domain 2 · Model development", "ja": "分野2・モデル開発"},
+  "领域三 · 部署与编排": {"en": "Domain 3 · Deployment and orchestration", "ja": "分野3・デプロイとオーケストレーション"},
+  "领域四 · 监控、维护与安全": {"en": "Domain 4 · Monitoring, maintenance and security", "ja": "分野4・監視・保守・セキュリティ"},
+  "正确答案 / Answer:": {"en": "Correct answer / Answer:", "ja": "正解 / 解答:"},
+  "题目来自公开备考资料，非 AWS 官方内容，也不代表官方题库。中文与日文为机器翻译，仅供对照。考试领域权重：数据准备 28%、模型开发 26%、监控与安全 24%、部署与编排 22%。": {"en": "Questions are taken from public study material. They are not AWS official content and do not represent the official question bank. Chinese and Japanese are machine translated, for reference only. Official domain weightings: data preparation 28%, model development 26%, monitoring and security 24%, deployment and orchestration 22%.", "ja": "問題は公開されている学習教材からの転載で、AWS公式コンテンツではなく、公式問題集でもありません。中文・日本語は機械翻訳で、参照用です。公式の分野比重：データ準備28%、モデル開発26%、監視とセキュリティ24%、デプロイとオーケストレーション22%。"},
+  "12 个题库 · 共 5026 题次 · 可作答判分 · 登录后跨设备同步": {"en": "12 question banks · 5,026 attempts · instant scoring · sign in to sync across devices", "ja": "12の問題集・全5,026問・即時採点・ログインしてデバイス間で同期"}
 }

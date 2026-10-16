@@ -155,7 +155,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">11 个题库 · 共 4961 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <p class="sub">12 个题库 · 共 5026 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
@@ -167,6 +167,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
       <li>AWS SAA-C03</li>
       <li>AWS CLF-C02</li>
       <li>AWS AIF-C01</li>
+      <li>AWS MLA-C01</li>
       <li>基本情報技術者</li>
       <li>WorkBuddy OPC</li>
     </ul>
@@ -199,7 +200,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 4961</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 5026</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -249,6 +250,12 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <div class="top"><span class="tg g">AI 认证</span><span class="cnt">782 题</span></div>
         <h3>AWS AIF-C01 · AI Practitioner</h3>
         <p class="sd">真题库 452 题 + 练习卷 230 题 + 专业术语 100 题，附答案与解析。</p>
+        <div class="pg"><i></i><span>未开始</span></div>
+      </a>
+      <a class="card" href="aws-mla/index.html" data-site="aws-mla">
+        <div class="top"><span class="tg g">ML 认证</span><span class="cnt">65 题</span></div>
+        <h3>AWS MLA-C01 · 机器学习工程师</h3>
+        <p class="sd">65 题全真模拟 · 130 分钟 · 720 分及格。按官方四大领域配比，中英对照，含 130 分钟计时模考。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="fe/index.html" data-site="fe">
@@ -401,6 +408,7 @@ var SITES={
   "aws-saa":{keys:awsKeys()},
   "aws-clf":{keys:seq("aws:clf:",1,4,50)},
   "aws-aif":{keys:aifKeys()},
+  "aws-mla":{keys:[["aws:mla:c01",65]]},
   "fe":{keys:[["fe:a:2022",60],["fe:a:2023",20],["fe:a:2024",20],["fe:a:2025",20],["fe:a:2026",20],
               ["fe:b:2022",20],["fe:b:2023",6],["fe:b:2024",6],["fe:b:2025",6],["fe:b:2026",6],
               ["fe:a:paper-2",60],["fe:a:paper-3",60],["fe:b:paper-2",20],["fe:b:paper-3",20]]},
