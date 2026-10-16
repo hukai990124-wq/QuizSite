@@ -2223,5 +2223,8 @@
   "30 题": {"en": "30 questions", "ja": "30問"},
   "30 道四选一 · 阅读代码，辨认问题，选择修复 · 原创练习": {"en": "30 four-choice questions · read code, identify defects and choose fixes · original practice", "ja": "4択30問・コードを読み、問題点と修正を選ぶ・オリジナル演習"},
   "类型、函数、空值检查与异步基础。30 道四选一，附中英日题干、选项与解析。": {"en": "Types, functions, null checks and async basics. 30 four-choice questions with English, Chinese and Japanese prompts, choices and explanations.", "ja": "型、関数、nullチェック、非同期の基礎。4択30問。問題文・選択肢・解説は英中日対応。"},
-  "按 strict 模式审查；第 28–29 题注明额外配置。示例只展示，不会执行。": {"en": "Review in strict mode; questions 28–29 specify extra compiler settings. Examples are displayed, never executed.", "ja": "strict モードでレビューする。28–29問は追加設定を明記。例は表示のみで実行しない。"}
+  "按 strict 模式审查；第 28–29 题注明额外配置。示例只展示，不会执行。": {"en": "Review in strict mode; questions 28–29 specify extra compiler settings. Examples are displayed, never executed.", "ja": "strict モードでレビューする。28–29問は追加設定を明記。例は表示のみで実行しない。"},
+  "13 个题库 · 共 5199 题次 · 可作答判分 · 登录后跨设备同步": {"en": "13 question banks · 5,199 attempts · instant scoring · sign in to sync across devices", "ja": "13の問題集・全5,199問・即時採点・ログインしてデバイス間で同期"},
+  "177 题": {"en": "177 questions", "ja": "177問"},
+  "面向腾讯云「效率智能体 OPC 从业者」认证的备考题库。按官方课程地图 11 个模块编排（117 题）用于边看课边查漏，另有 1 套全真模拟卷（60 题：单选 40 + 多选 20），带 90 分钟模考模式、按官方分值换算、70 分及格线。题目依据官方文档自编，每题附解析与出处。": {"en": "Preparation for Tencent Cloud's OPC Practitioner certification: 117 questions across 11 course modules and one 60-question mock exam (40 single-answer and 20 multiple-answer), with a 90-minute timer, weighted scoring and a 70-point pass mark. Original questions based on official documentation, with explanations and sources.", "ja": "テンセントクラウドのOPC認定対策。公式コースの11モジュール・117問に加え、模擬試験60問（単一選択40・複数選択20）を収録。90分タイマー、配点換算、70点の合格基準付き。公式文書に基づくオリジナル問題で、各問に解説と出典を付ける。"}
 }

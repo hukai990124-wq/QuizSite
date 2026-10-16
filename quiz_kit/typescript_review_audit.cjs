@@ -71,7 +71,7 @@ async function main(){
     }
     await page.goto(base+'/');
     assert.match(await page.locator('[data-site="programming-typescript"] .pg span').textContent(),/30\/30/);
-    assert.match(await page.locator('#ov-txt').textContent(),/30 \/ 5192/);
+    assert.match(await page.locator('#ov-txt').textContent(),/30 \/ 5199/);
     for(const language of ['zh','en','ja']){
       await page.locator(`[data-set-lang="${language}"]`).click();
       assert.ok((await page.locator('[data-site="programming-typescript"] .sd').textContent()).includes('30'));

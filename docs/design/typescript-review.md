@@ -2,7 +2,7 @@
 
 ## Scope and content
 
-Add 30 original, single-answer, four-choice defect reviews under the red programming practice section, beside HTML and CSS. Stable IDs `typescript-01` through `typescript-30`; storage key `quiz:programming:typescript:01`. The homepage aggregate includes 30 more questions (5,192 total); its 13 main exam-bank categories are unchanged.
+Add 30 original, single-answer, four-choice defect reviews under the red programming practice section, beside HTML and CSS. Stable IDs `typescript-01` through `typescript-30`; storage key `quiz:programming:typescript:01`. The homepage aggregate includes 30 more questions (5,199 total after preserving the concurrent OPC additions); its 13 main exam-bank categories are unchanged.
 
 Questions 1–10 cover primitives, inference, arrays, tuples, parameters, returns, required/optional properties and union narrowing. Questions 11–20 cover DOM null checks, unknown, literals, readonly, generics, keyof, Record, Partial and Pick. Questions 21–30 cover promises/await, find, catch variables, discriminated unions, callbacks, satisfies, indexed access, exact optional properties and exhaustiveness. The last questions are a gentle extension beyond the initial syntax exercises.
 
@@ -27,4 +27,4 @@ Official documentation checked on 2026-10-17: [Everyday types](https://www.types
 
 ## Delivery boundary
 
-Prepared and verified locally. This request does not change production or push to GitHub. Deployment can use the existing GitHub-to-Cloudflare workflow when requested; verify the card and `/programming/typescript.html` afterward. Rollback is a targeted revert of the additive feature; no data migration is required.
+The owner requested production publication after local verification. Release uses the existing GitHub-to-Cloudflare workflow; verify the card and `/programming/typescript.html` afterward. Preserve remote OPC corrections from `22ba57f` and its seven additional questions: the combined homepage total is 5,199. Resolve only conflicting count assertions, keep all question-bank content from both sides, and regenerate the shared translation dictionary. All 128 tests, typecheck, dependency audit, the isolated browser audit and Wrangler dry-run pass on the combined tree. Release integration review is `22ba57f..merge-candidate` (14 feature files); no OPC bank source/output is changed relative to that remote revision. Whitespace check against the remote is clean; inherited CRLF warnings in the other merge parent are retained, not normalized. The generated-only exemption remains as reviewed above. Rollback is a targeted revert of the additive TypeScript feature, retaining OPC corrections; no data migration is required.
