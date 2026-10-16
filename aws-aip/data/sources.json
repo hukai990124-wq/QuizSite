@@ -1,0 +1,32 @@
+[
+  {
+    "file": "AIP-C01_题目_001-050.pdf",
+    "sha256": "345e95baabd13ed6313362c4fd56580db2f32a22c633f1037ba0764d4f4ae36b",
+    "count": 50
+  },
+  {
+    "file": "AIP-C01_题目_051-100.pdf",
+    "sha256": "4f5c32af589d909b09da33c3900cd633175d3d9910d3af5c76eccda56fd501f2",
+    "count": 50
+  },
+  {
+    "file": "AIP-C01_题目_101-136.pdf",
+    "sha256": "d9fd340b702bd1af2effdb0cc0bbdad8be67cb56ac4f0b59aa423dfa7637990a",
+    "count": 36
+  },
+  {
+    "file": "AIP-C01_答案讨论_001-050.pdf",
+    "sha256": "992012d7778e13d2700e98f3bc227d48d7e58c73a8803c451d1144df9fe5d9d4",
+    "count": 50
+  },
+  {
+    "file": "AIP-C01_答案讨论_051-100.pdf",
+    "sha256": "859a395b4cc24d8d947c3ff7bf83b1267419e4eb16cc6cd0d3d8e9bc09976f8a",
+    "count": 50
+  },
+  {
+    "file": "AIP-C01_答案讨论_101-136.pdf",
+    "sha256": "6fe4b571568e82456eab902fbb67f0748f418fdba4c4745c14d25bc7060cfe3f",
+    "count": 36
+  }
+]
