@@ -50,6 +50,7 @@
 - `password_salt TEXT NOT NULL`、`password_hash TEXT NOT NULL`、`password_iterations INTEGER NOT NULL`：随机盐、带 `scrypt-v1$` 版本前缀的 scrypt 派生值，以及 scrypt 的 N 参数（16384）。无前缀的旧记录按 PBKDF2 解析，此字段在旧记录中仍表示迭代次数。
 - `progress_initialized INTEGER NOT NULL DEFAULT 0`：是否完成该账号首次完整进度合并。
 - `created_at INTEGER NOT NULL`。
+- `registration_country TEXT NULL`、`registration_region TEXT NULL`：Cloudflare 根据注册请求的网络位置估算的两位国家/地区码及一级行政区名称。旧账号或元数据不可用时为 `NULL`；不保存原始 IP。随账号删除而删除。
 
 ### `sessions`
 
@@ -73,6 +74,7 @@
 - 写请求要求同源 `Origin` 和 JSON Content-Type；无开放 CORS。
 - 对登录和注册使用 Cloudflare Worker Rate Limiting binding 静默限流；该服务是最终一致的缓解措施，不作为精确计数器。
 - SQL 均使用 D1 prepared statement 参数绑定。对请求体、账号长度、进度键和值大小做服务端校验。
+- 注册界面告知会保存估算的国家和地区，用于查看注册来源。数据保留至账号删除，仅站主可在 Cloudflare D1 后台访问。
 - 页面不把会话令牌放入 localStorage；仅同步元数据和现有学习进度留在 localStorage。
 
 ## 验收条件
@@ -95,6 +97,7 @@
 
 - Cloudflare D1 Worker Bindings 与 prepared statements：<https://developers.cloudflare.com/d1/worker-api/>、<https://developers.cloudflare.com/d1/worker-api/prepared-statements/>
 - Cloudflare D1 migrations：<https://developers.cloudflare.com/d1/reference/migrations/>
+- Cloudflare Workers incoming request geolocation metadata: <https://developers.cloudflare.com/workers/runtime-apis/request/#incomingrequestcfproperties>
 - Cloudflare Workers Web Crypto：<https://developers.cloudflare.com/workers/runtime-apis/web-crypto/>
 - Cloudflare Workers Rate Limiting API：<https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/>
 - OWASP Password Storage Cheat Sheet：<https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html>

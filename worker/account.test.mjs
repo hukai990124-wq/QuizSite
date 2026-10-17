@@ -211,9 +211,9 @@ function createMemoryDatabase() {
     },
     run(sql, values) {
       if (sql.startsWith("INSERT OR IGNORE INTO users")) {
-        const [id, username, password_salt, password_hash, password_iterations, created_at] = values;
+        const [id, username, password_salt, password_hash, password_iterations, registration_country, registration_region, created_at] = values;
         if ([...this.users.values()].some((user) => user.username === username)) return { meta: { changes: 0 } };
-        this.users.set(id, { id, username, password_salt, password_hash, password_iterations, progress_initialized: 0, created_at });
+        this.users.set(id, { id, username, password_salt, password_hash, password_iterations, progress_initialized: 0, registration_country, registration_region, created_at });
         return { meta: { changes: 1 } };
       }
       if (sql.startsWith("INSERT INTO sessions")) {
@@ -282,10 +282,12 @@ function makeEnvironment(allowed = true) {
 
 test("registration creates a case-sensitive account and an HttpOnly secure session", async () => {
   const env = makeEnvironment();
-  const response = await handleAccountRequest(makeRequest("/api/auth/register", "POST", {
+  const request = makeRequest("/api/auth/register", "POST", {
     username: "Tester1",
     password: "secret1",
-  }), env);
+  });
+  Object.defineProperty(request, "cf", { value: { country: "JP", region: "Tokyo" } });
+  const response = await handleAccountRequest(request, env);
   const cookie = response.headers.get("Set-Cookie");
 
   assert.equal(response.status, 201);
@@ -295,6 +297,8 @@ test("registration creates a case-sensitive account and an HttpOnly secure sessi
   assert.equal(response.headers.get("X-Content-Type-Options"), "nosniff");
   assert.equal((await response.json()).user.username, "Tester1");
   assert.equal([...env.DB.users.values()][0].password_hash === "secret1", false);
+  assert.equal([...env.DB.users.values()][0].registration_country, "JP");
+  assert.equal([...env.DB.users.values()][0].registration_region, "Tokyo");
   assert.equal(env.DB.users.size, 1);
 
   const lowerCaseLogin = await handleAccountRequest(makeRequest("/api/auth/login", "POST", {
@@ -302,6 +306,18 @@ test("registration creates a case-sensitive account and an HttpOnly secure sessi
     password: "secret1",
   }), env);
   assert.equal(lowerCaseLogin.status, 401);
+});
+
+test("registration succeeds without location metadata and stores it as unknown", async () => {
+  const env = makeEnvironment();
+  const response = await handleAccountRequest(makeRequest("/api/auth/register", "POST", {
+    username: "Tester1",
+    password: "secret1",
+  }), env);
+
+  assert.equal(response.status, 201);
+  assert.equal([...env.DB.users.values()][0].registration_country, null);
+  assert.equal([...env.DB.users.values()][0].registration_region, null);
 });
 
 test('registration endpoint rejects missing verification before creating users/sessions, while config stays public',async()=>{

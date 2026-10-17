@@ -42,7 +42,7 @@
 
   var COPY = {
     zh: {
-      eyebrow: "QuizBank 账号", title: "登录或注册", description: "登录后，学习进度会在设备间同步。注册无需邮箱或短信验证码，需完成人机验证。",
+      eyebrow: "QuizBank 账号", title: "登录或注册", description: "登录后，学习进度会在设备间同步。注册无需邮箱或短信验证码，需完成人机验证。注册时会保存 Cloudflare 根据网络位置估算的国家和地区，用于查看注册来源。",
       login: "登录", register: "注册", username: "账号（6–15 个字符）", password: "密码（6–15 个字符）",
       loginButton: "登录", registerButton: "创建账号", forgot: "忘记密码无法自助找回。",
       close: "关闭", account: "当前账号", logout: "退出登录", delete: "删除账号",
@@ -58,7 +58,7 @@
       loading: "正在检查账号状态……", accountLabel: "账号：", loginLabel: "登录 / 注册",
     },
     en: {
-      eyebrow: "QuizBank account", title: "Sign in or register", description: "Sign in to sync study progress. Registration requires human verification, but no email or SMS code.",
+      eyebrow: "QuizBank account", title: "Sign in or register", description: "Sign in to sync study progress. Registration requires human verification, but no email or SMS code. We store the country and region Cloudflare estimates from the connection to review registration origins.",
       login: "Sign in", register: "Register", username: "Account (6–15 characters)", password: "Password (6–15 characters)",
       loginButton: "Sign in", registerButton: "Create account", forgot: "Forgot passwords cannot be recovered automatically.",
       close: "Close", account: "Signed-in account", logout: "Sign out", delete: "Delete account",
@@ -74,7 +74,7 @@
       loading: "Checking account status…", accountLabel: "Account: ", loginLabel: "Sign in / Register",
     },
     ja: {
-      eyebrow: "QuizBank アカウント", title: "ログインまたは登録", description: "ログインすると学習進捗を同期。登録には人間による操作の確認が必要。メールやSMSコードは不要。",
+      eyebrow: "QuizBank アカウント", title: "ログインまたは登録", description: "ログインすると学習進捗を同期。登録には人間による操作の確認が必要。メールやSMSコードは不要。登録元を確認するため、Cloudflareが接続情報から推定した国・地域を保存します。",
       login: "ログイン", register: "登録", username: "アカウント（6～15文字）", password: "パスワード（6～15文字）",
       loginButton: "ログイン", registerButton: "アカウントを作成", forgot: "パスワードを忘れた場合、自分では再設定できません。",
       close: "閉じる", account: "ログイン中のアカウント", logout: "ログアウト", delete: "アカウントを削除",

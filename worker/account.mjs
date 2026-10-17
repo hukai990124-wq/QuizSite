@@ -335,14 +335,17 @@ async function handleRegister(request, env) {
   const credentials = await hashPassword(body.password);
   const userId = crypto.randomUUID();
   const now = Date.now();
+  const location = registrationLocation(request.cf);
   const result = await env.DB.prepare(
-    "INSERT OR IGNORE INTO users (id, username, password_salt, password_hash, password_iterations, progress_initialized, created_at) VALUES (?, ?, ?, ?, ?, 0, ?)",
+    "INSERT OR IGNORE INTO users (id, username, password_salt, password_hash, password_iterations, progress_initialized, registration_country, registration_region, created_at) VALUES (?, ?, ?, ?, ?, 0, ?, ?, ?)",
   ).bind(
     userId,
     body.username,
     credentials.salt,
     credentials.hash,
     credentials.iterations,
+    location.country,
+    location.region,
     now,
   ).run();
   if (!result?.meta?.changes) return jsonResponse({ error: "该账号已被注册" }, 409);
@@ -351,6 +354,16 @@ async function handleRegister(request, env) {
   return jsonResponse({ user: { username: body.username } }, 201, {
     "Set-Cookie": session.cookie,
   });
+}
+
+function registrationLocation(cf) {
+  const country = typeof cf?.country === "string" && /^[A-Z0-9]{2}$/i.test(cf.country)
+    ? cf.country.toUpperCase()
+    : null;
+  const region = typeof cf?.region === "string" && cf.region.trim().length <= 128
+    ? cf.region.trim() || null
+    : null;
+  return { country, region };
 }
 
 async function handleLogin(request, env) {
