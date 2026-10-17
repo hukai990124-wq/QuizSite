@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const source = readFileSync(new URL("../src/chat.mts", import.meta.url), "utf8");
+const builtChat = readFileSync(new URL("../site/assets/chat.mjs", import.meta.url), "utf8");
 const styles = readFileSync(new URL("../site/assets/chat.css", import.meta.url), "utf8");
 const config = readFileSync(new URL("../wrangler.toml", import.meta.url), "utf8");
 
@@ -30,4 +31,12 @@ test("selected provider is remembered locally and sent to status and chat APIs",
 
 test("checked-in Worker config retains the user's Workers AI binding name", () => {
   assert.match(config, /\[ai\]\s+binding = "MY_AI_BINDING"/);
+});
+
+test("chat UI does not expose provider billing notices to visitors", () => {
+  assert.doesNotMatch(source, /超出免费额度后可能按账户套餐计费/);
+  assert.doesNotMatch(source, /qb-chat-model-notice/);
+  assert.doesNotMatch(builtChat, /超出免费额度后可能按账户套餐计费/);
+  assert.doesNotMatch(builtChat, /qb-chat-model-notice/);
+  assert.doesNotMatch(styles, /qb-chat-model-notice/);
 });

@@ -33,7 +33,6 @@ dialog.innerHTML = `<header class="qb-chat-header"><h2 id="qb-chat-title">题库
 <label class="qb-chat-model-option"><input type="radio" name="qb-chat-provider" value="qwen"><span class="qb-chat-model-icon" aria-hidden="true"><img src="/assets/qwen-mark.svg" alt=""></span><span class="qb-chat-model-copy"><strong>Qwen</strong><small>通义千问</small></span></label>
 <label class="qb-chat-model-option"><input type="radio" name="qb-chat-provider" value="cloudflare"><span class="qb-chat-model-icon" aria-hidden="true"><img src="/assets/cloudflare-ai-mark.svg" alt=""></span><span class="qb-chat-model-copy"><strong>Cloudflare AI</strong><small>Llama 3.1 · 8B Fast</small></span></label>
 </fieldset>
-<small class="qb-chat-model-notice">Cloudflare AI 使用 Workers AI 账户额度；超出免费额度后可能按账户套餐计费。</small>
 <p class="qb-chat-intro">选择题目即可提问，后续直接在聊天框里追问。AI 讲解可能有误，请核对题库与官方资料。</p>
 <label for="qb-chat-question">带入题目</label><select id="qb-chat-question"><option value="">不指定题目／自行粘贴</option></select>
 <div id="qb-chat-log" role="log" aria-label="学习对话" aria-live="polite"></div>
