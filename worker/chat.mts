@@ -15,7 +15,9 @@ interface ChatRequestBody {
   question: string;
   context: string;
   history: ChatHistoryEntry[];
+  provider: ChatProvider;
 }
+type ChatProvider = "qwen" | "cloudflare";
 interface ChatStatusRow {
   stopped: number | null;
   identity_used: number | null;
@@ -35,6 +37,13 @@ interface ChatEnvironment {
   DASHSCOPE_API_KEY?: string;
   QWEN_MODEL?: string;
   QWEN_FREE_ONLY_CONFIRMED?: string;
+  MY_AI_BINDING?: {
+    run(model: string, input: {
+      messages: ChatMessage[];
+      stream: true;
+      max_tokens: number;
+    }): Promise<ReadableStream<Uint8Array> | Response>;
+  };
 }
 interface ChatUsage {
   total_tokens?: unknown;
@@ -46,6 +55,7 @@ interface CollectedAnswer {
 }
 
 export const CHAT_POLICY = Object.freeze({ guestDaily: 10, userDaily: 50, globalDaily: 1000, tokenBudget: 800000, maxOutput: 1024 });
+export const CLOUDFLARE_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast";
 export const CHAT_PROMPT = `你是 QuizBank 的学习助手，回答学习和技术问题，包括题库讲解、语言学习、数学与科学、课程知识、考试准备、编程、软件、硬件和工程技术。不要求用户包含考试名称或题库关键词，根据真实意图和对话上下文判断。
 接受任何语言的提问。优先使用用户指定的语言；未指定时跟随当前提问的语言，不强制使用中文。默认回答概要，用 2–4 个短句；参考篇幅为中文约 160–300 字、英文约 80–160 个词、日文约 200–400 个字符，其他语言保持相近信息量。这些是参考目标，不要机械截字；简单问题可以更短，不为凑字数填充。先给答案或结论，再说明核心理由；必要时最多列 3 个简短要点。不主动逐项分析所有选项、展开完整步骤或举例，不重复题干、长篇免责声明或引导追问。用户明确追问细节时，只展开指定部分，仍保持紧凑。解释依据而非输出私有思考过程。
 日语回答默认使用简洁的常体（だ／である体），减少尊敬语、谦让语和反复的礼貌句尾；保持尊重，不使用粗鲁、命令式措辞。省去「ご質問ありがとうございます」「〜させていただきます」「〜でございます」等客套铺垫和结束语，把篇幅留给结论与知识点。敬语学习题、题目引用或必要例句应保留准确原表达；用户明确要求敬语时遵从该要求。此规则只调整日语回答风格，不改变回答语言的选择。
@@ -69,6 +79,17 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+function parseProvider(value: unknown): ChatProvider {
+  if (value === undefined || value === null || value === "qwen") return "qwen";
+  if (value === "cloudflare") return "cloudflare";
+  throw new Error("不支持的 AI 模型。");
+}
+
+function providerConfigured(provider: ChatProvider, env: ChatEnvironment): boolean {
+  if (provider === "cloudflare") return !!env.MY_AI_BINDING;
+  return !!env.DASHSCOPE_API_KEY && !!env.QWEN_MODEL && env.QWEN_FREE_ONLY_CONFIRMED === "true";
+}
+
 function parseChatRequestBody(value: unknown): ChatRequestBody {
   if (!isRecord(value) || typeof value.question !== "string" || !value.question.trim() || value.question.length > 2000) throw new Error("问题需为 1–2000 个字符。");
   if (typeof value.context !== "string" || value.context.length > 10000) throw new Error("题目内容过长，请只带入一道题及对应材料。");
@@ -78,7 +99,7 @@ function parseChatRequestBody(value: unknown): ChatRequestBody {
     const role: ChatHistoryEntry["role"] = item.role;
     return { role, content: item.content };
   });
-  return { question: value.question, context: value.context, history };
+  return { question: value.question, context: value.context, history, provider: parseProvider(value.provider) };
 }
 
 export function buildChatMessages(value: unknown): ChatMessage[] {
@@ -111,7 +132,7 @@ async function readLimitedBody(request: Request): Promise<unknown> {
 }
 
 // Parse upstream SSE on the server; do not expose reasoning or provider metadata.
-export async function collectAnswer(response: Response, onText?: (text: string) => void): Promise<CollectedAnswer> {
+export async function collectAnswer(response: Response, onText?: (text: string) => void, signal?: AbortSignal): Promise<CollectedAnswer> {
   if (!response.body) throw new Error("Missing upstream response body");
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
@@ -126,6 +147,11 @@ export async function collectAnswer(response: Response, onText?: (text: string) 
     const data = raw;
     if (data.error) throw new Error("Upstream stream error");
     if (isRecord(data.usage)) usage = data.usage;
+    if (typeof data.response === "string") {
+      answer += data.response;
+      if (data.response) onText?.(data.response);
+      return;
+    }
     const choice = Array.isArray(data.choices) && isRecord(data.choices[0]) ? data.choices[0] : null;
     const delta = choice && isRecord(choice.delta) ? choice.delta : null;
     if (typeof delta?.content === "string") {
@@ -134,6 +160,8 @@ export async function collectAnswer(response: Response, onText?: (text: string) 
     }
     if (typeof choice?.finish_reason === "string" && choice.finish_reason) finish = choice.finish_reason;
   }
+  const cancelOnAbort = () => { void reader.cancel(new DOMException("Cancelled", "AbortError")).catch(() => {}); };
+  signal?.addEventListener("abort", cancelOnAbort, { once: true });
   try {
     while (true) {
       const { done, value } = await reader.read();
@@ -149,6 +177,7 @@ export async function collectAnswer(response: Response, onText?: (text: string) 
     if (!ended && !finish) throw new Error("Incomplete upstream response");
     return { answer: answer.trim(), usage, truncated: finish === "length" };
   } finally {
+    signal?.removeEventListener("abort", cancelOnAbort);
     try { await reader.cancel(); } finally { reader.releaseLock(); }
   }
 }
@@ -178,23 +207,27 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment, 
     if (!env.DB) return json({ error: "学习助手暂不可用。" }, 503);
     const session = await findSession(request, env.DB);
     const now = Date.now(), day = chatDay(now);
-    const apiKey = env.DASHSCOPE_API_KEY;
-    const model = env.QWEN_MODEL;
-    const configured = !!apiKey && !!model && env.QWEN_FREE_ONLY_CONFIRMED === "true";
     const userId = session?.user_id || null;
     const visitorHash = await visitorId(request, env.DASHSCOPE_API_KEY);
     if (!userId && !visitorHash) return json({ error: "无法识别访客，请启用 Cloudflare 代理后重试。" }, 503);
-    if (request.method === "GET" && new URL(request.url).pathname === "/api/chat/status") {
-      return json({ ...(await status(env.DB, userId, visitorHash, day)), configured });
+    const url = new URL(request.url);
+    if (request.method === "GET" && url.pathname === "/api/chat/status") {
+      let provider: ChatProvider;
+      try { provider = parseProvider(url.searchParams.get("provider") ?? undefined); }
+      catch { return json({ error: "不支持的 AI 模型。" }, 400); }
+      return json({ ...(await status(env.DB, userId, visitorHash, day)), configured: providerConfigured(provider, env) });
     }
-    if (request.method !== "POST" || new URL(request.url).pathname !== "/api/chat") return json({ error: "不支持此请求。" }, 405);
+    if (request.method !== "POST" || url.pathname !== "/api/chat") return json({ error: "不支持此请求。" }, 405);
     if (!validateMutationRequest(request)) return json({ error: "请求来源或格式不正确。" }, 403);
-    if (!configured) return json({ error: "学习助手尚未配置完成。" }, 503);
-    let messages: ChatMessage[];
+    let messages: ChatMessage[], provider: ChatProvider;
     try {
-      messages = buildChatMessages(await readLimitedBody(request));
+      const body = await readLimitedBody(request);
+      provider = parseProvider(isRecord(body) ? body.provider : undefined);
+      messages = buildChatMessages(body);
+    } catch (failure) {
+      return json({ error: failure instanceof Error && failure.message === "不支持的 AI 模型。" ? failure.message : "问题或题目材料过长、为空或格式不正确，请缩短后再试。" }, 400);
     }
-    catch { return json({ error: "问题或题目材料过长、为空或格式不正确，请缩短后再试。" }, 400); }
+    if (!providerConfigured(provider, env)) return json({ error: "所选 AI 模型尚未配置完成。" }, 503);
     // UTF-8 byte length is a conservative token allowance; reserve before making any API call.
     const reserved = new TextEncoder().encode(JSON.stringify(messages)).length + CHAT_POLICY.maxOutput + 1024;
     const id = crypto.randomUUID();
@@ -226,11 +259,13 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment, 
       if (charged > reserved) await db.prepare("UPDATE ai_state SET stopped = 1 WHERE id = 1").run();
     }
     try {
-      const response = await fetch("https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions", {
-        method: "POST", headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ model, messages, stream: true, stream_options: { include_usage: true }, max_tokens: CHAT_POLICY.maxOutput, enable_thinking: false }),
-        signal: AbortSignal.any([AbortSignal.timeout(90000), abort.signal]),
-      });
+      const response = provider === "qwen"
+        ? await fetch("https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions", {
+          method: "POST", headers: { "Authorization": `Bearer ${env.DASHSCOPE_API_KEY}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ model: env.QWEN_MODEL, messages, stream: true, stream_options: { include_usage: true }, max_tokens: CHAT_POLICY.maxOutput, enable_thinking: false }),
+          signal: AbortSignal.any([AbortSignal.timeout(90000), abort.signal]),
+        })
+        : await runCloudflareAi(env.MY_AI_BINDING!, messages);
       if (!response.ok) {
         // Fail closed on all quota, authentication, and model configuration denials.
         if ([401, 402, 403, 404].includes(response.status)) await env.DB.prepare("UPDATE ai_state SET stopped = 1 WHERE id = 1").run();
@@ -240,15 +275,15 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment, 
       }
       if (request.headers.get("Accept")?.includes("application/x-ndjson")) {
         return streamChatAnswer(async onText => {
-          const answer = await collectAnswer(response, onText);
+          const answer = await collectAnswer(response, onText, abort.signal);
           await settle(answer);
           if (!answer.answer) throw new Error("Empty upstream answer");
-          return {truncated:answer.truncated, ...(await status(db, userId, visitorHash, day)), configured};
+          return {truncated:answer.truncated, ...(await status(db, userId, visitorHash, day)), configured: providerConfigured(provider, env)};
         }, async () => {
           await db.prepare("UPDATE ai_requests SET status = 'failed' WHERE id = ?").bind(id).run();
         }, () => abort.abort(), lifetime);
       }
-      result = await collectAnswer(response);
+      result = await collectAnswer(response, undefined, abort.signal);
       await settle(result);
     } catch {
       // Unknown completion/usage stays fully charged to avoid overspending on retries.
@@ -256,9 +291,18 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment, 
       return json({ error: "回答未完成，请稍后再试。" }, 503);
     }
     if (!result.answer) return json({ error: "模型未返回完整讲解，请缩短问题后再试。" }, 503);
-    return json({ answer: result.answer, truncated: result.truncated, ...(await status(env.DB, userId, visitorHash, day)), configured });
+    return json({ answer: result.answer, truncated: result.truncated, ...(await status(env.DB, userId, visitorHash, day)), configured: providerConfigured(provider, env) });
   } catch (error) {
     console.warn(JSON.stringify({ event: "ai_handler_failure", errorName: error instanceof Error ? error.name : "Error" }));
     return json({ error: "学习助手暂不可用，请稍后再试。" }, 503);
   }
+}
+
+async function runCloudflareAi(binding: NonNullable<ChatEnvironment["MY_AI_BINDING"]>, messages: ChatMessage[]): Promise<Response> {
+  const stream = await binding.run(CLOUDFLARE_AI_MODEL, {
+    messages,
+    stream: true,
+    max_tokens: CHAT_POLICY.maxOutput,
+  });
+  return stream instanceof Response ? stream : new Response(stream, { headers: { "Content-Type": "text/event-stream; charset=utf-8" } });
 }

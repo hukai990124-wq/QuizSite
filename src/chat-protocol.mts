@@ -7,7 +7,8 @@ export type ChatStatusResponse = {
   configured: boolean;
 };
 export type ChatAnswerResponse = ChatStatusResponse & { answer: string; truncated: boolean };
-export type ChatRequestPayload = { question: string; context: string; history: ChatHistoryEntry[] };
+export type ChatProvider = "qwen" | "cloudflare";
+export type ChatRequestPayload = { question: string; context: string; history: ChatHistoryEntry[]; provider: ChatProvider };
 
 export class ChatApiError extends Error {
   constructor(message: string, readonly status: number) {

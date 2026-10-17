@@ -25,8 +25,8 @@ function fixture() {
 function request(token, body = { question: "为什么选 B？", context: "题库：AWS", history: [] }, origin = "https://example.com", ip = "203.0.113.5") {
   return new Request("https://example.com/api/chat", { method: "POST", headers: { "Origin": origin, "Content-Type": "application/json", "CF-Connecting-IP": ip, ...(token ? { Cookie: `__Host-quizbank_session=${token}` } : {}) }, body: JSON.stringify(body) });
 }
-function statusRequest(token, ip = "203.0.113.5") {
-  return new Request("https://example.com/api/chat/status", { headers: { "CF-Connecting-IP": ip, ...(token ? { Cookie: `__Host-quizbank_session=${token}` } : {}) } });
+function statusRequest(token, ip = "203.0.113.5", provider = "qwen") {
+  return new Request(`https://example.com/api/chat/status?provider=${encodeURIComponent(provider)}`, { headers: { "CF-Connecting-IP": ip, ...(token ? { Cookie: `__Host-quizbank_session=${token}` } : {}) } });
 }
 function streamReply() {
   return new Response('data: {"choices":[{"delta":{"reasoning_content":"private","content":"因为 B 满足题干要求。"},"finish_reason":"stop"}]}\n\ndata: {"choices":[],"usage":{"total_tokens":42}}\n\ndata: [DONE]\n\n');
@@ -237,6 +237,45 @@ test("successful inference settles usage and never returns the private reasoning
   assert.equal(data.remaining, 49);
   assert.equal(JSON.stringify(data).includes("private"), false);
   assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, 42);
+});
+
+test("Cloudflare AI can be selected without exposing a model name and uses the existing quota", async t => {
+  const { env, token, sqlite } = fixture();
+  t.after(() => sqlite.close());
+  let selectedModel;
+  env.MY_AI_BINDING = {
+    async run(model, options) {
+      selectedModel = model;
+      assert.equal(options.stream, true);
+      assert.equal(options.max_tokens, CHAT_POLICY.maxOutput);
+      assert.equal(options.max_completion_tokens, undefined);
+      assert.equal(options.stream_options, undefined);
+      assert.deepEqual(options.messages.at(-1), { role: "user", content: "解释 AWS" });
+      return new ReadableStream({ start(controller) {
+        controller.enqueue(new TextEncoder().encode('data: {"response":"Cloudflare"}\n\ndata: {"response":"回答。"}\n\ndata: [DONE]\n\n'));
+        controller.close();
+      } });
+    }
+  };
+  const response = await handleChatRequest(request(token, { question: "解释 AWS", context: "", history: [], provider: "cloudflare" }), env);
+  assert.equal(response.status, 200);
+  assert.equal(selectedModel, "@cf/meta/llama-3.1-8b-instruct-fast");
+  assert.equal((await response.json()).answer, "Cloudflare回答。");
+  const input = { question: "解释 AWS", context: "", history: [], provider: "cloudflare" };
+  const expectedReservation = new TextEncoder().encode(JSON.stringify(buildChatMessages(input))).length + CHAT_POLICY.maxOutput + 1024;
+  assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, expectedReservation);
+});
+
+test("provider selection rejects unknown values and reports missing Cloudflare binding as unavailable", async t => {
+  const { env, token, sqlite } = fixture();
+  t.after(() => sqlite.close());
+  const spy = t.mock.method(globalThis, "fetch", () => { throw new Error("must not call Qwen"); });
+  const unknown = await handleChatRequest(request(token, { question: "解题", context: "", history: [], provider: "https://attacker.invalid/model" }), env);
+  assert.equal(unknown.status, 400);
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM ai_requests").get().n, 0);
+  const unavailable = await handleChatRequest(statusRequest(token, "203.0.113.8", "cloudflare"), env);
+  assert.equal((await unavailable.json()).configured, false);
+  assert.equal(spy.mock.callCount(), 0);
 });
 
 test("successful account and guest replies satisfy the browser response contract", async t => {

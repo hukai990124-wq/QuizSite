@@ -50,6 +50,9 @@ database_name = "quizbank-accounts"
 database_id = "5df2fac9-fe75-4a2a-9313-75e47a164de5"
 migrations_dir = "worker/migrations"
 
+[ai]
+binding = "MY_AI_BINDING"
+
 [[durable_objects.bindings]]
 name = "PRESENCE"
 class_name = "Presence"

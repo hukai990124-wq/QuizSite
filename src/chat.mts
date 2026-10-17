@@ -1,7 +1,7 @@
 import { extractQuestionContext } from "./chat-context.mjs";
 import { submitChatOnEnter } from "./chat-keyboard.mjs";
 import { ChatApiError, parseChatAnswer, parseChatStatus } from "./chat-protocol.mjs";
-import type { ChatHistoryEntry, ChatRequestPayload } from "./chat-protocol.mjs";
+import type { ChatHistoryEntry, ChatProvider, ChatRequestPayload } from "./chat-protocol.mjs";
 import {readChatStream} from "./chat-stream.mjs";
 import {createChatRenderer} from "./chat-renderer.mjs";
 
@@ -33,6 +33,11 @@ dialog.className = "qb-chat-dialog";
 dialog.setAttribute("aria-labelledby", "qb-chat-title");
 dialog.innerHTML = `<header class="qb-chat-header"><h2 id="qb-chat-title">题库学习助手</h2><button type="button" id="qb-chat-close" aria-label="关闭聊天窗口">×</button></header>
 <div class="qb-chat-body">
+<fieldset class="qb-chat-model-picker"><legend>选择 AI 模型</legend>
+<label class="qb-chat-model-option"><input type="radio" name="qb-chat-provider" value="qwen"><span class="qb-chat-model-icon" aria-hidden="true"><img src="/assets/qwen-mark.svg" alt=""></span><span class="qb-chat-model-copy"><strong>Qwen</strong><small>通义千问</small></span></label>
+<label class="qb-chat-model-option"><input type="radio" name="qb-chat-provider" value="cloudflare"><span class="qb-chat-model-icon" aria-hidden="true"><img src="/assets/cloudflare-ai-mark.svg" alt=""></span><span class="qb-chat-model-copy"><strong>Cloudflare AI</strong><small>Llama 3.1 · 8B Fast</small></span></label>
+</fieldset>
+<small class="qb-chat-model-notice">Cloudflare AI 使用 Workers AI 账户额度；超出免费额度后可能按账户套餐计费。</small>
 <p class="qb-chat-intro">选择题目即可提问，后续直接在聊天框里追问。AI 讲解可能有误，请核对题库与官方资料。</p>
 <label for="qb-chat-question">带入题目</label><select id="qb-chat-question"><option value="">不指定题目／自行粘贴</option></select>
 <div id="qb-chat-log" role="log" aria-label="学习对话" aria-live="polite"></div>
@@ -50,6 +55,14 @@ const login = byId<HTMLButtonElement>("qb-chat-login");
 const send = byId<HTMLButtonElement>("qb-chat-send");
 const clear = byId<HTMLButtonElement>("qb-chat-clear");
 const form = byId<HTMLFormElement>("qb-chat-form");
+const providerInputs = Array.from(dialog.querySelectorAll<HTMLInputElement>('input[name="qb-chat-provider"]'));
+const PROVIDER_STORAGE_KEY = "quizbank-ai-provider";
+function readProviderPreference(): ChatProvider {
+  try { return localStorage.getItem(PROVIDER_STORAGE_KEY) === "cloudflare" ? "cloudflare" : "qwen"; }
+  catch { return "qwen"; }
+}
+let selectedProvider = readProviderPreference();
+providerInputs.forEach(radio => { radio.checked = radio.value === selectedProvider; });
 let history: ChatHistoryEntry[] = [];
 let busy = false;
 let returnFocus: HTMLElement = trigger;
@@ -68,6 +81,12 @@ document.addEventListener("quizbank:language-changed", () => {
   // Never translate or overwrite a user's own draft.
   if (Object.values(draftPrompts).includes(input.value)) input.value = draftPrompt();
 });
+providerInputs.forEach(radio => radio.addEventListener("change", () => {
+  if (!radio.checked || (radio.value !== "qwen" && radio.value !== "cloudflare")) return;
+  selectedProvider = radio.value;
+  try { localStorage.setItem(PROVIDER_STORAGE_KEY, selectedProvider); } catch { /* preference remains available for this page */ }
+  if (dialog.open && !busy) void checkStatus();
+}));
 
 function appendMessage(role: ChatHistoryEntry["role"], text: string): HTMLDivElement {
   const message = document.createElement("div");
@@ -106,6 +125,7 @@ function controls(enabled: boolean): void {
   input.disabled = busy;
   clear.disabled = busy;
   select.disabled = busy;
+  providerInputs.forEach(radio => { radio.disabled = busy; });
 }
 
 function setBusy(value: boolean): void {
@@ -119,7 +139,7 @@ function setBusy(value: boolean): void {
 async function checkStatus(): Promise<void> {
   const sequence = ++requestSequence;
   try {
-    const data = await api("/api/chat/status", undefined, parseChatStatus);
+    const data = await api(`/api/chat/status?provider=${selectedProvider}`, undefined, parseChatStatus);
     if (sequence !== requestSequence) return;
     login.hidden = data.authenticated || data.remaining > 0;
     if (!data.authenticated) login.textContent = "注册账号";
@@ -238,7 +258,7 @@ form.addEventListener("submit", async event => {
     if (nearBottom) log.scrollTop = log.scrollHeight;
   }, () => document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   try {
-    const data = await api("/api/chat", { question, context: questionContext, history: history.slice(-6).map(item => ({ role: item.role, content: item.content.slice(0, 2000) })) }, parseChatAnswer, text => renderer.append(text));
+    const data = await api("/api/chat", { question, context: questionContext, history: history.slice(-6).map(item => ({ role: item.role, content: item.content.slice(0, 2000) })), provider: selectedProvider }, parseChatAnswer, text => renderer.append(text));
     // Old cached deployments/mocks can still return a complete JSON answer.
     if (!reply) renderer.append(data.answer);
     await renderer.finish();
