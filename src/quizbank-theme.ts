@@ -4,6 +4,13 @@
   if (!document.body) return;
   // Transitional documents replace their DOM; initialize account/chat only in the final document.
   if (document.documentElement.hasAttribute("data-defer-shared-shell")) return;
+  if (!document.getElementById("qb-sigil-footer-module")) {
+    var sigilFooterScript = document.createElement("script");
+    sigilFooterScript.id = "qb-sigil-footer-module";
+    sigilFooterScript.type = "module";
+    sigilFooterScript.src = "/assets/sigil-footer.mjs";
+    document.head.appendChild(sigilFooterScript);
+  }
   function updateReportHomeLanguage(): void {
     var currentLang = document.documentElement.getAttribute("data-lang") || "zh";
     document.querySelectorAll<HTMLAnchorElement>(".qb-report-home").forEach(function (link) {
