@@ -1,0 +1,2287 @@
+[
+  {
+    "id": 1,
+    "domain": 1,
+    "task": "1.1",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "A company lets a vendor manage resources in its AWS account. The vendor must access the account from its own AWS account, and the company must be able to identify the vendor in audit logs. What should the company configure?",
+      "zh": "一家公司委托供应商管理其 AWS 账户中的资源。供应商需从自己的 AWS 账户访问，且公司必须能在审计日志中识别供应商。公司应如何配置？",
+      "ja": "ある会社は、AWS アカウント内のリソース管理をベンダーに委託する。ベンダーは自社の AWS アカウントからアクセスし、会社は監査ログでベンダーを識別する必要がある。何を設定すべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Create an IAM user for each vendor employee and share access keys.",
+        "zh": "为每位供应商员工创建 IAM 用户并共享访问密钥。",
+        "ja": "ベンダーの各従業員に IAM ユーザーを作成し、アクセスキーを共有する。"
+      },
+      {
+        "letter": "B",
+        "en": "Create a cross-account IAM role and require an external ID in its trust policy.",
+        "zh": "创建跨账户 IAM 角色，并在信任策略中要求提供外部 ID。",
+        "ja": "クロスアカウント IAM ロールを作成し、信頼ポリシーで外部 ID を必須にする。"
+      },
+      {
+        "letter": "C",
+        "en": "Make the vendor's AWS account an organization administrator.",
+        "zh": "将供应商的 AWS 账户设为组织管理员。",
+        "ja": "ベンダーの AWS アカウントを Organizations の管理者にする。"
+      },
+      {
+        "letter": "D",
+        "en": "Allow the vendor to use the root user's access keys.",
+        "zh": "允许供应商使用根用户访问密钥。",
+        "ja": "ベンダーにルートユーザーのアクセスキーを使わせる。"
+      }
+    ],
+    "explanation": {
+      "en": "A role lets the vendor assume temporary, scoped credentials. The external ID helps prevent the confused deputy problem and identifies the vendor integration.",
+      "zh": "角色可让供应商取得临时且受限的凭证。外部 ID 有助于防止“混淆代理人”问题，并标识供应商集成。",
+      "ja": "ロールを使えば、ベンダーは範囲を限定した一時認証情報を取得できる。外部 ID は confused deputy 問題の防止に役立ち、連携先の識別にも使える。"
+    }
+  },
+  {
+    "id": 2,
+    "domain": 1,
+    "task": "1.2",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "A company serves private documents through CloudFront with an Amazon S3 bucket as the origin. Only CloudFront should read the objects. Which solution is best?",
+      "zh": "一家公司通过 CloudFront 提供私有文档，源站是 Amazon S3 存储桶。只有 CloudFront 应能读取对象。哪种方案最好？",
+      "ja": "ある会社は Amazon S3 バケットをオリジンとして、CloudFront 経由で非公開ドキュメントを配信する。オブジェクトを読み取れるのは CloudFront のみにしたい。最適な方法はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Use CloudFront Origin Access Control and a bucket policy that allows the distribution.",
+        "zh": "使用 CloudFront Origin Access Control，并通过存储桶策略仅允许该分配访问。",
+        "ja": "CloudFront の Origin Access Control を使い、ディストリビューションだけを許可するバケットポリシーを設定する。"
+      },
+      {
+        "letter": "B",
+        "en": "Make the bucket public and hide its URL.",
+        "zh": "将存储桶设为公开并隐藏其 URL。",
+        "ja": "バケットを公開し、URL を隠す。"
+      },
+      {
+        "letter": "C",
+        "en": "Put the bucket credentials in the CloudFront URL.",
+        "zh": "将存储桶凭证放入 CloudFront URL。",
+        "ja": "バケットの認証情報を CloudFront URL に含める。"
+      },
+      {
+        "letter": "D",
+        "en": "Allow every AWS principal to read the bucket.",
+        "zh": "允许所有 AWS 主体读取存储桶。",
+        "ja": "すべての AWS プリンシパルにバケットの読み取りを許可する。"
+      }
+    ],
+    "explanation": {
+      "en": "Origin Access Control signs origin requests, while the bucket policy restricts access to the intended CloudFront distribution. The bucket can remain private.",
+      "zh": "Origin Access Control 会对源站请求签名，存储桶策略则将访问限制为指定的 CloudFront 分配，因此存储桶仍可保持私有。",
+      "ja": "Origin Access Control はオリジンへのリクエストに署名し、バケットポリシーは指定ディストリビューションだけに制限する。バケットは非公開のままにできる。"
+    }
+  },
+  {
+    "id": 3,
+    "domain": 1,
+    "task": "1.2",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "A public application behind an Application Load Balancer must block common SQL injection attempts before they reach the application. Which service should be used?",
+      "zh": "一个位于 Application Load Balancer 后的公共应用，需要在常见 SQL 注入请求到达应用前将其拦截。应使用哪项服务？",
+      "ja": "Application Load Balancer の背後にある公開アプリケーションで、一般的な SQL インジェクションをアプリ到達前に遮断したい。どのサービスを使うべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Amazon GuardDuty",
+        "zh": "Amazon GuardDuty",
+        "ja": "Amazon GuardDuty"
+      },
+      {
+        "letter": "B",
+        "en": "AWS Network Firewall only",
+        "zh": "仅使用 AWS Network Firewall",
+        "ja": "AWS Network Firewall のみ"
+      },
+      {
+        "letter": "C",
+        "en": "AWS WAF with managed rule groups",
+        "zh": "使用 AWS WAF 托管规则组",
+        "ja": "マネージドルールグループを設定した AWS WAF"
+      },
+      {
+        "letter": "D",
+        "en": "Amazon Inspector",
+        "zh": "Amazon Inspector",
+        "ja": "Amazon Inspector"
+      }
+    ],
+    "explanation": {
+      "en": "AWS WAF evaluates HTTP requests and managed rule groups can detect common web exploits such as SQL injection. It can protect an ALB directly.",
+      "zh": "AWS WAF 会检查 HTTP 请求，托管规则组可以检测 SQL 注入等常见 Web 攻击，并可直接保护 ALB。",
+      "ja": "AWS WAF は HTTP リクエストを評価し、マネージドルールで SQL インジェクションなどの一般的な攻撃を検出できる。ALB を直接保護できる。"
+    }
+  },
+  {
+    "id": 4,
+    "domain": 1,
+    "task": "1.1",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "An application on Amazon EC2 needs to read objects from one S3 bucket. Credentials must rotate automatically and must not be stored on the instance. What should be used?",
+      "zh": "Amazon EC2 上的应用需要读取一个 S3 存储桶中的对象。凭证必须自动轮换，且不能存储在实例上。应采用什么方式？",
+      "ja": "Amazon EC2 上のアプリケーションが S3 バケットのオブジェクトを読み取る。認証情報を自動更新し、インスタンスに保存しない方法はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "A long-lived IAM access key in a configuration file",
+        "zh": "配置文件中的长期 IAM 访问密钥",
+        "ja": "設定ファイルに保存した長期 IAM アクセスキー"
+      },
+      {
+        "letter": "B",
+        "en": "The account root user's access key",
+        "zh": "账户根用户访问密钥",
+        "ja": "アカウントのルートユーザーアクセスキー"
+      },
+      {
+        "letter": "C",
+        "en": "A public S3 bucket URL",
+        "zh": "公开的 S3 存储桶 URL",
+        "ja": "公開 S3 バケットの URL"
+      },
+      {
+        "letter": "D",
+        "en": "An EC2 instance profile with a least-privilege role",
+        "zh": "附加最小权限角色的 EC2 实例配置文件",
+        "ja": "最小権限ロールを持つ EC2 インスタンスプロファイル"
+      }
+    ],
+    "explanation": {
+      "en": "An instance profile supplies temporary role credentials through the AWS SDK. The role can grant only the required S3 actions and credentials rotate automatically.",
+      "zh": "实例配置文件通过 AWS SDK 提供临时角色凭证。角色只授予所需的 S3 操作，凭证也会自动轮换。",
+      "ja": "インスタンスプロファイルは AWS SDK に一時的なロール認証情報を提供する。必要な S3 操作だけを許可でき、認証情報は自動更新される。"
+    }
+  },
+  {
+    "id": 5,
+    "domain": 1,
+    "task": "1.1",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "A company manages many AWS accounts and wants employees to sign in once, use centrally assigned permission sets, and avoid creating separate IAM users in every account. Which service fits?",
+      "zh": "一家公司管理多个 AWS 账户，希望员工统一登录、使用集中分配的权限集，并避免在每个账户中单独创建 IAM 用户。哪项服务适合？",
+      "ja": "複数の AWS アカウントを管理する会社が、一度のサインインと一元管理された権限セットを使い、各アカウントで個別に IAM ユーザーを作らずに済ませたい。適切なサービスはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "AWS IAM Identity Center",
+        "zh": "AWS IAM Identity Center",
+        "ja": "AWS IAM Identity Center"
+      },
+      {
+        "letter": "B",
+        "en": "AWS Artifact",
+        "zh": "AWS Artifact",
+        "ja": "AWS Artifact"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon Cognito identity pools only",
+        "zh": "Amazon Cognito identity pools のみ",
+        "ja": "Amazon Cognito ID プールのみ"
+      },
+      {
+        "letter": "D",
+        "en": "AWS Certificate Manager",
+        "zh": "AWS Certificate Manager",
+        "ja": "AWS Certificate Manager"
+      }
+    ],
+    "explanation": {
+      "en": "IAM Identity Center centrally manages workforce access to multiple AWS accounts and applications using permission sets and a single sign-on experience.",
+      "zh": "IAM Identity Center 使用权限集和单点登录体验，集中管理员工对多个 AWS 账户和应用的访问。",
+      "ja": "IAM Identity Center は権限セットとシングルサインオンにより、複数アカウントやアプリへの従業員アクセスを一元管理する。"
+    }
+  },
+  {
+    "id": 6,
+    "domain": 1,
+    "task": "1.2",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "Private-subnet instances need to access S3 without using a NAT gateway or traversing the public internet. Which VPC component should be added?",
+      "zh": "私有子网中的实例需要访问 S3，但不能使用 NAT 网关或经过公共互联网。应添加哪种 VPC 组件？",
+      "ja": "プライベートサブネットのインスタンスが、NAT ゲートウェイやインターネットを経由せずに S3 へアクセスしたい。追加すべき VPC コンポーネントはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "An internet gateway",
+        "zh": "Internet Gateway",
+        "ja": "インターネットゲートウェイ"
+      },
+      {
+        "letter": "B",
+        "en": "An S3 gateway VPC endpoint and route-table association",
+        "zh": "S3 Gateway VPC Endpoint，并关联路由表",
+        "ja": "S3 Gateway VPC Endpoint とルートテーブルの関連付け"
+      },
+      {
+        "letter": "C",
+        "en": "A public IP address for each instance",
+        "zh": "每个实例分配一个公有 IP 地址",
+        "ja": "各インスタンスにパブリック IP を割り当てる"
+      },
+      {
+        "letter": "D",
+        "en": "A NAT instance in every subnet",
+        "zh": "每个子网部署 NAT 实例",
+        "ja": "各サブネットに NAT インスタンスを配置する"
+      }
+    ],
+    "explanation": {
+      "en": "An S3 gateway endpoint provides private connectivity from selected route tables to S3 without a NAT gateway or internet gateway data path.",
+      "zh": "S3 Gateway Endpoint 可让指定路由表通过私有路径连接 S3，无需 NAT 网关或互联网网关数据路径。",
+      "ja": "S3 Gateway Endpoint は選択したルートテーブルから S3 へのプライベート接続を提供し、NAT ゲートウェイやインターネット経由を不要にする。"
+    }
+  },
+  {
+    "id": 7,
+    "domain": 1,
+    "task": "1.3",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "An application writes sensitive records to S3. The security team requires server-side encryption with a customer-managed KMS key and control over who can decrypt. What should be configured?",
+      "zh": "应用将敏感记录写入 S3。安全团队要求使用客户管理的 KMS 密钥进行服务器端加密，并控制谁可以解密。应如何配置？",
+      "ja": "アプリケーションが機密レコードを S3 に書き込む。セキュリティチームは、カスタマーマネージド KMS キーによるサーバー側暗号化と、復号できる主体の制御を求めている。何を設定すべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "SSE-S3 and public read access",
+        "zh": "SSE-S3 と公開読み取りアクセス",
+        "ja": "SSE-S3 と公開読み取りアクセス"
+      },
+      {
+        "letter": "B",
+        "en": "Client-side encryption with a key stored in the object metadata",
+        "zh": "オブジェクトメタデータ内に鍵を保存するクライアント側暗号化",
+        "ja": "オブジェクトメタデータに鍵を保存するクライアント側暗号化"
+      },
+      {
+        "letter": "C",
+        "en": "SSE-KMS with a customer-managed key policy and narrowly scoped IAM permissions",
+        "zh": "SSE-KMS、顧客管理キーのキーポリシー、範囲を絞った IAM 権限",
+        "ja": "SSE-KMS とカスタマーマネージドキーのキーポリシー、および最小限の IAM 権限"
+      },
+      {
+        "letter": "D",
+        "en": "Disable encryption and rely on bucket names being private",
+        "zh": "暗号化を無効にし、存储桶名称保密即可",
+        "ja": "暗号化を無効にし、バケット名を秘密にする"
+      }
+    ],
+    "explanation": {
+      "en": "SSE-KMS uses the selected KMS key for encryption. The key policy and IAM permissions together control which principals can use the key to decrypt.",
+      "zh": "SSE-KMS 使用指定 KMS 密钥加密；密钥策略和 IAM 权限共同控制哪些主体可以使用密钥解密。",
+      "ja": "SSE-KMS は指定した KMS キーで暗号化する。キーポリシーと IAM 権限により、復号にキーを使える主体を制御する。"
+    }
+  },
+  {
+    "id": 8,
+    "domain": 1,
+    "task": "1.3",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "A web application stores database passwords that must rotate automatically and be retrieved by the application at runtime. Which service should store them?",
+      "zh": "Web 应用需要保存数据库密码，密码必须自动轮换，并由应用在运行时获取。应使用哪项服务存储？",
+      "ja": "Web アプリケーションがデータベースのパスワードを保存し、自動更新したうえで実行時に取得したい。どのサービスに保存すべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Amazon S3 with public access blocked",
+        "zh": "阻止公开访问的 Amazon S3",
+        "ja": "パブリックアクセスをブロックした Amazon S3"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon CloudWatch Logs",
+        "zh": "Amazon CloudWatch Logs",
+        "ja": "Amazon CloudWatch Logs"
+      },
+      {
+        "letter": "C",
+        "en": "An EC2 user-data script",
+        "zh": "EC2 user-data スクリプト",
+        "ja": "EC2 の user-data スクリプト"
+      },
+      {
+        "letter": "D",
+        "en": "AWS Secrets Manager with rotation enabled",
+        "zh": "启用轮换的 AWS Secrets Manager",
+        "ja": "ローテーションを有効にした AWS Secrets Manager"
+      }
+    ],
+    "explanation": {
+      "en": "Secrets Manager stores secrets securely, supports managed rotation for supported databases, and provides APIs for retrieval at runtime.",
+      "zh": "Secrets Manager 可安全存储机密，支持为特定数据库托管轮换，并提供运行时读取 API。",
+      "ja": "Secrets Manager はシークレットを安全に保存し、対応データベースの管理ローテーションと実行時取得 API を提供する。"
+    }
+  },
+  {
+    "id": 9,
+    "domain": 1,
+    "task": "1.2",
+    "select": 2,
+    "answer": [
+      "A",
+      "C"
+    ],
+    "stem": {
+      "en": "A web tier runs on EC2 instances in private subnets. Only HTTPS requests from the internet should reach the application, and response traffic must work without opening broad inbound ranges. Which two controls should be used?",
+      "zh": "Web 层运行在私有子网的 EC2 实例上。只有来自互联网的 HTTPS 请求应到达应用，且响应流量要正常工作，不能开放宽泛的入站范围。应采用哪两项控制？",
+      "ja": "プライベートサブネットの EC2 で Web 層を実行する。インターネットからの HTTPS のみをアプリに到達させ、広いインバウンド範囲を開かずに応答通信も許可したい。どの 2 つの制御を使うべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Allow inbound HTTPS to the ALB security group and allow the EC2 security group to receive traffic only from the ALB security group.",
+        "zh": "允许 ALB 安全组入站 HTTPS，并只允许 EC2 安全组接收来自 ALB 安全组的流量。",
+        "ja": "ALB のセキュリティグループで HTTPS を許可し、EC2 側では ALB のセキュリティグループからの通信のみ許可する。"
+      },
+      {
+        "letter": "B",
+        "en": "Assign public IP addresses to every EC2 instance.",
+        "zh": "为每台 EC2 实例分配公有 IP。",
+        "ja": "すべての EC2 インスタンスにパブリック IP を割り当てる。"
+      },
+      {
+        "letter": "C",
+        "en": "Keep the EC2 instances private and place the ALB in public subnets.",
+        "zh": "让 EC2 实例保持私有，并将 ALB 放在公有子网。",
+        "ja": "EC2 をプライベートに保ち、ALB をパブリックサブネットに配置する。"
+      },
+      {
+        "letter": "D",
+        "en": "Allow all inbound traffic in the EC2 security group.",
+        "zh": "允许 EC2 安全组的所有入站流量。",
+        "ja": "EC2 のセキュリティグループで全インバウンド通信を許可する。"
+      },
+      {
+        "letter": "E",
+        "en": "Replace security-group rules with a network ACL that allows all inbound traffic.",
+        "zh": "用允许所有入站流量的网络 ACL 替代安全组规则。",
+        "ja": "セキュリティグループの代わりに、すべてのインバウンド通信を許可するネットワーク ACL を使う。"
+      }
+    ],
+    "explanation": {
+      "en": "A public ALB is the internet entry point; the EC2 tier stays private and accepts traffic only from the ALB. Security groups are stateful, so response traffic is automatically allowed. If subnet NACLs are used, their stateless rules must also permit required return ports.",
+      "zh": "公共 ALB 作为互联网入口；EC2 层保持私有，并且只接收来自 ALB 的流量。安全组是有状态的，会自动允许响应流量。若使用子网 NACL，还需通过无状态规则允许必要的返回端口。",
+      "ja": "パブリック ALB を入口とし、EC2 層はプライベートにして ALB からのみ受信する。セキュリティグループはステートフルなので応答通信を許可する。NACL を使う場合は、ステートレスな戻りポートも許可する必要がある。"
+    }
+  },
+  {
+    "id": 10,
+    "domain": 1,
+    "task": "1.3",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "A company must discover sensitive personal data stored across many S3 buckets and receive findings for investigation. Which service is designed for this task?",
+      "zh": "一家公司需要发现分散在多个 S3 存储桶中的敏感个人数据，并接收调查发现结果。哪项服务专为此任务设计？",
+      "ja": "複数の S3 バケットに保存された機密個人データを検出し、調査用の検出結果を受け取りたい。適したサービスはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Amazon Detective",
+        "zh": "Amazon Detective",
+        "ja": "Amazon Detective"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon Macie",
+        "zh": "Amazon Macie",
+        "ja": "Amazon Macie"
+      },
+      {
+        "letter": "C",
+        "en": "AWS Config",
+        "zh": "AWS Config",
+        "ja": "AWS Config"
+      },
+      {
+        "letter": "D",
+        "en": "AWS Trusted Advisor",
+        "zh": "AWS Trusted Advisor",
+        "ja": "AWS Trusted Advisor"
+      }
+    ],
+    "explanation": {
+      "en": "Amazon Macie discovers and helps protect sensitive data in S3, including personally identifiable information, and generates findings for review.",
+      "zh": "Amazon Macie 可发现并帮助保护 S3 中的敏感数据（包括个人身份信息），并生成供审查的发现结果。",
+      "ja": "Amazon Macie は個人識別情報など、S3 内の機密データを検出・保護し、確認用の検出結果を生成する。"
+    }
+  },
+  {
+    "id": 11,
+    "domain": 1,
+    "task": "1.3",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "A security team needs an auditable history of API calls made to AWS services, including who made each call and when. Which service should be enabled?",
+      "zh": "安全团队需要可审计的 AWS 服务 API 调用历史，包括每次调用的人员和时间。应启用哪项服务？",
+      "ja": "セキュリティチームが、実行者と時刻を含む AWS サービスへの API 呼び出し履歴を監査可能な形で記録したい。どのサービスを有効にすべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "AWS CloudTrail",
+        "zh": "AWS CloudTrail",
+        "ja": "AWS CloudTrail"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon CloudWatch metrics",
+        "zh": "Amazon CloudWatch 指标",
+        "ja": "Amazon CloudWatch メトリクス"
+      },
+      {
+        "letter": "C",
+        "en": "AWS Health Dashboard",
+        "zh": "AWS Health Dashboard",
+        "ja": "AWS Health Dashboard"
+      },
+      {
+        "letter": "D",
+        "en": "Amazon Inspector",
+        "zh": "Amazon Inspector",
+        "ja": "Amazon Inspector"
+      }
+    ],
+    "explanation": {
+      "en": "CloudTrail records account activity and API events. Trails can deliver logs to a protected S3 bucket for retention and audit analysis.",
+      "zh": "CloudTrail 记录账户活动和 API 事件。Trail 可将日志发送到受保护的 S3 存储桶，以便保留和审计分析。",
+      "ja": "CloudTrail はアカウントアクティビティと API イベントを記録する。Trail を使って保護された S3 バケットにログを保存し、監査できる。"
+    }
+  },
+  {
+    "id": 12,
+    "domain": 1,
+    "task": "1.3",
+    "select": 2,
+    "answer": [
+      "A",
+      "D"
+    ],
+    "stem": {
+      "en": "A company processes regulated data. It requires encryption at rest in an RDS database and encryption in transit for database connections. Which two actions meet the requirements?",
+      "zh": "一家公司处理受监管数据，要求 RDS 数据库静态加密，并对数据库连接进行传输加密。哪两项操作可以满足要求？",
+      "ja": "規制対象データを扱う会社が、RDS の保存データとデータベース接続の両方を暗号化したい。要件を満たす 2 つの対応はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Enable RDS storage encryption with AWS KMS.",
+        "zh": "使用 AWS KMS 启用 RDS 存储加密。",
+        "ja": "AWS KMS による RDS ストレージ暗号化を有効にする。"
+      },
+      {
+        "letter": "B",
+        "en": "Put the database in a private subnet without enabling encryption.",
+        "zh": "将数据库放入私有子网，但不启用加密。",
+        "ja": "暗号化を有効にせず、データベースをプライベートサブネットに置く。"
+      },
+      {
+        "letter": "C",
+        "en": "Use a security group as a substitute for encryption.",
+        "zh": "用安全组代替加密。",
+        "ja": "暗号化の代わりにセキュリティグループを使う。"
+      },
+      {
+        "letter": "D",
+        "en": "Configure the application to connect to the database using SSL/TLS.",
+        "zh": "将应用配置为使用 SSL/TLS 连接数据库。",
+        "ja": "アプリケーションから SSL/TLS でデータベースに接続する。"
+      },
+      {
+        "letter": "E",
+        "en": "Store database credentials in the source code repository.",
+        "zh": "将数据库凭证存入源代码仓库。",
+        "ja": "データベース認証情報をソースコードリポジトリに保存する。"
+      }
+    ],
+    "explanation": {
+      "en": "RDS storage encryption protects data at rest, while TLS protects data sent over database connections. Network isolation alone does not encrypt either form of data.",
+      "zh": "RDS 存储加密保护静态数据，TLS 保护数据库连接中的传输数据。仅做网络隔离并不能加密这两种数据。",
+      "ja": "RDS ストレージ暗号化は保存データを保護し、TLS はデータベース接続中の通信を保護する。ネットワーク分離だけでは暗号化にならない。"
+    }
+  },
+  {
+    "id": 13,
+    "domain": 1,
+    "task": "1.3",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "A business unit needs a KMS key whose key policy it can manage and whose use can be audited and restricted independently. Which key type should it choose?",
+      "zh": "某业务部门需要一个可自行管理密钥策略、独立限制密钥使用并进行审计的 KMS 密钥。应选择哪种密钥？",
+      "ja": "ある部門が、キーポリシーを管理し、利用を個別に制限・監査できる KMS キーを必要としている。どの種類を選ぶべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "An AWS owned key",
+        "zh": "AWS 所有密钥",
+        "ja": "AWS 所有キー"
+      },
+      {
+        "letter": "B",
+        "en": "An AWS managed key only",
+        "zh": "仅 AWS 管理密钥",
+        "ja": "AWS マネージドキーのみ"
+      },
+      {
+        "letter": "C",
+        "en": "A customer managed KMS key",
+        "zh": "客户管理的 KMS 密钥",
+        "ja": "カスタマーマネージド KMS キー"
+      },
+      {
+        "letter": "D",
+        "en": "A key copied into an IAM tag",
+        "zh": "复制到 IAM 标签中的密钥",
+        "ja": "IAM タグにコピーしたキー"
+      }
+    ],
+    "explanation": {
+      "en": "A customer managed key gives the account control over its key policy, grants, rotation settings, and audit trail, subject to KMS service behavior.",
+      "zh": "客户管理密钥允许账户控制密钥策略、授权、轮换设置和审计记录，同时遵循 KMS 服务行为。",
+      "ja": "カスタマーマネージドキーなら、KMS の仕様の範囲内で、キーポリシー、グラント、ローテーション、監査をアカウント側で管理できる。"
+    }
+  },
+  {
+    "id": 14,
+    "domain": 1,
+    "task": "1.1",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "A company connects its on-premises network to one VPC over an encrypted connection across the internet. It needs a managed site-to-site VPN. Which resources are required on the AWS side?",
+      "zh": "一家公司通过互联网加密连接，将本地网络连接到一个 VPC，并需要托管式站点到站点 VPN。AWS 侧需要哪些资源？",
+      "ja": "オンプレミスネットワークをインターネット経由の暗号化接続で 1 つの VPC に接続し、マネージド Site-to-Site VPN を使いたい。AWS 側で必要なリソースはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "A Direct Connect gateway and a public hosted zone",
+        "zh": "Direct Connect Gateway 和公共托管区",
+        "ja": "Direct Connect ゲートウェイとパブリックホストゾーン"
+      },
+      {
+        "letter": "B",
+        "en": "A NAT gateway and an internet gateway only",
+        "zh": "仅 NAT 网关和 Internet Gateway",
+        "ja": "NAT ゲートウェイとインターネットゲートウェイのみ"
+      },
+      {
+        "letter": "C",
+        "en": "A CloudFront distribution and an S3 endpoint",
+        "zh": "CloudFront 分配和 S3 Endpoint",
+        "ja": "CloudFront ディストリビューションと S3 Endpoint"
+      },
+      {
+        "letter": "D",
+        "en": "A virtual private gateway attached to the VPC and a customer gateway representing the on-premises device",
+        "zh": "附加到 VPC 的 Virtual Private Gateway，以及代表本地设备的 Customer Gateway",
+        "ja": "VPC に接続する仮想プライベートゲートウェイと、オンプレミス機器を表すカスタマーゲートウェイ"
+      }
+    ],
+    "explanation": {
+      "en": "AWS Site-to-Site VPN uses a virtual private gateway or transit gateway on the AWS side and a customer gateway resource to represent the on-premises endpoint.",
+      "zh": "AWS Site-to-Site VPN 在 AWS 侧使用 Virtual Private Gateway 或 Transit Gateway，并用 Customer Gateway 资源代表本地端点。",
+      "ja": "AWS Site-to-Site VPN は AWS 側の仮想プライベートゲートウェイまたはトランジットゲートウェイと、オンプレミス側を表すカスタマーゲートウェイを使う。"
+    }
+  },
+  {
+    "id": 15,
+    "domain": 1,
+    "task": "1.2",
+    "select": 2,
+    "answer": [
+      "B",
+      "E"
+    ],
+    "stem": {
+      "en": "A public website needs protection against distributed denial-of-service attacks and common malicious HTTP requests. Which two services should be combined?",
+      "zh": "一个公共网站需要防御分布式拒绝服务攻击和常见恶意 HTTP 请求。应组合使用哪两项服务？",
+      "ja": "公開 Web サイトを DDoS 攻撃と一般的な悪意ある HTTP リクエストから保護したい。組み合わせるべき 2 つのサービスはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Amazon EBS and AWS Backup",
+        "zh": "Amazon EBS 和 AWS Backup",
+        "ja": "Amazon EBS と AWS Backup"
+      },
+      {
+        "letter": "B",
+        "en": "AWS Shield Advanced for DDoS protection",
+        "zh": "用于 DDoS 防护的 AWS Shield Advanced",
+        "ja": "DDoS 保護の AWS Shield Advanced"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon Macie for request filtering",
+        "zh": "用于请求过滤的 Amazon Macie",
+        "ja": "リクエストフィルタリング用 Amazon Macie"
+      },
+      {
+        "letter": "D",
+        "en": "AWS Config rules for HTTP inspection",
+        "zh": "用于 HTTP 检查的 AWS Config 规则",
+        "ja": "HTTP 検査用 AWS Config ルール"
+      },
+      {
+        "letter": "E",
+        "en": "AWS WAF rules for web request filtering",
+        "zh": "用于 Web 请求过滤的 AWS WAF 规则",
+        "ja": "Web リクエストフィルタリング用 AWS WAF ルール"
+      }
+    ],
+    "explanation": {
+      "en": "Shield Advanced provides enhanced DDoS protection, while AWS WAF filters application-layer web requests. They address complementary threat layers.",
+      "zh": "Shield Advanced 提供增强的 DDoS 防护，AWS WAF 过滤应用层 Web 请求。两者覆盖互补的威胁层。",
+      "ja": "Shield Advanced は高度な DDoS 保護を提供し、AWS WAF はアプリケーション層の Web リクエストをフィルタリングする。両者は異なる脅威層を補完する。"
+    }
+  },
+  {
+    "id": 16,
+    "domain": 2,
+    "task": "2.1",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "A web application must scale across Availability Zones. Its EC2 web servers are stateless, and traffic varies widely during the day. Which design is most suitable?",
+      "zh": "一个 Web 应用必须跨可用区扩展。EC2 Web 服务器无状态，流量在一天中变化很大。哪种设计最合适？",
+      "ja": "Web アプリケーションを複数のアベイラビリティーゾーンで拡張する。EC2 Web サーバーはステートレスで、日中のトラフィック変動が大きい。最適な設計はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Use an Application Load Balancer with an Auto Scaling group spanning multiple Availability Zones.",
+        "zh": "使用 Application Load Balancer，并配置跨多个可用区的 Auto Scaling 组。",
+        "ja": "複数 AZ にまたがる Auto Scaling グループと Application Load Balancer を使う。"
+      },
+      {
+        "letter": "B",
+        "en": "Run one large EC2 instance in one Availability Zone.",
+        "zh": "在一个可用区运行一台大型 EC2 实例。",
+        "ja": "1 つの AZ で大規模 EC2 インスタンスを 1 台だけ実行する。"
+      },
+      {
+        "letter": "C",
+        "en": "Use an Elastic IP address as the scaling mechanism.",
+        "zh": "使用 Elastic IP 地址实现扩展。",
+        "ja": "Elastic IP アドレスでスケーリングする。"
+      },
+      {
+        "letter": "D",
+        "en": "Store all application sessions on the instance disk.",
+        "zh": "将所有应用会话存储在实例磁盘。",
+        "ja": "すべてのアプリケーションセッションをインスタンスディスクに保存する。"
+      }
+    ],
+    "explanation": {
+      "en": "The load balancer distributes requests and the multi-AZ Auto Scaling group adjusts stateless compute capacity as demand changes while improving availability.",
+      "zh": "负载均衡器分配请求，多可用区 Auto Scaling 组则随需求调整无状态计算容量，同时提高可用性。",
+      "ja": "ロードバランサーがリクエストを分散し、マルチ AZ の Auto Scaling グループが需要に応じてステートレスな計算容量を調整し、可用性も高める。"
+    }
+  },
+  {
+    "id": 17,
+    "domain": 2,
+    "task": "2.1",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "A checkout service must place orders reliably even when the downstream fulfillment service is temporarily unavailable. The two services should not call each other synchronously. What should be added?",
+      "zh": "结账服务需要可靠地提交订单，即使下游履约服务暂时不可用。两个服务不应相互同步调用。应添加什么？",
+      "ja": "下流の出荷サービスが一時停止していても、注文サービスが確実に注文を受け付けられるようにしたい。両サービスは同期呼び出しに依存しない。何を追加すべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "A shared EBS volume",
+        "zh": "共享 EBS 卷",
+        "ja": "共有 EBS ボリューム"
+      },
+      {
+        "letter": "B",
+        "en": "An Amazon SQS queue between the services",
+        "zh": "在服务之间添加 Amazon SQS 队列",
+        "ja": "サービス間に Amazon SQS キューを配置する"
+      },
+      {
+        "letter": "C",
+        "en": "A larger EC2 instance for the fulfillment service",
+        "zh": "为履约服务换用更大型的 EC2 实例",
+        "ja": "出荷サービスの EC2 を大きくする"
+      },
+      {
+        "letter": "D",
+        "en": "A Route 53 private hosted zone",
+        "zh": "Route 53 私有托管区",
+        "ja": "Route 53 プライベートホストゾーン"
+      }
+    ],
+    "explanation": {
+      "en": "SQS buffers orders durably and decouples the services. The fulfillment service can process messages when it recovers, while the checkout service remains available.",
+      "zh": "SQS 可持久缓冲订单并解耦服务。履约服务恢复后再处理消息，而结账服务仍可继续提供服务。",
+      "ja": "SQS は注文を永続的にバッファーし、サービスを疎結合にする。出荷サービスは復旧後に処理でき、注文サービスは稼働を続けられる。"
+    }
+  },
+  {
+    "id": 18,
+    "domain": 2,
+    "task": "2.1",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "A publisher sends each event to several independent consumers. Each consumer must receive and process every event at its own pace. Which pattern should be used?",
+      "zh": "一个发布者将每个事件发送给多个独立消费者。每个消费者都必须按自己的速度接收并处理每个事件。应采用哪种模式？",
+      "ja": "発行者がイベントを複数の独立したコンシューマーに送る。各コンシューマーが自分の速度で全イベントを受信・処理するには、どのパターンが適切か。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "One shared SQS queue consumed by all services",
+        "zh": "所有服务共同消费一个 SQS 队列",
+        "ja": "すべてのサービスが 1 つの SQS キューを共有する"
+      },
+      {
+        "letter": "B",
+        "en": "An EC2 instance that copies events to local files",
+        "zh": "イベントをローカルファイルにコピーする EC2",
+        "ja": "イベントをローカルファイルにコピーする EC2"
+      },
+      {
+        "letter": "C",
+        "en": "A single Lambda function that calls consumers sequentially",
+        "zh": "各コンシューマーを順に呼ぶ単一 Lambda 関数",
+        "ja": "コンシューマーを順番に呼び出す単一 Lambda 関数"
+      },
+      {
+        "letter": "D",
+        "en": "An SNS topic that fans out to a separate SQS queue for each consumer",
+        "zh": "SNS Topic 将消息扇出到每个消费者各自的 SQS 队列",
+        "ja": "SNS Topic から各コンシューマー専用の SQS キューへファンアウトする"
+      }
+    ],
+    "explanation": {
+      "en": "SNS fanout delivers each published event to multiple subscriptions. Separate SQS queues let consumers retry and scale independently without competing for one queue's messages.",
+      "zh": "SNS 扇出可将每条事件发送到多个订阅。独立的 SQS 队列让各消费者可单独重试和扩展，不会争抢同一队列中的消息。",
+      "ja": "SNS ファンアウトは各イベントを複数のサブスクリプションに配信する。個別の SQS キューなら、メッセージを取り合わず、各コンシューマーが独立して再試行・拡張できる。"
+    }
+  },
+  {
+    "id": 19,
+    "domain": 2,
+    "task": "2.2",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "An Amazon RDS database must continue operating if the primary DB instance's Availability Zone fails, with automatic failover and minimal application changes. What should be enabled?",
+      "zh": "如果主 RDS 数据库实例所在可用区发生故障，数据库必须自动故障转移并继续运行，且尽量少改应用。应启用什么？",
+      "ja": "プライマリ RDS インスタンスの AZ 障害時に、自動フェイルオーバーして稼働を続け、アプリ変更を最小限にしたい。何を有効にすべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "An RDS read replica in the same Availability Zone",
+        "zh": "同一可用区中的 RDS 只读副本",
+        "ja": "同じ AZ の RDS リードレプリカ"
+      },
+      {
+        "letter": "B",
+        "en": "A larger DB instance class",
+        "zh": "更大的数据库实例类型",
+        "ja": "より大きな DB インスタンスクラス"
+      },
+      {
+        "letter": "C",
+        "en": "An RDS Multi-AZ deployment",
+        "zh": "RDS Multi-AZ 部署",
+        "ja": "RDS Multi-AZ 配置"
+      },
+      {
+        "letter": "D",
+        "en": "A daily manual database export",
+        "zh": "每日手动导出数据库",
+        "ja": "毎日の手動データベースエクスポート"
+      }
+    ],
+    "explanation": {
+      "en": "A Multi-AZ deployment maintains a standby in another Availability Zone and automatically fails over for availability. A read replica is primarily for read scaling and requires promotion for recovery.",
+      "zh": "Multi-AZ 部署在另一个可用区维护备用实例，并在故障时自动转移以提高可用性。只读副本主要用于扩展读取，恢复时需要提升为主库。",
+      "ja": "Multi-AZ 配置は別 AZ にスタンバイを維持し、障害時に自動フェイルオーバーする。リードレプリカは主に読み取り拡張用で、復旧には昇格が必要。"
+    }
+  },
+  {
+    "id": 20,
+    "domain": 2,
+    "task": "2.2",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "A company needs disaster recovery for a critical application with an RTO of about 30 minutes and an RPO of 15 minutes. It can accept lower performance before a disaster but needs faster recovery than restoring backups. Which strategy is appropriate?",
+      "zh": "一家公司的关键应用要求 RTO 约 30 分钟、RPO 15 分钟。灾难前可以接受较低性能，但需要比从备份恢复更快。哪种策略合适？",
+      "ja": "重要アプリケーションの RTO は約 30 分、RPO は 15 分。災害前の性能低下は許容できるが、バックアップ復元より速く復旧したい。適切な戦略はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Warm standby with continuously replicated data and a scaled-down running environment",
+        "zh": "温备：持续复制数据并运行缩小规模的环境",
+        "ja": "継続的にデータを複製し、縮小構成で稼働させるウォームスタンバイ"
+      },
+      {
+        "letter": "B",
+        "en": "Backup and restore only, with no replicated data",
+        "zh": "仅备份与恢复，不复制数据",
+        "ja": "データを複製しないバックアップと復元のみ"
+      },
+      {
+        "letter": "C",
+        "en": "Pilot light with no application compute running",
+        "zh": "不运行应用计算资源的 Pilot Light",
+        "ja": "アプリケーションの計算リソースを稼働させないパイロットライト"
+      },
+      {
+        "letter": "D",
+        "en": "Multi-site active-active across Regions for every component",
+        "zh": "所有组件都采用跨区域多站点主动-主动",
+        "ja": "すべてのコンポーネントをリージョン間マルチサイト・アクティブ/アクティブにする"
+      }
+    ],
+    "explanation": {
+      "en": "Warm standby keeps a functional, scaled-down copy running and data replicated, so capacity can be increased after failure. It generally recovers faster than backup-and-restore or a pilot light.",
+      "zh": "温备会运行功能完整但缩小规模的副本，并持续复制数据，因此故障后可扩容。它通常比备份恢复或 Pilot Light 恢复更快。",
+      "ja": "ウォームスタンバイは縮小構成の機能する環境を稼働させ、データも複製するため、障害後に拡張できる。通常、バックアップ復元やパイロットライトより復旧が速い。"
+    }
+  },
+  {
+    "id": 21,
+    "domain": 2,
+    "task": "2.2",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "A company needs objects written to one S3 bucket to be copied automatically to a second Region for disaster recovery. Which configuration is required?",
+      "zh": "一家公司需要将写入某个 S3 存储桶的对象自动复制到第二个区域用于灾难恢复。需要什么配置？",
+      "ja": "ある S3 バケットに書き込まれたオブジェクトを、災害対策用に別リージョンへ自動コピーしたい。必要な設定はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Enable S3 Transfer Acceleration only",
+        "zh": "仅启用 S3 Transfer Acceleration",
+        "ja": "S3 Transfer Acceleration のみを有効にする"
+      },
+      {
+        "letter": "B",
+        "en": "Create an S3 access point in the second Region",
+        "zh": "在第二个区域创建 S3 Access Point",
+        "ja": "第 2 リージョンに S3 アクセスポイントを作成する"
+      },
+      {
+        "letter": "C",
+        "en": "Enable a lifecycle expiration rule",
+        "zh": "启用生命周期过期规则",
+        "ja": "ライフサイクルの有効期限ルールを有効にする"
+      },
+      {
+        "letter": "D",
+        "en": "Enable versioning on both buckets and configure S3 Cross-Region Replication",
+        "zh": "在两个存储桶启用版本控制并配置 S3 跨区域复制",
+        "ja": "両バケットでバージョニングを有効にし、S3 クロスリージョンレプリケーションを設定する"
+      }
+    ],
+    "explanation": {
+      "en": "S3 Cross-Region Replication requires versioning on source and destination buckets and an IAM role that allows replication. It copies eligible new object versions to the destination Region.",
+      "zh": "S3 跨区域复制要求源和目标存储桶启用版本控制，并配置允许复制的 IAM 角色。它会将符合条件的新对象版本复制到目标区域。",
+      "ja": "S3 クロスリージョンレプリケーションには、送信元・送信先バケットのバージョニングと、複製を許可する IAM ロールが必要。対象となる新しいオブジェクトバージョンが複製される。"
+    }
+  },
+  {
+    "id": 22,
+    "domain": 2,
+    "task": "2.1",
+    "select": 2,
+    "answer": [
+      "B",
+      "E"
+    ],
+    "stem": {
+      "en": "An order processor reads messages from an SQS queue. Messages can be delivered more than once, and duplicate orders must not be created. Which two measures should be implemented?",
+      "zh": "订单处理程序从 SQS 队列读取消息。消息可能重复投递，但不能创建重复订单。应实施哪两项措施？",
+      "ja": "注文処理サービスが SQS キューからメッセージを読み取る。重複配信があり得るが、注文の重複作成は防ぎたい。どの 2 つを実装すべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Delete messages before processing them.",
+        "zh": "处理前删除消息。",
+        "ja": "処理前にメッセージを削除する。"
+      },
+      {
+        "letter": "B",
+        "en": "Make the processing operation idempotent using a unique order identifier.",
+        "zh": "使用唯一订单 ID 使处理操作具备幂等性。",
+        "ja": "一意の注文 ID を使い、処理を冪等にする。"
+      },
+      {
+        "letter": "C",
+        "en": "Set the visibility timeout to zero.",
+        "zh": "将可见性超时设为零。",
+        "ja": "可視性タイムアウトを 0 にする。"
+      },
+      {
+        "letter": "D",
+        "en": "Use a queue shared by unrelated workloads.",
+        "zh": "让无关工作负载共用一个队列。",
+        "ja": "無関係なワークロードでキューを共有する。"
+      },
+      {
+        "letter": "E",
+        "en": "For FIFO workloads, use message deduplication and still make consumers idempotent.",
+        "zh": "对于 FIFO 工作负载，使用消息去重，同时仍让消费者具备幂等性。",
+        "ja": "FIFO ワークロードではメッセージ重複排除を使い、コンシューマー側も冪等にする。"
+      }
+    ],
+    "explanation": {
+      "en": "SQS standard queues provide at-least-once delivery, so consumers should safely handle duplicates, typically with an idempotency key. FIFO deduplication can reduce duplicates within its deduplication interval but does not replace robust consumer logic.",
+      "zh": "SQS 标准队列采用至少一次投递，因此消费者应通过幂等键等方式安全处理重复消息。FIFO 去重可在去重时间段内减少重复，但不能替代健壮的消费者逻辑。",
+      "ja": "SQS 標準キューは少なくとも 1 回の配信なので、冪等キーなどで重複を安全に処理する。FIFO の重複排除は一定期間の重複を減らすが、堅牢なコンシューマー処理の代替にはならない。"
+    }
+  },
+  {
+    "id": 23,
+    "domain": 2,
+    "task": "2.2",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "A primary website should send users to a secondary Region only when the primary endpoint becomes unhealthy. Which Route 53 routing policy is designed for this?",
+      "zh": "主站点应仅在主区域端点不健康时才将用户转到备用区域。Route 53 哪种路由策略适合？",
+      "ja": "プライマリエンドポイントが異常な場合に限り、セカンダリリージョンへユーザーを誘導したい。Route 53 のどのルーティングポリシーを使うべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Geolocation routing without health checks",
+        "zh": "不使用运行状况检查的地理位置路由",
+        "ja": "ヘルスチェックなしの位置情報ルーティング"
+      },
+      {
+        "letter": "B",
+        "en": "Multivalue answer routing",
+        "zh": "多值应答路由",
+        "ja": "複数値回答ルーティング"
+      },
+      {
+        "letter": "C",
+        "en": "Failover routing with health checks",
+        "zh": "带运行状况检查的故障转移路由",
+        "ja": "ヘルスチェック付きフェイルオーバールーティング"
+      },
+      {
+        "letter": "D",
+        "en": "Weighted routing with equal weights",
+        "zh": "相同权重的加权路由",
+        "ja": "同じ重みの加重ルーティング"
+      }
+    ],
+    "explanation": {
+      "en": "Failover routing uses health checks to return the primary record while healthy and the secondary record when the primary is unhealthy.",
+      "zh": "故障转移路由通过运行状况检查，在主端点健康时返回主记录，在主端点不健康时返回备用记录。",
+      "ja": "フェイルオーバールーティングはヘルスチェックを使い、プライマリ正常時は主レコード、異常時はセカンダリレコードを返す。"
+    }
+  },
+  {
+    "id": 24,
+    "domain": 2,
+    "task": "2.2",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "A DynamoDB table must support restoring data to a specific point during the previous 30 days after accidental writes or deletes. Which feature should be enabled?",
+      "zh": "DynamoDB 表必须能在误写入或删除后恢复到过去 30 天内的指定时间点。应启用什么功能？",
+      "ja": "DynamoDB テーブルを、誤った書き込みや削除が起きた場合に過去 30 日以内の特定時点へ復元したい。どの機能を有効にすべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Point-in-time recovery (PITR)",
+        "zh": "时间点恢复 (PITR)",
+        "ja": "ポイントインタイムリカバリ (PITR)"
+      },
+      {
+        "letter": "B",
+        "en": "DynamoDB Accelerator (DAX)",
+        "zh": "DynamoDB Accelerator (DAX)",
+        "ja": "DynamoDB Accelerator (DAX)"
+      },
+      {
+        "letter": "C",
+        "en": "A global secondary index",
+        "zh": "全局二级索引",
+        "ja": "グローバルセカンダリインデックス"
+      },
+      {
+        "letter": "D",
+        "en": "On-demand capacity mode",
+        "zh": "按需容量模式",
+        "ja": "オンデマンドキャパシティモード"
+      }
+    ],
+    "explanation": {
+      "en": "DynamoDB point-in-time recovery provides continuous backups and lets a table be restored to a selected point within the supported recovery window.",
+      "zh": "DynamoDB 时间点恢复提供连续备份，并可在支持的恢复窗口内将表还原到所选时间点。",
+      "ja": "DynamoDB のポイントインタイムリカバリは継続バックアップを提供し、対応する復旧期間内の指定時点にテーブルを復元できる。"
+    }
+  },
+  {
+    "id": 25,
+    "domain": 2,
+    "task": "2.2",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "A disaster recovery plan requires an application to recover in another Region within one hour. The team wants the recovery environment to be tested regularly and avoid waiting for service quotas during an incident. What should it do?",
+      "zh": "灾难恢复计划要求应用在另一地区一小时内恢复。团队希望定期测试恢复环境，并避免事故期间等待服务配额。应怎么做？",
+      "ja": "別リージョンで 1 時間以内に復旧する計画がある。復旧環境を定期テストし、障害時にサービスクォータ待ちを避けたい。何をすべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Rely only on the default service quotas and create everything after the outage.",
+        "zh": "仅依赖默认服务配额，并在中断后再创建所有资源。",
+        "ja": "デフォルトのサービスクォータだけに頼り、障害後にすべて作成する。"
+      },
+      {
+        "letter": "B",
+        "en": "Keep the recovery account disabled until an incident occurs.",
+        "zh": "在事故发生前禁用恢复账户。",
+        "ja": "障害発生まで復旧アカウントを無効にする。"
+      },
+      {
+        "letter": "C",
+        "en": "Use manual snapshots without documenting restoration steps.",
+        "zh": "使用手动快照但不记录恢复步骤。",
+        "ja": "復旧手順を文書化せず、手動スナップショットだけを使う。"
+      },
+      {
+        "letter": "D",
+        "en": "Pre-provision and test required capacity, permissions, quotas, and recovery procedures in the secondary Region.",
+        "zh": "在备用区域预先配置并测试所需容量、权限、配额和恢复流程。",
+        "ja": "セカンダリリージョンで必要な容量、権限、クォータ、復旧手順を事前に構成・テストする。"
+      }
+    ],
+    "explanation": {
+      "en": "Recovery objectives depend on tested procedures and available capacity, not only data copies. Pre-provisioning and validating regional quotas reduces the chance that recovery is blocked during an event.",
+      "zh": "恢复目标不仅取决于数据副本，还取决于经过测试的流程和可用容量。预先配置并验证区域配额，可降低事故期间恢复受阻的风险。",
+      "ja": "復旧目標はデータコピーだけでなく、検証済み手順と利用可能な容量にも依存する。事前構成とリージョンクォータ確認で、障害時の復旧阻害を減らせる。"
+    }
+  },
+  {
+    "id": 26,
+    "domain": 2,
+    "task": "2.2",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "A globally distributed application needs a relational database with low-latency reads in secondary Regions and rapid cross-Region disaster recovery. Which service feature is designed for this?",
+      "zh": "一个全球分布式应用需要在次要区域低延迟读取关系型数据，并快速进行跨区域灾难恢复。哪项服务功能适合？",
+      "ja": "グローバルアプリケーションで、セカンダリリージョンから低遅延でリレーショナルデータを読み取り、迅速なリージョン間復旧を行いたい。どのサービス機能が適切か。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "An RDS snapshot copied manually once a year",
+        "zh": "每年手动复制一次 RDS 快照",
+        "ja": "年 1 回手動コピーする RDS スナップショット"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon Aurora Global Database",
+        "zh": "Amazon Aurora Global Database",
+        "ja": "Amazon Aurora Global Database"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon ElastiCache in one Region only",
+        "zh": "仅在一个区域使用 Amazon ElastiCache",
+        "ja": "1 リージョンのみの Amazon ElastiCache"
+      },
+      {
+        "letter": "D",
+        "en": "An S3 gateway endpoint",
+        "zh": "S3 Gateway Endpoint",
+        "ja": "S3 Gateway Endpoint"
+      }
+    ],
+    "explanation": {
+      "en": "Aurora Global Database replicates data to secondary Regions with low replication lag and supports promoting a secondary cluster during a regional failure.",
+      "zh": "Aurora Global Database 可将数据低延迟复制到次要区域，并在区域故障时支持提升次要集群。",
+      "ja": "Aurora Global Database は低レプリケーション遅延でセカンダリリージョンに複製し、リージョン障害時にセカンダリクラスターを昇格できる。"
+    }
+  },
+  {
+    "id": 27,
+    "domain": 2,
+    "task": "2.2",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "Linux applications in several Availability Zones need shared POSIX file storage with regional availability and automatic growth. Which service should be used?",
+      "zh": "多个可用区中的 Linux 应用需要共享 POSIX 文件存储，要求区域级可用性并自动增长。应使用哪项服务？",
+      "ja": "複数 AZ の Linux アプリケーションが、リージョン内で利用でき自動拡張する共有 POSIX ファイルストレージを必要としている。どのサービスが適切か。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Amazon EBS Multi-Attach for all instances",
+        "zh": "所有实例使用 Amazon EBS Multi-Attach",
+        "ja": "全インスタンスで Amazon EBS Multi-Attach を使う"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon S3 mounted as a block device",
+        "zh": "将 Amazon S3 挂载为块设备",
+        "ja": "Amazon S3 をブロックデバイスとしてマウントする"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon EFS Regional file system",
+        "zh": "Amazon EFS Regional 文件系统",
+        "ja": "Amazon EFS Regional ファイルシステム"
+      },
+      {
+        "letter": "D",
+        "en": "Instance store volumes",
+        "zh": "实例存储卷",
+        "ja": "インスタンスストアボリューム"
+      }
+    ],
+    "explanation": {
+      "en": "Amazon EFS provides managed shared file systems that can be mounted by Linux instances across multiple Availability Zones and scales as files are added.",
+      "zh": "Amazon EFS 提供托管共享文件系统，可由多个可用区中的 Linux 实例挂载，并随文件增加而扩展。",
+      "ja": "Amazon EFS はマルチ AZ の Linux インスタンスからマウントできるマネージド共有ファイルシステムで、ファイル増加に応じて拡張する。"
+    }
+  },
+  {
+    "id": 28,
+    "domain": 2,
+    "task": "2.1",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "A workflow coordinates several Lambda functions, must branch based on results, retry transient failures, and record each step's state. Which service is best suited?",
+      "zh": "一个工作流需要协调多个 Lambda 函数，根据结果分支、重试暂时性故障，并记录每一步的状态。哪项服务最适合？",
+      "ja": "複数の Lambda 関数を調整し、結果に応じた分岐、一時的障害の再試行、各ステップの状態記録を行うワークフローに最適なサービスはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "AWS Step Functions",
+        "zh": "AWS Step Functions",
+        "ja": "AWS Step Functions"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon Route 53",
+        "zh": "Amazon Route 53",
+        "ja": "Amazon Route 53"
+      },
+      {
+        "letter": "C",
+        "en": "AWS Storage Gateway",
+        "zh": "AWS Storage Gateway",
+        "ja": "AWS Storage Gateway"
+      },
+      {
+        "letter": "D",
+        "en": "Amazon CloudFront",
+        "zh": "Amazon CloudFront",
+        "ja": "Amazon CloudFront"
+      }
+    ],
+    "explanation": {
+      "en": "Step Functions models workflows as state machines and provides branching, retries, error handling, and execution history for coordinating services such as Lambda.",
+      "zh": "Step Functions 使用状态机建模工作流，并提供分支、重试、错误处理和执行历史，以协调 Lambda 等服务。",
+      "ja": "Step Functions はステートマシンでワークフローを表し、分岐、再試行、エラー処理、実行履歴を備えて Lambda などを調整する。"
+    }
+  },
+  {
+    "id": 29,
+    "domain": 3,
+    "task": "3.1",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "Multiple Linux EC2 instances across Availability Zones need concurrent access to the same shared file system. Which storage service is appropriate?",
+      "zh": "多个可用区中的 Linux EC2 实例需要同时访问同一个共享文件系统。哪项存储服务合适？",
+      "ja": "複数 AZ の Linux EC2 インスタンスが同じ共有ファイルシステムへ同時アクセスしたい。適切なストレージサービスはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Amazon EFS",
+        "zh": "Amazon EFS",
+        "ja": "Amazon EFS"
+      },
+      {
+        "letter": "B",
+        "en": "One Amazon EBS volume attached to one instance",
+        "zh": "只附加到一台实例的 Amazon EBS 卷",
+        "ja": "1 台のインスタンスだけに接続した Amazon EBS ボリューム"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon S3 Glacier Deep Archive",
+        "zh": "Amazon S3 Glacier Deep Archive",
+        "ja": "Amazon S3 Glacier Deep Archive"
+      },
+      {
+        "letter": "D",
+        "en": "EC2 instance store",
+        "zh": "EC2 实例存储",
+        "ja": "EC2 インスタンスストア"
+      }
+    ],
+    "explanation": {
+      "en": "EFS is a shared file system that supports concurrent NFS access from multiple Linux instances and can be accessed across Availability Zones in a Region.",
+      "zh": "EFS 是共享文件系统，支持多个 Linux 实例通过 NFS 并发访问，并可在区域内跨可用区访问。",
+      "ja": "EFS は複数の Linux インスタンスから NFS で同時アクセスでき、リージョン内の複数 AZ から利用できる共有ファイルシステムである。"
+    }
+  },
+  {
+    "id": 30,
+    "domain": 3,
+    "task": "3.1",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "A database runs on EC2 and needs block storage with provisioned IOPS that can be adjusted independently of volume size. Which EBS volume type is a strong fit?",
+      "zh": "数据库运行在 EC2 上，需要可预置 IOPS 且 IOPS 可独立于卷大小调整的块存储。哪种 EBS 卷类型较合适？",
+      "ja": "EC2 上のデータベースで、IOPS をプロビジョニングでき、ボリュームサイズとは独立して調整可能なブロックストレージが必要。適した EBS ボリュームタイプはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "st1 throughput optimized HDD",
+        "zh": "st1 スループット最適化 HDD",
+        "ja": "st1 スループット最適化 HDD"
+      },
+      {
+        "letter": "B",
+        "en": "sc1 cold HDD",
+        "zh": "sc1 コールド HDD",
+        "ja": "sc1 コールド HDD"
+      },
+      {
+        "letter": "C",
+        "en": "Instance store only",
+        "zh": "仅实例存储",
+        "ja": "インスタンスストアのみ"
+      },
+      {
+        "letter": "D",
+        "en": "gp3 General Purpose SSD with provisioned IOPS, or io2 for sustained high IOPS durability needs",
+        "zh": "支持预置 IOPS 的 gp3 通用型 SSD；若需持续高 IOPS 和耐久性则用 io2",
+        "ja": "IOPS を設定できる汎用 SSD の gp3。持続的な高 IOPS と耐久性が必要なら io2"
+      }
+    ],
+    "explanation": {
+      "en": "gp3 lets customers configure performance separately from capacity for many workloads. io2 is appropriate for demanding, sustained IOPS and durability requirements; HDD types target throughput or infrequent access.",
+      "zh": "对于许多工作负载，gp3 可将性能与容量分开配置；io2 适合要求高且持续 IOPS 和耐久性的场景。HDD 类型面向吞吐或低频访问。",
+      "ja": "gp3 は多くの用途で容量と性能を独立して設定できる。高い持続 IOPS と耐久性には io2 が適し、HDD はスループットや低頻度アクセス向けである。"
+    }
+  },
+  {
+    "id": 31,
+    "domain": 3,
+    "task": "3.4",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "A company delivers images and video to users worldwide. The files change infrequently, and the company wants lower latency and less load on its origin servers. What should it use?",
+      "zh": "一家公司向全球用户提供图片和视频。文件很少变化，公司希望降低延迟并减轻源站负载。应使用什么？",
+      "ja": "画像や動画を世界中に配信する会社が、ファイル更新は少なく、遅延とオリジンサーバー負荷を減らしたい。何を使うべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "A NAT gateway in each Region",
+        "zh": "每个区域一个 NAT 网关",
+        "ja": "各リージョンの NAT ゲートウェイ"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon CloudFront with appropriate cache behavior",
+        "zh": "配置适当缓存行为的 Amazon CloudFront",
+        "ja": "適切なキャッシュ動作を設定した Amazon CloudFront"
+      },
+      {
+        "letter": "C",
+        "en": "An RDS read replica",
+        "zh": "RDS 只读副本",
+        "ja": "RDS リードレプリカ"
+      },
+      {
+        "letter": "D",
+        "en": "AWS DataSync on every request",
+        "zh": "每次请求都使用 AWS DataSync",
+        "ja": "リクエストごとに AWS DataSync を実行する"
+      }
+    ],
+    "explanation": {
+      "en": "CloudFront caches content at edge locations near viewers, reducing latency and the number of requests reaching the origin.",
+      "zh": "CloudFront 在靠近用户的边缘站点缓存内容，可降低延迟并减少到达源站的请求数量。",
+      "ja": "CloudFront は利用者に近いエッジロケーションでコンテンツをキャッシュし、遅延とオリジンへのリクエスト数を減らす。"
+    }
+  },
+  {
+    "id": 32,
+    "domain": 3,
+    "task": "3.3",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "A DynamoDB table receives much more traffic for a small set of partition-key values than for others. The hot partitions limit throughput. What is the best design change?",
+      "zh": "DynamoDB 表中少量分区键值承受的流量远高于其他键值，热点分区限制了吞吐量。最佳设计变更是什么？",
+      "ja": "DynamoDB テーブルで一部のパーティションキー値にアクセスが集中し、ホットパーティションがスループットを制限している。最善の設計変更はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Use a low-cardinality partition key such as status",
+        "zh": "使用 status 这类低基数分区键",
+        "ja": "status などカーディナリティの低いパーティションキーを使う"
+      },
+      {
+        "letter": "B",
+        "en": "Store all items under one partition key",
+        "zh": "将所有项目存储在同一个分区键下",
+        "ja": "すべての項目を 1 つのパーティションキーに保存する"
+      },
+      {
+        "letter": "C",
+        "en": "Choose a high-cardinality partition key that distributes requests, adding a shard suffix if needed",
+        "zh": "选择能分散请求的高基数分区键，必要时增加分片后缀",
+        "ja": "アクセスを分散する高カーディナリティのパーティションキーを選び、必要ならシャード用サフィックスを加える"
+      },
+      {
+        "letter": "D",
+        "en": "Increase the table's item size",
+        "zh": "增加表中项目的大小",
+        "ja": "テーブル項目のサイズを大きくする"
+      }
+    ],
+    "explanation": {
+      "en": "DynamoDB distributes data and throughput by partition key. A high-cardinality, well-distributed key reduces hot partitions; write sharding can spread traffic for inherently hot identifiers.",
+      "zh": "DynamoDB 按分区键分配数据和吞吐量。分布良好的高基数键可减少热点分区；对于天然热点的标识符，可用写分片分散流量。",
+      "ja": "DynamoDB はパーティションキーに基づいてデータとスループットを分散する。高カーディナリティで均等なキーはホットパーティションを減らし、必要なら書き込みシャーディングで集中を分散できる。"
+    }
+  },
+  {
+    "id": 33,
+    "domain": 3,
+    "task": "3.3",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "An application performs many read queries against an Amazon RDS database. Reads are slowing writes on the primary, and the application can route read-only queries separately. What should be added?",
+      "zh": "一个应用对 Amazon RDS 数据库执行大量读取查询。读取正在拖慢主实例的写入，而且应用可以单独路由只读查询。应添加什么？",
+      "ja": "Amazon RDS に大量の読み取りを行うアプリケーションで、読み取りがプライマリの書き込みに影響している。読み取り専用クエリを別に振り分けられる。何を追加すべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "An RDS read replica and a read/write split in the application",
+        "zh": "RDS 只读副本，并在应用中分离读写流量",
+        "ja": "RDS リードレプリカとアプリケーションでの読み書き分離"
+      },
+      {
+        "letter": "B",
+        "en": "A second primary database without replication",
+        "zh": "复制关系的第二个主数据库",
+        "ja": "レプリケーションなしの 2 台目のプライマリデータベース"
+      },
+      {
+        "letter": "C",
+        "en": "An S3 bucket for SQL queries",
+        "zh": "用于 SQL 查询的 S3 存储桶",
+        "ja": "SQL クエリ用の S3 バケット"
+      },
+      {
+        "letter": "D",
+        "en": "A larger subnet CIDR block",
+        "zh": "更大的子网 CIDR 块",
+        "ja": "より大きなサブネット CIDR ブロック"
+      }
+    ],
+    "explanation": {
+      "en": "RDS read replicas serve read-only traffic from a replicated copy. Routing eligible queries to replicas can reduce read load on the primary; replication is asynchronous for many engines.",
+      "zh": "RDS 只读副本通过复制的数据副本处理只读流量。将合适的查询路由到副本可减轻主库读取负载；许多引擎的复制是异步的。",
+      "ja": "RDS リードレプリカは複製されたデータから読み取り専用トラフィックを処理する。対象クエリをレプリカへ送ればプライマリ負荷を減らせるが、多くのエンジンでは非同期複製である。"
+    }
+  },
+  {
+    "id": 34,
+    "domain": 3,
+    "task": "3.3",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "A relational database has highly variable and unpredictable demand, including long idle periods and short spikes. The application can use a supported Aurora engine. Which option can automatically adjust capacity?",
+      "zh": "关系型数据库的需求高度变化且不可预测，包括长时间空闲和短时峰值。应用可使用受支持的 Aurora 引擎。哪种选项可自动调整容量？",
+      "ja": "リレーショナルデータベースの需要が予測困難で、長いアイドル時間と短い急増がある。対応する Aurora エンジンを使える場合、容量を自動調整する選択肢はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "A fixed-size DB instance sized for the maximum peak",
+        "zh": "按最大峰值配置固定规格数据库实例",
+        "ja": "最大ピークに合わせた固定サイズの DB インスタンス"
+      },
+      {
+        "letter": "B",
+        "en": "A self-managed database on one EC2 instance",
+        "zh": "1 台の EC2 で自己管理するデータベース",
+        "ja": "1 台の EC2 上で自己管理するデータベース"
+      },
+      {
+        "letter": "C",
+        "en": "An RDS snapshot schedule",
+        "zh": "RDS 快照计划",
+        "ja": "RDS スナップショットのスケジュール"
+      },
+      {
+        "letter": "D",
+        "en": "Amazon Aurora Serverless v2 for a supported workload",
+        "zh": "适用于受支持工作负载的 Amazon Aurora Serverless v2",
+        "ja": "対応ワークロード向けの Amazon Aurora Serverless v2"
+      }
+    ],
+    "explanation": {
+      "en": "Aurora Serverless v2 can scale database capacity in fine-grained increments as demand changes, avoiding the need to provision fixed peak capacity for suitable workloads.",
+      "zh": "对于适合的工作负载，Aurora Serverless v2 可随需求变化细粒度扩缩数据库容量，避免始终预置峰值容量。",
+      "ja": "Aurora Serverless v2 は需要変化に応じて DB 容量を細かくスケールし、適した用途ではピーク固定容量の常時確保を避けられる。"
+    }
+  },
+  {
+    "id": 35,
+    "domain": 3,
+    "task": "3.5",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "A company must migrate tens of terabytes from an isolated data center where network bandwidth is limited. The transfer should use a physical device shipped to AWS. Which service should it choose?",
+      "zh": "一家公司需要从网络带宽有限的隔离数据中心迁移数十 TB 数据，要求通过寄送到 AWS 的物理设备传输。应选择哪项服务？",
+      "ja": "ネットワーク帯域が限られた隔離データセンターから数十 TB を移行し、物理デバイスを AWS へ送って転送したい。どのサービスが適切か。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "AWS Direct Connect only",
+        "zh": "仅 AWS Direct Connect",
+        "ja": "AWS Direct Connect のみ"
+      },
+      {
+        "letter": "B",
+        "en": "AWS Snowball Edge",
+        "zh": "AWS Snowball Edge",
+        "ja": "AWS Snowball Edge"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon CloudFront",
+        "zh": "Amazon CloudFront",
+        "ja": "Amazon CloudFront"
+      },
+      {
+        "letter": "D",
+        "en": "Amazon SQS",
+        "zh": "Amazon SQS",
+        "ja": "Amazon SQS"
+      }
+    ],
+    "explanation": {
+      "en": "Snowball Edge provides a physical appliance for moving large datasets when network transfer is impractical or too slow. The device is shipped back for import into AWS.",
+      "zh": "当网络传输不切实际或太慢时，Snowball Edge 提供用于迁移大型数据集的物理设备。设备寄回后可将数据导入 AWS。",
+      "ja": "Snowball Edge は、ネットワーク転送が現実的でない場合に大規模データを移動する物理アプライアンスを提供する。返送後に AWS へ取り込める。"
+    }
+  },
+  {
+    "id": 36,
+    "domain": 3,
+    "task": "3.5",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "An analytics application must ingest events continuously, retain them briefly, and let several consumer applications process the stream independently. Which service is designed for this pattern?",
+      "zh": "一个分析应用需要持续接收事件、短期保留数据，并允许多个消费者应用独立处理数据流。哪项服务适合？",
+      "ja": "分析アプリケーションがイベントを継続的に取り込み、短期間保持し、複数のコンシューマーが独立して処理したい。この用途向けのサービスはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "AWS Snowcone",
+        "zh": "AWS Snowcone",
+        "ja": "AWS Snowcone"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon EFS",
+        "zh": "Amazon EFS",
+        "ja": "Amazon EFS"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon Kinesis Data Streams",
+        "zh": "Amazon Kinesis Data Streams",
+        "ja": "Amazon Kinesis Data Streams"
+      },
+      {
+        "letter": "D",
+        "en": "AWS Backup",
+        "zh": "AWS Backup",
+        "ja": "AWS Backup"
+      }
+    ],
+    "explanation": {
+      "en": "Kinesis Data Streams ingests real-time records and allows multiple consumer applications to read and process the stream independently, subject to retention and throughput configuration.",
+      "zh": "Kinesis Data Streams 可接收实时记录，并允许多个消费者应用独立读取和处理数据流，具体取决于保留期和吞吐配置。",
+      "ja": "Kinesis Data Streams はリアルタイムレコードを取り込み、保持期間やスループット設定の範囲内で複数のコンシューマーが独立して処理できる。"
+    }
+  },
+  {
+    "id": 37,
+    "domain": 3,
+    "task": "3.2",
+    "select": 2,
+    "answer": [
+      "A",
+      "D"
+    ],
+    "stem": {
+      "en": "A Lambda function consumes SQS messages and writes to a database with limited connection capacity. Bursts must not overwhelm the database. Which two changes help control this?",
+      "zh": "Lambda 函数消费 SQS 消息并写入连接容量有限的数据库。突发流量不能压垮数据库。哪两项调整有助于控制负载？",
+      "ja": "Lambda 関数が SQS メッセージを処理して接続容量の限られた DB に書き込む。急増時に DB を過負荷にしたくない。どの 2 つの変更が役立つか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Set a maximum concurrency on the SQS event source mapping.",
+        "zh": "为 SQS 事件源映射设置最大并发数。",
+        "ja": "SQS イベントソースマッピングに最大同時実行数を設定する。"
+      },
+      {
+        "letter": "B",
+        "en": "Increase Lambda concurrency without a limit.",
+        "zh": "无限制提高 Lambda 并发数。",
+        "ja": "Lambda の同時実行数を無制限に増やす。"
+      },
+      {
+        "letter": "C",
+        "en": "Set the queue visibility timeout to zero.",
+        "zh": "将队列可见性超时设为零。",
+        "ja": "キューの可視性タイムアウトを 0 にする。"
+      },
+      {
+        "letter": "D",
+        "en": "Use Amazon RDS Proxy to pool and manage database connections.",
+        "zh": "使用 Amazon RDS Proxy 池化并管理数据库连接。",
+        "ja": "Amazon RDS Proxy でデータベース接続をプール・管理する。"
+      },
+      {
+        "letter": "E",
+        "en": "Poll the database from every browser client.",
+        "zh": "让每个浏览器客户端直接轮询数据库。",
+        "ja": "各ブラウザクライアントから DB をポーリングする。"
+      }
+    ],
+    "explanation": {
+      "en": "Maximum event-source concurrency caps the number of simultaneous Lambda invocations from the queue. RDS Proxy pools connections and can reduce connection churn from serverless workloads.",
+      "zh": "最大事件源并发数可限制队列触发的 Lambda 同时执行数。RDS Proxy 池化连接，可减少无服务器工作负载造成的连接频繁创建。",
+      "ja": "イベントソースの最大同時実行数でキュー起因の Lambda 並列実行を制限できる。RDS Proxy は接続をプールし、サーバーレス負荷の接続増減を抑えられる。"
+    }
+  },
+  {
+    "id": 38,
+    "domain": 3,
+    "task": "3.3",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "A read-heavy DynamoDB application needs microsecond read latency for frequently accessed items. It can tolerate a cache that may need to be repopulated. Which service should be used?",
+      "zh": "一个读取密集型 DynamoDB 应用需要对频繁访问的项目实现微秒级读取延迟，并能接受缓存可能需要重新填充。应使用哪项服务？",
+      "ja": "読み取り中心の DynamoDB アプリケーションで、頻繁に参照する項目をマイクロ秒レベルで読み取りたい。キャッシュ再構築は許容できる。どのサービスを使うべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "DynamoDB Accelerator (DAX)",
+        "zh": "DynamoDB Accelerator (DAX)",
+        "ja": "DynamoDB Accelerator (DAX)"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon S3 Transfer Acceleration",
+        "zh": "Amazon S3 Transfer Acceleration",
+        "ja": "Amazon S3 Transfer Acceleration"
+      },
+      {
+        "letter": "C",
+        "en": "AWS Storage Gateway",
+        "zh": "AWS Storage Gateway",
+        "ja": "AWS Storage Gateway"
+      },
+      {
+        "letter": "D",
+        "en": "Amazon EBS snapshots",
+        "zh": "Amazon EBS 快照",
+        "ja": "Amazon EBS スナップショット"
+      }
+    ],
+    "explanation": {
+      "en": "DAX is a managed in-memory cache designed for DynamoDB and can provide microsecond read latency for eventually consistent reads in suitable workloads.",
+      "zh": "DAX 是为 DynamoDB 设计的托管内存缓存，适用于需要微秒级最终一致性读取延迟的工作负载。",
+      "ja": "DAX は DynamoDB 向けのマネージドインメモリキャッシュで、適切な用途では結果整合性読み取りをマイクロ秒レベルにできる。"
+    }
+  },
+  {
+    "id": 39,
+    "domain": 3,
+    "task": "3.1",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "Windows EC2 instances in multiple Availability Zones need shared file storage accessible through the SMB protocol and integrated with Microsoft Active Directory. Which service fits?",
+      "zh": "多个可用区中的 Windows EC2 实例需要通过 SMB 协议访问共享文件存储，并与 Microsoft Active Directory 集成。哪项服务合适？",
+      "ja": "複数 AZ の Windows EC2 から SMB で共有ファイルにアクセスし、Microsoft Active Directory と統合したい。適切なサービスはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Amazon EFS",
+        "zh": "Amazon EFS",
+        "ja": "Amazon EFS"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon S3 Glacier Flexible Retrieval",
+        "zh": "Amazon S3 Glacier Flexible Retrieval",
+        "ja": "Amazon S3 Glacier Flexible Retrieval"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon FSx for Windows File Server",
+        "zh": "Amazon FSx for Windows File Server",
+        "ja": "Amazon FSx for Windows File Server"
+      },
+      {
+        "letter": "D",
+        "en": "Amazon EBS Multi-Attach",
+        "zh": "Amazon EBS Multi-Attach",
+        "ja": "Amazon EBS Multi-Attach"
+      }
+    ],
+    "explanation": {
+      "en": "FSx for Windows File Server provides fully managed Windows file storage with SMB support and Microsoft Active Directory integration.",
+      "zh": "FSx for Windows File Server 提供托管式 Windows 文件存储，支持 SMB 和 Microsoft Active Directory 集成。",
+      "ja": "FSx for Windows File Server は SMB と Microsoft Active Directory 統合に対応したマネージド Windows ファイルストレージを提供する。"
+    }
+  },
+  {
+    "id": 40,
+    "domain": 3,
+    "task": "3.4",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "A company needs a dedicated, private network connection from its data center to AWS for predictable bandwidth and consistent network performance. Which service should it use?",
+      "zh": "一家公司需要从数据中心到 AWS 的专用私有网络连接，以获得可预测的带宽和稳定的网络性能。应使用哪项服务？",
+      "ja": "データセンターから AWS へ、帯域幅を予測しやすく安定したネットワーク性能を得る専用プライベート接続が必要。どのサービスを使うべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "AWS Client VPN",
+        "zh": "AWS Client VPN",
+        "ja": "AWS Client VPN"
+      },
+      {
+        "letter": "B",
+        "en": "An internet gateway",
+        "zh": "Internet Gateway",
+        "ja": "インターネットゲートウェイ"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon Route 53 Resolver",
+        "zh": "Amazon Route 53 Resolver",
+        "ja": "Amazon Route 53 Resolver"
+      },
+      {
+        "letter": "D",
+        "en": "AWS Direct Connect",
+        "zh": "AWS Direct Connect",
+        "ja": "AWS Direct Connect"
+      }
+    ],
+    "explanation": {
+      "en": "Direct Connect establishes a dedicated network connection from a data center or colocation facility to AWS. It can provide more predictable network performance than internet-based VPN, though encryption may require an additional design.",
+      "zh": "Direct Connect 在数据中心或托管设施与 AWS 之间建立专用网络连接，性能通常比基于互联网的 VPN 更可预测；如需加密，还需额外设计。",
+      "ja": "Direct Connect はデータセンターなどから AWS への専用接続を確立し、インターネット VPN より予測しやすい性能を提供する。暗号化が必要なら追加設計を検討する。"
+    }
+  },
+  {
+    "id": 41,
+    "domain": 4,
+    "task": "4.1",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "A company must retain records for seven years. They are rarely retrieved, and retrieval within 12 hours is acceptable. Which S3 storage class is most cost-effective for the archive?",
+      "zh": "一家公司必须保留记录七年，极少读取，且可接受 12 小时内取回。哪种 S3 存储类别最适合低成本归档？",
+      "ja": "7 年保管が必要な記録で、ほとんど参照せず、12 時間以内の取得を許容できる。アーカイブに最も費用対効果の高い S3 ストレージクラスはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "S3 Standard",
+        "zh": "S3 Standard",
+        "ja": "S3 Standard"
+      },
+      {
+        "letter": "B",
+        "en": "S3 Glacier Deep Archive",
+        "zh": "S3 Glacier Deep Archive",
+        "ja": "S3 Glacier Deep Archive"
+      },
+      {
+        "letter": "C",
+        "en": "S3 Express One Zone",
+        "zh": "S3 Express One Zone",
+        "ja": "S3 Express One Zone"
+      },
+      {
+        "letter": "D",
+        "en": "S3 Standard-IA for every object regardless of access",
+        "zh": "不论访问情况都使用 S3 Standard-IA",
+        "ja": "アクセス頻度に関係なく S3 Standard-IA を使う"
+      }
+    ],
+    "explanation": {
+      "en": "S3 Glacier Deep Archive is designed for long-term, rarely accessed data with low storage cost and retrieval times measured in hours. Retrieval time and minimum storage duration should be included in the design.",
+      "zh": "S3 Glacier Deep Archive 面向长期、极少访问的数据，存储成本低，取回时间以小时计。设计时还应考虑取回时间和最低存储期限。",
+      "ja": "S3 Glacier Deep Archive は長期・低頻度アクセス向けで、保存コストが低く、取得に数時間かかる。取得時間と最低保存期間も設計に含める。"
+    }
+  },
+  {
+    "id": 42,
+    "domain": 4,
+    "task": "4.1",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "A bucket contains data with unknown and changing access patterns. The company wants S3 to automatically move objects among access tiers without designing its own access-based lifecycle rules. Which class should it consider?",
+      "zh": "一个存储桶中的数据访问模式未知且经常变化。公司希望 S3 自动在访问层级间移动对象，而不自行设计基于访问的生命周期规则。应考虑哪种类别？",
+      "ja": "アクセスパターンが不明で変化するデータがある。独自にアクセス条件のライフサイクルルールを設計せず、S3 にアクセス階層を自動移動させたい。検討すべきクラスはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "S3 Intelligent-Tiering",
+        "zh": "S3 Intelligent-Tiering",
+        "ja": "S3 Intelligent-Tiering"
+      },
+      {
+        "letter": "B",
+        "en": "S3 Glacier Deep Archive only",
+        "zh": "S3 Glacier Deep Archive のみ",
+        "ja": "S3 Glacier Deep Archive のみ"
+      },
+      {
+        "letter": "C",
+        "en": "S3 One Zone-IA for all data",
+        "zh": "すべてのデータに S3 One Zone-IA",
+        "ja": "すべてのデータに S3 One Zone-IA"
+      },
+      {
+        "letter": "D",
+        "en": "Amazon EBS gp3",
+        "zh": "Amazon EBS gp3",
+        "ja": "Amazon EBS gp3"
+      }
+    ],
+    "explanation": {
+      "en": "S3 Intelligent-Tiering monitors access patterns and moves eligible objects among access tiers. Small monitoring and automation charges apply, and some archive tiers have retrieval considerations.",
+      "zh": "S3 Intelligent-Tiering 会监控访问模式，并在适用层级间移动对象。需考虑少量监控与自动化费用，以及部分归档层的取回特性。",
+      "ja": "S3 Intelligent-Tiering はアクセスパターンを監視し、対象オブジェクトをアクセス階層間で移動する。監視・自動化料金やアーカイブ階層の取得条件も考慮する。"
+    }
+  },
+  {
+    "id": 43,
+    "domain": 4,
+    "task": "4.2",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "A company uses a steady amount of EC2 compute every month and expects this usage to continue for at least one year. It wants flexibility across instance families and Regions. Which pricing option is suitable?",
+      "zh": "一家公司每月稳定使用一定量的 EC2 计算资源，预计至少持续一年，并希望在实例系列和区域间保持灵活。哪种定价选项合适？",
+      "ja": "毎月一定量の EC2 を継続利用する会社が、少なくとも 1 年の利用を見込み、インスタンスファミリーやリージョン間の柔軟性も求める。適切な料金オプションはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "On-Demand capacity reservations only",
+        "zh": "仅按需容量预留",
+        "ja": "オンデマンドキャパシティ予約のみ"
+      },
+      {
+        "letter": "B",
+        "en": "Dedicated Hosts for every workload",
+        "zh": "所有工作负载都使用 Dedicated Hosts",
+        "ja": "すべてのワークロードで Dedicated Hosts を使う"
+      },
+      {
+        "letter": "C",
+        "en": "A Compute Savings Plan",
+        "zh": "Compute Savings Plan",
+        "ja": "Compute Savings Plan"
+      },
+      {
+        "letter": "D",
+        "en": "Spot Instances for the baseline workload",
+        "zh": "基线工作负载使用 Spot 实例",
+        "ja": "ベースラインのワークロードに Spot インスタンスを使う"
+      }
+    ],
+    "explanation": {
+      "en": "A Compute Savings Plan applies discounted rates to eligible compute usage in exchange for a committed hourly spend over the selected term and offers flexibility across instance families and Regions.",
+      "zh": "Compute Savings Plan 以承诺指定期限内的每小时消费换取符合条件的计算用量折扣，并可在实例系列和区域间灵活适用。",
+      "ja": "Compute Savings Plan は期間中の時間当たり利用額を約束して対象コンピューティング料金を割引し、インスタンスファミリーやリージョンにも柔軟性がある。"
+    }
+  },
+  {
+    "id": 44,
+    "domain": 4,
+    "task": "4.2",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "A batch analytics job can be interrupted and restarted from checkpoints. It has no strict completion deadline. Which EC2 purchasing option can reduce compute cost?",
+      "zh": "一个批量分析作业可被中断，并能从检查点重新启动，没有严格完成期限。哪种 EC2 购买选项可降低计算成本？",
+      "ja": "中断されてもチェックポイントから再開でき、厳密な完了期限がないバッチ分析ジョブがある。EC2 のコスト削減に適した購入オプションはどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "On-Demand Instances only",
+        "zh": "仅按需实例",
+        "ja": "オンデマンドインスタンスのみ"
+      },
+      {
+        "letter": "B",
+        "en": "Dedicated Instances",
+        "zh": "Dedicated Instances",
+        "ja": "Dedicated Instances"
+      },
+      {
+        "letter": "C",
+        "en": "Capacity Reservations with no workload changes",
+        "zh": "不调整工作负载，使用容量预留",
+        "ja": "ワークロードを変更せずキャパシティ予約を使う"
+      },
+      {
+        "letter": "D",
+        "en": "Spot Instances with checkpointing and interruption handling",
+        "zh": "配合检查点和中断处理使用 Spot 实例",
+        "ja": "チェックポイントと中断処理を備えた Spot インスタンス"
+      }
+    ],
+    "explanation": {
+      "en": "Spot Instances use spare EC2 capacity at a discount but can be interrupted. A fault-tolerant batch workload that checkpoints and can resume is a suitable candidate.",
+      "zh": "Spot 实例以折扣使用 EC2 闲置容量，但可能被中断。能够容错、保存检查点并恢复的批处理作业适合采用。",
+      "ja": "Spot インスタンスは余剰 EC2 容量を割引利用できる一方、中断される可能性がある。チェックポイントから再開できるバッチ処理に適している。"
+    }
+  },
+  {
+    "id": 45,
+    "domain": 4,
+    "task": "4.4",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "Instances in private subnets make frequent requests to S3. The company currently routes this traffic through a NAT gateway and wants to reduce network processing charges without exposing instances to the internet. What should it do?",
+      "zh": "私有子网中的实例频繁请求 S3。公司目前通过 NAT 网关转发流量，希望降低网络处理费用，同时不让实例暴露到互联网。应怎么做？",
+      "ja": "プライベートサブネットのインスタンスが S3 を頻繁に利用し、現在 NAT ゲートウェイ経由で通信している。インターネットに公開せず、ネットワーク処理料金を減らすにはどうすべきか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Add an S3 gateway VPC endpoint and update the relevant route tables.",
+        "zh": "添加 S3 Gateway VPC Endpoint，并更新相关路由表。",
+        "ja": "S3 Gateway VPC Endpoint を追加し、該当ルートテーブルを更新する。"
+      },
+      {
+        "letter": "B",
+        "en": "Give every instance a public IP address.",
+        "zh": "为每台实例分配公有 IP。",
+        "ja": "すべてのインスタンスにパブリック IP を割り当てる。"
+      },
+      {
+        "letter": "C",
+        "en": "Move the instances to a public subnet.",
+        "zh": "将实例移至公有子网。",
+        "ja": "インスタンスをパブリックサブネットへ移動する。"
+      },
+      {
+        "letter": "D",
+        "en": "Create a second NAT gateway in each Availability Zone.",
+        "zh": "在每个可用区再创建一个 NAT 网关。",
+        "ja": "各 AZ に NAT ゲートウェイを追加する。"
+      }
+    ],
+    "explanation": {
+      "en": "An S3 gateway endpoint routes eligible S3 traffic privately from associated route tables and avoids sending that traffic through a NAT gateway. It does not make the instances public.",
+      "zh": "S3 Gateway Endpoint 会从关联路由表私有转发符合条件的 S3 流量，避免通过 NAT 网关；它不会使实例变为公有。",
+      "ja": "S3 Gateway Endpoint は関連するルートテーブルから S3 通信をプライベートに転送し、NAT 経由を避ける。インスタンスを公開にはしない。"
+    }
+  },
+  {
+    "id": 46,
+    "domain": 4,
+    "task": "4.1",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "A company stores a large EFS file system. Most files are rarely accessed, but a small subset must remain available with low latency. Which feature can reduce storage cost automatically?",
+      "zh": "一家公司使用大型 EFS 文件系统。大多数文件很少访问，但少量文件必须保持低延迟可用。哪项功能可自动降低存储成本？",
+      "ja": "大規模な EFS ファイルシステムを利用し、大半は低頻度アクセスだが一部は低遅延で利用可能にしたい。自動で保存コストを下げる機能はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Create a full copy on EBS and delete the EFS files",
+        "zh": "将完整副本存入 EBS 并删除 EFS 文件",
+        "ja": "EBS に全コピーを作り EFS ファイルを削除する"
+      },
+      {
+        "letter": "B",
+        "en": "Enable EFS lifecycle management to move eligible files to an Infrequent Access storage class",
+        "zh": "启用 EFS 生命周期管理，将符合条件的文件移至不频繁访问存储类",
+        "ja": "EFS ライフサイクル管理を有効にし、対象ファイルを低頻度アクセスストレージクラスへ移動する"
+      },
+      {
+        "letter": "C",
+        "en": "Disable the EFS mount targets",
+        "zh": "禁用 EFS 挂载目标",
+        "ja": "EFS マウントターゲットを無効にする"
+      },
+      {
+        "letter": "D",
+        "en": "Convert the file system into an SQS queue",
+        "zh": "将文件系统转换为 SQS 队列",
+        "ja": "ファイルシステムを SQS キューに変換する"
+      }
+    ],
+    "explanation": {
+      "en": "EFS lifecycle management can move files based on access patterns to lower-cost storage classes while keeping them in the same file system namespace.",
+      "zh": "EFS 生命周期管理可根据访问模式将文件移至成本更低的存储类，同时保留在同一文件系统命名空间中。",
+      "ja": "EFS ライフサイクル管理はアクセス状況に応じてファイルを低コストのクラスへ移し、同じファイルシステム名前空間から利用できるようにする。"
+    }
+  },
+  {
+    "id": 47,
+    "domain": 4,
+    "task": "4.1",
+    "select": 1,
+    "answer": [
+      "C"
+    ],
+    "stem": {
+      "en": "A company stores static software installers for occasional download. The files do not require POSIX file-system semantics or low-latency block access. Which storage choice is generally more cost-effective than a shared file system?",
+      "zh": "一家公司存储供偶尔下载的静态软件安装包。文件不需要 POSIX 文件系统语义或低延迟块访问。与共享文件系统相比，通常哪种存储更经济？",
+      "ja": "たまにダウンロードされる静的なソフトウェアインストーラーを保存する。POSIX ファイルシステムや低遅延ブロックアクセスは不要。共有ファイルシステムより一般に費用対効果が高い選択肢はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Amazon EBS Multi-Attach",
+        "zh": "Amazon EBS Multi-Attach",
+        "ja": "Amazon EBS Multi-Attach"
+      },
+      {
+        "letter": "B",
+        "en": "Amazon FSx for Lustre",
+        "zh": "Amazon FSx for Lustre",
+        "ja": "Amazon FSx for Lustre"
+      },
+      {
+        "letter": "C",
+        "en": "Amazon S3 with an appropriate storage class",
+        "zh": "使用合适存储类别的 Amazon S3",
+        "ja": "適切なストレージクラスの Amazon S3"
+      },
+      {
+        "letter": "D",
+        "en": "Provisioned IOPS io2 volumes for every user",
+        "zh": "为每位用户配置 io2 预置 IOPS 卷",
+        "ja": "すべてのユーザーに io2 ボリュームを用意する"
+      }
+    ],
+    "explanation": {
+      "en": "S3 is object storage well suited to static downloadable artifacts. A shared file system or high-performance block volumes add capabilities and cost that this access pattern does not need.",
+      "zh": "S3 对象存储适合静态可下载文件。共享文件系统或高性能块卷会增加此访问模式不需要的功能和成本。",
+      "ja": "S3 は静的なダウンロード用成果物に適したオブジェクトストレージである。このアクセス形態に不要な共有ファイルや高性能ブロック機能を避けられる。"
+    }
+  },
+  {
+    "id": 48,
+    "domain": 4,
+    "task": "4.4",
+    "select": 1,
+    "answer": [
+      "D"
+    ],
+    "stem": {
+      "en": "Two VPCs in the same Region need private connectivity and have a small number of routes. They do not need centralized transitive routing. Which option is usually simpler and lower cost?",
+      "zh": "同一区域内的两个 VPC 需要私有互联，路由数量少，也不需要集中式传递路由。通常哪种选项更简单且成本更低？",
+      "ja": "同一リージョンの 2 つの VPC をプライベート接続したい。ルート数は少なく、集中型の推移的ルーティングも不要。一般により簡単で低コストな方法はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "A separate transit gateway for each subnet",
+        "zh": "每个子网都单独使用 Transit Gateway",
+        "ja": "各サブネットに個別の Transit Gateway"
+      },
+      {
+        "letter": "B",
+        "en": "A public internet gateway between the VPCs",
+        "zh": "在两个 VPC 之间使用公共 Internet Gateway",
+        "ja": "VPC 間にパブリックインターネットゲートウェイを置く"
+      },
+      {
+        "letter": "C",
+        "en": "AWS Direct Connect between the two VPCs",
+        "zh": "在两个 VPC 之间使用 AWS Direct Connect",
+        "ja": "2 つの VPC 間に AWS Direct Connect を設定する"
+      },
+      {
+        "letter": "D",
+        "en": "VPC peering with routes and security rules configured on both sides",
+        "zh": "使用 VPC Peering，并在两端配置路由和安全规则",
+        "ja": "VPC ピアリングを設定し、両側にルートとセキュリティルールを設定する"
+      }
+    ],
+    "explanation": {
+      "en": "VPC peering directly connects two VPCs and is appropriate for a small, non-transitive connectivity requirement. Transit Gateway is useful when many VPCs need centralized hub-and-spoke routing.",
+      "zh": "VPC Peering 可直接连接两个 VPC，适合规模小且不需要传递路由的互联需求。许多 VPC 需要集中式 Hub-and-Spoke 路由时，Transit Gateway 更合适。",
+      "ja": "VPC ピアリングは 2 つの VPC を直接接続し、小規模で推移的でない要件に適する。多数の VPC を集中ハブ型で接続するなら Transit Gateway が適している。"
+    }
+  },
+  {
+    "id": 49,
+    "domain": 4,
+    "task": "4.2",
+    "select": 1,
+    "answer": [
+      "A"
+    ],
+    "stem": {
+      "en": "Development EC2 instances are used only during business hours. They do not host production workloads, and the team can restart them when needed. Which action can reduce compute charges?",
+      "zh": "开发用 EC2 实例仅在工作时间使用，不承载生产工作负载，团队需要时可重新启动。哪项措施可以降低计算费用？",
+      "ja": "開発用 EC2 は営業時間だけ利用し、本番ワークロードではない。必要時に再起動できる。コンピューティング料金を減らす方法はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Schedule the instances to stop outside business hours and start before use.",
+        "zh": "安排实例在非工作时间停止，并在使用前启动。",
+        "ja": "営業時間外にインスタンスを停止し、利用前に起動するようスケジュールする。"
+      },
+      {
+        "letter": "B",
+        "en": "Convert all instances to Dedicated Hosts.",
+        "zh": "将所有实例改为 Dedicated Hosts。",
+        "ja": "すべてのインスタンスを Dedicated Hosts に変更する。"
+      },
+      {
+        "letter": "C",
+        "en": "Add larger EBS volumes to every instance.",
+        "zh": "为每台实例增加更大的 EBS 卷。",
+        "ja": "すべてのインスタンスに大容量 EBS を追加する。"
+      },
+      {
+        "letter": "D",
+        "en": "Keep instances running and increase their size overnight.",
+        "zh": "保持实例运行并在夜间扩大规格。",
+        "ja": "インスタンスを稼働させたまま夜間にサイズを大きくする。"
+      }
+    ],
+    "explanation": {
+      "en": "Stopping nonproduction instances outside their usage window can avoid applicable instance compute charges, though attached storage and other resources can continue to incur charges.",
+      "zh": "在非生产实例的使用时段外将其停止，可避免相应的实例计算费用；但附加存储和其他资源仍可能产生费用。",
+      "ja": "非本番インスタンスを利用時間外に停止すると、該当するインスタンス計算料金を抑えられる。ただし接続ストレージなどの料金は継続する場合がある。"
+    }
+  },
+  {
+    "id": 50,
+    "domain": 4,
+    "task": "4.1",
+    "select": 1,
+    "answer": [
+      "B"
+    ],
+    "stem": {
+      "en": "A company must retain old audit objects for ten years, then delete them automatically. Objects are rarely retrieved. Which S3 design is most appropriate?",
+      "zh": "一家公司必须保留旧审计对象十年，之后自动删除，且极少取回。哪种 S3 设计最合适？",
+      "ja": "古い監査オブジェクトを 10 年間保存し、その後自動削除する。取得頻度は非常に低い。最適な S3 設計はどれか。"
+    },
+    "options": [
+      {
+        "letter": "A",
+        "en": "Keep all objects in S3 Standard forever.",
+        "zh": "将所有对象永久保存在 S3 Standard。",
+        "ja": "すべてのオブジェクトを S3 Standard に永久保存する。"
+      },
+      {
+        "letter": "B",
+        "en": "Use an S3 lifecycle rule to transition objects to Glacier Deep Archive and expire them after the retention period.",
+        "zh": "使用 S3 生命周期规则将对象转入 Glacier Deep Archive，并在保留期后过期删除。",
+        "ja": "S3 ライフサイクルルールで Glacier Deep Archive に移行し、保存期間後に期限切れにする。"
+      },
+      {
+        "letter": "C",
+        "en": "Copy objects daily to an EBS volume and delete the bucket.",
+        "zh": "每天将对象复制到 EBS 卷后删除存储桶。",
+        "ja": "毎日 EBS にコピーしてバケットを削除する。"
+      },
+      {
+        "letter": "D",
+        "en": "Use S3 Express One Zone for ten-year retention.",
+        "zh": "使用 S3 Express One Zone 保留十年。",
+        "ja": "10 年保存に S3 Express One Zone を使う。"
+      }
+    ],
+    "explanation": {
+      "en": "Lifecycle transitions automate movement to a lower-cost archive class, and expiration can enforce the retention period. Deep Archive fits data that is rarely accessed and can tolerate hours-long retrieval.",
+      "zh": "生命周期转换可自动将数据移至成本更低的归档类，过期规则可执行保留期限。Deep Archive 适合极少访问且可容忍数小时取回的数据。",
+      "ja": "ライフサイクル移行で低コストのアーカイブクラスへ自動移動し、有効期限で保存期間を適用できる。Deep Archive は取得に数時間かかってもよい低頻度データ向けである。"
+    }
+  }
+]

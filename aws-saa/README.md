@@ -1,6 +1,6 @@
 # AWS SAA-C03 备考题库（中英对照）
 
-AWS Certified Solutions Architect – Associate (SAA-C03) 备考题库。**两条线分开存放**，各 10 份、每份 50 题，共 **1000 题**，全部**中英对照 + 带答案**（A 线另带逐题解析）。外加 AWS 官方样题 10 题。
+AWS Certified Solutions Architect – Associate (SAA-C03) 备考题库。A、B 两条题库各 10 份、每份 50 题，共 **1000 题**；另有 **50 道原创加练题**和 AWS 官方样题 10 题。新增原创卷提供英中日题干、选项与解析。
 
 > 打开 **`output/index.html`** 就是总入口。
 
@@ -14,6 +14,10 @@ AWS Certified Solutions Architect – Associate (SAA-C03) 备考题库。**两�
 output/
 ├── index.html              # 总入口（先开这个）
 ├── appendix_official.html  # 附录：AWS 官方样题 10 题（官方答案与解析）
+├── original-questions.json # 原创加练卷数据（构建时生成）
+├── build_original.mjs      # 生成原创加练卷 HTML 与题目数据
+├── original/               # C 线 · 原创加练卷
+│   └── part01.html         # 50 题，英中日对照
 ├── real/                   # A 线 · 真题演练卷（HydraNode）
 │   ├── index.html
 │   ├── part01.html …part10.html    # 每份 50 题

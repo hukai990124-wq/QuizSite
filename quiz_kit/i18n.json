@@ -241,6 +241,10 @@
   "en": "Submit & see score",
   "ja": "採点して成績を見る"
  },
+ "单选 · 需选 1 项": {
+  "en": "Single answer · pick 1",
+  "ja": "単一選択 · 1つ選択"
+ },
  "多选 · 需选 2 项": {
   "en": "Multi-select · pick 2",
   "ja": "複数選択 · 2つ選択"
@@ -652,6 +656,50 @@
  "AWS SAA-C03 题库": {
   "en": "AWS SAA-C03 Question Bank",
   "ja": "AWS SAA-C03 問題集"
+ },
+ "1050 题 · 中英对照（原创加练卷含日文） · 可作答判分 · 21 份练习卷，每份 50 题（另含官方样题 10 题）": {
+  "en": "1,050 practice questions · English-Chinese (the original extra set also has Japanese) · Instant scoring · 21 sets of 50 (plus 10 official sample questions)",
+  "ja": "練習問題1,050問・英中対応（オリジナル追加セットは日本語も対応）・即時採点・50問×21セット（公式サンプル10問を含む）"
+ },
+ "从三组题库中抽取": {
+  "en": "Drawn from three question banks",
+  "ja": "3つの問題集から出題"
+ },
+ "练习题库": {
+  "en": "Practice question banks",
+  "ja": "練習問題集"
+ },
+ "C 线 · 原创加练卷（50 题）": {
+  "en": "Track C · Original extra practice (50 questions)",
+  "ja": "Cライン・オリジナル追加演習（50問）"
+ },
+ "覆盖四大考试领域 · 中英日对照 · 每题带答案与解析": {
+  "en": "Covers all four exam domains · English, Chinese and Japanese · Answers and explanations included",
+  "ja": "4つの試験分野を網羅・英中日対応・解答と解説付き"
+ },
+ "原创练习": {
+  "en": "Original practice",
+  "ja": "オリジナル演習"
+ },
+ "AWS SAA-C03 原创加练卷 · 第 01 份": {
+  "en": "AWS SAA-C03 Original Extra Practice · Paper 01",
+  "ja": "AWS SAA-C03 オリジナル追加演習・第01セット"
+ },
+ "50 道原创练习题 · 覆盖四大考试领域 · 附答案与解析": {
+  "en": "50 original practice questions · Covers all four exam domains · Answers and explanations included",
+  "ja": "オリジナル練習問題50問・4つの試験分野を網羅・解答と解説付き"
+ },
+ "中英对照，含真题演练卷、原创练习卷与官方样题；新增 50 道英中日原创加练题，附答案解析。": {
+  "en": "English-Chinese question sets, past-exam practice and official samples; plus 50 original English-Chinese-Japanese questions with answers and explanations.",
+  "ja": "英中対応の演習・過去問セットと公式サンプルに加え、英中日対応のオリジナル問題50問（解答・解説付き）。"
+ },
+ "1050 题": {
+  "en": "1,050 questions",
+  "ja": "1050問"
+ },
+ "1060 题": {
+  "en": "1,060 questions",
+  "ja": "1060問"
  },
  "AWS 官方样题（10 题）": {
   "en": "AWS official sample questions (10)",

@@ -1,0 +1,2154 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS SAA-C03 原创加练卷 · 第 01 份</title><style>
+:root{--line:#e3e6ea;--muted:#6b7280;--en:#111827;--zh:#0f4c81;--badge:#eff6ff;--badge-line:#bfdbfe}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:var(--en);font:15px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 22px 90px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:9;background:#fff;border:1px solid var(--line);border-radius:12px;
+ padding:10px 14px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.toolbar .btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.toolbar button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer}
+.toolbar button:hover{background:#f3f4f6}
+.toolbar button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.toolbar button.primary:hover{background:#0a5d33}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;scroll-margin-top:118px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.qno{font-weight:700;font-size:15px}
+.badge{font-size:11px;color:#1d4ed8;background:var(--badge);border:1px solid var(--badge-line);border-radius:999px;padding:2px 9px}
+.stem p{margin:0 0 6px}
+.en{color:var(--en)}
+.zh{color:var(--zh);font-size:14px}
+.zh:before{content:"中译 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}
+.opts{list-style:none;margin:12px 0 0;padding:0}
+.opts li{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;background:#fcfcfd}
+.letter{flex:0 0 22px;height:22px;line-height:22px;text-align:center;font-weight:700;font-size:12px;background:#fff;border:1px solid #d1d5db;border-radius:999px}
+.otext{flex:1 1 auto;min-width:0}
+.opts p{margin:0 0 4px}
+details.ans{margin-top:12px;border:1px solid #cdebd6;background:#f4fdf7;border-radius:10px}
+details.ans summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;color:#065f46}
+details.ans .correct,details.ans .expl{padding:0 14px}
+details.ans .correct{font-size:14px;margin:4px 0 8px}
+details.ans .correct b{color:#047857;font-size:16px}
+details.ans .expl{padding-bottom:12px}
+a.card{display:block;background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:15px 18px;
+ margin-bottom:10px;text-decoration:none;color:#111827}
+a.card:hover{border-color:#93c5fd;background:#f8fbff}
+a.card .n{font-weight:700}
+a.card .r{color:#6b7280;font-size:13px;margin-top:3px}
+@media print{
+ body{background:#fff}
+ .toolbar{display:none}
+ .wrap{max-width:none;padding:0}
+ .q{border:none;border-bottom:1px solid #ddd;border-radius:0;padding:14px 0;page-break-inside:avoid;margin:0}
+ details.ans{border:1px solid #ccc;background:#fff;display:block}
+ details.ans .expl{display:block}
+}
+
+/* ===================== 答题引擎（共用） ===================== */
+li.opt{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s ease,border-color .12s ease}
+@media (hover:hover){.q:not(.done) li.opt:hover{border-color:#98b0c6;background:#f7fbfd}}
+.q.done li.opt{cursor:default}
+li.opt.sel{border-color:#4a7fb5;background:#eef5fc}
+li.opt.ok{border-color:#0b7a44;background:#eaf7ef}
+li.opt.ok .letter{background:#0b7a44;color:#fff;border-color:#0b7a44}
+li.opt.bad{border-color:#c0392b;background:#fdeeed}
+li.opt.bad .letter{background:#c0392b;color:#fff;border-color:#c0392b}
+li.opt.miss{border-color:#c98a00;background:#fff8e6}
+li.opt.miss .letter{border-color:#c98a00;color:#a06b00}
+li.opt::after{margin-left:auto;font-weight:700;font-size:15px;align-self:center;flex:0 0 auto}
+li.opt.ok::after{content:"✓";color:#0b7a44}
+li.opt.bad::after{content:"✗";color:#c0392b}
+li.opt.miss::after{content:"正解";font-size:11px;color:#a06b00}
+
+/* 锚点定位避开 sticky 工具栏（高度由 JS 实测写入 --tb） */
+.q{scroll-margin-top:calc(var(--tb,110px) + 16px)}
+
+/* 窄屏收紧 */
+@media (max-width:560px){
+  .toolbar{padding:8px 0 9px!important}
+  .toolbar .btns{gap:6px!important}
+  .toolbar button{font-size:12px!important;padding:5px 10px!important}
+  .qbar{font-size:12px;gap:4px 12px}
+  .pbar{flex:1 1 100%;height:5px}
+  .q{padding:16px 15px!important}
+}
+
+/* 题目操作区 */
+.qact{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+.qact button{font:inherit;font-size:13px;padding:7px 15px;border-radius:8px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer}
+.qact button:hover{background:#f1f5f9}
+.qact button.primary{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
+.qact button.primary:hover{background:#0a5d33}
+.qact button.primary:disabled{background:#ccd5db;border-color:#ccd5db;cursor:not-allowed}
+.qact .js-redo,.qact .js-next{display:none}
+.q.done .js-redo,.q.done .js-next{display:inline-block}
+.q.done .js-submit,.q.done .js-reveal,.q.done .need{display:none}
+.qact .need{font-size:12px;color:#a06b00;background:#fff8e6;border:1px solid #f0dca8;border-radius:6px;padding:3px 9px}
+
+/* 判定提示 */
+.verdict{display:none;margin:10px 0 0;font-size:13.5px}
+.verdict.show{display:block}
+.verdict .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v-ok{color:#0b7a44;font-weight:700}
+.v-bad{color:#c0392b;font-weight:700}
+.v-key{color:#5b6570}
+.v-key b{color:#111;font-size:15px}
+
+/* 顶部统计条 */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px 16px;font-size:13px;color:#5b6570;width:100%}
+.qbar b{color:#111;font-variant-numeric:tabular-nums}
+.qbar b.ok{color:#0b7a44}
+.qbar b.bad{color:#c0392b}
+.pbar{flex:1 1 110px;height:6px;background:#e6ebef;border-radius:99px;overflow:hidden;min-width:80px}
+.pbar i{display:block;height:100%;width:0;background:#0b7a44;transition:width .25s ease}
+body.only-wrong .q:not(.wrong){display:none}
+button.on{background:#0b6b3a!important;color:#fff!important;border-color:#0b6b3a!important}
+
+/* 答题卡浮层 */
+.sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dfe5ea;
+ box-shadow:0 -4px 18px rgba(0,0,0,.10);padding:12px 16px 16px;z-index:40;
+ transform:translateY(115%);transition:transform .22s ease}
+.sheet.open{transform:translateY(0)}
+.sheet .hd{display:flex;align-items:center;gap:14px;font-size:13px;color:#5b6570;margin-bottom:9px;flex-wrap:wrap}
+.sheet .hd b{color:#111}
+.sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;max-height:38vh;overflow:auto}
+.sheet .grid a{display:block;text-align:center;padding:6px 0;border:1px solid #dfe5ea;border-radius:7px;
+ font-size:12px;text-decoration:none;color:#334155;background:#fff;font-variant-numeric:tabular-nums}
+.sheet .grid a.ok{background:#eaf7ef;border-color:#0b7a44;color:#0b7a44;font-weight:700}
+.sheet .grid a.bad{background:#fdeeed;border-color:#c0392b;color:#c0392b;font-weight:700}
+
+/* 交卷成绩单 */
+.mask{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(15,23,42,.45);display:none;
+ align-items:center;justify-content:center;z-index:60;padding:18px}
+.mask.open{display:flex}
+.report{background:#fff;border-radius:14px;max-width:390px;width:100%;padding:22px 24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:88vh;overflow:auto}
+.report h3{margin:0;font-size:17px;color:#0f172a}
+.report .big{font-size:42px;font-weight:800;color:#0b6b3a;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.report table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 18px}
+.report td{padding:6px 0;border-bottom:1px solid #eef2f5;color:#475569}
+.report td:last-child{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.report .row{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.report button{font:inherit;font-size:13.5px;padding:8px 16px;border-radius:8px;border:1px solid #0b6b3a;background:#0b6b3a;color:#fff;cursor:pointer}
+.report button.ghost{background:#fff;color:#0b6b3a}
+
+@media print{
+ .qbar,.sheet,.mask,.verdict,.qact,button.redo{display:none!important}
+ li.opt{border:1px solid #ccc!important;background:#fff!important}
+ li.opt.ok,li.opt.bad,li.opt.miss{background:#fff!important}
+ body.only-wrong .q:not(.wrong){display:block}
+}
+.toolbar button,.toolbar a.navback{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block}
+.toolbar button:hover,.toolbar a.navback:hover{background:#f3f4f6}
+.toolbar a.navback{font-weight:600;color:#0b6b3a;border-color:#c9e4d6;background:#f2faf6}
+
+/* English remains visible; show only the selected translation. */
+.wrap .zh,.wrap .ja{display:none}
+html[data-lang="zh"] .wrap .zh{display:block}
+html[data-lang="ja"] .wrap .ja{display:block;color:#0f4c81;font-size:14px}
+html[data-lang="ja"] .wrap .ja:before{content:"日訳 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}
+</style><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+<!--i18n:head-->
+<style id="i18n-css">
+.lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
+footer .lang-switch{margin-top:14px}
+.lang-switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.lang-switch button{font:inherit;font-size:12.5px;line-height:1.25;padding:5px 13px;border-radius:99px;
+ border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,border-color .12s,color .12s}
+.lang-switch button:hover{background:#f1f5f9}
+.lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff;font-weight:600}
+/* CSS 伪元素里的中文标签（不是 DOM 文本节点，只能靠覆盖规则跟着语言走） */
+html[data-lang="en"] li.opt.miss::after{content:"KEY"}
+html[data-lang="en"] .zh:before{content:"ZH "}
+html[data-lang="ja"] .zh:before{content:"中訳 "}
+html[data-i18n-wait] body{visibility:hidden}
+@media print{.lang-foot,footer .lang-switch{display:none!important}}
+</style>
+<script id="i18n-init">
+(function(){try{
+var L=["zh","en","ja"],l=null;
+try{l=localStorage.getItem("ui:lang")}catch(e){}
+if(L.indexOf(l)<0){var n=String(navigator.language||navigator.userLanguage||"").toLowerCase();
+ l=n.indexOf("ja")===0?"ja":(n.indexOf("zh")===0?"zh":"en");}
+if(l!=="zh"){document.documentElement.setAttribute("data-i18n-wait","1");
+ setTimeout(function(){document.documentElement.removeAttribute("data-i18n-wait")},1500);}
+document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
+}catch(e){}})();
+</script>
+<!--/i18n:head--></head><body>
+<div class="wrap">
+<h1>AWS SAA-C03 原创加练卷 · 第 01 份</h1>
+<p class="sub">50 道原创练习题 · 覆盖四大考试领域 · 附答案与解析</p>
+<div class="toolbar"><div class="btns"><a class="navback" href="../index.html">← 返回目录</a>
+<button class="primary" id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button><button onclick="window.print()" type="button">打印 / 存 PDF</button>
+</div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>50</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div>
+<div class="q" id="q1" data-n="1" data-ans="B">
+  <div class="qhead"><span class="qno">Question 1</span><span class="badge">Domain 1 · Task 1.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A company lets a vendor manage resources in its AWS account. The vendor must access the account from its own AWS account, and the company must be able to identify the vendor in audit logs. What should the company configure?</p>
+<p class="zh">一家公司委托供应商管理其 AWS 账户中的资源。供应商需从自己的 AWS 账户访问，且公司必须能在审计日志中识别供应商。公司应如何配置？</p>
+<p class="ja">ある会社は、AWS アカウント内のリソース管理をベンダーに委託する。ベンダーは自社の AWS アカウントからアクセスし、会社は監査ログでベンダーを識別する必要がある。何を設定すべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Create an IAM user for each vendor employee and share access keys.</p>
+<p class="zh">为每位供应商员工创建 IAM 用户并共享访问密钥。</p>
+<p class="ja">ベンダーの各従業員に IAM ユーザーを作成し、アクセスキーを共有する。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Create a cross-account IAM role and require an external ID in its trust policy.</p>
+<p class="zh">创建跨账户 IAM 角色，并在信任策略中要求提供外部 ID。</p>
+<p class="ja">クロスアカウント IAM ロールを作成し、信頼ポリシーで外部 ID を必須にする。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Make the vendor&#39;s AWS account an organization administrator.</p>
+<p class="zh">将供应商的 AWS 账户设为组织管理员。</p>
+<p class="ja">ベンダーの AWS アカウントを Organizations の管理者にする。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Allow the vendor to use the root user&#39;s access keys.</p>
+<p class="zh">允许供应商使用根用户访问密钥。</p>
+<p class="ja">ベンダーにルートユーザーのアクセスキーを使わせる。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">A role lets the vendor assume temporary, scoped credentials. The external ID helps prevent the confused deputy problem and identifies the vendor integration.</p>
+<p class="zh">角色可让供应商取得临时且受限的凭证。外部 ID 有助于防止“混淆代理人”问题，并标识供应商集成。</p>
+<p class="ja">ロールを使えば、ベンダーは範囲を限定した一時認証情報を取得できる。外部 ID は confused deputy 問題の防止に役立ち、連携先の識別にも使える。</p></div>
+  </details>
+</div>
+<div class="q" id="q2" data-n="2" data-ans="A">
+  <div class="qhead"><span class="qno">Question 2</span><span class="badge">Domain 1 · Task 1.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A company serves private documents through CloudFront with an Amazon S3 bucket as the origin. Only CloudFront should read the objects. Which solution is best?</p>
+<p class="zh">一家公司通过 CloudFront 提供私有文档，源站是 Amazon S3 存储桶。只有 CloudFront 应能读取对象。哪种方案最好？</p>
+<p class="ja">ある会社は Amazon S3 バケットをオリジンとして、CloudFront 経由で非公開ドキュメントを配信する。オブジェクトを読み取れるのは CloudFront のみにしたい。最適な方法はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Use CloudFront Origin Access Control and a bucket policy that allows the distribution.</p>
+<p class="zh">使用 CloudFront Origin Access Control，并通过存储桶策略仅允许该分配访问。</p>
+<p class="ja">CloudFront の Origin Access Control を使い、ディストリビューションだけを許可するバケットポリシーを設定する。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Make the bucket public and hide its URL.</p>
+<p class="zh">将存储桶设为公开并隐藏其 URL。</p>
+<p class="ja">バケットを公開し、URL を隠す。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Put the bucket credentials in the CloudFront URL.</p>
+<p class="zh">将存储桶凭证放入 CloudFront URL。</p>
+<p class="ja">バケットの認証情報を CloudFront URL に含める。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Allow every AWS principal to read the bucket.</p>
+<p class="zh">允许所有 AWS 主体读取存储桶。</p>
+<p class="ja">すべての AWS プリンシパルにバケットの読み取りを許可する。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">Origin Access Control signs origin requests, while the bucket policy restricts access to the intended CloudFront distribution. The bucket can remain private.</p>
+<p class="zh">Origin Access Control 会对源站请求签名，存储桶策略则将访问限制为指定的 CloudFront 分配，因此存储桶仍可保持私有。</p>
+<p class="ja">Origin Access Control はオリジンへのリクエストに署名し、バケットポリシーは指定ディストリビューションだけに制限する。バケットは非公開のままにできる。</p></div>
+  </details>
+</div>
+<div class="q" id="q3" data-n="3" data-ans="C">
+  <div class="qhead"><span class="qno">Question 3</span><span class="badge">Domain 1 · Task 1.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A public application behind an Application Load Balancer must block common SQL injection attempts before they reach the application. Which service should be used?</p>
+<p class="zh">一个位于 Application Load Balancer 后的公共应用，需要在常见 SQL 注入请求到达应用前将其拦截。应使用哪项服务？</p>
+<p class="ja">Application Load Balancer の背後にある公開アプリケーションで、一般的な SQL インジェクションをアプリ到達前に遮断したい。どのサービスを使うべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Amazon GuardDuty</p>
+<p class="zh">Amazon GuardDuty</p>
+<p class="ja">Amazon GuardDuty</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">AWS Network Firewall only</p>
+<p class="zh">仅使用 AWS Network Firewall</p>
+<p class="ja">AWS Network Firewall のみ</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">AWS WAF with managed rule groups</p>
+<p class="zh">使用 AWS WAF 托管规则组</p>
+<p class="ja">マネージドルールグループを設定した AWS WAF</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Amazon Inspector</p>
+<p class="zh">Amazon Inspector</p>
+<p class="ja">Amazon Inspector</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">AWS WAF evaluates HTTP requests and managed rule groups can detect common web exploits such as SQL injection. It can protect an ALB directly.</p>
+<p class="zh">AWS WAF 会检查 HTTP 请求，托管规则组可以检测 SQL 注入等常见 Web 攻击，并可直接保护 ALB。</p>
+<p class="ja">AWS WAF は HTTP リクエストを評価し、マネージドルールで SQL インジェクションなどの一般的な攻撃を検出できる。ALB を直接保護できる。</p></div>
+  </details>
+</div>
+<div class="q" id="q4" data-n="4" data-ans="D">
+  <div class="qhead"><span class="qno">Question 4</span><span class="badge">Domain 1 · Task 1.1 · Select 1</span></div>
+  <div class="stem"><p class="en">An application on Amazon EC2 needs to read objects from one S3 bucket. Credentials must rotate automatically and must not be stored on the instance. What should be used?</p>
+<p class="zh">Amazon EC2 上的应用需要读取一个 S3 存储桶中的对象。凭证必须自动轮换，且不能存储在实例上。应采用什么方式？</p>
+<p class="ja">Amazon EC2 上のアプリケーションが S3 バケットのオブジェクトを読み取る。認証情報を自動更新し、インスタンスに保存しない方法はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">A long-lived IAM access key in a configuration file</p>
+<p class="zh">配置文件中的长期 IAM 访问密钥</p>
+<p class="ja">設定ファイルに保存した長期 IAM アクセスキー</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">The account root user&#39;s access key</p>
+<p class="zh">账户根用户访问密钥</p>
+<p class="ja">アカウントのルートユーザーアクセスキー</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">A public S3 bucket URL</p>
+<p class="zh">公开的 S3 存储桶 URL</p>
+<p class="ja">公開 S3 バケットの URL</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">An EC2 instance profile with a least-privilege role</p>
+<p class="zh">附加最小权限角色的 EC2 实例配置文件</p>
+<p class="ja">最小権限ロールを持つ EC2 インスタンスプロファイル</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">An instance profile supplies temporary role credentials through the AWS SDK. The role can grant only the required S3 actions and credentials rotate automatically.</p>
+<p class="zh">实例配置文件通过 AWS SDK 提供临时角色凭证。角色只授予所需的 S3 操作，凭证也会自动轮换。</p>
+<p class="ja">インスタンスプロファイルは AWS SDK に一時的なロール認証情報を提供する。必要な S3 操作だけを許可でき、認証情報は自動更新される。</p></div>
+  </details>
+</div>
+<div class="q" id="q5" data-n="5" data-ans="A">
+  <div class="qhead"><span class="qno">Question 5</span><span class="badge">Domain 1 · Task 1.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A company manages many AWS accounts and wants employees to sign in once, use centrally assigned permission sets, and avoid creating separate IAM users in every account. Which service fits?</p>
+<p class="zh">一家公司管理多个 AWS 账户，希望员工统一登录、使用集中分配的权限集，并避免在每个账户中单独创建 IAM 用户。哪项服务适合？</p>
+<p class="ja">複数の AWS アカウントを管理する会社が、一度のサインインと一元管理された権限セットを使い、各アカウントで個別に IAM ユーザーを作らずに済ませたい。適切なサービスはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">AWS IAM Identity Center</p>
+<p class="zh">AWS IAM Identity Center</p>
+<p class="ja">AWS IAM Identity Center</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">AWS Artifact</p>
+<p class="zh">AWS Artifact</p>
+<p class="ja">AWS Artifact</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon Cognito identity pools only</p>
+<p class="zh">Amazon Cognito identity pools のみ</p>
+<p class="ja">Amazon Cognito ID プールのみ</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">AWS Certificate Manager</p>
+<p class="zh">AWS Certificate Manager</p>
+<p class="ja">AWS Certificate Manager</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">IAM Identity Center centrally manages workforce access to multiple AWS accounts and applications using permission sets and a single sign-on experience.</p>
+<p class="zh">IAM Identity Center 使用权限集和单点登录体验，集中管理员工对多个 AWS 账户和应用的访问。</p>
+<p class="ja">IAM Identity Center は権限セットとシングルサインオンにより、複数アカウントやアプリへの従業員アクセスを一元管理する。</p></div>
+  </details>
+</div>
+<div class="q" id="q6" data-n="6" data-ans="B">
+  <div class="qhead"><span class="qno">Question 6</span><span class="badge">Domain 1 · Task 1.2 · Select 1</span></div>
+  <div class="stem"><p class="en">Private-subnet instances need to access S3 without using a NAT gateway or traversing the public internet. Which VPC component should be added?</p>
+<p class="zh">私有子网中的实例需要访问 S3，但不能使用 NAT 网关或经过公共互联网。应添加哪种 VPC 组件？</p>
+<p class="ja">プライベートサブネットのインスタンスが、NAT ゲートウェイやインターネットを経由せずに S3 へアクセスしたい。追加すべき VPC コンポーネントはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">An internet gateway</p>
+<p class="zh">Internet Gateway</p>
+<p class="ja">インターネットゲートウェイ</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">An S3 gateway VPC endpoint and route-table association</p>
+<p class="zh">S3 Gateway VPC Endpoint，并关联路由表</p>
+<p class="ja">S3 Gateway VPC Endpoint とルートテーブルの関連付け</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">A public IP address for each instance</p>
+<p class="zh">每个实例分配一个公有 IP 地址</p>
+<p class="ja">各インスタンスにパブリック IP を割り当てる</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">A NAT instance in every subnet</p>
+<p class="zh">每个子网部署 NAT 实例</p>
+<p class="ja">各サブネットに NAT インスタンスを配置する</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">An S3 gateway endpoint provides private connectivity from selected route tables to S3 without a NAT gateway or internet gateway data path.</p>
+<p class="zh">S3 Gateway Endpoint 可让指定路由表通过私有路径连接 S3，无需 NAT 网关或互联网网关数据路径。</p>
+<p class="ja">S3 Gateway Endpoint は選択したルートテーブルから S3 へのプライベート接続を提供し、NAT ゲートウェイやインターネット経由を不要にする。</p></div>
+  </details>
+</div>
+<div class="q" id="q7" data-n="7" data-ans="C">
+  <div class="qhead"><span class="qno">Question 7</span><span class="badge">Domain 1 · Task 1.3 · Select 1</span></div>
+  <div class="stem"><p class="en">An application writes sensitive records to S3. The security team requires server-side encryption with a customer-managed KMS key and control over who can decrypt. What should be configured?</p>
+<p class="zh">应用将敏感记录写入 S3。安全团队要求使用客户管理的 KMS 密钥进行服务器端加密，并控制谁可以解密。应如何配置？</p>
+<p class="ja">アプリケーションが機密レコードを S3 に書き込む。セキュリティチームは、カスタマーマネージド KMS キーによるサーバー側暗号化と、復号できる主体の制御を求めている。何を設定すべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">SSE-S3 and public read access</p>
+<p class="zh">SSE-S3 と公開読み取りアクセス</p>
+<p class="ja">SSE-S3 と公開読み取りアクセス</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Client-side encryption with a key stored in the object metadata</p>
+<p class="zh">オブジェクトメタデータ内に鍵を保存するクライアント側暗号化</p>
+<p class="ja">オブジェクトメタデータに鍵を保存するクライアント側暗号化</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">SSE-KMS with a customer-managed key policy and narrowly scoped IAM permissions</p>
+<p class="zh">SSE-KMS、顧客管理キーのキーポリシー、範囲を絞った IAM 権限</p>
+<p class="ja">SSE-KMS とカスタマーマネージドキーのキーポリシー、および最小限の IAM 権限</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Disable encryption and rely on bucket names being private</p>
+<p class="zh">暗号化を無効にし、存储桶名称保密即可</p>
+<p class="ja">暗号化を無効にし、バケット名を秘密にする</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">SSE-KMS uses the selected KMS key for encryption. The key policy and IAM permissions together control which principals can use the key to decrypt.</p>
+<p class="zh">SSE-KMS 使用指定 KMS 密钥加密；密钥策略和 IAM 权限共同控制哪些主体可以使用密钥解密。</p>
+<p class="ja">SSE-KMS は指定した KMS キーで暗号化する。キーポリシーと IAM 権限により、復号にキーを使える主体を制御する。</p></div>
+  </details>
+</div>
+<div class="q" id="q8" data-n="8" data-ans="D">
+  <div class="qhead"><span class="qno">Question 8</span><span class="badge">Domain 1 · Task 1.3 · Select 1</span></div>
+  <div class="stem"><p class="en">A web application stores database passwords that must rotate automatically and be retrieved by the application at runtime. Which service should store them?</p>
+<p class="zh">Web 应用需要保存数据库密码，密码必须自动轮换，并由应用在运行时获取。应使用哪项服务存储？</p>
+<p class="ja">Web アプリケーションがデータベースのパスワードを保存し、自動更新したうえで実行時に取得したい。どのサービスに保存すべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Amazon S3 with public access blocked</p>
+<p class="zh">阻止公开访问的 Amazon S3</p>
+<p class="ja">パブリックアクセスをブロックした Amazon S3</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon CloudWatch Logs</p>
+<p class="zh">Amazon CloudWatch Logs</p>
+<p class="ja">Amazon CloudWatch Logs</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">An EC2 user-data script</p>
+<p class="zh">EC2 user-data スクリプト</p>
+<p class="ja">EC2 の user-data スクリプト</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">AWS Secrets Manager with rotation enabled</p>
+<p class="zh">启用轮换的 AWS Secrets Manager</p>
+<p class="ja">ローテーションを有効にした AWS Secrets Manager</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">Secrets Manager stores secrets securely, supports managed rotation for supported databases, and provides APIs for retrieval at runtime.</p>
+<p class="zh">Secrets Manager 可安全存储机密，支持为特定数据库托管轮换，并提供运行时读取 API。</p>
+<p class="ja">Secrets Manager はシークレットを安全に保存し、対応データベースの管理ローテーションと実行時取得 API を提供する。</p></div>
+  </details>
+</div>
+<div class="q" id="q9" data-n="9" data-ans="A, C">
+  <div class="qhead"><span class="qno">Question 9</span><span class="badge">Domain 1 · Task 1.2 · Select 2</span></div>
+  <div class="stem"><p class="en">A web tier runs on EC2 instances in private subnets. Only HTTPS requests from the internet should reach the application, and response traffic must work without opening broad inbound ranges. Which two controls should be used?</p>
+<p class="zh">Web 层运行在私有子网的 EC2 实例上。只有来自互联网的 HTTPS 请求应到达应用，且响应流量要正常工作，不能开放宽泛的入站范围。应采用哪两项控制？</p>
+<p class="ja">プライベートサブネットの EC2 で Web 層を実行する。インターネットからの HTTPS のみをアプリに到達させ、広いインバウンド範囲を開かずに応答通信も許可したい。どの 2 つの制御を使うべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Allow inbound HTTPS to the ALB security group and allow the EC2 security group to receive traffic only from the ALB security group.</p>
+<p class="zh">允许 ALB 安全组入站 HTTPS，并只允许 EC2 安全组接收来自 ALB 安全组的流量。</p>
+<p class="ja">ALB のセキュリティグループで HTTPS を許可し、EC2 側では ALB のセキュリティグループからの通信のみ許可する。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Assign public IP addresses to every EC2 instance.</p>
+<p class="zh">为每台 EC2 实例分配公有 IP。</p>
+<p class="ja">すべての EC2 インスタンスにパブリック IP を割り当てる。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Keep the EC2 instances private and place the ALB in public subnets.</p>
+<p class="zh">让 EC2 实例保持私有，并将 ALB 放在公有子网。</p>
+<p class="ja">EC2 をプライベートに保ち、ALB をパブリックサブネットに配置する。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Allow all inbound traffic in the EC2 security group.</p>
+<p class="zh">允许 EC2 安全组的所有入站流量。</p>
+<p class="ja">EC2 のセキュリティグループで全インバウンド通信を許可する。</p></div>
+    </li>
+<li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext"><p class="en">Replace security-group rules with a network ACL that allows all inbound traffic.</p>
+<p class="zh">用允许所有入站流量的网络 ACL 替代安全组规则。</p>
+<p class="ja">セキュリティグループの代わりに、すべてのインバウンド通信を許可するネットワーク ACL を使う。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A, C</b></p>
+    <div class="expl"><p class="en">A public ALB is the internet entry point; the EC2 tier stays private and accepts traffic only from the ALB. Security groups are stateful, so response traffic is automatically allowed. If subnet NACLs are used, their stateless rules must also permit required return ports.</p>
+<p class="zh">公共 ALB 作为互联网入口；EC2 层保持私有，并且只接收来自 ALB 的流量。安全组是有状态的，会自动允许响应流量。若使用子网 NACL，还需通过无状态规则允许必要的返回端口。</p>
+<p class="ja">パブリック ALB を入口とし、EC2 層はプライベートにして ALB からのみ受信する。セキュリティグループはステートフルなので応答通信を許可する。NACL を使う場合は、ステートレスな戻りポートも許可する必要がある。</p></div>
+  </details>
+</div>
+<div class="q" id="q10" data-n="10" data-ans="B">
+  <div class="qhead"><span class="qno">Question 10</span><span class="badge">Domain 1 · Task 1.3 · Select 1</span></div>
+  <div class="stem"><p class="en">A company must discover sensitive personal data stored across many S3 buckets and receive findings for investigation. Which service is designed for this task?</p>
+<p class="zh">一家公司需要发现分散在多个 S3 存储桶中的敏感个人数据，并接收调查发现结果。哪项服务专为此任务设计？</p>
+<p class="ja">複数の S3 バケットに保存された機密個人データを検出し、調査用の検出結果を受け取りたい。適したサービスはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Amazon Detective</p>
+<p class="zh">Amazon Detective</p>
+<p class="ja">Amazon Detective</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon Macie</p>
+<p class="zh">Amazon Macie</p>
+<p class="ja">Amazon Macie</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">AWS Config</p>
+<p class="zh">AWS Config</p>
+<p class="ja">AWS Config</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">AWS Trusted Advisor</p>
+<p class="zh">AWS Trusted Advisor</p>
+<p class="ja">AWS Trusted Advisor</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">Amazon Macie discovers and helps protect sensitive data in S3, including personally identifiable information, and generates findings for review.</p>
+<p class="zh">Amazon Macie 可发现并帮助保护 S3 中的敏感数据（包括个人身份信息），并生成供审查的发现结果。</p>
+<p class="ja">Amazon Macie は個人識別情報など、S3 内の機密データを検出・保護し、確認用の検出結果を生成する。</p></div>
+  </details>
+</div>
+<div class="q" id="q11" data-n="11" data-ans="A">
+  <div class="qhead"><span class="qno">Question 11</span><span class="badge">Domain 1 · Task 1.3 · Select 1</span></div>
+  <div class="stem"><p class="en">A security team needs an auditable history of API calls made to AWS services, including who made each call and when. Which service should be enabled?</p>
+<p class="zh">安全团队需要可审计的 AWS 服务 API 调用历史，包括每次调用的人员和时间。应启用哪项服务？</p>
+<p class="ja">セキュリティチームが、実行者と時刻を含む AWS サービスへの API 呼び出し履歴を監査可能な形で記録したい。どのサービスを有効にすべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">AWS CloudTrail</p>
+<p class="zh">AWS CloudTrail</p>
+<p class="ja">AWS CloudTrail</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon CloudWatch metrics</p>
+<p class="zh">Amazon CloudWatch 指标</p>
+<p class="ja">Amazon CloudWatch メトリクス</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">AWS Health Dashboard</p>
+<p class="zh">AWS Health Dashboard</p>
+<p class="ja">AWS Health Dashboard</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Amazon Inspector</p>
+<p class="zh">Amazon Inspector</p>
+<p class="ja">Amazon Inspector</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">CloudTrail records account activity and API events. Trails can deliver logs to a protected S3 bucket for retention and audit analysis.</p>
+<p class="zh">CloudTrail 记录账户活动和 API 事件。Trail 可将日志发送到受保护的 S3 存储桶，以便保留和审计分析。</p>
+<p class="ja">CloudTrail はアカウントアクティビティと API イベントを記録する。Trail を使って保護された S3 バケットにログを保存し、監査できる。</p></div>
+  </details>
+</div>
+<div class="q" id="q12" data-n="12" data-ans="A, D">
+  <div class="qhead"><span class="qno">Question 12</span><span class="badge">Domain 1 · Task 1.3 · Select 2</span></div>
+  <div class="stem"><p class="en">A company processes regulated data. It requires encryption at rest in an RDS database and encryption in transit for database connections. Which two actions meet the requirements?</p>
+<p class="zh">一家公司处理受监管数据，要求 RDS 数据库静态加密，并对数据库连接进行传输加密。哪两项操作可以满足要求？</p>
+<p class="ja">規制対象データを扱う会社が、RDS の保存データとデータベース接続の両方を暗号化したい。要件を満たす 2 つの対応はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Enable RDS storage encryption with AWS KMS.</p>
+<p class="zh">使用 AWS KMS 启用 RDS 存储加密。</p>
+<p class="ja">AWS KMS による RDS ストレージ暗号化を有効にする。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Put the database in a private subnet without enabling encryption.</p>
+<p class="zh">将数据库放入私有子网，但不启用加密。</p>
+<p class="ja">暗号化を有効にせず、データベースをプライベートサブネットに置く。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Use a security group as a substitute for encryption.</p>
+<p class="zh">用安全组代替加密。</p>
+<p class="ja">暗号化の代わりにセキュリティグループを使う。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Configure the application to connect to the database using SSL/TLS.</p>
+<p class="zh">将应用配置为使用 SSL/TLS 连接数据库。</p>
+<p class="ja">アプリケーションから SSL/TLS でデータベースに接続する。</p></div>
+    </li>
+<li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext"><p class="en">Store database credentials in the source code repository.</p>
+<p class="zh">将数据库凭证存入源代码仓库。</p>
+<p class="ja">データベース認証情報をソースコードリポジトリに保存する。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A, D</b></p>
+    <div class="expl"><p class="en">RDS storage encryption protects data at rest, while TLS protects data sent over database connections. Network isolation alone does not encrypt either form of data.</p>
+<p class="zh">RDS 存储加密保护静态数据，TLS 保护数据库连接中的传输数据。仅做网络隔离并不能加密这两种数据。</p>
+<p class="ja">RDS ストレージ暗号化は保存データを保護し、TLS はデータベース接続中の通信を保護する。ネットワーク分離だけでは暗号化にならない。</p></div>
+  </details>
+</div>
+<div class="q" id="q13" data-n="13" data-ans="C">
+  <div class="qhead"><span class="qno">Question 13</span><span class="badge">Domain 1 · Task 1.3 · Select 1</span></div>
+  <div class="stem"><p class="en">A business unit needs a KMS key whose key policy it can manage and whose use can be audited and restricted independently. Which key type should it choose?</p>
+<p class="zh">某业务部门需要一个可自行管理密钥策略、独立限制密钥使用并进行审计的 KMS 密钥。应选择哪种密钥？</p>
+<p class="ja">ある部門が、キーポリシーを管理し、利用を個別に制限・監査できる KMS キーを必要としている。どの種類を選ぶべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">An AWS owned key</p>
+<p class="zh">AWS 所有密钥</p>
+<p class="ja">AWS 所有キー</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">An AWS managed key only</p>
+<p class="zh">仅 AWS 管理密钥</p>
+<p class="ja">AWS マネージドキーのみ</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">A customer managed KMS key</p>
+<p class="zh">客户管理的 KMS 密钥</p>
+<p class="ja">カスタマーマネージド KMS キー</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">A key copied into an IAM tag</p>
+<p class="zh">复制到 IAM 标签中的密钥</p>
+<p class="ja">IAM タグにコピーしたキー</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">A customer managed key gives the account control over its key policy, grants, rotation settings, and audit trail, subject to KMS service behavior.</p>
+<p class="zh">客户管理密钥允许账户控制密钥策略、授权、轮换设置和审计记录，同时遵循 KMS 服务行为。</p>
+<p class="ja">カスタマーマネージドキーなら、KMS の仕様の範囲内で、キーポリシー、グラント、ローテーション、監査をアカウント側で管理できる。</p></div>
+  </details>
+</div>
+<div class="q" id="q14" data-n="14" data-ans="D">
+  <div class="qhead"><span class="qno">Question 14</span><span class="badge">Domain 1 · Task 1.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A company connects its on-premises network to one VPC over an encrypted connection across the internet. It needs a managed site-to-site VPN. Which resources are required on the AWS side?</p>
+<p class="zh">一家公司通过互联网加密连接，将本地网络连接到一个 VPC，并需要托管式站点到站点 VPN。AWS 侧需要哪些资源？</p>
+<p class="ja">オンプレミスネットワークをインターネット経由の暗号化接続で 1 つの VPC に接続し、マネージド Site-to-Site VPN を使いたい。AWS 側で必要なリソースはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">A Direct Connect gateway and a public hosted zone</p>
+<p class="zh">Direct Connect Gateway 和公共托管区</p>
+<p class="ja">Direct Connect ゲートウェイとパブリックホストゾーン</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">A NAT gateway and an internet gateway only</p>
+<p class="zh">仅 NAT 网关和 Internet Gateway</p>
+<p class="ja">NAT ゲートウェイとインターネットゲートウェイのみ</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">A CloudFront distribution and an S3 endpoint</p>
+<p class="zh">CloudFront 分配和 S3 Endpoint</p>
+<p class="ja">CloudFront ディストリビューションと S3 Endpoint</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">A virtual private gateway attached to the VPC and a customer gateway representing the on-premises device</p>
+<p class="zh">附加到 VPC 的 Virtual Private Gateway，以及代表本地设备的 Customer Gateway</p>
+<p class="ja">VPC に接続する仮想プライベートゲートウェイと、オンプレミス機器を表すカスタマーゲートウェイ</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">AWS Site-to-Site VPN uses a virtual private gateway or transit gateway on the AWS side and a customer gateway resource to represent the on-premises endpoint.</p>
+<p class="zh">AWS Site-to-Site VPN 在 AWS 侧使用 Virtual Private Gateway 或 Transit Gateway，并用 Customer Gateway 资源代表本地端点。</p>
+<p class="ja">AWS Site-to-Site VPN は AWS 側の仮想プライベートゲートウェイまたはトランジットゲートウェイと、オンプレミス側を表すカスタマーゲートウェイを使う。</p></div>
+  </details>
+</div>
+<div class="q" id="q15" data-n="15" data-ans="B, E">
+  <div class="qhead"><span class="qno">Question 15</span><span class="badge">Domain 1 · Task 1.2 · Select 2</span></div>
+  <div class="stem"><p class="en">A public website needs protection against distributed denial-of-service attacks and common malicious HTTP requests. Which two services should be combined?</p>
+<p class="zh">一个公共网站需要防御分布式拒绝服务攻击和常见恶意 HTTP 请求。应组合使用哪两项服务？</p>
+<p class="ja">公開 Web サイトを DDoS 攻撃と一般的な悪意ある HTTP リクエストから保護したい。組み合わせるべき 2 つのサービスはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Amazon EBS and AWS Backup</p>
+<p class="zh">Amazon EBS 和 AWS Backup</p>
+<p class="ja">Amazon EBS と AWS Backup</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">AWS Shield Advanced for DDoS protection</p>
+<p class="zh">用于 DDoS 防护的 AWS Shield Advanced</p>
+<p class="ja">DDoS 保護の AWS Shield Advanced</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon Macie for request filtering</p>
+<p class="zh">用于请求过滤的 Amazon Macie</p>
+<p class="ja">リクエストフィルタリング用 Amazon Macie</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">AWS Config rules for HTTP inspection</p>
+<p class="zh">用于 HTTP 检查的 AWS Config 规则</p>
+<p class="ja">HTTP 検査用 AWS Config ルール</p></div>
+    </li>
+<li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext"><p class="en">AWS WAF rules for web request filtering</p>
+<p class="zh">用于 Web 请求过滤的 AWS WAF 规则</p>
+<p class="ja">Web リクエストフィルタリング用 AWS WAF ルール</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B, E</b></p>
+    <div class="expl"><p class="en">Shield Advanced provides enhanced DDoS protection, while AWS WAF filters application-layer web requests. They address complementary threat layers.</p>
+<p class="zh">Shield Advanced 提供增强的 DDoS 防护，AWS WAF 过滤应用层 Web 请求。两者覆盖互补的威胁层。</p>
+<p class="ja">Shield Advanced は高度な DDoS 保護を提供し、AWS WAF はアプリケーション層の Web リクエストをフィルタリングする。両者は異なる脅威層を補完する。</p></div>
+  </details>
+</div>
+<div class="q" id="q16" data-n="16" data-ans="A">
+  <div class="qhead"><span class="qno">Question 16</span><span class="badge">Domain 2 · Task 2.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A web application must scale across Availability Zones. Its EC2 web servers are stateless, and traffic varies widely during the day. Which design is most suitable?</p>
+<p class="zh">一个 Web 应用必须跨可用区扩展。EC2 Web 服务器无状态，流量在一天中变化很大。哪种设计最合适？</p>
+<p class="ja">Web アプリケーションを複数のアベイラビリティーゾーンで拡張する。EC2 Web サーバーはステートレスで、日中のトラフィック変動が大きい。最適な設計はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Use an Application Load Balancer with an Auto Scaling group spanning multiple Availability Zones.</p>
+<p class="zh">使用 Application Load Balancer，并配置跨多个可用区的 Auto Scaling 组。</p>
+<p class="ja">複数 AZ にまたがる Auto Scaling グループと Application Load Balancer を使う。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Run one large EC2 instance in one Availability Zone.</p>
+<p class="zh">在一个可用区运行一台大型 EC2 实例。</p>
+<p class="ja">1 つの AZ で大規模 EC2 インスタンスを 1 台だけ実行する。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Use an Elastic IP address as the scaling mechanism.</p>
+<p class="zh">使用 Elastic IP 地址实现扩展。</p>
+<p class="ja">Elastic IP アドレスでスケーリングする。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Store all application sessions on the instance disk.</p>
+<p class="zh">将所有应用会话存储在实例磁盘。</p>
+<p class="ja">すべてのアプリケーションセッションをインスタンスディスクに保存する。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">The load balancer distributes requests and the multi-AZ Auto Scaling group adjusts stateless compute capacity as demand changes while improving availability.</p>
+<p class="zh">负载均衡器分配请求，多可用区 Auto Scaling 组则随需求调整无状态计算容量，同时提高可用性。</p>
+<p class="ja">ロードバランサーがリクエストを分散し、マルチ AZ の Auto Scaling グループが需要に応じてステートレスな計算容量を調整し、可用性も高める。</p></div>
+  </details>
+</div>
+<div class="q" id="q17" data-n="17" data-ans="B">
+  <div class="qhead"><span class="qno">Question 17</span><span class="badge">Domain 2 · Task 2.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A checkout service must place orders reliably even when the downstream fulfillment service is temporarily unavailable. The two services should not call each other synchronously. What should be added?</p>
+<p class="zh">结账服务需要可靠地提交订单，即使下游履约服务暂时不可用。两个服务不应相互同步调用。应添加什么？</p>
+<p class="ja">下流の出荷サービスが一時停止していても、注文サービスが確実に注文を受け付けられるようにしたい。両サービスは同期呼び出しに依存しない。何を追加すべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">A shared EBS volume</p>
+<p class="zh">共享 EBS 卷</p>
+<p class="ja">共有 EBS ボリューム</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">An Amazon SQS queue between the services</p>
+<p class="zh">在服务之间添加 Amazon SQS 队列</p>
+<p class="ja">サービス間に Amazon SQS キューを配置する</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">A larger EC2 instance for the fulfillment service</p>
+<p class="zh">为履约服务换用更大型的 EC2 实例</p>
+<p class="ja">出荷サービスの EC2 を大きくする</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">A Route 53 private hosted zone</p>
+<p class="zh">Route 53 私有托管区</p>
+<p class="ja">Route 53 プライベートホストゾーン</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">SQS buffers orders durably and decouples the services. The fulfillment service can process messages when it recovers, while the checkout service remains available.</p>
+<p class="zh">SQS 可持久缓冲订单并解耦服务。履约服务恢复后再处理消息，而结账服务仍可继续提供服务。</p>
+<p class="ja">SQS は注文を永続的にバッファーし、サービスを疎結合にする。出荷サービスは復旧後に処理でき、注文サービスは稼働を続けられる。</p></div>
+  </details>
+</div>
+<div class="q" id="q18" data-n="18" data-ans="D">
+  <div class="qhead"><span class="qno">Question 18</span><span class="badge">Domain 2 · Task 2.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A publisher sends each event to several independent consumers. Each consumer must receive and process every event at its own pace. Which pattern should be used?</p>
+<p class="zh">一个发布者将每个事件发送给多个独立消费者。每个消费者都必须按自己的速度接收并处理每个事件。应采用哪种模式？</p>
+<p class="ja">発行者がイベントを複数の独立したコンシューマーに送る。各コンシューマーが自分の速度で全イベントを受信・処理するには、どのパターンが適切か。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">One shared SQS queue consumed by all services</p>
+<p class="zh">所有服务共同消费一个 SQS 队列</p>
+<p class="ja">すべてのサービスが 1 つの SQS キューを共有する</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">An EC2 instance that copies events to local files</p>
+<p class="zh">イベントをローカルファイルにコピーする EC2</p>
+<p class="ja">イベントをローカルファイルにコピーする EC2</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">A single Lambda function that calls consumers sequentially</p>
+<p class="zh">各コンシューマーを順に呼ぶ単一 Lambda 関数</p>
+<p class="ja">コンシューマーを順番に呼び出す単一 Lambda 関数</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">An SNS topic that fans out to a separate SQS queue for each consumer</p>
+<p class="zh">SNS Topic 将消息扇出到每个消费者各自的 SQS 队列</p>
+<p class="ja">SNS Topic から各コンシューマー専用の SQS キューへファンアウトする</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">SNS fanout delivers each published event to multiple subscriptions. Separate SQS queues let consumers retry and scale independently without competing for one queue&#39;s messages.</p>
+<p class="zh">SNS 扇出可将每条事件发送到多个订阅。独立的 SQS 队列让各消费者可单独重试和扩展，不会争抢同一队列中的消息。</p>
+<p class="ja">SNS ファンアウトは各イベントを複数のサブスクリプションに配信する。個別の SQS キューなら、メッセージを取り合わず、各コンシューマーが独立して再試行・拡張できる。</p></div>
+  </details>
+</div>
+<div class="q" id="q19" data-n="19" data-ans="C">
+  <div class="qhead"><span class="qno">Question 19</span><span class="badge">Domain 2 · Task 2.2 · Select 1</span></div>
+  <div class="stem"><p class="en">An Amazon RDS database must continue operating if the primary DB instance&#39;s Availability Zone fails, with automatic failover and minimal application changes. What should be enabled?</p>
+<p class="zh">如果主 RDS 数据库实例所在可用区发生故障，数据库必须自动故障转移并继续运行，且尽量少改应用。应启用什么？</p>
+<p class="ja">プライマリ RDS インスタンスの AZ 障害時に、自動フェイルオーバーして稼働を続け、アプリ変更を最小限にしたい。何を有効にすべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">An RDS read replica in the same Availability Zone</p>
+<p class="zh">同一可用区中的 RDS 只读副本</p>
+<p class="ja">同じ AZ の RDS リードレプリカ</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">A larger DB instance class</p>
+<p class="zh">更大的数据库实例类型</p>
+<p class="ja">より大きな DB インスタンスクラス</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">An RDS Multi-AZ deployment</p>
+<p class="zh">RDS Multi-AZ 部署</p>
+<p class="ja">RDS Multi-AZ 配置</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">A daily manual database export</p>
+<p class="zh">每日手动导出数据库</p>
+<p class="ja">毎日の手動データベースエクスポート</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">A Multi-AZ deployment maintains a standby in another Availability Zone and automatically fails over for availability. A read replica is primarily for read scaling and requires promotion for recovery.</p>
+<p class="zh">Multi-AZ 部署在另一个可用区维护备用实例，并在故障时自动转移以提高可用性。只读副本主要用于扩展读取，恢复时需要提升为主库。</p>
+<p class="ja">Multi-AZ 配置は別 AZ にスタンバイを維持し、障害時に自動フェイルオーバーする。リードレプリカは主に読み取り拡張用で、復旧には昇格が必要。</p></div>
+  </details>
+</div>
+<div class="q" id="q20" data-n="20" data-ans="A">
+  <div class="qhead"><span class="qno">Question 20</span><span class="badge">Domain 2 · Task 2.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A company needs disaster recovery for a critical application with an RTO of about 30 minutes and an RPO of 15 minutes. It can accept lower performance before a disaster but needs faster recovery than restoring backups. Which strategy is appropriate?</p>
+<p class="zh">一家公司的关键应用要求 RTO 约 30 分钟、RPO 15 分钟。灾难前可以接受较低性能，但需要比从备份恢复更快。哪种策略合适？</p>
+<p class="ja">重要アプリケーションの RTO は約 30 分、RPO は 15 分。災害前の性能低下は許容できるが、バックアップ復元より速く復旧したい。適切な戦略はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Warm standby with continuously replicated data and a scaled-down running environment</p>
+<p class="zh">温备：持续复制数据并运行缩小规模的环境</p>
+<p class="ja">継続的にデータを複製し、縮小構成で稼働させるウォームスタンバイ</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Backup and restore only, with no replicated data</p>
+<p class="zh">仅备份与恢复，不复制数据</p>
+<p class="ja">データを複製しないバックアップと復元のみ</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Pilot light with no application compute running</p>
+<p class="zh">不运行应用计算资源的 Pilot Light</p>
+<p class="ja">アプリケーションの計算リソースを稼働させないパイロットライト</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Multi-site active-active across Regions for every component</p>
+<p class="zh">所有组件都采用跨区域多站点主动-主动</p>
+<p class="ja">すべてのコンポーネントをリージョン間マルチサイト・アクティブ/アクティブにする</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">Warm standby keeps a functional, scaled-down copy running and data replicated, so capacity can be increased after failure. It generally recovers faster than backup-and-restore or a pilot light.</p>
+<p class="zh">温备会运行功能完整但缩小规模的副本，并持续复制数据，因此故障后可扩容。它通常比备份恢复或 Pilot Light 恢复更快。</p>
+<p class="ja">ウォームスタンバイは縮小構成の機能する環境を稼働させ、データも複製するため、障害後に拡張できる。通常、バックアップ復元やパイロットライトより復旧が速い。</p></div>
+  </details>
+</div>
+<div class="q" id="q21" data-n="21" data-ans="D">
+  <div class="qhead"><span class="qno">Question 21</span><span class="badge">Domain 2 · Task 2.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A company needs objects written to one S3 bucket to be copied automatically to a second Region for disaster recovery. Which configuration is required?</p>
+<p class="zh">一家公司需要将写入某个 S3 存储桶的对象自动复制到第二个区域用于灾难恢复。需要什么配置？</p>
+<p class="ja">ある S3 バケットに書き込まれたオブジェクトを、災害対策用に別リージョンへ自動コピーしたい。必要な設定はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Enable S3 Transfer Acceleration only</p>
+<p class="zh">仅启用 S3 Transfer Acceleration</p>
+<p class="ja">S3 Transfer Acceleration のみを有効にする</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Create an S3 access point in the second Region</p>
+<p class="zh">在第二个区域创建 S3 Access Point</p>
+<p class="ja">第 2 リージョンに S3 アクセスポイントを作成する</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Enable a lifecycle expiration rule</p>
+<p class="zh">启用生命周期过期规则</p>
+<p class="ja">ライフサイクルの有効期限ルールを有効にする</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Enable versioning on both buckets and configure S3 Cross-Region Replication</p>
+<p class="zh">在两个存储桶启用版本控制并配置 S3 跨区域复制</p>
+<p class="ja">両バケットでバージョニングを有効にし、S3 クロスリージョンレプリケーションを設定する</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">S3 Cross-Region Replication requires versioning on source and destination buckets and an IAM role that allows replication. It copies eligible new object versions to the destination Region.</p>
+<p class="zh">S3 跨区域复制要求源和目标存储桶启用版本控制，并配置允许复制的 IAM 角色。它会将符合条件的新对象版本复制到目标区域。</p>
+<p class="ja">S3 クロスリージョンレプリケーションには、送信元・送信先バケットのバージョニングと、複製を許可する IAM ロールが必要。対象となる新しいオブジェクトバージョンが複製される。</p></div>
+  </details>
+</div>
+<div class="q" id="q22" data-n="22" data-ans="B, E">
+  <div class="qhead"><span class="qno">Question 22</span><span class="badge">Domain 2 · Task 2.1 · Select 2</span></div>
+  <div class="stem"><p class="en">An order processor reads messages from an SQS queue. Messages can be delivered more than once, and duplicate orders must not be created. Which two measures should be implemented?</p>
+<p class="zh">订单处理程序从 SQS 队列读取消息。消息可能重复投递，但不能创建重复订单。应实施哪两项措施？</p>
+<p class="ja">注文処理サービスが SQS キューからメッセージを読み取る。重複配信があり得るが、注文の重複作成は防ぎたい。どの 2 つを実装すべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Delete messages before processing them.</p>
+<p class="zh">处理前删除消息。</p>
+<p class="ja">処理前にメッセージを削除する。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Make the processing operation idempotent using a unique order identifier.</p>
+<p class="zh">使用唯一订单 ID 使处理操作具备幂等性。</p>
+<p class="ja">一意の注文 ID を使い、処理を冪等にする。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Set the visibility timeout to zero.</p>
+<p class="zh">将可见性超时设为零。</p>
+<p class="ja">可視性タイムアウトを 0 にする。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Use a queue shared by unrelated workloads.</p>
+<p class="zh">让无关工作负载共用一个队列。</p>
+<p class="ja">無関係なワークロードでキューを共有する。</p></div>
+    </li>
+<li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext"><p class="en">For FIFO workloads, use message deduplication and still make consumers idempotent.</p>
+<p class="zh">对于 FIFO 工作负载，使用消息去重，同时仍让消费者具备幂等性。</p>
+<p class="ja">FIFO ワークロードではメッセージ重複排除を使い、コンシューマー側も冪等にする。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B, E</b></p>
+    <div class="expl"><p class="en">SQS standard queues provide at-least-once delivery, so consumers should safely handle duplicates, typically with an idempotency key. FIFO deduplication can reduce duplicates within its deduplication interval but does not replace robust consumer logic.</p>
+<p class="zh">SQS 标准队列采用至少一次投递，因此消费者应通过幂等键等方式安全处理重复消息。FIFO 去重可在去重时间段内减少重复，但不能替代健壮的消费者逻辑。</p>
+<p class="ja">SQS 標準キューは少なくとも 1 回の配信なので、冪等キーなどで重複を安全に処理する。FIFO の重複排除は一定期間の重複を減らすが、堅牢なコンシューマー処理の代替にはならない。</p></div>
+  </details>
+</div>
+<div class="q" id="q23" data-n="23" data-ans="C">
+  <div class="qhead"><span class="qno">Question 23</span><span class="badge">Domain 2 · Task 2.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A primary website should send users to a secondary Region only when the primary endpoint becomes unhealthy. Which Route 53 routing policy is designed for this?</p>
+<p class="zh">主站点应仅在主区域端点不健康时才将用户转到备用区域。Route 53 哪种路由策略适合？</p>
+<p class="ja">プライマリエンドポイントが異常な場合に限り、セカンダリリージョンへユーザーを誘導したい。Route 53 のどのルーティングポリシーを使うべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Geolocation routing without health checks</p>
+<p class="zh">不使用运行状况检查的地理位置路由</p>
+<p class="ja">ヘルスチェックなしの位置情報ルーティング</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Multivalue answer routing</p>
+<p class="zh">多值应答路由</p>
+<p class="ja">複数値回答ルーティング</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Failover routing with health checks</p>
+<p class="zh">带运行状况检查的故障转移路由</p>
+<p class="ja">ヘルスチェック付きフェイルオーバールーティング</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Weighted routing with equal weights</p>
+<p class="zh">相同权重的加权路由</p>
+<p class="ja">同じ重みの加重ルーティング</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">Failover routing uses health checks to return the primary record while healthy and the secondary record when the primary is unhealthy.</p>
+<p class="zh">故障转移路由通过运行状况检查，在主端点健康时返回主记录，在主端点不健康时返回备用记录。</p>
+<p class="ja">フェイルオーバールーティングはヘルスチェックを使い、プライマリ正常時は主レコード、異常時はセカンダリレコードを返す。</p></div>
+  </details>
+</div>
+<div class="q" id="q24" data-n="24" data-ans="A">
+  <div class="qhead"><span class="qno">Question 24</span><span class="badge">Domain 2 · Task 2.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A DynamoDB table must support restoring data to a specific point during the previous 30 days after accidental writes or deletes. Which feature should be enabled?</p>
+<p class="zh">DynamoDB 表必须能在误写入或删除后恢复到过去 30 天内的指定时间点。应启用什么功能？</p>
+<p class="ja">DynamoDB テーブルを、誤った書き込みや削除が起きた場合に過去 30 日以内の特定時点へ復元したい。どの機能を有効にすべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Point-in-time recovery (PITR)</p>
+<p class="zh">时间点恢复 (PITR)</p>
+<p class="ja">ポイントインタイムリカバリ (PITR)</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">DynamoDB Accelerator (DAX)</p>
+<p class="zh">DynamoDB Accelerator (DAX)</p>
+<p class="ja">DynamoDB Accelerator (DAX)</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">A global secondary index</p>
+<p class="zh">全局二级索引</p>
+<p class="ja">グローバルセカンダリインデックス</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">On-demand capacity mode</p>
+<p class="zh">按需容量模式</p>
+<p class="ja">オンデマンドキャパシティモード</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">DynamoDB point-in-time recovery provides continuous backups and lets a table be restored to a selected point within the supported recovery window.</p>
+<p class="zh">DynamoDB 时间点恢复提供连续备份，并可在支持的恢复窗口内将表还原到所选时间点。</p>
+<p class="ja">DynamoDB のポイントインタイムリカバリは継続バックアップを提供し、対応する復旧期間内の指定時点にテーブルを復元できる。</p></div>
+  </details>
+</div>
+<div class="q" id="q25" data-n="25" data-ans="D">
+  <div class="qhead"><span class="qno">Question 25</span><span class="badge">Domain 2 · Task 2.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A disaster recovery plan requires an application to recover in another Region within one hour. The team wants the recovery environment to be tested regularly and avoid waiting for service quotas during an incident. What should it do?</p>
+<p class="zh">灾难恢复计划要求应用在另一地区一小时内恢复。团队希望定期测试恢复环境，并避免事故期间等待服务配额。应怎么做？</p>
+<p class="ja">別リージョンで 1 時間以内に復旧する計画がある。復旧環境を定期テストし、障害時にサービスクォータ待ちを避けたい。何をすべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Rely only on the default service quotas and create everything after the outage.</p>
+<p class="zh">仅依赖默认服务配额，并在中断后再创建所有资源。</p>
+<p class="ja">デフォルトのサービスクォータだけに頼り、障害後にすべて作成する。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Keep the recovery account disabled until an incident occurs.</p>
+<p class="zh">在事故发生前禁用恢复账户。</p>
+<p class="ja">障害発生まで復旧アカウントを無効にする。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Use manual snapshots without documenting restoration steps.</p>
+<p class="zh">使用手动快照但不记录恢复步骤。</p>
+<p class="ja">復旧手順を文書化せず、手動スナップショットだけを使う。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Pre-provision and test required capacity, permissions, quotas, and recovery procedures in the secondary Region.</p>
+<p class="zh">在备用区域预先配置并测试所需容量、权限、配额和恢复流程。</p>
+<p class="ja">セカンダリリージョンで必要な容量、権限、クォータ、復旧手順を事前に構成・テストする。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">Recovery objectives depend on tested procedures and available capacity, not only data copies. Pre-provisioning and validating regional quotas reduces the chance that recovery is blocked during an event.</p>
+<p class="zh">恢复目标不仅取决于数据副本，还取决于经过测试的流程和可用容量。预先配置并验证区域配额，可降低事故期间恢复受阻的风险。</p>
+<p class="ja">復旧目標はデータコピーだけでなく、検証済み手順と利用可能な容量にも依存する。事前構成とリージョンクォータ確認で、障害時の復旧阻害を減らせる。</p></div>
+  </details>
+</div>
+<div class="q" id="q26" data-n="26" data-ans="B">
+  <div class="qhead"><span class="qno">Question 26</span><span class="badge">Domain 2 · Task 2.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A globally distributed application needs a relational database with low-latency reads in secondary Regions and rapid cross-Region disaster recovery. Which service feature is designed for this?</p>
+<p class="zh">一个全球分布式应用需要在次要区域低延迟读取关系型数据，并快速进行跨区域灾难恢复。哪项服务功能适合？</p>
+<p class="ja">グローバルアプリケーションで、セカンダリリージョンから低遅延でリレーショナルデータを読み取り、迅速なリージョン間復旧を行いたい。どのサービス機能が適切か。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">An RDS snapshot copied manually once a year</p>
+<p class="zh">每年手动复制一次 RDS 快照</p>
+<p class="ja">年 1 回手動コピーする RDS スナップショット</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon Aurora Global Database</p>
+<p class="zh">Amazon Aurora Global Database</p>
+<p class="ja">Amazon Aurora Global Database</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon ElastiCache in one Region only</p>
+<p class="zh">仅在一个区域使用 Amazon ElastiCache</p>
+<p class="ja">1 リージョンのみの Amazon ElastiCache</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">An S3 gateway endpoint</p>
+<p class="zh">S3 Gateway Endpoint</p>
+<p class="ja">S3 Gateway Endpoint</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">Aurora Global Database replicates data to secondary Regions with low replication lag and supports promoting a secondary cluster during a regional failure.</p>
+<p class="zh">Aurora Global Database 可将数据低延迟复制到次要区域，并在区域故障时支持提升次要集群。</p>
+<p class="ja">Aurora Global Database は低レプリケーション遅延でセカンダリリージョンに複製し、リージョン障害時にセカンダリクラスターを昇格できる。</p></div>
+  </details>
+</div>
+<div class="q" id="q27" data-n="27" data-ans="C">
+  <div class="qhead"><span class="qno">Question 27</span><span class="badge">Domain 2 · Task 2.2 · Select 1</span></div>
+  <div class="stem"><p class="en">Linux applications in several Availability Zones need shared POSIX file storage with regional availability and automatic growth. Which service should be used?</p>
+<p class="zh">多个可用区中的 Linux 应用需要共享 POSIX 文件存储，要求区域级可用性并自动增长。应使用哪项服务？</p>
+<p class="ja">複数 AZ の Linux アプリケーションが、リージョン内で利用でき自動拡張する共有 POSIX ファイルストレージを必要としている。どのサービスが適切か。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Amazon EBS Multi-Attach for all instances</p>
+<p class="zh">所有实例使用 Amazon EBS Multi-Attach</p>
+<p class="ja">全インスタンスで Amazon EBS Multi-Attach を使う</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon S3 mounted as a block device</p>
+<p class="zh">将 Amazon S3 挂载为块设备</p>
+<p class="ja">Amazon S3 をブロックデバイスとしてマウントする</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon EFS Regional file system</p>
+<p class="zh">Amazon EFS Regional 文件系统</p>
+<p class="ja">Amazon EFS Regional ファイルシステム</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Instance store volumes</p>
+<p class="zh">实例存储卷</p>
+<p class="ja">インスタンスストアボリューム</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">Amazon EFS provides managed shared file systems that can be mounted by Linux instances across multiple Availability Zones and scales as files are added.</p>
+<p class="zh">Amazon EFS 提供托管共享文件系统，可由多个可用区中的 Linux 实例挂载，并随文件增加而扩展。</p>
+<p class="ja">Amazon EFS はマルチ AZ の Linux インスタンスからマウントできるマネージド共有ファイルシステムで、ファイル増加に応じて拡張する。</p></div>
+  </details>
+</div>
+<div class="q" id="q28" data-n="28" data-ans="A">
+  <div class="qhead"><span class="qno">Question 28</span><span class="badge">Domain 2 · Task 2.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A workflow coordinates several Lambda functions, must branch based on results, retry transient failures, and record each step&#39;s state. Which service is best suited?</p>
+<p class="zh">一个工作流需要协调多个 Lambda 函数，根据结果分支、重试暂时性故障，并记录每一步的状态。哪项服务最适合？</p>
+<p class="ja">複数の Lambda 関数を調整し、結果に応じた分岐、一時的障害の再試行、各ステップの状態記録を行うワークフローに最適なサービスはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">AWS Step Functions</p>
+<p class="zh">AWS Step Functions</p>
+<p class="ja">AWS Step Functions</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon Route 53</p>
+<p class="zh">Amazon Route 53</p>
+<p class="ja">Amazon Route 53</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">AWS Storage Gateway</p>
+<p class="zh">AWS Storage Gateway</p>
+<p class="ja">AWS Storage Gateway</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Amazon CloudFront</p>
+<p class="zh">Amazon CloudFront</p>
+<p class="ja">Amazon CloudFront</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">Step Functions models workflows as state machines and provides branching, retries, error handling, and execution history for coordinating services such as Lambda.</p>
+<p class="zh">Step Functions 使用状态机建模工作流，并提供分支、重试、错误处理和执行历史，以协调 Lambda 等服务。</p>
+<p class="ja">Step Functions はステートマシンでワークフローを表し、分岐、再試行、エラー処理、実行履歴を備えて Lambda などを調整する。</p></div>
+  </details>
+</div>
+<div class="q" id="q29" data-n="29" data-ans="A">
+  <div class="qhead"><span class="qno">Question 29</span><span class="badge">Domain 3 · Task 3.1 · Select 1</span></div>
+  <div class="stem"><p class="en">Multiple Linux EC2 instances across Availability Zones need concurrent access to the same shared file system. Which storage service is appropriate?</p>
+<p class="zh">多个可用区中的 Linux EC2 实例需要同时访问同一个共享文件系统。哪项存储服务合适？</p>
+<p class="ja">複数 AZ の Linux EC2 インスタンスが同じ共有ファイルシステムへ同時アクセスしたい。適切なストレージサービスはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Amazon EFS</p>
+<p class="zh">Amazon EFS</p>
+<p class="ja">Amazon EFS</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">One Amazon EBS volume attached to one instance</p>
+<p class="zh">只附加到一台实例的 Amazon EBS 卷</p>
+<p class="ja">1 台のインスタンスだけに接続した Amazon EBS ボリューム</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon S3 Glacier Deep Archive</p>
+<p class="zh">Amazon S3 Glacier Deep Archive</p>
+<p class="ja">Amazon S3 Glacier Deep Archive</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">EC2 instance store</p>
+<p class="zh">EC2 实例存储</p>
+<p class="ja">EC2 インスタンスストア</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">EFS is a shared file system that supports concurrent NFS access from multiple Linux instances and can be accessed across Availability Zones in a Region.</p>
+<p class="zh">EFS 是共享文件系统，支持多个 Linux 实例通过 NFS 并发访问，并可在区域内跨可用区访问。</p>
+<p class="ja">EFS は複数の Linux インスタンスから NFS で同時アクセスでき、リージョン内の複数 AZ から利用できる共有ファイルシステムである。</p></div>
+  </details>
+</div>
+<div class="q" id="q30" data-n="30" data-ans="D">
+  <div class="qhead"><span class="qno">Question 30</span><span class="badge">Domain 3 · Task 3.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A database runs on EC2 and needs block storage with provisioned IOPS that can be adjusted independently of volume size. Which EBS volume type is a strong fit?</p>
+<p class="zh">数据库运行在 EC2 上，需要可预置 IOPS 且 IOPS 可独立于卷大小调整的块存储。哪种 EBS 卷类型较合适？</p>
+<p class="ja">EC2 上のデータベースで、IOPS をプロビジョニングでき、ボリュームサイズとは独立して調整可能なブロックストレージが必要。適した EBS ボリュームタイプはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">st1 throughput optimized HDD</p>
+<p class="zh">st1 スループット最適化 HDD</p>
+<p class="ja">st1 スループット最適化 HDD</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">sc1 cold HDD</p>
+<p class="zh">sc1 コールド HDD</p>
+<p class="ja">sc1 コールド HDD</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Instance store only</p>
+<p class="zh">仅实例存储</p>
+<p class="ja">インスタンスストアのみ</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">gp3 General Purpose SSD with provisioned IOPS, or io2 for sustained high IOPS durability needs</p>
+<p class="zh">支持预置 IOPS 的 gp3 通用型 SSD；若需持续高 IOPS 和耐久性则用 io2</p>
+<p class="ja">IOPS を設定できる汎用 SSD の gp3。持続的な高 IOPS と耐久性が必要なら io2</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">gp3 lets customers configure performance separately from capacity for many workloads. io2 is appropriate for demanding, sustained IOPS and durability requirements; HDD types target throughput or infrequent access.</p>
+<p class="zh">对于许多工作负载，gp3 可将性能与容量分开配置；io2 适合要求高且持续 IOPS 和耐久性的场景。HDD 类型面向吞吐或低频访问。</p>
+<p class="ja">gp3 は多くの用途で容量と性能を独立して設定できる。高い持続 IOPS と耐久性には io2 が適し、HDD はスループットや低頻度アクセス向けである。</p></div>
+  </details>
+</div>
+<div class="q" id="q31" data-n="31" data-ans="B">
+  <div class="qhead"><span class="qno">Question 31</span><span class="badge">Domain 3 · Task 3.4 · Select 1</span></div>
+  <div class="stem"><p class="en">A company delivers images and video to users worldwide. The files change infrequently, and the company wants lower latency and less load on its origin servers. What should it use?</p>
+<p class="zh">一家公司向全球用户提供图片和视频。文件很少变化，公司希望降低延迟并减轻源站负载。应使用什么？</p>
+<p class="ja">画像や動画を世界中に配信する会社が、ファイル更新は少なく、遅延とオリジンサーバー負荷を減らしたい。何を使うべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">A NAT gateway in each Region</p>
+<p class="zh">每个区域一个 NAT 网关</p>
+<p class="ja">各リージョンの NAT ゲートウェイ</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon CloudFront with appropriate cache behavior</p>
+<p class="zh">配置适当缓存行为的 Amazon CloudFront</p>
+<p class="ja">適切なキャッシュ動作を設定した Amazon CloudFront</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">An RDS read replica</p>
+<p class="zh">RDS 只读副本</p>
+<p class="ja">RDS リードレプリカ</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">AWS DataSync on every request</p>
+<p class="zh">每次请求都使用 AWS DataSync</p>
+<p class="ja">リクエストごとに AWS DataSync を実行する</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">CloudFront caches content at edge locations near viewers, reducing latency and the number of requests reaching the origin.</p>
+<p class="zh">CloudFront 在靠近用户的边缘站点缓存内容，可降低延迟并减少到达源站的请求数量。</p>
+<p class="ja">CloudFront は利用者に近いエッジロケーションでコンテンツをキャッシュし、遅延とオリジンへのリクエスト数を減らす。</p></div>
+  </details>
+</div>
+<div class="q" id="q32" data-n="32" data-ans="C">
+  <div class="qhead"><span class="qno">Question 32</span><span class="badge">Domain 3 · Task 3.3 · Select 1</span></div>
+  <div class="stem"><p class="en">A DynamoDB table receives much more traffic for a small set of partition-key values than for others. The hot partitions limit throughput. What is the best design change?</p>
+<p class="zh">DynamoDB 表中少量分区键值承受的流量远高于其他键值，热点分区限制了吞吐量。最佳设计变更是什么？</p>
+<p class="ja">DynamoDB テーブルで一部のパーティションキー値にアクセスが集中し、ホットパーティションがスループットを制限している。最善の設計変更はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Use a low-cardinality partition key such as status</p>
+<p class="zh">使用 status 这类低基数分区键</p>
+<p class="ja">status などカーディナリティの低いパーティションキーを使う</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Store all items under one partition key</p>
+<p class="zh">将所有项目存储在同一个分区键下</p>
+<p class="ja">すべての項目を 1 つのパーティションキーに保存する</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Choose a high-cardinality partition key that distributes requests, adding a shard suffix if needed</p>
+<p class="zh">选择能分散请求的高基数分区键，必要时增加分片后缀</p>
+<p class="ja">アクセスを分散する高カーディナリティのパーティションキーを選び、必要ならシャード用サフィックスを加える</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Increase the table&#39;s item size</p>
+<p class="zh">增加表中项目的大小</p>
+<p class="ja">テーブル項目のサイズを大きくする</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">DynamoDB distributes data and throughput by partition key. A high-cardinality, well-distributed key reduces hot partitions; write sharding can spread traffic for inherently hot identifiers.</p>
+<p class="zh">DynamoDB 按分区键分配数据和吞吐量。分布良好的高基数键可减少热点分区；对于天然热点的标识符，可用写分片分散流量。</p>
+<p class="ja">DynamoDB はパーティションキーに基づいてデータとスループットを分散する。高カーディナリティで均等なキーはホットパーティションを減らし、必要なら書き込みシャーディングで集中を分散できる。</p></div>
+  </details>
+</div>
+<div class="q" id="q33" data-n="33" data-ans="A">
+  <div class="qhead"><span class="qno">Question 33</span><span class="badge">Domain 3 · Task 3.3 · Select 1</span></div>
+  <div class="stem"><p class="en">An application performs many read queries against an Amazon RDS database. Reads are slowing writes on the primary, and the application can route read-only queries separately. What should be added?</p>
+<p class="zh">一个应用对 Amazon RDS 数据库执行大量读取查询。读取正在拖慢主实例的写入，而且应用可以单独路由只读查询。应添加什么？</p>
+<p class="ja">Amazon RDS に大量の読み取りを行うアプリケーションで、読み取りがプライマリの書き込みに影響している。読み取り専用クエリを別に振り分けられる。何を追加すべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">An RDS read replica and a read/write split in the application</p>
+<p class="zh">RDS 只读副本，并在应用中分离读写流量</p>
+<p class="ja">RDS リードレプリカとアプリケーションでの読み書き分離</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">A second primary database without replication</p>
+<p class="zh">复制关系的第二个主数据库</p>
+<p class="ja">レプリケーションなしの 2 台目のプライマリデータベース</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">An S3 bucket for SQL queries</p>
+<p class="zh">用于 SQL 查询的 S3 存储桶</p>
+<p class="ja">SQL クエリ用の S3 バケット</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">A larger subnet CIDR block</p>
+<p class="zh">更大的子网 CIDR 块</p>
+<p class="ja">より大きなサブネット CIDR ブロック</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">RDS read replicas serve read-only traffic from a replicated copy. Routing eligible queries to replicas can reduce read load on the primary; replication is asynchronous for many engines.</p>
+<p class="zh">RDS 只读副本通过复制的数据副本处理只读流量。将合适的查询路由到副本可减轻主库读取负载；许多引擎的复制是异步的。</p>
+<p class="ja">RDS リードレプリカは複製されたデータから読み取り専用トラフィックを処理する。対象クエリをレプリカへ送ればプライマリ負荷を減らせるが、多くのエンジンでは非同期複製である。</p></div>
+  </details>
+</div>
+<div class="q" id="q34" data-n="34" data-ans="D">
+  <div class="qhead"><span class="qno">Question 34</span><span class="badge">Domain 3 · Task 3.3 · Select 1</span></div>
+  <div class="stem"><p class="en">A relational database has highly variable and unpredictable demand, including long idle periods and short spikes. The application can use a supported Aurora engine. Which option can automatically adjust capacity?</p>
+<p class="zh">关系型数据库的需求高度变化且不可预测，包括长时间空闲和短时峰值。应用可使用受支持的 Aurora 引擎。哪种选项可自动调整容量？</p>
+<p class="ja">リレーショナルデータベースの需要が予測困難で、長いアイドル時間と短い急増がある。対応する Aurora エンジンを使える場合、容量を自動調整する選択肢はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">A fixed-size DB instance sized for the maximum peak</p>
+<p class="zh">按最大峰值配置固定规格数据库实例</p>
+<p class="ja">最大ピークに合わせた固定サイズの DB インスタンス</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">A self-managed database on one EC2 instance</p>
+<p class="zh">1 台の EC2 で自己管理するデータベース</p>
+<p class="ja">1 台の EC2 上で自己管理するデータベース</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">An RDS snapshot schedule</p>
+<p class="zh">RDS 快照计划</p>
+<p class="ja">RDS スナップショットのスケジュール</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Amazon Aurora Serverless v2 for a supported workload</p>
+<p class="zh">适用于受支持工作负载的 Amazon Aurora Serverless v2</p>
+<p class="ja">対応ワークロード向けの Amazon Aurora Serverless v2</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">Aurora Serverless v2 can scale database capacity in fine-grained increments as demand changes, avoiding the need to provision fixed peak capacity for suitable workloads.</p>
+<p class="zh">对于适合的工作负载，Aurora Serverless v2 可随需求变化细粒度扩缩数据库容量，避免始终预置峰值容量。</p>
+<p class="ja">Aurora Serverless v2 は需要変化に応じて DB 容量を細かくスケールし、適した用途ではピーク固定容量の常時確保を避けられる。</p></div>
+  </details>
+</div>
+<div class="q" id="q35" data-n="35" data-ans="B">
+  <div class="qhead"><span class="qno">Question 35</span><span class="badge">Domain 3 · Task 3.5 · Select 1</span></div>
+  <div class="stem"><p class="en">A company must migrate tens of terabytes from an isolated data center where network bandwidth is limited. The transfer should use a physical device shipped to AWS. Which service should it choose?</p>
+<p class="zh">一家公司需要从网络带宽有限的隔离数据中心迁移数十 TB 数据，要求通过寄送到 AWS 的物理设备传输。应选择哪项服务？</p>
+<p class="ja">ネットワーク帯域が限られた隔離データセンターから数十 TB を移行し、物理デバイスを AWS へ送って転送したい。どのサービスが適切か。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">AWS Direct Connect only</p>
+<p class="zh">仅 AWS Direct Connect</p>
+<p class="ja">AWS Direct Connect のみ</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">AWS Snowball Edge</p>
+<p class="zh">AWS Snowball Edge</p>
+<p class="ja">AWS Snowball Edge</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon CloudFront</p>
+<p class="zh">Amazon CloudFront</p>
+<p class="ja">Amazon CloudFront</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Amazon SQS</p>
+<p class="zh">Amazon SQS</p>
+<p class="ja">Amazon SQS</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">Snowball Edge provides a physical appliance for moving large datasets when network transfer is impractical or too slow. The device is shipped back for import into AWS.</p>
+<p class="zh">当网络传输不切实际或太慢时，Snowball Edge 提供用于迁移大型数据集的物理设备。设备寄回后可将数据导入 AWS。</p>
+<p class="ja">Snowball Edge は、ネットワーク転送が現実的でない場合に大規模データを移動する物理アプライアンスを提供する。返送後に AWS へ取り込める。</p></div>
+  </details>
+</div>
+<div class="q" id="q36" data-n="36" data-ans="C">
+  <div class="qhead"><span class="qno">Question 36</span><span class="badge">Domain 3 · Task 3.5 · Select 1</span></div>
+  <div class="stem"><p class="en">An analytics application must ingest events continuously, retain them briefly, and let several consumer applications process the stream independently. Which service is designed for this pattern?</p>
+<p class="zh">一个分析应用需要持续接收事件、短期保留数据，并允许多个消费者应用独立处理数据流。哪项服务适合？</p>
+<p class="ja">分析アプリケーションがイベントを継続的に取り込み、短期間保持し、複数のコンシューマーが独立して処理したい。この用途向けのサービスはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">AWS Snowcone</p>
+<p class="zh">AWS Snowcone</p>
+<p class="ja">AWS Snowcone</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon EFS</p>
+<p class="zh">Amazon EFS</p>
+<p class="ja">Amazon EFS</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon Kinesis Data Streams</p>
+<p class="zh">Amazon Kinesis Data Streams</p>
+<p class="ja">Amazon Kinesis Data Streams</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">AWS Backup</p>
+<p class="zh">AWS Backup</p>
+<p class="ja">AWS Backup</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">Kinesis Data Streams ingests real-time records and allows multiple consumer applications to read and process the stream independently, subject to retention and throughput configuration.</p>
+<p class="zh">Kinesis Data Streams 可接收实时记录，并允许多个消费者应用独立读取和处理数据流，具体取决于保留期和吞吐配置。</p>
+<p class="ja">Kinesis Data Streams はリアルタイムレコードを取り込み、保持期間やスループット設定の範囲内で複数のコンシューマーが独立して処理できる。</p></div>
+  </details>
+</div>
+<div class="q" id="q37" data-n="37" data-ans="A, D">
+  <div class="qhead"><span class="qno">Question 37</span><span class="badge">Domain 3 · Task 3.2 · Select 2</span></div>
+  <div class="stem"><p class="en">A Lambda function consumes SQS messages and writes to a database with limited connection capacity. Bursts must not overwhelm the database. Which two changes help control this?</p>
+<p class="zh">Lambda 函数消费 SQS 消息并写入连接容量有限的数据库。突发流量不能压垮数据库。哪两项调整有助于控制负载？</p>
+<p class="ja">Lambda 関数が SQS メッセージを処理して接続容量の限られた DB に書き込む。急増時に DB を過負荷にしたくない。どの 2 つの変更が役立つか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Set a maximum concurrency on the SQS event source mapping.</p>
+<p class="zh">为 SQS 事件源映射设置最大并发数。</p>
+<p class="ja">SQS イベントソースマッピングに最大同時実行数を設定する。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Increase Lambda concurrency without a limit.</p>
+<p class="zh">无限制提高 Lambda 并发数。</p>
+<p class="ja">Lambda の同時実行数を無制限に増やす。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Set the queue visibility timeout to zero.</p>
+<p class="zh">将队列可见性超时设为零。</p>
+<p class="ja">キューの可視性タイムアウトを 0 にする。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Use Amazon RDS Proxy to pool and manage database connections.</p>
+<p class="zh">使用 Amazon RDS Proxy 池化并管理数据库连接。</p>
+<p class="ja">Amazon RDS Proxy でデータベース接続をプール・管理する。</p></div>
+    </li>
+<li class="opt" data-letter="E">
+      <span class="letter">E</span><div class="otext"><p class="en">Poll the database from every browser client.</p>
+<p class="zh">让每个浏览器客户端直接轮询数据库。</p>
+<p class="ja">各ブラウザクライアントから DB をポーリングする。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">多选 · 需选 2 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A, D</b></p>
+    <div class="expl"><p class="en">Maximum event-source concurrency caps the number of simultaneous Lambda invocations from the queue. RDS Proxy pools connections and can reduce connection churn from serverless workloads.</p>
+<p class="zh">最大事件源并发数可限制队列触发的 Lambda 同时执行数。RDS Proxy 池化连接，可减少无服务器工作负载造成的连接频繁创建。</p>
+<p class="ja">イベントソースの最大同時実行数でキュー起因の Lambda 並列実行を制限できる。RDS Proxy は接続をプールし、サーバーレス負荷の接続増減を抑えられる。</p></div>
+  </details>
+</div>
+<div class="q" id="q38" data-n="38" data-ans="A">
+  <div class="qhead"><span class="qno">Question 38</span><span class="badge">Domain 3 · Task 3.3 · Select 1</span></div>
+  <div class="stem"><p class="en">A read-heavy DynamoDB application needs microsecond read latency for frequently accessed items. It can tolerate a cache that may need to be repopulated. Which service should be used?</p>
+<p class="zh">一个读取密集型 DynamoDB 应用需要对频繁访问的项目实现微秒级读取延迟，并能接受缓存可能需要重新填充。应使用哪项服务？</p>
+<p class="ja">読み取り中心の DynamoDB アプリケーションで、頻繁に参照する項目をマイクロ秒レベルで読み取りたい。キャッシュ再構築は許容できる。どのサービスを使うべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">DynamoDB Accelerator (DAX)</p>
+<p class="zh">DynamoDB Accelerator (DAX)</p>
+<p class="ja">DynamoDB Accelerator (DAX)</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon S3 Transfer Acceleration</p>
+<p class="zh">Amazon S3 Transfer Acceleration</p>
+<p class="ja">Amazon S3 Transfer Acceleration</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">AWS Storage Gateway</p>
+<p class="zh">AWS Storage Gateway</p>
+<p class="ja">AWS Storage Gateway</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Amazon EBS snapshots</p>
+<p class="zh">Amazon EBS 快照</p>
+<p class="ja">Amazon EBS スナップショット</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">DAX is a managed in-memory cache designed for DynamoDB and can provide microsecond read latency for eventually consistent reads in suitable workloads.</p>
+<p class="zh">DAX 是为 DynamoDB 设计的托管内存缓存，适用于需要微秒级最终一致性读取延迟的工作负载。</p>
+<p class="ja">DAX は DynamoDB 向けのマネージドインメモリキャッシュで、適切な用途では結果整合性読み取りをマイクロ秒レベルにできる。</p></div>
+  </details>
+</div>
+<div class="q" id="q39" data-n="39" data-ans="C">
+  <div class="qhead"><span class="qno">Question 39</span><span class="badge">Domain 3 · Task 3.1 · Select 1</span></div>
+  <div class="stem"><p class="en">Windows EC2 instances in multiple Availability Zones need shared file storage accessible through the SMB protocol and integrated with Microsoft Active Directory. Which service fits?</p>
+<p class="zh">多个可用区中的 Windows EC2 实例需要通过 SMB 协议访问共享文件存储，并与 Microsoft Active Directory 集成。哪项服务合适？</p>
+<p class="ja">複数 AZ の Windows EC2 から SMB で共有ファイルにアクセスし、Microsoft Active Directory と統合したい。適切なサービスはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Amazon EFS</p>
+<p class="zh">Amazon EFS</p>
+<p class="ja">Amazon EFS</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon S3 Glacier Flexible Retrieval</p>
+<p class="zh">Amazon S3 Glacier Flexible Retrieval</p>
+<p class="ja">Amazon S3 Glacier Flexible Retrieval</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon FSx for Windows File Server</p>
+<p class="zh">Amazon FSx for Windows File Server</p>
+<p class="ja">Amazon FSx for Windows File Server</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Amazon EBS Multi-Attach</p>
+<p class="zh">Amazon EBS Multi-Attach</p>
+<p class="ja">Amazon EBS Multi-Attach</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">FSx for Windows File Server provides fully managed Windows file storage with SMB support and Microsoft Active Directory integration.</p>
+<p class="zh">FSx for Windows File Server 提供托管式 Windows 文件存储，支持 SMB 和 Microsoft Active Directory 集成。</p>
+<p class="ja">FSx for Windows File Server は SMB と Microsoft Active Directory 統合に対応したマネージド Windows ファイルストレージを提供する。</p></div>
+  </details>
+</div>
+<div class="q" id="q40" data-n="40" data-ans="D">
+  <div class="qhead"><span class="qno">Question 40</span><span class="badge">Domain 3 · Task 3.4 · Select 1</span></div>
+  <div class="stem"><p class="en">A company needs a dedicated, private network connection from its data center to AWS for predictable bandwidth and consistent network performance. Which service should it use?</p>
+<p class="zh">一家公司需要从数据中心到 AWS 的专用私有网络连接，以获得可预测的带宽和稳定的网络性能。应使用哪项服务？</p>
+<p class="ja">データセンターから AWS へ、帯域幅を予測しやすく安定したネットワーク性能を得る専用プライベート接続が必要。どのサービスを使うべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">AWS Client VPN</p>
+<p class="zh">AWS Client VPN</p>
+<p class="ja">AWS Client VPN</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">An internet gateway</p>
+<p class="zh">Internet Gateway</p>
+<p class="ja">インターネットゲートウェイ</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon Route 53 Resolver</p>
+<p class="zh">Amazon Route 53 Resolver</p>
+<p class="ja">Amazon Route 53 Resolver</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">AWS Direct Connect</p>
+<p class="zh">AWS Direct Connect</p>
+<p class="ja">AWS Direct Connect</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">Direct Connect establishes a dedicated network connection from a data center or colocation facility to AWS. It can provide more predictable network performance than internet-based VPN, though encryption may require an additional design.</p>
+<p class="zh">Direct Connect 在数据中心或托管设施与 AWS 之间建立专用网络连接，性能通常比基于互联网的 VPN 更可预测；如需加密，还需额外设计。</p>
+<p class="ja">Direct Connect はデータセンターなどから AWS への専用接続を確立し、インターネット VPN より予測しやすい性能を提供する。暗号化が必要なら追加設計を検討する。</p></div>
+  </details>
+</div>
+<div class="q" id="q41" data-n="41" data-ans="B">
+  <div class="qhead"><span class="qno">Question 41</span><span class="badge">Domain 4 · Task 4.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A company must retain records for seven years. They are rarely retrieved, and retrieval within 12 hours is acceptable. Which S3 storage class is most cost-effective for the archive?</p>
+<p class="zh">一家公司必须保留记录七年，极少读取，且可接受 12 小时内取回。哪种 S3 存储类别最适合低成本归档？</p>
+<p class="ja">7 年保管が必要な記録で、ほとんど参照せず、12 時間以内の取得を許容できる。アーカイブに最も費用対効果の高い S3 ストレージクラスはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">S3 Standard</p>
+<p class="zh">S3 Standard</p>
+<p class="ja">S3 Standard</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">S3 Glacier Deep Archive</p>
+<p class="zh">S3 Glacier Deep Archive</p>
+<p class="ja">S3 Glacier Deep Archive</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">S3 Express One Zone</p>
+<p class="zh">S3 Express One Zone</p>
+<p class="ja">S3 Express One Zone</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">S3 Standard-IA for every object regardless of access</p>
+<p class="zh">不论访问情况都使用 S3 Standard-IA</p>
+<p class="ja">アクセス頻度に関係なく S3 Standard-IA を使う</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">S3 Glacier Deep Archive is designed for long-term, rarely accessed data with low storage cost and retrieval times measured in hours. Retrieval time and minimum storage duration should be included in the design.</p>
+<p class="zh">S3 Glacier Deep Archive 面向长期、极少访问的数据，存储成本低，取回时间以小时计。设计时还应考虑取回时间和最低存储期限。</p>
+<p class="ja">S3 Glacier Deep Archive は長期・低頻度アクセス向けで、保存コストが低く、取得に数時間かかる。取得時間と最低保存期間も設計に含める。</p></div>
+  </details>
+</div>
+<div class="q" id="q42" data-n="42" data-ans="A">
+  <div class="qhead"><span class="qno">Question 42</span><span class="badge">Domain 4 · Task 4.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A bucket contains data with unknown and changing access patterns. The company wants S3 to automatically move objects among access tiers without designing its own access-based lifecycle rules. Which class should it consider?</p>
+<p class="zh">一个存储桶中的数据访问模式未知且经常变化。公司希望 S3 自动在访问层级间移动对象，而不自行设计基于访问的生命周期规则。应考虑哪种类别？</p>
+<p class="ja">アクセスパターンが不明で変化するデータがある。独自にアクセス条件のライフサイクルルールを設計せず、S3 にアクセス階層を自動移動させたい。検討すべきクラスはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">S3 Intelligent-Tiering</p>
+<p class="zh">S3 Intelligent-Tiering</p>
+<p class="ja">S3 Intelligent-Tiering</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">S3 Glacier Deep Archive only</p>
+<p class="zh">S3 Glacier Deep Archive のみ</p>
+<p class="ja">S3 Glacier Deep Archive のみ</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">S3 One Zone-IA for all data</p>
+<p class="zh">すべてのデータに S3 One Zone-IA</p>
+<p class="ja">すべてのデータに S3 One Zone-IA</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Amazon EBS gp3</p>
+<p class="zh">Amazon EBS gp3</p>
+<p class="ja">Amazon EBS gp3</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">S3 Intelligent-Tiering monitors access patterns and moves eligible objects among access tiers. Small monitoring and automation charges apply, and some archive tiers have retrieval considerations.</p>
+<p class="zh">S3 Intelligent-Tiering 会监控访问模式，并在适用层级间移动对象。需考虑少量监控与自动化费用，以及部分归档层的取回特性。</p>
+<p class="ja">S3 Intelligent-Tiering はアクセスパターンを監視し、対象オブジェクトをアクセス階層間で移動する。監視・自動化料金やアーカイブ階層の取得条件も考慮する。</p></div>
+  </details>
+</div>
+<div class="q" id="q43" data-n="43" data-ans="C">
+  <div class="qhead"><span class="qno">Question 43</span><span class="badge">Domain 4 · Task 4.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A company uses a steady amount of EC2 compute every month and expects this usage to continue for at least one year. It wants flexibility across instance families and Regions. Which pricing option is suitable?</p>
+<p class="zh">一家公司每月稳定使用一定量的 EC2 计算资源，预计至少持续一年，并希望在实例系列和区域间保持灵活。哪种定价选项合适？</p>
+<p class="ja">毎月一定量の EC2 を継続利用する会社が、少なくとも 1 年の利用を見込み、インスタンスファミリーやリージョン間の柔軟性も求める。適切な料金オプションはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">On-Demand capacity reservations only</p>
+<p class="zh">仅按需容量预留</p>
+<p class="ja">オンデマンドキャパシティ予約のみ</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Dedicated Hosts for every workload</p>
+<p class="zh">所有工作负载都使用 Dedicated Hosts</p>
+<p class="ja">すべてのワークロードで Dedicated Hosts を使う</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">A Compute Savings Plan</p>
+<p class="zh">Compute Savings Plan</p>
+<p class="ja">Compute Savings Plan</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Spot Instances for the baseline workload</p>
+<p class="zh">基线工作负载使用 Spot 实例</p>
+<p class="ja">ベースラインのワークロードに Spot インスタンスを使う</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">A Compute Savings Plan applies discounted rates to eligible compute usage in exchange for a committed hourly spend over the selected term and offers flexibility across instance families and Regions.</p>
+<p class="zh">Compute Savings Plan 以承诺指定期限内的每小时消费换取符合条件的计算用量折扣，并可在实例系列和区域间灵活适用。</p>
+<p class="ja">Compute Savings Plan は期間中の時間当たり利用額を約束して対象コンピューティング料金を割引し、インスタンスファミリーやリージョンにも柔軟性がある。</p></div>
+  </details>
+</div>
+<div class="q" id="q44" data-n="44" data-ans="D">
+  <div class="qhead"><span class="qno">Question 44</span><span class="badge">Domain 4 · Task 4.2 · Select 1</span></div>
+  <div class="stem"><p class="en">A batch analytics job can be interrupted and restarted from checkpoints. It has no strict completion deadline. Which EC2 purchasing option can reduce compute cost?</p>
+<p class="zh">一个批量分析作业可被中断，并能从检查点重新启动，没有严格完成期限。哪种 EC2 购买选项可降低计算成本？</p>
+<p class="ja">中断されてもチェックポイントから再開でき、厳密な完了期限がないバッチ分析ジョブがある。EC2 のコスト削減に適した購入オプションはどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">On-Demand Instances only</p>
+<p class="zh">仅按需实例</p>
+<p class="ja">オンデマンドインスタンスのみ</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Dedicated Instances</p>
+<p class="zh">Dedicated Instances</p>
+<p class="ja">Dedicated Instances</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Capacity Reservations with no workload changes</p>
+<p class="zh">不调整工作负载，使用容量预留</p>
+<p class="ja">ワークロードを変更せずキャパシティ予約を使う</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Spot Instances with checkpointing and interruption handling</p>
+<p class="zh">配合检查点和中断处理使用 Spot 实例</p>
+<p class="ja">チェックポイントと中断処理を備えた Spot インスタンス</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">Spot Instances use spare EC2 capacity at a discount but can be interrupted. A fault-tolerant batch workload that checkpoints and can resume is a suitable candidate.</p>
+<p class="zh">Spot 实例以折扣使用 EC2 闲置容量，但可能被中断。能够容错、保存检查点并恢复的批处理作业适合采用。</p>
+<p class="ja">Spot インスタンスは余剰 EC2 容量を割引利用できる一方、中断される可能性がある。チェックポイントから再開できるバッチ処理に適している。</p></div>
+  </details>
+</div>
+<div class="q" id="q45" data-n="45" data-ans="A">
+  <div class="qhead"><span class="qno">Question 45</span><span class="badge">Domain 4 · Task 4.4 · Select 1</span></div>
+  <div class="stem"><p class="en">Instances in private subnets make frequent requests to S3. The company currently routes this traffic through a NAT gateway and wants to reduce network processing charges without exposing instances to the internet. What should it do?</p>
+<p class="zh">私有子网中的实例频繁请求 S3。公司目前通过 NAT 网关转发流量，希望降低网络处理费用，同时不让实例暴露到互联网。应怎么做？</p>
+<p class="ja">プライベートサブネットのインスタンスが S3 を頻繁に利用し、現在 NAT ゲートウェイ経由で通信している。インターネットに公開せず、ネットワーク処理料金を減らすにはどうすべきか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Add an S3 gateway VPC endpoint and update the relevant route tables.</p>
+<p class="zh">添加 S3 Gateway VPC Endpoint，并更新相关路由表。</p>
+<p class="ja">S3 Gateway VPC Endpoint を追加し、該当ルートテーブルを更新する。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Give every instance a public IP address.</p>
+<p class="zh">为每台实例分配公有 IP。</p>
+<p class="ja">すべてのインスタンスにパブリック IP を割り当てる。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Move the instances to a public subnet.</p>
+<p class="zh">将实例移至公有子网。</p>
+<p class="ja">インスタンスをパブリックサブネットへ移動する。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Create a second NAT gateway in each Availability Zone.</p>
+<p class="zh">在每个可用区再创建一个 NAT 网关。</p>
+<p class="ja">各 AZ に NAT ゲートウェイを追加する。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">An S3 gateway endpoint routes eligible S3 traffic privately from associated route tables and avoids sending that traffic through a NAT gateway. It does not make the instances public.</p>
+<p class="zh">S3 Gateway Endpoint 会从关联路由表私有转发符合条件的 S3 流量，避免通过 NAT 网关；它不会使实例变为公有。</p>
+<p class="ja">S3 Gateway Endpoint は関連するルートテーブルから S3 通信をプライベートに転送し、NAT 経由を避ける。インスタンスを公開にはしない。</p></div>
+  </details>
+</div>
+<div class="q" id="q46" data-n="46" data-ans="B">
+  <div class="qhead"><span class="qno">Question 46</span><span class="badge">Domain 4 · Task 4.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A company stores a large EFS file system. Most files are rarely accessed, but a small subset must remain available with low latency. Which feature can reduce storage cost automatically?</p>
+<p class="zh">一家公司使用大型 EFS 文件系统。大多数文件很少访问，但少量文件必须保持低延迟可用。哪项功能可自动降低存储成本？</p>
+<p class="ja">大規模な EFS ファイルシステムを利用し、大半は低頻度アクセスだが一部は低遅延で利用可能にしたい。自動で保存コストを下げる機能はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Create a full copy on EBS and delete the EFS files</p>
+<p class="zh">将完整副本存入 EBS 并删除 EFS 文件</p>
+<p class="ja">EBS に全コピーを作り EFS ファイルを削除する</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Enable EFS lifecycle management to move eligible files to an Infrequent Access storage class</p>
+<p class="zh">启用 EFS 生命周期管理，将符合条件的文件移至不频繁访问存储类</p>
+<p class="ja">EFS ライフサイクル管理を有効にし、対象ファイルを低頻度アクセスストレージクラスへ移動する</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Disable the EFS mount targets</p>
+<p class="zh">禁用 EFS 挂载目标</p>
+<p class="ja">EFS マウントターゲットを無効にする</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Convert the file system into an SQS queue</p>
+<p class="zh">将文件系统转换为 SQS 队列</p>
+<p class="ja">ファイルシステムを SQS キューに変換する</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">EFS lifecycle management can move files based on access patterns to lower-cost storage classes while keeping them in the same file system namespace.</p>
+<p class="zh">EFS 生命周期管理可根据访问模式将文件移至成本更低的存储类，同时保留在同一文件系统命名空间中。</p>
+<p class="ja">EFS ライフサイクル管理はアクセス状況に応じてファイルを低コストのクラスへ移し、同じファイルシステム名前空間から利用できるようにする。</p></div>
+  </details>
+</div>
+<div class="q" id="q47" data-n="47" data-ans="C">
+  <div class="qhead"><span class="qno">Question 47</span><span class="badge">Domain 4 · Task 4.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A company stores static software installers for occasional download. The files do not require POSIX file-system semantics or low-latency block access. Which storage choice is generally more cost-effective than a shared file system?</p>
+<p class="zh">一家公司存储供偶尔下载的静态软件安装包。文件不需要 POSIX 文件系统语义或低延迟块访问。与共享文件系统相比，通常哪种存储更经济？</p>
+<p class="ja">たまにダウンロードされる静的なソフトウェアインストーラーを保存する。POSIX ファイルシステムや低遅延ブロックアクセスは不要。共有ファイルシステムより一般に費用対効果が高い選択肢はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Amazon EBS Multi-Attach</p>
+<p class="zh">Amazon EBS Multi-Attach</p>
+<p class="ja">Amazon EBS Multi-Attach</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Amazon FSx for Lustre</p>
+<p class="zh">Amazon FSx for Lustre</p>
+<p class="ja">Amazon FSx for Lustre</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Amazon S3 with an appropriate storage class</p>
+<p class="zh">使用合适存储类别的 Amazon S3</p>
+<p class="ja">適切なストレージクラスの Amazon S3</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Provisioned IOPS io2 volumes for every user</p>
+<p class="zh">为每位用户配置 io2 预置 IOPS 卷</p>
+<p class="ja">すべてのユーザーに io2 ボリュームを用意する</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>C</b></p>
+    <div class="expl"><p class="en">S3 is object storage well suited to static downloadable artifacts. A shared file system or high-performance block volumes add capabilities and cost that this access pattern does not need.</p>
+<p class="zh">S3 对象存储适合静态可下载文件。共享文件系统或高性能块卷会增加此访问模式不需要的功能和成本。</p>
+<p class="ja">S3 は静的なダウンロード用成果物に適したオブジェクトストレージである。このアクセス形態に不要な共有ファイルや高性能ブロック機能を避けられる。</p></div>
+  </details>
+</div>
+<div class="q" id="q48" data-n="48" data-ans="D">
+  <div class="qhead"><span class="qno">Question 48</span><span class="badge">Domain 4 · Task 4.4 · Select 1</span></div>
+  <div class="stem"><p class="en">Two VPCs in the same Region need private connectivity and have a small number of routes. They do not need centralized transitive routing. Which option is usually simpler and lower cost?</p>
+<p class="zh">同一区域内的两个 VPC 需要私有互联，路由数量少，也不需要集中式传递路由。通常哪种选项更简单且成本更低？</p>
+<p class="ja">同一リージョンの 2 つの VPC をプライベート接続したい。ルート数は少なく、集中型の推移的ルーティングも不要。一般により簡単で低コストな方法はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">A separate transit gateway for each subnet</p>
+<p class="zh">每个子网都单独使用 Transit Gateway</p>
+<p class="ja">各サブネットに個別の Transit Gateway</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">A public internet gateway between the VPCs</p>
+<p class="zh">在两个 VPC 之间使用公共 Internet Gateway</p>
+<p class="ja">VPC 間にパブリックインターネットゲートウェイを置く</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">AWS Direct Connect between the two VPCs</p>
+<p class="zh">在两个 VPC 之间使用 AWS Direct Connect</p>
+<p class="ja">2 つの VPC 間に AWS Direct Connect を設定する</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">VPC peering with routes and security rules configured on both sides</p>
+<p class="zh">使用 VPC Peering，并在两端配置路由和安全规则</p>
+<p class="ja">VPC ピアリングを設定し、両側にルートとセキュリティルールを設定する</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>D</b></p>
+    <div class="expl"><p class="en">VPC peering directly connects two VPCs and is appropriate for a small, non-transitive connectivity requirement. Transit Gateway is useful when many VPCs need centralized hub-and-spoke routing.</p>
+<p class="zh">VPC Peering 可直接连接两个 VPC，适合规模小且不需要传递路由的互联需求。许多 VPC 需要集中式 Hub-and-Spoke 路由时，Transit Gateway 更合适。</p>
+<p class="ja">VPC ピアリングは 2 つの VPC を直接接続し、小規模で推移的でない要件に適する。多数の VPC を集中ハブ型で接続するなら Transit Gateway が適している。</p></div>
+  </details>
+</div>
+<div class="q" id="q49" data-n="49" data-ans="A">
+  <div class="qhead"><span class="qno">Question 49</span><span class="badge">Domain 4 · Task 4.2 · Select 1</span></div>
+  <div class="stem"><p class="en">Development EC2 instances are used only during business hours. They do not host production workloads, and the team can restart them when needed. Which action can reduce compute charges?</p>
+<p class="zh">开发用 EC2 实例仅在工作时间使用，不承载生产工作负载，团队需要时可重新启动。哪项措施可以降低计算费用？</p>
+<p class="ja">開発用 EC2 は営業時間だけ利用し、本番ワークロードではない。必要時に再起動できる。コンピューティング料金を減らす方法はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Schedule the instances to stop outside business hours and start before use.</p>
+<p class="zh">安排实例在非工作时间停止，并在使用前启动。</p>
+<p class="ja">営業時間外にインスタンスを停止し、利用前に起動するようスケジュールする。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Convert all instances to Dedicated Hosts.</p>
+<p class="zh">将所有实例改为 Dedicated Hosts。</p>
+<p class="ja">すべてのインスタンスを Dedicated Hosts に変更する。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Add larger EBS volumes to every instance.</p>
+<p class="zh">为每台实例增加更大的 EBS 卷。</p>
+<p class="ja">すべてのインスタンスに大容量 EBS を追加する。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Keep instances running and increase their size overnight.</p>
+<p class="zh">保持实例运行并在夜间扩大规格。</p>
+<p class="ja">インスタンスを稼働させたまま夜間にサイズを大きくする。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>A</b></p>
+    <div class="expl"><p class="en">Stopping nonproduction instances outside their usage window can avoid applicable instance compute charges, though attached storage and other resources can continue to incur charges.</p>
+<p class="zh">在非生产实例的使用时段外将其停止，可避免相应的实例计算费用；但附加存储和其他资源仍可能产生费用。</p>
+<p class="ja">非本番インスタンスを利用時間外に停止すると、該当するインスタンス計算料金を抑えられる。ただし接続ストレージなどの料金は継続する場合がある。</p></div>
+  </details>
+</div>
+<div class="q" id="q50" data-n="50" data-ans="B">
+  <div class="qhead"><span class="qno">Question 50</span><span class="badge">Domain 4 · Task 4.1 · Select 1</span></div>
+  <div class="stem"><p class="en">A company must retain old audit objects for ten years, then delete them automatically. Objects are rarely retrieved. Which S3 design is most appropriate?</p>
+<p class="zh">一家公司必须保留旧审计对象十年，之后自动删除，且极少取回。哪种 S3 设计最合适？</p>
+<p class="ja">古い監査オブジェクトを 10 年間保存し、その後自動削除する。取得頻度は非常に低い。最適な S3 設計はどれか。</p></div>
+  <ol class="opts"><li class="opt" data-letter="A">
+      <span class="letter">A</span><div class="otext"><p class="en">Keep all objects in S3 Standard forever.</p>
+<p class="zh">将所有对象永久保存在 S3 Standard。</p>
+<p class="ja">すべてのオブジェクトを S3 Standard に永久保存する。</p></div>
+    </li>
+<li class="opt" data-letter="B">
+      <span class="letter">B</span><div class="otext"><p class="en">Use an S3 lifecycle rule to transition objects to Glacier Deep Archive and expire them after the retention period.</p>
+<p class="zh">使用 S3 生命周期规则将对象转入 Glacier Deep Archive，并在保留期后过期删除。</p>
+<p class="ja">S3 ライフサイクルルールで Glacier Deep Archive に移行し、保存期間後に期限切れにする。</p></div>
+    </li>
+<li class="opt" data-letter="C">
+      <span class="letter">C</span><div class="otext"><p class="en">Copy objects daily to an EBS volume and delete the bucket.</p>
+<p class="zh">每天将对象复制到 EBS 卷后删除存储桶。</p>
+<p class="ja">毎日 EBS にコピーしてバケットを削除する。</p></div>
+    </li>
+<li class="opt" data-letter="D">
+      <span class="letter">D</span><div class="otext"><p class="en">Use S3 Express One Zone for ten-year retention.</p>
+<p class="zh">使用 S3 Express One Zone 保留十年。</p>
+<p class="ja">10 年保存に S3 Express One Zone を使う。</p></div>
+    </li></ol>
+  <div class="qact"><button class="primary js-submit" type="button" disabled>确认作答</button><button class="js-reveal" type="button">直接看答案</button><button class="js-redo" type="button">重做本题</button><button class="js-next" type="button">下一题 ↓</button><span class="need">单选 · 需选 1 项</span></div>
+  <div class="verdict"></div>
+  <details class="ans"><summary>答案与解析 / Answer &amp; Explanation</summary>
+    <p class="correct">正确答案 <b>B</b></p>
+    <div class="expl"><p class="en">Lifecycle transitions automate movement to a lower-cost archive class, and expiration can enforce the retention period. Deep Archive fits data that is rarely accessed and can tolerate hours-long retrieval.</p>
+<p class="zh">生命周期转换可自动将数据移至成本更低的归档类，过期规则可执行保留期限。Deep Archive 适合极少访问且可容忍数小时取回的数据。</p>
+<p class="ja">ライフサイクル移行で低コストのアーカイブクラスへ自動移動し、有効期限で保存期間を適用できる。Deep Archive は取得に数時間かかってもよい低頻度データ向けである。</p></div>
+  </details>
+</div>
+</div><div class="sheet" id="sheet">
+  <div class="hd"><span><b>答题卡</b></span>
+    <span>已答 <b id="sh-done">0</b> · 正确 <b id="sh-ok">0</b> · 错误 <b id="sh-bad">0</b></span>
+    <button class="redo" id="sh-close" type="button" style="margin-left:auto">收起</button>
+  </div>
+  <div class="grid"></div>
+</div>
+<div class="mask" id="mask" role="dialog" aria-label="成绩单">
+  <div class="report">
+    <h3>本份成绩</h3>
+    <div class="big" id="rp-pct">0%</div>
+    <table>
+      <tr><td>已作答</td><td id="rp-done">0</td></tr>
+      <tr><td>答对</td><td id="rp-ok">0</td></tr>
+      <tr><td>答错</td><td id="rp-bad">0</td></tr>
+      <tr><td>未作答</td><td id="rp-left">0</td></tr>
+      <tr><td>用时</td><td id="rp-time">—</td></tr>
+    </table>
+    <div class="row"><button id="rp-close">继续答题</button><button class="ghost" id="rp-retry">只练错题</button></div>
+  </div>
+</div><script>
+(function(){
+"use strict";
+var KEY="quiz:aws:original:01";
+var TOTAL=50;
+var S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+var TKEY=KEY+":t0";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function q1(s,r){return (r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+var QS=qa(".q");
+function nOf(q){return q.getAttribute("data-n")}
+function ansOf(q){return (q.getAttribute("data-ans")||"").split(",").map(function(x){return x.trim().toUpperCase()}).filter(Boolean)}
+
+/* 让"下一题"滚动后不被 sticky 工具栏遮住 */
+function fitTop(){
+  var tb=q1(".toolbar");
+  var h=tb?Math.round(tb.getBoundingClientRect().height):0;
+  if(h)document.documentElement.style.setProperty("--tb",h+"px");
+}
+
+/* ---------- 渲染 ---------- */
+function paint(q){
+  var rec=S[nOf(q)]||null;
+  var A=ansOf(q), sel=rec?rec.s:[];
+  var judged=!!(rec&&rec.ok!==null), revealed=!!(rec&&rec.revealed);
+  var locked=judged||revealed;
+
+  qa("li.opt",q).forEach(function(li){
+    var L=(li.getAttribute("data-letter")||"").toUpperCase();
+    li.classList.remove("sel","ok","bad","miss");
+    var chosen=sel.indexOf(L)>=0, right=A.indexOf(L)>=0;
+    if(revealed){
+      if(right)li.classList.add("miss");
+      else if(chosen)li.classList.add("sel");
+    }else if(judged){
+      if(chosen&&right)li.classList.add("ok");
+      else if(chosen)li.classList.add("bad");
+      else if(right)li.classList.add("miss");
+    }else if(chosen)li.classList.add("sel");
+  });
+
+  q.classList.toggle("done",locked);
+  q.classList.toggle("wrong",judged&&!rec.ok);
+
+  var sub=q1(".js-submit",q);
+  if(sub)sub.disabled = sel.length === 0;
+
+  var v=q1(".verdict",q);
+  if(v){
+    if(judged){
+      var tip=(A.length>1&&!rec.ok)
+        ?'<span class="v-key">本题需选 '+A.length+' 项，你选了 '+(rec.s||[]).length+' 项</span>':'';
+      v.innerHTML='<div class="line">'+(rec.ok
+        ?'<span class="v-ok">✓ 答对了</span>'
+        :'<span class="v-bad">✗ 答错了</span><span class="v-key">正确答案 <b>'+A.join(", ")+'</b></span>'+tip)
+        +'</div>';
+      v.classList.add("show");
+    }else if(revealed){
+      v.innerHTML='<div class="line"><span class="v-key">已直接查看答案：<b>'+A.join(", ")+'</b></span></div>';
+      v.classList.add("show");
+    }else{v.classList.remove("show");v.innerHTML=""}
+  }
+  if(locked){var d=q1("details.ans",q);if(d)d.open=true}
+}
+
+/* ---------- 判定 ---------- */
+function doJudge(q,sel){
+  var A=ansOf(q);
+  var ok=sel.length===A.length&&sel.every(function(x){return A.indexOf(x)>=0});
+  S[nOf(q)]={s:sel.slice(),ok:ok,revealed:false};
+  try{if(!localStorage.getItem(TKEY))localStorage.setItem(TKEY,String(Date.now()))}catch(e){}
+  save();paint(q);stats();sheet();
+}
+function doReveal(q){
+  S[nOf(q)]={s:[],ok:null,revealed:true};
+  save();paint(q);stats();sheet();
+}
+function doRedo(q){delete S[nOf(q)];save();paint(q);stats();sheet();}
+function doNext(q){
+  var vis=QS.filter(function(x){return x.offsetParent!==null});
+  var i=vis.indexOf(q);
+  var t=vis[i+1];
+  if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- 选择 ---------- */
+function onPick(li){
+  var q=li.closest(".q");if(!q)return;
+  var rec=S[nOf(q)];
+  if(rec&&(rec.ok!==null||rec.revealed))return;
+  var A=ansOf(q),L=(li.getAttribute("data-letter")||"").toUpperCase();
+  var cur=(rec&&rec.s)?rec.s.slice():[];
+  if(A.length>1){var i=cur.indexOf(L);if(i>=0)cur.splice(i,1);else cur.push(L);}
+  else cur=[L];
+  S[nOf(q)]={s:cur,ok:null,revealed:false};
+  save();paint(q);
+}
+
+/* ---------- 统计 ---------- */
+function tally(){
+  var d=0,o=0;
+  QS.forEach(function(q){
+    var r=S[nOf(q)];
+    if(r&&r.ok!==null&&!r.revealed){d++;if(r.ok)o++}
+  });
+  return[d,o,d-o];
+}
+function stats(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("s-done",d);setTxt("s-ok",o);setTxt("s-bad",b);
+  setTxt("s-pct",d?Math.round(o/d*100)+"%":"—");
+  var f=q1("#s-fill");if(f)f.style.width=(TOTAL?d/TOTAL*100:0)+"%";
+}
+function sheet(){
+  var g=q1("#sheet .grid");if(!g)return;
+  var html="";
+  QS.forEach(function(q,i){
+    var r=S[nOf(q)];
+    var cls=(r&&r.ok!==null&&!r.revealed)?(r.ok?' class="ok"':' class="bad"'):"";
+    html+='<a href="#'+q.id+'"'+cls+'>'+(i+1)+'</a>';
+  });
+  g.innerHTML=html;
+  var t=tally();setTxt("sh-done",t[0]);setTxt("sh-ok",t[1]);setTxt("sh-bad",t[2]);
+}
+function report(){
+  var t=tally(),d=t[0],o=t[1],b=t[2];
+  setTxt("rp-pct",(d?Math.round(o/d*100):0)+"%");
+  setTxt("rp-done",d);setTxt("rp-ok",o);setTxt("rp-bad",b);setTxt("rp-left",TOTAL-d);
+  var t0=null;try{t0=localStorage.getItem(TKEY)}catch(e){}
+  var used="—";
+  if(t0){var s=Math.max(0,Math.round((Date.now()-(+t0))/1000));used=Math.floor(s/60)+" 分 "+(s%60)+" 秒";}
+  setTxt("rp-time",used);
+  var m=q1("#mask");if(m)m.classList.add("open");
+}
+function reset(){
+  if(!confirm("清空本份全部作答记录？此操作不可撤销。"))return;
+  S={};save();
+  try{localStorage.removeItem(TKEY)}catch(e){}
+  QS.forEach(paint);stats();sheet();
+}
+
+/* ---------- 事件（委托） ---------- */
+document.addEventListener("click",function(ev){
+  var t=ev.target;if(!t||!t.closest)return;
+  var li=t.closest("li.opt");
+  if(li){onPick(li);return}
+  var q=null;
+  if(t.closest(".js-submit")){q=t.closest(".q");var rec=S[nOf(q)];if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);return}
+  if(t.closest(".js-reveal")){q=t.closest(".q");if(q)doReveal(q);return}
+  if(t.closest(".js-redo")){q=t.closest(".q");if(q)doRedo(q);return}
+  if(t.closest(".js-next")){q=t.closest(".q");if(q)doNext(q);return}
+  if(t.id==="mask"){t.classList.remove("open");return}
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key!=="Enter")return;
+  var q=null;
+  var ae=document.activeElement;
+  if(ae&&ae.closest)q=ae.closest(".q");
+  if(!q)return;
+  var rec=S[nOf(q)];
+  if(q&&rec&&rec.ok===null&&!rec.revealed)doJudge(q,rec.s||[]);
+});
+function bind(id,fn){var e=document.getElementById(id);if(e)e.addEventListener("click",fn)}
+bind("btn-sheet",function(){var s=q1("#sheet");if(s)s.classList.toggle("open")});
+bind("sh-close",function(){var s=q1("#sheet");if(s)s.classList.remove("open")});
+bind("btn-report",report);
+bind("rp-close",function(){var m=q1("#mask");if(m)m.classList.remove("open")});
+bind("rp-retry",function(){
+  var m=q1("#mask");if(m)m.classList.remove("open");
+  document.body.classList.add("only-wrong");
+  var b=document.getElementById("btn-wrong");if(b){b.classList.add("on");b.textContent="显示全部"}
+  stats();
+});
+bind("btn-wrong",function(){
+  document.body.classList.toggle("only-wrong");
+  this.classList.toggle("on");
+  this.textContent=document.body.classList.contains("only-wrong")?"显示全部":"只看错题";
+});
+bind("btn-reset",reset);
+bind("btn-expand",function(){
+  var ds=qa("details.ans");
+  var anyClosed=ds.some(function(d){return !d.open});
+  ds.forEach(function(d){d.open=anyClosed});
+  this.textContent=anyClosed?"收起全部解析":"展开全部解析";
+});
+
+QS.forEach(paint);
+fitTop();
+window.addEventListener("resize",fitTop);
+stats();sheet();
+})();
+</script><!--pc:js-->
+<script src="../../assets/presence.js"></script>
+<!--/pc:js-->
+<script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+<!--i18n:sw-->
+<footer class="lang-foot">
+<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+<button type="button" data-set-lang="en" aria-pressed="false">English</button>
+<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+</div>
+</footer>
+<!--/i18n:sw--><!--i18n:js-->
+<script src="/assets/i18n.js"></script>
+<script id="i18n-boot">
+(function(){var REL="../../";
+function go(){if(window.__I18N__&&window.__I18N__.boot)window.__I18N__.boot();}
+if(window.__I18N__){go();return;}
+var s=document.createElement("script");s.src=REL+"assets/i18n.js";
+s.onload=go;
+s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
+document.head.appendChild(s);})();
+</script>
+<!--/i18n:js--></body></html>

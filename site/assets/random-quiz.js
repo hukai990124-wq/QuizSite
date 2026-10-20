@@ -8,7 +8,7 @@
     "aws-clf": { title: "AWS CLF-C02", type: "aws", files: files("aws-clf", 4, "part"), quotas: [12, 15, 17, 6] },
     "aws-aip": { title: "AWS AIP-C01", type: "aws", files: [...files("aws-aip", 3, "part"), ...files("aws-aip/open-easy", 4, "part"), ...files("aws-aip/open-hard", 3, "part"), ...files("aws-aip/open-veryhard", 3, "part")] },
     "aws-aif": { title: "AWS AIF-C01", type: "aws", files: [...files("aws-aif/bank", 10, "part"), ...files("aws-aif/practice", 5, "part")] },
-    "aws-saa": { title: "AWS SAA-C03", type: "aws", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/compliance", 10, "part")] },
+    "aws-saa": { title: "AWS SAA-C03", type: "aws", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/compliance", 10, "part"), ...files("aws-saa/original", 1, "part")] },
     "toeic-listening": { title: "TOEIC Listening", type: "listening", files: files("toeic-listening", 10, "TOEIC_Listening_Test_") },
     "toeic-reading": { title: "TOEIC Reading", type: "reading", files: files("toeic-reading", 10, "TOEIC_Reading_Test_") }
   };
@@ -170,6 +170,7 @@
     doc.querySelector(".toolbar .btns").append(newButton);
     const extraStyle = doc.createElement("style");
     extraStyle.textContent = ".toolbar .random-again{display:inline-block;font:inherit;font-size:13px;padding:6px 13px;border-radius:7px;border:1px solid #0b6b3a;background:#fff;color:#0b6b3a;text-decoration:none}.toolbar .random-again:hover{background:#eef6f0}@media(max-width:560px){.toolbar .random-again{font-size:12px;padding:5px 10px}}";
+    if (config.type === "aws") extraStyle.textContent += '.wrap .zh,.wrap .ja{display:none}html[data-lang="zh"] .wrap .zh{display:block}html[data-lang="ja"] .wrap .ja{display:block;color:#0f4c81;font-size:14px}html[data-lang="ja"] .wrap .ja:before{content:"日訳 ";font-size:10px;color:#9ca3af;letter-spacing:.5px}';
     doc.head.append(extraStyle);
 
     if (config.type === "aws") {
