@@ -1,0 +1,59 @@
+.qb-sigil-footer {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  min-height: 8.5rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-top: 2px solid #c69b48;
+  background: #123c5e;
+  color: #f1d38b;
+}
+
+.qb-sigil-footer__image {
+  display: block;
+  flex: 0 0 auto;
+  width: 6.5rem;
+  height: 6.5rem;
+  object-fit: contain;
+  animation: qb-sigil-sparkle 4.5s ease-in-out infinite;
+}
+
+.qb-sigil-footer__motto {
+  color: #f1d38b;
+  font-family: "UnifrakturCook", "Old English Text MT", "Cloister Black", serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.15;
+  text-shadow: 0 0 12px rgba(255, 205, 89, .24);
+}
+
+@keyframes qb-sigil-sparkle {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(255, 205, 89, .52));
+  }
+  50% {
+    filter: brightness(1.12) drop-shadow(0 0 11px rgba(255, 218, 119, .94));
+  }
+}
+
+@media (max-width: 600px) {
+  .qb-sigil-footer {
+    gap: .75rem;
+    min-height: 6.5rem;
+    padding: .75rem 1rem;
+  }
+  .qb-sigil-footer__image {
+    width: 4.75rem;
+    height: 4.75rem;
+  }
+  .qb-sigil-footer__motto {
+    font-size: clamp(1.35rem, 6vw, 1.8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qb-sigil-footer__image { animation: none; }
+}
