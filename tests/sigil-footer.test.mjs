@@ -55,13 +55,25 @@ test("mounts the personal crest and Latin motto at the document bottom", () => {
   assert.equal(footer.id, "qb-sigil-footer");
   assert.equal(document.body.children.at(-2), existing);
   assert.equal(document.body.children.at(-1), footer);
-  const [image, motto] = footer.children;
+  const [rights, brand] = footer.children;
+  const [image, motto] = brand.children;
+  assert.equal(rights.className, "qb-sigil-footer__rights i18n-noloc");
+  assert.equal(rights.textContent, "© @HuKai. All rights reserved.");
+  assert.equal(brand.className, "qb-sigil-footer__brand");
   assert.equal(image.src, "/assets/sigilHK.png");
   assert.equal(image.attributes["aria-hidden"], "true");
   assert.equal(motto.textContent, "Omnia Superabo");
   assert.equal(motto.lang, "la");
   assert.ok(document.head.children.some((element) => element.href === "/assets/sigil-footer.css"));
   assert.ok(document.head.children.some((element) => element.href.startsWith("https://fonts.googleapis.com/")));
+});
+
+test("sigil footer stays static and keeps the rights notice on the left", async () => {
+  const stylesheet = await readFile(`${siteDirectory}assets/sigil-footer.css`, "utf8");
+
+  assert.doesNotMatch(stylesheet, /animation|@keyframes|filter\s*:/i);
+  assert.match(stylesheet, /\.qb-sigil-footer__rights\s*\{[^}]*justify-self:\s*start/s);
+  assert.match(stylesheet, /@media\s*\(max-width:\s*600px\)/);
 });
 
 test("does not add duplicate crest footers or stylesheets", () => {

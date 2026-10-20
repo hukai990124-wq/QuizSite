@@ -25,6 +25,13 @@ export function mountSigilFooter(doc = document) {
   footer.id = FOOTER_ID;
   footer.className = "qb-sigil-footer";
 
+  const rights = doc.createElement("span");
+  rights.className = "qb-sigil-footer__rights i18n-noloc";
+  rights.textContent = "© @HuKai. All rights reserved.";
+
+  const brand = doc.createElement("div");
+  brand.className = "qb-sigil-footer__brand";
+
   const image = doc.createElement("img");
   image.className = "qb-sigil-footer__image";
   image.src = "/assets/sigilHK.png";
@@ -37,8 +44,10 @@ export function mountSigilFooter(doc = document) {
   motto.lang = "la";
   motto.textContent = "Omnia Superabo";
 
-  footer.appendChild(image);
-  footer.appendChild(motto);
+  brand.appendChild(image);
+  brand.appendChild(motto);
+  footer.appendChild(rights);
+  footer.appendChild(brand);
   doc.body.appendChild(footer);
   return footer;
 }
