@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZSITE_BROWSER_MODULES || process.cwd()]}));
 const root=path.resolve(__dirname,'..'),site=path.join(root,'site');
-const bank=JSON.parse(fs.readFileSync(path.join(root,'programming/typescript-review.json')));
+const bank=JSON.parse(fs.readFileSync(path.join(root,'question-banks/programming/typescript-review.json')));
 async function main(){
   const server=http.createServer((req,res)=>{
     const file=path.resolve(site,'.'+new URL(req.url,'http://localhost').pathname);

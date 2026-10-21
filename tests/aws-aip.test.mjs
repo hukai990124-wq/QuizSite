@@ -5,7 +5,7 @@ import {validateProgressItems} from '../worker/account.mjs';
 
 const load = path => readFile(new URL('../' + path, import.meta.url), 'utf8');
 test('AIP import preserves all 136 numbered questions and valid answer choices', async () => {
-  const bank = JSON.parse(await load('aws-aip/data/questions.json'));
+  const bank = JSON.parse(await load('question-banks/aws-aip/data/questions.json'));
   assert.equal(bank.length,136);
   assert.deepEqual(bank[1].answer,['A','D','F']);
   assert.match(bank[22].question.en,/invoke_model\(modelId="anthropic\.claude-v2"/);
@@ -24,14 +24,14 @@ test('AIP import preserves all 136 numbered questions and valid answer choices',
       assert.doesNotMatch(field.en,/Correct Answer:|Community vote distribution|Topic 1Question|淘宝|微信/);
     }
   }
-  const sources=JSON.parse(await load('aws-aip/data/sources.json'));
+  const sources=JSON.parse(await load('question-banks/aws-aip/data/sources.json'));
   assert.equal(sources.length,6);
   assert.deepEqual(sources.map(s=>s.count),[50,50,36,50,50,36]);
   for(const source of sources) assert.match(source.sha256,/^[a-f0-9]{64}$/);
 });
 
 test('AIP pages reuse the AWS engine with 50/50/36 questions, AI and shared shell',async()=>{
-  const bank=JSON.parse(await load('aws-aip/data/questions.json'));
+  const bank=JSON.parse(await load('question-banks/aws-aip/data/questions.json'));
   for (const [part,total] of [[1,50],[2,50],[3,36]]) {
     const page=await load(`site/aws-aip/part0${part}.html`);
     assert.equal((page.match(/class="q" id="q\d+"/g)||[]).length,total);

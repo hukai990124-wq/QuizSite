@@ -5,7 +5,7 @@ const http = require('node:http');
 const assert = require('node:assert/strict');
 const {chromium} = require(require.resolve('playwright', {paths:[process.env.QUIZSITE_BROWSER_MODULES || process.cwd()]}));
 const site = path.resolve(__dirname, '../site');
-const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../programming/html-review.json')));
+const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../question-banks/programming/html-review.json')));
 async function main() {
   const server = http.createServer((request, response) => {
     const file = path.resolve(site, '.' + new URL(request.url, 'http://localhost').pathname);
@@ -103,7 +103,7 @@ async function main() {
       assert.ok((await page.locator('.hero .sub').textContent()).includes(lang === 'en' ? '4,881' : lang === 'ja' ? '4,881' : '4881'));
     }
     await page.locator('#programming-practice').scrollIntoViewIfNeeded();
-    await page.screenshot({path:path.resolve(__dirname,'../fe/shots/html-review-home.png')});
+    await page.screenshot({path:path.resolve(__dirname,'../question-banks/fe/shots/html-review-home.png')});
     assert.deepEqual(errors,[]);
     console.log('HTML review passed: 20/80; safe code; red theme; score/redo/reveal/reload/report; keyboard; 3 languages; AI options; mobile; homepage progress.');
   } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }

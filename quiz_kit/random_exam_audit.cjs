@@ -37,7 +37,7 @@ async function main(){
       await page.emulateMedia({media:'print'});
       assert.equal(await page.locator('details.ans:visible').count(),0,'print cannot reveal solutions');
       await page.emulateMedia({media:'screen'});
-      if(pool==='aws-clf')await page.screenshot({path:path.resolve(__dirname,'../fe/shots/random-exam-pending.png')});
+      if(pool==='aws-clf')await page.screenshot({path:path.resolve(__dirname,'../question-banks/fe/shots/random-exam-pending.png')});
       if(quotas){
         const actual=await page.locator('.wrap > h2').evaluateAll(headings=>headings.map(h=>{let count=0;for(let n=h.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling)count+=n.matches('.q')?1:n.querySelectorAll('.q').length;return count;}));
         assert.deepEqual(actual,quotas);
@@ -97,7 +97,7 @@ async function main(){
         await page.setViewportSize({width,height:900});
         assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
       }
-      if(pool==='aws-clf')await page.screenshot({path:path.resolve(__dirname,'../fe/shots/random-exam-submitted.png')});
+      if(pool==='aws-clf')await page.screenshot({path:path.resolve(__dirname,'../question-banks/fe/shots/random-exam-submitted.png')});
       if(pool==='aws-clf'){
         const home=await ctx.newPage();await home.goto(base+'/');
         await home.locator('#reset-progress').click();await home.locator('#reset-confirm').click();

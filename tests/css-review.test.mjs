@@ -6,7 +6,7 @@ import {validateProgressItems} from '../worker/account.mjs';
 const load = path => readFile(new URL('../' + path, import.meta.url), 'utf8');
 
 test('CSS review has 20 stable four-choice questions with three-language explanations', async () => {
-  const data = JSON.parse(await load('programming/css-review.json'));
+  const data = JSON.parse(await load('question-banks/programming/css-review.json'));
   assert.equal(data.length, 20);
   assert.equal(new Set(data.map(q => q.id)).size, 20);
   const answers = {};
@@ -27,7 +27,7 @@ test('CSS review has 20 stable four-choice questions with three-language explana
 });
 
 test('defect-review options are translated; implementation-choice options stay code', async () => {
-  const data = JSON.parse(await load('programming/css-review.json'));
+  const data = JSON.parse(await load('question-banks/programming/css-review.json'));
   const defect = data.filter(q => (q.code || '').trim());
   const impl = data.filter(q => !(q.code || '').trim());
   assert.ok(defect.length && impl.length, 'the set mixes both question styles');
@@ -49,7 +49,7 @@ test('defect-review options are translated; implementation-choice options stay c
 
 test('rendered prose options carry three languages and the theme switches them', async () => {
   const page = await load('site/programming/css.html');
-  const data = JSON.parse(await load('programming/css-review.json'));
+  const data = JSON.parse(await load('question-banks/programming/css-review.json'));
   const proseOptions = data.filter(q => (q.code || '').trim()).length * 4;
   for (const lang of ['en', 'zh', 'ja']) {
     assert.equal((page.match(new RegExp(`class="opt-lang" lang="${lang}"`, 'g')) || []).length,
@@ -73,7 +73,7 @@ test('CSS review reuses the shared engine, red theme and safe snippets', async (
   assert.doesNotMatch(page, /<img\b|<input\b|<iframe\b|on(?:click|error)\s*=\s*["']/i,
     'code choices must stay inert escaped text');
   // Questions that only ask the reviewer to pick an implementation carry no code block.
-  const data = JSON.parse(await load('programming/css-review.json'));
+  const data = JSON.parse(await load('question-banks/programming/css-review.json'));
   const withoutCode = data.filter(q => !(q.code || '').trim()).length;
   assert.equal((page.match(/class="review-code i18n-noloc"/g) || []).length, 20 - withoutCode,
     'a code block appears only where the question supplies source code');

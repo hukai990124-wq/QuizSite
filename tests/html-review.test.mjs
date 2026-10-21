@@ -5,7 +5,7 @@ import {validateProgressItems} from '../worker/account.mjs';
 
 const load = path => readFile(new URL('../' + path, import.meta.url), 'utf8');
 test('HTML review has 20 stable four-choice questions with three-language explanations', async () => {
-  const data = JSON.parse(await load('programming/html-review.json'));
+  const data = JSON.parse(await load('question-banks/programming/html-review.json'));
   assert.equal(data.length, 20);
   assert.equal(new Set(data.map(q => q.id)).size, 20);
   const answers = {};

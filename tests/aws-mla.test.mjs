@@ -13,7 +13,7 @@ const DOMAINS = [
 ];
 
 test('MLA-C01 bank holds 65 questions matching the official domain weights', async () => {
-  const qs = JSON.parse(await load('aws-mla/data/questions.json'));
+  const qs = JSON.parse(await load('question-banks/aws-mla/data/questions.json'));
   assert.equal(qs.length, 65);
   const tally = {};
   for (const [i, q] of qs.entries()) {
@@ -50,7 +50,7 @@ test('MLA-C01 bank holds 65 questions matching the official domain weights', asy
 
 test('MLA-C01 page renders the bank with a timed mock mode', async () => {
   const page = await load('site/aws-mla/index.html');
-  const qs = JSON.parse(await load('aws-mla/data/questions.json'));
+  const qs = JSON.parse(await load('question-banks/aws-mla/data/questions.json'));
   const blocks = page.match(/class="q" id="q\d+"/g) || [];
   assert.equal(blocks.length, 65);
   for (const q of qs) {

@@ -6,7 +6,7 @@ Add a vocabulary entry to the AWS-AIF directory: 100 original terminology questi
 
 Use the existing QuizSite theme, question engine, answer card, wrong-answer filtering, redo, submission report, account controls, AI explanation button and back-to-top component. Native option buttons support keyboard input; selecting with Enter must not prematurely grade the question. Explanations compare the correct term with the distractor. English originals always remain visible in stems, options and explanations. Chinese UI adds only Chinese translations, Japanese UI adds only Japanese translations, and English UI shows no additional translation. Follow the document's data-lang so changes take effect immediately without altering stored answers.
 
-Data: `aws-aif/vocabulary.json`. Generator: `python aws-aif/gen_vocabulary.py`; outputs only `site/aws-aif/vocabulary.html`. UI dictionary is generated separately through `quiz_kit/i18n_inject.py`. Build the TypeScript accessibility adapter through `pnpm run build`.
+Data: `question-banks/aws-aif/vocabulary.json`. Generator: `python question-banks/aws-aif/gen_vocabulary.py`; outputs only `site/aws-aif/vocabulary.html`. UI dictionary is generated separately through `quiz_kit/i18n_inject.py`. Build the TypeScript accessibility adapter through `pnpm run build`.
 
 Progress key: `quiz:aws:aifvocab:01`, isolated from bank/practice questions; accepted by the existing account sync contract. Question order and IDs must remain stable for persisted answers. Answer positions are deterministic per ID and mixed across A/B. Do not mix this supplement into the 50-question exam random pool. Include its 100 questions in homepage aggregate progress.
 

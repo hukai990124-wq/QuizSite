@@ -6,7 +6,7 @@ import {validateProgressItems} from '../worker/account.mjs';
 const load = path => readFile(new URL('../' + path, import.meta.url), 'utf8');
 
 test('Java Bronze set has 20 stable questions mixing single and multiple answers', async () => {
-  const data = JSON.parse(await load('java-bronze/java-bronze.json'));
+  const data = JSON.parse(await load('question-banks/java-bronze/java-bronze.json'));
   const qs = data.questions;
   assert.equal(qs.length, 20);
   const multi = qs.filter(q => q.kind === 'multi');
@@ -47,7 +47,7 @@ test('Java Bronze page renders both answer types with three-language text', asyn
   }
   assert.equal((page.match(/class="jb-code i18n-noloc"/g) || []).length, 20);
   // Multi-answer questions are marked by a comma in data-ans.
-  const data = JSON.parse(await load('java-bronze/java-bronze.json'));
+  const data = JSON.parse(await load('question-banks/java-bronze/java-bronze.json'));
   const multiCount = data.questions.filter(q => q.kind === 'multi').length;
   assert.equal((page.match(/data-ans="[ABCD],[ABCD,]+"/g) || []).length, multiCount);
   assert.doesNotMatch(page, /<img\b|<input\b|<iframe\b|on(?:click|error)\s*=\s*["']/i,
@@ -77,7 +77,7 @@ test('homepage lists the Java Bronze bank and registers its progress', async () 
 });
 
 test('Java Bronze mock exam has 60 questions with balanced answers and a timer', async () => {
-  const data = JSON.parse(await load('java-bronze/java-bronze-exam.json'));
+  const data = JSON.parse(await load('question-banks/java-bronze/java-bronze-exam.json'));
   const qs = data.questions;
   assert.equal(qs.length, 60);
   assert.equal(new Set(qs.map(q => q.id)).size, 60);

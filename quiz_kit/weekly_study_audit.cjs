@@ -55,7 +55,7 @@ async function main(){
   await page.waitForTimeout(100);const paused=records.get('Learner').total;
   await page.clock.runFor(20000);assert.equal(records.get('Learner').total,paused,'hidden pages accrue no weekly time');
   await page.evaluate(()=>{window.testVisibility='visible';document.dispatchEvent(new Event('visibilitychange'));});
-  await page.screenshot({path:path.resolve(__dirname,'../fe/shots/weekly-study.png')});
+  await page.screenshot({path:path.resolve(__dirname,'../question-banks/fe/shots/weekly-study.png')});
   for(const width of [320,768,1440]){await page.setViewportSize({width,height:900});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);}
   fail=true;await page.locator('#qb-account-close').click();await page.locator('.qb-auth-trigger').click();
   await page.locator('#qb-weekly-note').getByText(/暂未同步/).waitFor();

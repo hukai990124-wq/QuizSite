@@ -28,7 +28,7 @@ async function main() {
     await page.waitForSelector('.qb-sitebar');
     assert.equal(await page.locator('.q').count(), 100);
     assert.equal(await page.locator('.opt').count(), 200);
-    const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../aws-aif/vocabulary.json')));
+    const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../question-banks/aws-aif/vocabulary.json')));
     for (const q of data) {
       const node = page.locator(`[data-term-id="${q.id}"]`);
       const key = await node.getAttribute('data-ans');

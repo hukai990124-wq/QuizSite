@@ -52,7 +52,7 @@ async function main(){
    for(const width of [320,768,1024,1440]){await page.setViewportSize({width,height:900});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);}
    await page.waitForSelector('.mock-verify');await page.locator('#qb-account-close').click();assert.equal(await page.locator('.mock-verify').count(),0);
    await page.locator('.qb-auth-trigger').click();await page.waitForSelector('.mock-verify');
-   if(language==='zh')await page.locator('.qb-account-dialog').screenshot({path:path.resolve(__dirname,'../fe/shots/registration-turnstile.png')});
+   if(language==='zh')await page.locator('.qb-account-dialog').screenshot({path:path.resolve(__dirname,'../question-banks/fe/shots/registration-turnstile.png')});
    allow=true;await page.locator('.mock-verify').click();await page.locator('#qb-auth-submit').click();await page.waitForSelector('#qb-account-view',{state:'visible'});
    assert.equal(await page.locator('#qb-registration-challenge').isVisible(),false);assert.equal(registerCalls,2);assert.deepEqual(errors,[]);
    console.log(language+': registration-only challenge, expiry/retry, consumed token, login unchanged, missing config, close/reopen, success and responsive PASS');

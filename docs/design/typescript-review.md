@@ -10,7 +10,7 @@ All prompts, prose choices and explanations are authored in English, Chinese and
 
 ## Integration and compiler evidence
 
-Reuse `programming/build_css_review.py` via optional renderer metadata rather than copying a third renderer. Default CSS output is byte-identical after parameterization. `programming/build_typescript_review.py` generates only the new page and shared i18n dictionary. Existing red CSS, native-button accessibility adapter, quiz scoring, wrong-only filter, redo, answer sheet, reports/home link, AI context and account sync are reused unchanged. No backend, authentication, AI quota, database or runtime dependency changes.
+Reuse `question-banks/programming/build_css_review.py` via optional renderer metadata rather than copying a third renderer. Default CSS output is byte-identical after parameterization. `question-banks/programming/build_typescript_review.py` generates only the new page and shared i18n dictionary. Existing red CSS, native-button accessibility adapter, quiz scoring, wrong-only filter, redo, answer sheet, reports/home link, AI context and account sync are reused unchanged. No backend, authentication, AI quota, database or runtime dependency changes.
 
 The installed, locked compiler is TypeScript **7.0.2**; no version upgrade. Each question stores its displayed faulty `code`, expected `diagnostic` and a full corrected `fixed` example. A test invokes the installed compiler on isolated temporary modules, requires the exact diagnostic for every faulty snippet and typechecks every corrected snippet without errors. Flags: `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, ES2022 and DOM libraries. Questions 28–29 explicitly identify the extra flags their examples depend on. These fixture flags do not alter the site's tsconfig. Fixtures are checked, never run.
 
@@ -18,7 +18,7 @@ Official documentation checked on 2026-10-17: [Everyday types](https://www.types
 
 ## Verification and review
 
-- `python programming/build_typescript_review.py` regenerates the page using cached, authored content; no network calls or AI token use.
+- `python question-banks/programming/build_typescript_review.py` regenerates the page using cached, authored content; no network calls or AI token use.
 - `pnpm test`: **128 tests pass**, including 30 faulty and 30 fixed compiler fixtures, trilingual completeness, four unique choices, balanced answer keys, escaping, shared-engine hooks and progress contract. Existing homepage count assertions and the AIP browser-audit total are updated, not removed.
 - `pnpm typecheck`, `pnpm audit`, `git diff --check`: pass.
 - `node quiz_kit/typescript_review_audit.cjs`: isolated Edge, API/WebSocket boundaries mocked; 30/120, exact code preservation, no executed snippets, red computed theme, all three languages including options/explanations, keyboard selection without premature submit, wrong/redo, all answers, reload, report/home, AI context retaining all options, homepage progress and 320/768/1024/1440 layouts. Screenshots at 320 and 1440 inspected. No real AI requests, cloud writes or registration tests.

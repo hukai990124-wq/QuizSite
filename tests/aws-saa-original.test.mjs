@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-const questions = JSON.parse(readFileSync(new URL("../aws-saa/original-questions.json", import.meta.url), "utf8"));
+const questions = JSON.parse(readFileSync(new URL("../question-banks/aws-saa/original-questions.json", import.meta.url), "utf8"));
 const paper = readFileSync(new URL("../site/aws-saa/original/part01.html", import.meta.url), "utf8");
 const directory = readFileSync(new URL("../site/aws-saa/index.html", import.meta.url), "utf8");
 const homepage = readFileSync(new URL("../site/index.html", import.meta.url), "utf8");

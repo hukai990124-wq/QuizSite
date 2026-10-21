@@ -5,13 +5,13 @@ import {validateProgressItems} from '../worker/account.mjs';
 const load=path=>readFile(new URL('../'+path,import.meta.url),'utf8');
 const groups=[['easy',[50,50,50,46]],['hard',[50,50,15]],['veryhard',[50,50,31]]];
 test('open AIP bank excludes attributed BenchPrep content and retains 442 unique reference-answer questions',async()=>{
-  const bank=JSON.parse(await load('aws-aip/data/open-questions.json'));
-  const meta=JSON.parse(await load('aws-aip/data/open-source.json'));
+  const bank=JSON.parse(await load('question-banks/aws-aip/data/open-questions.json'));
+  const meta=JSON.parse(await load('question-banks/aws-aip/data/open-source.json'));
   assert.equal(bank.length,442);assert.equal(meta.imported,442);assert.equal(meta.excluded.length,20);
   assert.ok(meta.excluded.every(q=>q.source==='BenchPrep'));assert.deepEqual(meta.duplicates,[]);
   assert.equal(new Set(bank.map(q=>q.sourceId)).size,442);
   const fingerprint=t=>t.toLowerCase().replace(/[^a-z0-9]/g,'');
-  const old=JSON.parse(await load('aws-aip/data/questions.json'));
+  const old=JSON.parse(await load('question-banks/aws-aip/data/questions.json'));
   const seen=new Set(old.map(q=>fingerprint(q.question.en)));
   for(const [i,q] of bank.entries()){
     assert.equal(q.id,`open-aip-${String(i+1).padStart(3,'0')}`);
@@ -32,7 +32,7 @@ test('open AIP bank excludes attributed BenchPrep content and retains 442 unique
   assert.match(await load('site/aws-aip/LICENSE-JeremyEngineer.txt'),/Copyright \(c\) 2026 JeremyEngineer/);
 });
 test('open practice papers keep all answers, bilingual options, shared AI shell and separate progress keys',async()=>{
-  const bank=JSON.parse(await load('aws-aip/data/open-questions.json'));
+  const bank=JSON.parse(await load('question-banks/aws-aip/data/open-questions.json'));
   for(const [tier,counts] of groups){
     const source=bank.filter(q=>q.tier===tier);let offset=0;
     for(const [index,count] of counts.entries()){

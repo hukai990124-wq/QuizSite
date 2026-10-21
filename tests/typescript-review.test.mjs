@@ -8,7 +8,7 @@ import {spawnSync} from 'node:child_process';
 import {validateProgressItems} from '../worker/account.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const load=name=>readFile(path.join(root,name),'utf8');
-const getBank=async()=>JSON.parse(await load('programming/typescript-review.json'));
+const getBank=async()=>JSON.parse(await load('question-banks/programming/typescript-review.json'));
 
 test('TypeScript review contains 30 original trilingual four-choice defect reviews',async()=>{
   const bank=await getBank(), tally={};
