@@ -1,4 +1,4 @@
-"""Build original AIF terminology practice with the existing QuizBank engine.
+"""Build original AIF terminology practice with the existing QuizSite engine.
 
 Run from any directory: python aws-aif/gen_vocabulary.py
 Only site/aws-aif/vocabulary.html is generated; question order is a progress contract.

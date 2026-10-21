@@ -136,12 +136,12 @@ function mount() {
         if (username)
             void read();
     }
-    window.addEventListener('quizbank:account-changed', event => {
+    window.addEventListener('quizsite:account-changed', event => {
         const value = event.detail?.username;
         changeUser(typeof value === 'string' ? value : null);
     });
-    window.addEventListener('quizbank:account-opened', () => { render(); void flush().then(read); });
-    window.addEventListener('quizbank:study-interval', event => {
+    window.addEventListener('quizsite:account-opened', () => { render(); void flush().then(read); });
+    window.addEventListener('quizsite:study-interval', event => {
         if (!username)
             return;
         const value = event.detail;
@@ -159,9 +159,9 @@ function mount() {
         if (pending.end - pending.start >= 15000)
             void flush();
     });
-    window.addEventListener('quizbank:study-flush', () => { void flush(); });
+    window.addEventListener('quizsite:study-flush', () => { void flush(); });
     window.addEventListener('online', () => { void flush().then(read); });
-    document.addEventListener('quizbank:language-changed', render);
+    document.addEventListener('quizsite:language-changed', render);
     window.setInterval(() => {
         render();
         if (username && state && clock() >= state.resetsAt)
@@ -169,7 +169,7 @@ function mount() {
     }, 1000);
     window.setInterval(() => { if (username)
         void flush(); }, 15000);
-    const account = window.QuizBankAccount;
+    const account = window.QuizSiteAccount;
     changeUser(account?.getUser()?.username || null);
 }
 if (typeof document !== 'undefined') {

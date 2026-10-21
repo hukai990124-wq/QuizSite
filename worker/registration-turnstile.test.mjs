@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {registrationConfig,verifyRegistration} from './registration-turnstile.mjs';
 const env={TURNSTILE_SITE_KEY:'unit-test-public-key',TURNSTILE_SECRET_KEY:'unit-test-private-value'};
-const request=new Request('https://quizbank.example/api/auth/register');
+const request=new Request('https://quizsite.example/api/auth/register');
 test('registration configuration exposes only the public key and fails closed when incomplete',()=>{
   assert.deepEqual(registrationConfig(env),{configured:true,siteKey:env.TURNSTILE_SITE_KEY});
   assert.deepEqual(registrationConfig({TURNSTILE_SITE_KEY:env.TURNSTILE_SITE_KEY}),{configured:false,siteKey:null});
@@ -20,11 +20,11 @@ test('successful server verification requires the exact host and register action
   const result=await verifyRegistration(request,env,'token',async(url,options)=>{
     assert.equal(url,'https://challenges.cloudflare.com/turnstile/v0/siteverify');
     sent=JSON.parse(options.body);
-    return Response.json({success:true,hostname:'quizbank.example',action:'register'});
+    return Response.json({success:true,hostname:'quizsite.example',action:'register'});
   });
   assert.equal(result.status,200);
   assert.deepEqual(sent,{secret:env.TURNSTILE_SECRET_KEY,response:'token'});
-  for(const response of [{success:true,hostname:'attacker.example',action:'register'},{success:true,hostname:'quizbank.example',action:'login'},{}]){
+  for(const response of [{success:true,hostname:'attacker.example',action:'register'},{success:true,hostname:'quizsite.example',action:'login'},{}]){
     assert.notEqual((await verifyRegistration(request,env,'token',async()=>Response.json(response))).status,200);
   }
 });

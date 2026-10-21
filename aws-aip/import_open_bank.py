@@ -11,7 +11,7 @@ SOURCE = "https://raw.githubusercontent.com/JeremyEngineer/aws-aip-c01-practice-
 
 
 def download(relative):
-    request = urllib.request.Request(SOURCE + "/" + relative, headers={"User-Agent": "QuizBank-study-import"})
+    request = urllib.request.Request(SOURCE + "/" + relative, headers={"User-Agent": "QuizSite-study-import"})
     with urllib.request.urlopen(request, timeout=30) as response:
         return response.read()
 

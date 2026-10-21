@@ -67,7 +67,7 @@ test('CSS review reuses the shared engine, red theme and safe snippets', async (
   assert.equal((page.match(/class="opt" data-letter="[ABCD]"/g) || []).length, 80);
   assert.match(page, /quiz:programming:css:01/);
   assert.match(page, /programming-review.css/);
-  assert.match(page, /quizbank-theme.js/);
+  assert.match(page, /quizsite-theme.js/);
   assert.equal((page.match(/data-chat-context="/g) || []).length, 20,
     'AI context must preserve options even though the shared reader strips buttons');
   assert.doesNotMatch(page, /<img\b|<input\b|<iframe\b|on(?:click|error)\s*=\s*["']/i,

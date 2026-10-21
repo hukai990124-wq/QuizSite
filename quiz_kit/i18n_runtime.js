@@ -356,7 +356,7 @@
       if (document.body) observe();
     }
     document.documentElement.removeAttribute("data-i18n-wait");
-    document.dispatchEvent(new CustomEvent("quizbank:language-changed", { detail: { language: lang } }));
+    document.dispatchEvent(new CustomEvent("quizsite:language-changed", { detail: { language: lang } }));
   }
 
   function current() {

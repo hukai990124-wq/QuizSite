@@ -70,7 +70,7 @@
 - 使用 Cloudflare Workers 原生 `node:crypto` 的 scrypt，参数 N=16384、r=8、p=5、maxmem=32 MiB，随机盐 16 字节、派生值 32 字节；这是 [OWASP 推荐的 scrypt 参数组合](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)。根配置显式声明 `nodejs_compat`，兼容支持原生 Node Crypto 的运行环境。账号密码只在 TLS 请求体中短暂经过 Worker，不记录日志。
 - 2026-10-11 在云端预览环境复现：旧版 PBKDF2 的 600,000 次迭代触发 `NotSupportedError`，Workers 当前单次上限为 100,000。本地 Node 和本地 workerd 不实施同一上限，原先的测试未覆盖生产限制。修复前已只读确认远程数据库账号数为 0，改用 scrypt 无需更改表或迁移已有密码。
 - 新哈希显式带版本前缀，验证时固定允许的参数以避免异常工作量。保留旧 PBKDF2 验证分支；超过运行时迭代上限的导入记录仍需要在兼容环境验证或重置密码，不能只改迭代次数。错误日志仅记录路由和错误类型，不记录密码、账号名、cookie 或进度正文。
-- 会话令牌由密码学安全随机源生成；cookie 为 `__Host-quizbank_session`、`Secure`、`HttpOnly`、`SameSite=Strict`、`Path=/`，不设置 Domain。
+- 会话令牌由密码学安全随机源生成；cookie 为 `__Host-quizsite_session`、`Secure`、`HttpOnly`、`SameSite=Strict`、`Path=/`，不设置 Domain。
 - 写请求要求同源 `Origin` 和 JSON Content-Type；无开放 CORS。
 - 对登录和注册使用 Cloudflare Worker Rate Limiting binding 静默限流；该服务是最终一致的缓解措施，不作为精确计数器。
 - SQL 均使用 D1 prepared statement 参数绑定。对请求体、账号长度、进度键和值大小做服务端校验。

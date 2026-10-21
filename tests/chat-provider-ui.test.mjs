@@ -24,7 +24,7 @@ test("AI model selector offers accessible Qwen and Cloudflare cards with separat
 });
 
 test("selected provider is remembered locally and sent to status and chat APIs", () => {
-  assert.match(source, /quizbank-ai-provider/);
+  assert.match(source, /quizsite-ai-provider/);
   assert.match(source, /\/api\/chat\/status\?provider=\$\{selectedProvider\}/);
   assert.match(source, /provider: selectedProvider/);
 });

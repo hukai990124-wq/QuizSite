@@ -17,18 +17,18 @@ function getLabel() {
 }
 
 function mountBackToTop() {
-  if (!document.body || document.getElementById("quizbank-back-to-top")) return;
+  if (!document.body || document.getElementById("quizsite-back-to-top")) return;
 
-  if (!document.getElementById("quizbank-back-to-top-css")) {
+  if (!document.getElementById("quizsite-back-to-top-css")) {
     const stylesheet = document.createElement("link");
-    stylesheet.id = "quizbank-back-to-top-css";
+    stylesheet.id = "quizsite-back-to-top-css";
     stylesheet.rel = "stylesheet";
     stylesheet.href = new URL("./back-to-top.css", import.meta.url).href;
     document.head.appendChild(stylesheet);
   }
 
   const button = document.createElement("button");
-  button.id = "quizbank-back-to-top";
+  button.id = "quizsite-back-to-top";
   button.className = "qb-back-to-top";
   button.type = "button";
   button.hidden = true;

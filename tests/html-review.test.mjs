@@ -31,7 +31,7 @@ test('HTML review uses safe escaped snippets and the shared quiz engine', async 
   assert.doesNotMatch(page, /<img\b|<input\b|<iframe\b|onclick="|onerror="/i);
   assert.match(page, /quiz:programming:html:01/);
   assert.match(page, /programming-review.css/);
-  assert.match(page, /quizbank-theme.js/);
+  assert.match(page, /quizsite-theme.js/);
   assert.equal((page.match(/data-chat-context="/g) || []).length, 20,
     'AI context must preserve options even though the shared reader strips buttons');
   assert.doesNotThrow(() => validateProgressItems([{

@@ -91,7 +91,7 @@ test("does not add duplicate crest footers or stylesheets", () => {
 
 test("the homepage and shared quiz shell both load the crest footer", async () => {
   const homepage = await readFile(`${siteDirectory}index.html`, "utf8");
-  const sharedTheme = await readFile(`${siteDirectory}assets/quizbank-theme.js`, "utf8");
+  const sharedTheme = await readFile(`${siteDirectory}assets/quizsite-theme.js`, "utf8");
 
   assert.match(homepage, /\/assets\/sigil-footer\.mjs/);
   assert.match(sharedTheme, /\/assets\/sigil-footer\.mjs/);

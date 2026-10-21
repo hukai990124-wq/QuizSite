@@ -100,7 +100,7 @@ function mount(q: HTMLElement, data: Hotspot): void {
       notice.textContent = known ? copy[0] : copy[1];
       heading.textContent = copy[2]; explanation.textContent = verifiedReview[lang];
     }
-    localizeReview(); document.addEventListener('quizbank:language-changed', localizeReview);
+    localizeReview(); document.addEventListener('quizsite:language-changed', localizeReview);
   }
   if (data.answer !== null) {
     const answer = required<HTMLElement>(details, '.correct');

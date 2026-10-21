@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
 const assert = require('node:assert/strict');
-const {chromium} = require(require.resolve('playwright', {paths:[process.env.QUIZBANK_BROWSER_MODULES || process.cwd()]}));
+const {chromium} = require(require.resolve('playwright', {paths:[process.env.QUIZSITE_BROWSER_MODULES || process.cwd()]}));
 const site = path.resolve(__dirname, '../site');
 const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../programming/html-review.json')));
 async function main() {

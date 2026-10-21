@@ -34,7 +34,7 @@
       return Array.from(mutation.addedNodes).some(function (node) { return node instanceof HTMLElement; });
     })) mountReportHome();
   }).observe(document.body, { childList: true, subtree: true });
-  document.addEventListener("quizbank:language-changed", updateReportHomeLanguage);
+  document.addEventListener("quizsite:language-changed", updateReportHomeLanguage);
   if (/\/aws-aif\/bank\/part\d+/.test(location.pathname)) {
     var hotspotScript = document.createElement("script");
     hotspotScript.type = "module";
@@ -42,17 +42,17 @@
     document.head.appendChild(hotspotScript);
   }
 
-  if (!document.getElementById("quizbank-back-to-top-js")) {
+  if (!document.getElementById("quizsite-back-to-top-js")) {
     var backToTopScript = document.createElement("script");
-    backToTopScript.id = "quizbank-back-to-top-js";
+    backToTopScript.id = "quizsite-back-to-top-js";
     backToTopScript.type = "module";
     backToTopScript.src = "/assets/back-to-top.mjs";
     document.head.appendChild(backToTopScript);
   }
 
-  if (!document.getElementById("quizbank-account-js")) {
+  if (!document.getElementById("quizsite-account-js")) {
     var accountScript = document.createElement("script");
-    accountScript.id = "quizbank-account-js";
+    accountScript.id = "quizsite-account-js";
     accountScript.src = "/assets/account.js";
     accountScript.defer = true;
     document.head.appendChild(accountScript);
@@ -101,14 +101,14 @@
     homeText.textContent = "← " + label;
     home.setAttribute("aria-label", label);
   }
-  document.addEventListener("quizbank:language-changed", updateHomeLanguage);
+  document.addEventListener("quizsite:language-changed", updateHomeLanguage);
   updateHomeLanguage();
 
   brand.className = "qb-sitebar__brand";
   mark.className = "qb-sitebar__mark";
   mark.setAttribute("aria-hidden", "true");
   mark.textContent = "Q";
-  name.textContent = "QuizBank";
+  name.textContent = "QuizSite";
   brand.appendChild(mark);
   brand.appendChild(name);
 

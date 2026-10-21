@@ -2,9 +2,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
 const assert = require('node:assert/strict');
-const {chromium} = require(require.resolve('playwright', {paths:[process.env.QUIZBANK_BROWSER_MODULES || process.cwd()]}));
+const {chromium} = require(require.resolve('playwright', {paths:[process.env.QUIZSITE_BROWSER_MODULES || process.cwd()]}));
 const site = path.resolve(__dirname,'../site');
-const key = 'quizbank:study-time:v1';
+const key = 'quizsite:study-time:v1';
 async function main() {
  const server=http.createServer((request,response)=>{
   const file=path.resolve(site,'.'+new URL(request.url,'http://localhost').pathname);
@@ -15,7 +15,7 @@ async function main() {
  });
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  server.unref();
- const base=process.env.QUIZBANK_TEST_BASE || `http://127.0.0.1:${server.address().port}`;
+ const base=process.env.QUIZSITE_TEST_BASE || `http://127.0.0.1:${server.address().port}`;
  const browser=await chromium.launch({headless:true,channel:'msedge'});
  try {
   const context=await browser.newContext({timezoneId:'Asia/Tokyo'});

@@ -55,7 +55,7 @@ const send = byId<HTMLButtonElement>("qb-chat-send");
 const clear = byId<HTMLButtonElement>("qb-chat-clear");
 const form = byId<HTMLFormElement>("qb-chat-form");
 const providerInputs = Array.from(dialog.querySelectorAll<HTMLInputElement>('input[name="qb-chat-provider"]'));
-const PROVIDER_STORAGE_KEY = "quizbank-ai-provider";
+const PROVIDER_STORAGE_KEY = "quizsite-ai-provider";
 function readProviderPreference(): ChatProvider {
   try { return localStorage.getItem(PROVIDER_STORAGE_KEY) === "cloudflare" ? "cloudflare" : "qwen"; }
   catch { return "qwen"; }
@@ -76,7 +76,7 @@ function draftPrompt(): string {
   const language = document.documentElement.getAttribute("data-lang");
   return language === "en" ? draftPrompts.en : language === "ja" ? draftPrompts.ja : draftPrompts.zh;
 }
-document.addEventListener("quizbank:language-changed", () => {
+document.addEventListener("quizsite:language-changed", () => {
   // Never translate or overwrite a user's own draft.
   if (Object.values(draftPrompts).includes(input.value)) input.value = draftPrompt();
 });
@@ -228,8 +228,8 @@ function updateExamAvailability(): void {
   if (examPending()) { dialog.close(); clearConversation(); }
   else indexQuestions();
 }
-document.addEventListener("quizbank:exam-submitted", updateExamAvailability);
-document.addEventListener("quizbank:exam-state-changed", updateExamAvailability);
+document.addEventListener("quizsite:exam-submitted", updateExamAvailability);
+document.addEventListener("quizsite:exam-state-changed", updateExamAvailability);
 // Some viewers have a header .wrap before their dynamically rendered main.
 new MutationObserver(indexQuestions).observe(document.body, { childList: true, subtree: true });
 

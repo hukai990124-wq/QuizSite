@@ -1,6 +1,6 @@
 /* Isolated browser, simulated widget/provider, no real registration or AI requests. */
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
-const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZBANK_BROWSER_MODULES||process.cwd()]}));
+const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZSITE_BROWSER_MODULES||process.cwd()]}));
 const site=path.resolve(__dirname,'../site');
 const widget=`(()=>{let count=0;const hosts=new Map();window.turnstile={render(host,o){const id=String(++count);hosts.set(id,host);host.dataset.widgetLanguage=o.language;host.dataset.widgetSize=o.size;host.innerHTML='<button type="button" class="mock-verify">Verify</button><button type="button" class="mock-expire">Expire</button>';host.querySelector('.mock-verify').onclick=()=>o.callback('mock-token-'+id);host.querySelector('.mock-expire').onclick=()=>o['expired-callback']();return id;},remove(id){hosts.get(id)?.replaceChildren();hosts.delete(id);},reset(){}};})();`;
 async function main(){

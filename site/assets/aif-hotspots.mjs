@@ -127,7 +127,7 @@ function mount(q, data) {
             explanation.textContent = verifiedReview[lang];
         }
         localizeReview();
-        document.addEventListener('quizbank:language-changed', localizeReview);
+        document.addEventListener('quizsite:language-changed', localizeReview);
     }
     if (data.answer !== null) {
         const answer = required(details, '.correct');

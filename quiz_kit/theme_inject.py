@@ -1,4 +1,4 @@
-"""Generate the shared QuizBank shell and attach it to published pages."""
+"""Generate the shared QuizSite shell and attach it to published pages."""
 
 import argparse
 import re
@@ -10,10 +10,10 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 SITE = ROOT / "site"
 ASSETS = SITE / "assets"
-CSS_ID = "quizbank-theme-css"
-JS_ID = "quizbank-theme-js"
-CSS_TAG = f'<link rel="stylesheet" href="/assets/quizbank-theme.css" id="{CSS_ID}">'
-JS_TAG = f'<script src="/assets/quizbank-theme.js" id="{JS_ID}" defer></script>'
+CSS_ID = "quizsite-theme-css"
+JS_ID = "quizsite-theme-js"
+CSS_TAG = f'<link rel="stylesheet" href="/assets/quizsite-theme.css" id="{CSS_ID}">'
+JS_TAG = f'<script src="/assets/quizsite-theme.js" id="{JS_ID}" defer></script>'
 
 
 def inject_html(text):
@@ -62,7 +62,7 @@ def inject_file(path):
 
 def copy_theme_assets(assets_dir):
     """Use compiled TypeScript JS, not a second hand-maintained implementation."""
-    for name in ("quizbank-theme.css", "quizbank-theme.js"):
+    for name in ("quizsite-theme.css", "quizsite-theme.js"):
         source = ASSETS / name if name.endswith(".js") else HERE / name
         if not source.exists():
             raise FileNotFoundError(f"Missing {source}; run pnpm build first")

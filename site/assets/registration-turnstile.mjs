@@ -97,7 +97,7 @@ export class RegistrationChallenge {
                     this.deadline = Date.now() + 290000;
                     this.status = 'verified';
                     this.paint();
-                    this.container.dispatchEvent(new Event('quizbank:verification-ready'));
+                    this.container.dispatchEvent(new Event('quizsite:verification-ready'));
                 } },
                 'expired-callback': fail, 'error-callback': fail
             });

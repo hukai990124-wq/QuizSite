@@ -169,7 +169,7 @@ document.documentElement.setAttribute("data-lang",l);
 document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en"));
 }catch(e){}})();
 </script>
-<!--/i18n:head--><link rel="stylesheet" href="/assets/quizbank-theme.css" id="quizbank-theme-css">
+<!--/i18n:head--><link rel="stylesheet" href="/assets/quizsite-theme.css" id="quizsite-theme-css">
 </head><body><main class="wrap"><h1>AWS AIP-C01 开源练习 · 高难 · 第 01 套</h1><p class="sub">英文原题与中文机器翻译。本批暂不提供日文题文；日语界面显示英文原文。</p><p class="sub">开源练习，非 AWS 官方试题。按作者参考答案判分，解析附官方文档链接。</p><p class="sub"><a href="/aws-aip/index.html">← 题库目录</a></p><div class="toolbar"><div class="btns"><button id="btn-sheet" type="button">答题卡</button><button id="btn-wrong" type="button">只看错题</button><button id="btn-expand" type="button">展开全部解析</button><button id="btn-report" type="button">交卷</button><button id="btn-reset" type="button">重置</button></div><div class="qbar"><span>已答 <b id="s-done">0</b>/<b>50</b></span><span>正确 <b id="s-ok" class="ok">0</b></span><span>错误 <b id="s-bad" class="bad">0</b></span><span>正确率 <b id="s-pct">—</b></span><span class="pbar"><i id="s-fill"></i></span></div></div><div class="q" id="q1" data-source-id="veryhard:1.1-v1" data-chat-context="AWS AIP-C01 · veryhard:1.1-v1<br>Reference answer: A<br>A production Bedrock workload has steady, high, predictable demand for 12 business hours and near-zero traffic overnight. The team must guarantee dedicated capacity during business hours (no throttling) at the lowest total cost, keeping the same model and API. Which approach is BEST?<br>生产基岩工作负载在 12 个工作小时内具有稳定、高且可预测的需求，并且夜间流量接近于零。团队必须以最低的总成本保证工作时间内的专用容量（无节流），并保持相同的模型和 API。哪种方法最好？<br>A. Use Provisioned Throughput without a long-term commitment, creating model units for business hours and deleting them overnight.<br>使用预置吞吐量而无需长期承诺，为工作时间创建模型单元并在一夜之间将其删除。<br>B. Use Provisioned Throughput with a 6-month commitment sized for peak.<br>使用预置吞吐量和 6 个月的峰值承诺。<br>C. Use on-demand inference for all traffic.<br>对所有流量使用按需推理。<br>D. Use cross-Region inference to add capacity during business hours.<br>使用跨区域推理在工作时间内增加容量。" data-n="1" data-ans="A">
 <div class="qhead"><span class="qno">Question 1</span><span class="badge">Domain 1 · Task 1.1</span></div>
 <div class="stem"><p class="en" lang="en">A production Bedrock workload has steady, high, predictable demand for 12 business hours and near-zero traffic overnight. The team must guarantee dedicated capacity during business hours (no throttling) at the lowest total cost, keeping the same model and API. Which approach is BEST?</p><p class="zh" lang="zh-CN">生产基岩工作负载在 12 个工作小时内具有稳定、高且可预测的需求，并且夜间流量接近于零。团队必须以最低的总成本保证工作时间内的专用容量（无节流），并保持相同的模型和 API。哪种方法最好？</p></div>
@@ -1383,5 +1383,5 @@ s.onload=go;
 s.onerror=function(){document.documentElement.removeAttribute("data-i18n-wait")};
 document.head.appendChild(s);})();
 </script>
-<!--/i18n:js--><script src="/assets/quizbank-theme.js" id="quizbank-theme-js" defer></script>
+<!--/i18n:js--><script src="/assets/quizsite-theme.js" id="quizsite-theme-js" defer></script>
 </body></html>

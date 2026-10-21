@@ -43,7 +43,7 @@ test('vocabulary page reuses quiz scoring with exactly A/B choices and an isolat
   }
   assert.ok(a >= 30 && a <= 70, 'answer positions must not all be the same');
   assert.match(page, /quiz:aws:aifvocab:01/);
-  assert.match(page, /quizbank-theme\.js/);
+  assert.match(page, /quizsite-theme\.js/);
   const index = await readFile(new URL('site/aws-aif/index.html', root), 'utf8');
   assert.match(index, /href="vocabulary.html"/);
 });

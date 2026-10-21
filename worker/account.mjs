@@ -14,7 +14,7 @@ const MAX_PROGRESS_ITEMS = 10_000;
 const MAX_PROGRESS_ITEM_BYTES = 4 * 1024;
 const MAX_AUTH_BODY_BYTES = 8 * 1024;
 const MAX_PROGRESS_BODY_BYTES = 2 * 1024 * 1024;
-const SESSION_COOKIE = "__Host-quizbank_session";
+const SESSION_COOKIE = "__Host-quizsite_session";
 const SESSION_TTL_SECONDS = 30 * 24 * 60 * 60;
 
 export function validateCredentials(username, password) {
@@ -566,7 +566,7 @@ export async function handleAccountRequest(request, env) {
     return await route.handler(request, env);
   } catch (error) {
     if (error instanceof ApiError) return jsonResponse({ error: error.message }, error.status);
-    console.error("quizbank_account_failure", { route: pathname, errorName: error?.name || "Error" });
+    console.error("quizsite_account_failure", { route: pathname, errorName: error?.name || "Error" });
     return apiUnavailable();
   }
 }

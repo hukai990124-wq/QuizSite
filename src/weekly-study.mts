@@ -74,12 +74,12 @@ function mount():void {
     username=next;generation++;loginAt=Date.now();offset=0;state=null;pending=null;queue=[];failed=false;sending=false;reading=false;
     render();if(username)void read();
   }
-  window.addEventListener('quizbank:account-changed',event=>{
+  window.addEventListener('quizsite:account-changed',event=>{
     const value:unknown=(event as CustomEvent).detail?.username;
     changeUser(typeof value==='string'?value:null);
   });
-  window.addEventListener('quizbank:account-opened',()=>{render();void flush().then(read);});
-  window.addEventListener('quizbank:study-interval',event=>{
+  window.addEventListener('quizsite:account-opened',()=>{render();void flush().then(read);});
+  window.addEventListener('quizsite:study-interval',event=>{
     if(!username)return;
     const value=(event as CustomEvent<{start:number;end:number}>).detail;
     if(!value||!Number.isFinite(value.start)||!Number.isFinite(value.end)||value.end<=loginAt)return;
@@ -88,14 +88,14 @@ function mount():void {
     if(!pending)pending={start,end};else pending.end=Math.max(pending.end,end);
     if(pending.end-pending.start>=15000)void flush();
   });
-  window.addEventListener('quizbank:study-flush',()=>{void flush();});
+  window.addEventListener('quizsite:study-flush',()=>{void flush();});
   window.addEventListener('online',()=>{void flush().then(read);});
-  document.addEventListener('quizbank:language-changed',render);
+  document.addEventListener('quizsite:language-changed',render);
   window.setInterval(()=>{
     render();if(username&&state&&clock()>=state.resetsAt)void read();
   },1000);
   window.setInterval(()=>{if(username)void flush();},15000);
-  const account=(window as unknown as {QuizBankAccount?:{getUser:()=>{username:string}|null}}).QuizBankAccount;
+  const account=(window as unknown as {QuizSiteAccount?:{getUser:()=>{username:string}|null}}).QuizSiteAccount;
   changeUser(account?.getUser()?.username||null);
 }
 if(typeof document!=='undefined') {

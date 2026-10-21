@@ -39,7 +39,7 @@ test('open practice papers keep all answers, bilingual options, shared AI shell 
       const part=String(index+1).padStart(2,'0'),page=await load(`site/aws-aip/open-${tier}/part${part}.html`);
       assert.equal((page.match(/class="q" id="q\d+"/g)||[]).length,count);
       assert.deepEqual([...page.matchAll(/data-ans="([A-F,]+)"/g)].map(m=>m[1]),source.slice(offset,offset+count).map(q=>q.answer.join(',')));
-      assert.match(page,/quizbank-theme-js/);assert.match(page,/aip-options.mjs/);
+      assert.match(page,/quizsite-theme-js/);assert.match(page,/aip-options.mjs/);
       assert.doesNotMatch(page,/class="ja" lang="ja"/);
       assert.match(page,/本批暂不提供日文题文/);
       assert.match(page,/JeremyEngineer/);assert.match(page,/LICENSE-JeremyEngineer.txt/);

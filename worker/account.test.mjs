@@ -123,7 +123,7 @@ test("progress payloads accept bounded quiz records and reject unsafe keys or ov
 });
 
 test("mutating API requests require same-origin JSON", () => {
-  const target = "https://quizbank.example";
+  const target = "https://quizsite.example";
   assert.equal(validateMutationRequest(new Request(target, {
     method: "POST",
     headers: { Origin: target, "Content-Type": "application/json" },
@@ -139,7 +139,7 @@ test("mutating API requests require same-origin JSON", () => {
 });
 
 test("oversized streamed JSON is rejected even when Content-Length is absent", async () => {
-  const origin = "https://quizbank.example";
+  const origin = "https://quizsite.example";
   const stream = new ReadableStream({
     start(controller) {
       controller.enqueue(new Uint8Array(9 * 1024).fill(32));
@@ -256,11 +256,11 @@ function createMemoryDatabase() {
 
 beforeEach(t=>t.mock.method(globalThis,'fetch',async url=>{
   assert.equal(url,'https://challenges.cloudflare.com/turnstile/v0/siteverify');
-  return Response.json({success:true,hostname:'quizbank.example',action:'register'});
+  return Response.json({success:true,hostname:'quizsite.example',action:'register'});
 }));
 
 function makeRequest(path, method, body, headers = {}) {
-  const origin = "https://quizbank.example";
+  const origin = "https://quizsite.example";
   return new Request(origin + path, {
     method,
     headers: {
@@ -291,7 +291,7 @@ test("registration creates a case-sensitive account and an HttpOnly secure sessi
   const cookie = response.headers.get("Set-Cookie");
 
   assert.equal(response.status, 201);
-  assert.match(cookie, /^__Host-quizbank_session=.*; Path=\/; Max-Age=2592000; Secure; HttpOnly; SameSite=Strict$/);
+  assert.match(cookie, /^__Host-quizsite_session=.*; Path=\/; Max-Age=2592000; Secure; HttpOnly; SameSite=Strict$/);
   assert.equal(response.headers.get("Strict-Transport-Security"), "max-age=31536000");
   assert.equal(response.headers.get("X-Frame-Options"), "DENY");
   assert.equal(response.headers.get("X-Content-Type-Options"), "nosniff");

@@ -38,7 +38,7 @@ test('AIP pages reuse the AWS engine with 50/50/36 questions, AI and shared shel
     const answers=[...page.matchAll(/data-ans="([A-F,]+)"/g)].map(m=>m[1]);
     assert.deepEqual(answers,bank.slice((part-1)*50,part*50).map(q=>q.answer.join(',')));
     assert.match(page,new RegExp(`quiz:aws:aip:0${part}`));
-    assert.match(page,/quizbank-theme-js/);
+    assert.match(page,/quizsite-theme-js/);
     assert.match(page,/id="btn-report"/);
     assert.match(page,/i18n:head/);
     assert.match(page,/html\[data-lang="en"\] \.zh/);

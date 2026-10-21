@@ -117,7 +117,7 @@ def translate(text: str, target_lang: str = "zh-CN", retries: int = 5) -> str:
 
 def fetch_domain(domain: int) -> list[dict]:
     url = f"{SOURCE_ROOT}/domain{domain}.json"
-    req = urllib.request.Request(url, headers={"User-Agent": "QuizBank-CLF-C02-builder/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "QuizSite-CLF-C02-builder/1.0"})
     with urllib.request.urlopen(req, timeout=45) as response:
         return json.loads(response.read().decode("utf-8"))
 

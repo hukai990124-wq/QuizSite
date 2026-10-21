@@ -17,7 +17,7 @@ class MemoryStorage {
 function loadSync() {
   const window = {};
   vm.runInNewContext(source, { window });
-  return window.QuizBankProgressSync;
+  return window.QuizSiteProgressSync;
 }
 
 test("local edits and removals produce per-question versions and tombstones", () => {

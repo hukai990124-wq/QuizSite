@@ -55,7 +55,7 @@ python toeic-listening/add_tmt_sets.py render       # 渲染 HTML/md 并同步�
 
 ### 发布与回退
 
-2026-10-15 的 Kokoro 补录仅替换第五套 54 个同名 MP3（源目录和 `site/` 各一份）并更新音频清单与来源说明，不重建题页、翻译或题库数据。完成后运行 `pnpm test`、音频清单/口音测试和 `node toeic-listening/kokoro_playback_audit.cjs`；后者需通过 `QUIZBANK_BROWSER_MODULES` 指定隔离浏览器依赖，可用 `QUIZBANK_TEST_BASE` 检查已部署站点。回退本次音频提交即可恢复旧录音，不需要删除进度或修改数据库。页面播放的是静态 MP3，不会实时调用 Kokoro。
+2026-10-15 的 Kokoro 补录仅替换第五套 54 个同名 MP3（源目录和 `site/` 各一份）并更新音频清单与来源说明，不重建题页、翻译或题库数据。完成后运行 `pnpm test`、音频清单/口音测试和 `node toeic-listening/kokoro_playback_audit.cjs`；后者需通过 `QUIZSITE_BROWSER_MODULES` 指定隔离浏览器依赖，可用 `QUIZSITE_TEST_BASE` 检查已部署站点。回退本次音频提交即可恢复旧录音，不需要删除进度或修改数据库。页面播放的是静态 MP3，不会实时调用 Kokoro。
 
 Cloudflare 继续由主分支自动部署，无新增服务或密钥。发布后检查六套目录、05/06 题页、音频播放和判分。
 如新增题页无法加载、播放或保存进度，停止推广新增入口；回退本次 TOEIC 功能提交及合并中的总数调整，

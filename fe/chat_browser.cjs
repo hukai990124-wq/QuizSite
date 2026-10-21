@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
 const assert = require('node:assert/strict');
-const {chromium} = require(require.resolve('playwright', {paths:[process.env.QUIZBANK_BROWSER_MODULES || process.cwd()]}));
+const {chromium} = require(require.resolve('playwright', {paths:[process.env.QUIZSITE_BROWSER_MODULES || process.cwd()]}));
 const site = path.resolve(__dirname, '../site');
 const quota = {remaining:9,dailyLimit:10,authenticated:false,available:true,configured:true};
 async function main() {

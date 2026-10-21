@@ -11,7 +11,7 @@ Weeks start Monday 00:00 at fixed UTC−8 (Monday 08:00 UTC), without daylight s
 - Atomic D1 upsert stores one row per user: `user_id` FK/cascade/PK, `week_start` UTC epoch milliseconds, `total_ms` integer 0–604800000, `last_end` integer. Add only the part beyond the prior high-water mark. Duplicate intervals and overlapping tabs/devices do not increase totals twice. Out-of-order earlier intervals can be undercounted; this is a learning aid, not an audit/attendance ledger.
 - Responses: 400 malformed interval/body, 401 missing/changed/expired session, 403 cross-origin or wrong content type, 405 unsupported method, 503 storage unavailable. Error bodies do not expose database/session details.
 - Client uses the existing one-second visible timer's bounded intervals; synchronizes about every 15 seconds and on account open/hide/navigation. A small in-memory retry queue expires after 60 seconds; no offline/week-old backfill, cross-account migration or sensitive storage. Network failure is shown, not silently reported as zero/success. Server offset is derived from status responses. Rollovers invalidate old display data. Guests send no study-time API requests.
-- Public account frontend hook: read-only `QuizBankAccount.getUser()` returns username or null; `quizbank:account-changed` and `quizbank:account-opened` carry no credentials. Weekly timer code owns display/network behavior; login/password/session logic is unchanged.
+- Public account frontend hook: read-only `QuizSiteAccount.getUser()` returns username or null; `quizsite:account-changed` and `quizsite:account-opened` carry no credentials. Weekly timer code owns display/network behavior; login/password/session logic is unchanged.
 
 ## Verification and release
 

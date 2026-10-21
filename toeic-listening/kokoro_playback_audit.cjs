@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
 const assert = require('node:assert/strict');
-const {chromium} = require(require.resolve('playwright',{paths:[process.env.QUIZBANK_BROWSER_MODULES || process.cwd()]}));
+const {chromium} = require(require.resolve('playwright',{paths:[process.env.QUIZSITE_BROWSER_MODULES || process.cwd()]}));
 const site = path.resolve(__dirname,'../site');
 async function main() {
   const server = http.createServer((req,res) => {
@@ -20,7 +20,7 @@ async function main() {
     await context.routeWebSocket('**/api/presence**',socket=>socket.close());
     const page = await context.newPage(), errors = [];
     page.on('pageerror',error=>errors.push(error.message));
-    const base = process.env.QUIZBANK_TEST_BASE || `http://127.0.0.1:${server.address().port}`;
+    const base = process.env.QUIZSITE_TEST_BASE || `http://127.0.0.1:${server.address().port}`;
     await page.goto(base+'/toeic-listening/TOEIC_Listening_Test_05.html');
     assert.equal(await page.locator('.q[id]').count(),100);
     assert.equal(await page.locator('audio').count(),54);

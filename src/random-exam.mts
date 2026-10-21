@@ -128,7 +128,7 @@ document.getElementById('btn-report')?.addEventListener('click',()=>{
     if (!confirm(`${left ? left+' '+c.left+'\n' : ''}${c.confirm}`)) return;
     state.exam.submitted=true; state.exam.submittedAt=Date.now();
     for (const q of questions) { const s=state.answers[q.id]?.s || []; state.answers[q.id]={s,ok:isExamCorrect(q,s),revealed:false}; }
-    save(); render(); document.dispatchEvent(new Event('quizbank:exam-submitted'));
+    save(); render(); document.dispatchEvent(new Event('quizsite:exam-submitted'));
   }
   showReport();
 });
@@ -149,12 +149,12 @@ document.getElementById('btn-expand')?.addEventListener('click',()=>{
 });
 document.getElementById('btn-sheet')?.addEventListener('click',()=>document.getElementById('sheet')?.classList.toggle('open'));
 document.getElementById('sh-close')?.addEventListener('click',()=>document.getElementById('sheet')?.classList.remove('open'));
-document.addEventListener('quizbank:language-changed',render);
+document.addEventListener('quizsite:language-changed',render);
 function restore():void {
   state=load(); render();
-  document.dispatchEvent(new Event('quizbank:exam-state-changed'));
+  document.dispatchEvent(new Event('quizsite:exam-state-changed'));
 }
-window.addEventListener('quizbank:progress-updated',restore);
+window.addEventListener('quizsite:progress-updated',restore);
 window.addEventListener('storage',event=>{if (event.key === storageKey || event.key === null) restore();});
 window.addEventListener('resize',()=>{const toolbar=document.querySelector('.toolbar');if (toolbar) root.style.setProperty('--tb',Math.round(toolbar.getBoundingClientRect().height)+'px');});
 save(); render();

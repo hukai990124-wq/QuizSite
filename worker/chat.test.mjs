@@ -23,10 +23,10 @@ function fixture() {
   return { sqlite, env: { DB, DASHSCOPE_API_KEY: "mock-only", QWEN_MODEL: "qwen-flash", QWEN_FREE_ONLY_CONFIRMED: "true" }, token };
 }
 function request(token, body = { question: "为什么选 B？", context: "题库：AWS", history: [] }, origin = "https://example.com", ip = "203.0.113.5") {
-  return new Request("https://example.com/api/chat", { method: "POST", headers: { "Origin": origin, "Content-Type": "application/json", "CF-Connecting-IP": ip, ...(token ? { Cookie: `__Host-quizbank_session=${token}` } : {}) }, body: JSON.stringify(body) });
+  return new Request("https://example.com/api/chat", { method: "POST", headers: { "Origin": origin, "Content-Type": "application/json", "CF-Connecting-IP": ip, ...(token ? { Cookie: `__Host-quizsite_session=${token}` } : {}) }, body: JSON.stringify(body) });
 }
 function statusRequest(token, ip = "203.0.113.5", provider = "qwen") {
-  return new Request(`https://example.com/api/chat/status?provider=${encodeURIComponent(provider)}`, { headers: { "CF-Connecting-IP": ip, ...(token ? { Cookie: `__Host-quizbank_session=${token}` } : {}) } });
+  return new Request(`https://example.com/api/chat/status?provider=${encodeURIComponent(provider)}`, { headers: { "CF-Connecting-IP": ip, ...(token ? { Cookie: `__Host-quizsite_session=${token}` } : {}) } });
 }
 function streamReply() {
   return new Response('data: {"choices":[{"delta":{"reasoning_content":"private","content":"因为 B 满足题干要求。"},"finish_reason":"stop"}]}\n\ndata: {"choices":[],"usage":{"total_tokens":42}}\n\ndata: [DONE]\n\n');

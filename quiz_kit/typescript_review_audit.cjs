@@ -1,6 +1,6 @@
 /* Isolated Edge, mocked API endpoints: no real accounts, AI quota or cloud writes. */
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
-const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZBANK_BROWSER_MODULES || process.cwd()]}));
+const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZSITE_BROWSER_MODULES || process.cwd()]}));
 const root=path.resolve(__dirname,'..'),site=path.join(root,'site');
 const bank=JSON.parse(fs.readFileSync(path.join(root,'programming/typescript-review.json')));
 async function main(){

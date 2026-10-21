@@ -10,10 +10,10 @@ class ThemeInjectionTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             target = Path(directory)
             copy_theme_assets(target)
-            self.assertEqual((target / "quizbank-theme.js").read_bytes(), (ASSETS / "quizbank-theme.js").read_bytes())
-            self.assertIn("/assets/back-to-top.mjs", (target / "quizbank-theme.js").read_text(encoding="utf-8"))
+            self.assertEqual((target / "quizsite-theme.js").read_bytes(), (ASSETS / "quizsite-theme.js").read_bytes())
+            self.assertIn("/assets/back-to-top.mjs", (target / "quizsite-theme.js").read_text(encoding="utf-8"))
             copy_theme_assets(target)
-            self.assertEqual((target / "quizbank-theme.js").read_bytes(), (ASSETS / "quizbank-theme.js").read_bytes())
+            self.assertEqual((target / "quizsite-theme.js").read_bytes(), (ASSETS / "quizsite-theme.js").read_bytes())
 
     def test_adds_shared_stylesheet_and_runtime(self):
         source = "<html><head></head><body><main>Practice</main></body></html>"
@@ -21,12 +21,12 @@ class ThemeInjectionTest(unittest.TestCase):
         result, changed = inject_html(source)
 
         self.assertTrue(changed)
-        self.assertIn('id="quizbank-theme-css"', result)
-        self.assertIn('href="/assets/quizbank-theme.css"', result)
-        self.assertIn('id="quizbank-theme-js"', result)
-        self.assertIn('src="/assets/quizbank-theme.js"', result)
-        self.assertLess(result.index("quizbank-theme-css"), result.index("</head>"))
-        self.assertLess(result.index("quizbank-theme-js"), result.index("</body>"))
+        self.assertIn('id="quizsite-theme-css"', result)
+        self.assertIn('href="/assets/quizsite-theme.css"', result)
+        self.assertIn('id="quizsite-theme-js"', result)
+        self.assertIn('src="/assets/quizsite-theme.js"', result)
+        self.assertLess(result.index("quizsite-theme-css"), result.index("</head>"))
+        self.assertLess(result.index("quizsite-theme-js"), result.index("</body>"))
 
     def test_is_idempotent(self):
         source = "<html><head></head><body></body></html>"

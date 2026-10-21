@@ -23,7 +23,7 @@ function getTasks(job) {
 }
 
 async function fetchSpeech(text, voice) {
-  const sessionHash = `quizbank-m6-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  const sessionHash = `quizsite-m6-${Date.now()}-${Math.random().toString(36).slice(2)}`;
   const queued = await fetch(`${SPACE_API}/queue/join`, {
     method: 'POST',
     headers: { 'content-type': 'application/json', 'x-gradio-user': 'api' },

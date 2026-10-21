@@ -59,7 +59,7 @@ export class RegistrationChallenge {
       const fail=()=>{if(this.active&&generation===this.generation){this.value='';this.status='failed';this.paint();}};
       this.widget=window.turnstile!.render(this.host,{
         sitekey:config.siteKey,action:'register',language:language==='zh'?'zh-cn':language==='ja'?'ja':'en',size:this.compact?'compact':'flexible',
-        callback:token=>{if(this.active&&generation===this.generation){this.value=token;this.deadline=Date.now()+290000;this.status='verified';this.paint();this.container.dispatchEvent(new Event('quizbank:verification-ready'));}},
+        callback:token=>{if(this.active&&generation===this.generation){this.value=token;this.deadline=Date.now()+290000;this.status='verified';this.paint();this.container.dispatchEvent(new Event('quizsite:verification-ready'));}},
         'expired-callback':fail,'error-callback':fail
       });
     } catch {

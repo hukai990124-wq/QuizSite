@@ -42,7 +42,7 @@
 pnpm test
 pnpm audit
 # 指向已安装 Playwright 的模块目录；使用独立 Edge 配置，不读取登录资料。
-$env:QUIZBANK_BROWSER_MODULES = '<Playwright modules directory>'
+$env:QUIZSITE_BROWSER_MODULES = '<Playwright modules directory>'
 pnpm exec node quiz_kit/i18n_audit.cjs '<report.json>'
 ```
 

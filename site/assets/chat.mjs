@@ -51,7 +51,7 @@ const send = byId("qb-chat-send");
 const clear = byId("qb-chat-clear");
 const form = byId("qb-chat-form");
 const providerInputs = Array.from(dialog.querySelectorAll('input[name="qb-chat-provider"]'));
-const PROVIDER_STORAGE_KEY = "quizbank-ai-provider";
+const PROVIDER_STORAGE_KEY = "quizsite-ai-provider";
 function readProviderPreference() {
     try {
         return localStorage.getItem(PROVIDER_STORAGE_KEY) === "cloudflare" ? "cloudflare" : "qwen";
@@ -76,7 +76,7 @@ function draftPrompt() {
     const language = document.documentElement.getAttribute("data-lang");
     return language === "en" ? draftPrompts.en : language === "ja" ? draftPrompts.ja : draftPrompts.zh;
 }
-document.addEventListener("quizbank:language-changed", () => {
+document.addEventListener("quizsite:language-changed", () => {
     // Never translate or overwrite a user's own draft.
     if (Object.values(draftPrompts).includes(input.value))
         input.value = draftPrompt();
@@ -248,8 +248,8 @@ function updateExamAvailability() {
     else
         indexQuestions();
 }
-document.addEventListener("quizbank:exam-submitted", updateExamAvailability);
-document.addEventListener("quizbank:exam-state-changed", updateExamAvailability);
+document.addEventListener("quizsite:exam-submitted", updateExamAvailability);
+document.addEventListener("quizsite:exam-state-changed", updateExamAvailability);
 // Some viewers have a header .wrap before their dynamically rendered main.
 new MutationObserver(indexQuestions).observe(document.body, { childList: true, subtree: true });
 form.addEventListener("submit", async (event) => {

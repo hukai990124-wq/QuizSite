@@ -458,7 +458,7 @@ if(f)f.style.width=(allT?allD/allT*100:0)+"%";
 if(t)t.textContent=allD+" / "+allT+(allD?" · 正确率 "+Math.round(allO/allD*100)+"%":"");
 }
 refreshProgress();
-window.addEventListener("quizbank:progress-updated",refreshProgress);
+window.addEventListener("quizsite:progress-updated",refreshProgress);
 window.addEventListener("storage",function(event){
   if(event.key===null||event.key.indexOf("quiz:")===0)refreshProgress();
 });
@@ -467,7 +467,7 @@ window.addEventListener("storage",function(event){
 <!--pc:js-->
 <script src="assets/presence.js"></script>
 <!--/pc:js-->
-<script src="/assets/account.js" id="quizbank-account-js" defer></script><script type="module" src="/assets/back-to-top.mjs" id="quizbank-back-to-top-js"></script><!--i18n:js-->
+<script src="/assets/account.js" id="quizsite-account-js" defer></script><script type="module" src="/assets/back-to-top.mjs" id="quizsite-back-to-top-js"></script><!--i18n:js-->
 <script src="/assets/i18n.js"></script>
 <script id="i18n-boot">
 (function(){var REL="";

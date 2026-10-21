@@ -16,7 +16,7 @@
 
 上游 401/402/403/404 将全站标记停止，且不自动切换模型。免费用完或过期的防扣费保证由百炼「免费额度用完即停」提供；本站预算只统计本站，不能覆盖其他程序调用同一模型的消耗。超时 90 秒，无自动重试。消费记录仅保存账号 ID、时间、预留量、实际量和状态，不保存对话文本。删除账号后记录保留但账号 ID 置空，确保全站预算不会被删除账号重置。
 
-部署：先 `wrangler d1 migrations apply quizbank-accounts --remote` 再 `wrangler deploy`。所有新增表向后兼容旧版本；回滚旧 Worker 不影响账号和进度。
+部署：先 `wrangler d1 migrations apply quizsite-accounts --remote` 再 `wrangler deploy`。所有新增表向后兼容旧版本；回滚旧 Worker 不影响账号和进度。
 
 排障：读取服务端 `ai_provider_denied` 的状态码，检查密钥、北京模型 Code、剩余额度和用完即停。修复后管理员可执行 `UPDATE ai_state SET stopped = 0 WHERE id = 1`，但不会清空已有使用预算。要调整限额修改 `CHAT_POLICY`；只有在核对新的免费额度后才能提高累计预算。聊天内容仅驻留当前页面内存，不做本机或云端历史存储。
 

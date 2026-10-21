@@ -1,6 +1,6 @@
 /* Isolated Edge; no actual AI quota, registration, or cloud progress writes. */
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
-const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZBANK_BROWSER_MODULES||process.cwd()]}));
+const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZSITE_BROWSER_MODULES||process.cwd()]}));
 const root=path.resolve(__dirname,'..'),site=path.join(root,'site');
 const bank=JSON.parse(fs.readFileSync(path.join(root,'aws-aip/data/open-questions.json')));
 async function main(){

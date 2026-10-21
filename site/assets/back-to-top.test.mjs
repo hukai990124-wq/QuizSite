@@ -31,7 +31,7 @@ test("keeps the button hidden for invalid or negative scroll positions", () => {
 test("all question bank pages load the shared back-to-top component", async () => {
   const files = await htmlFiles(siteDirectory);
   const homepage = await readFile(join(siteDirectory, "index.html"), "utf8");
-  const sharedTheme = await readFile(join(siteDirectory, "assets", "quizbank-theme.js"), "utf8");
+  const sharedTheme = await readFile(join(siteDirectory, "assets", "quizsite-theme.js"), "utf8");
 
   assert.ok(files.length > 1, "expected the site to contain question bank pages");
   assert.match(homepage, /\/assets\/back-to-top\.mjs/);
@@ -40,6 +40,6 @@ test("all question bank pages load the shared back-to-top component", async () =
   for (const file of files) {
     if (file === join(siteDirectory, "index.html")) continue;
     const html = await readFile(file, "utf8");
-    assert.match(html, /quizbank-theme\.js/, `${file} should load the shared theme`);
+    assert.match(html, /quizsite-theme\.js/, `${file} should load the shared theme`);
   }
 });

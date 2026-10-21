@@ -1,6 +1,6 @@
 /* Real isolated browser; no real accounts, AI requests or cloud progress writes. */
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
-const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZBANK_BROWSER_MODULES || process.cwd()]}));
+const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZSITE_BROWSER_MODULES || process.cwd()]}));
 const site=path.resolve(__dirname,'../site');
 async function main(){
   const server=http.createServer((req,res)=>{

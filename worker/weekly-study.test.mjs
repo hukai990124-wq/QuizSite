@@ -18,7 +18,7 @@ function fixture() {
   return {sql,env};
 }
 function req(body,token='one',origin='https://example.com') {
-  return new Request('https://example.com/api/study-time',{method:body===undefined?'GET':'POST',headers:{...(token?{Cookie:'__Host-quizbank_session='+tokenFor(token)}:{}),Origin:origin,'Content-Type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})});
+  return new Request('https://example.com/api/study-time',{method:body===undefined?'GET':'POST',headers:{...(token?{Cookie:'__Host-quizsite_session='+tokenFor(token)}:{}),Origin:origin,'Content-Type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})});
 }
 const monday=Date.parse('2026-10-12T08:00:00Z');
 const interval=(start,end,username='Learner')=>({username,start,end});

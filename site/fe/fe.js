@@ -143,7 +143,7 @@ function render(){
   if(storageError)side.appendChild(node("p","error","浏览器拒绝保存进度，本次作答在关闭页面后可能丢失。"));
   app.appendChild(side);
 }
-window.addEventListener("quizbank:progress-updated",function(){
+window.addEventListener("quizsite:progress-updated",function(){
   if(!exam)return;
   state=readState();
   render();

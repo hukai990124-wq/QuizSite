@@ -193,7 +193,7 @@ def main():
                     rec["pages"].append(rel)
         b.close()
 
-    todo_path = os.path.join(tempfile.gettempdir(), "quizbank_i18n_todo.json")
+    todo_path = os.path.join(tempfile.gettempdir(), "quizsite_i18n_todo.json")
     with open(todo_path, "w", encoding="utf-8") as f:
         json.dump(keys, f, ensure_ascii=False, indent=1)
     print("明细已写入 %s" % todo_path)

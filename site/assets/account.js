@@ -4,7 +4,7 @@
   var USERNAME_MIN = 6;
   var USERNAME_MAX = 15;
   var META_LAST_SYNC = "account:last-full-sync";
-  var sync = global.QuizBankProgressSync || null;
+  var sync = global.QuizSiteProgressSync || null;
   var storage = null;
   var meta = null;
   var accountUser = null;
@@ -42,7 +42,7 @@
 
   var COPY = {
     zh: {
-      eyebrow: "QuizBank 账号", title: "登录或注册", description: "登录后，学习进度会在设备间同步。注册无需邮箱或短信验证码，需完成人机验证。注册时会保存 Cloudflare 根据网络位置估算的国家和地区，用于查看注册来源。",
+      eyebrow: "QuizSite 账号", title: "登录或注册", description: "登录后，学习进度会在设备间同步。注册无需邮箱或短信验证码，需完成人机验证。注册时会保存 Cloudflare 根据网络位置估算的国家和地区，用于查看注册来源。",
       login: "登录", register: "注册", username: "账号（6–15 个字符）", password: "密码（6–15 个字符）",
       loginButton: "登录", registerButton: "创建账号", forgot: "忘记密码无法自助找回。",
       close: "关闭", account: "当前账号", logout: "退出登录", delete: "删除账号",
@@ -58,7 +58,7 @@
       loading: "正在检查账号状态……", accountLabel: "账号：", loginLabel: "登录 / 注册",
     },
     en: {
-      eyebrow: "QuizBank account", title: "Sign in or register", description: "Sign in to sync study progress. Registration requires human verification, but no email or SMS code. We store the country and region Cloudflare estimates from the connection to review registration origins.",
+      eyebrow: "QuizSite account", title: "Sign in or register", description: "Sign in to sync study progress. Registration requires human verification, but no email or SMS code. We store the country and region Cloudflare estimates from the connection to review registration origins.",
       login: "Sign in", register: "Register", username: "Account (6–15 characters)", password: "Password (6–15 characters)",
       loginButton: "Sign in", registerButton: "Create account", forgot: "Forgot passwords cannot be recovered automatically.",
       close: "Close", account: "Signed-in account", logout: "Sign out", delete: "Delete account",
@@ -74,7 +74,7 @@
       loading: "Checking account status…", accountLabel: "Account: ", loginLabel: "Sign in / Register",
     },
     ja: {
-      eyebrow: "QuizBank アカウント", title: "ログインまたは登録", description: "ログインすると学習進捗を同期。登録には人間による操作の確認が必要。メールやSMSコードは不要。登録元を確認するため、Cloudflareが接続情報から推定した国・地域を保存します。",
+      eyebrow: "QuizSite アカウント", title: "ログインまたは登録", description: "ログインすると学習進捗を同期。登録には人間による操作の確認が必要。メールやSMSコードは不要。登録元を確認するため、Cloudflareが接続情報から推定した国・地域を保存します。",
       login: "ログイン", register: "登録", username: "アカウント（6～15文字）", password: "パスワード（6～15文字）",
       loginButton: "ログイン", registerButton: "アカウントを作成", forgot: "パスワードを忘れた場合、自分では再設定できません。",
       close: "閉じる", account: "ログイン中のアカウント", logout: "ログアウト", delete: "アカウントを削除",
@@ -104,23 +104,23 @@
   function words() { return COPY[language()]; }
 
   function loadStyles() {
-    if (document.getElementById("quizbank-account-css")) return;
+    if (document.getElementById("quizsite-account-css")) return;
     var link = document.createElement("link");
-    link.id = "quizbank-account-css";
+    link.id = "quizsite-account-css";
     link.rel = "stylesheet";
     link.href = "/assets/account.css";
     document.head.appendChild(link);
   }
 
   function loadSyncModule(callback) {
-    if (global.QuizBankProgressSync) { callback(); return; }
-    var existing = document.getElementById("quizbank-account-sync-js");
+    if (global.QuizSiteProgressSync) { callback(); return; }
+    var existing = document.getElementById("quizsite-account-sync-js");
     if (existing) {
       existing.addEventListener("load", callback, { once: true });
       return;
     }
     var script = document.createElement("script");
-    script.id = "quizbank-account-sync-js";
+    script.id = "quizsite-account-sync-js";
     script.src = "/assets/account-sync.js";
     script.onload = callback;
     script.onerror = function () { updateTrigger(); };
@@ -188,7 +188,7 @@
     dialog.querySelector("#qb-mode-login").addEventListener("click", function () { setMode("login"); });
     dialog.querySelector("#qb-mode-register").addEventListener("click", function () { setMode("register"); });
     dialog.querySelector("#qb-auth-form").addEventListener("submit", submitAuth);
-    byId("qb-registration-challenge").addEventListener("quizbank:verification-ready", function () {
+    byId("qb-registration-challenge").addEventListener("quizsite:verification-ready", function () {
       if (verificationMessage) { verificationMessage = null; byId("qb-auth-error").textContent = ""; }
     });
     dialog.querySelector("#qb-logout").addEventListener("click", logout);
@@ -255,7 +255,7 @@
   }
 
   function updateTrigger() {
-    global.dispatchEvent(new global.CustomEvent("quizbank:account-changed", { detail: { username: accountUser ? accountUser.username : null } }));
+    global.dispatchEvent(new global.CustomEvent("quizsite:account-changed", { detail: { username: accountUser ? accountUser.username : null } }));
     if (!trigger) return;
     var c = words();
     var label = accountUser ? c.accountLabel + accountUser.username : c.loginLabel;
@@ -288,7 +288,7 @@
     applyCopy();
     if (typeof dialog.showModal === "function") dialog.showModal();
     else dialog.setAttribute("open", "open");
-    global.dispatchEvent(new global.Event("quizbank:account-opened"));
+    global.dispatchEvent(new global.Event("quizsite:account-opened"));
     if (accountUser) byId("qb-logout").focus();
     else byId("qb-username").focus();
     refreshRegistrationChallenge();
@@ -449,7 +449,7 @@
       if (event.storageArea !== storage || !sync) return;
       if (event.key === null || isQuizKey(event.key)) {
         queueSync(false, 100);
-        global.dispatchEvent(new global.Event("quizbank:progress-updated"));
+        global.dispatchEvent(new global.Event("quizsite:progress-updated"));
       }
     });
   }
@@ -535,7 +535,7 @@
         var applied = sync.applyMergedRecords(storage, meta, safeRecords);
         var settled = sync.settle(applied.meta, records, result.records || []);
         persistMeta(settled);
-        if (applied.changed) global.dispatchEvent(new global.Event("quizbank:progress-updated"));
+        if (applied.changed) global.dispatchEvent(new global.Event("quizsite:progress-updated"));
       } finally { applyingRemote = false; }
       if (full) {
         try { storage.setItem(META_LAST_SYNC, String(Date.now())); }
@@ -628,11 +628,11 @@
     }).finally(function () { setBusy(button, false); });
   }
 
-  global.QuizBankAccount = Object.freeze({ getUser: function () { return accountUser ? { username: accountUser.username } : null; } });
+  global.QuizSiteAccount = Object.freeze({ getUser: function () { return accountUser ? { username: accountUser.username } : null; } });
 
   function startBackgroundSync() {
     global.addEventListener("online", function () { queueSync(false, 0); });
-    global.addEventListener("quizbank:progress-updated", refreshLiveQuizState);
+    global.addEventListener("quizsite:progress-updated", refreshLiveQuizState);
     document.addEventListener("visibilitychange", function () {
       if (!document.hidden && accountUser && !wasFullSyncRecent()) queueSync(true, 0);
     });
@@ -651,9 +651,9 @@
   }
 
   function initialize() {
-    if (!document.getElementById("quizbank-chat-js")) {
+    if (!document.getElementById("quizsite-chat-js")) {
       var chatScript = document.createElement("script");
-      chatScript.id = "quizbank-chat-js";
+      chatScript.id = "quizsite-chat-js";
       chatScript.type = "module";
       chatScript.src = "/assets/chat.mjs";
       document.head.appendChild(chatScript);
@@ -664,7 +664,7 @@
     updateTrigger();
     startBackgroundSync();
     loadSyncModule(function () {
-      sync = global.QuizBankProgressSync;
+      sync = global.QuizSiteProgressSync;
       if (!sync) {
         updateTrigger();
         return;

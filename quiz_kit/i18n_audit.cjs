@@ -1,9 +1,9 @@
-/* Run with the bundled Playwright module: QUIZBANK_BROWSER_MODULES=<module directory>. */
+/* Run with the bundled Playwright module: QUIZSITE_BROWSER_MODULES=<module directory>. */
 const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
 const assert = require('node:assert/strict');
-const { chromium } = require(require.resolve('playwright', { paths: [process.env.QUIZBANK_BROWSER_MODULES || process.cwd()] }));
+const { chromium } = require(require.resolve('playwright', { paths: [process.env.QUIZSITE_BROWSER_MODULES || process.cwd()] }));
 const site = path.resolve(__dirname, '../site');
 let activeBrowser;
 function pages(dir) {
@@ -23,8 +23,8 @@ async function main() {
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   server.unref();
-  const base = process.env.QUIZBANK_TEST_BASE || `http://127.0.0.1:${server.address().port}`;
-  const browser = await chromium.launch({ headless: true, channel: process.env.QUIZBANK_BROWSER_CHANNEL || 'msedge' });
+  const base = process.env.QUIZSITE_TEST_BASE || `http://127.0.0.1:${server.address().port}`;
+  const browser = await chromium.launch({ headless: true, channel: process.env.QUIZSITE_BROWSER_CHANNEL || 'msedge' });
   activeBrowser = browser;
   const context = await browser.newContext();
   await context.route('**/api/**', route => {
@@ -94,14 +94,14 @@ async function main() {
   await page.goto(base + '/aws-aif/bank/part03.html', { waitUntil: 'domcontentloaded' });
   await page.waitForSelector('#q114 .hotspot-form');
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.waitForSelector('#quizbank-back-to-top', {state:'attached'});
-  assert.equal(await page.locator('#quizbank-back-to-top').count(),1);
-  assert.equal(await page.locator('#quizbank-back-to-top').isVisible(),false);
+  await page.waitForSelector('#quizsite-back-to-top', {state:'attached'});
+  assert.equal(await page.locator('#quizsite-back-to-top').count(),1);
+  assert.equal(await page.locator('#quizsite-back-to-top').isVisible(),false);
   await page.evaluate(() => window.scrollTo(0,600));
-  await page.waitForFunction(() => !document.getElementById('quizbank-back-to-top').hidden);
-  await page.locator('#quizbank-back-to-top').click();
+  await page.waitForFunction(() => !document.getElementById('quizsite-back-to-top').hidden);
+  await page.locator('#quizsite-back-to-top').click();
   await page.waitForFunction(() => window.scrollY === 0);
-  assert.equal(await page.locator('#quizbank-back-to-top').isVisible(),false);
+  assert.equal(await page.locator('#quizsite-back-to-top').isVisible(),false);
   regressions.push('TypeScript back-to-top mounts once, toggles with scrolling and respects reduced motion');
   await page.locator('#btn-report').click();
   const reportHome = page.locator('#mask .qb-report-home');
@@ -244,7 +244,7 @@ async function main() {
     await page.evaluate(language => window.__I18N__.setLang(language), language);
     await page.waitForTimeout(50);
     assert.equal(await page.locator('#qb-chat-input').inputValue(), 'Keep my draft unchanged / 保留我的问题');
-    assert.equal(await page.locator('#qb-chat-title').textContent(), ({ zh: '题库学习助手', en: 'QuizBank study assistant', ja: 'QuizBank 学習アシスタント' })[language]);
+    assert.equal(await page.locator('#qb-chat-title').textContent(), ({ zh: '题库学习助手', en: 'QuizSite study assistant', ja: 'QuizSite 学習アシスタント' })[language]);
   }
   regressions.push('account errors and chat dialog follow language switching without overwriting user input');
   let nextReply;

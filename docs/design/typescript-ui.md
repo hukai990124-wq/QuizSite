@@ -9,12 +9,12 @@
 | TypeScript 源 | 编译产物 | 职责 |
 | --- | --- | --- |
 | `src/back-to-top.mts` | `site/assets/back-to-top.mjs` | 返回顶部、减少动态效果偏好 |
-| `src/quizbank-theme.ts` | `site/assets/quizbank-theme.js` | 公共导航、组件加载、动态标题 |
+| `src/quizsite-theme.ts` | `site/assets/quizsite-theme.js` | 公共导航、组件加载、动态标题 |
 | `src/aif-hotspots.mts` | `site/assets/aif-hotspots.mjs` | 匹配题控件、参考解释、进度恢复 |
 
 公共导航仍为经典 `defer` 脚本；`moduleDetection: legacy` 防止生成 CommonJS `exports`，其余 `.mts` 文件仍是 ES 模块。类型检查保留 strict、noImplicitReturns、noUnusedLocals 等原有标准。新增 DOM 元素类型及对未知 JSON/事件目标的边界检查。
 
-`quiz_kit/theme_inject.py` 从编译后的 `site/assets/quizbank-theme.js` 复制到目标站点；不再维护第二份 JS 实现。生成页面前先运行 `pnpm build`。
+`quiz_kit/theme_inject.py` 从编译后的 `site/assets/quizsite-theme.js` 复制到目标站点；不再维护第二份 JS 实现。生成页面前先运行 `pnpm build`。
 
 账号、在线人数、国际化生成器、随机出题和题目内联脚本仍为兼容 JavaScript；这不是“整个仓库全部转换完成”。本轮为新增 TypeScript 网页组件建立稳定入口，不将旧脚本强行设为弱类型 TS。
 

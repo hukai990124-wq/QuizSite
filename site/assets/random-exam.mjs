@@ -208,7 +208,7 @@ document.getElementById('btn-report')?.addEventListener('click', () => {
         }
         save();
         render();
-        document.dispatchEvent(new Event('quizbank:exam-submitted'));
+        document.dispatchEvent(new Event('quizsite:exam-submitted'));
     }
     showReport();
 });
@@ -232,13 +232,13 @@ document.getElementById('btn-expand')?.addEventListener('click', () => {
 });
 document.getElementById('btn-sheet')?.addEventListener('click', () => document.getElementById('sheet')?.classList.toggle('open'));
 document.getElementById('sh-close')?.addEventListener('click', () => document.getElementById('sheet')?.classList.remove('open'));
-document.addEventListener('quizbank:language-changed', render);
+document.addEventListener('quizsite:language-changed', render);
 function restore() {
     state = load();
     render();
-    document.dispatchEvent(new Event('quizbank:exam-state-changed'));
+    document.dispatchEvent(new Event('quizsite:exam-state-changed'));
 }
-window.addEventListener('quizbank:progress-updated', restore);
+window.addEventListener('quizsite:progress-updated', restore);
 window.addEventListener('storage', event => { if (event.key === storageKey || event.key === null)
     restore(); });
 window.addEventListener('resize', () => { const toolbar = document.querySelector('.toolbar'); if (toolbar)

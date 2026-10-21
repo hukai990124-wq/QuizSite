@@ -223,7 +223,7 @@
     return { changed: changed, meta: meta };
   }
 
-  global.QuizBankProgressSync = {
+  global.QuizSiteProgressSync = {
     createMeta: createMeta,
     readMeta: readMeta,
     writeMeta: writeMeta,

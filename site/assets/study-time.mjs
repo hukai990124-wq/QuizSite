@@ -1,5 +1,5 @@
 import './weekly-study.mjs';
-export const STUDY_TIME_KEY = "quizbank:study-time:v1";
+export const STUDY_TIME_KEY = "quizsite:study-time:v1";
 const DAY_MS = 86400000;
 export function studyDay(now) {
     const date = new Date(now);
@@ -69,7 +69,7 @@ function mountStudyTime() {
             : (lang.startsWith("ja") ? "保存できないため、このページを開いている間のみ記録します。" : lang.startsWith("en") ? "Browser storage is unavailable; time is kept for this page session only." : "浏览器无法保存数据，学习时间仅保留在当前页面会话。");
     }
     function record(start, end) {
-        window.dispatchEvent(new CustomEvent('quizbank:study-interval', { detail: { start: Math.max(start, end - 5000), end } }));
+        window.dispatchEvent(new CustomEvent('quizsite:study-interval', { detail: { start: Math.max(start, end - 5000), end } }));
         const save = () => {
             memory = advanceStudyTime(read(), start, end);
             try {
@@ -91,7 +91,7 @@ function mountStudyTime() {
         if (lastTick !== null)
             record(lastTick, now);
         lastTick = null;
-        window.dispatchEvent(new Event('quizbank:study-flush'));
+        window.dispatchEvent(new Event('quizsite:study-flush'));
     }
     function tick() {
         const now = Date.now();
@@ -118,7 +118,7 @@ function mountStudyTime() {
         memory = parseStudyTime(event.newValue);
         render();
     } });
-    document.addEventListener("quizbank:language-changed", render);
+    document.addEventListener("quizsite:language-changed", render);
     render();
     window.setInterval(tick, 1000);
 }

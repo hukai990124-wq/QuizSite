@@ -31,7 +31,7 @@ test('TypeScript review contains 30 original trilingual four-choice defect revie
 
 test('every displayed defect produces its documented compiler error; every fix typechecks',async()=>{
   const bank=await getBank();
-  const scratch=await mkdtemp(path.join(tmpdir(),'quizbank-typescript-review-'));
+  const scratch=await mkdtemp(path.join(tmpdir(),'quizsite-typescript-review-'));
   const compiler=path.join(root,'node_modules/typescript/bin/tsc');
   const run=files=>spawnSync(process.execPath,[compiler,'--noEmit','--strict','--target','ES2022',
     '--module','ESNext','--lib','ES2022,DOM','--noUncheckedIndexedAccess','--exactOptionalPropertyTypes',
@@ -52,7 +52,7 @@ test('every displayed defect produces its documented compiler error; every fix t
     const fixed=run(bank.map(q=>q.id+'-fixed.ts'));
     assert.equal(fixed.error,undefined);assert.equal(fixed.status,0,fixed.stdout+fixed.stderr);
   }finally{
-    assert.ok(scratch.startsWith(path.join(tmpdir(),'quizbank-typescript-review-')));
+    assert.ok(scratch.startsWith(path.join(tmpdir(),'quizsite-typescript-review-')));
     await rm(scratch,{recursive:true});
   }
 });
@@ -63,7 +63,7 @@ test('TypeScript page keeps code inert, shared red review controls and complete 
   assert.equal((page.match(/class="opt" data-letter="[ABCD]"/g)||[]).length,120);
   assert.equal((page.match(/data-chat-context="/g)||[]).length,30);
   assert.equal((page.match(/class="review-code i18n-noloc"/g)||[]).length,30);
-  assert.match(page,/programming-review.css/);assert.match(page,/quizbank-theme.js/);
+  assert.match(page,/programming-review.css/);assert.match(page,/quizsite-theme.js/);
   assert.match(page,/quiz:programming:typescript:01/);assert.match(page,/id="btn-report"/);
   assert.match(page,/TypeScript Handbook/);
   assert.doesNotMatch(page,/<img\b|<input\b|<iframe\b|on(?:click|error)\s*=\s*["']/i);

@@ -40,7 +40,7 @@ test('Java Bronze page renders both answer types with three-language text', asyn
   assert.equal((page.match(/class="q" id="q\d+"/g) || []).length, 20);
   assert.equal((page.match(/class="opt" data-letter="[ABCD]"/g) || []).length, 80);
   assert.match(page, /jb:practice:01/);
-  assert.match(page, /quizbank-theme.js/);
+  assert.match(page, /quizsite-theme.js/);
   for (const lang of ['en', 'zh', 'ja']) {
     assert.equal((page.match(new RegExp(`class="opt-lang" lang="${lang}"`, 'g')) || []).length, 80,
       `every option needs a ${lang} rendering`);
