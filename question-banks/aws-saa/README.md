@@ -54,7 +54,7 @@ output/
 
 ### 答题引擎在哪
 
-交互逻辑（判分 / 统计 / 进度 / 答题卡）抽成了共用模块 **`../quiz_kit/quizkit.py`**，TOEIC 与 AWS 两条线共用同一份，改一处两边同步生效。
+交互逻辑（判分 / 统计 / 进度 / 答题卡）抽成了共用模块 **`../../quiz_kit/quizkit.py`**，TOEIC 与 AWS 两条线共用同一份，改一处两边同步生效。
 真正注入页面的是内联的 CSS+JS，所以每个 HTML **单文件自包含**，可以直接发到手机、离线打开。
 
 ## 数据质检（本次生成时已逐题校验）
@@ -95,7 +95,7 @@ output/
 | `normalize_zh.py` | 术语与中英混排规范化 |
 | `gen_saa.py <hydranode\|ditectrev> <total>` | 组装可作答的 HTML/MD |
 | `gen_appendix.py` | 生成官方样题附录（可作答） |
-| `../quiz_kit/quizkit.py` | **共用答题引擎**（判分/统计/进度/答题卡/成绩单），TOEIC 与 AWS 共用 |
+| `../../quiz_kit/quizkit.py` | **共用答题引擎**（判分/统计/进度/答题卡/成绩单），TOEIC 与 AWS 共用 |
 | `../toeic-reading/gen_html.py` | TOEIC 侧生成器（同样引用 quizkit） |
 
 ---

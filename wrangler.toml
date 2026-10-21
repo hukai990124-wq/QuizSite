@@ -25,7 +25,7 @@ QWEN_FREE_ONLY_CONFIRMED = "true"
 
 [build]
 command = "pnpm run build"
-watch_dir = ["src", "worker"]
+watch_dir = ["src", "worker", "scripts", "quiz_kit"]
 
 # 静态页面继续由 Cloudflare 免费无限地发；只有 /api/* 先落到 Worker 脚本上。
 [assets]

@@ -1,0 +1,13 @@
+{
+  "files.encoding": "utf8",
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.wrangler": true,
+    "**/__pycache__": true
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.mts": "${capture}.mjs, ${capture}.d.mts",
+    "tsconfig.json": "tsconfig.*.json"
+  }
+}

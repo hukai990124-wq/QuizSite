@@ -1,7 +1,7 @@
 # DELE A1 · 阅读 + 写作 + 听力 练习册
 
 把 Instituto Cervantes 官方公开的 **5 套 A1 试卷**做成可作答、可判分的单文件 HTML。
-沿用 `../quiz_kit/quizkit.py` 判分引擎（与 TOEIC / AWS 题库同一套交互）。
+沿用 `../../quiz_kit/quizkit.py` 判分引擎（与 TOEIC / AWS 题库同一套交互）。
 
 - **Prueba 1 阅读**：25 题，即时判分
 - **Prueba 2 听力**：25 题（4 套有；4 套带音频，可展开听力原文对照）
@@ -124,12 +124,12 @@ PY=C:/Users/75729/.workbuddy/binaries/python/envs/default/Scripts/python.exe
 
 ## 三语（中 / EN / 日）
 
-- 词典在 `../quiz_kit/i18n.json`，运行时在 `../quiz_kit/i18n_runtime.js`。
+- 词典在 `../../quiz_kit/i18n.json`，运行时在 `../../src/javascript/i18n_runtime.js`。
 - **只翻界面文案，题目 / 选项 / 解析 / 原文一律不翻**。保障来自两道锁：
   ① 区域规则（WHITE / BLACK 名单）② 字典是精确匹配（规范化后全等），不是模糊替换。
 - 听力播放器的 `.aud` 特意加进了 WHITE 白名单 —— 它常被放在题目区（BLACK）里面，
   但里面只有「示例录音 / 第 N 题录音」这类播放器标签，没有题目内容。
-- 覆盖度自检：`../quiz_kit/i18n_scan.py`（用真实浏览器 + **未翻译的原始 DOM** 复刻运行时判定，
+- 覆盖度自检：`../../quiz_kit/i18n_scan.py`（用真实浏览器 + **未翻译的原始 DOM** 复刻运行时判定，
   列出所有「会被翻但词典里没有」的串）。当前全站 70 页 **0 缺口**。
 
 ## 验证覆盖

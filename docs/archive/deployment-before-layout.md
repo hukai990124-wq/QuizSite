@@ -1,0 +1,297 @@
+# 历史部署说明（目录整理前）
+
+本文件保留历史维护记录。当前目录、构建和发布步骤请看根目录的 [部署指南](../../部署指南.md)；下面的旧目录、题数和个人电脑路径不再作为现行操作指引。
+
+**站点**：https://quizsite.hukai990124.workers.dev/
+**源码**：https://github.com/hukai990124-wq/QuizSite （**私有仓库**，源码不公开）
+
+| 项目 | 值 |
+|---|---|
+| 部署平台 | Cloudflare **Workers**（静态资产托管 + 一个很小的接口脚本） |
+| 部署方式 | 后台 **Connect to Git** —— push 后自动构建部署 |
+| 仓库 / 分支 | `hukai990124-wq/QuizSite` · `main` |
+| Build command | **留空** |
+| Build output directory | **`site`** |
+| Worker 名字 | `quizsite`（与根目录 `wrangler.toml` 里的 `name` 一致） |
+| 公开性 | 网站**公开**（任何人拿到链接可访问）；源码私有 |
+
+> 上一版这份文档写的是「Pages + 拖拽上传 + output 填 `/`」——**那是错的**，与实际不符，已按现状重写。
+> 备份留在 `_backups/部署指南.md.before-rewrite`。
+
+---
+
+## 一、日常更新：改完 push 就上线
+
+三条命令，Cloudflare 自动构建，约 1 分钟生效：
+
+```bash
+cd "C:\Users\75729\WorkBuddy\2026-10-05-22-16-32"
+git add -A
+git commit -m "更新题库"
+git push
+```
+
+⚠️ **本地改了不 push，线上永远是旧的。** `2026-10-05-22-16-32/` 里有一大半东西被
+`.gitignore` 挡在仓库外（`raw/` 官方试卷原件、`parse/` `_seg/` 解析中间件、`shots/` 截图、
+`_backups/` 备份），它们**不会**上传，也不该上传。
+
+---
+
+## 二、站点内容从哪来
+
+`site/` 就是**要发布的全部内容**（552 文件 / 72 MB），它是各题库成品的副本集合：
+
+```
+site/
+├─ index.html          总门户（6 张卡片 + 总进度条）  ← 手工维护
+├─ assets/
+│   ├─ i18n.js         三语词典 + 运行时（注入器生成，勿手改）
+│   ├─ presence.js     左下角在线人数 + 3D 地球（注入器生成，勿手改）
+│   └─ quizsite-theme.css / .js   子页面共用视觉模板
+├─ dele-a1/            DELE A1 · 阅读+写作+听力 · 225 题（带音频 19MB）
+├─ toeic-listening/    TOEIC 听力 · 400 题（带音频 27MB）
+├─ toeic-reading/      TOEIC 阅读 · 1000 题
+├─ aws-saa/            AWS SAA-C03 · 1010 题
+├─ aws-clf/            AWS CLF-C02 · 200 题
+└─ aws-aif/            AWS AIF-C01 · 682 题
+```
+
+**题库本体在各自目录里**（`dele-a1/`、`toeic-listening/`、`toeic-reading/`、`aws-saa/`、`aws-clf/`、`aws-aif/`）。
+以后改了题库要**重新把成品拷进 `site/` 对应子目录**，再 push —— `site/` 不会自动同步。
+
+**子页面统一模板**由 `quiz_kit/quizsite-theme.css` 和 `quiz_kit/quizsite-theme.js` 维护，提供一致的站点页眉、配色、卡片、控件和响应式基础样式；不改题目内容或答题逻辑。新增或重新生成页面后，运行 `python quiz_kit\theme_inject.py`，将共用资源复制到 `site/assets/` 并幂等地挂到所有子页面（总览首页 `site/index.html` 保持独立）。
+
+- **`dele-a1/` 用 `python dele-a1/sync_site.py` 一条命令搞定**：拷 `out/` → `site/dele-a1/`，
+  再补上站点侧那三样 `out/` 里没有的东西（「← 题库总览」链接、三语注入、在线人数控件）。
+  **不要直接 `cp -r`**，否则这三样会被冲掉。
+- 其它子站目前还是手工拷贝（`site/index.html` 与各子站的「← 题库总览」按钮是直接改在 `site/` 里的）。
+
+所有 HTML 都**无外链 CSS/JS**（全内联）、引用**全是相对路径**，所以能当子目录直接搬家，链接一条不断。
+
+---
+
+## 三、本地先看效果（改完再推之前）
+
+不要双击 `index.html` —— 用 `file://` 打开可能存不了做题进度。起个本地服务器：
+
+```bash
+cd "C:\Users\75729\WorkBuddy\2026-10-05-22-16-32\site"
+C:\Users\75729\.workbuddy\binaries\python\envs\default\Scripts\python.exe -m http.server 8000
+```
+
+浏览器打开 <http://localhost:8000>，看完 `Ctrl+C` 关掉。
+
+---
+
+## 四、六件要知道的事
+
+1. **未登录时，做题进度只保存在当前浏览器**（localStorage）；登录账号后会同步到 Cloudflare D1，并在本机保留离线缓存。更换设备后登录同一账号即可合并继续。清除浏览器数据会删除本机缓存，但已成功同步的云端进度仍可登录恢复。
+2. **进度按域名隔离**：`quizsite.hukai990124.workers.dev` 和以后绑的**自定义域名算两个网站**，进度不互通。
+   正式长期用之前先定最终域名，别做了一半再换。
+3. **网站是公开的**：任何人拿到链接都能刷。里面有 DELE / TOEIC 官方真题和 AWS 题库，
+   版权归各官方机构所有 —— **个人学习自测没问题，别公开宣传、别商用、别把链接外传**。
+   想收口可加 Cloudflare Access（邮箱验证），免费版 50 个席位。
+4. **额度：基本不花钱。** 官方明确 *Requests to static assets are free and unlimited* ——
+   静态资产请求免费且无限。只有左下角小窗的 WebSocket 连接（`/api/*`）计入 Workers 免费额度
+   （10 万请求 / 天）。几十人同时在线用不到 5%；**没人访问 = 0 消耗**。
+5. **国内访问可能不稳**：走 Cloudflare 的 IP，国内连通性时好时坏。
+6. **文件上限**：单次部署 2 万文件 / 单文件 25 MB。本站 348 文件、单文件最大 0.59 MB，用不到 2%。
+
+---
+
+## 五、版本标记
+
+`site/index.html` 页脚有一行：
+
+```
+最后更新：2026-10-08 01:01 JST
+```
+
+**这是判断线上是不是最新版的唯一可靠依据** —— Cloudflare 不返回 `Last-Modified` / `ETag` 头，
+所以没法自动显示文件时间。每次更新内容后，记得把这行改成新的日期时间。
+
+---
+
+## 六、出问题怎么查
+
+**复核线上与本地是否一致**（改 `BASE` / `ROOT` 即可复用）：
+
+```bash
+C:\Users\75729\.workbuddy\binaries\python\envs\default\Scripts\python.exe ^
+  "C:\Users\75729\WorkBuddy\2026-10-08-00-40-44\_verify_site.py"
+```
+
+脚本会逐个文件比对 HTTP 状态、体积（用 `Range` 请求，因为 CF 对 HEAD 不返回 `Content-Length`）
+和小文件的 MD5。
+
+**查源码有没有被意外暴露**：随便访问几个仓库里的路径，应该全 404：
+
+```
+https://quizsite.hukai990124.workers.dev/.gitignore
+https://quizsite.hukai990124.workers.dev/部署指南.md
+https://quizsite.hukai990124.workers.dev/aws-saa/gen_saa.py
+```
+
+**改坏了要回滚**：备份在 `_backups/`（本目录下，已被 `.gitignore` 排除，不会上传）。
+Git 里也有全部历史，`git log` / `git revert` 可回退。
+
+**后台看部署日志**：Cloudflare → Workers & Pages → `quizsite` → Deployments，能看到每次
+push 触发的构建与报错。
+
+---
+
+## 七、关键事实备查
+
+- 本站内容规模：**348 文件 / 44 MB / 2510 题**
+- 首次上线 commit：`36953f4`（2026-10-08）
+- 上传前做过的检查（全部通过）：无中间件混入 · 4 子站首页 + 6 个深层页面 HTTP 200 ·
+  本地引用大小写精确匹配（Cloudflare 跑 Linux，区分大小写，Windows 本地测不出来）·
+  图片音频可访问 · 无中文文件名 · 进度汇总计算正确 · 手机 375px 无横向溢出
+
+---
+
+## 八、界面三语切换（中 / English / 日本語）
+
+全站界面文字可切三语，**题目本体不翻译**（保持原文）。页脚右侧有三个按钮，默认跟随浏览器语言。
+
+| 组成 | 文件 | 说明 |
+|---|---|---|
+| 词典 | `quiz_kit/i18n.json` | 477 条界面文案，值是 `{en, ja}` |
+| 运行时 | `quiz_kit/i18n_runtime.js` | 挂 `MutationObserver`，动态写入的文案也翻 |
+| 注入器 | `quiz_kit/i18n_inject.py` | 生成 `site/assets/i18n.js`，并向 70 个 HTML 注入标记块 |
+| 覆盖自检 | `quiz_kit/i18n_scan.py` | 用真实浏览器扫「会被翻但词典里没有」的串（需先起 site/ 静态服务 8777） |
+| 产物 | `site/assets/i18n.js` | **注入器生成，勿手改** |
+
+### 改文案的正确流程
+
+**不要直接改 `site/assets/i18n.js`**（下次注入会被覆盖）。正确顺序：
+
+```bash
+cd "C:\Users\75729\WorkBuddy\2026-10-05-22-16-32"
+# 1. 改词典 quiz_kit/i18n.json
+# 2. 重跑注入器（幂等，重复跑不会叠加）
+C:\Users\75729\.workbuddy\binaries\python\envs\default\Scripts\python.exe quiz_kit\i18n_inject.py
+# 3. 本地看一眼，再 commit + push
+```
+
+### 两个容易踩的点
+
+- 页面是 **CRLF 换行**，注入脚本必须用 `newline=""` 读写，否则 git diff 会变成几万行假改动。
+- 词典里少数整句译文含 `<b>` 标签，是**故意**的（用 `setMarkup()` 只放行 `<b>`，其余转义），不要删。
+
+---
+
+## 九、左下角「在线人数 + 3D 地球」小窗
+
+页面**左下角**常驻一枚小地球：自转、有经纬网和陆地点阵，**地球上的金点就是正在浏览的人**。
+球下面一行「● N 人在线」，点一下展开访客所在城市列表，再点收起。地球可以用鼠标拖动旋转。
+
+| 组成 | 文件 | 说明 |
+|---|---|---|
+| 前端 | `site/assets/presence.js` | 46 个页面各引一次；自包含（陆地掩码已内联），无外部依赖 |
+| 后端 | `worker/worker.js` | Cloudflare Worker + Durable Object，汇总在线人数 |
+| 部署配置 | 根目录 `wrangler.toml` | 让现有站点这个 Worker 带上 `/api/*` 与 Durable Object |
+| 注入 | 各 HTML 末尾的 `<!--pc:js-->` 块 | 一行 script 标签 |
+
+### 部署方式：做法 A（已配置好）
+
+根目录的 `wrangler.toml` 让**现有站点这个 Worker 自己带上后端** —— 同域名、无跨域、不用再建项目。
+push 之后 Cloudflare 会改用 wrangler 部署，Durable Object 随之创建。
+
+```toml
+name = "quizsite"                  # 必须与后台现有的 Worker 项目名一致
+main = "worker/worker.js"
+compatibility_date = "2026-09-01"
+
+[assets]
+directory = "site"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]      # 只有 /api/* 先落到脚本上，静态页面照旧免费无限
+
+[[durable_objects.bindings]]
+name = "PRESENCE"
+class_name = "Presence"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Presence"]
+```
+
+> ⚠️ 这一步把部署方式从「纯静态资产」改成「Worker + 静态资产」。
+> **回退**：删掉根目录的 `wrangler.toml` 再 push 一次，立刻回到原状 ——
+> 静态页面的服务方式没有任何改动，不会把站点搞挂。
+
+### 怎么验证后端起来了
+
+浏览器直接打开：
+
+```
+https://quizsite.hukai990124.workers.dev/api/presence/snap
+```
+
+- 返回 `{"type":"state","count":1,"users":[...]}` → **后端已上线**
+- 返回 404 → 还是旧部署，等构建完成或看后台构建日志
+
+后端上线后，打开任意题库页面，左下角就会自动出现小地球。
+
+### 万一想改成「做法 B」（单独建一个小项目，完全不动现有站点）
+
+1. 删掉根目录的 `wrangler.toml`
+2. Cloudflare 后台 → Workers & Pages → Create → Workers → **Connect to Git**
+3. 选同一个仓库，**Root directory 填 `worker`**（用 `worker/wrangler.toml`）
+4. 部署完记下地址，形如 `https://quizsite-presence.<你的账号>.workers.dev`
+5. 前端要指向这个新地址 —— 在 `PRESENCE_CFG.endpoint` 里写完整 URL，重跑一次注入脚本
+
+### 性能与省电（已做的处理）
+
+- 渲染限 **30 帧/秒**（这么小的球不需要 60 帧）
+- 页面切到后台**自动暂停**渲染，切回来恢复
+- 系统开启「减少动态效果」时**不自转**
+- 地球下方数字与列表**只在真的变化时才动 DOM**，避免反复触发全站翻译扫描
+
+### 隐私
+
+- 只显示**国家 / 城市**级位置，由 Cloudflare 按 IP 推测，本身就不精确
+- **不记录 IP**（服务端代码里没有任何留存的字段）
+- 同一浏览器的多个标签页只算**一个人**（前端生成一个随机 ID 用于去重）
+- 想让窗口彻底安静：删掉 HTML 里的 `<!--pc:js-->` 块即可
+
+---
+
+## 十、已知遗留问题
+
+| 位置 | 现象 | 状态 |
+|---|---|---|
+| `site/aws-saa/compliance/part01.html` | 390px 手机下横向溢出 37px | **既有问题**（改动前就存在），待决定是否修 |
+| `site/myCV.html`（Introduction 仓库） | 390px 手机下横向溢出 194px | **既有问题**，待决定是否修 |
+
+---
+
+## 十一、账号与跨设备学习进度
+
+代码已加入本地账号注册 / 登录、退出、删除账号、按题目同步进度，以及 Worker API 与 D1 迁移。账号名和密码各为 6–15 个 Unicode 字符、区分大小写；忘记密码不能自助找回。进度仍保留在本机作为离线缓存，登录后再同步到云端。
+
+账号与 D1 已配置。账号接口依赖根目录 `wrangler.toml` 里的 `DB` 和 `AUTH_LIMIT` 两个绑定，以及密码哈希所需的 `nodejs_compat` 兼容标志。缺少限流绑定或账号内部运行错误均会返回 503。2026-10-11 已确认绑定和远程数据库正常；当时实际故障是旧密码哈希的 600,000 次 PBKDF2 超过 Workers 的 100,000 次上限，已改用原生 scrypt（N=16384、r=8、p=5），无需修改数据库表。
+
+部署与验证：
+
+1. 确认 Cloudflare 的 Git 部署使用仓库根目录的 `wrangler.toml`，并使用 Wrangler 4.36.0 或更新版本；其中 `AUTH_LIMIT` 的限额是每 60 秒 10 次，`compatibility_flags` 包含 `nodejs_compat`。
+2. 推送主分支后等待现有 `quizsite` Worker 自动部署。D1 迁移已单独应用，不要重复创建账号数据库。
+3. 部署后检查 `/api/auth/me` 返回未登录状态 `{ "user": null }`，再用不存在的随机账号尝试登录，应返回 401 账号或密码错误，而不是 503。发布验证还需完成一个随机测试账号的注册、登录、跨会话进度同步与删除，确认完整链路后清理该测试账号。`/api/auth/me` 的未登录响应不会查询账号表，不能单独证明账号服务可用。
+
+删除账号会永久删除该账号的云端记录，但保留当前浏览器中的题库进度。涉及 Cloudflare D1、Cookie 会话、安全限流及其数据模型的细节见 [`docs/design/accounts-and-progress-sync.md`](docs/design/accounts-and-progress-sync.md)。
+
+---
+
+## 十二、AI 助手的 TypeScript 开发与构建
+
+AI 助手的前后端源码使用 TypeScript：浏览器端位于 `src/chat*.mts`，Worker 端位于 `worker/chat.mts`。编译产物分别写入 `site/assets/chat*.mjs` 和 `worker/chat.mjs`，仍由现有网页和 Worker 加载；TypeScript 源码不放在公开的 `site/` 静态资源目录中。
+
+在本机安装依赖并验证：
+
+```bash
+pnpm install --frozen-lockfile
+pnpm test
+```
+
+`pnpm test` 会先按严格 TypeScript 规则编译，再运行项目测试。改动 AI 源码后，请把对应 `.mts` 源码和编译生成的 `.mjs` 一起提交。当前 Cloudflare Git 部署的 Build command 留空，因此线上自动部署使用仓库里的 `.mjs`；本地 `wrangler dev` / `wrangler deploy` 则会按根目录 `wrangler.toml` 中的 `[build]` 配置先运行构建。
