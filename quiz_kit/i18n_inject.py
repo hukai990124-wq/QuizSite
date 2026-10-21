@@ -2,7 +2,7 @@
 """把「界面三语切换（中 / EN / 日）」注入全站。
 
 产出两样东西
-  1) site/assets/i18n.js   —— quiz_kit/i18n.json（词条）+ quiz_kit/i18n_runtime.js（运行时）
+  1) site/assets/i18n.js   —— quiz_kit/i18n.json（词条）+ src/javascript/i18n_runtime.js（运行时）
   2) site/**/*.html        —— 页脚语言按钮 + 引导脚本
 
 只动界面文案。题目 / 选项 / 解析 / 原文一律不碰（运行时靠区域规则 + 精确匹配两道锁）。
@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SITE = os.path.join(ROOT, "site")
 DICT_SRC = os.path.join(HERE, "i18n.json")
-RUNTIME_SRC = os.path.join(HERE, "i18n_runtime.js")
+RUNTIME_SRC = os.path.join(ROOT, "src", "javascript", "i18n_runtime.js")
 OUT_DIR = os.path.join(SITE, "assets")
 OUT_JS = os.path.join(OUT_DIR, "i18n.js")
 
@@ -115,7 +115,7 @@ def build_dict_js():
     runtime = open(RUNTIME_SRC, encoding="utf-8").read()
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(OUT_JS, "w", encoding="utf-8", newline="\n") as f:
-        f.write("/* 自动生成：quiz_kit/i18n.json + quiz_kit/i18n_runtime.js  —— 请勿手改 */\n")
+        f.write("/* 自动生成：quiz_kit/i18n.json + src/javascript/i18n_runtime.js —— 请勿手改 */\n")
         f.write("window.__I18N_DICT__=" + payload + ";\n")
         f.write(runtime)
     size = os.path.getsize(OUT_JS)

@@ -19,7 +19,7 @@
     "worker/weekly-study.mts",
     "worker/registration-turnstile.mts",
     "worker/account.d.mts",
-    "src/**/*.mts",
-    "src/**/*.ts"
+    "src/typescript/**/*.mts",
+    "src/typescript/**/*.ts"
   ]
 }

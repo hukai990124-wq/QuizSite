@@ -63,7 +63,7 @@ def inject_file(path):
 def copy_theme_assets(assets_dir):
     """Use compiled TypeScript JS, not a second hand-maintained implementation."""
     for name in ("quizsite-theme.css", "quizsite-theme.js"):
-        source = ASSETS / name if name.endswith(".js") else HERE / name
+        source = ASSETS / name if name.endswith(".js") else ROOT / "src/css" / name
         if not source.exists():
             raise FileNotFoundError(f"Missing {source}; run pnpm build first")
         target = assets_dir / name

@@ -8,9 +8,9 @@
 
 | TypeScript 源 | 编译产物 | 职责 |
 | --- | --- | --- |
-| `src/back-to-top.mts` | `site/assets/back-to-top.mjs` | 返回顶部、减少动态效果偏好 |
-| `src/quizsite-theme.ts` | `site/assets/quizsite-theme.js` | 公共导航、组件加载、动态标题 |
-| `src/aif-hotspots.mts` | `site/assets/aif-hotspots.mjs` | 匹配题控件、参考解释、进度恢复 |
+| `src/typescript/back-to-top.mts` | `site/assets/back-to-top.mjs` | 返回顶部、减少动态效果偏好 |
+| `src/typescript/quizsite-theme.ts` | `site/assets/quizsite-theme.js` | 公共导航、组件加载、动态标题 |
+| `src/typescript/aif-hotspots.mts` | `site/assets/aif-hotspots.mjs` | 匹配题控件、参考解释、进度恢复 |
 
 公共导航仍为经典 `defer` 脚本；`moduleDetection: legacy` 防止生成 CommonJS `exports`，其余 `.mts` 文件仍是 ES 模块。类型检查保留 strict、noImplicitReturns、noUnusedLocals 等原有标准。新增 DOM 元素类型及对未知 JSON/事件目标的边界检查。
 
@@ -20,11 +20,11 @@
 
 ## 日常开发
 
-1. 新 ES 模块写在 `src/<name>.mts`，使用 DOM 类型；编译后是 `/assets/<name>.mjs`。
+1. 新 ES 模块写在 `src/typescript/<name>.mts`，使用 DOM 类型；编译后是 `/assets/<name>.mjs`。
 2. 内部导入写输出扩展名 `.mjs`，例如 `import { matchingAnswer } from './hotspot-protocol.mjs'`。
 3. `pnpm dev:types` 自动编译前端；另开本地静态服务器或 Wrangler 查看网页。
 4. 发布前运行 `pnpm typecheck`、`pnpm test`；Cloudflare 的既有 `[build]` 自动执行 `pnpm build`。
-5. 继续保留仓库已有编译产物策略。不要只修改 `site/assets` 中由 TS 生成的文件，下一次构建会覆盖它们。
+5. `site/assets` 中的浏览器 CSS/JS 由 `pnpm build` 生成，不再提交这些重复产物。编辑 `src/css`、`src/javascript` 或 `src/typescript` 中的源文件；HTML、数据和媒体仍保存在 `site`。
 
 动画、渐变、WebGL/Canvas 可以由这些 TS 模块调用；视觉样式仍写在 CSS。TypeScript 的职责是减少交互代码的类型错误，不替代动画库或图形 API。参考：[官方 DOM 文档](https://www.typescriptlang.org/docs/handbook/dom-manipulation.html)。
 

@@ -1,10 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": "./src/typescript",
     "outDir": "./site/assets",
     "moduleDetection": "legacy",
     "noEmit": false
   },
-  "include": ["src/**/*.mts", "src/**/*.ts"]
+  "include": ["src/typescript/**/*.mts", "src/typescript/**/*.ts"]
 }

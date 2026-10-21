@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-const source = readFileSync(new URL("../src/chat.mts", import.meta.url), "utf8");
+const source = readFileSync(new URL("../src/typescript/chat.mts", import.meta.url), "utf8");
 const builtChat = readFileSync(new URL("../site/assets/chat.mjs", import.meta.url), "utf8");
 const styles = readFileSync(new URL("../site/assets/chat.css", import.meta.url), "utf8");
 const config = readFileSync(new URL("../wrangler.toml", import.meta.url), "utf8");

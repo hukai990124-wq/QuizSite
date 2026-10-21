@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 
 test('back-to-top has a strict TypeScript source and keeps its browser module URL', () => {
   const root = new URL('../', import.meta.url);
-  const source = readFileSync(new URL('src/back-to-top.mts', root), 'utf8');
+  const source = readFileSync(new URL('src/typescript/back-to-top.mts', root), 'utf8');
   const output = readFileSync(new URL('site/assets/back-to-top.mjs', root), 'utf8');
   assert.match(source, /scrollPosition: number/);
   assert.match(output, /export function shouldShowBackToTop/);
@@ -14,7 +14,7 @@ test('back-to-top has a strict TypeScript source and keeps its browser module UR
 });
 test('shared navigation and matching UI are built from TypeScript at unchanged asset URLs', () => {
   for (const [source, output] of [['quizsite-theme.ts','quizsite-theme.js'],['aif-hotspots.mts','aif-hotspots.mjs']]) {
-    assert.ok(readFileSync(new URL('../src/'+source, import.meta.url),'utf8').length > 100);
+    assert.ok(readFileSync(new URL('../src/typescript/'+source, import.meta.url),'utf8').length > 100);
     assert.ok(readFileSync(new URL('../site/assets/'+output, import.meta.url),'utf8').length > 100);
   }
   const theme = readFileSync(new URL('../site/assets/quizsite-theme.js', import.meta.url),'utf8');
