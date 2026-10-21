@@ -1,6 +1,6 @@
 import { findSession, validateMutationRequest } from "./account.mjs";
 import { streamChatAnswer } from "./chat-stream.mjs";
-export const CHAT_POLICY = Object.freeze({ guestDaily: 10, userDaily: 50, globalDaily: 1000, tokenBudget: 800000, maxOutput: 1024 });
+export const CHAT_POLICY = Object.freeze({ guestDaily: 5, userDaily: 50, globalDaily: 1000, tokenBudget: 800000, maxOutput: 1024 });
 export const CLOUDFLARE_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast";
 export const CHAT_PROMPT = `你是 QuizSite 的学习助手，回答学习和技术问题，包括题库讲解、语言学习、数学与科学、课程知识、考试准备、编程、软件、硬件和工程技术。不要求用户包含考试名称或题库关键词，根据真实意图和对话上下文判断。
 接受任何语言的提问。优先使用用户指定的语言；未指定时跟随当前提问的语言，不强制使用中文。默认回答概要，用 2–4 个短句；参考篇幅为中文约 160–300 字、英文约 80–160 个词、日文约 200–400 个字符，其他语言保持相近信息量。这些是参考目标，不要机械截字；简单问题可以更短，不为凑字数填充。先给答案或结论，再说明核心理由；必要时最多列 3 个简短要点。不主动逐项分析所有选项、展开完整步骤或举例，不重复题干、长篇免责声明或引导追问。用户明确追问细节时，只展开指定部分，仍保持紧凑。解释依据而非输出私有思考过程。

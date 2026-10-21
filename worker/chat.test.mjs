@@ -110,7 +110,7 @@ test("streamed account and guest replies satisfy the browser's incremental contr
       assert.equal(answer.answer, "因为 B 满足题干要求。");
       assert.equal(text.join(""), answer.answer);
       assert.equal(answer.authenticated, authenticated);
-      assert.equal(answer.remaining, authenticated ? 49 : 9);
+      assert.equal(answer.remaining, authenticated ? 49 : 4);
     });
   }
 });
@@ -121,7 +121,9 @@ test("guest chat status works without an account, and cross-origin requests are 
   const spy = t.mock.method(globalThis, "fetch", () => streamReply());
   const guest = await handleChatRequest(statusRequest(null), env);
   assert.equal(guest.status, 200);
-  assert.deepEqual(await guest.json(), { remaining: 10, dailyLimit: 10, authenticated: false, available: true, configured: true });
+  assert.deepEqual(await guest.json(), { remaining: 5, dailyLimit: 5, authenticated: false, available: true, configured: true });
+  const account = await handleChatRequest(statusRequest(token), env);
+  assert.equal((await account.json()).dailyLimit, 50);
   assert.equal((await handleChatRequest(request(token, undefined, "https://other.com"), env)).status, 403);
   sqlite.prepare("UPDATE sessions SET expires_at = 0").run();
   const expired = await handleChatRequest(request(token), env);
@@ -130,23 +132,29 @@ test("guest chat status works without an account, and cross-origin requests are 
   assert.equal(spy.mock.callCount(), 1);
 });
 
-test("guest IP allowance is 10; registering on that IP preserves today's usage toward 50", async t => {
+test("guest IP allowance is 5; the sixth call is blocked and login preserves usage toward 50", async t => {
   const { env, token, sqlite } = fixture();
   t.after(() => sqlite.close());
   const day = chatDay(Date.now());
   const visitor = await visitorId(request(null), env.DASHSCOPE_API_KEY);
   const insert = sqlite.prepare("INSERT INTO ai_requests (id, user_id, visitor_hash, day, created_at, reserved, charged, status) VALUES (?, NULL, ?, ?, 1, 1, 1, 'complete')");
-  for (let i = 0; i < 10; i++) insert.run(`guest${i}`, visitor, day);
+  for (let i = 0; i < 4; i++) insert.run(`guest${i}`, visitor, day);
+  const spy = t.mock.method(globalThis, "fetch", () => streamReply());
+  const fifth = await handleChatRequest(request(null), env);
+  assert.equal(fifth.status, 200);
+  const fifthReply = await fifth.json();
+  assert.equal(fifthReply.remaining, 0);
+  assert.equal(fifthReply.dailyLimit, 5);
   const guestStatus = await (await handleChatRequest(statusRequest(null), env)).json();
   assert.equal(guestStatus.remaining, 0);
-  const spy = t.mock.method(globalThis, "fetch", () => streamReply());
   const exhausted = await handleChatRequest(request(null), env);
   assert.equal(exhausted.status, 429);
   assert.match((await exhausted.json()).error, /注册账号/);
-  assert.equal(spy.mock.callCount(), 0);
+  assert.equal(spy.mock.callCount(), 1);
   const userStatus = await (await handleChatRequest(statusRequest(token), env)).json();
   assert.equal(userStatus.authenticated, true);
-  assert.equal(userStatus.remaining, 40);
+  assert.equal(userStatus.dailyLimit, 50);
+  assert.equal(userStatus.remaining, 45);
 });
 
 test("cannot inject a system role or exceed input bounds; server owns the system prompt", () => {
@@ -211,7 +219,7 @@ test("requests reach Qwen without keyword filtering; the server prompt governs s
         });
         const result = await handleChatRequest(request(authenticated ? token : null, { question, context: "", history: [] }), env);
         assert.equal(result.status, 200);
-        assert.equal((await result.json()).remaining, authenticated ? 49 : 9);
+        assert.equal((await result.json()).remaining, authenticated ? 49 : 4);
         assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, 42);
         assert.equal(spy.mock.callCount(), 1);
       });
@@ -290,7 +298,7 @@ test("successful account and guest replies satisfy the browser response contract
       assert.equal(answer.answer, "因为 B 满足题干要求。");
       assert.equal(answer.configured, true);
       assert.equal(answer.authenticated, authenticated);
-      assert.equal(answer.remaining, authenticated ? 49 : 9);
+      assert.equal(answer.remaining, authenticated ? 49 : 4);
     });
   }
 });
