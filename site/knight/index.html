@@ -40,6 +40,12 @@
       <noscript>请启用 JavaScript 以显示 Sir.Gavin 的三维模型。</noscript>
       <section class="chat-panel" aria-labelledby="chat-title">
         <h2 id="chat-title"><span class="i18n-noloc">Sir.Gavin</span> · <span>骑士导师对话</span></h2>
+        <label class="gavin-model-label" for="gavin-model"><span>选择语言模型</span>
+          <select id="gavin-model">
+            <option value="cloudflare" selected>Cloudflare · Llama 3.1 8B FP8</option>
+            <option value="nvidia">NVIDIA · Nemotron 3.5 Lightning</option>
+          </select>
+        </label>
         <div class="chat-window" id="gavin-log" role="log" aria-label="与 GavinAI 的对话" aria-live="polite"><p class="gavin-placeholder">向骑士导师提问欧洲历史。</p></div>
         <form class="chat-composer" id="gavin-form"><input id="gavin-input" aria-label="发送给 Sir.Gavin 的消息" placeholder="向骑士导师提问…" maxlength="2000" required disabled><button id="gavin-send" type="submit" disabled>发送问题</button></form>
         <p id="gavin-status" role="status">正在连接 GavinAI…</p>

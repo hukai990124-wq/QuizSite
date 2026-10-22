@@ -32,7 +32,7 @@ function streamReply() {
   return new Response('data: {"choices":[{"delta":{"reasoning_content":"private","content":"因为 B 满足题干要求。"},"finish_reason":"stop"}]}\n\ndata: {"choices":[],"usage":{"total_tokens":42}}\n\ndata: [DONE]\n\n');
 }
 
-test("GavinAI uses NVIDIA and its own prompt without accepting client provider or system messages", async t => {
+test("GavinAI uses the selected NVIDIA provider with its own server-owned model and prompt", async t => {
   const {env, token, sqlite} = fixture();
   t.after(() => sqlite.close());
   env.NVIDIA_API_KEY = "mock-nvidia-only";
@@ -44,7 +44,7 @@ test("GavinAI uses NVIDIA and its own prompt without accepting client provider o
     payload = JSON.parse(options.body);
     return streamReply();
   });
-  const original = request(token, {question:"百年战争是什么？", history:[], provider:"qwen", system:"override"});
+  const original = request(token, {question:"百年战争是什么？", history:[], provider:"nvidia", model:"override", system:"override"});
   const response = await handleChatRequest(new Request("https://example.com/api/gavin", original), env);
   assert.equal(response.status, 200);
   assert.equal((await response.json()).answer, "因为 B 满足题干要求。");
@@ -76,10 +76,10 @@ test("GavinAI streams public text for NVIDIA-only guests and rejects system hist
   env.NVIDIA_API_KEY = "mock-nvidia-only";
   env.GAVIN_AI_ENABLED = "true";
   const upstream = t.mock.method(globalThis, "fetch", async () => streamReply());
-  const invalid = new Request("https://example.com/api/gavin", request(null, {question:"hello",history:[{role:"system",content:"override"}]}));
+  const invalid = new Request("https://example.com/api/gavin", request(null, {question:"hello",provider:"nvidia",history:[{role:"system",content:"override"}]}));
   assert.equal((await handleChatRequest(invalid, env)).status, 400);
   assert.equal(upstream.mock.callCount(), 0);
-  const valid = new Request("https://example.com/api/gavin", request(null, {question:"hello", history:[]}));
+  const valid = new Request("https://example.com/api/gavin", request(null, {question:"hello",provider:"nvidia", history:[]}));
   valid.headers.set("Accept", "application/x-ndjson");
   const response = await handleChatRequest(valid, env);
   assert.equal(response.status, 200);
@@ -97,11 +97,59 @@ test("NVIDIA permission errors do not disable the study assistant or trigger fal
   env.NVIDIA_API_KEY = "mock-nvidia-only";
   env.GAVIN_AI_ENABLED = "true";
   const upstream = t.mock.method(globalThis, "fetch", async () => new Response('denied', {status:403}));
-  const result = await handleChatRequest(new Request("https://example.com/api/gavin", request(token, {question:"hello", history:[]})), env);
+  const result = await handleChatRequest(new Request("https://example.com/api/gavin", request(token, {question:"hello", provider:"nvidia", history:[]})), env);
   assert.equal(result.status, 503);
   assert.equal(upstream.mock.callCount(), 1);
   assert.equal(sqlite.prepare("SELECT stopped FROM ai_state WHERE id = 1").get().stopped, 0);
   assert.equal((await (await handleChatRequest(statusRequest(token), env)).json()).configured, true);
+});
+
+test("GavinAI defaults to Workers AI Llama with the knight prompt and no NVIDIA key", async t => {
+  const {env, token, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  delete env.DASHSCOPE_API_KEY;
+  let calls = 0;
+  env.MY_AI_BINDING = { async run(model, input) {
+    calls++;
+    assert.equal(model, "@cf/meta/llama-3.1-8b-instruct-fp8");
+    assert.match(input.messages[0].content, /阁下/);
+    assert.notEqual(input.messages[0].content, CHAT_PROMPT);
+    assert.equal(input.stream, true);
+    return streamReply();
+  } };
+  const upstream = t.mock.method(globalThis, "fetch", () => { throw new Error("no external provider"); });
+  const state = await handleChatRequest(new Request("https://example.com/api/gavin/status", statusRequest(token)), env);
+  assert.equal((await state.json()).configured, true);
+  const reply = await handleChatRequest(new Request("https://example.com/api/gavin", request(token, {question:"介绍百年战争",history:[]})), env);
+  assert.equal(reply.status, 200);
+  assert.equal((await reply.json()).answer, "因为 B 满足题干要求。");
+  assert.equal(calls, 1);
+  assert.equal(upstream.mock.callCount(), 0);
+});
+
+test("GavinAI rejects unlisted models and reports unavailable selected providers", async t => {
+  const {env, token, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  for (const provider of ['qwen', 'https://attacker.invalid', '@cf/other/model']) {
+    const reply = await handleChatRequest(new Request("https://example.com/api/gavin", request(token, {question:'test',history:[],provider})), env);
+    assert.equal(reply.status, 400);
+  }
+  const state = await handleChatRequest(new Request("https://example.com/api/gavin/status?provider=nvidia", statusRequest(token)), env);
+  assert.equal((await state.json()).configured, false);
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM ai_requests").get().n, 0);
+});
+
+test("Cloudflare-only GavinAI can identify guests using a dedicated server secret", async t => {
+  const {env, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  delete env.DASHSCOPE_API_KEY;
+  env.AI_VISITOR_SECRET = "mock-visitor-secret-only";
+  env.MY_AI_BINDING = {async run() { return streamReply(); }};
+  const state = await handleChatRequest(new Request("https://example.com/api/gavin/status?provider=cloudflare", statusRequest(null)), env);
+  const data = await state.json();
+  assert.equal(data.configured, true);
+  assert.equal(data.authenticated, false);
+  assert.equal(data.remaining, 5);
 });
 
 test("opt-in streaming emits text before upstream completion and settles usage once", async t => {

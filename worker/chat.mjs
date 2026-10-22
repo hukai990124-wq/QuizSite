@@ -3,9 +3,10 @@ import { streamChatAnswer } from "./chat-stream.mjs";
 import sirGavinConfig from "./prompts/sir-gavin.json" with { type: "json" };
 import { buildPrompt } from "./sir-gavin-prompt.mjs";
 // GavinAI（骑士导师）：独立人设配置，本地编辑窗口保存到 worker/prompts/sir-gavin.json。
-// 独立接口 /api/gavin 仅调用 NVIDIA，不使用学习助手的模型选择。
+// 独立接口 /api/gavin 支持 Workers AI 和 NVIDIA，始终使用骑士提示词。
 export const SIR_GAVIN_PROMPT = buildPrompt(sirGavinConfig);
 export const GAVIN_AI_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b";
+export const GAVIN_CLOUDFLARE_MODEL = "@cf/meta/llama-3.1-8b-instruct-fp8";
 export function buildSirGavinMessages(question, history = []) {
     const body = parseChatRequestBody({ question, context: "", history });
     return [{ role: "system", content: SIR_GAVIN_PROMPT }, ...body.history, { role: "user", content: body.question }];
@@ -46,6 +47,13 @@ function providerConfigured(provider, env) {
     if (provider === "cloudflare")
         return !!env.MY_AI_BINDING;
     return !!env.DASHSCOPE_API_KEY && !!env.QWEN_MODEL && env.QWEN_FREE_ONLY_CONFIRMED === "true";
+}
+function parseGavinProvider(value) {
+    if (value === undefined || value === null || value === "cloudflare")
+        return "cloudflare";
+    if (value === "nvidia")
+        return "nvidia";
+    throw new Error("不支持的 AI 模型。");
 }
 function parseChatRequestBody(value) {
     if (!isRecord(value) || typeof value.question !== "string" || !value.question.trim() || value.question.length > 2000)
@@ -197,7 +205,7 @@ export async function handleChatRequest(request, env, lifetime) {
         const session = await findSession(request, env.DB);
         const now = Date.now(), day = chatDay(now);
         const userId = session?.user_id || null;
-        const visitorHash = await visitorId(request, env.DASHSCOPE_API_KEY || env.NVIDIA_API_KEY);
+        const visitorHash = await visitorId(request, env.DASHSCOPE_API_KEY || env.NVIDIA_API_KEY || env.AI_VISITOR_SECRET);
         if (!userId && !visitorHash)
             return json({ error: "无法识别访客，请启用 Cloudflare 代理后重试。" }, 503);
         const url = new URL(request.url);
@@ -205,7 +213,7 @@ export async function handleChatRequest(request, env, lifetime) {
         if (request.method === "GET" && (url.pathname === "/api/chat/status" || url.pathname === "/api/gavin/status")) {
             let provider;
             try {
-                provider = isGavin ? "nvidia" : parseProvider(url.searchParams.get("provider") ?? undefined);
+                provider = isGavin ? parseGavinProvider(url.searchParams.get("provider") ?? undefined) : parseProvider(url.searchParams.get("provider") ?? undefined);
             }
             catch {
                 return json({ error: "不支持的 AI 模型。" }, 400);
@@ -219,7 +227,7 @@ export async function handleChatRequest(request, env, lifetime) {
         let messages, provider;
         try {
             const body = await readLimitedBody(request);
-            provider = isGavin ? "nvidia" : parseProvider(isRecord(body) ? body.provider : undefined);
+            provider = isGavin ? parseGavinProvider(isRecord(body) ? body.provider : undefined) : parseProvider(isRecord(body) ? body.provider : undefined);
             if (isGavin) {
                 const parsed = parseChatRequestBody(isRecord(body) ? { question: body.question, history: body.history, context: "" } : body);
                 messages = buildSirGavinMessages(parsed.question, parsed.history);
@@ -277,7 +285,7 @@ export async function handleChatRequest(request, env, lifetime) {
                         body: JSON.stringify({ model: env.QWEN_MODEL, messages, stream: true, stream_options: { include_usage: true }, max_tokens: CHAT_POLICY.maxOutput, enable_thinking: false }),
                         signal: upstreamSignal,
                     })
-                    : await runCloudflareAi(env.MY_AI_BINDING, messages);
+                    : await runCloudflareAi(env.MY_AI_BINDING, messages, isGavin ? GAVIN_CLOUDFLARE_MODEL : CLOUDFLARE_AI_MODEL);
             if (!response.ok) {
                 // Fail closed on all quota, authentication, and model configuration denials.
                 if (provider !== "nvidia" && [401, 402, 403, 404].includes(response.status))
@@ -314,8 +322,8 @@ export async function handleChatRequest(request, env, lifetime) {
         return json({ error: "学习助手暂不可用，请稍后再试。" }, 503);
     }
 }
-async function runCloudflareAi(binding, messages) {
-    const stream = await binding.run(CLOUDFLARE_AI_MODEL, {
+async function runCloudflareAi(binding, messages, model) {
+    const stream = await binding.run(model, {
         messages,
         stream: true,
         max_tokens: CHAT_POLICY.maxOutput,

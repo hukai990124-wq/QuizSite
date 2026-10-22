@@ -8,29 +8,39 @@ const send = document.getElementById('gavin-send') as HTMLButtonElement;
 const retry = document.getElementById('gavin-retry') as HTMLButtonElement;
 const log = document.getElementById('gavin-log') as HTMLDivElement;
 const status = document.getElementById('gavin-status') as HTMLParagraphElement;
+const modelSelect = document.getElementById('gavin-model') as HTMLSelectElement;
+try { if (localStorage.getItem('gavin:provider') === 'nvidia') modelSelect.value = 'nvidia'; } catch {}
 let history: ChatHistoryEntry[] = [];
 let busy = false;
 let ready = false;
 let active: AbortController | null = null;
+let statusVersion = 0;
 
 function controls(): void {
   input.disabled = send.disabled = busy || !ready;
   retry.disabled = busy;
+  modelSelect.disabled = busy;
   log.setAttribute('aria-busy', String(busy));
 }
 
 async function checkStatus(): Promise<void> {
+  const version = ++statusVersion;
+  const provider = modelSelect.value;
+  ready = false;
+  controls();
   try {
-    const response = await fetch('/api/gavin/status', { cache: 'no-store', signal: AbortSignal.timeout(15000) });
+    const response = await fetch('/api/gavin/status?provider=' + encodeURIComponent(provider), { cache: 'no-store', signal: AbortSignal.timeout(15000) });
     const data: unknown = await response.json();
+    if (version !== statusVersion) return;
     if (!response.ok) throw new Error('暂时无法连接 GavinAI，请稍后重新连接。');
     const state = parseChatStatus(data);
     ready = state.configured && state.available && state.remaining > 0;
-    status.textContent = !state.configured ? 'GavinAI 尚未启用，请先完成服务端配置。'
+    status.textContent = !state.configured ? '所选模型尚未配置，请选择其他模型或检查服务端配置。'
       : !state.available ? 'AI 服务已暂停或总额度已达上限。'
       : state.remaining === 0 ? '今日提问额度已用完。'
       : `GavinAI 已就绪 · 今日 AI 剩余 ${state.remaining} / ${state.dailyLimit} 次（与学习助手共用额度）。`;
   } catch (error) {
+    if (version !== statusVersion) return;
     ready = false;
     status.textContent = error instanceof Error ? error.message : '无法连接 GavinAI。';
   }
@@ -66,7 +76,7 @@ form.addEventListener('submit', async event => {
     const response = await fetch('/api/gavin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/x-ndjson' },
-      body: JSON.stringify({ question, history }),
+      body: JSON.stringify({ question, history, provider: modelSelect.value }),
       signal: AbortSignal.any([active.signal, AbortSignal.timeout(95000)]),
     });
     if (!response.ok) {
@@ -102,5 +112,16 @@ form.addEventListener('submit', async event => {
   }
 });
 retry.addEventListener('click', () => { void checkStatus(); });
+modelSelect.addEventListener('change', () => {
+  if (busy) return;
+  history = [];
+  log.replaceChildren();
+  const placeholder = document.createElement('p');
+  placeholder.className = 'gavin-placeholder';
+  placeholder.textContent = '已切换模型，开始新的骑士对话。';
+  log.appendChild(placeholder);
+  try { localStorage.setItem('gavin:provider', modelSelect.value); } catch {}
+  void checkStatus();
+});
 window.addEventListener('pagehide', () => active?.abort());
 void checkStatus();

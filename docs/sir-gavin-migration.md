@@ -12,4 +12,4 @@
 node scripts/import-sir-gavin.mjs '<原 WebPet 目录>'
 ```
 
-Three.js 沿用原项目固定版本 0.150.1，由 jsDelivr 加载。模型和语音在本站托管。聊天窗口已接入独立的 GavinAI 接口；服务端配置 NVIDIA 密钥和启用开关后可用，见 [部署说明](gavin-ai-cloudflare.md)。独立 WebPet 项目保持原样；验证新部署后再决定是否停用旧部署。
+Three.js 沿用原项目固定版本 0.150.1，由 jsDelivr 加载。模型和语音在本站托管。聊天窗口已接入独立的 GavinAI 接口；下拉框默认使用 Workers AI Llama 3.1 8B FP8，通过现有 AI 绑定运行，也可选择已配置的 NVIDIA 模型，见 [部署说明](gavin-ai-cloudflare.md)。独立 WebPet 项目保持原样；验证新部署后再决定是否停用旧部署。

@@ -1,4 +1,7 @@
 {
+ "选择语言模型": {"en":"Choose a language model","ja":"言語モデルを選択"},
+ "所选模型尚未配置，请选择其他模型或检查服务端配置。": {"en":"This model is not configured. Choose another model or check the server configuration.","ja":"このモデルは未設定です。別のモデルを選ぶか、サーバー側の設定を確認してください。"},
+ "已切换模型，开始新的骑士对话。": {"en":"Model changed. Start a new conversation with your knight mentor.","ja":"モデルを切り替えました。騎士の先生との新しい会話を始めましょう。"},
  "通过 GitHub 联系作者：": {"en":"Contact the author on GitHub:","ja":"GitHub で作者に連絡："},
  "关闭联系作者窗口": {"en":"Close author contact window","ja":"作者への連絡ウィンドウを閉じる"},
  "GavinAI 无法调用：请管理员检查 NVIDIA 密钥或模型权限。": {"en":"GavinAI is unavailable: an administrator must check the NVIDIA key or model permissions.","ja":"GavinAI を呼び出せません。管理者に NVIDIA キーとモデルの権限の確認を依頼してください。"},

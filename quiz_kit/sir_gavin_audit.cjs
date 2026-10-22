@@ -65,7 +65,7 @@ async function main() {
     await page.waitForTimeout(300);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     assert.equal(await page.locator('.chat-composer input:disabled').count(), 1);
-    await page.route('**/api/gavin/status', route => route.fulfill({ json: { configured: true, authenticated: false, available: true, remaining: 5, dailyLimit: 5 } }));
+    await page.route('**/api/gavin/status?*', route => route.fulfill({ json: { configured: new URL(route.request().url()).searchParams.get('provider') === 'cloudflare', authenticated: false, available: true, remaining: 5, dailyLimit: 5 } }));
     let chatPayload;
     await page.route('**/api/gavin', route => {
       chatPayload = route.request().postDataJSON();
@@ -77,8 +77,19 @@ async function main() {
     await page.locator('#gavin-send').click();
     await page.waitForFunction(() => document.getElementById('gavin-log').textContent.includes('A historical answer.'));
     assert.equal(chatPayload.question, 'Explain the Hundred Years War.');
-    assert.equal(chatPayload.provider, undefined);
+    assert.equal(chatPayload.provider, 'cloudflare');
     assert.equal(await page.locator('#gavin-log img').count(), 0);
+    await page.locator('#gavin-input:enabled').waitFor();
+    await page.locator('#gavin-model').selectOption('nvidia');
+    await page.waitForFunction(() => document.getElementById('gavin-status').textContent.includes('所选模型尚未配置'));
+    assert.equal(await page.locator('#gavin-input').isDisabled(), true);
+    assert.equal(await page.locator('#gavin-log .i18n-noloc').count(), 0);
+    await page.locator('#gavin-model').selectOption('cloudflare');
+    await page.locator('#gavin-input:enabled').waitFor();
+    await page.locator('#gavin-input').fill('Explain the Norman Conquest.');
+    await page.locator('#gavin-send').click();
+    await page.waitForFunction(() => document.getElementById('gavin-log').textContent.includes('A historical answer.'));
+    assert.deepEqual(chatPayload.history, []);
     const originalConversation = await page.locator('#gavin-log .i18n-noloc').allTextContents();
     for (const [language, resetLabel, placeholder] of [
       ['en', 'Reset view', 'Ask your knight mentor…'],
@@ -97,6 +108,7 @@ async function main() {
     await page.reload();
     await page.waitForFunction(() => document.documentElement.getAttribute('data-lang') === 'ja');
     assert.equal(await page.locator('#reset-view').textContent(), '視点をリセット');
+    assert.equal(await page.locator('#gavin-model').inputValue(), 'cloudflare');
     assert.match(await page.locator('#pet-title').evaluate(element => getComputedStyle(element).fontFamily), /UnifrakturCook/);
     await page.waitForFunction(() => !document.getElementById('shake-hands').disabled, { timeout: 90000 });
     await page.locator('#shake-hands').click();
