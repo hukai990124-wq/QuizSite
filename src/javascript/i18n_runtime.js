@@ -26,7 +26,7 @@
      aud = 听力播放器外壳（.aud > .alab 标签 + <audio>）；它常被放在题目区（BLACK）
      内部，但里面只有播放器的说明文字，没有题目内容，所以单独放行。 */
   var WHITE = {};
-  ("hero idx-hd idx-main toolbar tbin btns qbar qact sheet mask report howto author-dialog " +
+  ("hero idx-hd idx-main toolbar tbin btns qbar qact sheet mask report howto author-dialog mentor-section " +
    "reset-dialog verdict scroll-hint notice card cards tags tg pg no sd meta badge sub ov-hd " +
    "ov-bar need lang-foot aud qb-question-chat").split(" ").forEach(function (c) { WHITE[c] = 1; });
 
