@@ -41,6 +41,18 @@ async function main() {
   try {
     const page = await browser.newPage();
     await page.addInitScript(() => { if (!localStorage.getItem('ui:lang')) localStorage.setItem('ui:lang', 'zh'); });
+    await page.addInitScript(() => {
+      window.gavinSpeechTest = { calls: [], cancels: 0 };
+      window.SpeechSynthesisUtterance = class { constructor(text) { this.text = text; } };
+      Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: {
+        getVoices: () => [{name:'David',lang:'en-US',localService:true}],
+        cancel: () => window.gavinSpeechTest.cancels++,
+        speak: utterance => {
+          window.gavinSpeechTest.calls.push({text:utterance.text,lang:utterance.lang});
+          utterance.onstart?.();
+        },
+      } });
+    });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     const requested = [];
@@ -67,20 +79,37 @@ async function main() {
     assert.equal(await page.locator('.chat-composer input:disabled').count(), 1);
     await page.route('**/api/gavin/status?*', route => route.fulfill({ json: { configured: new URL(route.request().url()).searchParams.get('provider') === 'cloudflare', authenticated: false, available: true, remaining: 5, dailyLimit: 5 } }));
     let chatPayload;
-    await page.route('**/api/gavin', route => {
+    let releaseFirst;
+    const firstReply = new Promise(resolve => { releaseFirst = resolve; });
+    let firstRequest = true;
+    await page.route('**/api/gavin', async route => {
       chatPayload = route.request().postDataJSON();
-      return route.fulfill({ contentType: 'application/x-ndjson', body: JSON.stringify({type:'delta',text:'<img src=x onerror=alert(1)> A historical answer.'}) + '\n' + JSON.stringify({type:'done',truncated:false,configured:true,authenticated:false,available:true,remaining:4,dailyLimit:5}) + '\n' });
+      assert.equal(route.request().headers().accept, 'application/json');
+      if (firstRequest) { firstRequest = false; await firstReply; }
+      return route.fulfill({ json: {answer:'<img src=x onerror=alert(1)> A historical answer.',truncated:false,configured:true,authenticated:false,available:true,remaining:4,dailyLimit:5} });
     });
     await page.locator('#gavin-retry').click();
     await page.locator('#gavin-input:enabled').waitFor();
     await page.locator('#gavin-input').fill('Explain the Hundred Years War.');
+    const outgoing = page.waitForRequest('**/api/gavin');
     await page.locator('#gavin-send').click();
+    await outgoing;
+    assert.equal(await page.locator('#gavin-log').textContent().then(text => text.includes('A historical answer.')), false);
+    assert.equal(await page.evaluate(() => window.gavinSpeechTest.calls.length), 0);
+    releaseFirst();
     await page.waitForFunction(() => document.getElementById('gavin-log').textContent.includes('A historical answer.'));
+    assert.deepEqual(await page.evaluate(() => window.gavinSpeechTest.calls[0]), {text:'<img src=x onerror=alert(1)> A historical answer.',lang:'en-US'});
+    await page.locator('#gavin-stop').click();
+    assert.equal(await page.locator('#gavin-stop').isDisabled(), true);
+    await page.locator('#gavin-read').click();
+    assert.equal(await page.evaluate(() => window.gavinSpeechTest.calls.length), 2);
     assert.equal(chatPayload.question, 'Explain the Hundred Years War.');
     assert.equal(chatPayload.provider, 'cloudflare');
     assert.equal(await page.locator('#gavin-log img').count(), 0);
     await page.locator('#gavin-input:enabled').waitFor();
     await page.locator('#gavin-model').selectOption('nvidia');
+    assert.equal(await page.locator('#gavin-stop').isDisabled(), true);
+    assert.equal(await page.locator('#gavin-read').isDisabled(), true);
     await page.waitForFunction(() => document.getElementById('gavin-status').textContent.includes('所选模型尚未配置'));
     assert.equal(await page.locator('#gavin-input').isDisabled(), true);
     assert.equal(await page.locator('#gavin-log .i18n-noloc').count(), 0);
@@ -90,6 +119,16 @@ async function main() {
     await page.locator('#gavin-send').click();
     await page.waitForFunction(() => document.getElementById('gavin-log').textContent.includes('A historical answer.'));
     assert.deepEqual(chatPayload.history, []);
+    await page.locator('#gavin-input:enabled').waitFor();
+    const spokenBeforeFailure = await page.evaluate(() => window.gavinSpeechTest.calls.length);
+    await page.route('**/api/gavin', route => route.fulfill({status:503,json:{error:'GavinAI 暂时无法回答。'}}));
+    await page.locator('#gavin-input').fill('Test a failed reply.');
+    await page.locator('#gavin-send').click();
+    await page.waitForFunction(() => document.getElementById('gavin-log').textContent.includes('本次回答未完成'));
+    assert.equal(await page.evaluate(() => window.gavinSpeechTest.calls.length), spokenBeforeFailure);
+    await page.locator('#gavin-input:enabled').waitFor();
+    await page.locator('#gavin-retry').click();
+    await page.waitForFunction(() => document.getElementById('gavin-status').textContent.includes('GavinAI 已就绪'));
     const originalConversation = await page.locator('#gavin-log .i18n-noloc').allTextContents();
     for (const [language, resetLabel, placeholder] of [
       ['en', 'Reset view', 'Ask your knight mentor…'],
@@ -124,7 +163,7 @@ async function main() {
     assert.equal(requested.some(url => /draco|blakcdragon|dragon-roar/i.test(url)), false);
     assert.deepEqual(errors, []);
     await page.screenshot({ path: path.join(process.env.TEMP || '.', 'quizsite-sir-gavin-mobile.png'), fullPage: true });
-    console.log('PASS: lossless model, asset limits, rendering, handshake, mobile layout, GavinAI streaming, safe text rendering, no Draco requests.');
+    console.log('PASS: model rendering, three languages, full-reply display, TTS after completion, replay/stop, model switching and safe text rendering.');
   } finally {
     await browser.close();
     server.close();

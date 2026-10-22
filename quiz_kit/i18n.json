@@ -1,4 +1,11 @@
 {
+ "朗读回复": {"en":"Read reply aloud","ja":"回答を読み上げる"},
+ "停止朗读": {"en":"Stop reading","ja":"読み上げを停止"},
+ "Gavin 正在朗读…": {"en":"Gavin is reading…","ja":"Gavin が読み上げ中…"},
+ "朗读已结束。": {"en":"Reading finished.","ja":"読み上げが終了しました。"},
+ "朗读已停止。": {"en":"Reading stopped.","ja":"読み上げを停止しました。"},
+ "无法自动朗读，请点击“朗读回复”重试，或检查设备的对应语言语音。": {"en":"Automatic reading failed. Click Read reply aloud to retry, or check your device's voices for this language.","ja":"自動読み上げができません。読み上げボタンで再試行するか、端末の対応言語の音声を確認してください。"},
+ "此浏览器不支持语音朗读，文字回复仍可正常使用。": {"en":"This browser does not support speech synthesis. Text replies still work.","ja":"このブラウザーは音声読み上げに対応していません。テキストの回答は利用できます。"},
  "选择语言模型": {"en":"Choose a language model","ja":"言語モデルを選択"},
  "所选模型尚未配置，请选择其他模型或检查服务端配置。": {"en":"This model is not configured. Choose another model or check the server configuration.","ja":"このモデルは未設定です。別のモデルを選ぶか、サーバー側の設定を確認してください。"},
  "已切换模型，开始新的骑士对话。": {"en":"Model changed. Start a new conversation with your knight mentor.","ja":"モデルを切り替えました。騎士の先生との新しい会話を始めましょう。"},

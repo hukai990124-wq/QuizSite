@@ -1,4 +1,4 @@
-import { readChatStream } from './chat-stream.mjs';
+import { createGavinSpeech } from './gavin-speech.mjs';
 import { parseChatAnswer, parseChatStatus } from './chat-protocol.mjs';
 import type { ChatHistoryEntry } from './chat-protocol.mjs';
 
@@ -9,6 +9,7 @@ const retry = document.getElementById('gavin-retry') as HTMLButtonElement;
 const log = document.getElementById('gavin-log') as HTMLDivElement;
 const status = document.getElementById('gavin-status') as HTMLParagraphElement;
 const modelSelect = document.getElementById('gavin-model') as HTMLSelectElement;
+const speech = createGavinSpeech();
 try { if (localStorage.getItem('gavin:provider') === 'nvidia') modelSelect.value = 'nvidia'; } catch {}
 let history: ChatHistoryEntry[] = [];
 let busy = false;
@@ -65,17 +66,16 @@ form.addEventListener('submit', async event => {
   event.preventDefault();
   const question = input.value.trim();
   if (busy || !ready || !question) return;
+  speech.stop(true);
   busy = true;
   controls();
   append('你', question);
-  const reply = append('GavinAI', '');
-  let answer = '';
   status.textContent = 'GavinAI 正在回答…';
   active = new AbortController();
   try {
     const response = await fetch('/api/gavin', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/x-ndjson' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ question, history, provider: modelSelect.value }),
       signal: AbortSignal.any([active.signal, AbortSignal.timeout(95000)]),
     });
@@ -83,10 +83,9 @@ form.addEventListener('submit', async event => {
       const failure: unknown = await response.json();
       throw new Error(typeof failure === 'object' && failure !== null && 'error' in failure && typeof failure.error === 'string' ? failure.error : 'GavinAI 暂时无法回答。');
     }
-    const result = response.headers.get('Content-Type')?.includes('application/x-ndjson')
-      ? await readChatStream(response, text => { answer += text; reply.textContent = answer; log.scrollTop = log.scrollHeight; })
-      : parseChatAnswer(await response.json());
-    reply.textContent = result.answer;
+    const result = parseChatAnswer(await response.json());
+    const reply = append('GavinAI', result.answer);
+    speech.read(result.answer, question);
     if (result.truncated) {
       const note = document.createElement('small');
       note.textContent = '（已达到本次长度上限，可继续追问。）';
@@ -97,10 +96,9 @@ form.addEventListener('submit', async event => {
     input.value = '';
     await checkStatus();
   } catch (error) {
-    reply.textContent = answer;
     const note = document.createElement('small');
-    note.textContent = answer ? '（回答中断，内容可能不完整。）' : '本次回答未完成。';
-    reply.parentElement?.appendChild(note);
+    note.textContent = '本次回答未完成。';
+    log.appendChild(note);
     const failure = error instanceof Error ? error.message : '连接中断，请稍后重试。';
     await checkStatus();
     status.textContent = failure;
@@ -114,6 +112,7 @@ form.addEventListener('submit', async event => {
 retry.addEventListener('click', () => { void checkStatus(); });
 modelSelect.addEventListener('change', () => {
   if (busy) return;
+  speech.stop(true);
   history = [];
   log.replaceChildren();
   const placeholder = document.createElement('p');

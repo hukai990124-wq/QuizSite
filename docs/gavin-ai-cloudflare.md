@@ -14,7 +14,7 @@
 
 - `worker/chat.mts` 中 GavinAI 支持 `cloudflare` 和 `nvidia` 两个供应商，独立接口为 `POST /api/gavin`、`GET /api/gavin/status?provider=cloudflare`。不传 provider 时默认 Cloudflare；学习助手仍使用 `/api/chat`。
 - 使用 Worker 原生 fetch，不需要安装 OpenAI SDK 或单独搭建 Node/Python 服务器。
-- 保留示例的 `temperature: 1`、`top_p: 0.95`、`enable_thinking: false` 和流式输出；只返回正文，不返回思考内容。移除哈利波特和颜色工具。
+- 保留 NVIDIA 示例的 `temperature: 1`、`top_p: 0.95`、`enable_thinking: false`。上游流由服务端收集，只返回完整正文，不返回思考内容。Gavin 页面使用 JSON 整条回复，一次性展示后启动浏览器 TTS；学习助手保留流式显示。移除哈利波特和颜色工具。
 - GavinAI 输出上限为 512 tokens，默认提示词要求 2–4 句短答，学术问题也适用；优先遵从本轮明确的语言要求，否则跟随当前提问语言，而非界面或历史回答语言。学习助手仍为 1024 tokens。90 秒超时。GavinAI 与学习助手共用已有 D1 次数、总预算、并发预留保护；对话历史在各自页面内独立保存。NVIDIA 权限错误不关闭学习助手，也不回退到其他付费服务。
 - NVIDIA 选项默认未启用，必须同时设置 `NVIDIA_API_KEY` 和 `GAVIN_AI_ENABLED=true`。尚未使用真实 Key 联调；Workers AI 选项只依赖 AI 绑定。
 
@@ -26,7 +26,11 @@
 4. 再添加 `GAVIN_AI_ENABLED`，值为 `true`。可同样用 Secret 类型保存，避免代码部署覆盖开关。
 5. 点击 **Deploy** 应用变量。这一步仅更新当前部署的变量；新代码仍需另外部署。
 6. 将本次代码更新到私有 GitHub 仓库，触发已有的 Cloudflare Git 构建。原来的 Worker 名称、D1、Durable Object 和域名配置继续沿用，不需新建项目或数据库迁移。
-7. 打开部署域名的 `/api/gavin/status?provider=nvidia`，正常配置应返回 `configured: true`。再进入 `/knight/`，选择 NVIDIA 模型并发送问题。状态显示今日共用剩余额度，回复逐段出现。
+7. 打开部署域名的 `/api/gavin/status?provider=nvidia`，正常配置应返回 `configured: true`。再进入 `/knight/`，选择 NVIDIA 模型并发送问题。状态显示今日共用剩余额度，完整回复生成后一次性显示并开始朗读。
+
+## 浏览器朗读
+
+Gavin 回复完成后，以完整回答创建一次 SpeechSynthesisUtterance，按回答和提问内容选择中日英语音；不朗读流式片段或失败的半句。语速 0.92、音调 0.85，优先选择设备已有的对应语言音色；声音及可用语言由设备决定，不需要 TTS API Key。使用「朗读回复」重播，「停止朗读」取消；新提问、切换模型、离开页面会停止旧语音。若浏览器禁止异步自动朗读，提示手动点击重试；不支持 TTS 时仍能查看文字。并非所有设备语音都离线运行。
 
 NVIDIA 免费端点仅用于内部测试/评估。启用前应将 NVIDIA 调用限制为内部访问（不能只隐藏页面链接）；否则在公开站点保留 NVIDIA 关闭状态，正式开放前另行取得相应服务资格。
 

@@ -39,6 +39,8 @@ h2 { margin: 0; color: var(--accent); font-size: 1rem; }
 .chat-window strong { color: var(--accent); }
 .gavin-placeholder { text-align: center; }
 #gavin-status { margin: 0; color: var(--muted); font-size: .85rem; }
+.gavin-speech-controls { display: flex; flex-wrap: wrap; gap: 10px; }
+#gavin-speech-status { margin: 0; color: var(--muted); font-size: .85rem; }
 .chat-composer { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
 input { min-width: 0; padding: 12px; color: var(--muted); background: var(--page); border: 1px solid var(--line); border-radius: 5px; font: inherit; }
 body .qb-sigil-footer { background: var(--surface); border-color: var(--line); color: var(--accent); }

@@ -49,6 +49,8 @@
         <div class="chat-window" id="gavin-log" role="log" aria-label="与 GavinAI 的对话" aria-live="polite"><p class="gavin-placeholder">向骑士导师提问欧洲历史。</p></div>
         <form class="chat-composer" id="gavin-form"><input id="gavin-input" aria-label="发送给 Sir.Gavin 的消息" placeholder="向骑士导师提问…" maxlength="2000" required disabled><button id="gavin-send" type="submit" disabled>发送问题</button></form>
         <p id="gavin-status" role="status">正在连接 GavinAI…</p>
+        <div class="gavin-speech-controls"><button id="gavin-read" type="button" disabled>朗读回复</button><button id="gavin-stop" type="button" disabled>停止朗读</button></div>
+        <p id="gavin-speech-status" role="status"></p>
         <div><button id="gavin-retry" type="button">重新连接</button></div>
       </section>
     </section>
