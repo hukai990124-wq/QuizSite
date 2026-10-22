@@ -1445,14 +1445,16 @@ stats();sheet();
 <script>
 (function(){
 "use strict";
-function openSet(q){
-  var s=q&&q.closest?q.closest(".set"):null;
-  if(s){Array.prototype.forEach.call(s.querySelectorAll("details.ans"),function(d){d.open=true});}
+// The shared grader runs first; only expand details for the finalized question.
+function openQuestion(q){
+  if(q&&q.classList.contains("done")){
+    Array.prototype.forEach.call(q.querySelectorAll("details.ans"),function(d){d.open=true});
+  }
 }
 document.addEventListener("click",function(ev){
   var t=ev.target;if(!t||!t.closest)return;
-  if(t.closest(".js-submit")||t.closest(".js-reveal")){openSet(t.closest(".q"));}
-},true);
+  if(t.closest(".js-submit")||t.closest(".js-reveal")){openQuestion(t.closest(".q"));}
+});
 var bt=document.getElementById("btn-text");
 if(bt)bt.addEventListener("click",function(){
   document.body.classList.toggle("all-text");

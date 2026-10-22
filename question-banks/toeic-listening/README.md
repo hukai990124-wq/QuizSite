@@ -1,5 +1,13 @@
 # TOEIC® Listening 练习 · 10 套（带音频 + 可作答判分）
 
+## 单题解析显示
+
+Part 3/4 共用一段录音的三道题分别判分。确认作答或直接看答案后，只展开当前题目的原文（如有）和解析；同组尚未作答题目的解析保持折叠。“展开全部原文/解析”按钮仍可主动展开全卷。
+
+相关逻辑在 `gen_html.py` 的 `EXTRA_JS` 中：使用冒泡阶段的点击事件，在公共判题脚本标记当前 `.q.done` 后，仅展开该题的 `details.ans`。修改后需同步本目录和 `site/toeic-listening/` 的 10 套 HTML。
+
+从仓库根目录运行回归检查：`node --test tests/toeic-answer-isolation.test.mjs`。真实浏览器检查为 `node quiz_kit/toeic_answer_isolation_audit.cjs`，需要本机 Edge 和 Playwright；可通过 `QUIZSITE_BROWSER_MODULES` 指定 Playwright 所在模块目录。
+
 ## 第 07–10 套：toeicmocktests 追加套
 
 与第 01–04 套**同源**（toeicmocktests.com 免费模拟，官方 2026 格式）、
