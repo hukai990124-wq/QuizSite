@@ -5,8 +5,9 @@ import sirGavinConfig from "./prompts/sir-gavin.json" with { type: "json" };
 import { buildPrompt } from "./sir-gavin-prompt.mjs";
 
 // GavinAI（骑士导师）：独立人设配置，本地编辑窗口保存到 worker/prompts/sir-gavin.json。
-// 此处仅构建提示词和消息，尚未接入骑士页面的聊天 API。
+// 独立接口 /api/gavin 仅调用 NVIDIA，不使用学习助手的模型选择。
 export const SIR_GAVIN_PROMPT = buildPrompt(sirGavinConfig);
+export const GAVIN_AI_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b";
 
 export function buildSirGavinMessages(question: string, history: ChatHistoryEntry[] = []): ChatMessage[] {
   const body = parseChatRequestBody({ question, context: "", history });
@@ -28,7 +29,7 @@ interface ChatRequestBody {
   history: ChatHistoryEntry[];
   provider: ChatProvider;
 }
-type ChatProvider = "qwen" | "cloudflare";
+type ChatProvider = "qwen" | "cloudflare" | "nvidia";
 interface ChatStatusRow {
   stopped: number | null;
   identity_used: number | null;
@@ -48,6 +49,8 @@ interface ChatEnvironment {
   DASHSCOPE_API_KEY?: string;
   QWEN_MODEL?: string;
   QWEN_FREE_ONLY_CONFIRMED?: string;
+  NVIDIA_API_KEY?: string;
+  GAVIN_AI_ENABLED?: string;
   MY_AI_BINDING?: {
     run(model: string, input: {
       messages: ChatMessage[];
@@ -99,6 +102,7 @@ function parseProvider(value: unknown): ChatProvider {
 }
 
 function providerConfigured(provider: ChatProvider, env: ChatEnvironment): boolean {
+  if (provider === "nvidia") return !!env.NVIDIA_API_KEY && env.GAVIN_AI_ENABLED === "true";
   if (provider === "cloudflare") return !!env.MY_AI_BINDING;
   return !!env.DASHSCOPE_API_KEY && !!env.QWEN_MODEL && env.QWEN_FREE_ONLY_CONFIRMED === "true";
 }
@@ -222,22 +226,26 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment, 
     const session = await findSession(request, env.DB);
     const now = Date.now(), day = chatDay(now);
     const userId = session?.user_id || null;
-    const visitorHash = await visitorId(request, env.DASHSCOPE_API_KEY);
+    const visitorHash = await visitorId(request, env.DASHSCOPE_API_KEY || env.NVIDIA_API_KEY);
     if (!userId && !visitorHash) return json({ error: "无法识别访客，请启用 Cloudflare 代理后重试。" }, 503);
     const url = new URL(request.url);
-    if (request.method === "GET" && url.pathname === "/api/chat/status") {
+    const isGavin = url.pathname === "/api/gavin" || url.pathname === "/api/gavin/status";
+    if (request.method === "GET" && (url.pathname === "/api/chat/status" || url.pathname === "/api/gavin/status")) {
       let provider: ChatProvider;
-      try { provider = parseProvider(url.searchParams.get("provider") ?? undefined); }
+      try { provider = isGavin ? "nvidia" : parseProvider(url.searchParams.get("provider") ?? undefined); }
       catch { return json({ error: "不支持的 AI 模型。" }, 400); }
       return json({ ...(await status(env.DB, userId, visitorHash, day)), configured: providerConfigured(provider, env) });
     }
-    if (request.method !== "POST" || url.pathname !== "/api/chat") return json({ error: "不支持此请求。" }, 405);
+    if (request.method !== "POST" || (url.pathname !== "/api/chat" && url.pathname !== "/api/gavin")) return json({ error: "不支持此请求。" }, 405);
     if (!validateMutationRequest(request)) return json({ error: "请求来源或格式不正确。" }, 403);
     let messages: ChatMessage[], provider: ChatProvider;
     try {
       const body = await readLimitedBody(request);
-      provider = parseProvider(isRecord(body) ? body.provider : undefined);
-      messages = buildChatMessages(body);
+      provider = isGavin ? "nvidia" : parseProvider(isRecord(body) ? body.provider : undefined);
+      if (isGavin) {
+        const parsed = parseChatRequestBody(isRecord(body) ? {question: body.question, history: body.history, context: ""} : body);
+        messages = buildSirGavinMessages(parsed.question, parsed.history);
+      } else messages = buildChatMessages(body);
     } catch (failure) {
       return json({ error: failure instanceof Error && failure.message === "不支持的 AI 模型。" ? failure.message : "问题或题目材料过长、为空或格式不正确，请缩短后再试。" }, 400);
     }
@@ -265,6 +273,7 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment, 
     }
     let result;
     const abort = new AbortController();
+    const upstreamSignal = AbortSignal.any([AbortSignal.timeout(90000), abort.signal]);
     const db = env.DB;
     async function settle(answer: CollectedAnswer): Promise<void> {
       const tokens = answer.usage?.total_tokens;
@@ -273,23 +282,29 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment, 
       if (charged > reserved) await db.prepare("UPDATE ai_state SET stopped = 1 WHERE id = 1").run();
     }
     try {
-      const response = provider === "qwen"
+      const response = provider === "nvidia"
+        ? await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
+          method: "POST", headers: { "Authorization": `Bearer ${env.NVIDIA_API_KEY}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ model: GAVIN_AI_MODEL, messages, temperature: 1, top_p: 0.95, max_tokens: CHAT_POLICY.maxOutput, chat_template_kwargs: {enable_thinking: false}, stream: true, stream_options: {include_usage: true} }),
+          signal: upstreamSignal,
+        })
+        : provider === "qwen"
         ? await fetch("https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions", {
           method: "POST", headers: { "Authorization": `Bearer ${env.DASHSCOPE_API_KEY}`, "Content-Type": "application/json" },
           body: JSON.stringify({ model: env.QWEN_MODEL, messages, stream: true, stream_options: { include_usage: true }, max_tokens: CHAT_POLICY.maxOutput, enable_thinking: false }),
-          signal: AbortSignal.any([AbortSignal.timeout(90000), abort.signal]),
+          signal: upstreamSignal,
         })
         : await runCloudflareAi(env.MY_AI_BINDING!, messages);
       if (!response.ok) {
         // Fail closed on all quota, authentication, and model configuration denials.
-        if ([401, 402, 403, 404].includes(response.status)) await env.DB.prepare("UPDATE ai_state SET stopped = 1 WHERE id = 1").run();
+        if (provider !== "nvidia" && [401, 402, 403, 404].includes(response.status)) await env.DB.prepare("UPDATE ai_state SET stopped = 1 WHERE id = 1").run();
         await env.DB.prepare("UPDATE ai_requests SET status = 'failed', charged = 0 WHERE id = ?").bind(id).run();
         console.warn(JSON.stringify({ event: "ai_provider_denied", status: response.status }));
-        return json({ error: [401, 402, 403, 404].includes(response.status) ? "AI 服务已暂停：免费额度、密钥或模型权限需要管理员检查。" : "AI 服务暂时繁忙，请稍后重试。" }, 503);
+        return json({ error: [401, 402, 403, 404].includes(response.status) ? (provider === "nvidia" ? "GavinAI 无法调用：请管理员检查 NVIDIA 密钥或模型权限。" : "AI 服务已暂停：免费额度、密钥或模型权限需要管理员检查。") : "AI 服务暂时繁忙，请稍后重试。" }, 503);
       }
       if (request.headers.get("Accept")?.includes("application/x-ndjson")) {
         return streamChatAnswer(async onText => {
-          const answer = await collectAnswer(response, onText, abort.signal);
+          const answer = await collectAnswer(response, onText, upstreamSignal);
           await settle(answer);
           if (!answer.answer) throw new Error("Empty upstream answer");
           return {truncated:answer.truncated, ...(await status(db, userId, visitorHash, day)), configured: providerConfigured(provider, env)};
@@ -297,7 +312,7 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment, 
           await db.prepare("UPDATE ai_requests SET status = 'failed' WHERE id = ?").bind(id).run();
         }, () => abort.abort(), lifetime);
       }
-      result = await collectAnswer(response, undefined, abort.signal);
+      result = await collectAnswer(response, undefined, upstreamSignal);
       await settle(result);
     } catch {
       // Unknown completion/usage stays fully charged to avoid overspending on retries.

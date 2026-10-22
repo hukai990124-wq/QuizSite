@@ -4,7 +4,7 @@
 
 四个编辑栏分别保存角色身份、知识范围、表达风格、回答规则。右侧实时预览最终系统提示词，点击「保存到项目」写入 `worker/prompts/sir-gavin.json`。重新载入可读取外部修改；未保存离开会提示，旧版本覆盖会被拒绝。
 
-`worker/chat.mts` 导入该配置，导出 `SIR_GAVIN_PROMPT` 与 `buildSirGavinMessages()`，与原 `CHAT_PROMPT` 和 `buildChatMessages()` 分开。修改配置后需重新构建及部署才会更新线上版本。当前尚未将骑士聊天窗口连接至 API，也不会因保存提示词而产生模型调用。
+`worker/chat.mts` 导入该配置，导出 `SIR_GAVIN_PROMPT` 与 `buildSirGavinMessages()`，与原 `CHAT_PROMPT` 和 `buildChatMessages()` 分开。修改配置后需重新构建及部署才会更新线上版本。骑士聊天窗口通过 `/api/gavin` 调用 NVIDIA，需在服务端配置密钥并启用开关；保存提示词本身不会产生模型调用。部署见 [GavinAI Cloudflare 部署](gavin-ai-cloudflare.md)。
 
 编辑工具位于 `quiz_kit/` 和 `scripts/`，不在公开静态目录 `site/` 内。只允许同源且持有当前进程令牌的请求保存到固定配置文件，不提供任意文件读写、模型请求或密钥输入功能。提示词不是密钥保险箱；未来启用聊天时，模型也不能保证绝不透露提示词。
 

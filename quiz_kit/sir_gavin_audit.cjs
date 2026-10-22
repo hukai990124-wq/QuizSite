@@ -44,7 +44,7 @@ async function main() {
     page.on('pageerror', error => errors.push(error.message));
     const requested = [];
     page.on('request', request => requested.push(request.url()));
-    await page.route('**/api/**', route => route.fulfill({ json: { configured: false, authenticated: false } }));
+    await page.route('**/api/**', route => route.fulfill({ json: { configured: false, authenticated: false, available: true, remaining: 5, dailyLimit: 5 } }));
     await page.goto(`http://127.0.0.1:${server.address().port}/knight/`);
     await page.waitForFunction(() => !document.getElementById('shake-hands').disabled, { timeout: 90000 });
     await page.locator('#shake-hands').click();
@@ -55,10 +55,24 @@ async function main() {
     await page.waitForTimeout(300);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     assert.equal(await page.locator('.chat-composer input:disabled').count(), 1);
+    await page.route('**/api/gavin/status', route => route.fulfill({ json: { configured: true, authenticated: false, available: true, remaining: 5, dailyLimit: 5 } }));
+    let chatPayload;
+    await page.route('**/api/gavin', route => {
+      chatPayload = route.request().postDataJSON();
+      return route.fulfill({ contentType: 'application/x-ndjson', body: JSON.stringify({type:'delta',text:'<img src=x onerror=alert(1)> A historical answer.'}) + '\n' + JSON.stringify({type:'done',truncated:false,configured:true,authenticated:false,available:true,remaining:4,dailyLimit:5}) + '\n' });
+    });
+    await page.locator('#gavin-retry').click();
+    await page.locator('#gavin-input:enabled').waitFor();
+    await page.locator('#gavin-input').fill('Explain the Hundred Years War.');
+    await page.locator('#gavin-send').click();
+    await page.waitForFunction(() => document.getElementById('gavin-log').textContent.includes('A historical answer.'));
+    assert.equal(chatPayload.question, 'Explain the Hundred Years War.');
+    assert.equal(chatPayload.provider, undefined);
+    assert.equal(await page.locator('#gavin-log img').count(), 0);
     assert.equal(requested.some(url => /draco|blakcdragon|dragon-roar/i.test(url)), false);
     assert.deepEqual(errors, []);
     await page.screenshot({ path: path.join(process.env.TEMP || '.', 'quizsite-sir-gavin-mobile.png'), fullPage: true });
-    console.log('PASS: lossless model, asset limits, browser rendering, handshake, reset, mobile layout, no Draco requests.');
+    console.log('PASS: lossless model, asset limits, rendering, handshake, mobile layout, GavinAI streaming, safe text rendering, no Draco requests.');
   } finally {
     await browser.close();
     server.close();

@@ -11,6 +11,7 @@
     {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/"}}
   </script>
   <script type="module" src="/assets/sir-gavin.mjs"></script>
+  <script type="module" src="/assets/gavin-chat.mjs"></script>
 </head>
 <body>
   <main>
@@ -27,9 +28,11 @@
       </div>
       <noscript>请启用 JavaScript 以显示 Sir.Gavin 的三维模型。</noscript>
       <section class="chat-panel" aria-labelledby="chat-title">
-        <h2 id="chat-title">Chat with Sir.Gavin</h2>
-        <div class="chat-window"><p>骑士已经到来，AI 聊天功能尚未接入。</p></div>
-        <div class="chat-composer"><input aria-label="发送给 Sir.Gavin 的消息" placeholder="聊天功能筹备中" disabled><button type="button" disabled>Send</button></div>
+        <h2 id="chat-title">GavinAI · Chat with Sir.Gavin</h2>
+        <div class="chat-window" id="gavin-log" role="log" aria-label="与 GavinAI 的对话" aria-live="polite"><p class="gavin-placeholder">向骑士导师提问欧洲历史。</p></div>
+        <form class="chat-composer" id="gavin-form"><input id="gavin-input" aria-label="发送给 Sir.Gavin 的消息" placeholder="向骑士导师提问…" maxlength="2000" required disabled><button id="gavin-send" type="submit" disabled>Send</button></form>
+        <p id="gavin-status" role="status">正在连接 GavinAI…</p>
+        <div><button id="gavin-retry" type="button">重新连接</button></div>
       </section>
     </section>
   </main>

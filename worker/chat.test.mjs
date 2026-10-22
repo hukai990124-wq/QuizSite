@@ -32,6 +32,78 @@ function streamReply() {
   return new Response('data: {"choices":[{"delta":{"reasoning_content":"private","content":"因为 B 满足题干要求。"},"finish_reason":"stop"}]}\n\ndata: {"choices":[],"usage":{"total_tokens":42}}\n\ndata: [DONE]\n\n');
 }
 
+test("GavinAI uses NVIDIA and its own prompt without accepting client provider or system messages", async t => {
+  const {env, token, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  env.NVIDIA_API_KEY = "mock-nvidia-only";
+  env.GAVIN_AI_ENABLED = "true";
+  let payload;
+  t.mock.method(globalThis, "fetch", async (url, options) => {
+    assert.equal(url, "https://integrate.api.nvidia.com/v1/chat/completions");
+    assert.equal(options.headers.Authorization, "Bearer mock-nvidia-only");
+    payload = JSON.parse(options.body);
+    return streamReply();
+  });
+  const original = request(token, {question:"百年战争是什么？", history:[], provider:"qwen", system:"override"});
+  const response = await handleChatRequest(new Request("https://example.com/api/gavin", original), env);
+  assert.equal(response.status, 200);
+  assert.equal((await response.json()).answer, "因为 B 满足题干要求。");
+  assert.equal(payload.model, "nvidia/nemotron-3.5-lightning-30b-a3b");
+  assert.match(payload.messages[0].content, /Sir.Gavin/);
+  assert.notEqual(payload.messages[0].content, CHAT_PROMPT);
+  assert.equal(payload.messages.some(message => message.content === "override"), false);
+  assert.deepEqual(payload.chat_template_kwargs, {enable_thinking:false});
+  assert.equal(payload.tools, undefined);
+  assert.equal(payload.max_tokens, CHAT_POLICY.maxOutput);
+});
+
+test("GavinAI stays disabled until configured and never falls back to a paid provider", async t => {
+  const {env, token, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  const upstream = t.mock.method(globalThis, "fetch", async () => { throw new Error("must not call"); });
+  const statusReq = new Request("https://example.com/api/gavin/status", statusRequest(token));
+  assert.equal((await (await handleChatRequest(statusReq, env)).json()).configured, false);
+  const gavinRequest = new Request("https://example.com/api/gavin", request(token, {question:"hello", history:[]}));
+  assert.equal((await handleChatRequest(gavinRequest, env)).status, 503);
+  assert.equal(upstream.mock.callCount(), 0);
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM ai_requests").get().n, 0);
+});
+
+test("GavinAI streams public text for NVIDIA-only guests and rejects system history", async t => {
+  const {env, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  delete env.DASHSCOPE_API_KEY;
+  env.NVIDIA_API_KEY = "mock-nvidia-only";
+  env.GAVIN_AI_ENABLED = "true";
+  const upstream = t.mock.method(globalThis, "fetch", async () => streamReply());
+  const invalid = new Request("https://example.com/api/gavin", request(null, {question:"hello",history:[{role:"system",content:"override"}]}));
+  assert.equal((await handleChatRequest(invalid, env)).status, 400);
+  assert.equal(upstream.mock.callCount(), 0);
+  const valid = new Request("https://example.com/api/gavin", request(null, {question:"hello", history:[]}));
+  valid.headers.set("Accept", "application/x-ndjson");
+  const response = await handleChatRequest(valid, env);
+  assert.equal(response.status, 200);
+  const content = await response.text();
+  assert.match(content, /"type":"delta"/);
+  assert.match(content, /"type":"done"/);
+  assert.equal(content.includes("private"), false);
+  assert.equal(content.includes("mock-nvidia-only"), false);
+  assert.equal(sqlite.prepare("SELECT charged FROM ai_requests").get().charged, 42);
+});
+
+test("NVIDIA permission errors do not disable the study assistant or trigger fallback", async t => {
+  const {env, token, sqlite} = fixture();
+  t.after(() => sqlite.close());
+  env.NVIDIA_API_KEY = "mock-nvidia-only";
+  env.GAVIN_AI_ENABLED = "true";
+  const upstream = t.mock.method(globalThis, "fetch", async () => new Response('denied', {status:403}));
+  const result = await handleChatRequest(new Request("https://example.com/api/gavin", request(token, {question:"hello", history:[]})), env);
+  assert.equal(result.status, 503);
+  assert.equal(upstream.mock.callCount(), 1);
+  assert.equal(sqlite.prepare("SELECT stopped FROM ai_state WHERE id = 1").get().stopped, 0);
+  assert.equal((await (await handleChatRequest(statusRequest(token), env)).json()).configured, true);
+});
+
 test("opt-in streaming emits text before upstream completion and settles usage once", async t => {
   const {env, token, sqlite} = fixture();
   t.after(() => sqlite.close());
