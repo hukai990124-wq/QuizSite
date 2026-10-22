@@ -16,7 +16,12 @@
 </head>
 <body>
   <main class="gavin-interface">
-    <nav><a href="/">← 返回题库首页</a><a href="https://github.com/hukai990124-wq" target="_blank" rel="noopener noreferrer">联系作者</a></nav>
+    <nav><a href="/">← 返回题库首页</a><button id="contact-author" type="button" aria-haspopup="dialog" aria-controls="contact-author-dialog">联系作者</button></nav>
+    <dialog id="contact-author-dialog" aria-labelledby="contact-author-title">
+      <div class="contact-heading"><h2 id="contact-author-title">联系作者</h2><button id="contact-author-close" type="button" aria-label="关闭联系作者窗口">×</button></div>
+      <p>通过 GitHub 联系作者：</p>
+      <a href="https://github.com/hukai990124-wq" target="_blank" rel="noopener noreferrer">github.com/hukai990124-wq</a>
+    </dialog>
     <div class="gavin-languages i18n-noloc" role="group" aria-label="Language / 语言 / 言語">
       <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
       <button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
@@ -34,7 +39,7 @@
       </div>
       <noscript>请启用 JavaScript 以显示 Sir.Gavin 的三维模型。</noscript>
       <section class="chat-panel" aria-labelledby="chat-title">
-        <h2 id="chat-title"><span class="gavin-name i18n-noloc">Sir.Gavin</span> · <span>骑士导师对话</span></h2>
+        <h2 id="chat-title"><span class="i18n-noloc">Sir.Gavin</span> · <span>骑士导师对话</span></h2>
         <div class="chat-window" id="gavin-log" role="log" aria-label="与 GavinAI 的对话" aria-live="polite"><p class="gavin-placeholder">向骑士导师提问欧洲历史。</p></div>
         <form class="chat-composer" id="gavin-form"><input id="gavin-input" aria-label="发送给 Sir.Gavin 的消息" placeholder="向骑士导师提问…" maxlength="2000" required disabled><button id="gavin-send" type="submit" disabled>发送问题</button></form>
         <p id="gavin-status" role="status">正在连接 GavinAI…</p>

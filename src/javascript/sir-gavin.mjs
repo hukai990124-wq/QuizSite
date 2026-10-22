@@ -3,6 +3,13 @@ const message = document.getElementById('pet-message');
 const handshakeButton = document.getElementById('shake-hands');
 const resetButton = document.getElementById('reset-view');
 const voice = document.getElementById('sir-gavin-handshake-voice');
+const contactDialog = document.getElementById('contact-author-dialog');
+document.getElementById('contact-author').addEventListener('click', () => contactDialog.showModal());
+document.getElementById('contact-author-close').addEventListener('click', () => contactDialog.close());
+contactDialog.addEventListener('click', event => {
+  const bounds = contactDialog.getBoundingClientRect();
+  if (event.target === contactDialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) contactDialog.close();
+});
 
 async function initialize() {
   const THREE = await import('three');

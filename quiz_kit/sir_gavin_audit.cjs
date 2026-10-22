@@ -47,6 +47,15 @@ async function main() {
     page.on('request', request => requested.push(request.url()));
     await page.route('**/api/**', route => route.fulfill({ json: { configured: false, authenticated: false, available: true, remaining: 5, dailyLimit: 5 } }));
     await page.goto(`http://127.0.0.1:${server.address().port}/knight/`);
+    await page.locator('#contact-author').click();
+    assert.equal(await page.locator('#contact-author-dialog').evaluate(element => element.open), true);
+    assert.equal(await page.locator('#contact-author-dialog a').getAttribute('href'), 'https://github.com/hukai990124-wq');
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('#contact-author-dialog').evaluate(element => element.open), false);
+    await page.locator('#contact-author').click();
+    await page.locator('#contact-author-close').click();
+    assert.equal(await page.locator('#contact-author-dialog').evaluate(element => element.open), false);
+    assert.doesNotMatch(await page.locator('#chat-title').evaluate(element => getComputedStyle(element.firstElementChild).fontFamily), /UnifrakturCook/);
     await page.waitForFunction(() => !document.getElementById('shake-hands').disabled, { timeout: 90000 });
     await page.locator('#shake-hands').click();
     await page.waitForFunction(() => document.getElementById('pet-message').textContent.includes('握'));

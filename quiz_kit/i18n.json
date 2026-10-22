@@ -1,4 +1,6 @@
 {
+ "通过 GitHub 联系作者：": {"en":"Contact the author on GitHub:","ja":"GitHub で作者に連絡："},
+ "关闭联系作者窗口": {"en":"Close author contact window","ja":"作者への連絡ウィンドウを閉じる"},
  "GavinAI 无法调用：请管理员检查 NVIDIA 密钥或模型权限。": {"en":"GavinAI is unavailable: an administrator must check the NVIDIA key or model permissions.","ja":"GavinAI を呼び出せません。管理者に NVIDIA キーとモデルの権限の確認を依頼してください。"},
  "所选 AI 模型尚未配置完成。": {"en":"The selected AI model has not been configured yet.","ja":"選択した AI モデルはまだ設定されていません。"},
  "← 返回题库首页": {"en":"← Back to question banks","ja":"← 問題集ホームへ"},
