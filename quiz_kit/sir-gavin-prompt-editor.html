@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="editor-token" content="__EDITOR_TOKEN__">
+  <title>GavinAI · Sir.Gavin 提示词工作台</title>
+  <style>
+    :root{color-scheme:dark;font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:#0a111b;color:#e8eef6}*{box-sizing:border-box}body{margin:0;padding:32px}main{max-width:1280px;margin:auto}header{border-bottom:1px solid #344154;padding-bottom:24px;margin-bottom:24px}.eyebrow{color:#e4be75;font-size:13px;letter-spacing:.12em}h1{font-size:30px;margin:10px 0}p{color:#b4c0d0;line-height:1.6}.layout{display:grid;grid-template-columns:1fr 1fr;gap:24px}section{border:1px solid #344154;border-radius:12px;background:#111d2c;padding:24px}h2{margin:0 0 20px;font-size:18px}label{display:block;font-weight:600;margin-bottom:8px}textarea{width:100%;min-height:135px;resize:vertical;border:1px solid #53647c;border-radius:6px;background:#0a1421;color:#edf3fa;padding:12px;font:inherit;line-height:1.7;margin-bottom:20px}textarea:focus-visible,button:focus-visible{outline:3px solid #e4be75;outline-offset:3px}#preview{min-height:700px;font-size:14px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}button{min-height:44px;border:1px solid #e4be75;border-radius:6px;padding:8px 18px;background:#e4be75;color:#17202b;font:inherit;cursor:pointer}button.secondary{background:transparent;color:#e4be75}button:disabled{opacity:.5;cursor:wait}#status{min-height:26px;color:#a7e8ca}.note{font-size:13px}footer{margin-top:20px;color:#9aaec4;font-size:13px}@media(max-width:800px){body{padding:18px}.layout{grid-template-columns:1fr}section{padding:18px}#preview{min-height:420px}}
+  </style>
+  <script src="/editor.js" defer></script>
+</head>
+<body><main>
+  <header><span class="eyebrow">LOCAL WORKSPACE / GAVIN AI</span><h1>GavinAI · 骑士导师提示词工作台</h1><p>分别写好他是谁、懂什么、如何说话，以及必须遵守的回答规则。</p><p class="note">当前编辑：GavinAI（Sir.Gavin，骑士导师） · 学习助手 AI（题库答疑）使用独立提示词，不在此处编辑。</p><p class="note">仅本机管理 · 保存到服务端配置文件 · 不会自动部署或调用模型</p></header>
+  <div class="layout">
+    <section aria-labelledby="edit-title"><h2 id="edit-title">编辑提示词</h2>
+      <form id="prompt-form">
+        <label for="identity">01 · 角色身份</label><textarea id="identity" name="identity" maxlength="12000" required disabled></textarea>
+        <label for="scope">02 · 知识范围</label><textarea id="scope" name="scope" maxlength="12000" required disabled></textarea>
+        <label for="style">03 · 表达风格</label><textarea id="style" name="style" maxlength="12000" required disabled></textarea>
+        <label for="rules">04 · 回答规则</label><textarea id="rules" name="rules" maxlength="12000" required disabled></textarea>
+        <div class="actions"><button id="save" type="submit" disabled>保存到项目</button><button id="reload" type="button" class="secondary">重新载入</button></div>
+      </form><p id="status" role="status">正在读取本地配置…</p>
+    </section>
+    <section aria-labelledby="preview-title"><h2 id="preview-title">最终系统提示词</h2><p class="note">预览随输入更新。保存后供 worker/chat.mts 使用；不会影响题库助手。</p><textarea id="preview" aria-label="最终系统提示词预览" readonly></textarea><p class="note">AI 尚未接入。这里预览的是提示词文本，不是模型回复。</p></section>
+  </div><footer>配置位置：worker/prompts/sir-gavin.json。不要在提示词中填写 API 密钥或账号凭据。</footer>
+</main></body>
+</html>

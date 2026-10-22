@@ -1,5 +1,16 @@
 import { findSession, validateMutationRequest } from "./account.mjs";
 import { streamChatAnswer } from "./chat-stream.mjs";
+import sirGavinConfig from "./prompts/sir-gavin.json" with { type: "json" };
+import { buildPrompt } from "./sir-gavin-prompt.mjs";
+// GavinAI（骑士导师）：独立人设配置，本地编辑窗口保存到 worker/prompts/sir-gavin.json。
+// 此处仅构建提示词和消息，尚未接入骑士页面的聊天 API。
+export const SIR_GAVIN_PROMPT = buildPrompt(sirGavinConfig);
+export function buildSirGavinMessages(question, history = []) {
+    const body = parseChatRequestBody({ question, context: "", history });
+    return [{ role: "system", content: SIR_GAVIN_PROMPT }, ...body.history, { role: "user", content: body.question }];
+}
+// 学习助手 AI（题库答疑）：现有 /api/chat 使用以下模型、额度策略和 CHAT_PROMPT。
+// 与 GavinAI 的人设配置独立；修改下方提示词不会修改骑士导师。
 export const CHAT_POLICY = Object.freeze({ guestDaily: 5, userDaily: 50, globalDaily: 1000, tokenBudget: 800000, maxOutput: 1024 });
 export const CLOUDFLARE_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast";
 export const CHAT_PROMPT = `你是 QuizSite 的学习助手，回答学习和技术问题，包括题库讲解、语言学习、数学与科学、课程知识、考试准备、编程、软件、硬件和工程技术。不要求用户包含考试名称或题库关键词，根据真实意图和对话上下文判断。
@@ -48,6 +59,7 @@ function parseChatRequestBody(value) {
     });
     return { question: value.question, context: value.context, history, provider: parseProvider(value.provider) };
 }
+// 学习助手 AI：组装题目上下文与对话；GavinAI 使用上方 buildSirGavinMessages()。
 export function buildChatMessages(value) {
     const body = parseChatRequestBody(value);
     const history = body.history;

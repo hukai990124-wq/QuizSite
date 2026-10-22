@@ -6,6 +6,7 @@
     "node": ">=22.13"
   },
   "scripts": {
+    "edit:sir-gavin": "node scripts/sir-gavin-prompt-editor.mjs",
     "dev:types": "tsc -p tsconfig.site.json --watch --noEmitOnError",
     "typecheck": "tsc --noEmit",
     "build": "node question-banks/aws-saa/build_original.mjs && node scripts/build-frontend.mjs && tsc -p tsconfig.site.json --noEmitOnError && tsc -p tsconfig.worker.json --noEmitOnError",
