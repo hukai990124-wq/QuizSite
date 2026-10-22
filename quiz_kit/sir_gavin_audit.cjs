@@ -40,6 +40,7 @@ async function main() {
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
   try {
     const page = await browser.newPage();
+    await page.addInitScript(() => { if (!localStorage.getItem('ui:lang')) localStorage.setItem('ui:lang', 'zh'); });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     const requested = [];
@@ -69,6 +70,36 @@ async function main() {
     assert.equal(chatPayload.question, 'Explain the Hundred Years War.');
     assert.equal(chatPayload.provider, undefined);
     assert.equal(await page.locator('#gavin-log img').count(), 0);
+    const originalConversation = await page.locator('#gavin-log .i18n-noloc').allTextContents();
+    for (const [language, resetLabel, placeholder] of [
+      ['en', 'Reset view', 'Ask your knight mentor…'],
+      ['ja', '視点をリセット', '騎士の先生に質問…'],
+      ['zh', '重置视角', '向骑士导师提问…'],
+    ]) {
+      await page.locator(`[data-set-lang="${language}"]`).click();
+      await page.waitForFunction(expected => document.getElementById('reset-view').textContent === expected, resetLabel);
+      assert.equal(await page.locator('#gavin-input').getAttribute('placeholder'), placeholder);
+      assert.equal(await page.locator(`[data-set-lang="${language}"]`).getAttribute('aria-pressed'), 'true');
+      assert.deepEqual(await page.locator('#gavin-log .i18n-noloc').allTextContents(), originalConversation);
+      assert.match(await page.locator('#gavin-status').textContent(), language === 'en' ? /GavinAI ready/ : language === 'ja' ? /GavinAI 準備完了/ : /GavinAI 已就绪/);
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    }
+    await page.locator('[data-set-lang="ja"]').click();
+    await page.reload();
+    await page.waitForFunction(() => document.documentElement.getAttribute('data-lang') === 'ja');
+    assert.equal(await page.locator('#reset-view').textContent(), '視点をリセット');
+    assert.match(await page.locator('#pet-title').evaluate(element => getComputedStyle(element).fontFamily), /UnifrakturCook/);
+    await page.waitForFunction(() => !document.getElementById('shake-hands').disabled, { timeout: 90000 });
+    await page.locator('#shake-hands').click();
+    await page.waitForFunction(() => /握手しました|音声を再生できません/.test(document.getElementById('pet-message').textContent));
+    await page.locator('[data-set-lang="zh"]').click();
+    await page.setViewportSize({ width: 1440, height: 1100 });
+    await page.locator('#reset-view').click();
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(500);
+    await page.screenshot({ path: path.join(process.env.TEMP || '.', 'quizsite-sir-gavin-desktop.png'), fullPage: true });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForTimeout(300);
     assert.equal(requested.some(url => /draco|blakcdragon|dragon-roar/i.test(url)), false);
     assert.deepEqual(errors, []);
     await page.screenshot({ path: path.join(process.env.TEMP || '.', 'quizsite-sir-gavin-mobile.png'), fullPage: true });

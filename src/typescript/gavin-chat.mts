@@ -41,8 +41,9 @@ function append(role: string, content: string): HTMLSpanElement {
   log.querySelector('.gavin-placeholder')?.remove();
   const message = document.createElement('p');
   const label = document.createElement('strong');
-  label.textContent = role + '：';
+  label.textContent = role === '你' ? '你：' : role + '：';
   const text = document.createElement('span');
+  text.className = 'i18n-noloc';
   text.textContent = content;
   message.append(label, text);
   log.appendChild(message);
@@ -76,13 +77,20 @@ form.addEventListener('submit', async event => {
       ? await readChatStream(response, text => { answer += text; reply.textContent = answer; log.scrollTop = log.scrollHeight; })
       : parseChatAnswer(await response.json());
     reply.textContent = result.answer;
-    if (result.truncated) reply.append('（已达到本次长度上限，可继续追问。）');
+    if (result.truncated) {
+      const note = document.createElement('small');
+      note.textContent = '（已达到本次长度上限，可继续追问。）';
+      reply.parentElement?.appendChild(note);
+    }
     history.push({ role: 'user', content: question }, { role: 'assistant', content: result.answer.slice(0, 2000) });
     history = history.slice(-6);
     input.value = '';
     await checkStatus();
   } catch (error) {
-    reply.textContent = answer ? answer + '（回答中断，内容可能不完整。）' : '本次回答未完成。';
+    reply.textContent = answer;
+    const note = document.createElement('small');
+    note.textContent = answer ? '（回答中断，内容可能不完整。）' : '本次回答未完成。';
+    reply.parentElement?.appendChild(note);
     const failure = error instanceof Error ? error.message : '连接中断，请稍后重试。';
     await checkStatus();
     status.textContent = failure;

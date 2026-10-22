@@ -26,7 +26,7 @@
      aud = 听力播放器外壳（.aud > .alab 标签 + <audio>）；它常被放在题目区（BLACK）
      内部，但里面只有播放器的说明文字，没有题目内容，所以单独放行。 */
   var WHITE = {};
-  ("hero idx-hd idx-main toolbar tbin btns qbar qact sheet mask report howto author-dialog mentor-section " +
+  ("hero idx-hd idx-main toolbar tbin btns qbar qact sheet mask report howto author-dialog mentor-section gavin-interface " +
    "reset-dialog verdict scroll-hint notice card cards tags tg pg no sd meta badge sub ov-hd " +
    "ov-bar need lang-foot aud qb-question-chat").split(" ").forEach(function (c) { WHITE[c] = 1; });
 
@@ -69,6 +69,7 @@
 
   /* 动态文案（数字会变，字典无法穷举的）—— 按顺序替换 */
   var RULES = [
+    [/^GavinAI 已就绪 · 今日 AI 剩余 (\d+) \/ (\d+) 次（与学习助手共用额度）。$/, "GavinAI ready · $1 / $2 AI requests left today (shared with the study assistant).", "GavinAI 準備完了・本日の AI 残り $1 / $2 回（学習アシスタントと共通）。"],
     [/^这是 IPA (\d+) 年度公开的 (\d+) 道科目 ([AB]) 实考题，仅为部分试题；实际考试为 (\d+) 题。本卷不是完整考试卷。$/, "These are $2 actual Subject $3 questions published by IPA in $1, only a subset of the $4-question exam. This is not a complete exam paper.", "IPAが$1年度に公開した科目$3の本試験問題$2問です。本試験（$4問）の一部であり、完全な試験セットではありません。"],
     [/^第 (\d+) 题 · 第 (\d+) 套 科目 ([AB])$/, "Q$1 · Set $2 · Subject $3", "第$1問・第$2セット・科目$3"],
     [/^第 (\d+) 题 · (\d+) 年度 科目 ([AB])$/, "Q$1 · $2 · Subject $3", "第$1問・$2年度・科目$3"],

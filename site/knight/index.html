@@ -6,6 +6,7 @@
   <title>Sir.Gavin · 你的骑士导师</title>
   <link rel="stylesheet" href="/assets/quizsite-theme.css">
   <link rel="stylesheet" href="/assets/sir-gavin.css">
+  <link id="qb-sigil-footer-font" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap">
   <script src="/assets/quizsite-theme.js" id="quizsite-theme-js" defer></script>
   <script type="importmap">
     {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/"}}
@@ -14,27 +15,34 @@
   <script type="module" src="/assets/gavin-chat.mjs"></script>
 </head>
 <body>
-  <main>
-    <nav><a href="/">← 返回题库首页</a><a href="https://github.com/hukai990124-wq" target="_blank" rel="noopener noreferrer">Contact Author</a></nav>
+  <main class="gavin-interface">
+    <nav><a href="/">← 返回题库首页</a><a href="https://github.com/hukai990124-wq" target="_blank" rel="noopener noreferrer">联系作者</a></nav>
+    <div class="gavin-languages i18n-noloc" role="group" aria-label="Language / 语言 / 言語">
+      <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+      <button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+    </div>
     <section class="page-section" aria-labelledby="pet-title">
-      <div class="pet-heading"><div><p class="pet-kicker">YOUR KNIGHT MENTOR</p><h1 id="pet-title">Sir.Gavin</h1></div><p>你的骑士导师 · 欧洲历史</p></div>
+      <div class="pet-heading"><div><p class="pet-kicker">你的骑士导师</p><h1 id="pet-title" class="gavin-name i18n-noloc">Sir.Gavin</h1></div><p>你的骑士导师 · 欧洲历史</p></div>
       <div id="pet" aria-label="Sir.Gavin 互动三维模型"></div>
       <p class="interaction-hint">拖动旋转 · 右键拖动平移 · 滚轮缩放</p>
       <div class="pet-footer">
         <audio id="sir-gavin-handshake-voice" src="./media/sir-gavin-handshake.wav" preload="none"></audio>
-        <button id="shake-hands" type="button" disabled>Shake hands</button>
+        <button id="shake-hands" type="button" disabled>握手</button>
         <button id="reset-view" type="button" disabled>重置视角</button>
         <p id="pet-message" role="status">正在加载 Sir.Gavin…</p>
       </div>
       <noscript>请启用 JavaScript 以显示 Sir.Gavin 的三维模型。</noscript>
       <section class="chat-panel" aria-labelledby="chat-title">
-        <h2 id="chat-title">GavinAI · Chat with Sir.Gavin</h2>
+        <h2 id="chat-title"><span class="gavin-name i18n-noloc">Sir.Gavin</span> · <span>骑士导师对话</span></h2>
         <div class="chat-window" id="gavin-log" role="log" aria-label="与 GavinAI 的对话" aria-live="polite"><p class="gavin-placeholder">向骑士导师提问欧洲历史。</p></div>
-        <form class="chat-composer" id="gavin-form"><input id="gavin-input" aria-label="发送给 Sir.Gavin 的消息" placeholder="向骑士导师提问…" maxlength="2000" required disabled><button id="gavin-send" type="submit" disabled>Send</button></form>
+        <form class="chat-composer" id="gavin-form"><input id="gavin-input" aria-label="发送给 Sir.Gavin 的消息" placeholder="向骑士导师提问…" maxlength="2000" required disabled><button id="gavin-send" type="submit" disabled>发送问题</button></form>
         <p id="gavin-status" role="status">正在连接 GavinAI…</p>
         <div><button id="gavin-retry" type="button">重新连接</button></div>
       </section>
     </section>
   </main>
+  <script src="/assets/i18n.js"></script>
+  <script>window.__I18N__.boot();</script>
 </body>
 </html>

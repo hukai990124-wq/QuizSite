@@ -10,7 +10,7 @@ async function initialize() {
   const { OrbitControls } = await import('three/addons/controls/OrbitControls.js');
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-  camera.position.set(0, 0.72, 2.9);
+  camera.position.set(0, 0.72, 2);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
