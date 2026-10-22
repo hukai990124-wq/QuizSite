@@ -5,9 +5,21 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validatePrompt, buildPrompt } from '../worker/sir-gavin-prompt.mjs';
 import { createPromptEditor } from '../scripts/sir-gavin-prompt-editor.mjs';
-import { buildSirGavinMessages, buildChatMessages, CHAT_PROMPT } from '../worker/chat.mjs';
+import { buildSirGavinMessages, buildChatMessages, CHAT_PROMPT, SIR_GAVIN_PROMPT } from '../worker/chat.mjs';
 
 const draft = { identity: '你是 Sir.Gavin。', scope: '欧洲历史', style: '简洁有礼', rules: '不编造史实' };
+
+test('Gavin follows the current question language despite Chinese history and defaults to brief academic answers', () => {
+  for (const question of ['What caused the Hundred Years War?', '百年戦争の原因は何か？', '百年战争为何发生？']) {
+    const messages = buildSirGavinMessages(question, [{role:'assistant',content:'阁下，容我用中文详细解释……'}]);
+    assert.equal(messages.at(-1).content, question);
+    assert.match(messages[0].content, /当前这条提问/);
+    assert.match(messages[0].content, /2–4 句/);
+    assert.match(messages[0].content, /学术问题也遵守/);
+  }
+  assert.doesNotMatch(SIR_GAVIN_PROMPT, /使用优雅、略带古风而清楚易懂的中文|始终称呼用户为/);
+  assert.match(SIR_GAVIN_PROMPT, /中文提示词/);
+});
 
 test('chat.mts separates the knight prompt from the existing quiz assistant', () => {
   const knight = buildSirGavinMessages('百年战争发生在什么时候？', [{ role: 'user', content: '用中文回答' }]);

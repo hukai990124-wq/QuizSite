@@ -15,7 +15,7 @@
 - `worker/chat.mts` 中 GavinAI 支持 `cloudflare` 和 `nvidia` 两个供应商，独立接口为 `POST /api/gavin`、`GET /api/gavin/status?provider=cloudflare`。不传 provider 时默认 Cloudflare；学习助手仍使用 `/api/chat`。
 - 使用 Worker 原生 fetch，不需要安装 OpenAI SDK 或单独搭建 Node/Python 服务器。
 - 保留示例的 `temperature: 1`、`top_p: 0.95`、`enable_thinking: false` 和流式输出；只返回正文，不返回思考内容。移除哈利波特和颜色工具。
-- 输出上限沿用项目的 1024 tokens，90 秒超时。GavinAI 与学习助手共用已有 D1 次数、总预算、并发预留保护；对话历史在各自页面内独立保存。NVIDIA 权限错误不关闭学习助手，也不回退到其他付费服务。
+- GavinAI 输出上限为 512 tokens，默认提示词要求 2–4 句短答，学术问题也适用；优先遵从本轮明确的语言要求，否则跟随当前提问语言，而非界面或历史回答语言。学习助手仍为 1024 tokens。90 秒超时。GavinAI 与学习助手共用已有 D1 次数、总预算、并发预留保护；对话历史在各自页面内独立保存。NVIDIA 权限错误不关闭学习助手，也不回退到其他付费服务。
 - NVIDIA 选项默认未启用，必须同时设置 `NVIDIA_API_KEY` 和 `GAVIN_AI_ENABLED=true`。尚未使用真实 Key 联调；Workers AI 选项只依赖 AI 绑定。
 
 ## 在 Cloudflare 控制台配置

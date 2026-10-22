@@ -54,7 +54,7 @@ test("GavinAI uses the selected NVIDIA provider with its own server-owned model 
   assert.equal(payload.messages.some(message => message.content === "override"), false);
   assert.deepEqual(payload.chat_template_kwargs, {enable_thinking:false});
   assert.equal(payload.tools, undefined);
-  assert.equal(payload.max_tokens, CHAT_POLICY.maxOutput);
+  assert.equal(payload.max_tokens, 512);
 });
 
 test("GavinAI stays disabled until configured and never falls back to a paid provider", async t => {
@@ -115,6 +115,7 @@ test("GavinAI defaults to Workers AI Llama with the knight prompt and no NVIDIA 
     assert.match(input.messages[0].content, /阁下/);
     assert.notEqual(input.messages[0].content, CHAT_PROMPT);
     assert.equal(input.stream, true);
+    assert.equal(input.max_tokens, 512);
     return streamReply();
   } };
   const upstream = t.mock.method(globalThis, "fetch", () => { throw new Error("no external provider"); });
