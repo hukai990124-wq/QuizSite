@@ -4,6 +4,7 @@
   if (!document.body) return;
   // Transitional documents replace their DOM; initialize account/chat only in the final document.
   if (document.documentElement.hasAttribute("data-defer-shared-shell")) return;
+  void import("./color-mode.mjs").then(module => module.mountColorMode());
   if (!document.getElementById("qb-sigil-footer-module")) {
     var sigilFooterScript = document.createElement("script");
     sigilFooterScript.id = "qb-sigil-footer-module";
