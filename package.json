@@ -9,7 +9,7 @@
     "edit:sir-gavin": "node scripts/sir-gavin-prompt-editor.mjs",
     "dev:types": "tsc -p tsconfig.site.json --watch --noEmitOnError",
     "typecheck": "tsc --noEmit",
-    "build": "node question-banks/aws-saa/build_original.mjs && node scripts/build-frontend.mjs && tsc -p tsconfig.site.json --noEmitOnError && tsc -p tsconfig.worker.json --noEmitOnError",
+    "build": "node question-banks/aws-saa/build_original.mjs && node question-banks/aws-saa/build_reference.mjs && node scripts/build-frontend.mjs && tsc -p tsconfig.site.json --noEmitOnError && tsc -p tsconfig.worker.json --noEmitOnError",
     "test": "pnpm run build && node --test worker/*.test.mjs tests/*.test.mjs site/assets/back-to-top.test.mjs"
   },
   "devDependencies": {

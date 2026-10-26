@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS SAA-C03 服务与术语集 · QuizSite</title>
+<meta name="description" content="按用途理解 AWS SAA-C03 的 118 项服务与 97 个核心术语，包含功能说明、概念辨析和官方资料。">
+<link rel="stylesheet" href="/assets/quizsite-theme.css" id="quizsite-theme-css">
+<link rel="stylesheet" href="/assets/saa-reference.css">
+<script src="/assets/quizsite-theme.js" id="quizsite-theme-js" defer></script>
+<script type="module" src="/assets/saa-reference.mjs"></script>
+</head>
+<body class="saa-reference">
+<a class="ref-skip" href="#reference-content">跳到服务与术语</a>
+<main class="ref-wrap i18n-noloc">
+  <a class="ref-back" href="index.html">← SAA 备考目录</a>
+  <header class="ref-hero">
+    <p class="ref-eyebrow">AWS SAA-C03 / REFERENCE</p>
+    <h1>服务与术语集</h1>
+    <p class="ref-lead">先理解它有什么用，再理解它怎样组成架构。</p>
+    <p class="ref-summary">118 项服务 · 97 个术语 · 12 个主题 · 中文说明，保留英文名称与缩写</p>
+    <p class="ref-scope">服务范围按 <a href="https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/saa-03-in-scope-services.html" target="_blank" rel="noopener noreferrer">AWS 官方 SAA-C03 考纲</a>核对（2026-10-26），另补充核心架构术语。官方清单并不穷尽所有考点，服务名称和可用性也会变化；每条附官方资料供继续查阅。</p>
+  </header>
+  <form class="ref-filter" id="reference-filter" role="search" hidden>
+    <div class="ref-search-field"><label for="reference-search">搜索服务或术语</label><input type="search" id="reference-search" placeholder="例如：S3、私有子网、灾难恢复" autocomplete="off" aria-controls="reference-content"></div>
+    <div class="ref-kind-field"><label for="reference-kind">内容类型</label><select id="reference-kind"><option value="all">全部内容</option><option value="service">只看服务</option><option value="term">只看术语</option></select></div>
+    <button class="ref-clear" type="reset">清空筛选</button>
+    <p class="ref-result" id="reference-result" role="status" aria-live="polite">显示 215 / 215 条</p>
+  </form>
+  <noscript><p class="ref-notice">全部内容已列在下方；启用 JavaScript 后可使用搜索与筛选。</p></noscript>
+  <div class="ref-layout">
+    <nav class="ref-nav" aria-label="按主题浏览">
+      <h2>按主题浏览</h2>
+      <button type="button" class="ref-all" data-category="all" aria-pressed="true" hidden>全部主题 <span>215</span></button>
+      <a href="#group-foundation" data-category="foundation">架构基础与灾难恢复 <span>15</span></a>
+      <a href="#group-compute" data-category="compute">计算、容器与应用入口 <span>23</span></a>
+      <a href="#group-storage" data-category="storage">存储与数据保护 <span>23</span></a>
+      <a href="#group-database" data-category="database">数据库与缓存 <span>19</span></a>
+      <a href="#group-network" data-category="network">网络、连接与内容分发 <span>25</span></a>
+      <a href="#group-security" data-category="security">身份、安全与合规 <span>30</span></a>
+      <a href="#group-integration" data-category="integration">消息、事件与工作流 <span>12</span></a>
+      <a href="#group-analytics" data-category="analytics">分析、流处理与数据湖 <span>16</span></a>
+      <a href="#group-operations" data-category="operations">监控、运维与多账户治理 <span>22</span></a>
+      <a href="#group-cost" data-category="cost">成本、购买方式与容量 <span>11</span></a>
+      <a href="#group-migration" data-category="migration">迁移、传输与混合架构 <span>9</span></a>
+      <a href="#group-ai-media" data-category="ai-media">AI 能力与媒体 <span>10</span></a>
+    </nav>
+    <div id="reference-content" tabindex="-1">
+      <p class="ref-empty" id="reference-empty" hidden>没有找到匹配条目。试试英文缩写、中文用途，或清空筛选。</p>
+      <section class="ref-group" id="group-foundation" data-group="foundation" aria-labelledby="heading-foundation">
+        <header class="ref-group-heading"><p class="ref-section-number">01</p><div><h2 id="heading-foundation">架构基础与灾难恢复</h2><p>先理解系统要达到的目标，再选择实现目标的服务。</p></div></header>
+        <article class="ref-entry" id="region" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#region">Region / Availability Zone</a></h3><p class="ref-alias">区域 / 可用区 / AZ</p></div>
+  <dl><div><dt>有什么用</dt><dd>用不同级别的故障隔离位置部署系统。</dd></div><div><dt>实现什么</dt><dd>区域由多个可用区组成；跨 AZ 设计应对机房级故障，跨区域设计可用于区域灾难恢复。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>子网属于单个 AZ；多 AZ 不等于多区域。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Region / Availability Zone（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="edge-location" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#edge-location">Edge Location</a></h3><p class="ref-alias">边缘站点</p></div>
+  <dl><div><dt>有什么用</dt><dd>把内容或网络入口放到更靠近用户的位置。</dd></div><div><dt>实现什么</dt><dd>CloudFront 用边缘缓存降低访问延迟；Global Accelerator 使用边缘网络入口优化传输路径。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>边缘站点不是让你任意部署 EC2 的可用区。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/cloudfront/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Edge Location（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="shared-responsibility" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#shared-responsibility">Shared Responsibility Model</a></h3><p class="ref-alias">责任共担模型</p></div>
+  <dl><div><dt>有什么用</dt><dd>明确 AWS 和客户各自负责的安全工作。</dd></div><div><dt>实现什么</dt><dd>AWS 负责云基础设施安全；客户负责数据、身份权限以及所选服务中需要自己管理的配置。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>使用托管服务仍需配置权限、加密和数据保护；责任随服务类型变化。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/compliance/shared-responsibility-model/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Shared Responsibility Model（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="well-architected" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#well-architected">Well-Architected Framework</a></h3><p class="ref-alias">良好架构六大支柱</p></div>
+  <dl><div><dt>有什么用</dt><dd>从多个目标检查架构是否合理。</dd></div><div><dt>实现什么</dt><dd>覆盖卓越运营、安全性、可靠性、性能效率、成本优化、可持续性。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>成本最低不一定满足可靠性；应根据业务目标权衡。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Well-Architected Framework（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ha" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#ha">High Availability / Fault Tolerance</a></h3><p class="ref-alias">高可用 / 容错</p></div>
+  <dl><div><dt>有什么用</dt><dd>在组件发生故障时继续提供服务。</dd></div><div><dt>实现什么</dt><dd>高可用通过冗余、检测和切换减少中断；容错强调故障发生后仍持续运行。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>增加单机规格不能消除单点故障。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：High Availability / Fault Tolerance（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="scalability" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#scalability">Scalability / Elasticity</a></h3><p class="ref-alias">可扩展性 / 弹性</p></div>
+  <dl><div><dt>有什么用</dt><dd>让系统容量匹配工作负载。</dd></div><div><dt>实现什么</dt><dd>扩展性表示能增加处理能力；弹性表示随需求增减容量；横向增加实例，纵向改变单机规格。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>扩容不自动解决有状态会话、数据库热点或单点故障。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/wellarchitected/latest/performance-efficiency-pillar/welcome.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Scalability / Elasticity（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="rto" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#rto">RTO</a></h3><p class="ref-alias">Recovery Time Objective · 恢复时间目标</p></div>
+  <dl><div><dt>有什么用</dt><dd>规定业务最多可以中断多久。</dd></div><div><dt>实现什么</dt><dd>指导选择恢复流程、预置容量和自动切换方案；例如 RTO 30 分钟要求在目标时间内恢复业务。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>RTO 衡量恢复时间；RPO 衡量可接受的数据丢失。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：RTO（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="rpo" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#rpo">RPO</a></h3><p class="ref-alias">Recovery Point Objective · 恢复点目标</p></div>
+  <dl><div><dt>有什么用</dt><dd>规定最多可以丢失多长时间范围的数据。</dd></div><div><dt>实现什么</dt><dd>指导备份间隔和数据复制方式；例如 RPO 15 分钟要求恢复点与事故时间的差距满足目标。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>每小时备份通常不能保证 15 分钟 RPO；还需考虑备份成功率和复制延迟。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：RPO（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="backup-restore" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#backup-restore">Backup and Restore</a></h3><p class="ref-alias">备份与恢复</p></div>
+  <dl><div><dt>有什么用</dt><dd>以较低日常成本保留可恢复的数据。</dd></div><div><dt>实现什么</dt><dd>事故后创建基础设施、恢复备份并启动应用。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>通常恢复较慢；备份可恢复性需要演练验证。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Backup and Restore（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="pilot-light" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#pilot-light">Pilot Light</a></h3><p class="ref-alias">指示灯 / 核心资源常备</p></div>
+  <dl><div><dt>有什么用</dt><dd>用较少常驻资源保留恢复的关键基础。</dd></div><div><dt>实现什么</dt><dd>持续维护数据和核心依赖，事故时启动或扩展其余应用资源。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>与温备相比，平时并不运行完整的可服务应用环境。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Pilot Light（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="warm-standby" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#warm-standby">Warm Standby</a></h3><p class="ref-alias">温备</p></div>
+  <dl><div><dt>有什么用</dt><dd>预先运行缩小规模的完整环境以缩短恢复时间。</dd></div><div><dt>实现什么</dt><dd>备用环境具备业务功能，故障后扩容并切换流量。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>容量较小不表示无需测试；配额、依赖和数据同步都影响恢复。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Warm Standby（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="active-active" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#active-active">Multi-site Active/Active</a></h3><p class="ref-alias">多站点主动 / 主动</p></div>
+  <dl><div><dt>有什么用</dt><dd>让多个站点同时承接真实流量。</dd></div><div><dt>实现什么</dt><dd>一个站点故障时由其他站点承接请求；结合跨区域数据策略提高业务连续性。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>成本和写入冲突处理更复杂；不能简单认为一定零数据损失。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Multi-site Active/Active（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="stateless" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#stateless">Stateless / Loose Coupling</a></h3><p class="ref-alias">无状态 / 松耦合</p></div>
+  <dl><div><dt>有什么用</dt><dd>让实例替换和组件独立扩展更容易。</dd></div><div><dt>实现什么</dt><dd>会话放在外部数据存储；通过队列或事件减少组件间的同步依赖。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>无状态是应用设计方式；不是说整个系统不保存数据。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-your-workload-service-architecture.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Stateless / Loose Coupling（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="latency-throughput" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#latency-throughput">Latency / Throughput / IOPS</a></h3><p class="ref-alias">延迟 / 吞吐量 / 每秒 I/O 次数</p></div>
+  <dl><div><dt>有什么用</dt><dd>区分系统性能瓶颈。</dd></div><div><dt>实现什么</dt><dd>延迟看一次操作多久完成；吞吐量看单位时间传输或处理多少；IOPS 看每秒完成多少次 I/O。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>更多 IOPS 不必然减少网络延迟；大文件传输更关注吞吐量。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/wellarchitected/latest/performance-efficiency-pillar/welcome.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Latency / Throughput / IOPS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="durability" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#durability">Durability / Availability</a></h3><p class="ref-alias">持久性 / 可用性</p></div>
+  <dl><div><dt>有什么用</dt><dd>分别评估数据丢失风险与服务可访问程度。</dd></div><div><dt>实现什么</dt><dd>持久性关注数据是否仍保存；可用性关注需要时能否成功访问。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>有冗余副本仍需备份，避免误删除或逻辑损坏同时传播。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/DataDurability.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Durability / Availability（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-compute" data-group="compute" aria-labelledby="heading-compute">
+        <header class="ref-group-heading"><p class="ref-section-number">02</p><div><h2 id="heading-compute">计算、容器与应用入口</h2><p>决定代码在哪里运行，以及如何扩展和接收请求。</p></div></header>
+        <article class="ref-entry" id="ec2" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#ec2">Amazon EC2</a></h3><p class="ref-alias">Elastic Compute Cloud · 云服务器</p></div>
+  <dl><div><dt>有什么用</dt><dd>运行需要操作系统控制权的应用。</dd></div><div><dt>实现什么</dt><dd>选择实例规格、操作系统和网络，运行 Web 服务、数据库或自定义软件。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>你负责来宾操作系统和应用管理；自动扩缩容需另行配置。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/ec2/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon EC2（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ec2-auto-scaling" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#ec2-auto-scaling">Amazon EC2 Auto Scaling</a></h3><p class="ref-alias">ASG · EC2 自动扩缩容</p></div>
+  <dl><div><dt>有什么用</dt><dd>按需求调整 EC2 数量并替换不健康实例。</dd></div><div><dt>实现什么</dt><dd>配置最小、期望、最大容量及扩缩策略；跨多个 AZ 部署。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>负责实例容量；ELB 负责把请求分发给实例。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/ec2/autoscaling/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon EC2 Auto Scaling（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="lambda" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#lambda">AWS Lambda</a></h3><p class="ref-alias">无服务器函数</p></div>
+  <dl><div><dt>有什么用</dt><dd>按事件运行代码而无需管理服务器。</dd></div><div><dt>实现什么</dt><dd>响应 API、队列、文件上传或定时事件，按调用和执行资源计费。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>有执行时长、并发和运行环境限制；不是长期运行的普通虚拟机。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/lambda/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Lambda（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="fargate" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#fargate">AWS Fargate</a></h3><p class="ref-alias">无服务器容器计算</p></div>
+  <dl><div><dt>有什么用</dt><dd>运行容器而无需维护容器宿主机。</dd></div><div><dt>实现什么</dt><dd>为 ECS 任务或 EKS Pod 提供计算容量。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Fargate 提供运行资源；ECS/EKS 提供编排。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/fargate/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Fargate（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="batch" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#batch">AWS Batch</a></h3><p class="ref-alias">批处理作业调度</p></div>
+  <dl><div><dt>有什么用</dt><dd>运行大量可排队的计算作业。</dd></div><div><dt>实现什么</dt><dd>根据作业依赖和资源需求调度执行，并管理相应计算环境。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>适合批处理，不是对用户请求逐次提供低延迟响应的入口。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/batch/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Batch（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="beanstalk" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#beanstalk">AWS Elastic Beanstalk</a></h3><p class="ref-alias">应用部署与环境管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>快速把应用代码部署为完整运行环境。</dd></div><div><dt>实现什么</dt><dd>协调 EC2、负载均衡、扩缩容和健康检查等资源。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>底层资源仍在你的账户中；不像 Lambda 以单个函数调用为核心。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/elasticbeanstalk/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Elastic Beanstalk（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="outposts" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#outposts">AWS Outposts</a></h3><p class="ref-alias">本地 AWS 基础设施</p></div>
+  <dl><div><dt>有什么用</dt><dd>把部分 AWS 计算与存储能力放到本地机房。</dd></div><div><dt>实现什么</dt><dd>以 AWS 管理的硬件支持低延迟、本地数据处理和混合架构。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是在普通服务器上自行安装全部 AWS 服务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/outposts/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Outposts（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="sar" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#sar">AWS Serverless Application Repository</a></h3><p class="ref-alias">无服务器应用仓库</p></div>
+  <dl><div><dt>有什么用</dt><dd>发现、共享和部署可复用的无服务器应用。</dd></div><div><dt>实现什么</dt><dd>使用已有模板和应用组件，减少重复搭建。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>是应用分发与部署入口，不是函数运行引擎。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/serverless/serverlessrepo/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Serverless Application Repository（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="vmware" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#vmware">VMware Cloud on AWS</a></h3><p class="ref-alias">VMware 混合云</p></div>
+  <dl><div><dt>有什么用</dt><dd>把 VMware 工作负载扩展到 AWS 基础设施。</dd></div><div><dt>实现什么</dt><dd>保留熟悉的 VMware 工具与运行方式，支持迁移和混合部署。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>考纲保留此名称；采购和可用性应查看当前官方说明。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/vmware/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：VMware Cloud on AWS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="wavelength" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#wavelength">AWS Wavelength</a></h3><p class="ref-alias">运营商边缘计算</p></div>
+  <dl><div><dt>有什么用</dt><dd>让应用计算更接近移动网络用户。</dd></div><div><dt>实现什么</dt><dd>将 AWS 计算与存储部署到合作运营商网络边缘。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>聚焦移动网络低延迟；Outposts 聚焦客户本地场所。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/wavelength/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Wavelength（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ecr" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#ecr">Amazon ECR</a></h3><p class="ref-alias">Elastic Container Registry · 容器镜像仓库</p></div>
+  <dl><div><dt>有什么用</dt><dd>保存和分发容器镜像。</dd></div><div><dt>实现什么</dt><dd>提供镜像推送、拉取、访问控制及扫描集成。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>保存镜像而不负责运行容器。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/ecr/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon ECR（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ecs" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#ecs">Amazon ECS</a></h3><p class="ref-alias">Elastic Container Service · 容器编排</p></div>
+  <dl><div><dt>有什么用</dt><dd>调度和管理容器应用。</dd></div><div><dt>实现什么</dt><dd>用任务定义和服务部署容器，可搭配 EC2 或 Fargate。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>采用 AWS 的容器编排接口；EKS 采用 Kubernetes。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/ecs/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon ECS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ecs-anywhere" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#ecs-anywhere">Amazon ECS Anywhere</a></h3><p class="ref-alias">本地 ECS 容器管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>把 ECS 管理扩展到 AWS 以外的服务器。</dd></div><div><dt>实现什么</dt><dd>通过外部实例运行和管理容器任务。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>外部主机仍需你维护，不是 Fargate。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/ecs/anywhere/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon ECS Anywhere（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="eks" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#eks">Amazon EKS</a></h3><p class="ref-alias">Elastic Kubernetes Service · 托管 Kubernetes</p></div>
+  <dl><div><dt>有什么用</dt><dd>运行 Kubernetes 容器平台。</dd></div><div><dt>实现什么</dt><dd>由 AWS 管理 Kubernetes 控制平面，工作负载使用适合的计算选项。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>托管控制平面不代表应用和所有工作节点配置都由 AWS 负责。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/eks/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon EKS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="eks-anywhere" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#eks-anywhere">Amazon EKS Anywhere</a></h3><p class="ref-alias">本地 Kubernetes 集群</p></div>
+  <dl><div><dt>有什么用</dt><dd>在自己的基础设施上创建与运维 Kubernetes。</dd></div><div><dt>实现什么</dt><dd>使用与 EKS 生态兼容的工具管理本地集群。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>与 AWS 云中托管的 EKS 控制平面运维责任不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/eks/eks-anywhere/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon EKS Anywhere（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="eks-distro" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#eks-distro">Amazon EKS Distro</a></h3><p class="ref-alias">Kubernetes 发行版</p></div>
+  <dl><div><dt>有什么用</dt><dd>使用与 EKS 相关的 Kubernetes 开源组件发行版。</dd></div><div><dt>实现什么</dt><dd>获得经过打包和维护的组件用于自行构建集群。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>发行版不是替你管理集群的托管服务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/eks/eks-distro/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon EKS Distro（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="amplify" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#amplify">AWS Amplify</a></h3><p class="ref-alias">前端与全栈应用开发</p></div>
+  <dl><div><dt>有什么用</dt><dd>快速构建、部署 Web 和移动应用。</dd></div><div><dt>实现什么</dt><dd>提供前端托管以及身份、数据等后端集成能力。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>用于应用开发交付；Device Farm 用于设备测试。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/amplify/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Amplify（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="api-gateway" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#api-gateway">Amazon API Gateway</a></h3><p class="ref-alias">API 托管入口</p></div>
+  <dl><div><dt>有什么用</dt><dd>把后端能力以受管理的 API 暴露给客户端。</dd></div><div><dt>实现什么</dt><dd>支持 HTTP/REST/WebSocket API，并配置认证、限流和后端集成。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>它处理 API 入口；业务计算由 Lambda、HTTP 服务等实现。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/api-gateway/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon API Gateway（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="device-farm" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#device-farm">AWS Device Farm</a></h3><p class="ref-alias">真实设备应用测试</p></div>
+  <dl><div><dt>有什么用</dt><dd>验证应用在不同设备和浏览器中的表现。</dd></div><div><dt>实现什么</dt><dd>运行自动化测试和远程设备调试。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>是测试服务，不是面向最终用户的移动应用托管。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/device-farm/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Device Farm（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ami" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#ami">AMI / Launch Template</a></h3><p class="ref-alias">机器映像 / 启动模板</p></div>
+  <dl><div><dt>有什么用</dt><dd>重复创建配置一致的 EC2 实例。</dd></div><div><dt>实现什么</dt><dd>AMI 提供操作系统和磁盘映像；启动模板指定映像、规格、网络等启动参数。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>AMI 是镜像；启动模板是实例启动配置。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AMI / Launch Template（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="instance-store" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#instance-store">Instance Store</a></h3><p class="ref-alias">实例存储 / 临时本地盘</p></div>
+  <dl><div><dt>有什么用</dt><dd>提供宿主机上的本地存储以获取临时高性能。</dd></div><div><dt>实现什么</dt><dd>用于缓存、暂存文件和可重建数据。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>实例停止或终止等情况会丢失数据；持久数据应使用适当的持久存储。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Instance Store（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="lambda-concurrency" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#lambda-concurrency">Lambda Concurrency</a></h3><p class="ref-alias">函数并发 / 预留并发 / 预置并发</p></div>
+  <dl><div><dt>有什么用</dt><dd>控制同时执行量与启动延迟。</dd></div><div><dt>实现什么</dt><dd>预留并发可隔离并限制函数并发；预置并发提前准备执行环境。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>预置并发不是最大并发限制；还需保护数据库等下游资源。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Lambda Concurrency（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="container-image" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#container-image">Container Image / Task / Pod</a></h3><p class="ref-alias">容器镜像 / 任务 / Pod</p></div>
+  <dl><div><dt>有什么用</dt><dd>把应用及依赖打包并交给编排平台运行。</dd></div><div><dt>实现什么</dt><dd>镜像是可分发的运行模板；ECS 任务和 Kubernetes Pod 是各自的工作负载单位。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>容器共享宿主机内核；并不是每个容器都带完整虚拟机。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Container Image / Task / Pod（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-storage" data-group="storage" aria-labelledby="heading-storage">
+        <header class="ref-group-heading"><p class="ref-section-number">03</p><div><h2 id="heading-storage">存储与数据保护</h2><p>按对象、块、共享文件和归档需求选择存储。</p></div></header>
+        <article class="ref-entry" id="s3" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#s3">Amazon S3</a></h3><p class="ref-alias">Simple Storage Service · 对象存储</p></div>
+  <dl><div><dt>有什么用</dt><dd>存储文件、备份、静态资源和数据湖对象。</dd></div><div><dt>实现什么</dt><dd>用存储桶和对象键管理数据，支持版本控制、生命周期、复制与访问策略。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是供操作系统直接使用的块卷；对象接口与共享文件系统不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/s3/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon S3（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-glacier" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#s3-glacier">Amazon S3 Glacier</a></h3><p class="ref-alias">S3 归档存储类别</p></div>
+  <dl><div><dt>有什么用</dt><dd>以较低存储成本保留很少访问的数据。</dd></div><div><dt>实现什么</dt><dd>通过不同归档类别平衡取回速度、费用和最低存储期限。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Instant Retrieval 可直接快速访问；Flexible Retrieval 和 Deep Archive 一般需先发起恢复。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/s3/storage-classes/glacier/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon S3 Glacier（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ebs" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#ebs">Amazon EBS</a></h3><p class="ref-alias">Elastic Block Store · 块存储</p></div>
+  <dl><div><dt>有什么用</dt><dd>为 EC2 提供可持久保存的块设备。</dd></div><div><dt>实现什么</dt><dd>支持不同性能卷类型、快照和加密，常用于系统盘与数据库。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>卷位于单个 AZ；跨 AZ 恢复通常用快照重新创建卷。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/ebs/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon EBS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="efs" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#efs">Amazon EFS</a></h3><p class="ref-alias">Elastic File System · Linux 共享文件</p></div>
+  <dl><div><dt>有什么用</dt><dd>让多台计算实例共享文件目录。</dd></div><div><dt>实现什么</dt><dd>通过 NFS 提供弹性文件系统，支持区域和 One Zone 等存储选择。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Windows 的 SMB/AD 场景通常考虑 FSx for Windows File Server。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/efs/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon EFS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="fsx" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#fsx">Amazon FSx (for all types)</a></h3><p class="ref-alias">托管专用文件系统家族</p></div>
+  <dl><div><dt>有什么用</dt><dd>使用具有特定协议或性能能力的共享文件系统。</dd></div><div><dt>实现什么</dt><dd>提供 Windows File Server、Lustre、NetApp ONTAP、OpenZFS 等类型。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>根据现有应用协议和文件系统特性选择，不能把各类型看作同一套功能。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/fsx/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon FSx (for all types)（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="backup" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#backup">AWS Backup</a></h3><p class="ref-alias">集中备份管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>统一管理多种 AWS 资源的数据保护。</dd></div><div><dt>实现什么</dt><dd>通过备份计划、保留规则和备份保管库集中调度与管理恢复点。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>备份不能直接替代实时高可用；恢复能力需验证。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/backup/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Backup（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="storage-gateway" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#storage-gateway">AWS Storage Gateway</a></h3><p class="ref-alias">混合云存储网关</p></div>
+  <dl><div><dt>有什么用</dt><dd>让本地应用使用云端支持的存储。</dd></div><div><dt>实现什么</dt><dd>通过文件、卷或虚拟磁带等接口连接云存储，并可使用本地缓存。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>面向持续混合存储访问；DataSync 面向数据传输任务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/storagegateway/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Storage Gateway（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="storage-models" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#storage-models">Object / Block / File Storage</a></h3><p class="ref-alias">对象 / 块 / 文件存储</p></div>
+  <dl><div><dt>有什么用</dt><dd>根据应用访问方式选择存储模型。</dd></div><div><dt>实现什么</dt><dd>S3 通过对象 API 访问；EBS 为主机提供块设备；EFS/FSx 提供共享文件系统。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不能因为都是“保存文件”，就直接互换接口和语义。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/aws-overview/storage-services.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Object / Block / File Storage（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-standard" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-standard">S3 Standard / Standard-IA / One Zone-IA</a></h3><p class="ref-alias">频繁访问 / 低频访问 / 单区低频</p></div>
+  <dl><div><dt>有什么用</dt><dd>按访问频率和可用区冗余需求降低存储成本。</dd></div><div><dt>实现什么</dt><dd>Standard 用于常用数据；Standard-IA 保留多 AZ 冗余但有取回费；One Zone-IA 存于单 AZ。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>One Zone-IA 不适合必须应对整个 AZ 丢失的唯一数据副本。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：S3 Standard / Standard-IA / One Zone-IA（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-intelligent" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-intelligent">S3 Intelligent-Tiering</a></h3><p class="ref-alias">智能分层</p></div>
+  <dl><div><dt>有什么用</dt><dd>自动适应未知或变化的数据访问模式。</dd></div><div><dt>实现什么</dt><dd>监控访问并将符合条件的对象移到合适层级，可按需启用归档层。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>需考虑监控费用、小对象和归档层访问特性；不是所有对象都同样受益。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/intelligent-tiering-overview.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：S3 Intelligent-Tiering（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="glacier-tiers" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#glacier-tiers">Glacier Instant / Flexible / Deep Archive</a></h3><p class="ref-alias">即时取回 / 灵活取回 / 深度归档</p></div>
+  <dl><div><dt>有什么用</dt><dd>按取回时限选择归档类别。</dd></div><div><dt>实现什么</dt><dd>Instant 适合少访问但需毫秒读取；Flexible 提供不同恢复速度；Deep Archive 面向可等较长时间的长期保留。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>归档费用还包括最低存储期限和取回费用，不能只看每 GB 存储价格。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Glacier Instant / Flexible / Deep Archive（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-express" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-express">S3 Express One Zone</a></h3><p class="ref-alias">单可用区高性能对象存储</p></div>
+  <dl><div><dt>有什么用</dt><dd>为高请求量、低延迟访问提供专用对象存储选项。</dd></div><div><dt>实现什么</dt><dd>使用目录存储桶，把数据访问放在与计算接近的 AZ。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>单 AZ 定位与 S3 Standard 的多 AZ 设计不同。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：S3 Express One Zone（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-versioning" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-versioning">S3 Versioning</a></h3><p class="ref-alias">对象版本控制</p></div>
+  <dl><div><dt>有什么用</dt><dd>保留对象被覆盖或删除前的版本。</dd></div><div><dt>实现什么</dt><dd>同一个键保存多个版本，普通删除可写入删除标记，便于恢复误操作。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不阻止有权限者永久删除指定版本；需结合权限和保护策略。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：S3 Versioning（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-lifecycle" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-lifecycle">S3 Lifecycle</a></h3><p class="ref-alias">生命周期规则</p></div>
+  <dl><div><dt>有什么用</dt><dd>自动执行数据分层和保留期限。</dd></div><div><dt>实现什么</dt><dd>按对象年龄、前缀或标签转换存储类别、过期对象或清理历史版本。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>生命周期是规则驱动；Intelligent-Tiering 是访问模式驱动。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：S3 Lifecycle（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-replication" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-replication">S3 CRR / SRR</a></h3><p class="ref-alias">跨区域 / 同区域复制</p></div>
+  <dl><div><dt>有什么用</dt><dd>为对象建立不同位置的复制副本。</dd></div><div><dt>实现什么</dt><dd>在满足版本控制和权限等条件下复制符合规则的对象；存量对象可用批量复制。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不能假设配置复制后所有旧对象都会自动补齐。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：S3 CRR / SRR（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-object-lock" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-object-lock">S3 Object Lock</a></h3><p class="ref-alias">WORM · 一次写入多次读取</p></div>
+  <dl><div><dt>有什么用</dt><dd>在保留期内保护对象版本不被覆盖或删除。</dd></div><div><dt>实现什么</dt><dd>提供保留模式与法律保留，适合审计和合规记录。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>治理模式可由特定权限绕过；合规模式在保留期内限制更严格。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：S3 Object Lock（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-presigned" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-presigned">Presigned URL</a></h3><p class="ref-alias">预签名 URL</p></div>
+  <dl><div><dt>有什么用</dt><dd>临时授权别人执行特定 S3 对象操作。</dd></div><div><dt>实现什么</dt><dd>签名携带期限与操作权限，接收者无需自己的 AWS 凭证即可在授权范围内访问。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>URL 可被持有者使用，应控制有效期和传播范围。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Presigned URL（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-multipart" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-multipart">Multipart Upload / Transfer Acceleration</a></h3><p class="ref-alias">分段上传 / 传输加速</p></div>
+  <dl><div><dt>有什么用</dt><dd>改善大文件或远距离上传体验。</dd></div><div><dt>实现什么</dt><dd>分段上传并行传输且可重试单段；传输加速借助边缘网络优化到存储桶的路径。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>分段上传不等于跨区域复制；传输加速也不负责对象缓存。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Multipart Upload / Transfer Acceleration（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-encryption" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-encryption">SSE-S3 / SSE-KMS / SSE-C</a></h3><p class="ref-alias">S3 服务器端加密</p></div>
+  <dl><div><dt>有什么用</dt><dd>在存储端加密对象，选择合适的密钥控制方式。</dd></div><div><dt>实现什么</dt><dd>SSE-S3 由 S3 管理密钥；SSE-KMS 使用 KMS 密钥；SSE-C 每次请求由客户提供密钥。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>静态加密不等于允许谁读取；仍需 S3 和相关密钥权限。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：SSE-S3 / SSE-KMS / SSE-C（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ebs-types" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#ebs-types">EBS gp3 / io2 / st1 / sc1</a></h3><p class="ref-alias">通用 SSD / 预置 IOPS SSD / 吞吐 HDD / 冷 HDD</p></div>
+  <dl><div><dt>有什么用</dt><dd>根据随机 I/O、持续性能或吞吐需求选卷。</dd></div><div><dt>实现什么</dt><dd>gp3 独立配置容量与性能；io2 面向高要求 I/O；st1/sc1 面向适当的顺序吞吐工作负载。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>HDD 卷不能作为启动卷；实际性能还受实例和连接能力限制。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：EBS gp3 / io2 / st1 / sc1（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="snapshot" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#snapshot">Snapshot</a></h3><p class="ref-alias">快照</p></div>
+  <dl><div><dt>有什么用</dt><dd>保存某一时刻的数据恢复点。</dd></div><div><dt>实现什么</dt><dd>EBS 快照可用来创建新卷，并可按需要复制到其他区域。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>快照不是一个始终随写入更新的实时副本。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Snapshot（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="fsx-types" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#fsx-types">FSx Windows / Lustre / ONTAP / OpenZFS</a></h3><p class="ref-alias">四类 FSx 文件系统</p></div>
+  <dl><div><dt>有什么用</dt><dd>匹配原有应用的文件协议和数据能力。</dd></div><div><dt>实现什么</dt><dd>Windows 提供 SMB/AD；Lustre 适合并行计算；ONTAP 提供 NetApp 功能与多协议；OpenZFS 提供 ZFS 文件能力。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Lustre 的高性能计算定位与 Windows 共享目录需求不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/fsx/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：FSx Windows / Lustre / ONTAP / OpenZFS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="efs-lifecycle" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#efs-lifecycle">EFS Lifecycle Management</a></h3><p class="ref-alias">共享文件自动分层</p></div>
+  <dl><div><dt>有什么用</dt><dd>降低低频访问文件的存储成本。</dd></div><div><dt>实现什么</dt><dd>按配置将适当文件在 EFS 存储类别间转移，同时保留文件系统访问方式。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>仍需考虑访问费用、性能以及文件系统类型支持。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：EFS Lifecycle Management（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-database" data-group="database" aria-labelledby="heading-database">
+        <header class="ref-group-heading"><p class="ref-section-number">04</p><div><h2 id="heading-database">数据库与缓存</h2><p>按数据模型、读写模式、延迟和恢复目标选择数据库。</p></div></header>
+        <article class="ref-entry" id="rds" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#rds">Amazon RDS</a></h3><p class="ref-alias">Relational Database Service · 托管关系数据库</p></div>
+  <dl><div><dt>有什么用</dt><dd>运行依赖 SQL 和关系模型的数据库。</dd></div><div><dt>实现什么</dt><dd>管理数据库基础设施、备份和维护，并提供多 AZ、只读副本等选项。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>托管不代表可忽略引擎选择、索引、连接和容量设计。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/rds/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon RDS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="aurora" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#aurora">Amazon Aurora</a></h3><p class="ref-alias">云原生关系数据库</p></div>
+  <dl><div><dt>有什么用</dt><dd>运行兼容 MySQL 或 PostgreSQL 的关系应用。</dd></div><div><dt>实现什么</dt><dd>提供分布式存储、读取副本、故障转移和 Global Database 等能力。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>兼容不代表所有引擎行为和扩展都完全相同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/rds/aurora/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Aurora（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="aurora-serverless" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#aurora-serverless">Amazon Aurora Serverless</a></h3><p class="ref-alias">Aurora 自动容量调整</p></div>
+  <dl><div><dt>有什么用</dt><dd>让数据库计算容量适应变化的需求。</dd></div><div><dt>实现什么</dt><dd>Serverless v2 使用 ACU 在配置范围内调整容量。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是无条件零成本；暂停能力和容量范围取决于版本及配置。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/rds/aurora/serverless/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Aurora Serverless（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="dynamodb" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#dynamodb">Amazon DynamoDB</a></h3><p class="ref-alias">无服务器键值与文档数据库</p></div>
+  <dl><div><dt>有什么用</dt><dd>以可扩展的低延迟方式按键访问数据。</dd></div><div><dt>实现什么</dt><dd>支持分区键、排序键、二级索引、按需或预置容量、全局表。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>应围绕访问模式设计键；不是可以直接替代 SQL 联表查询的关系库。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/dynamodb/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon DynamoDB（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="elasticache" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#elasticache">Amazon ElastiCache</a></h3><p class="ref-alias">托管内存缓存</p></div>
+  <dl><div><dt>有什么用</dt><dd>降低热点读取延迟并减少后端数据库负载。</dd></div><div><dt>实现什么</dt><dd>运行 Valkey、Redis OSS 或 Memcached 等受支持的缓存引擎。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>缓存失效、热键和数据一致性仍需设计；不能默认缓存是唯一持久数据源。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/elasticache/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon ElastiCache（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="documentdb" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#documentdb">Amazon DocumentDB</a></h3><p class="ref-alias">MongoDB 兼容文档数据库</p></div>
+  <dl><div><dt>有什么用</dt><dd>管理 JSON 类文档并支持相应查询方式。</dd></div><div><dt>实现什么</dt><dd>提供 MongoDB 兼容 API 和托管存储、备份等能力。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>需核对兼容范围；不是完整的 MongoDB 产品等价替代。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/documentdb/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon DocumentDB（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="keyspaces" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#keyspaces">Amazon Keyspaces</a></h3><p class="ref-alias">Apache Cassandra 兼容宽列数据库</p></div>
+  <dl><div><dt>有什么用</dt><dd>运行使用 Cassandra 数据模型和接口的应用。</dd></div><div><dt>实现什么</dt><dd>提供托管、可扩展的 Cassandra 兼容数据访问。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>与面向关系联表的 RDS 定位不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/keyspaces/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Keyspaces（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="neptune" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#neptune">Amazon Neptune</a></h3><p class="ref-alias">图数据库</p></div>
+  <dl><div><dt>有什么用</dt><dd>查询数据之间复杂的关联关系。</dd></div><div><dt>实现什么</dt><dd>用图模型表示节点与边，适合社交关系、知识图谱和欺诈关联分析。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>图遍历是核心用途；不是普通表格报表仓库。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/neptune/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Neptune（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="multi-az" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#multi-az">RDS Multi-AZ</a></h3><p class="ref-alias">数据库跨 AZ 高可用</p></div>
+  <dl><div><dt>有什么用</dt><dd>在数据库或 AZ 故障时提供故障转移。</dd></div><div><dt>实现什么</dt><dd>单备用实例部署的备用库不承担读流量；Multi-AZ DB 集群的读实例可提供读取和故障转移。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不能一概认为所有 Multi-AZ 都只能容灾或都能读扩展。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：RDS Multi-AZ（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="read-replica" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#read-replica">Read Replica</a></h3><p class="ref-alias">只读副本</p></div>
+  <dl><div><dt>有什么用</dt><dd>把读取流量从主数据库分离出去。</dd></div><div><dt>实现什么</dt><dd>复制主库数据供读取；受支持时可跨区域，并可在需要时提升。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>常见复制为异步，可能读到旧数据；不会自动把写入扩展到多个主库。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Read Replica（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="rds-proxy" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#rds-proxy">Amazon RDS Proxy</a></h3><p class="ref-alias">数据库连接代理 / 连接池</p></div>
+  <dl><div><dt>有什么用</dt><dd>减少大量短连接给数据库造成的压力。</dd></div><div><dt>实现什么</dt><dd>复用数据库连接，适合 Lambda 等高并发客户端，并帮助改善故障切换连接管理。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>连接池不会自动优化慢 SQL 或无限增加数据库吞吐量。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/rds/proxy/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon RDS Proxy（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="aurora-global" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#aurora-global">Aurora Global Database</a></h3><p class="ref-alias">跨区域 Aurora 数据库</p></div>
+  <dl><div><dt>有什么用</dt><dd>为关系数据提供跨区域读取与灾难恢复能力。</dd></div><div><dt>实现什么</dt><dd>将主区域数据复制到次要区域，配置和执行切换流程。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>跨区域复制存在延迟；需要理解计划切换和事故恢复的数据风险。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Aurora Global Database（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="dynamo-keys" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#dynamo-keys">Partition Key / Sort Key / GSI / LSI</a></h3><p class="ref-alias">分区键 / 排序键 / 二级索引</p></div>
+  <dl><div><dt>有什么用</dt><dd>让 DynamoDB 按预定模式快速定位数据。</dd></div><div><dt>实现什么</dt><dd>分区键分布数据；排序键组织同组项目；GSI/LSI 提供其他查询路径。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>低基数热点键可能形成瓶颈；GSI 和 LSI 的键及一致性能力不同。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Partition Key / Sort Key / GSI / LSI（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="dynamo-dax" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#dynamo-dax">DynamoDB Accelerator (DAX)</a></h3><p class="ref-alias">DynamoDB 内存缓存</p></div>
+  <dl><div><dt>有什么用</dt><dd>加速适合缓存的 DynamoDB 读取。</dd></div><div><dt>实现什么</dt><dd>使用专为 DynamoDB 设计的缓存接口，降低重复读取延迟。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>强一致读取不会像最终一致读取那样从 DAX 缓存获益。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：DynamoDB Accelerator (DAX)（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="global-tables" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#global-tables">DynamoDB Global Tables</a></h3><p class="ref-alias">多区域复制表</p></div>
+  <dl><div><dt>有什么用</dt><dd>让多个区域的应用访问复制的数据。</dd></div><div><dt>实现什么</dt><dd>在多个区域维护表副本；按支持的模式选择一致性和冲突处理策略。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不要把跨区域复制等同于自动满足所有一致性要求。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：DynamoDB Global Tables（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="pitr" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#pitr">PITR / Automated Backups</a></h3><p class="ref-alias">时间点恢复 / 自动备份</p></div>
+  <dl><div><dt>有什么用</dt><dd>从误修改、误删除等逻辑故障中恢复。</dd></div><div><dt>实现什么</dt><dd>利用备份及日志恢复到支持保留窗口内的时间点。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>恢复通常创建新资源；高可用副本不能代替历史恢复点。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：PITR / Automated Backups（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ttl" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#ttl">DynamoDB TTL / Streams</a></h3><p class="ref-alias">过期清理 / 变更流</p></div>
+  <dl><div><dt>有什么用</dt><dd>自动清理过期项目并响应数据变更。</dd></div><div><dt>实现什么</dt><dd>TTL 按时间戳异步删除过期项；Streams 捕获项目变更供下游处理。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>TTL 不是精确到期立刻删除；读取逻辑应考虑尚未清理的过期项目。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：DynamoDB TTL / Streams（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cache-pattern" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#cache-pattern">Cache-aside / Cache Invalidation</a></h3><p class="ref-alias">旁路缓存 / 缓存失效</p></div>
+  <dl><div><dt>有什么用</dt><dd>用缓存降低延迟同时管理数据新鲜度。</dd></div><div><dt>实现什么</dt><dd>未命中时读数据库并填充缓存；写入后更新或删除相应缓存。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>需处理缓存穿透、击穿、雪崩与过期时间，避免同时压垮源数据库。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/database-caching-strategies-using-redis/caching-patterns.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Cache-aside / Cache Invalidation（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="consistency" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#consistency">Strong / Eventual Consistency</a></h3><p class="ref-alias">强一致 / 最终一致</p></div>
+  <dl><div><dt>有什么用</dt><dd>选择读取最新写入的保证与代价。</dd></div><div><dt>实现什么</dt><dd>强一致读取提供更严格的可见性保证；最终一致允许副本在一定时间后收敛。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不同服务、索引和区域模式的支持不同，不能将一个结论套用到所有读路径。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Strong / Eventual Consistency（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-network" data-group="network" aria-labelledby="heading-network">
+        <header class="ref-group-heading"><p class="ref-section-number">05</p><div><h2 id="heading-network">网络、连接与内容分发</h2><p>理解流量走哪条路、谁可以访问，以及怎样减少访问延迟。</p></div></header>
+        <article class="ref-entry" id="vpc" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#vpc">Amazon VPC</a></h3><p class="ref-alias">Virtual Private Cloud · 虚拟私有网络</p></div>
+  <dl><div><dt>有什么用</dt><dd>为 AWS 资源定义隔离的网络环境。</dd></div><div><dt>实现什么</dt><dd>配置 IP 地址范围、子网、路由、安全控制和网络连接。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>创建 VPC 本身不代表所有资源都能上网；需要路由和相应地址或网关。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/vpc/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon VPC（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="elb" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#elb">Elastic Load Balancing (ELB)</a></h3><p class="ref-alias">弹性负载均衡</p></div>
+  <dl><div><dt>有什么用</dt><dd>把访问流量分发给健康的后端资源。</dd></div><div><dt>实现什么</dt><dd>根据负载均衡器类型支持应用层、传输层或网络设备流量分发与健康检查。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>ELB 分发流量；Auto Scaling 调整后端容量。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/elasticloadbalancing/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Elastic Load Balancing (ELB)（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="route53" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#route53">Amazon Route 53</a></h3><p class="ref-alias">DNS 与流量路由</p></div>
+  <dl><div><dt>有什么用</dt><dd>把域名解析到适当的目标。</dd></div><div><dt>实现什么</dt><dd>提供域名管理、DNS、路由策略和运行状况检查。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>DNS 路由受缓存与 TTL 影响；它不直接代理每一条应用请求。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/route53/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Route 53（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cloudfront" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#cloudfront">Amazon CloudFront</a></h3><p class="ref-alias">CDN · 内容分发网络</p></div>
+  <dl><div><dt>有什么用</dt><dd>让全球用户从更近的边缘站点获取内容。</dd></div><div><dt>实现什么</dt><dd>缓存静态或适合缓存的内容，支持 HTTPS、私有内容和源站访问控制。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>需要缓存和 HTTP 内容分发时考虑它；不等同于通用 TCP/UDP 加速。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/cloudfront/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon CloudFront（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="global-accelerator" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#global-accelerator">AWS Global Accelerator</a></h3><p class="ref-alias">全球网络加速</p></div>
+  <dl><div><dt>有什么用</dt><dd>优化到应用区域端点的网络路径与故障切换。</dd></div><div><dt>实现什么</dt><dd>通过静态任播 IP 和 AWS 全球网络把 TCP/UDP 流量引向健康端点。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是内容缓存；CloudFront 的核心能力之一是边缘内容分发。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/global-accelerator/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Global Accelerator（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="direct-connect" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#direct-connect">AWS Direct Connect</a></h3><p class="ref-alias">专用网络连接</p></div>
+  <dl><div><dt>有什么用</dt><dd>让本地网络通过专线连接 AWS。</dd></div><div><dt>实现什么</dt><dd>提供私有连接和更可预测的网络路径，支持不同虚拟接口。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>专线不自动提供端到端加密；需要时另设计 VPN、MACsec 等保护。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/directconnect/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Direct Connect（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="site-vpn" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#site-vpn">AWS Site-to-Site VPN</a></h3><p class="ref-alias">站点到站点 VPN</p></div>
+  <dl><div><dt>有什么用</dt><dd>把本地或其他网络与 AWS 网络加密互联。</dd></div><div><dt>实现什么</dt><dd>使用 IPsec 隧道，可连接虚拟私有网关或 Transit Gateway。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>通常经互联网传输，带宽和路径可预测性与 Direct Connect 不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/vpn/site-to-site-vpn/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Site-to-Site VPN（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="client-vpn" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#client-vpn">AWS Client VPN</a></h3><p class="ref-alias">远程用户 VPN</p></div>
+  <dl><div><dt>有什么用</dt><dd>让远程员工安全访问私有网络资源。</dd></div><div><dt>实现什么</dt><dd>为用户设备提供受管理的 VPN 接入、身份验证和授权控制。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>面向单个远程客户端；Site-to-Site VPN 面向网络之间互联。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/vpn/client-vpn/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Client VPN（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="transit-gateway" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#transit-gateway">AWS Transit Gateway</a></h3><p class="ref-alias">网络中转枢纽</p></div>
+  <dl><div><dt>有什么用</dt><dd>集中连接大量 VPC 和本地网络。</dd></div><div><dt>实现什么</dt><dd>通过附件和路由表构建 hub-and-spoke 网络，支持传递路由。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>少量 VPC 的简单互联可考虑 Peering；Peering 不支持传递路由。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/transit-gateway/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Transit Gateway（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="privatelink" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#privatelink">AWS PrivateLink</a></h3><p class="ref-alias">私有服务连接</p></div>
+  <dl><div><dt>有什么用</dt><dd>通过私有端点访问支持的服务。</dd></div><div><dt>实现什么</dt><dd>将服务以私有网络入口提供给消费者，而不要求公开互联网访问或完整网络互通。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>私有访问某项服务与连接整个 VPC 的用途不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/privatelink/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS PrivateLink（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="subnet" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#subnet">Public / Private / Isolated Subnet</a></h3><p class="ref-alias">公有 / 私有 / 隔离子网</p></div>
+  <dl><div><dt>有什么用</dt><dd>按路由和访问需求划分网络。</dd></div><div><dt>实现什么</dt><dd>公有子网有通向互联网网关的路由；私有子网无此直接路由，可按需通过 NAT 出站。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>子网的名字不决定公私；实例上网还需地址、规则与路由共同满足。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Public / Private / Isolated Subnet（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cidr" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#cidr">CIDR / IPv4 / IPv6</a></h3><p class="ref-alias">地址范围与网段规划</p></div>
+  <dl><div><dt>有什么用</dt><dd>分配可路由且不冲突的网络地址。</dd></div><div><dt>实现什么</dt><dd>用前缀表示地址范围，为 VPC、子网与互联网络规划空间。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>网段重叠会限制部分互联方案；IPv6 的访问策略不能照搬 IPv4 NAT 假设。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：CIDR / IPv4 / IPv6（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="route-table" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#route-table">Route Table</a></h3><p class="ref-alias">路由表</p></div>
+  <dl><div><dt>有什么用</dt><dd>决定匹配某个目的地址的流量下一步去哪里。</dd></div><div><dt>实现什么</dt><dd>通过目的 CIDR 和目标网关、端点或网卡等控制路径，按最长前缀匹配。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>路由决定路径；安全组和 NACL 决定是否允许流量。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Route Table（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="igw" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#igw">Internet Gateway / Egress-only IGW</a></h3><p class="ref-alias">互联网网关 / 仅出站互联网网关</p></div>
+  <dl><div><dt>有什么用</dt><dd>为 VPC 提供互联网连接路径。</dd></div><div><dt>实现什么</dt><dd>IGW 支持符合条件的公网访问；Egress-only IGW 支持 IPv6 主动出站并阻止互联网发起的入站连接。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>仅出站互联网网关用于 IPv6；不是 IPv4 NAT 网关的别名。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Internet Gateway / Egress-only IGW（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="nat" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#nat">NAT Gateway</a></h3><p class="ref-alias">私有资源出站地址转换</p></div>
+  <dl><div><dt>有什么用</dt><dd>让私有 IPv4 资源主动访问外部而不接受互联网主动入站。</dd></div><div><dt>实现什么</dt><dd>公有 NAT 网关配合公有子网、弹性 IP 和 IGW 提供互联网出站；私有 NAT 用于私网地址转换。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>区分部署与可用区架构及费用；访问支持的 AWS 服务还可考虑 VPC 端点。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：NAT Gateway（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="security-group" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#security-group">Security Group</a></h3><p class="ref-alias">安全组 / 有状态资源防火墙</p></div>
+  <dl><div><dt>有什么用</dt><dd>控制关联资源网卡的入站和出站流量。</dd></div><div><dt>实现什么</dt><dd>以允许规则限定协议、端口和来源或目标；已允许连接的返回流量自动获准。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>没有显式拒绝规则；不能把安全组引用理解为自动传递信任。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Security Group（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="nacl" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#nacl">Network ACL</a></h3><p class="ref-alias">网络访问控制列表 / 无状态子网防火墙</p></div>
+  <dl><div><dt>有什么用</dt><dd>在子网边界增加允许与拒绝控制。</dd></div><div><dt>实现什么</dt><dd>按规则编号顺序匹配，分别检查入站与出站。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>返回流量也需允许，常需考虑临时端口；与有状态安全组不同。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Network ACL（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="vpc-endpoint" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#vpc-endpoint">Gateway / Interface Endpoint</a></h3><p class="ref-alias">网关端点 / 接口端点</p></div>
+  <dl><div><dt>有什么用</dt><dd>通过私有路径访问支持的服务。</dd></div><div><dt>实现什么</dt><dd>Gateway Endpoint 通过路由表访问 S3/DynamoDB；Interface Endpoint 使用私有网卡并依托 PrivateLink。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>可用服务、访问范围、策略与计费不同，不能用一种端点替代全部需求。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Gateway / Interface Endpoint（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="peering" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#peering">VPC Peering</a></h3><p class="ref-alias">VPC 对等连接</p></div>
+  <dl><div><dt>有什么用</dt><dd>让两个 VPC 使用私有地址直接互通。</dd></div><div><dt>实现什么</dt><dd>两端配置路由与安全控制，可用于支持的同区域或跨区域连接。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不支持传递路由，也不能连接地址范围重叠的 VPC。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：VPC Peering（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="alb-nlb-gwlb" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#alb-nlb-gwlb">ALB / NLB / GWLB</a></h3><p class="ref-alias">应用 / 网络 / 网关负载均衡器</p></div>
+  <dl><div><dt>有什么用</dt><dd>按流量层次选择负载均衡器。</dd></div><div><dt>实现什么</dt><dd>ALB 处理 HTTP/HTTPS 与路径主机路由；NLB 处理高性能传输层流量；GWLB 连接和扩展虚拟网络设备。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>需要 Web 内容路由时通常选 ALB；需要固定 IP 等传输层能力时评估 NLB。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/what-is-load-balancing.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：ALB / NLB / GWLB（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="dns-routing" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#dns-routing">Route 53 Routing Policies</a></h3><p class="ref-alias">DNS 路由策略</p></div>
+  <dl><div><dt>有什么用</dt><dd>根据可用性、位置或流量分配目标返回 DNS 结果。</dd></div><div><dt>实现什么</dt><dd>加权路由分配比例；延迟路由选择测得较低延迟区域；故障转移路由用于主备；地理位置路由基于用户来源。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>地理位置路由不是延迟路由；健康检查与 DNS 缓存会影响切换过程。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Route 53 Routing Policies（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cloudfront-oac" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#cloudfront-oac">Origin Access Control (OAC)</a></h3><p class="ref-alias">CloudFront 源站访问控制</p></div>
+  <dl><div><dt>有什么用</dt><dd>限制 S3 源站仅接受授权的 CloudFront 分配访问。</dd></div><div><dt>实现什么</dt><dd>CloudFront 签名源站请求，配合桶策略和适当的 KMS 权限保护源站。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>保护源站与限制观众访问是两件事；观众可另用签名 URL/Cookie。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Origin Access Control (OAC)（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cloudfront-cache" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#cloudfront-cache">Cache Policy / TTL / Invalidation</a></h3><p class="ref-alias">缓存键 / 生存时间 / 失效刷新</p></div>
+  <dl><div><dt>有什么用</dt><dd>平衡 CDN 命中率与内容新鲜度。</dd></div><div><dt>实现什么</dt><dd>缓存策略确定哪些请求属性区分缓存；TTL 控制缓存时间；失效请求清除指定缓存对象。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>过多无关请求参数进入缓存键会降低命中率。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Cache Policy / TTL / Invalidation（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="flow-logs" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#flow-logs">VPC Flow Logs</a></h3><p class="ref-alias">VPC 网络流日志</p></div>
+  <dl><div><dt>有什么用</dt><dd>排查网络访问和安全控制问题。</dd></div><div><dt>实现什么</dt><dd>记录网卡等范围的 IP 流量元数据与接收或拒绝结果，交给日志或分析服务。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是完整数据包抓取，也不是记录用户 API 操作的 CloudTrail。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：VPC Flow Logs（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="hybrid-dns" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#hybrid-dns">Route 53 Resolver</a></h3><p class="ref-alias">混合云 DNS 解析</p></div>
+  <dl><div><dt>有什么用</dt><dd>让本地与 VPC 间按规则解析彼此的域名。</dd></div><div><dt>实现什么</dt><dd>使用入站、出站端点及转发规则集成企业 DNS。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>负责 DNS 查询路径，不直接建立业务流量的网络连接。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Route 53 Resolver（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-security" data-group="security" aria-labelledby="heading-security">
+        <header class="ref-group-heading"><p class="ref-section-number">06</p><div><h2 id="heading-security">身份、安全与合规</h2><p>分清身份权限、密钥、网络防护、风险检测与合规治理。</p></div></header>
+        <article class="ref-entry" id="iam" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#iam">IAM</a></h3><p class="ref-alias">Identity and Access Management · 身份与访问管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>规定谁能对哪些 AWS 资源执行什么操作。</dd></div><div><dt>实现什么</dt><dd>通过用户、角色与策略授予访问，并结合条件限制权限。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>默认不允许；显式拒绝优先；身份认证不等于获得全部授权。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/iam/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：IAM（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="identity-center" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#identity-center">AWS IAM Identity Center</a></h3><p class="ref-alias">员工单点登录 / 权限集</p></div>
+  <dl><div><dt>有什么用</dt><dd>集中管理员工访问多个 AWS 账户与应用。</dd></div><div><dt>实现什么</dt><dd>集成身份源并分配权限集，提供统一登录体验。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>面向员工身份；应用最终用户登录通常考虑 Cognito。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/iam/identity-center/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS IAM Identity Center（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cognito" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#cognito">Amazon Cognito</a></h3><p class="ref-alias">应用用户身份</p></div>
+  <dl><div><dt>有什么用</dt><dd>为 Web 和移动应用提供用户登录与身份联合。</dd></div><div><dt>实现什么</dt><dd>用户池管理用户认证；身份池可为受信用户换取临时 AWS 凭证。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>用户池和身份池解决的问题不同，不要混为一项功能。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/cognito/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Cognito（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="directory-service" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#directory-service">AWS Directory Service</a></h3><p class="ref-alias">托管目录与 Active Directory 集成</p></div>
+  <dl><div><dt>有什么用</dt><dd>让应用使用受支持的企业目录服务。</dd></div><div><dt>实现什么</dt><dd>提供托管 Microsoft AD 等选项，支持目录依赖应用和混合身份集成。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是自动替代 IAM 对 AWS API 的授权控制。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/directoryservice/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Directory Service（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="kms" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#kms">AWS KMS</a></h3><p class="ref-alias">Key Management Service · 密钥管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>集中创建、控制和审计加密密钥的使用。</dd></div><div><dt>实现什么</dt><dd>与 S3、EBS、RDS 等服务集成，通过密钥策略与授权控制加解密。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>管理密钥，不等于存储和自动轮换数据库密码。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/kms/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS KMS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cloudhsm" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#cloudhsm">AWS CloudHSM</a></h3><p class="ref-alias">专用硬件安全模块</p></div>
+  <dl><div><dt>有什么用</dt><dd>满足对专用 HSM 和密钥控制的特定要求。</dd></div><div><dt>实现什么</dt><dd>提供客户管理的 HSM 集群与标准加密接口。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>管理负担和控制方式与 KMS 的托管密钥接口不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/cloudhsm/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS CloudHSM（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="acm" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#acm">AWS Certificate Manager (ACM)</a></h3><p class="ref-alias">TLS 证书管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>为支持的 AWS 服务部署和管理证书。</dd></div><div><dt>实现什么</dt><dd>申请、导入和管理证书，配合负载均衡器或 CloudFront 等使用 HTTPS。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>证书验证端点身份并支持传输加密；不是数据静态加密密钥服务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/certificate-manager/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Certificate Manager (ACM)（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="secrets-manager" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#secrets-manager">AWS Secrets Manager</a></h3><p class="ref-alias">机密管理与轮换</p></div>
+  <dl><div><dt>有什么用</dt><dd>安全保存数据库密码、API 密钥等机密。</dd></div><div><dt>实现什么</dt><dd>通过权限控制和加密保护机密，支持配置轮换与运行时获取。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>需要配置轮换方式和访问权限，不能把密码写入代码就视为安全。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/secrets-manager/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Secrets Manager（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="waf" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#waf">AWS WAF</a></h3><p class="ref-alias">Web Application Firewall · Web 应用防火墙</p></div>
+  <dl><div><dt>有什么用</dt><dd>过滤恶意 HTTP/HTTPS 应用层请求。</dd></div><div><dt>实现什么</dt><dd>用规则、速率限制和托管规则组防护 SQL 注入等攻击。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是通用 VPC 网络防火墙，也不取代修复应用漏洞。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/waf/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS WAF（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="shield" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#shield">AWS Shield</a></h3><p class="ref-alias">DDoS 防护</p></div>
+  <dl><div><dt>有什么用</dt><dd>降低分布式拒绝服务攻击对应用的影响。</dd></div><div><dt>实现什么</dt><dd>Standard 提供基础防护；Advanced 提供额外的检测、防护与响应能力。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>WAF 更侧重 Web 请求规则；Shield 侧重 DDoS 防护。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/shield/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Shield（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="network-firewall" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#network-firewall">AWS Network Firewall</a></h3><p class="ref-alias">托管 VPC 网络防火墙</p></div>
+  <dl><div><dt>有什么用</dt><dd>对 VPC 流量进行网络层和状态检测。</dd></div><div><dt>实现什么</dt><dd>在规划的网络路径中执行规则、过滤和流量检查。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>部署后仍需正确设置路由，确保需要检查的流量经过防火墙。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/network-firewall/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Network Firewall（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="firewall-manager" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#firewall-manager">AWS Firewall Manager</a></h3><p class="ref-alias">多账户防火墙策略管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>统一为组织内资源应用安全防护策略。</dd></div><div><dt>实现什么</dt><dd>集中管理支持的 WAF、Shield、安全组和网络防火墙等策略。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>负责组织层策略管理；具体检查由相应防护服务执行。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/firewall-manager/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Firewall Manager（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="guardduty" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#guardduty">Amazon GuardDuty</a></h3><p class="ref-alias">智能威胁检测</p></div>
+  <dl><div><dt>有什么用</dt><dd>识别账户与工作负载中的可疑活动。</dd></div><div><dt>实现什么</dt><dd>分析支持的数据源并生成威胁发现，覆盖异常访问、恶意行为等。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>主要检测运行中的威胁；不是给软件依赖扫描 CVE 的工具。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/guardduty/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon GuardDuty（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="inspector" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#inspector">Amazon Inspector</a></h3><p class="ref-alias">漏洞与暴露风险扫描</p></div>
+  <dl><div><dt>有什么用</dt><dd>发现受支持工作负载的软件漏洞等风险。</dd></div><div><dt>实现什么</dt><dd>评估 EC2、容器镜像、Lambda 等受支持资源的漏洞和相关风险。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Inspector 看漏洞；GuardDuty 看可疑活动。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/inspector/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Inspector（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="macie" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#macie">Amazon Macie</a></h3><p class="ref-alias">S3 敏感数据发现</p></div>
+  <dl><div><dt>有什么用</dt><dd>识别 S3 中可能包含个人信息等敏感数据的对象。</dd></div><div><dt>实现什么</dt><dd>自动发现、分类并生成调查结果。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>发现敏感数据不代表自动修改应用所有访问权限。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/macie/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Macie（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="detective" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#detective">Amazon Detective</a></h3><p class="ref-alias">安全事件调查分析</p></div>
+  <dl><div><dt>有什么用</dt><dd>帮助理解安全发现背后的活动关系。</dd></div><div><dt>实现什么</dt><dd>关联用户、资源和行为信息，辅助调查根因。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>调查分析与 WAF 实时阻断请求的职责不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/detective/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Detective（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="security-hub" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#security-hub">AWS Security Hub</a></h3><p class="ref-alias">安全发现聚合与态势管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>集中查看和管理来自不同来源的安全风险。</dd></div><div><dt>实现什么</dt><dd>汇集发现、评估安全控制，并集成响应工作流。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>是集中管理视角；并不是用一个开关替代所有检测服务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/security-hub/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Security Hub（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="artifact" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#artifact">AWS Artifact</a></h3><p class="ref-alias">合规报告与协议</p></div>
+  <dl><div><dt>有什么用</dt><dd>获取 AWS 的合规材料。</dd></div><div><dt>实现什么</dt><dd>下载适用的审计报告并管理部分合规协议。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>AWS 的合规报告不自动证明你的应用配置已合规。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/artifact/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Artifact（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ram" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#ram">AWS Resource Access Manager (AWS RAM)</a></h3><p class="ref-alias">跨账户资源共享</p></div>
+  <dl><div><dt>有什么用</dt><dd>把支持的资源共享给其他 AWS 账户或组织。</dd></div><div><dt>实现什么</dt><dd>可共享子网等受支持资源，减少重复创建。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>共享能力受资源类型和权限约束；不是复制一份资源。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/ram/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Resource Access Manager (AWS RAM)（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="iam-role" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#iam-role">IAM Role / STS / Temporary Credentials</a></h3><p class="ref-alias">角色 / 安全令牌服务 / 临时凭证</p></div>
+  <dl><div><dt>有什么用</dt><dd>让应用或受信主体取得有期限的 AWS 访问权限。</dd></div><div><dt>实现什么</dt><dd>使用信任策略确定谁能承担角色，权限策略确定承担后能做什么；STS 签发临时凭证。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>优先给计算资源使用角色，而不是在代码中保存长期访问密钥。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：IAM Role / STS / Temporary Credentials（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="policy-types" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#policy-types">Identity / Resource Policy</a></h3><p class="ref-alias">身份策略 / 资源策略</p></div>
+  <dl><div><dt>有什么用</dt><dd>从身份和资源两侧描述访问授权。</dd></div><div><dt>实现什么</dt><dd>身份策略附在用户或角色；资源策略附在 S3 桶等资源，并可指定主体。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>跨账户访问需综合评估两侧策略、显式拒绝与服务规则。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Identity / Resource Policy（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="least-privilege" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#least-privilege">Least Privilege / Explicit Deny</a></h3><p class="ref-alias">最小权限 / 显式拒绝</p></div>
+  <dl><div><dt>有什么用</dt><dd>限制身份仅能执行完成任务所需的操作。</dd></div><div><dt>实现什么</dt><dd>缩小动作、资源和条件范围；用明确拒绝建立不能越过的限制。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>额外的 Allow 不能覆盖适用的显式 Deny。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Least Privilege / Explicit Deny（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="scp" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#scp">SCP / Permissions Boundary</a></h3><p class="ref-alias">服务控制策略 / 权限边界</p></div>
+  <dl><div><dt>有什么用</dt><dd>为可授予的权限设置上限。</dd></div><div><dt>实现什么</dt><dd>SCP 在组织层约束适用账户；权限边界限制指定身份可获得的最大权限。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>它们本身不授予权限；仍需要身份或资源授权，并注意管理账户等适用范围。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：SCP / Permissions Boundary（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="external-id" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#external-id">External ID</a></h3><p class="ref-alias">外部 ID / 混淆代理人防护</p></div>
+  <dl><div><dt>有什么用</dt><dd>降低第三方替多个客户承担角色时被冒用的风险。</dd></div><div><dt>实现什么</dt><dd>在跨账户角色信任策略中要求指定 External ID。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>外部 ID 不是秘密密码；需同时严格限制受信任主体。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：External ID（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="mfa" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#mfa">MFA / Federation / SSO</a></h3><p class="ref-alias">多因素认证 / 身份联合 / 单点登录</p></div>
+  <dl><div><dt>有什么用</dt><dd>加强认证并复用集中身份。</dd></div><div><dt>实现什么</dt><dd>MFA 增加独立验证因素；联合登录信任外部身份源；SSO 减少重复登录。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>登录成功仍需授权策略允许具体操作。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：MFA / Federation / SSO（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="envelope-encryption" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#envelope-encryption">Envelope Encryption / Data Key</a></h3><p class="ref-alias">信封加密 / 数据密钥</p></div>
+  <dl><div><dt>有什么用</dt><dd>用分层密钥保护大量业务数据。</dd></div><div><dt>实现什么</dt><dd>数据密钥加密数据；KMS 等密钥管理系统保护数据密钥。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>避免把主密钥、明文数据密钥和加密后的数据密钥混淆。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Envelope Encryption / Data Key（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="encryption-layers" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#encryption-layers">Encryption at Rest / in Transit</a></h3><p class="ref-alias">静态加密 / 传输加密</p></div>
+  <dl><div><dt>有什么用</dt><dd>分别保护存储介质中的数据与传输中的数据。</dd></div><div><dt>实现什么</dt><dd>静态加密用 S3/EBS/RDS 等加密选项；传输加密常使用 TLS 或 IPsec。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>使用 HTTPS 不意味着落盘数据已加密，反之亦然。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/wellarchitected/latest/framework/sec_protect_data_at_rest.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Encryption at Rest / in Transit（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="parameter-store" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#parameter-store">Systems Manager Parameter Store</a></h3><p class="ref-alias">参数与机密配置</p></div>
+  <dl><div><dt>有什么用</dt><dd>集中保存应用配置和适当的加密参数。</dd></div><div><dt>实现什么</dt><dd>按层级管理参数，使用 SecureString 与 KMS 保护敏感值。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>数据库密码的托管轮换场景通常优先评估 Secrets Manager。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Systems Manager Parameter Store（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="s3-public-block" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#s3-public-block">S3 Block Public Access</a></h3><p class="ref-alias">阻止公开访问</p></div>
+  <dl><div><dt>有什么用</dt><dd>为 S3 公共访问建立集中保护。</dd></div><div><dt>实现什么</dt><dd>在账户或桶等范围限制公共 ACL 与公共桶策略产生的访问。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>它不替代最小权限设计，也不是封锁所有跨账户访问。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：S3 Block Public Access（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="arn" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#arn">ARN / Principal / Policy Condition</a></h3><p class="ref-alias">资源标识 / 主体 / 策略条件</p></div>
+  <dl><div><dt>有什么用</dt><dd>精确描述授权对象和生效条件。</dd></div><div><dt>实现什么</dt><dd>ARN 标识资源；Principal 标识调用身份；Condition 限制来源、标签、网络等请求上下文。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>ARN 格式因服务而异，部分资源没有区域或账户段。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：ARN / Principal / Policy Condition（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-integration" data-group="integration" aria-labelledby="heading-integration">
+        <header class="ref-group-heading"><p class="ref-section-number">07</p><div><h2 id="heading-integration">消息、事件与工作流</h2><p>让组件独立工作，吸收流量波动，并可靠协调多个步骤。</p></div></header>
+        <article class="ref-entry" id="sqs" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#sqs">Amazon SQS</a></h3><p class="ref-alias">Simple Queue Service · 消息队列</p></div>
+  <dl><div><dt>有什么用</dt><dd>缓冲任务并解耦生产者与消费者。</dd></div><div><dt>实现什么</dt><dd>消费者按自己的处理速度拉取消息，支持标准队列与 FIFO 队列。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>同一队列的消费者通常竞争处理消息；广播给多个独立系统可用 SNS 配合多个队列。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/sqs/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon SQS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="sns" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#sns">Amazon SNS</a></h3><p class="ref-alias">Simple Notification Service · 发布订阅</p></div>
+  <dl><div><dt>有什么用</dt><dd>把一条消息发送给多个订阅目标。</dd></div><div><dt>实现什么</dt><dd>用 Topic 将通知扇出到 SQS、Lambda 或其他受支持端点。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>SNS 负责发布分发；需要持久缓冲与主动拉取时搭配 SQS。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/sns/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon SNS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="eventbridge" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#eventbridge">Amazon EventBridge</a></h3><p class="ref-alias">事件总线与事件路由</p></div>
+  <dl><div><dt>有什么用</dt><dd>按事件内容把变化通知交给正确的目标。</dd></div><div><dt>实现什么</dt><dd>连接 AWS、自定义应用和 SaaS 事件，使用规则、事件总线、Pipes 等集成功能。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>适合事件驱动集成；不会像数据库那样管理业务事务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/eventbridge/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon EventBridge（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="step-functions" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#step-functions">AWS Step Functions</a></h3><p class="ref-alias">状态机 / 工作流编排</p></div>
+  <dl><div><dt>有什么用</dt><dd>协调多个服务调用和分支步骤。</dd></div><div><dt>实现什么</dt><dd>以状态机表达顺序、并行、选择、重试和错误处理。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>编排控制流程；具体任务仍由 Lambda、容器或其他服务执行。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/step-functions/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Step Functions（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="mq" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#mq">Amazon MQ</a></h3><p class="ref-alias">托管 ActiveMQ / RabbitMQ 消息代理</p></div>
+  <dl><div><dt>有什么用</dt><dd>迁移依赖现有消息代理接口的应用。</dd></div><div><dt>实现什么</dt><dd>提供托管消息代理，支持相应引擎的协议和模式。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>有 JMS、AMQP 等兼容需求时评估 MQ；云原生队列可考虑 SQS。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/amazon-mq/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon MQ（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="appflow" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#appflow">Amazon AppFlow</a></h3><p class="ref-alias">SaaS 与 AWS 数据连接</p></div>
+  <dl><div><dt>有什么用</dt><dd>在业务 SaaS 和 AWS 服务间传送数据。</dd></div><div><dt>实现什么</dt><dd>通过受支持的连接器配置数据流，减少自行编写集成代码。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>传送业务数据与编排复杂多步骤事务不是同一任务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/appflow/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon AppFlow（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="sqs-visibility" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#sqs-visibility">Visibility Timeout / DeleteMessage</a></h3><p class="ref-alias">消息可见性超时 / 删除消息</p></div>
+  <dl><div><dt>有什么用</dt><dd>防止同一消息在处理中立即被其他消费者取得。</dd></div><div><dt>实现什么</dt><dd>读取后暂时隐藏消息；处理成功后显式删除；超时未删除可再次投递。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>隐藏不代表删除；处理应支持幂等，不能假设绝无重复。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Visibility Timeout / DeleteMessage（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="sqs-fifo" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#sqs-fifo">Standard / FIFO / Message Group</a></h3><p class="ref-alias">标准队列 / 有序队列 / 消息组</p></div>
+  <dl><div><dt>有什么用</dt><dd>按吞吐、顺序和去重需求选队列。</dd></div><div><dt>实现什么</dt><dd>标准队列提供至少一次投递和尽力排序；FIFO 按消息组保持顺序并提供去重机制。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>FIFO 的去重并不消除所有业务端重复副作用，仍应设计幂等消费者。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-types.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Standard / FIFO / Message Group（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="dlq" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#dlq">Dead-letter Queue (DLQ)</a></h3><p class="ref-alias">死信队列</p></div>
+  <dl><div><dt>有什么用</dt><dd>隔离反复处理失败的消息供排查。</dd></div><div><dt>实现什么</dt><dd>在满足重试或投递失败条件时保留消息，修复后按需要重放。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>死信队列不自动修正坏数据；应监控并设计处理流程。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Dead-letter Queue (DLQ)（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="idempotency" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#idempotency">Idempotency / Retry / Backoff</a></h3><p class="ref-alias">幂等 / 重试 / 退避</p></div>
+  <dl><div><dt>有什么用</dt><dd>让重复调用与暂时故障不会破坏业务状态。</dd></div><div><dt>实现什么</dt><dd>用业务唯一键识别重复；对暂时故障实施带抖动的指数退避和有限重试。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>无限重试可能放大故障；创建订单等有副作用操作尤其需要幂等。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_mitigate_interaction_failure_idempotent.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Idempotency / Retry / Backoff（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="fanout" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#fanout">Fan-out / Queue-based Load Leveling</a></h3><p class="ref-alias">消息扇出 / 队列削峰</p></div>
+  <dl><div><dt>有什么用</dt><dd>让多个系统独立接收事件，并平滑处理峰值。</dd></div><div><dt>实现什么</dt><dd>SNS 加多个 SQS 实现独立副本；队列积压使生产速度与消费速度解耦。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>队列只能缓冲，不能代替提升长期不足的消费能力。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/sns/latest/dg/sns-sqs-as-subscriber.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Fan-out / Queue-based Load Leveling（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="event-schedule" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#event-schedule">EventBridge Scheduler</a></h3><p class="ref-alias">定时与一次性任务</p></div>
+  <dl><div><dt>有什么用</dt><dd>按计划触发目标操作。</dd></div><div><dt>实现什么</dt><dd>设置一次性或周期性调度，并配置重试与失败处理。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>调度触发与完整工作流编排不同，多步骤状态可交给 Step Functions。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/scheduler/latest/UserGuide/what-is-scheduler.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：EventBridge Scheduler（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-analytics" data-group="analytics" aria-labelledby="heading-analytics">
+        <header class="ref-group-heading"><p class="ref-section-number">08</p><div><h2 id="heading-analytics">分析、流处理与数据湖</h2><p>分清离线 SQL 分析、实时数据流、数据仓库和可视化报表。</p></div></header>
+        <article class="ref-entry" id="athena" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#athena">Amazon Athena</a></h3><p class="ref-alias">无服务器交互式 SQL 查询</p></div>
+  <dl><div><dt>有什么用</dt><dd>直接查询 S3 等受支持数据源中的数据。</dd></div><div><dt>实现什么</dt><dd>使用 SQL 分析日志和数据湖，常与 Glue Data Catalog 配合。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>无需先搭建长期数据库集群；性能与成本取决于扫描数据和查询设计。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/athena/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Athena（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="redshift" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#redshift">Amazon Redshift</a></h3><p class="ref-alias">分析型数据仓库</p></div>
+  <dl><div><dt>有什么用</dt><dd>对大量结构化数据进行复杂分析与报表查询。</dd></div><div><dt>实现什么</dt><dd>使用并行处理与列式存储，提供预置或无服务器选项和外部数据查询能力。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>面向 OLAP 分析；不是通常承接订单逐笔交易的 OLTP 首选。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/redshift/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Redshift（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="emr" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#emr">Amazon EMR</a></h3><p class="ref-alias">托管大数据计算平台</p></div>
+  <dl><div><dt>有什么用</dt><dd>运行 Spark、Hadoop 等大数据处理框架。</dd></div><div><dt>实现什么</dt><dd>处理批量数据、转换与分布式分析，提供多种部署方式。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>需要框架生态和自定义处理时考虑 EMR；简单 SQL 查询可先评估 Athena。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/emr/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon EMR（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="glue" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#glue">AWS Glue</a></h3><p class="ref-alias">数据集成 / ETL / 数据目录</p></div>
+  <dl><div><dt>有什么用</dt><dd>发现、整理和转换数据以供分析。</dd></div><div><dt>实现什么</dt><dd>爬网程序发现结构，Data Catalog 保存元数据，ETL 作业转换与加载数据。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>目录保存数据定义，不等于把业务原始数据都存入目录。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/glue/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Glue（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="lake-formation" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#lake-formation">AWS Lake Formation</a></h3><p class="ref-alias">数据湖权限与治理</p></div>
+  <dl><div><dt>有什么用</dt><dd>集中管理数据湖的细粒度访问。</dd></div><div><dt>实现什么</dt><dd>配合目录、表和数据权限管理共享与授权。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>重点是治理与权限；数据转换通常由 Glue 等计算服务执行。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/lake-formation/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Lake Formation（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="kinesis" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#kinesis">Amazon Kinesis</a></h3><p class="ref-alias">实时流数据服务家族</p></div>
+  <dl><div><dt>有什么用</dt><dd>持续采集与处理实时数据。</dd></div><div><dt>实现什么</dt><dd>Kinesis Data Streams 将记录保留在数据流中供消费者读取与重放。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>流分区顺序和消费模型与 SQS 任务队列不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/kinesis/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Kinesis（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="firehose" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#firehose">Amazon Data Firehose</a></h3><p class="ref-alias">流数据托管投递 / 旧称 Kinesis Data Firehose</p></div>
+  <dl><div><dt>有什么用</dt><dd>把流式数据送入分析存储或其他受支持目标。</dd></div><div><dt>实现什么</dt><dd>自动缓冲、批量投递，并可配置格式转换和 Lambda 转换。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>侧重托管投递；Data Streams 更侧重可保留、重放的自定义消费。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/firehose/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Data Firehose（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="msk" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#msk">Amazon Managed Streaming for Apache Kafka (Amazon MSK)</a></h3><p class="ref-alias">托管 Kafka</p></div>
+  <dl><div><dt>有什么用</dt><dd>运行使用 Kafka 接口和生态的事件流平台。</dd></div><div><dt>实现什么</dt><dd>托管 Kafka 集群或使用相应无服务器选项进行发布订阅与流处理集成。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>有 Kafka 兼容需求时使用；不是所有消息队列都需要 Kafka。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/msk/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Managed Streaming for Apache Kafka (Amazon MSK)（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="opensearch" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#opensearch">Amazon OpenSearch Service</a></h3><p class="ref-alias">搜索与日志分析</p></div>
+  <dl><div><dt>有什么用</dt><dd>对文本、日志和其他可索引数据进行搜索分析。</dd></div><div><dt>实现什么</dt><dd>提供搜索索引、聚合查询、可视化等能力及相应部署选项。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>搜索索引不是所有业务主数据库的直接替代。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/opensearch-service/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon OpenSearch Service（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="quick" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#quick">Amazon Quick</a></h3><p class="ref-alias">Amazon Quick Sight · 原 Amazon QuickSight / Amazon Quick Suite</p></div>
+  <dl><div><dt>有什么用</dt><dd>从数据中制作交互式仪表板、分析并获得业务洞察。</dd></div><div><dt>实现什么</dt><dd>Amazon Quick 包含 Quick Sight 商业智能组件；Quick Sight 连接数据源、制作可视化和报表，并支持嵌入式分析。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>SAA 考纲使用 Amazon Quick；现行服务名与产品结构已更新，旧版 QuickSight 接口仍延续。它不同于 Athena 的 SQL 查询和 Redshift 的分析仓库。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/quick/latest/userguide/what-is.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Quick（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="data-exchange" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#data-exchange">AWS Data Exchange</a></h3><p class="ref-alias">第三方数据订阅与交换</p></div>
+  <dl><div><dt>有什么用</dt><dd>发现并使用外部提供方的数据。</dd></div><div><dt>实现什么</dt><dd>在支持的数据产品中管理订阅、交付和访问。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>用于获取数据产品；不是把任意内部系统数据自动清洗的 ETL 引擎。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/data-exchange/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Data Exchange（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="data-lake" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#data-lake">Data Lake / Data Warehouse</a></h3><p class="ref-alias">数据湖 / 数据仓库</p></div>
+  <dl><div><dt>有什么用</dt><dd>分别承载灵活原始数据与经过组织的分析数据。</dd></div><div><dt>实现什么</dt><dd>数据湖常以 S3 保存多格式数据；数据仓库如 Redshift 组织适合报表和分析的结构。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>两者可组合使用，不是只能二选一。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Data Lake / Data Warehouse（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="etl" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#etl">ETL / ELT / Data Catalog</a></h3><p class="ref-alias">抽取转换加载 / 抽取加载转换 / 元数据目录</p></div>
+  <dl><div><dt>有什么用</dt><dd>把分散数据变为可理解、可查询的数据资产。</dd></div><div><dt>实现什么</dt><dd>ETL 先转换后加载；ELT 先加载再在目标处理；目录记录表结构和位置。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>数据目录不是数据备份，也不自动保证数据质量。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：ETL / ELT / Data Catalog（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="kinesis-shards" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#kinesis-shards">Shard / Partition Key / Consumer</a></h3><p class="ref-alias">流分片 / 分区键 / 消费者</p></div>
+  <dl><div><dt>有什么用</dt><dd>组织流记录并配置并行处理。</dd></div><div><dt>实现什么</dt><dd>分区键决定数据分布；分片是相关容量与顺序单位；消费者读取和处理记录。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>顺序通常在分片等限定范围内保证，不能默认整个流全局有序。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Shard / Partition Key / Consumer（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="columnar" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#columnar">Parquet / Partitioning / Compression</a></h3><p class="ref-alias">列式格式 / 分区 / 压缩</p></div>
+  <dl><div><dt>有什么用</dt><dd>减少分析读取的数据量与查询费用。</dd></div><div><dt>实现什么</dt><dd>列式格式读取所需列，分区裁剪跳过无关目录，压缩减少传输和存储。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>大量很小的文件或不合理分区也可能降低查询效率。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/athena/latest/ug/performance-tuning-data-optimization-techniques.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Parquet / Partitioning / Compression（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="oltp-olap" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#oltp-olap">OLTP / OLAP</a></h3><p class="ref-alias">联机事务处理 / 联机分析处理</p></div>
+  <dl><div><dt>有什么用</dt><dd>区分业务交易与历史聚合分析的数据库需求。</dd></div><div><dt>实现什么</dt><dd>OLTP 关注事务与单条读写；OLAP 关注大量数据的统计、聚合和复杂查询。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>交易数据库的读取副本不总能替代专用分析平台。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：OLTP / OLAP（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-operations" data-group="operations" aria-labelledby="heading-operations">
+        <header class="ref-group-heading"><p class="ref-section-number">09</p><div><h2 id="heading-operations">监控、运维与多账户治理</h2><p>区分“发生了什么”“配置是什么”“当前运行得怎样”。</p></div></header>
+        <article class="ref-entry" id="cloudwatch" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#cloudwatch">Amazon CloudWatch</a></h3><p class="ref-alias">指标、日志与告警</p></div>
+  <dl><div><dt>有什么用</dt><dd>观察应用和基础设施的运行状态。</dd></div><div><dt>实现什么</dt><dd>收集指标与日志、设置告警和仪表板，驱动适当的自动响应。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>CloudWatch 看运行状况；CloudTrail 看 API 活动。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/cloudwatch/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon CloudWatch（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cloudtrail" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#cloudtrail">AWS CloudTrail</a></h3><p class="ref-alias">账户活动与 API 审计</p></div>
+  <dl><div><dt>有什么用</dt><dd>追踪谁在什么时候对 AWS 做了什么。</dd></div><div><dt>实现什么</dt><dd>记录支持的管理与数据事件，并配置日志保留和分析。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是专门监测 CPU 或内存的指标服务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/cloudtrail/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS CloudTrail（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="config" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#config">AWS Config</a></h3><p class="ref-alias">资源配置记录与规则评估</p></div>
+  <dl><div><dt>有什么用</dt><dd>了解资源配置如何变化、是否符合要求。</dd></div><div><dt>实现什么</dt><dd>记录受支持资源的配置历史，按规则检查合规并集成修复。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>审计配置与 API 调用历史侧重点不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/config/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Config（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="xray" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#xray">AWS X-Ray</a></h3><p class="ref-alias">分布式链路追踪</p></div>
+  <dl><div><dt>有什么用</dt><dd>定位一个请求在多个服务间的慢点或错误。</dd></div><div><dt>实现什么</dt><dd>汇集追踪段、服务调用关系和延迟信息。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>单个请求链路与聚合 CPU 指标或权限审计日志不同；现行 AWS 可观测性文档已将链路追踪放进 CloudWatch Application Signals 相关产品入口。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS X-Ray（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cloudformation" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#cloudformation">AWS CloudFormation</a></h3><p class="ref-alias">基础设施即代码 / IaC</p></div>
+  <dl><div><dt>有什么用</dt><dd>以模板可重复地创建和更新 AWS 资源。</dd></div><div><dt>实现什么</dt><dd>使用堆栈管理资源生命周期和依赖，支持变更集等能力。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>模板不自动证明配置安全；变更仍需审查。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/cloudformation/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS CloudFormation（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="systems-manager" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#systems-manager">AWS Systems Manager</a></h3><p class="ref-alias">统一运维与实例管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>管理计算节点、配置和自动化运维任务。</dd></div><div><dt>实现什么</dt><dd>提供 Session Manager、Run Command、补丁、Automation 和 Parameter Store 等能力。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Session Manager 可减少直接开放 SSH 的需要，但仍需代理、权限与网络条件。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/systems-manager/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Systems Manager（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="organizations" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#organizations">AWS Organizations</a></h3><p class="ref-alias">组织与多账户管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>集中组织账户、账单与部分治理策略。</dd></div><div><dt>实现什么</dt><dd>使用 OU 划分账户，并通过 SCP 等策略建立组织级边界。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>OU 是账户组织单位，不是 VPC 子网或 IAM 用户组。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/organizations/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Organizations（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="control-tower" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#control-tower">AWS Control Tower</a></h3><p class="ref-alias">多账户着陆区与治理</p></div>
+  <dl><div><dt>有什么用</dt><dd>搭建和治理标准化多账户环境。</dd></div><div><dt>实现什么</dt><dd>基于 Organizations 等能力建立 landing zone、账户流程和控制。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是替代 Organizations，而是在其上组织标准化治理。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/controltower/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Control Tower（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="service-catalog" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#service-catalog">AWS Service Catalog</a></h3><p class="ref-alias">批准的基础设施产品目录</p></div>
+  <dl><div><dt>有什么用</dt><dd>让团队自助部署符合规范的资源组合。</dd></div><div><dt>实现什么</dt><dd>发布和管理经批准的产品、版本及部署约束。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>目录中的产品模板与容器镜像仓库 ECR 用途不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/servicecatalog/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Service Catalog（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="trusted-advisor" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#trusted-advisor">AWS Trusted Advisor</a></h3><p class="ref-alias">最佳实践检查建议</p></div>
+  <dl><div><dt>有什么用</dt><dd>发现成本、安全和可靠性等方面的改进机会。</dd></div><div><dt>实现什么</dt><dd>针对受支持资源与账户条件执行检查并提出建议。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>建议不是自动修复；可用检查与支持计划等条件有关。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/premiumsupport/technology/trusted-advisor/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Trusted Advisor（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="compute-optimizer" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#compute-optimizer">AWS Compute Optimizer</a></h3><p class="ref-alias">计算资源规格优化</p></div>
+  <dl><div><dt>有什么用</dt><dd>识别资源过大、过小或规格不匹配。</dd></div><div><dt>实现什么</dt><dd>分析利用率并建议适当的受支持资源配置。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>建议依赖数据质量和观察窗口，变更前仍需评估业务峰值。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/compute-optimizer/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Compute Optimizer（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="health" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#health">AWS Health Dashboard</a></h3><p class="ref-alias">服务健康与账户事件</p></div>
+  <dl><div><dt>有什么用</dt><dd>了解 AWS 服务事件与账户相关维护影响。</dd></div><div><dt>实现什么</dt><dd>查看服务状态、资源相关通知与计划变更。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>AWS 服务健康不等于你的应用业务指标健康。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/premiumsupport/technology/aws-health/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Health Dashboard（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="license-manager" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#license-manager">AWS License Manager</a></h3><p class="ref-alias">软件许可证管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>跟踪与管理软件许可证使用。</dd></div><div><dt>实现什么</dt><dd>配置许可规则、查看分配并减少不合规使用风险。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不会自动获得第三方软件的使用授权。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/license-manager/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS License Manager（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="grafana" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#grafana">Amazon Managed Grafana</a></h3><p class="ref-alias">托管 Grafana 可视化</p></div>
+  <dl><div><dt>有什么用</dt><dd>把多个数据源的观测数据组织为仪表板。</dd></div><div><dt>实现什么</dt><dd>使用 Grafana 工作区连接受支持的指标、日志等数据源。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Grafana 展示分析数据；不是所有数据的采集与长期存储引擎。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/grafana/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Managed Grafana（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="prometheus" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#prometheus">Amazon Managed Service for Prometheus</a></h3><p class="ref-alias">托管 Prometheus 指标</p></div>
+  <dl><div><dt>有什么用</dt><dd>保存与查询 Prometheus 兼容指标。</dd></div><div><dt>实现什么</dt><dd>支持容器等工作负载的指标监控，并可与 Grafana 联用。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Prometheus 聚焦指标；并非通用 API 操作审计。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/prometheus/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Managed Service for Prometheus（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="auto-scaling" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#auto-scaling">AWS Auto Scaling</a></h3><p class="ref-alias">跨服务扩缩容管理</p></div>
+  <dl><div><dt>有什么用</dt><dd>协调支持的资源随需求调整容量。</dd></div><div><dt>实现什么</dt><dd>通过扩缩计划和相关服务能力设置容量策略。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>与专门调整 EC2 实例数的 EC2 Auto Scaling 范围不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/autoscaling/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Auto Scaling（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cli" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#cli">AWS CLI</a></h3><p class="ref-alias">命令行接口</p></div>
+  <dl><div><dt>有什么用</dt><dd>通过命令行管理 AWS 服务。</dd></div><div><dt>实现什么</dt><dd>使用脚本调用服务 API，适合自动化和重复管理操作。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>命令行仍受 IAM 权限限制，不是绕过授权的入口。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/cli/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS CLI（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="console" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#console">AWS Management Console</a></h3><p class="ref-alias">AWS 管理控制台</p></div>
+  <dl><div><dt>有什么用</dt><dd>使用浏览器管理云资源。</dd></div><div><dt>实现什么</dt><dd>通过图形界面创建、检查和配置 AWS 服务。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>同一资源也可通过 CLI、SDK 或 IaC 管理；控制台不是业务数据存储。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/console/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Management Console（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="wa-tool" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#wa-tool">AWS Well-Architected Tool</a></h3><p class="ref-alias">架构评审工具</p></div>
+  <dl><div><dt>有什么用</dt><dd>按 Well-Architected 问题集检查工作负载。</dd></div><div><dt>实现什么</dt><dd>记录评审、识别风险并跟踪改进。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>工具辅助评估；实际架构变更与验证仍由团队完成。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/well-architected-tool/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Well-Architected Tool（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cloudwatch-alarm" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#cloudwatch-alarm">Alarm / Metric / Log / Trace</a></h3><p class="ref-alias">告警 / 指标 / 日志 / 追踪</p></div>
+  <dl><div><dt>有什么用</dt><dd>从不同观测层面定位问题并触发响应。</dd></div><div><dt>实现什么</dt><dd>指标展示数值趋势；日志记录事件；追踪关联一次调用；告警按条件通知或触发动作。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>四者互补，不能只看一个平均 CPU 就判断整个应用无故障。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Alarm / Metric / Log / Trace（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="tagging" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#tagging">Tag / Cost Allocation Tag</a></h3><p class="ref-alias">标签 / 成本分配标签</p></div>
+  <dl><div><dt>有什么用</dt><dd>给资源附加可管理的业务分类。</dd></div><div><dt>实现什么</dt><dd>通过键值标识环境、负责人和项目；启用适当标签用于成本分摊。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>标签不天然构成权限边界；ABAC 需要相应策略。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Tag / Cost Allocation Tag（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="landing-zone" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#landing-zone">Landing Zone / OU / Guardrail</a></h3><p class="ref-alias">着陆区 / 组织单位 / 治理控制</p></div>
+  <dl><div><dt>有什么用</dt><dd>为多团队使用 AWS 建立一致基础。</dd></div><div><dt>实现什么</dt><dd>标准化账户、日志、安全和网络基线；用 OU 组织账户，用控制限制或检测偏离。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>预防性限制与检测性告警的生效方式不同。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Landing Zone / OU / Guardrail（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-cost" data-group="cost" aria-labelledby="heading-cost">
+        <header class="ref-group-heading"><p class="ref-section-number">10</p><div><h2 id="heading-cost">成本、购买方式与容量</h2><p>区分费用分析、预算控制、折扣承诺与容量保证。</p></div></header>
+        <article class="ref-entry" id="budgets" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#budgets">AWS Budgets</a></h3><p class="ref-alias">预算与费用提醒</p></div>
+  <dl><div><dt>有什么用</dt><dd>监控实际或预测费用是否接近预算。</dd></div><div><dt>实现什么</dt><dd>设置预算阈值、通知，并按支持的方式配置预算动作。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>普通预算通知不是一到金额就自动停止整个账户消费的硬上限。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/aws-cost-management/aws-budgets/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Budgets（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cost-explorer" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#cost-explorer">AWS Cost Explorer</a></h3><p class="ref-alias">费用分析与预测</p></div>
+  <dl><div><dt>有什么用</dt><dd>看清费用花在哪里以及如何变化。</dd></div><div><dt>实现什么</dt><dd>按服务、账户、标签等维度查看历史费用、趋势与预测。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>用于分析；资源实际变更需要另行执行。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/aws-cost-management/aws-cost-explorer/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Cost Explorer（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cur" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#cur">AWS Cost and Usage Report</a></h3><p class="ref-alias">CUR · 成本和使用量报告</p></div>
+  <dl><div><dt>有什么用</dt><dd>获得更细粒度的账单与用量明细。</dd></div><div><dt>实现什么</dt><dd>将报告交给分析系统，用于自定义成本分摊、审计和查询。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>明细数据报告与 Cost Explorer 的交互分析界面不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/aws-cost-management/aws-cost-and-usage-reporting/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Cost and Usage Report（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="savings-plans" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#savings-plans">Savings Plans</a></h3><p class="ref-alias">计算消费承诺折扣</p></div>
+  <dl><div><dt>有什么用</dt><dd>以一定期限的每小时用量消费承诺换取折扣。</dd></div><div><dt>实现什么</dt><dd>根据计划类型对符合条件的计算用量自动应用折扣。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Compute Savings Plans 灵活性较高；计划本身不是容量预留。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/savingsplans/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Savings Plans（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="on-demand" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#on-demand">On-Demand</a></h3><p class="ref-alias">按需购买</p></div>
+  <dl><div><dt>有什么用</dt><dd>在没有长期用量承诺时使用计算资源。</dd></div><div><dt>实现什么</dt><dd>按实际使用的受支持计费单位付费，适合不可预测或短期需求。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>按需计费不等于有保证的预留容量。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：On-Demand（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="spot" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#spot">Spot Instances</a></h3><p class="ref-alias">竞价实例 / 闲置容量</p></div>
+  <dl><div><dt>有什么用</dt><dd>以较低价格运行可中断工作负载。</dd></div><div><dt>实现什么</dt><dd>适用于可重试批处理、并行任务等，结合检查点、容量多样化和中断处理。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>容量可能被回收；不宜把唯一关键数据库放在无容错的 Spot 实例上。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Spot Instances（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="ri" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#ri">Reserved Instances (RI)</a></h3><p class="ref-alias">预留实例折扣</p></div>
+  <dl><div><dt>有什么用</dt><dd>通过期限与配置承诺降低符合条件的实例费用。</dd></div><div><dt>实现什么</dt><dd>按 RI 类型和范围匹配用量；区域 RI 与可用区 RI 的容量效果不同。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不要把所有 RI 都理解为自动预留容量；需区分区域与可用区范围。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Reserved Instances (RI)（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="capacity-reservation" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#capacity-reservation">On-Demand Capacity Reservation</a></h3><p class="ref-alias">按需容量预留</p></div>
+  <dl><div><dt>有什么用</dt><dd>提前确保特定 AZ 内匹配配置的 EC2 容量。</dd></div><div><dt>实现什么</dt><dd>为关键启动需求保留计算容量，可按规则与折扣结合。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>容量保证与价格折扣是不同目标；不用的预留容量也可能计费。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：On-Demand Capacity Reservation（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="dedicated" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#dedicated">Dedicated Hosts / Dedicated Instances</a></h3><p class="ref-alias">专用宿主机 / 专用实例</p></div>
+  <dl><div><dt>有什么用</dt><dd>满足硬件隔离或许可证绑定要求。</dd></div><div><dt>实现什么</dt><dd>Dedicated Hosts 提供物理服务器分配与放置控制；Dedicated Instances 提供专用硬件上的实例隔离。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>需要按物理核心或套接字许可时，重点评估 Dedicated Hosts。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Dedicated Hosts / Dedicated Instances（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="right-sizing" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#right-sizing">Right Sizing / Scheduling</a></h3><p class="ref-alias">资源规格优化 / 非工作时间停机</p></div>
+  <dl><div><dt>有什么用</dt><dd>减少闲置或过度配置的成本。</dd></div><div><dt>实现什么</dt><dd>依据负载调小规格、自动扩缩容量，并在合适时段停止非生产实例。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>停止实例后存储等资源仍可能收费，删除前需确认数据保留。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Right Sizing / Scheduling（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="transfer-cost" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#transfer-cost">Data Transfer / NAT / Endpoint Costs</a></h3><p class="ref-alias">数据传输与网络处理费用</p></div>
+  <dl><div><dt>有什么用</dt><dd>把网络架构中的持续费用纳入设计。</dd></div><div><dt>实现什么</dt><dd>综合评估跨区域、跨 AZ、互联网出站、NAT 处理与端点使用等费用。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>私有路径不等于免费；应按流量模式和区域价格比较。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/aws-cost-management/cost-optimization/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Data Transfer / NAT / Endpoint Costs（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-migration" data-group="migration" aria-labelledby="heading-migration">
+        <header class="ref-group-heading"><p class="ref-section-number">11</p><div><h2 id="heading-migration">迁移、传输与混合架构</h2><p>按“迁移整台服务器、数据库还是文件”选择工具。</p></div></header>
+        <article class="ref-entry" id="mgn" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#mgn">AWS Application Migration Service</a></h3><p class="ref-alias">MGN · 服务器迁移 / AWS Transform MGN 相关名称</p></div>
+  <dl><div><dt>有什么用</dt><dd>把原有服务器应用迁移到 AWS。</dd></div><div><dt>实现什么</dt><dd>通过持续复制和测试切换，将源服务器迁移为云端运行环境。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>适合服务器重托管；数据库持续迁移可单独评估 DMS。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/application-migration-service/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Application Migration Service（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="datasync" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#datasync">AWS DataSync</a></h3><p class="ref-alias">在线数据传输</p></div>
+  <dl><div><dt>有什么用</dt><dd>自动在本地与 AWS 或支持的存储之间移动数据。</dd></div><div><dt>实现什么</dt><dd>配置传输任务、校验和增量同步，适合大规模文件与对象迁移。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>是数据搬运工具；Storage Gateway 为应用提供持续使用的存储接口。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/datasync/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS DataSync（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="dms" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#dms">AWS DMS</a></h3><p class="ref-alias">Database Migration Service · 数据库迁移</p></div>
+  <dl><div><dt>有什么用</dt><dd>把数据库数据迁移到受支持的目标。</dd></div><div><dt>实现什么</dt><dd>支持全量加载和变更数据捕获，以减少迁移切换时的数据差距。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>异构迁移还需处理架构与代码兼容；DMS 不保证自动改写所有应用 SQL。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/dms/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS DMS（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="snow" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#snow">AWS Snow Family</a></h3><p class="ref-alias">离线物理数据迁移与边缘设备</p></div>
+  <dl><div><dt>有什么用</dt><dd>理解带宽不足时用设备搬运数据的架构模式。</dd></div><div><dt>实现什么</dt><dd>考纲与旧题常以 Snowball Edge 说明离线数据导入和本地处理。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>自 2025-11-07 起不向新客户提供 Snowball Edge 设备；AWS 计划于 2026-12-31 停止所有商业区域的 Snowball 支持。新项目需核对状态，并评估 DataSync、Data Transfer Terminal 或合作伙伴方案。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-storage-service.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Snow Family（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="transfer-family" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#transfer-family">AWS Transfer Family</a></h3><p class="ref-alias">托管文件传输协议</p></div>
+  <dl><div><dt>有什么用</dt><dd>保留传统文件协议并使用 AWS 存储。</dd></div><div><dt>实现什么</dt><dd>为 SFTP、FTPS、FTP 等受支持协议提供管理能力，连接 S3 或 EFS 等后端。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>用于客户端按文件协议传输；DataSync 更侧重受管理的数据迁移任务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/aws-transfer-family/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：AWS Transfer Family（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="migration-strategies" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#migration-strategies">Migration Strategies / 7 Rs</a></h3><p class="ref-alias">迁移策略 / 七种 R</p></div>
+  <dl><div><dt>有什么用</dt><dd>决定每个工作负载应如何迁移或保留。</dd></div><div><dt>实现什么</dt><dd>评估 rehost、replatform、refactor/re-architect、repurchase、relocate、retain、retire。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是所有应用都应原样搬迁；停用无用系统也属于迁移决策。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/prescriptive-guidance/latest/application-portfolio-assessment-guide/welcome.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Migration Strategies / 7 Rs（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="cdc" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#cdc">CDC / Full Load</a></h3><p class="ref-alias">变更数据捕获 / 全量加载</p></div>
+  <dl><div><dt>有什么用</dt><dd>在迁移期间把目标数据持续追近源数据。</dd></div><div><dt>实现什么</dt><dd>先复制已有数据，再持续应用源数据库新产生的受支持变更。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>低停机不代表无需切换窗口、校验或应用连接调整。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Task.CDC.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：CDC / Full Load（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="schema-conversion" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#schema-conversion">Schema Conversion</a></h3><p class="ref-alias">数据库架构转换</p></div>
+  <dl><div><dt>有什么用</dt><dd>处理不同数据库引擎的数据定义与代码差异。</dd></div><div><dt>实现什么</dt><dd>评估并转换受支持的表定义、过程等对象，识别需人工改写部分。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>架构转换与搬运表数据是两类任务。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_SchemaConversion.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Schema Conversion（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="hybrid-storage" data-kind="term">
+  <div class="ref-entry-heading"><span class="ref-kind">术语</span><h3><a href="#hybrid-storage">File / Volume / Tape Gateway</a></h3><p class="ref-alias">文件 / 卷 / 磁带网关</p></div>
+  <dl><div><dt>有什么用</dt><dd>让不同类型的本地应用连接混合存储。</dd></div><div><dt>实现什么</dt><dd>文件网关提供文件协议；卷网关提供 iSCSI 块接口；磁带网关对接虚拟磁带备份工作流。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>按应用接口选择，不能把磁带归档当成普通共享目录。</dd></div></dl>
+  <a class="ref-source" href="https://docs.aws.amazon.com/whitepapers/latest/aws-overview/storage-services.html" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：File / Volume / Tape Gateway（新窗口）</span> ↗</a>
+</article>
+      </section>
+<section class="ref-group" id="group-ai-media" data-group="ai-media" aria-labelledby="heading-ai-media">
+        <header class="ref-group-heading"><p class="ref-section-number">12</p><div><h2 id="heading-ai-media">AI 能力与媒体</h2><p>SAA 主要掌握这些服务的输入、输出与用途。</p></div></header>
+        <article class="ref-entry" id="comprehend" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#comprehend">Amazon Comprehend</a></h3><p class="ref-alias">自然语言文本分析</p></div>
+  <dl><div><dt>有什么用</dt><dd>从文本中提取结构化理解结果。</dd></div><div><dt>实现什么</dt><dd>识别情感、实体、关键短语等信息。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>文本分析不同于把文本翻译成另一种语言。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/comprehend/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Comprehend（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="lex" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#lex">Amazon Lex</a></h3><p class="ref-alias">对话机器人</p></div>
+  <dl><div><dt>有什么用</dt><dd>构建能理解语音或文字请求的交互界面。</dd></div><div><dt>实现什么</dt><dd>使用意图与槽位组织对话，并把业务请求交给后端。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>侧重对话流程；不是单纯的音频转写工具。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/lex/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Lex（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="polly" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#polly">Amazon Polly</a></h3><p class="ref-alias">文本转语音 / TTS</p></div>
+  <dl><div><dt>有什么用</dt><dd>把文字生成可播放的语音。</dd></div><div><dt>实现什么</dt><dd>按可用语言和声音合成音频。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>Polly 文字变语音；Transcribe 语音变文字。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/polly/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Polly（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="rekognition" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#rekognition">Amazon Rekognition</a></h3><p class="ref-alias">图像与视频视觉分析</p></div>
+  <dl><div><dt>有什么用</dt><dd>从图像或视频中识别可用的视觉信息。</dd></div><div><dt>实现什么</dt><dd>提供对象、场景、内容审核及相应视觉识别功能。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>复杂表单和表格文字结构提取更适合 Textract。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/rekognition/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Rekognition（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="sagemaker" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#sagemaker">Amazon SageMaker AI</a></h3><p class="ref-alias">机器学习模型开发与部署</p></div>
+  <dl><div><dt>有什么用</dt><dd>构建、训练和托管自定义机器学习模型。</dd></div><div><dt>实现什么</dt><dd>支持数据准备、训练、调优和推理等机器学习生命周期步骤。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>需要现成语音或翻译能力时，可先评估专用 AI 服务。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/sagemaker/ai/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon SageMaker AI（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="textract" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#textract">Amazon Textract</a></h3><p class="ref-alias">文档文字、表格与表单提取</p></div>
+  <dl><div><dt>有什么用</dt><dd>从扫描文档中提取文字及结构。</dd></div><div><dt>实现什么</dt><dd>识别受支持文档的文本、键值对和表格等内容。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>不是单纯识别图片里有没有某种物体。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/textract/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Textract（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="transcribe" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#transcribe">Amazon Transcribe</a></h3><p class="ref-alias">语音转文字 / ASR</p></div>
+  <dl><div><dt>有什么用</dt><dd>把音频中的语音转为文本。</dd></div><div><dt>实现什么</dt><dd>支持受支持语言的批量或流式转写及相应识别功能。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>它不负责把文字合成为语音。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/transcribe/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Transcribe（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="translate" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#translate">Amazon Translate</a></h3><p class="ref-alias">机器翻译</p></div>
+  <dl><div><dt>有什么用</dt><dd>把文本从一种语言翻译为另一种语言。</dd></div><div><dt>实现什么</dt><dd>通过 API 对受支持语言进行自动翻译。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>翻译不等于情感分析，也不代替音频转写。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/translate/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Translate（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="elastic-transcoder" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#elastic-transcoder">Amazon Elastic Transcoder</a></h3><p class="ref-alias">历史音视频转码服务</p></div>
+  <dl><div><dt>有什么用</dt><dd>理解将媒体转换为适合不同设备格式的用途。</dd></div><div><dt>实现什么</dt><dd>历史上提供音视频格式、分辨率与码率转换。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>已于 2025-11-13 停止支持；当前方案应评估 AWS Elemental MediaConvert。此条保留考纲名称。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/blogs/media/support-for-amazon-elastic-transcoder-ending-soon/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Elastic Transcoder（新窗口）</span> ↗</a>
+</article>
+<article class="ref-entry" id="kinesis-video" data-kind="service">
+  <div class="ref-entry-heading"><span class="ref-kind">服务</span><h3><a href="#kinesis-video">Amazon Kinesis Video Streams</a></h3><p class="ref-alias">视频流采集与存储</p></div>
+  <dl><div><dt>有什么用</dt><dd>接收设备持续产生的视频以供回放或分析。</dd></div><div><dt>实现什么</dt><dd>连接摄像头等设备，将媒体流交给存储、播放或分析处理链路。</dd></div><div class="ref-distinction"><dt>理解要点</dt><dd>视频流与普通业务事件记录流的接口和处理目标不同。</dd></div></dl>
+  <a class="ref-source" href="https://aws.amazon.com/kinesis/video-streams/" target="_blank" rel="noopener noreferrer">AWS 官方资料<span class="ref-sr-only">：Amazon Kinesis Video Streams（新窗口）</span> ↗</a>
+</article>
+      </section>
+    </div>
+  </div>
+  <footer class="ref-footer"><a href="index.html">← 返回 SAA 备考目录</a><p>本页为阅读参考资料，按用途整理服务和术语。</p></footer>
+</main>
+</body>
+</html>
