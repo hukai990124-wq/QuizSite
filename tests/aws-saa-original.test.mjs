@@ -42,3 +42,10 @@ test("SAA original set is rendered, linked from the directory, counted and inclu
   assert.match(homepage, /1060 题/);
   assert.match(randomPool, /files\("aws-saa\/original", 1, "part"\)/);
 });
+test("SAA Chinese fields contain no Japanese kana", () => {
+  for (const question of questions) {
+    for (const field of [question.stem, ...question.options, question.explanation]) {
+      assert.doesNotMatch(field.zh, /[\u3040-\u30ff]/u, `Japanese text in Chinese question ${question.id}`);
+    }
+  }
+});

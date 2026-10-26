@@ -208,7 +208,7 @@
       {
         "letter": "C",
         "en": "Amazon Cognito identity pools only",
-        "zh": "Amazon Cognito identity pools のみ",
+        "zh": "仅使用 Amazon Cognito 身份池",
         "ja": "Amazon Cognito ID プールのみ"
       },
       {
@@ -286,25 +286,25 @@
       {
         "letter": "A",
         "en": "SSE-S3 and public read access",
-        "zh": "SSE-S3 と公開読み取りアクセス",
+        "zh": "使用 SSE-S3 并允许公开读取访问",
         "ja": "SSE-S3 と公開読み取りアクセス"
       },
       {
         "letter": "B",
         "en": "Client-side encryption with a key stored in the object metadata",
-        "zh": "オブジェクトメタデータ内に鍵を保存するクライアント側暗号化",
+        "zh": "使用客户端加密，并将密钥存储在对象元数据中",
         "ja": "オブジェクトメタデータに鍵を保存するクライアント側暗号化"
       },
       {
         "letter": "C",
         "en": "SSE-KMS with a customer-managed key policy and narrowly scoped IAM permissions",
-        "zh": "SSE-KMS、顧客管理キーのキーポリシー、範囲を絞った IAM 権限",
+        "zh": "使用 SSE-KMS、客户管理密钥的密钥策略，以及严格限定范围的 IAM 权限",
         "ja": "SSE-KMS とカスタマーマネージドキーのキーポリシー、および最小限の IAM 権限"
       },
       {
         "letter": "D",
         "en": "Disable encryption and rely on bucket names being private",
-        "zh": "暗号化を無効にし、存储桶名称保密即可",
+        "zh": "禁用加密，仅依靠存储桶名称保密",
         "ja": "暗号化を無効にし、バケット名を秘密にする"
       }
     ],
@@ -343,7 +343,7 @@
       {
         "letter": "C",
         "en": "An EC2 user-data script",
-        "zh": "EC2 user-data スクリプト",
+        "zh": "EC2 用户数据脚本",
         "ja": "EC2 の user-data スクリプト"
       },
       {
@@ -808,13 +808,13 @@
       {
         "letter": "B",
         "en": "An EC2 instance that copies events to local files",
-        "zh": "イベントをローカルファイルにコピーする EC2",
+        "zh": "将事件复制到本地文件的 EC2 实例",
         "ja": "イベントをローカルファイルにコピーする EC2"
       },
       {
         "letter": "C",
         "en": "A single Lambda function that calls consumers sequentially",
-        "zh": "各コンシューマーを順に呼ぶ単一 Lambda 関数",
+        "zh": "按顺序调用各个消费者的单个 Lambda 函数",
         "ja": "コンシューマーを順番に呼び出す単一 Lambda 関数"
       },
       {
@@ -1349,13 +1349,13 @@
       {
         "letter": "A",
         "en": "st1 throughput optimized HDD",
-        "zh": "st1 スループット最適化 HDD",
+        "zh": "st1 吞吐量优化型 HDD",
         "ja": "st1 スループット最適化 HDD"
       },
       {
         "letter": "B",
         "en": "sc1 cold HDD",
-        "zh": "sc1 コールド HDD",
+        "zh": "sc1 冷 HDD",
         "ja": "sc1 コールド HDD"
       },
       {
@@ -1535,7 +1535,7 @@
       {
         "letter": "B",
         "en": "A self-managed database on one EC2 instance",
-        "zh": "1 台の EC2 で自己管理するデータベース",
+        "zh": "在单个 EC2 实例上自行管理的数据库",
         "ja": "1 台の EC2 上で自己管理するデータベース"
       },
       {
@@ -1902,13 +1902,13 @@
       {
         "letter": "B",
         "en": "S3 Glacier Deep Archive only",
-        "zh": "S3 Glacier Deep Archive のみ",
+        "zh": "仅使用 S3 Glacier Deep Archive",
         "ja": "S3 Glacier Deep Archive のみ"
       },
       {
         "letter": "C",
         "en": "S3 One Zone-IA for all data",
-        "zh": "すべてのデータに S3 One Zone-IA",
+        "zh": "对所有数据使用 S3 One Zone-IA",
         "ja": "すべてのデータに S3 One Zone-IA"
       },
       {

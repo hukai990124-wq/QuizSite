@@ -51,6 +51,28 @@ async function main() {
     await other.locator('#qb-color-mode').waitFor();
     await other.locator('#qb-color-mode').selectOption('light');
     await page.waitForFunction(() => document.documentElement.dataset.colorMode === 'light');
+    for (const url of ['/aws-saa/original/part01.html', '/random.html?pool=aws-saa&size=50&seed=12345678']) {
+      await page.goto(base + url);
+      await page.locator('.q').first().waitFor();
+      await page.waitForFunction(() => window.__I18N_READY__);
+      for (const language of ['zh', 'ja', 'en', 'zh']) {
+        await page.evaluate(language => window.__I18N__.setLang(language), language);
+        const visible = await page.locator('.q').evaluateAll(questions => questions.flatMap(q =>
+          [...q.querySelectorAll('.zh, .ja')].filter(p => getComputedStyle(p).display !== 'none').map(p => p.className)));
+        assert.ok(visible.every(value => value === language), `${url}: unexpected translation in ${language}: ${[...new Set(visible)]}`);
+        if (language === 'zh') {
+          assert.ok(visible.length > 0);
+          assert.equal(await page.locator('.q .ja:visible').count(), 0);
+        }
+      }
+      await page.locator('#qb-color-mode').selectOption('dark');
+      const option = page.locator('.q').first().locator('li.opt').first();
+      await option.click();
+      await page.waitForFunction(() => getComputedStyle(document.querySelector('li.opt.sel')).backgroundColor === 'rgb(210, 180, 140)');
+      assert.equal(await option.locator('.zh').evaluate(el => getComputedStyle(el).color), 'rgb(48, 37, 27)');
+      await page.screenshot({path:path.join(process.env.TEMP, url.startsWith('/random') ? 'saa-random-selected.png' : 'saa-original-selected.png')});
+    }
+    await page.locator('#qb-color-mode').selectOption('light');
     await page.goto(base + '/knight/');
     await page.locator('#qb-color-mode').waitFor();
     await page.waitForFunction(() => document.documentElement.dataset.themePage === 'knight');

@@ -17,6 +17,10 @@ html[data-color-mode="dark"] :is(.opts li, li.opt, .letter, .fields, .source, .s
 html[data-color-mode="dark"] :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea, pre, code, table, th, td) { background-color: #111c2a !important; color: var(--qb-text) !important; border-color: var(--qb-border) !important; }
 html[data-color-mode="dark"] :is(.toolbar button, .qbar button, .qact button, .btns button, .qb-question-chat, .qb-chat-dialog button, .qb-account-switch button, .author-dialog .close, .reset-dialog .close, .reset-dialog .ghost) { background: #22344b !important; color: var(--qb-text) !important; border-color: #50647d !important; }
 html[data-color-mode="dark"] :is(.qb-account-submit, #qb-chat-send, .toolbar button.primary) { background: #16603e !important; color: white !important; }
+/* Keep an unsubmitted choice distinct from the dark option surface. */
+html[data-color-mode="dark"] li.opt.sel { background: #d2b48c !important; color: #30251b !important; border-color: #e8cda9 !important; --en: #30251b; --zh: #30251b; }
+html[data-color-mode="dark"] li.opt.sel :is(.en, .zh, .ja) { color: #30251b !important; }
+html[data-color-mode="dark"] li.opt.sel .letter { background: #30251b !important; color: #f6e8d5 !important; border-color: #30251b !important; }
 html[data-color-mode="dark"] :is(.opts li.good, .opts li.correct, .opt.good, .opt.correct, .opt.ok, .ans, .anbody, .verdict.good) { background: #123329 !important; color: #b0efcf !important; border-color: #448969 !important; }
 html[data-color-mode="dark"] :is(.opts li.bad, .opts li.wrong, .opt.bad, .opt.wrong, .verdict.bad, .qb-account-delete-panel) { background: #3c2029 !important; color: #ffc0c8 !important; border-color: #a9636e !important; }
 html[data-color-mode="dark"] :is(.ans summary, .ans .correct, .ans .correct b) { color: #a9ecc9 !important; }
