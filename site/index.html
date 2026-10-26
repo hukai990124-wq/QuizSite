@@ -29,9 +29,16 @@ a{color:#1d4e79}
 .author-dialog .eyebrow,.reset-dialog .eyebrow{margin:0 0 5px;color:#64748b;font-size:12px}
 .author-dialog h2,.reset-dialog h2{margin:0 38px 8px 0;font-size:20px;line-height:1.35}
 .author-dialog .description,.reset-dialog .description{margin:0 0 18px;color:#475569;font-size:14px;line-height:1.65}
-.author-dialog .profile{display:block;padding:12px 14px;border:1px solid #d8e3ed;border-radius:10px;background:#f8fafc;
+.author-dialog .profile{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #d8e3ed;border-radius:10px;background:#f8fafc;
  color:#1d4e79;font-size:14px;font-weight:600;overflow-wrap:anywhere;text-decoration:none}
 .author-dialog .profile:hover{background:#eff6ff;border-color:#93c5fd}
+.author-dialog .profile + .profile{margin-top:10px}
+.author-dialog .profile-copy{display:grid;gap:2px;min-width:0}
+.author-dialog .profile-url{font-size:12px;font-weight:400}
+.author-dialog .profile-icon{flex:0 0 24px;width:24px;height:24px}
+.author-dialog .github-logo-dark{display:none}
+html[data-color-mode="dark"] .author-dialog .github-logo-light{display:none}
+html[data-color-mode="dark"] .author-dialog .github-logo-dark{display:block}
 /* 「重置学习进度」确认框里的两个动作按钮 */
 .reset-dialog .acts{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
 .reset-dialog .acts button{font:inherit;font-size:13.5px;font-weight:600;border-radius:10px;padding:9px 17px;
@@ -189,7 +196,15 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <p class="eyebrow">题库作者</p>
     <h2 id="contact-author-title">联系作者</h2>
     <p class="description">欢迎通过 GitHub 联系，题目、答案或页面方面的反馈都很欢迎。</p>
-    <a class="profile" href="https://github.com/hukai990124-wq" target="_blank" rel="noopener noreferrer">https://github.com/hukai990124-wq</a>
+    <a class="profile i18n-noloc" href="https://github.com/hukai990124-wq" target="_blank" rel="noopener noreferrer">
+      <img class="profile-icon github-logo-light" src="/assets/github-invertocat-black.svg" width="24" height="24" alt="">
+      <img class="profile-icon github-logo-dark" src="/assets/github-invertocat-white.svg" width="24" height="24" alt="">
+      <span class="profile-copy"><strong>GitHub</strong><span class="profile-url">github.com/hukai990124-wq</span></span>
+    </a>
+    <a class="profile" href="https://hukaicv.hukai990124.workers.dev/" target="_blank" rel="noopener noreferrer">
+      <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18M5 6h14M5 18h14"></path></svg>
+      <span class="profile-copy"><strong>个人网站</strong><span class="profile-url i18n-noloc">hukaicv.hukai990124.workers.dev</span></span>
+    </a>
   </div>
 </dialog>
 
