@@ -104,7 +104,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 
   <div class="grp">
     <h2>附录</h2>
-    <a class="card" href="appendix_official.html" data-quiz-group="aws:official" data-quiz-count="1" data-quiz-total="10">
+    <a class="card" href="appendix_official.html" data-quiz-group="aws:official" data-quiz-count="1" data-quiz-total="10" data-quiz-key="aws:official">
       <span class="tx"><span class="n">AWS 官方样题（10 题）</span>
       <span class="d">AWS 官方 Sample Questions · 官方答案与解析 · 唯一权威来源</span>
       <span class="pg"><i></i><span>未开始</span></span></span>
@@ -136,13 +136,14 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 (function(){
 "use strict";
 function qa(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+function refreshProgress(){
 qa("[data-quiz-group]").forEach(function(el){
   var g=el.getAttribute("data-quiz-group");
   var cnt=parseInt(el.getAttribute("data-quiz-count")||"1",10);
   var total=parseInt(el.getAttribute("data-quiz-total")||"0",10);
   var d=0,o=0;
   for(var i=1;i<=cnt;i++){
-    var key="quiz:"+g+":"+("0"+i).slice(-2);
+    var key="quiz:"+(el.getAttribute("data-quiz-key")||g+":"+("0"+i).slice(-2));
     var S={};
     try{S=JSON.parse(localStorage.getItem(key)||"{}")||{}}catch(e){S={}}
     Object.keys(S).forEach(function(k){
@@ -153,7 +154,13 @@ qa("[data-quiz-group]").forEach(function(el){
   var bar=el.querySelector(".pg i"),txt=el.querySelector(".pg span");
   if(bar)bar.style.width=(total?d/total*100:0)+"%";
   if(txt)txt.textContent=d?(d+"/"+total+" 题 · 正确率 "+Math.round(o/d*100)+"%"):"未开始";
-  if(d){var c=el.querySelector(".pg");if(c)c.classList.add("on")}
+  var c=el.querySelector(".pg");if(c)c.classList.toggle("on",!!d);
+});
+}
+refreshProgress();
+window.addEventListener("quizsite:progress-updated",refreshProgress);
+window.addEventListener("storage",function(event){
+  if(event.key===null||event.key.indexOf("quiz:")===0)refreshProgress();
 });
 })();
 </script>

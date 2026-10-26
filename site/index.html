@@ -164,7 +164,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <span class="badge">个人题库 · 在线练习</span>
     <h1>我的题库</h1>
     <div class="hero-sub">
-      <p class="sub">13 个题库 · 共 5641 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <p class="sub">13 个题库 · 共 5691 题次 · 可作答判分 · 登录后跨设备同步</p>
       <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
     </div>
     <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
@@ -209,7 +209,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <main>
   <div class="wrap">
     <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 5641</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 5691</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
     </div>
 
@@ -415,7 +415,8 @@ function awsKeys(){
   ["real","compliance"].forEach(function(g){
     for(var i=1;i<=10;i++)a.push(["aws:"+g+":"+pad2(i),50]);
   });
-  a.push(["aws:official:01",10]);
+  a.push(["aws:original:01",50]);
+  a.push(["aws:official",10]);
   return a;
 }
 /* AIF-C01：真题库（bank，10 份）+ 练习卷（practice，5 份） */
