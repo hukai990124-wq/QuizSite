@@ -36,3 +36,13 @@ test('rejects invalid, cross-origin, oversized and over-quota requests without i
   assert.equal((await handleGavinSpeech(request({text:'hello', language:'en'}), env)).status, 429);
   assert.equal(calls.length, 0);
 });
+
+test('reports the failed service stage without logging the speech text', async t => {
+  const { env } = fixture(t);
+  env.DB.prepare = () => { throw new Error('database unavailable'); };
+  const log = t.mock.method(console, 'warn', () => {});
+  assert.equal((await handleGavinSpeech(request({ text: 'Private example', language: 'en' }), env)).status, 503);
+  const entry = JSON.parse(log.mock.calls[0].arguments[0]);
+  assert.equal(entry.stage, 'quota_database');
+  assert.doesNotMatch(JSON.stringify(entry), /Private example/);
+});

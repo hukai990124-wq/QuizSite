@@ -10,6 +10,7 @@ export async function handleGavinSpeech(request, env) {
   if (!env.MY_AI_BINDING || !env.DB || !env.AUTH_LIMIT) return new Response(null, { status: 503 });
   const ip = request.headers.get('CF-Connecting-IP');
   if (!ip) return new Response(null, { status: 403 });
+  let stage = 'rate_limit';
   try {
     const limited = await env.AUTH_LIMIT.limit({ key: `gavin-speech:${ip}` });
     if (!limited.success) return new Response(null, { status: 429 });
@@ -26,13 +27,19 @@ export async function handleGavinSpeech(request, env) {
     }
     const data = JSON.parse(await new Blob(chunks).text());
     if (!data || typeof data.text !== 'string' || !data.text.trim() || data.text.length > 600 || data.language !== 'en') return new Response(null, { status: 400 });
+    stage = 'quota_database';
     const day = new Date().toISOString().slice(0, 10);
     const usage = await env.DB.prepare('INSERT INTO gavin_speech_usage (day, requests) VALUES (?, 1) ON CONFLICT(day) DO UPDATE SET requests = requests + 1 WHERE requests < ? RETURNING requests').bind(day, DAILY_LIMIT).first();
     if (!usage) return new Response(null, { status: 429 });
+    stage = 'model';
     const audio = await env.MY_AI_BINDING.run(MODEL, { prompt: data.text.trim(), lang: 'en' });
-    if (!(audio instanceof ReadableStream) && !(audio instanceof ArrayBuffer) && !(audio instanceof Uint8Array)) return new Response(null, { status: 502 });
+    if (!(audio instanceof ReadableStream) && !(audio instanceof ArrayBuffer) && !(audio instanceof Uint8Array)) {
+      console.warn(JSON.stringify({ event: 'gavin_speech_invalid_audio' }));
+      return new Response(null, { status: 502 });
+    }
     return new Response(audio, { headers: { 'Content-Type': 'audio/mpeg', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' } });
-  } catch {
+  } catch (error) {
+    console.warn(JSON.stringify({ event: 'gavin_speech_failure', stage, errorName: error instanceof Error ? error.name : 'Error' }));
     return new Response(null, { status: 503 });
   }
 }
