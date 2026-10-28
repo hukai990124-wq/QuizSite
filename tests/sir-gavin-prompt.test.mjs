@@ -16,6 +16,9 @@ test('Gavin follows the current question language despite Chinese history and de
     assert.match(messages[0].content, /当前这条提问/);
     assert.match(messages[0].content, /2–4 句/);
     assert.match(messages[0].content, /学术问题也遵守/);
+    assert.match(messages[0].content, /language of the user's latest message/);
+    assert.match(messages[0].content, /Ignore the website and browser language/);
+    assert.match(messages[0].content, /language the user explicitly requests/);
   }
   assert.doesNotMatch(SIR_GAVIN_PROMPT, /使用优雅、略带古风而清楚易懂的中文|始终称呼用户为/);
   assert.match(SIR_GAVIN_PROMPT, /中文提示词/);

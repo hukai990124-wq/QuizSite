@@ -10,7 +10,8 @@ export const GAVIN_CLOUDFLARE_MODEL = "@cf/meta/llama-3.1-8b-instruct-fp8";
 export const GAVIN_MAX_OUTPUT = 512;
 export function buildSirGavinMessages(question, history = []) {
     const body = parseChatRequestBody({ question, context: "", history });
-    return [{ role: "system", content: SIR_GAVIN_PROMPT }, ...body.history, { role: "user", content: body.question }];
+    const languageReminder = "Reply in the language of the user's latest message, or in the language the user explicitly requests. Ignore the website and browser language and do not let earlier conversation override the latest message. If the language is ambiguous, use the user's most recent identifiable language or ask briefly.";
+    return [{ role: "system", content: `${SIR_GAVIN_PROMPT}\n\n${languageReminder}` }, ...body.history, { role: "user", content: body.question }];
 }
 // 学习助手 AI（题库答疑）：现有 /api/chat 使用以下模型、额度策略和 CHAT_PROMPT。
 // 与 GavinAI 的人设配置独立；修改下方提示词不会修改骑士导师。

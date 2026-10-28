@@ -13,7 +13,8 @@ export const GAVIN_MAX_OUTPUT = 512;
 
 export function buildSirGavinMessages(question: string, history: ChatHistoryEntry[] = []): ChatMessage[] {
   const body = parseChatRequestBody({ question, context: "", history });
-  return [{ role: "system", content: SIR_GAVIN_PROMPT }, ...body.history, { role: "user", content: body.question }];
+  const languageReminder = "Reply in the language of the user's latest message, or in the language the user explicitly requests. Ignore the website and browser language and do not let earlier conversation override the latest message. If the language is ambiguous, use the user's most recent identifiable language or ask briefly.";
+  return [{ role: "system", content: `${SIR_GAVIN_PROMPT}\n\n${languageReminder}` }, ...body.history, { role: "user", content: body.question }];
 }
 
 export type ChatRole = "system" | "user" | "assistant";
