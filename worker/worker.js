@@ -12,6 +12,7 @@
 
 import { handleAccountRequest } from "./account.mjs";
 import { handleChatRequest } from "./chat.mjs";
+import { handleGavinSpeech } from "./gavin-speech.mjs";
 import { handleStudyTimeRequest, clearExpiredStudyTime } from "./weekly-study.mjs";
 
 // 心跳超时：超过这个时长没有任何消息就当作已离开
@@ -64,6 +65,7 @@ const CC = {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.pathname === "/api/gavin/speech") return handleGavinSpeech(request, env);
     if (url.pathname === "/api/study-time") return handleStudyTimeRequest(request, env);
     if (["/api/chat", "/api/chat/status", "/api/gavin", "/api/gavin/status"].includes(url.pathname)) {
       return handleChatRequest(request, env, ctx);
