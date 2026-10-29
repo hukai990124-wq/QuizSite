@@ -13,6 +13,7 @@ const memoryStatus = document.getElementById('gavin-memory-status') as HTMLParag
 const memoryRetry = document.getElementById('gavin-memory-retry') as HTMLButtonElement;
 const memoryManage = document.getElementById('gavin-memory-manage') as HTMLButtonElement;
 const memoryDialog = document.getElementById('gavin-memory-dialog') as HTMLDialogElement;
+const memorySummaryView = document.getElementById('gavin-memory-summary') as HTMLParagraphElement;
 const memoryClear = document.getElementById('gavin-memory-clear') as HTMLButtonElement;
 const memoryCancel = document.getElementById('gavin-memory-cancel') as HTMLButtonElement;
 const speech = createGavinSpeech();
@@ -29,7 +30,9 @@ let memoryBusy = false;
 let generation = 0;
 let accountCheckVersion = 0;
 let revision = 0;
-let pending: { question: string; answer: string; revision: number } | null = null;
+let storedMessages: ChatHistoryEntry[] = [];
+let memorySummary = '';
+let pending: { question: string; answer: string; revision: number; summary?: string; compactedCount?: number; previousMessages: ChatHistoryEntry[]; previousSummary: string; summaryUnavailable: boolean } | null = null;
 let conflict = false;
 let memoryController: AbortController | null = null;
 
@@ -51,15 +54,28 @@ function resetLog(): void {
   log.appendChild(placeholder);
 }
 
-function parseConversation(value: unknown): { messages: ChatHistoryEntry[]; revision: number } {
+function parseConversation(value: unknown): { messages: ChatHistoryEntry[]; summary: string; revision: number } {
   if (typeof value !== 'object' || value === null || !('messages' in value) || !('revision' in value)) throw new Error('无法识别云端记录。');
-  const data = value as { messages: unknown; revision: unknown };
+  const data = value as { messages: unknown; summary?: unknown; revision: unknown };
   if (!Array.isArray(data.messages) || data.messages.length > 100 || typeof data.revision !== 'number' || !Number.isSafeInteger(data.revision) || data.revision < 0) throw new Error('无法识别云端记录。');
+  if (data.summary !== undefined && (typeof data.summary !== 'string' || data.summary.length > 1600)) throw new Error('无法识别云端摘要。');
   const messages: ChatHistoryEntry[] = data.messages.map((item: unknown) => {
     if (typeof item !== 'object' || item === null || !('role' in item) || !('content' in item) || (item.role !== 'user' && item.role !== 'assistant') || typeof item.content !== 'string' || item.content.length > 4000) throw new Error('无法识别云端记录。');
     return { role: item.role, content: item.content };
   });
-  return { messages, revision: data.revision };
+  return { messages, summary: data.summary ?? '', revision: data.revision };
+}
+
+function updateMemory(summary: string, messages: ChatHistoryEntry[]): void {
+  memorySummary = summary;
+  storedMessages = messages;
+  memorySummaryView.textContent = summary || '暂无摘要。';
+}
+
+function savedMemoryStatus(messages: ChatHistoryEntry[]): string {
+  return messages.length > 6
+    ? `云端已保存；较早的 ${messages.length - 6} 条对话将在后续聊天中逐步归纳为摘要。`
+    : '摘要与最近三轮对话已保存到账号云端。';
 }
 
 function renderConversation(messages: ChatHistoryEntry[]): void {
@@ -93,9 +109,10 @@ async function loadConversation(expected: number): Promise<void> {
     const result = parseConversation(await response.json());
     if (expected !== generation) return;
     revision = result.revision;
+    updateMemory(result.summary, result.messages);
     renderConversation(result.messages);
     memoryReady = true;
-    memoryStatus.textContent = '对话已保存到账号云端；Gavin 使用最近三轮对话作为上下文。';
+    memoryStatus.textContent = savedMemoryStatus(result.messages);
   } catch {
     if (expected !== generation) return;
     memoryStatus.textContent = '无法读取云端记录，请检查账号和网络后重试。';
@@ -114,8 +131,16 @@ async function savePending(expected: number): Promise<void> {
   memoryStatus.textContent = '正在保存对话到账号云端…';
   controls();
   try {
-    const response = await conversationRequest('POST', turn);
+    const { previousMessages, previousSummary, summaryUnavailable, ...payload } = turn;
+    const response = await conversationRequest('POST', payload);
     if (expected !== generation) return;
+    if (response.status === 422) {
+      conflict = true;
+      memoryStatus.textContent = '云端记录已达上限，无法保存本轮。请先复制本轮内容，再重新载入云端记录。';
+      memoryRetry.textContent = '重新载入云端记录';
+      memoryRetry.hidden = false;
+      return;
+    }
     if (response.status === 429 || response.status === 503) {
       memoryStatus.textContent = '本轮尚未确认保存，云端服务暂时繁忙，请稍后重试保存。';
       memoryRetry.textContent = '重试保存';
@@ -128,12 +153,18 @@ async function savePending(expected: number): Promise<void> {
       if (!latestResponse.ok) throw new Error('无法确认保存状态。');
       const latest = parseConversation(await latestResponse.json());
       if (expected !== generation) return;
-      const last = latest.messages.slice(-2);
-      if (latest.revision === turn.revision + 1 && last.length === 2 && last[0].role === 'user' && last[0].content === turn.question && last[1].role === 'assistant' && last[1].content === turn.answer) {
+      const expectedMessages = [...previousMessages.slice(turn.compactedCount ?? 0),
+        { role: 'user', content: turn.question }, { role: 'assistant', content: turn.answer }];
+      if (latest.revision === turn.revision + 1 && latest.summary === (turn.summary ?? previousSummary)
+          && latest.messages.length === expectedMessages.length
+          && latest.messages.every((message, index) => message.role === expectedMessages[index].role && message.content === expectedMessages[index].content)) {
         revision = latest.revision;
         pending = null;
+        updateMemory(latest.summary, latest.messages);
         renderConversation(latest.messages);
-        memoryStatus.textContent = '对话已保存到账号云端；Gavin 使用最近三轮对话作为上下文。';
+        memoryStatus.textContent = summaryUnavailable
+          ? '本轮已保存；摘要暂未生成，旧对话仍保留，将在下次对话时重试。'
+          : savedMemoryStatus(latest.messages);
       } else {
         conflict = true;
         memoryStatus.textContent = '云端记录已在其他设备发生变化，本轮保存状态无法确认。请先复制本轮内容，再重新载入云端记录。';
@@ -147,7 +178,10 @@ async function savePending(expected: number): Promise<void> {
     if (expected !== generation) return;
     revision = saved.revision;
     pending = null;
-    memoryStatus.textContent = '对话已保存到账号云端；Gavin 使用最近三轮对话作为上下文。';
+    updateMemory(saved.summary, saved.messages);
+    memoryStatus.textContent = summaryUnavailable
+      ? '本轮已保存；摘要暂未生成，旧对话仍保留，将在下次对话时重试。'
+      : savedMemoryStatus(saved.messages);
   } catch {
     if (expected !== generation) return;
     memoryStatus.textContent = '本轮对话尚未确认保存，请检查网络并重试保存。';
@@ -175,6 +209,7 @@ function changeUser(next: string | null): void {
   pending = null;
   conflict = false;
   history = [];
+  updateMemory('', []);
   revision = 0;
   memoryRetry.hidden = true;
   if (memoryDialog.open) memoryDialog.close();
@@ -250,6 +285,11 @@ form.addEventListener('submit', async event => {
   const question = input.value.trim();
   if (busy || !ready || !accountResolved || memoryBusy || (!!username && (!memoryReady || !!pending)) || !question) return;
   const expected = generation;
+  const compactedCount = username ? Math.min(6, Math.max(0, Math.floor((storedMessages.length - 4) / 2) * 2)) : 0;
+  const summarizeMessages = compactedCount ? storedMessages.slice(0, compactedCount) : [];
+  const currentHistory = username
+    ? storedMessages.slice(compactedCount).slice(-6).map(message => ({ ...message, content: message.content.slice(0, 2000) }))
+    : history;
   speech.stop(true);
   busy = true;
   controls();
@@ -260,7 +300,9 @@ form.addEventListener('submit', async event => {
     const response = await fetch('/api/gavin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'X-Gavin-Account': username ? 'user:' + encodeURIComponent(username) : 'guest' },
-      body: JSON.stringify({ question, history, provider: modelSelect.value }),
+      body: JSON.stringify({ question, history: currentHistory, provider: modelSelect.value,
+        ...(username && memorySummary ? { memorySummary } : {}),
+        ...(compactedCount ? { summarizeMessages } : {}) }),
       signal: AbortSignal.any([active.signal, AbortSignal.timeout(95000)]),
     });
     if (!response.ok) {
@@ -268,7 +310,20 @@ form.addEventListener('submit', async event => {
       const failure: unknown = await response.json();
       throw new Error(typeof failure === 'object' && failure !== null && 'error' in failure && typeof failure.error === 'string' ? failure.error : 'GavinAI 暂时无法回答。');
     }
-    const result = parseChatAnswer(await response.json());
+    const data: unknown = await response.json();
+    const result = parseChatAnswer(data);
+    let nextSummary: string | undefined;
+    let summaryUnavailable = false;
+    if (compactedCount) {
+      if (typeof data === 'object' && data !== null && 'summaryUnavailable' in data && data.summaryUnavailable === true) {
+        summaryUnavailable = true;
+      } else if (typeof data !== 'object' || data === null || !('summary' in data) || typeof data.summary !== 'string'
+          || !data.summary.trim() || data.summary.length > 1600 || result.truncated) {
+        throw new Error('记忆摘要未完成，原有云端记录未改变，请重新提问。');
+      } else {
+        nextSummary = data.summary;
+      }
+    }
     if (expected !== generation) return;
     const reply = append('GavinAI', result.answer);
     speech.read(result.answer, question);
@@ -281,14 +336,14 @@ form.addEventListener('submit', async event => {
     history = history.slice(-6);
     input.value = '';
     if (username) {
+      pending = { question, answer: result.answer, revision, previousMessages: storedMessages.map(message => ({ ...message })),
+        previousSummary: memorySummary, summaryUnavailable, ...(nextSummary === undefined ? {} : { summary: nextSummary, compactedCount }) };
       if (result.answer.length > 4000) {
         memoryStatus.textContent = '本轮回答过长，无法保存到云端；请复制内容后重新载入云端记录。';
-        pending = { question, answer: result.answer, revision };
         conflict = true;
         memoryRetry.textContent = '重新载入云端记录';
         memoryRetry.hidden = false;
       } else {
-        pending = { question, answer: result.answer, revision };
         await savePending(expected);
       }
     }
@@ -364,6 +419,7 @@ memoryClear.addEventListener('click', async () => {
     conflict = false;
     speech.stop(true);
     history = [];
+    updateMemory('', []);
     resetLog();
     memoryRetry.hidden = true;
     memoryDialog.close();

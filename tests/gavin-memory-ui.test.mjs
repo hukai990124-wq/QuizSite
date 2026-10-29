@@ -16,7 +16,7 @@ class Element extends EventTarget {
   close() { this.open = false; }
 }
 
-const ids = ['gavin-form', 'gavin-input', 'gavin-send', 'gavin-retry', 'gavin-log', 'gavin-status', 'gavin-model', 'gavin-read', 'gavin-stop', 'gavin-speech-status', 'gavin-memory-status', 'gavin-memory-retry', 'gavin-memory-manage', 'gavin-memory-dialog', 'gavin-memory-clear', 'gavin-memory-cancel'];
+const ids = ['gavin-form', 'gavin-input', 'gavin-send', 'gavin-retry', 'gavin-log', 'gavin-status', 'gavin-model', 'gavin-read', 'gavin-stop', 'gavin-speech-status', 'gavin-memory-status', 'gavin-memory-retry', 'gavin-memory-manage', 'gavin-memory-dialog', 'gavin-memory-summary', 'gavin-memory-clear', 'gavin-memory-cancel'];
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
 async function settle() { for (let i = 0; i < 8; i++) await tick(); }
 
@@ -188,4 +188,152 @@ test('logout while a response is pending clears private history and ignores the 
   assert.doesNotMatch(elements['gavin-log'].textContent, /Private history|Private late answer/);
   assert.equal(postCount, 0);
   assert.match(elements['gavin-memory-status'].textContent, /访客/);
+});
+
+test('Gavin gradually summarizes old turns, sends its existing memory and restores the saved summary', async t => {
+  let messages = Array.from({ length: 8 }, (_, i) => ({ role: i % 2 ? 'assistant' : 'user', content: i === 1 ? 'x'.repeat(3000) : 'Old ' + i }));
+  const original = messages.map(message => ({ ...message }));
+  let summary = 'Existing memory';
+  let revision = 4;
+  let chatPayload;
+  let savePayload;
+  const { elements } = await mount(t, async (url, options = {}) => {
+    if (url === '/api/auth/me') return json({ user: { username: 'alice' } });
+    if (url.startsWith('/api/gavin/status')) return json(status);
+    if (url === '/api/gavin/speech') return new Response(null, { status: 503 });
+    if (url === '/api/gavin') {
+      chatPayload = JSON.parse(options.body);
+      return json({ ...status, answer: 'New answer', summary: 'Updated memory', truncated: false });
+    }
+    if (url === '/api/gavin/conversation' && options.method === 'GET') return json({ messages, revision, summary });
+    if (url === '/api/gavin/conversation' && options.method === 'POST') {
+      savePayload = JSON.parse(options.body);
+      messages = [...messages.slice(savePayload.compactedCount), { role: 'user', content: savePayload.question }, { role: 'assistant', content: savePayload.answer }];
+      summary = savePayload.summary;
+      return json({ messages, summary, revision: ++revision });
+    }
+    throw new Error('Unexpected URL ' + url);
+  });
+  assert.equal(elements['gavin-memory-summary'].textContent, 'Existing memory');
+  assert.match(elements['gavin-memory-status'].textContent, /逐步归纳/);
+  elements['gavin-input'].value = 'New question';
+  elements['gavin-form'].dispatchEvent(new Event('submit', { cancelable: true }));
+  await settle();
+  assert.equal(chatPayload.memorySummary, 'Existing memory');
+  assert.deepEqual(chatPayload.summarizeMessages, original.slice(0, 4));
+  assert.deepEqual(chatPayload.history, original.slice(4));
+  assert.equal(savePayload.compactedCount, 4);
+  assert.equal(savePayload.summary, 'Updated memory');
+  assert.equal(messages.length, 6);
+  assert.equal(elements['gavin-memory-summary'].textContent, 'Updated memory');
+});
+
+test('an invalid or truncated generated summary does not replace or delete the old cloud conversation', async t => {
+  const oldMessages = Array.from({ length: 6 }, (_, i) => ({ role: i % 2 ? 'assistant' : 'user', content: 'Old ' + i }));
+  let writes = 0;
+  const { elements } = await mount(t, async (url, options = {}) => {
+    if (url === '/api/auth/me') return json({ user: { username: 'alice' } });
+    if (url.startsWith('/api/gavin/status')) return json(status);
+    if (url === '/api/gavin/conversation' && options.method === 'GET') return json({ messages: oldMessages, summary: 'Old summary', revision: 1 });
+    if (url === '/api/gavin/conversation' && options.method === 'POST') { writes++; return json({ messages: [], summary: '', revision: 2 }); }
+    if (url === '/api/gavin') return json({ ...status, answer: 'Answer', summary: 'Incomplete', truncated: true });
+    throw new Error('Unexpected URL ' + url);
+  });
+  elements['gavin-input'].value = 'Question';
+  elements['gavin-form'].dispatchEvent(new Event('submit', { cancelable: true }));
+  await settle();
+  assert.equal(writes, 0);
+  assert.equal(elements['gavin-memory-summary'].textContent, 'Old summary');
+  assert.match(elements['gavin-log'].textContent, /Old 0/);
+  assert.match(elements['gavin-status'].textContent, /原有云端记录未改变/);
+});
+
+test('a failed summary save keeps the original cloud messages and retries the identical update', async t => {
+  let messages = Array.from({ length: 6 }, (_, i) => ({ role: i % 2 ? 'assistant' : 'user', content: 'Old ' + i }));
+  let summary = 'Before';
+  let revision = 1;
+  const attempts = [];
+  const { elements } = await mount(t, async (url, options = {}) => {
+    if (url === '/api/auth/me') return json({ user: { username: 'alice' } });
+    if (url.startsWith('/api/gavin/status')) return json(status);
+    if (url === '/api/gavin/speech') return new Response(null, { status: 503 });
+    if (url === '/api/gavin') return json({ ...status, answer: 'New answer', summary: 'After', truncated: false });
+    if (url === '/api/gavin/conversation' && options.method === 'GET') return json({ messages, summary, revision });
+    if (url === '/api/gavin/conversation' && options.method === 'POST') {
+      const turn = JSON.parse(options.body);
+      attempts.push(turn);
+      if (attempts.length === 1) throw new Error('offline');
+      messages = [...messages.slice(turn.compactedCount), { role: 'user', content: turn.question }, { role: 'assistant', content: turn.answer }];
+      summary = turn.summary;
+      return json({ messages, summary, revision: ++revision });
+    }
+    throw new Error('Unexpected URL ' + url);
+  });
+  elements['gavin-input'].value = 'Question';
+  elements['gavin-form'].dispatchEvent(new Event('submit', { cancelable: true }));
+  await settle();
+  assert.equal(messages.length, 6);
+  assert.equal(summary, 'Before');
+  assert.equal(elements['gavin-send'].disabled, true);
+  assert.match(elements['gavin-log'].textContent, /New answer/);
+  elements['gavin-memory-retry'].dispatchEvent(new Event('click'));
+  await settle();
+  assert.deepEqual(attempts[1], attempts[0]);
+  assert.equal(summary, 'After');
+  assert.equal(messages.length, 6);
+  assert.equal(elements['gavin-memory-summary'].textContent, 'After');
+});
+
+test('a conflict with matching last turn and summary but different compacted history remains unresolved', async t => {
+  const oldMessages = Array.from({ length: 6 }, (_, i) => ({ role: i % 2 ? 'assistant' : 'user', content: 'Old ' + i }));
+  let reads = 0;
+  const { elements } = await mount(t, async (url, options = {}) => {
+    if (url === '/api/auth/me') return json({ user: { username: 'alice' } });
+    if (url.startsWith('/api/gavin/status')) return json(status);
+    if (url === '/api/gavin/speech') return new Response(null, { status: 503 });
+    if (url === '/api/gavin') return json({ ...status, answer: 'Answer', summary: 'Same summary', truncated: false });
+    if (url === '/api/gavin/conversation' && options.method === 'GET') {
+      if (++reads === 1) return json({ messages: oldMessages, summary: 'Old summary', revision: 1 });
+      return json({ messages: [...oldMessages.slice(4), { role: 'user', content: 'Question' }, { role: 'assistant', content: 'Answer' }], summary: 'Same summary', revision: 2 });
+    }
+    if (url === '/api/gavin/conversation' && options.method === 'POST') {
+      const body = JSON.parse(options.body);
+      assert.equal(body.compactedCount, 2);
+      assert.equal('previousMessages' in body, false);
+      assert.equal('previousSummary' in body, false);
+      return new Response(null, { status: 409 });
+    }
+    throw new Error('Unexpected URL ' + url);
+  });
+  elements['gavin-input'].value = 'Question';
+  elements['gavin-form'].dispatchEvent(new Event('submit', { cancelable: true }));
+  await settle();
+  assert.match(elements['gavin-memory-status'].textContent, /无法确认/);
+  assert.equal(elements['gavin-send'].disabled, true);
+  assert.match(elements['gavin-log'].textContent, /Answer/);
+});
+
+test('a valid answer with unavailable summary is saved without compacting old messages', async t => {
+  const oldMessages = Array.from({ length: 6 }, (_, i) => ({ role: i % 2 ? 'assistant' : 'user', content: 'Old ' + i }));
+  let saved;
+  const { elements } = await mount(t, async (url, options = {}) => {
+    if (url === '/api/auth/me') return json({ user: { username: 'alice' } });
+    if (url.startsWith('/api/gavin/status')) return json(status);
+    if (url === '/api/gavin/speech') return new Response(null, { status: 503 });
+    if (url === '/api/gavin') return json({ ...status, answer: 'Answer', summaryUnavailable: true, truncated: false });
+    if (url === '/api/gavin/conversation' && options.method === 'GET') return json({ messages: oldMessages, summary: 'Old memory', revision: 1 });
+    if (url === '/api/gavin/conversation' && options.method === 'POST') {
+      saved = JSON.parse(options.body);
+      return json({ messages: [...oldMessages, { role: 'user', content: saved.question }, { role: 'assistant', content: saved.answer }], summary: 'Old memory', revision: 2 });
+    }
+    throw new Error('Unexpected URL ' + url);
+  });
+  elements['gavin-input'].value = 'Question';
+  elements['gavin-form'].dispatchEvent(new Event('submit', { cancelable: true }));
+  await settle();
+  assert.deepEqual(saved, { question: 'Question', answer: 'Answer', revision: 1 });
+  assert.equal(elements['gavin-memory-summary'].textContent, 'Old memory');
+  assert.match(elements['gavin-memory-status'].textContent, /摘要暂未生成/);
+  assert.equal(elements['gavin-send'].disabled, false);
+  assert.match(elements['gavin-log'].textContent, /Answer/);
 });

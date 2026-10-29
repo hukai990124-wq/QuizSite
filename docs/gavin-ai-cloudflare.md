@@ -15,7 +15,7 @@
 - `worker/chat.mts` 中 GavinAI 支持 `cloudflare` 和 `nvidia` 两个供应商，独立接口为 `POST /api/gavin`、`GET /api/gavin/status?provider=cloudflare`。不传 provider 时默认 Cloudflare；学习助手仍使用 `/api/chat`。
 - 使用 Worker 原生 fetch，不需要安装 OpenAI SDK 或单独搭建 Node/Python 服务器。
 - 保留 NVIDIA 示例的 `temperature: 1`、`top_p: 0.95`、`enable_thinking: false`。上游流由服务端收集，只返回完整正文，不返回思考内容。Gavin 页面使用 JSON 整条回复，一次性展示后启动浏览器 TTS；学习助手保留流式显示。移除哈利波特和颜色工具。
-- GavinAI 输出上限为 512 tokens，默认提示词要求始终使用英文回答，接受不同语言的提问；默认 2–4 句短答，学术问题也适用。学习助手仍为 1024 tokens。90 秒超时。GavinAI 与学习助手共用已有 D1 次数、总预算、并发预留保护。NVIDIA 权限错误不关闭学习助手，也不回退到其他付费服务。
+- GavinAI 默认提示词要求始终使用英文回答，接受不同语言的提问；默认 2–4 句短答，学术问题也适用。90 秒超时。GavinAI 与学习助手共用已有 D1 次数、总预算、并发预留保护。NVIDIA 权限错误不关闭学习助手，也不回退到其他付费服务。
 - NVIDIA 选项默认未启用，必须同时设置 `NVIDIA_API_KEY` 和 `GAVIN_AI_ENABLED=true`。尚未使用真实 Key 联调；Workers AI 选项只依赖 AI 绑定。
 
 ## 在 Cloudflare 控制台配置
@@ -25,14 +25,16 @@
 3. 类型选择 **Secret**，名称填 `NVIDIA_API_KEY`，值粘贴完整 NVIDIA Key。
 4. 再添加 `GAVIN_AI_ENABLED`，值为 `true`。可同样用 Secret 类型保存，避免代码部署覆盖开关。
 5. 点击 **Deploy** 应用变量。这一步仅更新当前部署的变量；新代码仍需另外部署。
-6. 部署代码前，在项目目录对现有 D1 数据库执行 `wrangler d1 migrations apply DB --remote`，应用待执行的迁移（包括 `0009_gavin_conversation.sql`）。然后将代码更新到私有 GitHub 仓库，触发已有的 Cloudflare Git 构建；继续沿用原有 Worker、D1、Durable Object 和域名。
+6. 部署代码前，在项目目录对现有 D1 数据库执行 `wrangler d1 migrations apply DB --remote`，应用待执行的迁移（包括 `0009_gavin_conversation.sql` 和 `0010_gavin_memory_summary.sql`）。然后将代码更新到私有 GitHub 仓库，触发已有的 Cloudflare Git 构建；继续沿用原有 Worker、D1、Durable Object 和域名。
 7. 打开部署域名的 `/api/gavin/status?provider=nvidia`，正常配置应返回 `configured: true`。再进入 `/knight/`，选择 NVIDIA 模型并发送问题。状态显示今日共用剩余额度，完整回复生成后一次性显示并开始朗读。
 
 ## 账号会话与记忆
 
-登录账号后，Gavin 的对话记录存储在现有 D1 数据库中，重新登录或更换设备后可恢复；未登录时的对话只保留在当前页面。云端会话最多保留最近 100 条消息，每次提问仍只将最近 6 条消息作为模型上下文。页面中的「记忆管理」可以清除对话记录和这些上下文；删除账号时会级联删除对应会话。存储内容包含用户的问题和 Gavin 的回复，直到主动清除、账号删除或超出消息上限被较早记录淘汰。
+登录账号后，Gavin 的会话记忆存储在现有 D1 数据库中，重新登录或更换设备后可恢复；未登录时的对话只保留在当前页面。云端保存一份最多 1600 字符的摘要和最近 3 轮完整对话；更早对话在摘要成功生成并保存后才移除，无法逐字恢复。旧版已有较长记录会在后续对话中分批压缩；摘要生成或保存失败时保留原记录。每次提问使用摘要和最近 3 轮对话作为上下文。页面中的「记忆管理」可以同时清除摘要和最近对话；删除账号时也会级联删除对应会话。
 
-网页会话接口为 `/api/gavin/conversation`：已登录用户可通过 GET 读取 `{messages, revision}`，通过 POST 发送 `{question, answer, revision}` 追加一轮，或通过 DELETE 发送 `{revision}` 清空；写入时 revision 不匹配返回 409，客户端应重新读取，避免覆盖其他设备的改动。请求需携带 `X-Gavin-Account: user:<URL 编码的用户名>`，服务端将其与已认证会话比较。该头不是身份凭证；接口仍使用网站账号的安全 Cookie 和同源校验。未来原生 App 需另行设计适用的登录凭证和跨域访问，不能把用户名当作认证方式。
+网页会话接口为 `/api/gavin/conversation`：已登录用户可通过 GET 读取 `{messages, summary, revision}`，通过 POST 发送 `{question, answer, revision}` 追加一轮；压缩旧记录时还需提供新 `summary` 和已摘要消息数 `compactedCount`，并用同一版本原子替换。DELETE 发送 `{revision}` 同时清空摘要和对话；写入时 revision 不匹配返回 409，客户端应重新读取，避免覆盖其他设备的改动。请求需携带 `X-Gavin-Account: user:<URL 编码的用户名>`，服务端将其与已认证会话比较。该头不是身份凭证；接口仍使用网站账号的安全 Cookie 和同源校验。未来原生 App 需另行设计适用的登录凭证和跨域访问，不能把用户名当作认证方式。
+
+Gavin 在正常回答的同一次模型调用中整理待压缩的旧记录，不额外占用一次提问；摘要生成会增加本次输入及输出 token 的预算预留。摘要是可能不完整的非可信资料，不作为系统指令。摘要无效时保留旧记录；若模型仍提供有效回答，会在容量允许时保存本轮原文并在后续对话继续尝试摘要。输出被截断或保存版本冲突时不会删除旧记录；重新打开页面也无法恢复未成功保存的回答。
 
 ## 朗读
 

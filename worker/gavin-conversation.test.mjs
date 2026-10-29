@@ -12,7 +12,7 @@ function fixture(t) {
   const sql = new DatabaseSync(':memory:');
   t.after(() => sql.close());
   sql.exec('PRAGMA foreign_keys=ON');
-  for (const name of ['0001_accounts_and_progress.sql', '0009_gavin_conversation.sql']) {
+  for (const name of ['0001_accounts_and_progress.sql', '0009_gavin_conversation.sql', '0010_gavin_memory_summary.sql']) {
     sql.exec(readFileSync(new URL('./migrations/' + name, import.meta.url), 'utf8'));
   }
   for (const [id, username] of [['one', 'Learner'], ['two', 'Second']]) {
@@ -40,14 +40,14 @@ const append = (revision, question = 'Question', answer = 'Answer') => ({ revisi
 
 test('signed-in accounts restore their own saved conversations after reconnecting', async t => {
   const { env } = fixture(t);
-  assert.deepEqual(await (await handleGavinConversation(req(), env)).json(), { messages: [], revision: 0 });
+  assert.deepEqual(await (await handleGavinConversation(req(), env)).json(), { messages: [], summary: '', revision: 0 });
   const save = await handleGavinConversation(req('POST', append(0)), env);
   assert.equal(save.status, 200);
-  assert.deepEqual(await save.json(), { messages: [{ role: 'user', content: 'Question' }, { role: 'assistant', content: 'Answer' }], revision: 1 });
+  assert.deepEqual(await save.json(), { messages: [{ role: 'user', content: 'Question' }, { role: 'assistant', content: 'Answer' }], summary: '', revision: 1 });
   const restored = await worker.fetch(req(), env, {});
   assert.equal(restored.headers.get('cache-control'), 'no-store');
   assert.equal((await restored.json()).revision, 1);
-  assert.deepEqual(await (await handleGavinConversation(req('GET', undefined, 'two'), env)).json(), { messages: [], revision: 0 });
+  assert.deepEqual(await (await handleGavinConversation(req('GET', undefined, 'two'), env)).json(), { messages: [], summary: '', revision: 0 });
 });
 
 test('concurrent or replayed writes conflict and a clear cannot be undone by stale requests', async t => {
@@ -58,9 +58,9 @@ test('concurrent or replayed writes conflict and a clear cannot be undone by sta
   assert.equal(latest.messages.length, 2);
   assert.equal((await handleGavinConversation(req('POST', append(0)), env)).status, 409);
   const cleared = await handleGavinConversation(req('DELETE', { revision: 1 }), env);
-  assert.deepEqual(await cleared.json(), { messages: [], revision: 2 });
+  assert.deepEqual(await cleared.json(), { messages: [], summary: '', revision: 2 });
   assert.equal((await handleGavinConversation(req('POST', append(1)), env)).status, 409);
-  assert.deepEqual(await (await handleGavinConversation(req(), env)).json(), { messages: [], revision: 2 });
+  assert.deepEqual(await (await handleGavinConversation(req(), env)).json(), { messages: [], summary: '', revision: 2 });
 });
 
 test('auth, same-origin, bounded input and method checks reject invalid requests', async t => {
@@ -82,17 +82,68 @@ test('auth, same-origin, bounded input and method checks reject invalid requests
   assert.equal(sql.prepare('SELECT COUNT(*) n FROM gavin_conversations').get().n, 0);
 });
 
-test('only the latest 100 messages are kept and deleting an account cascades', async t => {
+test('unsummarized messages are not discarded at the storage limit and deleting an account cascades', async t => {
   const { env, sql } = fixture(t);
-  for (let i = 0; i < 51; i++) {
+  for (let i = 0; i < 50; i++) {
     assert.equal((await handleGavinConversation(req('POST', append(i, 'Q' + i, 'A' + i)), env)).status, 200);
   }
+  assert.equal((await handleGavinConversation(req('POST', append(50, 'Q50', 'A50')), env)).status, 422);
   const state = await (await handleGavinConversation(req(), env)).json();
   assert.equal(state.messages.length, 100);
-  assert.equal(state.messages[0].content, 'Q1');
+  assert.equal(state.messages[0].content, 'Q0');
+  assert.equal(state.revision, 50);
   sql.prepare('DELETE FROM users WHERE id=?').run('one');
   assert.equal(sql.prepare('SELECT COUNT(*) n FROM gavin_conversations').get().n, 0);
   assert.equal(sql.prepare('SELECT COUNT(*) n FROM users').get().n, 1);
+});
+
+test('summarizes older turns atomically and preserves summary until cleared', async t => {
+  const { env } = fixture(t);
+  for (let i = 0; i < 4; i++) assert.equal((await handleGavinConversation(req('POST', append(i, 'Q' + i, 'A' + i)), env)).status, 200);
+  const saved = await handleGavinConversation(req('POST', { ...append(4, 'Q4', 'A4'), summary: 'Q0 and Q1 covered medieval battles.', compactedCount: 4 }), env);
+  assert.equal(saved.status, 200);
+  const state = await saved.json();
+  assert.equal(state.summary, 'Q0 and Q1 covered medieval battles.');
+  assert.equal(state.messages.length, 6);
+  assert.equal(state.messages[0].content, 'Q2');
+  assert.equal(state.messages.at(-1).content, 'A4');
+  assert.equal(state.revision, 5);
+  const oldClient = await handleGavinConversation(req('POST', append(5, 'Q5', 'A5')), env);
+  assert.equal((await oldClient.json()).summary, state.summary);
+  const cleared = await handleGavinConversation(req('DELETE', { revision: 6 }), env);
+  assert.deepEqual(await cleared.json(), { messages: [], summary: '', revision: 7 });
+  assert.equal((await handleGavinConversation(req('POST', { ...append(5), summary: 'old', compactedCount: 2 }), env)).status, 409);
+});
+
+test('compaction is bounded, paired, validated, and cannot erase unsummarized messages', async t => {
+  const { env } = fixture(t);
+  await handleGavinConversation(req('POST', append(0)), env);
+  for (const body of [
+    { ...append(1), summary: 'ok' },
+    { ...append(1), compactedCount: 2 },
+    { ...append(1), summary: '', compactedCount: 2 },
+    { ...append(1), summary: 'x'.repeat(1601), compactedCount: 2 },
+    { ...append(1), summary: 'ok', compactedCount: 1 },
+    { ...append(1), summary: 'ok', compactedCount: 4 },
+    { ...append(1), summary: 'ok', compactedCount: 8 },
+  ]) assert.equal((await handleGavinConversation(req('POST', body), env)).status, 400);
+  assert.equal((await (await handleGavinConversation(req(), env)).json()).messages.length, 2);
+});
+
+test('migration preserves existing messages and initializes empty summary', async () => {
+  const sql = new DatabaseSync(':memory:');
+  try {
+    sql.exec('PRAGMA foreign_keys=ON');
+    for (const name of ['0001_accounts_and_progress.sql', '0009_gavin_conversation.sql']) sql.exec(readFileSync(new URL('./migrations/' + name, import.meta.url), 'utf8'));
+    sql.prepare('INSERT INTO users VALUES (?,?,?,?,?,?,?)').run('one', 'Learner', 'salt', 'hash', 1, 0, 0);
+    const messages = JSON.stringify([{role:'user',content:'Q'}, {role:'assistant',content:'A'}]);
+    sql.prepare('INSERT INTO gavin_conversations VALUES (?,?,?,?)').run('one', messages, 1, 123);
+    sql.exec(readFileSync(new URL('./migrations/0010_gavin_memory_summary.sql', import.meta.url), 'utf8'));
+    const row = sql.prepare('SELECT messages_json, summary, revision FROM gavin_conversations').get();
+    assert.equal(row.messages_json, messages);
+    assert.equal(row.summary, '');
+    assert.equal(row.revision, 1);
+  } finally { sql.close(); }
 });
 
 test('mutations are rate limited by authenticated user and fail closed if limiting is unavailable', async t => {
