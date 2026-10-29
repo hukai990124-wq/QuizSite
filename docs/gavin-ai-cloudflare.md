@@ -28,7 +28,13 @@
 6. 将本次代码更新到私有 GitHub 仓库，触发已有的 Cloudflare Git 构建。原来的 Worker 名称、D1、Durable Object 和域名配置继续沿用，不需新建项目或数据库迁移。
 7. 打开部署域名的 `/api/gavin/status?provider=nvidia`，正常配置应返回 `configured: true`。再进入 `/knight/`，选择 NVIDIA 模型并发送问题。状态显示今日共用剩余额度，完整回复生成后一次性显示并开始朗读。
 
-## 浏览器朗读
+## 朗读
+
+英文回复在 600 字符以内时优先调用 `POST /api/gavin/speech`，通过现有 `MY_AI_BINDING` 运行 `@cf/myshell-ai/melotts`。Workers AI 可返回二进制音频或 `{ audio: "Base64 audio" }`，后端负责解码；实际 WAV 输出使用 `audio/wav`，MP3 使用 `audio/mpeg`。上线前执行 `wrangler d1 migrations apply quizbank-accounts --remote`，其中 `0008_gavin_speech.sql` 创建朗读额度表；漏执行时接口会在 `quota_database` 阶段返回 503。
+
+在线朗读每天全站最多 200 次，沿用 `AUTH_LIMIT` 按 IP 限流；重复播放复用当前回答的音频，不再次生成。此限制与 Cloudflare 账户免费额度不是同一计量方式。只有英文使用 MeloTTS；中文、日语、过长英文或在线服务失败时回退设备语音。
+
+音频自动播放被浏览器阻止时保留已生成音频并提示点击「朗读回复」。解码失败时清除音频缓存再尝试设备语音；等待设备声音列表最多 800 毫秒，在线请求 20 秒超时，等待时可点击停止。离开页面、新提问和切换模型会取消旧请求与播放。
 
 Gavin 回复完成后，以完整回答创建一次 SpeechSynthesisUtterance，按回答和提问内容选择中日英语音；不朗读流式片段或失败的半句。语速 0.92、音调 0.85，优先选择设备已有的对应语言音色；声音及可用语言由设备决定，不需要 TTS API Key。使用「朗读回复」重播，「停止朗读」取消；新提问、切换模型、离开页面会停止旧语音。若浏览器禁止异步自动朗读，提示手动点击重试；不支持 TTS 时仍能查看文字。并非所有设备语音都离线运行。
 
