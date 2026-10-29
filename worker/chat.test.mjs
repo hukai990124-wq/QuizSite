@@ -32,6 +32,23 @@ function streamReply() {
   return new Response('data: {"choices":[{"delta":{"reasoning_content":"private","content":"因为 B 满足题干要求。"},"finish_reason":"stop"}]}\n\ndata: {"choices":[],"usage":{"total_tokens":42}}\n\ndata: [DONE]\n\n');
 }
 
+test("Gavin account marker rejects a changed session before sending history upstream", async t => {
+  const { env, token, sqlite } = fixture();
+  t.after(() => sqlite.close());
+  const upstream = t.mock.method(globalThis, "fetch", async () => { throw new Error("must not call"); });
+  const switched = new Request("https://example.com/api/gavin", request(token, { question: "hello", history: [] }));
+  switched.headers.set("X-Gavin-Account", "user:someone-else");
+  assert.equal((await handleChatRequest(switched, env)).status, 409);
+  const oldGuest = new Request("https://example.com/api/gavin", request(token, { question: "hello", history: [] }));
+  oldGuest.headers.set("X-Gavin-Account", "guest");
+  assert.equal((await handleChatRequest(oldGuest, env)).status, 409);
+  const wrongUser = new Request("https://example.com/api/gavin", request(null, { question: "hello", history: [] }));
+  wrongUser.headers.set("X-Gavin-Account", "user:learner");
+  assert.equal((await handleChatRequest(wrongUser, env)).status, 409);
+  assert.equal(upstream.mock.callCount(), 0);
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM ai_requests").get().n, 0);
+});
+
 test("GavinAI uses the selected NVIDIA provider with its own server-owned model and prompt", async t => {
   const {env, token, sqlite} = fixture();
   t.after(() => sqlite.close());

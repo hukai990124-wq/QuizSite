@@ -9,6 +9,12 @@ const retry = document.getElementById('gavin-retry') as HTMLButtonElement;
 const log = document.getElementById('gavin-log') as HTMLDivElement;
 const status = document.getElementById('gavin-status') as HTMLParagraphElement;
 const modelSelect = document.getElementById('gavin-model') as HTMLSelectElement;
+const memoryStatus = document.getElementById('gavin-memory-status') as HTMLParagraphElement;
+const memoryRetry = document.getElementById('gavin-memory-retry') as HTMLButtonElement;
+const memoryManage = document.getElementById('gavin-memory-manage') as HTMLButtonElement;
+const memoryDialog = document.getElementById('gavin-memory-dialog') as HTMLDialogElement;
+const memoryClear = document.getElementById('gavin-memory-clear') as HTMLButtonElement;
+const memoryCancel = document.getElementById('gavin-memory-cancel') as HTMLButtonElement;
 const speech = createGavinSpeech();
 try { if (localStorage.getItem('gavin:provider') === 'nvidia') modelSelect.value = 'nvidia'; } catch {}
 let history: ChatHistoryEntry[] = [];
@@ -16,12 +22,188 @@ let busy = false;
 let ready = false;
 let active: AbortController | null = null;
 let statusVersion = 0;
+let username: string | null = null;
+let accountResolved = false;
+let memoryReady = false;
+let memoryBusy = false;
+let generation = 0;
+let accountCheckVersion = 0;
+let revision = 0;
+let pending: { question: string; answer: string; revision: number } | null = null;
+let conflict = false;
+let memoryController: AbortController | null = null;
 
 function controls(): void {
-  input.disabled = send.disabled = busy || !ready;
+  input.disabled = send.disabled = busy || !ready || !accountResolved || memoryBusy || (!!username && (!memoryReady || !!pending));
   retry.disabled = busy;
   modelSelect.disabled = busy;
+  memoryManage.disabled = busy || memoryBusy || !accountResolved;
+  memoryClear.disabled = busy || memoryBusy || (!!username && !memoryReady);
+  memoryRetry.disabled = busy || memoryBusy;
   log.setAttribute('aria-busy', String(busy));
+}
+
+function resetLog(): void {
+  log.replaceChildren();
+  const placeholder = document.createElement('p');
+  placeholder.className = 'gavin-placeholder';
+  placeholder.textContent = '向骑士导师提问欧洲历史。';
+  log.appendChild(placeholder);
+}
+
+function parseConversation(value: unknown): { messages: ChatHistoryEntry[]; revision: number } {
+  if (typeof value !== 'object' || value === null || !('messages' in value) || !('revision' in value)) throw new Error('无法识别云端记录。');
+  const data = value as { messages: unknown; revision: unknown };
+  if (!Array.isArray(data.messages) || data.messages.length > 100 || typeof data.revision !== 'number' || !Number.isSafeInteger(data.revision) || data.revision < 0) throw new Error('无法识别云端记录。');
+  const messages: ChatHistoryEntry[] = data.messages.map((item: unknown) => {
+    if (typeof item !== 'object' || item === null || !('role' in item) || !('content' in item) || (item.role !== 'user' && item.role !== 'assistant') || typeof item.content !== 'string' || item.content.length > 4000) throw new Error('无法识别云端记录。');
+    return { role: item.role, content: item.content };
+  });
+  return { messages, revision: data.revision };
+}
+
+function renderConversation(messages: ChatHistoryEntry[]): void {
+  resetLog();
+  for (const message of messages) append(message.role === 'user' ? '你' : 'GavinAI', message.content);
+  history = messages.slice(-6).map(message => ({ ...message, content: message.content.slice(0, 2000) }));
+}
+
+async function conversationRequest(method: 'GET' | 'POST' | 'DELETE', body?: object): Promise<Response> {
+  if (!username) throw new Error('请登录后保存会话。');
+  memoryController = new AbortController();
+  return fetch('/api/gavin/conversation', {
+    method,
+    cache: 'no-store',
+    headers: { 'X-Gavin-Account': 'user:' + encodeURIComponent(username), ...(body ? { 'Content-Type': 'application/json' } : {}) },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+    signal: AbortSignal.any([memoryController.signal, AbortSignal.timeout(15000)]),
+  });
+}
+
+async function loadConversation(expected: number): Promise<void> {
+  memoryBusy = true;
+  memoryReady = false;
+  memoryRetry.hidden = true;
+  memoryStatus.textContent = '正在读取账号的云端对话…';
+  controls();
+  try {
+    const response = await conversationRequest('GET');
+    if (response.status === 401 || response.status === 409) void resolveAccount();
+    if (!response.ok) throw new Error('无法读取云端记录，请检查账号和网络后重试。');
+    const result = parseConversation(await response.json());
+    if (expected !== generation) return;
+    revision = result.revision;
+    renderConversation(result.messages);
+    memoryReady = true;
+    memoryStatus.textContent = '对话已保存到账号云端；Gavin 使用最近三轮对话作为上下文。';
+  } catch {
+    if (expected !== generation) return;
+    memoryStatus.textContent = '无法读取云端记录，请检查账号和网络后重试。';
+    memoryRetry.hidden = false;
+    memoryRetry.textContent = '重试读取';
+  } finally {
+    if (expected === generation) { memoryBusy = false; memoryController = null; controls(); }
+  }
+}
+
+async function savePending(expected: number): Promise<void> {
+  const turn = pending;
+  if (!turn) return;
+  memoryBusy = true;
+  memoryRetry.hidden = true;
+  memoryStatus.textContent = '正在保存对话到账号云端…';
+  controls();
+  try {
+    const response = await conversationRequest('POST', turn);
+    if (expected !== generation) return;
+    if (response.status === 429 || response.status === 503) {
+      memoryStatus.textContent = '本轮尚未确认保存，云端服务暂时繁忙，请稍后重试保存。';
+      memoryRetry.textContent = '重试保存';
+      memoryRetry.hidden = false;
+      return;
+    }
+    if (response.status === 409) {
+      const latestResponse = await conversationRequest('GET');
+      if (latestResponse.status === 401 || latestResponse.status === 409) void resolveAccount();
+      if (!latestResponse.ok) throw new Error('无法确认保存状态。');
+      const latest = parseConversation(await latestResponse.json());
+      if (expected !== generation) return;
+      const last = latest.messages.slice(-2);
+      if (latest.revision === turn.revision + 1 && last.length === 2 && last[0].role === 'user' && last[0].content === turn.question && last[1].role === 'assistant' && last[1].content === turn.answer) {
+        revision = latest.revision;
+        pending = null;
+        renderConversation(latest.messages);
+        memoryStatus.textContent = '对话已保存到账号云端；Gavin 使用最近三轮对话作为上下文。';
+      } else {
+        conflict = true;
+        memoryStatus.textContent = '云端记录已在其他设备发生变化，本轮保存状态无法确认。请先复制本轮内容，再重新载入云端记录。';
+        memoryRetry.textContent = '重新载入云端记录';
+        memoryRetry.hidden = false;
+      }
+      return;
+    }
+    if (!response.ok) throw new Error('保存失败。');
+    const saved = parseConversation(await response.json());
+    if (expected !== generation) return;
+    revision = saved.revision;
+    pending = null;
+    memoryStatus.textContent = '对话已保存到账号云端；Gavin 使用最近三轮对话作为上下文。';
+  } catch {
+    if (expected !== generation) return;
+    memoryStatus.textContent = '本轮对话尚未确认保存，请检查网络并重试保存。';
+    memoryRetry.textContent = '重试保存';
+    memoryRetry.hidden = false;
+  } finally {
+    if (expected === generation) { memoryBusy = false; memoryController = null; controls(); }
+  }
+}
+
+function changeUser(next: string | null): void {
+  if (accountResolved && next === username) return;
+  generation++;
+  statusVersion++;
+  active?.abort();
+  memoryController?.abort();
+  active = null;
+  memoryController = null;
+  speech.stop(true);
+  username = next;
+  accountResolved = true;
+  memoryReady = false;
+  memoryBusy = false;
+  busy = false;
+  pending = null;
+  conflict = false;
+  history = [];
+  revision = 0;
+  memoryRetry.hidden = true;
+  if (memoryDialog.open) memoryDialog.close();
+  resetLog();
+  if (username) void loadConversation(generation);
+  else memoryStatus.textContent = '访客对话仅保留在当前页面，登录后可保存到账号云端。';
+  void checkStatus();
+  controls();
+}
+
+async function resolveAccount(): Promise<void> {
+  const checkVersion = ++accountCheckVersion;
+  try {
+    const response = await fetch('/api/auth/me', { cache: 'no-store', signal: AbortSignal.timeout(15000) });
+    if (!response.ok) throw new Error('account unavailable');
+    const result: unknown = await response.json();
+    if (typeof result !== 'object' || result === null || !('user' in result)) throw new Error('account unavailable');
+    const user = result.user;
+    if (user !== null && (typeof user !== 'object' || !('username' in user) || typeof user.username !== 'string')) throw new Error('account unavailable');
+    if (checkVersion !== accountCheckVersion) return;
+    changeUser(user === null ? null : (user as { username: string }).username);
+  } catch {
+    if (checkVersion !== accountCheckVersion) return;
+    if (accountResolved) return;
+    memoryStatus.textContent = '无法确认登录状态，请检查网络并重试。';
+    memoryRetry.hidden = false;
+    memoryRetry.textContent = '重试读取';
+    controls();
+  }
 }
 
 async function checkStatus(): Promise<void> {
@@ -30,9 +212,10 @@ async function checkStatus(): Promise<void> {
   ready = false;
   controls();
   try {
-    const response = await fetch('/api/gavin/status?provider=' + encodeURIComponent(provider), { cache: 'no-store', signal: AbortSignal.timeout(15000) });
+    const response = await fetch('/api/gavin/status?provider=' + encodeURIComponent(provider), { cache: 'no-store', headers: { 'X-Gavin-Account': username ? 'user:' + encodeURIComponent(username) : 'guest' }, signal: AbortSignal.timeout(15000) });
     const data: unknown = await response.json();
     if (version !== statusVersion) return;
+    if (response.status === 409) void resolveAccount();
     if (!response.ok) throw new Error('暂时无法连接 GavinAI，请稍后重新连接。');
     const state = parseChatStatus(data);
     ready = state.configured && state.available && state.remaining > 0;
@@ -65,7 +248,8 @@ function append(role: string, content: string): HTMLSpanElement {
 form.addEventListener('submit', async event => {
   event.preventDefault();
   const question = input.value.trim();
-  if (busy || !ready || !question) return;
+  if (busy || !ready || !accountResolved || memoryBusy || (!!username && (!memoryReady || !!pending)) || !question) return;
+  const expected = generation;
   speech.stop(true);
   busy = true;
   controls();
@@ -75,15 +259,17 @@ form.addEventListener('submit', async event => {
   try {
     const response = await fetch('/api/gavin', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'X-Gavin-Account': username ? 'user:' + encodeURIComponent(username) : 'guest' },
       body: JSON.stringify({ question, history, provider: modelSelect.value }),
       signal: AbortSignal.any([active.signal, AbortSignal.timeout(95000)]),
     });
     if (!response.ok) {
+      if (response.status === 409) void resolveAccount();
       const failure: unknown = await response.json();
       throw new Error(typeof failure === 'object' && failure !== null && 'error' in failure && typeof failure.error === 'string' ? failure.error : 'GavinAI 暂时无法回答。');
     }
     const result = parseChatAnswer(await response.json());
+    if (expected !== generation) return;
     const reply = append('GavinAI', result.answer);
     speech.read(result.answer, question);
     if (result.truncated) {
@@ -94,8 +280,22 @@ form.addEventListener('submit', async event => {
     history.push({ role: 'user', content: question }, { role: 'assistant', content: result.answer.slice(0, 2000) });
     history = history.slice(-6);
     input.value = '';
+    if (username) {
+      if (result.answer.length > 4000) {
+        memoryStatus.textContent = '本轮回答过长，无法保存到云端；请复制内容后重新载入云端记录。';
+        pending = { question, answer: result.answer, revision };
+        conflict = true;
+        memoryRetry.textContent = '重新载入云端记录';
+        memoryRetry.hidden = false;
+      } else {
+        pending = { question, answer: result.answer, revision };
+        await savePending(expected);
+      }
+    }
+    if (expected !== generation) return;
     await checkStatus();
   } catch (error) {
+    if (expected !== generation) return;
     const note = document.createElement('small');
     note.textContent = '本次回答未完成。';
     log.appendChild(note);
@@ -103,6 +303,7 @@ form.addEventListener('submit', async event => {
     await checkStatus();
     status.textContent = failure;
   } finally {
+    if (expected !== generation) return;
     active = null;
     busy = false;
     controls();
@@ -113,14 +314,85 @@ retry.addEventListener('click', () => { void checkStatus(); });
 modelSelect.addEventListener('change', () => {
   if (busy) return;
   speech.stop(true);
-  history = [];
-  log.replaceChildren();
-  const placeholder = document.createElement('p');
-  placeholder.className = 'gavin-placeholder';
-  placeholder.textContent = '已切换模型，开始新的骑士对话。';
-  log.appendChild(placeholder);
   try { localStorage.setItem('gavin:provider', modelSelect.value); } catch {}
   void checkStatus();
 });
-window.addEventListener('pagehide', () => active?.abort());
+memoryManage.addEventListener('click', () => {
+  if (typeof memoryDialog.showModal === 'function') memoryDialog.showModal();
+  else memoryDialog.setAttribute('open', 'open');
+});
+memoryCancel.addEventListener('click', () => memoryDialog.close());
+memoryClear.addEventListener('click', async () => {
+  if (busy || memoryBusy) return;
+  const expected = generation;
+  if (!username) {
+    speech.stop(true);
+    history = [];
+    resetLog();
+    memoryDialog.close();
+    memoryStatus.textContent = '本次访客对话和记忆已清除。';
+    return;
+  }
+  memoryBusy = true;
+  controls();
+  try {
+    const response = await conversationRequest('DELETE', { revision });
+    if (expected !== generation) return;
+    if (response.status === 429 || response.status === 503) {
+      memoryDialog.close();
+      memoryStatus.textContent = '云端服务暂时繁忙，记录尚未清除，请稍后重试。';
+      return;
+    }
+    if (response.status === 409) {
+      memoryDialog.close();
+      if (pending) {
+        conflict = true;
+        memoryStatus.textContent = '云端记录已在其他设备更新，本轮保存状态无法确认。请先复制本轮内容，再重新载入云端记录。';
+        memoryRetry.textContent = '重新载入云端记录';
+        memoryRetry.hidden = false;
+      } else {
+        await loadConversation(expected);
+        if (expected === generation) memoryStatus.textContent = '云端记录已在其他设备更新，请检查后重新清除。';
+      }
+      return;
+    }
+    if (!response.ok) throw new Error('clear failed');
+    const result = parseConversation(await response.json());
+    if (expected !== generation) return;
+    revision = result.revision;
+    pending = null;
+    conflict = false;
+    speech.stop(true);
+    history = [];
+    resetLog();
+    memoryRetry.hidden = true;
+    memoryDialog.close();
+    memoryStatus.textContent = '账号云端聊天记录和会话记忆已清除。';
+  } catch {
+    if (expected !== generation) return;
+    memoryDialog.close();
+    memoryStatus.textContent = '清除失败，云端记录可能仍然保留，请检查网络后重试。';
+  } finally {
+    if (expected === generation) { memoryBusy = false; memoryController = null; controls(); }
+  }
+});
+memoryRetry.addEventListener('click', () => {
+  if (!accountResolved) { void resolveAccount(); return; }
+  if (!username) return;
+  if (conflict) {
+    if (!window.confirm('重新载入会丢弃尚未确认保存的本轮对话，请先复制需要保留的内容。继续吗？')) return;
+    pending = null;
+    conflict = false;
+    void loadConversation(generation);
+  } else if (pending) void savePending(generation);
+  else void loadConversation(generation);
+});
+window.addEventListener('quizsite:account-changed', event => {
+  const next: unknown = (event as CustomEvent).detail?.username;
+  if (accountResolved) changeUser(typeof next === 'string' ? next : null);
+  void resolveAccount();
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden) void resolveAccount(); });
+window.addEventListener('pagehide', () => { active?.abort(); memoryController?.abort(); });
+void resolveAccount();
 void checkStatus();

@@ -9,19 +9,18 @@ import { buildSirGavinMessages, buildChatMessages, CHAT_PROMPT, SIR_GAVIN_PROMPT
 
 const draft = { identity: '你是 Sir.Gavin。', scope: '欧洲历史', style: '简洁有礼', rules: '不编造史实' };
 
-test('Gavin follows the current question language despite Chinese history and defaults to brief academic answers', () => {
-  for (const question of ['What caused the Hundred Years War?', '百年戦争の原因は何か？', '百年战争为何发生？']) {
+test('Gavin is instructed to answer only in English regardless of the question or conversation language', () => {
+  for (const question of ['What caused the Hundred Years War?', '百年戦争の原因は何か？', '请用中文解释百年战争。']) {
     const messages = buildSirGavinMessages(question, [{role:'assistant',content:'阁下，容我用中文详细解释……'}]);
     assert.equal(messages.at(-1).content, question);
-    assert.match(messages[0].content, /当前这条提问/);
     assert.match(messages[0].content, /2–4 句/);
     assert.match(messages[0].content, /学术问题也遵守/);
-    assert.match(messages[0].content, /language of the user's latest message/);
-    assert.match(messages[0].content, /Ignore the website and browser language/);
-    assert.match(messages[0].content, /language the user explicitly requests/);
+    assert.match(messages[0].content, /Reply only in English/i);
+    assert.match(messages[0].content, /regardless of the language/i);
+    assert.doesNotMatch(messages[0].content, /language of the user's latest message|language the user explicitly requests/);
   }
   assert.doesNotMatch(SIR_GAVIN_PROMPT, /使用优雅、略带古风而清楚易懂的中文|始终称呼用户为/);
-  assert.match(SIR_GAVIN_PROMPT, /中文提示词/);
+  assert.match(SIR_GAVIN_PROMPT, /始终.*英文/);
 });
 
 test('chat.mts separates the knight prompt from the existing quiz assistant', () => {

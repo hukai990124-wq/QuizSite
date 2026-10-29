@@ -13,7 +13,7 @@ export const GAVIN_MAX_OUTPUT = 512;
 
 export function buildSirGavinMessages(question: string, history: ChatHistoryEntry[] = []): ChatMessage[] {
   const body = parseChatRequestBody({ question, context: "", history });
-  const languageReminder = "Reply in the language of the user's latest message, or in the language the user explicitly requests. Ignore the website and browser language and do not let earlier conversation override the latest message. If the language is ambiguous, use the user's most recent identifiable language or ask briefly.";
+  const languageReminder = "Reply only in English, regardless of the language of the user's message, any requested language, quoted material, or earlier conversation. Translate non-English material into English rather than reproducing it in another language.";
   return [{ role: "system", content: `${SIR_GAVIN_PROMPT}\n\n${languageReminder}` }, ...body.history, { role: "user", content: body.question }];
 }
 
@@ -240,6 +240,10 @@ export async function handleChatRequest(request: Request, env: ChatEnvironment, 
     if (!userId && !visitorHash) return json({ error: "无法识别访客，请启用 Cloudflare 代理后重试。" }, 503);
     const url = new URL(request.url);
     const isGavin = url.pathname === "/api/gavin" || url.pathname === "/api/gavin/status";
+    const expectedAccount = request.headers.get("X-Gavin-Account");
+    if (isGavin && expectedAccount !== null && expectedAccount !== (session ? "user:" + encodeURIComponent(session.username) : "guest")) {
+      return json({ error: "登录账号已更改，请重新加载。" }, 409);
+    }
     if (request.method === "GET" && (url.pathname === "/api/chat/status" || url.pathname === "/api/gavin/status")) {
       let provider: ChatProvider;
       try { provider = isGavin ? parseGavinProvider(url.searchParams.get("provider") ?? undefined) : parseProvider(url.searchParams.get("provider") ?? undefined); }
