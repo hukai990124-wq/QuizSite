@@ -1,7 +1,10 @@
-export function matchesReference(entry, { query = '', category = 'all', kind = 'all' } = {}) {
+interface ReferenceEntry { category?: string; kind?: string; text: string }
+interface ReferenceFilter { query?: string; category?: string; kind?: string }
+
+export function matchesReference(entry: ReferenceEntry, { query = '', category = 'all', kind = 'all' }: ReferenceFilter = {}) {
   if (category !== 'all' && entry.category !== category) return false;
   if (kind !== 'all' && entry.kind !== kind) return false;
-  const normalize = value => value.normalize('NFKC').toLocaleLowerCase().replace(/[-_/]/g, ' ');
+  const normalize = (value: string) => value.normalize('NFKC').toLocaleLowerCase().replace(/[-_/]/g, ' ');
   const text = normalize(entry.text);
   return normalize(query).trim().split(/\s+/u).filter(Boolean).every(token => text.includes(token));
 }
@@ -9,20 +12,23 @@ export function matchesReference(entry, { query = '', category = 'all', kind = '
 function mountReference() {
   const form = document.getElementById('reference-filter');
   if (!form) return;
-  const search = document.getElementById('reference-search');
-  const kind = document.getElementById('reference-kind');
+  const search = document.querySelector<HTMLInputElement>('#reference-search');
+  const kind = document.querySelector<HTMLSelectElement>('#reference-kind');
   const result = document.getElementById('reference-result');
   const empty = document.getElementById('reference-empty');
-  const sections = [...document.querySelectorAll('.ref-group')];
-  const links = [...document.querySelectorAll('[data-category]')];
-  const records = sections.flatMap(section => [...section.querySelectorAll('.ref-entry')].map(element => ({
-    element, category: section.dataset.group, kind: element.dataset.kind, text: element.textContent,
+  const sections = [...document.querySelectorAll<HTMLElement>('.ref-group')];
+  const links = [...document.querySelectorAll<HTMLElement>('[data-category]')];
+  const records = sections.flatMap(section => [...section.querySelectorAll<HTMLElement>('.ref-entry')].map(element => ({
+    element, category: section.dataset.group, kind: element.dataset.kind, text: element.textContent ?? '',
   })));
+  const all = document.querySelector<HTMLElement>('.ref-all');
+  if (!search || !kind || !result || !empty || !all) return;
+  const searchInput = search, kindInput = kind, resultOutput = result, emptyMessage = empty;
   let category = 'all';
   function update() {
     let count = 0;
     for (const record of records) {
-      const visible = matchesReference(record, { query: search.value, category, kind: kind.value });
+      const visible = matchesReference(record, { query: searchInput.value, category, kind: kindInput.value });
       record.element.hidden = !visible;
       if (visible) count++;
     }
@@ -33,14 +39,14 @@ function mountReference() {
       else if (active) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
     }
-    result.textContent = `显示 ${count} / ${records.length} 条`;
-    empty.hidden = count !== 0;
+    resultOutput.textContent = `显示 ${count} / ${records.length} 条`;
+    emptyMessage.hidden = count !== 0;
   }
   search.addEventListener('input', update);
   kind.addEventListener('change', update);
   links.forEach(link => link.addEventListener('click', event => {
     event.preventDefault();
-    category = link.dataset.category;
+    category = link.dataset.category ?? 'all';
     update();
   }));
   form.addEventListener('submit', event => event.preventDefault());
@@ -53,7 +59,7 @@ function mountReference() {
     search.focus();
   });
   form.hidden = false;
-  document.querySelector('.ref-all').hidden = false;
+  all.hidden = false;
   update();
 }
 

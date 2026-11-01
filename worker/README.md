@@ -5,6 +5,9 @@
 | `worker.js` | Worker 入口、在线人数及 WebSocket |
 | `account.mjs` | 注册、登录、会话、答题进度同步 |
 | `chat.mts` | AI 提示词、模型调用、输入检查和次数限制 |
+| `gavin-conversation.mts` | Gavin ??????? |
+| `gavin-speech.mts` | Gavin ???? |
+| `sir-gavin-prompt.mts` | Gavin ???????? |
 | `chat-stream.mts` | AI 流式输出 |
 | `registration-turnstile.mts` | 注册验证码的服务端验证 |
 | `weekly-study.mts` | 每周学习时间 |

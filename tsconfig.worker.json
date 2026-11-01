@@ -4,5 +4,5 @@
     "rootDir": "./worker",
     "noEmit": false
   },
-  "include": ["worker/chat.mts", "worker/weekly-study.mts", "worker/registration-turnstile.mts", "worker/account.d.mts"]
+  "include": ["worker/chat.mts", "worker/gavin-speech.mts", "worker/gavin-conversation.mts", "worker/sir-gavin-prompt.mts", "worker/weekly-study.mts", "worker/registration-turnstile.mts", "worker/account.d.mts"]
 }

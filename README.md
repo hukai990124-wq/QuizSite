@@ -42,7 +42,7 @@ QuizSite/
 | AI 聊天窗口样式 / 交互 | `src/css/chat.css` / `src/typescript/chat.mts` |
 | 账号窗口样式 / 交互 | `src/css/account.css` / `src/javascript/account.js` |
 | 随机出题入口 / 考试交互 | `src/javascript/random-quiz.js` / `src/typescript/random-exam.mts` |
-| 页脚徽章和座右铭 | `src/css/sigil-footer.css` / `src/javascript/sigil-footer.mjs` |
+| 页脚徽章和座右铭 | `src/css/sigil-footer.css` / `src/typescript/sigil-footer.mts` |
 | 返回顶部、学习计时、人机验证前端 | `src/typescript/` 中相应模块 |
 | 中英日界面词条 / 翻译规则 | `quiz_kit/i18n.json` / `src/javascript/i18n_runtime.js` |
 | HTML、CSS、TypeScript 练习题本身 | `question-banks/programming/*-review.json` |

@@ -2,7 +2,7 @@ const FOOTER_ID = "qb-sigil-footer";
 const STYLE_ID = "qb-sigil-footer-css";
 const FONT_ID = "qb-sigil-footer-font";
 
-export function mountSigilFooter(doc = document) {
+export function mountSigilFooter(doc: Document = document) {
   if (!doc.body || doc.getElementById(FOOTER_ID)) return null;
 
   if (!doc.getElementById(STYLE_ID)) {

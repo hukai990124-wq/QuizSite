@@ -1,6 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { mkdtemp, mkdir, copyFile, readFile, writeFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { execFileSync } from "node:child_process";
 
 const questions = JSON.parse(readFileSync(new URL("../question-banks/aws-saa/original-questions.json", import.meta.url), "utf8"));
 const paper = readFileSync(new URL("../site/aws-saa/original/part01.html", import.meta.url), "utf8");
@@ -47,5 +51,32 @@ test("SAA Chinese fields contain no Japanese kana", () => {
     for (const field of [question.stem, ...question.options, question.explanation]) {
       assert.doesNotMatch(field.zh, /[\u3040-\u30ff]/u, `Japanese text in Chinese question ${question.id}`);
     }
+  }
+});
+
+
+test("original paper is generated from editable data and a question-free template", async () => {
+  const root = await mkdtemp(join(tmpdir(), "quizsite-saa-"));
+  try {
+    const bank = join(root, "question-banks", "aws-saa");
+    await mkdir(bank, { recursive: true });
+    for (const file of ["build_original.mjs", "original-template.html"]) {
+      await copyFile(new URL(`../question-banks/aws-saa/${file}`, import.meta.url), join(bank, file));
+    }
+    const template = await readFile(join(bank, "original-template.html"), "utf8");
+    assert.ok(template.includes("<!-- QUIZ_CONTENT -->"));
+    assert.doesNotMatch(template, /class="q" id="q\d+"/);
+    const input = structuredClone(questions);
+    input[0].stem.en = "Edited <question> & text";
+    const data = JSON.stringify(input, null, 2) + "\n";
+    await writeFile(join(bank, "original-questions.json"), data);
+    execFileSync(process.execPath, [join(bank, "build_original.mjs")]);
+    assert.equal(await readFile(join(bank, "original-questions.json"), "utf8"), data);
+    const output = await readFile(join(root, "site", "aws-saa", "original", "part01.html"), "utf8");
+    assert.ok(output.includes("Edited &lt;question&gt; &amp; text"));
+    assert.match(output, /quiz:aws:original:01/);
+    assert.equal((output.match(/class="q" id="q\d+"/g) ?? []).length, 50);
+  } finally {
+    await rm(root, { recursive: true, force: true });
   }
 });

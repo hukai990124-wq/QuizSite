@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { groups } from '../question-banks/aws-saa/reference-data.mjs';
-import { matchesReference } from '../src/javascript/saa-reference.mjs';
+import { matchesReference } from '../site/assets/saa-reference.mjs';
 
 const scope = JSON.parse(readFileSync(new URL('../question-banks/aws-saa/reference-scope.json', import.meta.url), 'utf8'));
 const page = readFileSync(new URL('../site/aws-saa/reference.html', import.meta.url), 'utf8');

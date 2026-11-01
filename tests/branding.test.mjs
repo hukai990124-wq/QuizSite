@@ -9,10 +9,12 @@ const repoDirectory = fileURLToPath(new URL("..", import.meta.url));
 const legacyBrand = ["quiz", "bank"].join("");
 
 test("tracked text files and paths use the QuizSite identity", async () => {
-  const paths = execFileSync("git", ["ls-files", "-z"], { cwd: repoDirectory })
+  const deleted = new Set(execFileSync("git", ["ls-files", "--deleted", "-z"], { cwd: repoDirectory })
+    .toString("utf8").split("\0").filter(Boolean));
+  const paths = execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z"], { cwd: repoDirectory })
     .toString("utf8")
     .split("\0")
-    .filter(Boolean);
+    .filter((path) => path && !deleted.has(path));
   const stalePaths = paths.filter((path) => path.toLowerCase().includes(legacyBrand));
   const staleContents = [];
 
