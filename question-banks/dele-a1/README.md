@@ -1,5 +1,9 @@
 # DELE A1 · 阅读 + 写作 + 听力 练习册
 
+> 当前发布入口已迁移到 TypeScript。请编辑本目录的 `pages.json`（题目、选项、答案、解析、页面文本）和 `bank.mts`（题库声明）；在仓库根目录运行 `node scripts/build-banks.mjs --bank dele-a1`。页面布局在 `quiz_kit/typescript/layouts.mts`。下方旧 Python/HTML 流程仅供历史采集参考；详见[统一维护说明](../README.md)。
+
+
+
 把 Instituto Cervantes 官方公开的 **5 套 A1 试卷**做成可作答、可判分的单文件 HTML。
 沿用 `../../quiz_kit/quizkit.py` 判分引擎（与 TOEIC / AWS 题库同一套交互）。
 

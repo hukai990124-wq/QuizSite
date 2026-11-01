@@ -10,6 +10,16 @@
             90 分钟倒计时、期间隐藏判定与解析、交卷后按官方分值算分
             （单选 1.5 分 + 多选 2 分 = 60 题满分 100，及格 70）
 """
+
+# Legacy publishing entry point: all published pages now come from TypeScript.
+if __name__ == "__main__":
+    import subprocess as _publisher
+    import sys as _publisher_sys
+    from pathlib import Path as _PublisherPath
+    if len(_publisher_sys.argv) != 1:
+        raise SystemExit("Legacy acquisition flags are not publishing commands. See question-banks/README.md.")
+    raise SystemExit(_publisher.call(["node", str(_PublisherPath(__file__).resolve().parents[2] / "scripts/build-banks.mjs"), "--bank", "workbuddy-opc"]))
+
 import os
 import re
 import sys

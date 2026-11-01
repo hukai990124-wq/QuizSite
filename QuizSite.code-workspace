@@ -1,14 +1,45 @@
 {
   "folders": [
-    { "name": "01 HTML · 网页", "path": "site" },
-    { "name": "02 CSS · 样式", "path": "src/css" },
-    { "name": "03 JavaScript · 交互", "path": "src/javascript" },
-    { "name": "04 TypeScript · 交互", "path": "src/typescript" },
-    { "name": "05 题库 · 资料与生成脚本", "path": "question-banks" },
-    { "name": "06 后端 · API 与数据库", "path": "worker" },
-    { "name": "07 工具 · 判分与多语言", "path": "quiz_kit" },
-    { "name": "08 文档 · 维护说明", "path": "docs" },
-    { "name": "QuizSite", "path": "." }
+    {
+      "name": "01 HTML · 网页",
+      "path": "site"
+    },
+    {
+      "name": "02 CSS · 样式",
+      "path": "src/css"
+    },
+    {
+      "name": "03 JavaScript · 交互",
+      "path": "src/javascript"
+    },
+    {
+      "name": "04 TypeScript · 交互",
+      "path": "src/typescript"
+    },
+    {
+      "name": "TypeScript · 全题库页面框架",
+      "path": "quiz_kit/typescript"
+    },
+    {
+      "name": "05 题库 · 资料与生成脚本",
+      "path": "question-banks"
+    },
+    {
+      "name": "06 后端 · API 与数据库",
+      "path": "worker"
+    },
+    {
+      "name": "07 工具 · 判分与多语言",
+      "path": "quiz_kit"
+    },
+    {
+      "name": "08 文档 · 维护说明",
+      "path": "docs"
+    },
+    {
+      "name": "QuizSite",
+      "path": "."
+    }
   ],
   "settings": {
     "files.encoding": "utf8",
@@ -18,7 +49,21 @@
       "**/__pycache__": true,
       "**/assets/*.css": true,
       "**/assets/*.js": true,
-      "**/assets/*.mjs": true
+      "**/assets/*.mjs": true,
+      "**/.build": true,
+      "**/aws-aif/**/*.html": true,
+      "**/aws-aip/**/*.html": true,
+      "**/aws-clf/**/*.html": true,
+      "**/aws-mla/**/*.html": true,
+      "**/aws-saa/**/*.html": true,
+      "**/dele-a1/**/*.html": true,
+      "**/dele-a2/**/*.html": true,
+      "**/fe/**/*.html": true,
+      "**/java-bronze/**/*.html": true,
+      "**/programming/**/*.html": true,
+      "**/toeic-listening/**/*.html": true,
+      "**/toeic-reading/**/*.html": true,
+      "**/workbuddy-opc/**/*.html": true
     },
     "search.exclude": {
       "**/node_modules/**": true,
@@ -28,7 +73,21 @@
       "**/output/**": true,
       "**/assets/*.css": true,
       "**/assets/*.js": true,
-      "**/assets/*.mjs": true
+      "**/assets/*.mjs": true,
+      "**/.build": true,
+      "**/aws-aif/**/*.html": true,
+      "**/aws-aip/**/*.html": true,
+      "**/aws-clf/**/*.html": true,
+      "**/aws-mla/**/*.html": true,
+      "**/aws-saa/**/*.html": true,
+      "**/dele-a1/**/*.html": true,
+      "**/dele-a2/**/*.html": true,
+      "**/fe/**/*.html": true,
+      "**/java-bronze/**/*.html": true,
+      "**/programming/**/*.html": true,
+      "**/toeic-listening/**/*.html": true,
+      "**/toeic-reading/**/*.html": true,
+      "**/workbuddy-opc/**/*.html": true
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {

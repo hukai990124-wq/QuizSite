@@ -1,5 +1,9 @@
 # TOEIC® Listening 练习 · 10 套（带音频 + 可作答判分）
 
+> 当前发布入口已迁移到 TypeScript。请编辑本目录的 `pages.json`（题目、选项、答案、解析、页面文本）和 `bank.mts`（题库声明）；在仓库根目录运行 `node scripts/build-banks.mjs --bank toeic-listening`。页面布局在 `quiz_kit/typescript/layouts.mts`。下方旧 Python/HTML 流程仅供历史采集参考；详见[统一维护说明](../README.md)。
+
+
+
 ## 单题解析显示
 
 Part 3/4 共用一段录音的三道题分别判分。确认作答或直接看答案后，只展开当前题目的原文（如有）和解析；同组尚未作答题目的解析保持折叠。“展开全部原文/解析”按钮仍可主动展开全卷。

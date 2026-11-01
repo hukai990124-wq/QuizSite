@@ -99,7 +99,7 @@ def main():
         raise SystemExit("pdftoppm not found")
     RAW.mkdir(parents=True, exist_ok=True)
     IMAGES.mkdir(parents=True, exist_ok=True)
-    existing = json.loads((OUT / "data.json").read_text(encoding="utf-8"))["sets"]
+    existing = json.loads((ROOT / "question-banks/fe/content/data.json").read_text(encoding="utf-8"))["sets"]
     source = download(EARLY_URL, "2022-early-b-qs.pdf")
     early = {"sourcePage": EARLY_PAGE, "questionPdf": EARLY_URL, "answerPdf": EARLY_URL + "#page=11",
              "sourceAttribution": "出典：基本情報技術者試験 科目B試験サンプル問題",
@@ -108,7 +108,7 @@ def main():
                            for i, pages in enumerate(EARLY_PAGES)]}
     data = {"sets": {"paper-2-a": build_a(2, "jan"), "paper-3-a": build_a(3, "jun"),
                      "paper-2-b": build_b(2, existing, early), "paper-3-b": build_b(3, existing, early)}}
-    (OUT / "extra.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (ROOT / "question-banks/fe/content/extra.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("Built two extra A60/B20 practice papers")
 
 

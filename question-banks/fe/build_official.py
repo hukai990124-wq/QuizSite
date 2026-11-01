@@ -116,7 +116,7 @@ def main():
                 "sourcePage": SOURCE_PAGES[year],
                 "questionPdf": question_url, "answerPdf": answer_url, "questions": questions,
             }
-    (OUT / "data.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (ROOT / "question-banks/fe/content/data.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Built {sum(len(x['questions']) for x in data['sets'].values())} questions across {len(data['sets'])} sets")
 
 

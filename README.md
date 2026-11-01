@@ -16,8 +16,8 @@ QuizSite/
 │  ├─ css/                    公共样式、聊天框、账号框、考试、页脚
 │  ├─ javascript/             手写 JS、账号、在线人数、随机题、翻译运行时
 │  └─ typescript/             带类型检查的交互代码（.ts / .mts）
-├─ question-banks/            13 个考试/练习资料目录、题目数据、生成脚本
-├─ site/                      HTML 网页、发布数据、图片、音频；部署目录
+├─ question-banks/            13 个题库的 bank.mts、pages.json 和历史采集资料
+├─ site/                      构建输出、发布数据、图片、音频；部署目录
 │  ├─ index.html              首页
 │  ├─ assets/                 构建生成的 CSS/JS，以及公共图片/数据
 │  ├─ aws-aif/、aws-aip/…     AWS 各题库页面
@@ -45,17 +45,17 @@ QuizSite/
 | 页脚徽章和座右铭 | `src/css/sigil-footer.css` / `src/typescript/sigil-footer.mts` |
 | 返回顶部、学习计时、人机验证前端 | `src/typescript/` 中相应模块 |
 | 中英日界面词条 / 翻译规则 | `quiz_kit/i18n.json` / `src/javascript/i18n_runtime.js` |
-| HTML、CSS、TypeScript 练习题本身 | `question-banks/programming/*-review.json` |
+| HTML、CSS、TypeScript 练习题本身 | `question-banks/programming/pages.json` |
 | AWS 或语言考试题目、答案、原件 | `question-banks/` 对应科目；见[题库资料说明](question-banks/README.md) |
 | AI 提示词、模型和每日次数限制 | `worker/chat.mts` |
 | 登录、注册、学习进度后端 | `worker/account.mjs` |
 | 人机验证服务端 | `worker/registration-turnstile.mts` |
 
-`site` 中部分旧试卷仍含生成器输出的内联样式和答题脚本，保留现有行为。由脚本生成的题目页优先修改对应题库数据或生成器；直接改成品 HTML，之后重新生成可能会覆盖。编程题里展示的代码片段属于题目资料，不是网站自身的源码。
+全题库页面由 `quiz_kit/typescript/` 的 TypeScript 发布器统一生成。编辑 `question-banks/<科目>/pages.json` 中的题目、选项、答案和解析，页面框架在 `quiz_kit/typescript/layouts.mts`。详见[统一维护说明](question-banks/README.md)。编程题中的代码片段属于题目内容。
 
 ## 编辑、构建、预览
 
-需要 Node.js 22.13 或更新版本，以及 `package.json` 声明的 pnpm 版本。首次在新电脑打开时，在仓库根目录运行：
+若终端找不到 `pnpm`，使用 `corepack pnpm` 运行下列命令。需要 Node.js 22.13 或更新版本，以及 `package.json` 声明的 pnpm 版本。首次在新电脑打开时，在仓库根目录运行：
 
 ```powershell
 pnpm install --frozen-lockfile
@@ -65,7 +65,7 @@ pnpm build
 日常在仓库根目录运行：
 
 ```powershell
-pnpm build          # CSS/JS 同步到 site/assets，编译前后端 TypeScript
+pnpm build          # 重建全部题库 HTML、同步资源、编译前后端 TypeScript
 pnpm typecheck      # 严格类型检查
 pnpm test           # 构建并运行全部 Node 自动化测试
 pnpm dev:types      # 修改前端 TypeScript 时自动编译
@@ -75,7 +75,7 @@ pnpm dev:types      # 修改前端 TypeScript 时自动编译
 
 本地预览任务需要 Python，打开 [localhost:8000](http://localhost:8000)。它只提供静态页面，账号、AI 等接口需要 Cloudflare Worker 环境。停止预览时在任务终端按 `Ctrl+C`。
 
-生成题库 HTML 或音频时按各科目的说明执行 Python/Node 脚本。普通前端构建不会重新爬题、翻译、调用模型或生成语音。
+全题库 HTML 已纳入 `pnpm build`。音频采集和 PDF/OCR 等准备工作使用历史工具；正常构建不会重新爬题、翻译、调用模型或生成语音。
 
 ## 源码和生成文件
 
@@ -83,7 +83,7 @@ pnpm dev:types      # 修改前端 TypeScript 时自动编译
 - `src/css/`、`src/javascript/` 的独立文件会复制到 `site/assets/`；翻译运行时和词典合成为 `i18n.js`。
 - 这些浏览器 CSS/JS 产物不再重复提交到 Git，由 `pnpm build` 重建。请修改 `src` 中的源文件。
 - 后端 `.mts` 和同名 `.mjs` 放在 `worker`；编辑 `.mts` 后构建。`account.mjs` 和 `worker.js` 是手写后端文件。
-- `site` 的 HTML、发布数据和媒体继续提交。`raw/`、解析中间文件、截图等仍按 `.gitignore` 留在本机。
+- 科目 HTML 和 FE 发布 JSON 由题库 TypeScript 重建，不再提交；首页、随机考试入口、其他数据和媒体继续提交。`raw/`、解析中间文件、截图等仍按 `.gitignore` 留在本机。
 - API Secret 继续保存在 Cloudflare 的运行时 Secret 中。
 
 网站由现有 `quizsite` Worker 提供页面和 API，`quizsite-entry` Pages 入口通过服务绑定接入新域名。日常发布步骤见[部署指南](部署指南.md)。

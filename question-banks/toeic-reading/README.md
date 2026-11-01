@@ -1,5 +1,9 @@
 # TOEIC® Reading 练习 · 10 套（含答案与解析）
 
+> 当前发布入口已迁移到 TypeScript。请编辑本目录的 `pages.json`（题目、选项、答案、解析、页面文本）和 `bank.mts`（题库声明）；在仓库根目录运行 `node scripts/build-banks.mjs --bank toeic-reading`。页面布局在 `quiz_kit/typescript/layouts.mts`。下方旧 Python/HTML 流程仅供历史采集参考；详见[统一维护说明](../README.md)。
+
+
+
 从公开来源整理的 **10 套完整 TOEIC Reading 练习题**，每套 **100 题**，题目结构完全对齐现行 TOEIC L&R 考试：
 
 | 部分 | 题型 | 题量 | 题号 |

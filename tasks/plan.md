@@ -1,27 +1,22 @@
-# QuizSite source organization plan
+# All-bank TypeScript publishing migration
 
-Requested on 2026-10-21: make HTML, CSS, JavaScript, TypeScript and question-bank materials easy to find and edit in VS Code.
+## Scope
 
-## Layout and boundaries
+Move the published question pages for all 13 banks to a shared, strictly checked TypeScript build. Keep editable question content separate from reusable page/question layouts. Preserve every published URL, question identifier, answer, rich-text passage, image/audio reference, progress key and interaction. HTML becomes reproducible deployment output. Existing browser interaction code is retained during this publishing migration.
 
-- `src/typescript/`: editable browser TypeScript; compile to the existing `site/assets/` URLs.
-- `src/css/`: editable shared styles; copy to `site/assets/` during builds.
-- `src/javascript/`: editable browser JavaScript; generated dictionaries remain in `site/assets/`.
-- `question-banks/`: existing subject directories, including their data, scripts and local ignored materials.
-- `site/`: HTML organized by subject and the complete deployment output. Keep all public URLs unchanged.
-- `worker/`, `quiz_kit/`, `tests/`, `docs/`: retain their existing responsibilities.
-- A VS Code workspace and a Chinese README identify the editable sources, generated files and build commands.
+## Ordered work
 
-## Ordered slices
+1. Inventory every page, question and special bank; establish migration fingerprints and a typed content/layout contract.
+2. Implement a lossless one-time importer and TypeScript renderer. Question/choice content, root metadata and surrounding reading/audio material are separate from layouts.
+3. Import all banks, including FE's structured JSON and image questions; compile bank manifests and reproduce all subject pages through one command.
+4. Replace old publishing commands with the unified build, document editing paths, and exclude generated subject HTML from source control and the editor's normal source view.
+5. Verify original page fingerprints, question/answer inventories and links, a clean rebuild, strict types, the existing full suite and representative browser behavior.
 
-1. Group frontend sources and adapt compilation/copying, injectors and source-path tests.
-2. Group question-bank materials and adapt generators, imports, tests and maintenance commands.
-3. Add the VS Code workspace, tasks and editing guide; verify the full build and suite, commit, push and deploy.
+## Acceptance
 
-Acceptance: all existing tests and strict type checks pass; generated resource URLs and question counts remain unchanged; source changes reproduce their published assets. No account data, credentials or quiz content is changed.
+- Every subject HTML URL is declared by a typed bank manifest and rebuilt without reading a deployed HTML page as input.
+- Editable data and layouts are separate. Build never overwrites data. An edited question affects its corresponding output.
+- All source-page SHA-256 hashes match after initial migration; rich content, answer/progress contracts and FE data remain intact.
+- Generated pages can be removed and rebuilt entirely from checked-in sources. Existing tests remain active and pass.
 
-Risks: generators compute paths from their own location and some scripts use fixed historical paths. Audit these references as each subject moves. Preserve ignored local source material and avoid introducing duplicate hand-edited browser code.
-
-Rollback: revert the organization commits and rebuild; no database migration or runtime binding changes are needed.
-
-Design reference: `docs/design/source-layout.md`.
+Design: `docs/design/question-bank-typescript.md`. No UI/API behavior change or deployment.

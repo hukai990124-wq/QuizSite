@@ -7,3 +7,7 @@ TypeScript compiles to the same flat browser asset names. A build copies CSS and
 The VS Code workspace provides named entry points for each source category, HTML, question-bank materials, backend code, tooling and documentation. Root README instructions identify the canonical file for each resource and explain generated copies.
 
 Verification: run the package build, typecheck and test scripts; test source/output parity and workspace paths; smoke-check the deployed site and read-only account/AI configuration endpoints. Credential values are not part of this reorganization.
+
+## All-bank publishing update (2026-11-01)
+
+All subject HTML is now generated from `question-banks/*/bank.mts`, `pages.json` and `quiz_kit/typescript/`. Generated subject HTML and FE JSON are excluded from Git and the normal source view. `pnpm build` recreates the full deployable site before publishing. Original browser interactions are retained in shared compatibility layouts. See `question-bank-typescript.md` for the publishing contract.

@@ -3,11 +3,41 @@
   "files.exclude": {
     "**/node_modules": true,
     "**/.wrangler": true,
-    "**/__pycache__": true
+    "**/__pycache__": true,
+    "**/.build": true,
+    "**/aws-aif/**/*.html": true,
+    "**/aws-aip/**/*.html": true,
+    "**/aws-clf/**/*.html": true,
+    "**/aws-mla/**/*.html": true,
+    "**/aws-saa/**/*.html": true,
+    "**/dele-a1/**/*.html": true,
+    "**/dele-a2/**/*.html": true,
+    "**/fe/**/*.html": true,
+    "**/java-bronze/**/*.html": true,
+    "**/programming/**/*.html": true,
+    "**/toeic-listening/**/*.html": true,
+    "**/toeic-reading/**/*.html": true,
+    "**/workbuddy-opc/**/*.html": true
   },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.mts": "${capture}.mjs, ${capture}.d.mts",
     "tsconfig.json": "tsconfig.*.json"
+  },
+  "search.exclude": {
+    "**/.build": true,
+    "**/aws-aif/**/*.html": true,
+    "**/aws-aip/**/*.html": true,
+    "**/aws-clf/**/*.html": true,
+    "**/aws-mla/**/*.html": true,
+    "**/aws-saa/**/*.html": true,
+    "**/dele-a1/**/*.html": true,
+    "**/dele-a2/**/*.html": true,
+    "**/fe/**/*.html": true,
+    "**/java-bronze/**/*.html": true,
+    "**/programming/**/*.html": true,
+    "**/toeic-listening/**/*.html": true,
+    "**/toeic-reading/**/*.html": true,
+    "**/workbuddy-opc/**/*.html": true
   }
 }

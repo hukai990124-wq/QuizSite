@@ -27,7 +27,7 @@ def main():
     materials = {}
     ocr_cache = json.loads((ROOT / "question-banks/fe/raw/chat-ocr-pages-v2.json").read_text(encoding="utf-8-sig"))
     for filename in ("data.json", "extra.json"):
-        data = json.loads((ROOT / "site/fe" / filename).read_text(encoding="utf-8"))
+        data = json.loads((ROOT / "question-banks/fe/content" / filename).read_text(encoding="utf-8"))
         for set_id, exam in data["sets"].items():
             materials[set_id] = {}
             expected_pages = {}
@@ -64,7 +64,7 @@ def main():
                 if len(text) < 30:
                     raise ValueError(f"Insufficient text: {set_id}/{q['number']}")
                 materials[set_id][str(q["number"])] = ("[扫描题面 OCR 文本，可能有识别误差，请核对原图]\n" if from_ocr else "") + text
-    target = ROOT / "site/fe/chat-materials.json"
+    target = ROOT / "question-banks/fe/content/chat-materials.json"
     target.write_text(json.dumps(materials, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Extracted {sum(len(qs) for qs in materials.values())} FE question texts.")
 

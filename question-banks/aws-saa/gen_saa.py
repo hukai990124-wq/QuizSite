@@ -3,6 +3,16 @@
 用法: python gen_saa.py <source> <total>
   source = hydranode(真题线) | ditectrev(合规线)
 读取结构化题库 + 中文翻译，生成中英对照、可作答判分的 HTML/MD，两条线分开输出。"""
+
+# Legacy publishing entry point: all published pages now come from TypeScript.
+if __name__ == "__main__":
+    import subprocess as _publisher
+    import sys as _publisher_sys
+    from pathlib import Path as _PublisherPath
+    if len(_publisher_sys.argv) != 1:
+        raise SystemExit("Legacy acquisition flags are not publishing commands. See question-banks/README.md.")
+    raise SystemExit(_publisher.call(["node", str(_PublisherPath(__file__).resolve().parents[2] / "scripts/build-banks.mjs"), "--bank", "aws-saa"]))
+
 import sys, os, json, html, glob
 sys.stdout.reconfigure(encoding='utf-8')
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "quiz_kit")))

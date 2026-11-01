@@ -1,5 +1,9 @@
 # AWS SAA-C03 备考题库（中英对照）
 
+> 当前发布入口已迁移到 TypeScript。请编辑本目录的 `pages.json`（题目、选项、答案、解析、页面文本）和 `bank.mts`（题库声明）；在仓库根目录运行 `node scripts/build-banks.mjs --bank aws-saa`。页面布局在 `quiz_kit/typescript/layouts.mts`。下方旧 Python/HTML 流程仅供历史采集参考；详见[统一维护说明](../README.md)。
+
+
+
 AWS Certified Solutions Architect – Associate (SAA-C03) 备考题库。A、B 两条题库各 10 份、每份 50 题，共 **1000 题**；另有 **50 道原创加练题**和 AWS 官方样题 10 题。新增原创卷提供英中日题干、选项与解析。
 
 另提供 [SAA 服务与术语集](../../site/aws-saa/reference.html)，按 AWS 官方考纲收录 **118 项服务**，并补充核心架构概念，说明用途、功能和易混点。此参考页可搜索浏览，阅读不参与作答、计分或进度统计。

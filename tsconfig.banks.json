@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": ".build/banks",
+    "noEmit": false,
+    "types": ["node"]
+  },
+  "include": ["quiz_kit/typescript/**/*.mts", "question-banks/*/bank.mts"]
+}

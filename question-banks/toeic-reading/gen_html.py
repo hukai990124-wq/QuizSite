@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
 """Generate interactive (answerable) HTML per test + index."""
+
+# Legacy publishing entry point: all published pages now come from TypeScript.
+if __name__ == "__main__":
+    import subprocess as _publisher
+    import sys as _publisher_sys
+    from pathlib import Path as _PublisherPath
+    if len(_publisher_sys.argv) != 1:
+        raise SystemExit("Legacy acquisition flags are not publishing commands. See question-banks/README.md.")
+    raise SystemExit(_publisher.call(["node", str(_PublisherPath(__file__).resolve().parents[2] / "scripts/build-banks.mjs"), "--bank", "toeic-reading"]))
+
 import json, os, sys, html
 sys.stdout.reconfigure(encoding='utf-8')
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "quiz_kit")))

@@ -8,11 +8,17 @@
   "scripts": {
     "edit:sir-gavin": "node scripts/sir-gavin-prompt-editor.mjs",
     "dev:types": "tsc -p tsconfig.site.json --watch --noEmitOnError",
-    "typecheck": "tsc --noEmit",
-    "build": "node question-banks/aws-saa/build_original.mjs && node question-banks/aws-saa/build_reference.mjs && node scripts/build-frontend.mjs && tsc -p tsconfig.site.json --noEmitOnError && tsc -p tsconfig.worker.json --noEmitOnError",
-    "test": "pnpm run build && node --test worker/*.test.mjs tests/*.test.mjs site/assets/back-to-top.test.mjs"
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.banks.json --noEmit",
+    "build": "node scripts/build-project.mjs",
+    "test": "node scripts/build-project.mjs && node --test worker/*.test.mjs tests/*.test.mjs site/assets/back-to-top.test.mjs",
+    "build:banks": "node scripts/build-banks.mjs",
+    "verify:banks": "node scripts/build-banks.mjs --check",
+    "test:banks:browser": "node scripts/build-project.mjs && node .build/banks/quiz_kit/typescript/browser-smoke.mjs"
   },
   "devDependencies": {
+    "@types/node": "^26.6.6",
+    "parse5": "^8.0.1",
+    "playwright": "^1.64.1",
     "typescript": "7.0.2"
   }
 }

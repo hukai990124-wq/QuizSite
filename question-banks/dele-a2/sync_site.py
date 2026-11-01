@@ -10,6 +10,16 @@ site/ 里的页面比 out/ 多三样东西（都不是 build.py 产出的）：
     python sync_site.py          # 同步 + 注入
 （改完题库先跑 build.py，再跑这个；最后 git push 才会到线上。）
 """
+
+# Legacy publishing entry point: all published pages now come from TypeScript.
+if __name__ == "__main__":
+    import subprocess as _publisher
+    import sys as _publisher_sys
+    from pathlib import Path as _PublisherPath
+    if len(_publisher_sys.argv) != 1:
+        raise SystemExit("Legacy acquisition flags are not publishing commands. See question-banks/README.md.")
+    raise SystemExit(_publisher.call(["node", str(_PublisherPath(__file__).resolve().parents[2] / "scripts/build-banks.mjs"), "--bank", "dele-a2"]))
+
 import os
 import shutil
 import subprocess

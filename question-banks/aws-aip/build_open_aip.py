@@ -1,4 +1,14 @@
 """Render the licensed English/Chinese practice extension; no Japanese question translation."""
+
+# Legacy publishing entry point: all published pages now come from TypeScript.
+if __name__ == "__main__":
+    import subprocess as _publisher
+    import sys as _publisher_sys
+    from pathlib import Path as _PublisherPath
+    if len(_publisher_sys.argv) != 1:
+        raise SystemExit("Legacy acquisition flags are not publishing commands. See question-banks/README.md.")
+    raise SystemExit(_publisher.call(["node", str(_PublisherPath(__file__).resolve().parents[2] / "scripts/build-banks.mjs"), "--bank", "aws-aip"]))
+
 import json
 import shutil
 from pathlib import Path

@@ -1,5 +1,9 @@
 # 基本情報技術者試験（FE）官方题库
 
+> 当前发布入口已迁移到 TypeScript。请编辑本目录的 `pages.json`（题目、选项、答案、解析、页面文本）和 `bank.mts`（题库声明）；在仓库根目录运行 `node scripts/build-banks.mjs --bank fe`。页面布局在 `quiz_kit/typescript/layouts.mts`。下方旧 Python/HTML 流程仅供历史采集参考；详见[统一维护说明](../README.md)。
+
+
+
 ## AI 讲解接入（2026-10-13）
 
 科目 A/B 的年度卷和附加卷均提供每题「AI 讲解」按钮；聊天窗口可选择本卷任意题号，切题和重复渲染不产生重复选项。稳定的隐藏题目目录提供文字材料，当前题目的操作区通过 `data-chat-question` 指向目录条目，复用共享 TypeScript 聊天模块。作答、判分、进度和额度不变。
