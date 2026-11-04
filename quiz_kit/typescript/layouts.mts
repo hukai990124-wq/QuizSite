@@ -1,7 +1,9 @@
 // Imported reusable markup. Edit question content in question-banks/*/pages.json.
 import type { Layouts } from './model.mjs';
+import feVocabularyLayout from './fe-vocabulary-layout.mjs';
 
 const layouts: Layouts = {
+  "fe-vocabulary-page": [feVocabularyLayout],
   "style-f8f9fb141fae927841f7": [
     "<style>body{margin:0;background:#f5f6f8;font:15px/1.7 -apple-system,\"Segoe UI\",\"PingFang SC\",sans-serif;color:#111827}\r\n.wrap{max-width:720px;margin:0 auto;padding:34px 22px 70px}h1{font-size:24px;margin:0 0 6px}\r\n.sub{color:#6b7280;margin:0 0 24px;font-size:13px}\r\na.card{display:block;background:#fff;border:1px solid #e3e6ea;\r\nborder-radius:12px;padding:15px 18px;margin-bottom:10px;text-decoration:none;color:#111827}\r\na.card:hover{border-color:#93c5fd;background:#f8fbff}\r\na.card .n{font-weight:700}.r{color:#6b7280;font-size:13px;margin-top:3px}\r\na.back{display:inline-block;margin-bottom:14px;font-size:13px}\r\n</style>"
   ],
@@ -22294,7 +22296,7 @@ const layouts: Layouts = {
     {
       "slot": "p.3"
     },
-    "</p></div><nav class=\"year-nav\" id=\"years\" aria-label=\"选择卷别与年度\"></nav><div class=\"layout\" id=\"app\"><div class=\"panel loading\">正在加载题目……</div></div></main><footer class=\"foot\"><div class=\"wrap\">© 独立行政法人情報処理推進機構（IPA） · <a href=\"https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/index.html\">官方公开题目录</a></div><!--i18n:sw-->\r\n<div class=\"lang-switch i18n-noloc\" role=\"group\" aria-label=\"Language\">\r\n<button type=\"button\" data-set-lang=\"zh\" aria-pressed=\"false\">中文</button>\r\n<button type=\"button\" data-set-lang=\"en\" aria-pressed=\"false\">English</button>\r\n<button type=\"button\" data-set-lang=\"ja\" aria-pressed=\"false\">日本語</button>\r\n</div>\r\n<!--/i18n:sw--></footer>",
+    "</p></div><p><a href=\"vocabulary.html\">词汇背诵集 · 先记术语再做题 →</a></p><nav class=\"year-nav\" id=\"years\" aria-label=\"选择卷别与年度\"></nav><div class=\"layout\" id=\"app\"><div class=\"panel loading\">正在加载题目……</div></div></main><footer class=\"foot\"><div class=\"wrap\">© 独立行政法人情報処理推進機構（IPA） · <a href=\"https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/index.html\">官方公开题目录</a></div><!--i18n:sw-->\r\n<div class=\"lang-switch i18n-noloc\" role=\"group\" aria-label=\"Language\">\r\n<button type=\"button\" data-set-lang=\"zh\" aria-pressed=\"false\">中文</button>\r\n<button type=\"button\" data-set-lang=\"en\" aria-pressed=\"false\">English</button>\r\n<button type=\"button\" data-set-lang=\"ja\" aria-pressed=\"false\">日本語</button>\r\n</div>\r\n<!--/i18n:sw--></footer>",
     {
       "layout": "script-88c992bb4a6f5a01d946"
     },
@@ -22343,7 +22345,7 @@ const layouts: Layouts = {
     {
       "slot": "p.4"
     },
-    "</p></div><nav class=\"year-nav\" id=\"years\" aria-label=\"选择卷别与年度\"></nav><div class=\"layout\" id=\"app\"><div class=\"panel loading\">正在加载题目……</div></div></main><footer class=\"foot\"><div class=\"wrap\">© 独立行政法人情報処理推進機構（IPA） · <a href=\"https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/index.html\">官方公开题目录</a></div><!--i18n:sw-->\r\n<div class=\"lang-switch i18n-noloc\" role=\"group\" aria-label=\"Language\">\r\n<button type=\"button\" data-set-lang=\"zh\" aria-pressed=\"false\">中文</button>\r\n<button type=\"button\" data-set-lang=\"en\" aria-pressed=\"false\">English</button>\r\n<button type=\"button\" data-set-lang=\"ja\" aria-pressed=\"false\">日本語</button>\r\n</div>\r\n<!--/i18n:sw--></footer>",
+    "</p></div><p><a href=\"vocabulary.html\">词汇背诵集 · 先记术语再做题 →</a></p><nav class=\"year-nav\" id=\"years\" aria-label=\"选择卷别与年度\"></nav><div class=\"layout\" id=\"app\"><div class=\"panel loading\">正在加载题目……</div></div></main><footer class=\"foot\"><div class=\"wrap\">© 独立行政法人情報処理推進機構（IPA） · <a href=\"https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/index.html\">官方公开题目录</a></div><!--i18n:sw-->\r\n<div class=\"lang-switch i18n-noloc\" role=\"group\" aria-label=\"Language\">\r\n<button type=\"button\" data-set-lang=\"zh\" aria-pressed=\"false\">中文</button>\r\n<button type=\"button\" data-set-lang=\"en\" aria-pressed=\"false\">English</button>\r\n<button type=\"button\" data-set-lang=\"ja\" aria-pressed=\"false\">日本語</button>\r\n</div>\r\n<!--/i18n:sw--></footer>",
     {
       "layout": "script-88c992bb4a6f5a01d946"
     },
@@ -22408,7 +22410,7 @@ const layouts: Layouts = {
     {
       "slot": "p.8"
     },
-    "</p><strong>3 套完整结构 · 每套 20 题</strong></a></div></main>\r\n<footer class=\"foot\"><div class=\"wrap\">来源：<a href=\"https://www.ipa.go.jp/shiken/syllabus/henkou/2022/20221226.html\" target=\"_blank\" rel=\"noopener noreferrer\">IPA 2022 官方样题</a> · <a href=\"https://www.ipa.go.jp/shiken/about/menjo-fe.html\" target=\"_blank\" rel=\"noopener noreferrer\">IPA 科目 A 免除修了试验</a> · <a href=\"https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">IPA 2023–2026 公开题</a>。用于个人学习练习，本站与 IPA 无隶属关系。</div><!--i18n:sw-->\r\n<div class=\"lang-switch i18n-noloc\" role=\"group\" aria-label=\"Language\">\r\n<button type=\"button\" data-set-lang=\"zh\" aria-pressed=\"false\">中文</button>\r\n<button type=\"button\" data-set-lang=\"en\" aria-pressed=\"false\">English</button>\r\n<button type=\"button\" data-set-lang=\"ja\" aria-pressed=\"false\">日本語</button>\r\n</div>\r\n<!--/i18n:sw--></footer>",
+    "</p><strong>3 套完整结构 · 每套 20 题</strong></a></div><a class=\"subject-card\" style=\"margin-top:16px\" href=\"vocabulary.html\"><span class=\"eyebrow\">VOCABULARY · 记忆与复习</span><h2>词汇背诵集 →</h2><p>120 个核心词 · 日文、读音、英文与中文释义，配合记忆提示和易混辨析。</p><strong>翻卡背诵 · 反向回忆 · 待复习与已掌握</strong></a></main>\r\n<footer class=\"foot\"><div class=\"wrap\">来源：<a href=\"https://www.ipa.go.jp/shiken/syllabus/henkou/2022/20221226.html\" target=\"_blank\" rel=\"noopener noreferrer\">IPA 2022 官方样题</a> · <a href=\"https://www.ipa.go.jp/shiken/about/menjo-fe.html\" target=\"_blank\" rel=\"noopener noreferrer\">IPA 科目 A 免除修了试验</a> · <a href=\"https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">IPA 2023–2026 公开题</a>。用于个人学习练习，本站与 IPA 无隶属关系。</div><!--i18n:sw-->\r\n<div class=\"lang-switch i18n-noloc\" role=\"group\" aria-label=\"Language\">\r\n<button type=\"button\" data-set-lang=\"zh\" aria-pressed=\"false\">中文</button>\r\n<button type=\"button\" data-set-lang=\"en\" aria-pressed=\"false\">English</button>\r\n<button type=\"button\" data-set-lang=\"ja\" aria-pressed=\"false\">日本語</button>\r\n</div>\r\n<!--/i18n:sw--></footer>",
     {
       "layout": "script-96f10a1dc2ff0436eca8"
     },

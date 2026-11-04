@@ -18,7 +18,7 @@ const hash = value => createHash('sha256').update(value).digest('hex');
 test('all 13 banks render their complete published page and question inventory', async () => {
   assert.deepEqual(banks.map(bank => bank.id), ['aws-aif', 'aws-aip', 'aws-clf', 'aws-mla', 'aws-saa', 'dele-a1', 'dele-a2', 'fe', 'java-bronze', 'programming', 'toeic-listening', 'toeic-reading', 'workbuddy-opc']);
   const outputs = renderBanks(banks, layouts);
-  assert.equal(banks.reduce((n, bank) => n + bank.pages.length, 0), 117);
+  assert.equal(banks.reduce((n, bank) => n + bank.pages.length, 0), 118);
   assert.equal(banks.reduce((n, bank) => n + bank.pages.reduce((sum, page) => sum + page.questions.length, 0), 0), 5347);
   for (const bank of banks) {
     for (const page of bank.pages) {

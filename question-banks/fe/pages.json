@@ -40,5 +40,11 @@
       "p.8": "三套 20 题：官方样题 1 套、官方公开题组卷 2 套；另保留分年度公开题。"
     },
     "questions": []
+  },
+  {
+    "path": "fe/vocabulary.html",
+    "layout": "fe-vocabulary-page",
+    "content": {},
+    "questions": []
   }
 ]

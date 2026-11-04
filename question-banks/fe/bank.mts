@@ -15,6 +15,10 @@ export default defineBank({
   pages,
   dataFiles: [
   {
+    "source": "question-banks/fe/content/vocabulary.json",
+    "path": "fe/vocabulary.json"
+  },
+  {
     "source": "question-banks/fe/content/chat-materials.json",
     "path": "fe/chat-materials.json"
   },

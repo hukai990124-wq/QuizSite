@@ -14,6 +14,8 @@
 
 站点入口：`site/fe/index.html`；科目 A、B 分别在 `a.html`、`b.html`，年度互不混合。
 
+词汇背诵集：`site/fe/vocabulary.html` 提供 120 个核心日文术语，含读音、英文、中文释义、记忆提示与易混辨析。支持翻卡、反向回忆、分类搜索、词汇总览和掌握程度标记；背诵状态仅保存在当前浏览器，与考试作答记录独立。数据编辑 `content/vocabulary.json`，使用统一构建命令发布。界面与验收见 [词汇集设计说明](../../docs/design/fe-vocabulary.md)；浏览器验证运行 `node quiz_kit/fe_vocabulary_audit.cjs`。
+
 | 年度 | 科目 A | 科目 B |
 | --- | ---: | ---: |
 | 2022 官方样题 | 60 | 20 |
