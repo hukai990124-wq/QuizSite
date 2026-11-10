@@ -14,7 +14,7 @@ async function main(){
   const base=`http://127.0.0.1:${server.address().port}`;
   const browser=await chromium.launch({headless:true,channel:'msedge'});
   try{
-    for(const [pool,size,quotas] of [['aws-clf',50],['aws-aif',50],['aws-saa',50],['toeic-listening',50,[3,14,18,15]],['toeic-listening',100,[6,25,39,30]],['toeic-reading',50,[15,8,27]],['toeic-reading',100,[30,16,54]]]){
+    for(const [pool,size,quotas] of [['aws-clf',50],['aws-aif',50],['aws-saa',50],['aws-aip',50],['aws-mla',50],['toeic-listening',50,[3,14,18,15]],['toeic-listening',100,[6,25,39,30]],['toeic-reading',50,[15,8,27]],['toeic-reading',100,[30,16,54]]].filter(([pool])=>process.argv.length<3 || process.argv.slice(2).includes(pool))){
       const ctx=await browser.newContext();let aiCalls=0;
       await ctx.route('**/api/**',route=>{
         const name=new URL(route.request().url()).pathname;
@@ -30,6 +30,26 @@ async function main(){
       await page.waitForSelector('.exam-notice');
       await page.waitForSelector('.qb-chat-trigger',{state:'attached',timeout:7000});
       assert.equal(await page.locator('.q').count(),size);
+      const paged=pool.startsWith('aws-');
+      async function openQuestion(q) {
+        if(!paged)return;
+        const index=Number(await q.getAttribute('data-n'))-1;
+        await page.locator('#sheet .grid a').nth(index).click();
+        assert.equal(await page.locator('.q:visible').count(),1);
+        assert.equal(await q.isVisible(),true);
+      }
+      if(paged){
+        assert.equal(await page.locator('html').getAttribute('data-exam-layout'),'single');
+        assert.equal(await page.locator('.q:visible').count(),1);
+        assert.equal(await page.locator('#exam-previous').isDisabled(),true);
+        assert.equal(await page.locator('#sheet').isVisible(),true);
+        assert.equal(await page.locator('#sheet .grid a').count(),50);
+        const sheetBox=await page.locator('#sheet').boundingBox(), questionBox=await page.locator('.q:visible').boundingBox();
+        assert.ok(sheetBox.y+sheetBox.height<=questionBox.y,'answer sheet is above the question');
+        assert.equal(await page.locator('.exam-bar').count(),0,'source timed-practice controls are removed from the exam clone');
+        const stems=await page.locator('.q').evaluateAll(questions=>questions.map(q=>q.querySelector('.stem .en').textContent));
+        assert.equal(new Set(stems.map(text=>text.replace(/\s+/g,' ').trim())).size,50,'no duplicate stems');
+      }
       assert.equal(await page.locator('html').getAttribute('data-exam-status'),'pending');
       assert.equal(await page.locator('.qb-chat-trigger').isVisible(),false);
       assert.equal(await page.locator('.qb-question-chat').count(),0);
@@ -48,16 +68,25 @@ async function main(){
         assert.equal(await q1.locator('.opt.sel').count(),1);
       }else await q1.locator('input.fill').fill('draft');
       assert.equal(await page.locator('.q.done,.q.wrong,.opt.ok,.opt.bad,.opt.miss').count(),0);
-      await page.locator('#btn-sheet').click();
+      if(paged){
+        await page.locator('#exam-next').click();assert.equal(await q2.isVisible(),true);
+        await page.locator('#exam-previous').click();assert.equal(await q1.isVisible(),true);
+        assert.equal(await q1.locator('.opt.sel').count(),1,'previous retains the answer');
+        await openQuestion(page.locator('.q').nth(49));assert.equal(await page.locator('#exam-next').isDisabled(),true);
+        await openQuestion(q2);
+        assert.equal(await page.locator('#sheet [aria-current="step"]').textContent(),'2');
+      }else await page.locator('#btn-sheet').click();
       assert.equal(await page.locator('#sheet .grid a.exam-answered').count(),1);
       assert.equal(await page.locator('#sheet .grid a.ok,#sheet .grid a.bad').count(),0);
-      await page.locator('#sh-close').click();
+      if(!paged)await page.locator('#sh-close').click();
       page.once('dialog',d=>d.dismiss());await page.locator('#btn-report').click();
       assert.equal(await page.locator('html').getAttribute('data-exam-status'),'pending');
       await page.reload();await page.waitForSelector('.exam-notice');
       assert.equal(await page.locator('#s-done').textContent(),'1');
+      if(paged)assert.equal(await page.locator('.q:visible').getAttribute('data-n'),'2','refresh restores the current question');
       assert.equal(await page.locator('details.ans:visible,.qb-question-chat').count(),0);
       async function choose(q,correct){
+        await openQuestion(q);
         const answer=(await q.getAttribute('data-ans')).split(/[,|]/).map(s=>s.trim().toUpperCase());
         if(await q.getAttribute('data-kind')==='fill'){await q.locator('input.fill').fill(correct?answer[0]:'deliberately wrong');return;}
         if(answer.length>1){for(const selected of await q.locator('.opt.sel').all())await selected.click();}
@@ -78,14 +107,21 @@ async function main(){
       assert.equal(await page.locator('.qb-report-home').getAttribute('href'),'/');
       await page.locator('#rp-close').click();
       assert.equal(await page.locator('.q.done').count(),size);
+      if(paged){
+        await page.locator('#btn-wrong').click();
+        assert.equal(await page.locator('.q:visible').getAttribute('data-n'),'2');
+        assert.equal(await page.locator('#exam-previous').isDisabled(),true);
+        await page.locator('#exam-next').click();assert.equal(await page.locator('.q:visible').getAttribute('data-n'),'3');
+        await openQuestion(q1);assert.equal(await page.locator('body').evaluate(el=>el.classList.contains('only-wrong')),false);
+      }
       assert.equal(await page.locator('.qb-question-chat').count(),size);
       assert.equal(await page.locator('.qb-chat-trigger').isVisible(),true);
       assert.ok(await page.locator('details.ans:visible').count());
       if(await q1.locator('.opt').count()){
-        const before=await q1.locator('.opt.ok').getAttribute('data-letter');
+        const before=await q1.locator('.opt.ok').evaluateAll(options=>options.map(el=>el.dataset.letter));
         assert.equal(await q1.locator('.opt').first().getAttribute('aria-disabled'),'true');
         await q1.locator('.opt:not(.ok)').first().focus();await page.keyboard.press('Enter');
-        assert.equal(await q1.locator('.opt.ok').getAttribute('data-letter'),before);
+        assert.deepEqual(await q1.locator('.opt.ok').evaluateAll(options=>options.map(el=>el.dataset.letter)),before);
       }
       await q1.locator('.qb-question-chat').click();
       assert.equal(await page.locator('#qb-chat-question option').count(),size+1);
@@ -93,12 +129,29 @@ async function main(){
       await page.reload();await page.waitForSelector('.exam-notice');
       assert.equal(await page.locator('html').getAttribute('data-exam-status'),'submitted');
       assert.equal(await page.locator('#s-ok').textContent(),'1');
-      for(const width of [320,768,1024,1440]){
-        await page.setViewportSize({width,height:900});
-        assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+      for(const mode of ['light','dark']){
+        await page.locator('#qb-color-mode').selectOption(mode);
+        for(const width of [320,768,1024,1440]){
+          await page.setViewportSize({width,height:900});
+          assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`${pool} ${mode} ${width}`);
+          if(paged)assert.equal(await page.locator('.q:visible').count(),1);
+        }
       }
       if(pool==='aws-clf')await page.screenshot({path:path.resolve(__dirname,'../question-banks/fe/shots/random-exam-submitted.png')});
       if(pool==='aws-clf'){
+        const fresh=await ctx.newPage();await fresh.goto(`${base}/random.html?pool=aws-clf&size=50&seed=87654321`);await fresh.waitForSelector('.exam-notice');
+        assert.equal(await fresh.locator('#s-done').textContent(),'0','new seed is independent');
+        for(let index=0;index<50;index++){
+          await fresh.locator('#sheet .grid a').nth(index).click();
+          const q=fresh.locator('.q').nth(index), answers=(await q.getAttribute('data-ans')).split(',');
+          for(const letter of answers)await q.locator(`[data-letter="${letter.trim()}"]`).click();
+        }
+        assert.equal(await fresh.locator('#s-done').textContent(),'50');
+        fresh.once('dialog',d=>d.accept());await fresh.locator('#btn-report').click();await fresh.waitForSelector('#mask.open');
+        assert.equal(await fresh.locator('#rp-pct').textContent(),'100%');assert.equal(await fresh.locator('#rp-left').textContent(),'0');
+        await fresh.locator('#rp-retry').click();assert.equal(await fresh.locator('.q:visible').count(),0);assert.equal(await fresh.locator('.exam-empty').isVisible(),true);
+        assert.equal(await fresh.locator('#exam-next').isDisabled(),true);await fresh.locator('#btn-wrong').click();assert.equal(await fresh.locator('.q:visible').count(),1);
+        await fresh.close();
         const home=await ctx.newPage();await home.goto(base+'/');
         await home.locator('#reset-progress').click();await home.locator('#reset-confirm').click();
         await page.waitForFunction(()=>document.documentElement.dataset.examStatus==='pending');

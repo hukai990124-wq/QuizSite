@@ -40,3 +40,21 @@ test('submitted status survives reload only with valid submission metadata and r
   assert.equal(pending.exam.submitted,false);
   assert.equal(pending.answers['1'].ok,null);
 });
+
+test('exam resumes the current question and rejects invalid page positions',()=>{
+  assert.equal(readExamState(null,questions,100).exam.currentIndex,0);
+  for(const currentIndex of [0,1,2]) {
+    const state=readExamState(JSON.stringify({exam:{startedAt:1,currentIndex}}),questions,100);
+    assert.equal(state.exam.currentIndex,currentIndex);
+  }
+  for(const currentIndex of [-1,3,1.5,'1',null]) {
+    const state=readExamState(JSON.stringify({exam:{startedAt:1,currentIndex}}),questions,100);
+    assert.equal(state.exam.currentIndex,0);
+  }
+});
+
+test('MLA exposes the same random 50-question exam entrance as the other AWS banks',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const page=await readFile(new URL('../site/aws-mla/index.html',import.meta.url),'utf8');
+  assert.match(page,/random\.html\?pool=aws-mla&amp;size=50/);
+});

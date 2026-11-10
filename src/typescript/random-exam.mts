@@ -5,6 +5,7 @@ const root=document.documentElement;
 const key=root.dataset.examKey;
 if (!key || !/^quiz:random-exam:[a-z-]+:(50|100):[a-f0-9]{8}$/i.test(key)) throw new Error('Invalid exam key');
 const storageKey=key;
+const singlePage=root.dataset.examLayout === 'single';
 const nodes=[...document.querySelectorAll<HTMLElement>('.q[id]')];
 const questions:ExamQuestion[]=nodes.map(q=>({id:q.dataset.n || '',answers:(q.dataset.ans || '').split(/[,|]/).map(s=>s.trim().toUpperCase()).filter(Boolean),fill:q.dataset.kind === 'fill'}));
 function load() {
@@ -21,9 +22,9 @@ function text(id:string,value:string|number):void {
   if (el) el.textContent=String(value);
 }
 const copy={
-  zh:{score:'得分率',expand:'展开全部解析',collapse:'收起全部解析',title:'随机考试',pending:'考试模式：交卷前不显示答案、对错或 AI 讲解。选择会自动保存，交卷前可修改。',submitted:'已交卷：可查看成绩、答案与 AI 讲解。作答已锁定；再随机一套可开始新考试。',answered:'已答',unanswered:'未作答',right:'答对了',wrong:'答错了',answer:'正确答案',confirm:'确定交卷？交卷后不能修改答案。',left:'题未作答',review:'查看试卷',wrongOnly:'查看错题',all:'显示全部',report:'查看成绩',submit:'交卷',unsaved:'当前浏览器无法保存进度，关闭页面后作答可能丢失。'},
-  en:{score:'Score',expand:'Expand explanations',collapse:'Collapse explanations',title:'Random exam',pending:'Exam mode: answers, correctness and AI explanations stay hidden until submission. Choices save automatically and can be changed before submitting.',submitted:'Submitted: review your score, answers and AI explanations. Answers are locked; generate another paper to start a new exam.',answered:'Answered',unanswered:'Unanswered',right:'Correct',wrong:'Incorrect',answer:'Correct answer',confirm:'Submit this exam? Answers cannot be changed afterwards.',left:'questions unanswered',review:'Review paper',wrongOnly:'View mistakes',all:'Show all',report:'View score',submit:'Submit exam',unsaved:'This browser cannot save progress; closing the page may lose your answers.'},
-  ja:{score:'得点率',expand:'解説をすべて開く',collapse:'解説をすべて閉じる',title:'ランダム試験',pending:'試験モード：提出までは解答・正誤・AI解説を表示しない。選択は自動保存され、提出前は変更できる。',submitted:'提出済み：成績・解答・AI解説を確認できる。回答は変更不可。新しい試験は別のセットを作成する。',answered:'回答済み',unanswered:'未回答',right:'正解',wrong:'不正解',answer:'正解',confirm:'提出する？提出後は回答を変更できない。',left:'問が未回答',review:'問題を確認',wrongOnly:'誤答を確認',all:'すべて表示',report:'成績を確認',submit:'提出',unsaved:'このブラウザーでは進捗を保存できない。ページを閉じると回答が失われる場合がある。'}
+  zh:{previous:'上一题',next:'下一题',question:'题目',noMistakes:'没有错题。',current:'当前题',score:'得分率',expand:'展开全部解析',collapse:'收起全部解析',title:'随机考试',pending:'考试模式：交卷前不显示答案、对错或 AI 讲解。选择会自动保存，交卷前可修改。',submitted:'已交卷：可查看成绩、答案与 AI 讲解。作答已锁定；再随机一套可开始新考试。',answered:'已答',unanswered:'未作答',right:'答对了',wrong:'答错了',answer:'正确答案',confirm:'确定交卷？交卷后不能修改答案。',left:'题未作答',review:'查看试卷',wrongOnly:'查看错题',all:'显示全部',report:'查看成绩',submit:'交卷',unsaved:'当前浏览器无法保存进度，关闭页面后作答可能丢失。'},
+  en:{previous:'Previous',next:'Next',question:'Question',noMistakes:'No mistakes to review.',current:'Current question',score:'Score',expand:'Expand explanations',collapse:'Collapse explanations',title:'Random exam',pending:'Exam mode: answers, correctness and AI explanations stay hidden until submission. Choices save automatically and can be changed before submitting.',submitted:'Submitted: review your score, answers and AI explanations. Answers are locked; generate another paper to start a new exam.',answered:'Answered',unanswered:'Unanswered',right:'Correct',wrong:'Incorrect',answer:'Correct answer',confirm:'Submit this exam? Answers cannot be changed afterwards.',left:'questions unanswered',review:'Review paper',wrongOnly:'View mistakes',all:'Show all',report:'View score',submit:'Submit exam',unsaved:'This browser cannot save progress; closing the page may lose your answers.'},
+  ja:{previous:'前の問題',next:'次の問題',question:'問題',noMistakes:'誤答はない。',current:'現在の問題',score:'得点率',expand:'解説をすべて開く',collapse:'解説をすべて閉じる',title:'ランダム試験',pending:'試験モード：提出までは解答・正誤・AI解説を表示しない。選択は自動保存され、提出前は変更できる。',submitted:'提出済み：成績・解答・AI解説を確認できる。回答は変更不可。新しい試験は別のセットを作成する。',answered:'回答済み',unanswered:'未回答',right:'正解',wrong:'不正解',answer:'正解',confirm:'提出する？提出後は回答を変更できない。',left:'問が未回答',review:'問題を確認',wrongOnly:'誤答を確認',all:'すべて表示',report:'成績を確認',submit:'提出',unsaved:'このブラウザーでは進捗を保存できない。ページを閉じると回答が失われる場合がある。'}
 };
 function words() { const lang=root.dataset.lang; return copy[lang === 'en' || lang === 'ja' ? lang : 'zh']; }
 const notice=document.createElement('p'); notice.className='exam-notice i18n-noloc'; notice.setAttribute('role','status');
@@ -33,6 +34,37 @@ document.querySelector('.wrap > p.sub,.wrap > p.meta')?.classList.add('i18n-nolo
 const sheetSummary=document.createElement('span'); sheetSummary.className='i18n-noloc';
 document.querySelector('#sheet .hd')?.append(sheetSummary);
 document.querySelectorAll('.js-submit,.js-reveal,.js-redo,#btn-reset').forEach(el=>el.remove());
+const pager=singlePage ? createPager() : null;
+if (singlePage) {
+  const sheet=document.getElementById('sheet');
+  if (sheet) { sheet.classList.add('exam-sheet'); document.querySelector('.toolbar')?.after(sheet); }
+}
+function createPager() {
+  const nav=document.createElement('nav'); nav.className='exam-pager i18n-noloc';
+  const previous=document.createElement('button'), next=document.createElement('button');
+  previous.id='exam-previous'; next.id='exam-next'; previous.type=next.type='button';
+  const counter=document.createElement('span'); counter.id='exam-position'; counter.setAttribute('role','status');
+  counter.setAttribute('aria-live','polite'); counter.setAttribute('aria-atomic','true');
+  nav.append(previous,counter,next);
+  const empty=document.createElement('p'); empty.className='exam-empty i18n-noloc'; empty.setAttribute('role','status'); empty.hidden=true;
+  nodes.at(-1)?.after(empty,nav);
+  previous.addEventListener('click',()=>stepQuestion(-1)); next.addEventListener('click',()=>stepQuestion(1));
+  return {nav,previous,next,counter,empty};
+}
+function visibleQuestionIndices():number[] {
+  return questions.flatMap((q,index)=>!document.body.classList.contains('only-wrong') || !isExamCorrect(q,state.answers[q.id]?.s || []) ? [index] : []);
+}
+function goToQuestion(index:number):void {
+  if (!singlePage || !Number.isInteger(index) || index < 0 || index >= nodes.length) return;
+  if (!visibleQuestionIndices().includes(index)) document.body.classList.remove('only-wrong');
+  state.exam.currentIndex=index; save(); render();
+  const node=nodes[index]!; node.tabIndex=-1; node.focus({preventScroll:true});
+  node.scrollIntoView({behavior:'auto',block:'start'});
+}
+function stepQuestion(direction:number):void {
+  const indices=visibleQuestionIndices(), position=indices.indexOf(state.exam.currentIndex);
+  const next=indices[position+direction]; if (next !== undefined) goToQuestion(next);
+}
 nodes.forEach((node,index)=>{
   const q=questions[index];
   const options=[...node.querySelectorAll<HTMLElement>('li.opt')];
@@ -60,12 +92,23 @@ nodes.forEach((node,index)=>{
     state.answers[q.id]={s:[input.value.slice(0,2000)],ok:null,revealed:false}; save(); render();
   });
   node.querySelector('.js-next')?.addEventListener('click',()=>{
+    if (singlePage) { stepQuestion(1); return; }
     const next=nodes.slice(index+1).find(el=>el.offsetParent !== null);
     next?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',block:'start'});
   });
 });
 function render():void {
   const submitted=state.exam.submitted, c=words();
+  const visible=singlePage ? visibleQuestionIndices() : [];
+  if (singlePage && !visible.includes(state.exam.currentIndex)) state.exam.currentIndex=visible[0] ?? 0;
+  if (pager) {
+    const position=visible.indexOf(state.exam.currentIndex);
+    pager.nav.setAttribute('aria-label',c.question);
+    pager.previous.textContent=c.previous; pager.next.textContent=c.next;
+    pager.previous.disabled=position <= 0; pager.next.disabled=position < 0 || position >= visible.length-1;
+    pager.counter.textContent=`${c.question} ${position < 0 ? '—' : state.exam.currentIndex+1} / ${questions.length}`;
+    pager.empty.hidden=visible.length > 0; pager.empty.textContent=c.noMistakes;
+  }
   root.dataset.examStatus=submitted ? 'submitted' : 'pending';
   if (!submitted) { document.body.classList.remove('only-wrong'); document.getElementById('mask')?.classList.remove('open'); }
   const answered=questions.filter(q=>state.answers[q.id]?.s.some(value=>value.trim())).length;
@@ -86,6 +129,10 @@ function render():void {
   const grid=document.querySelector('#sheet .grid'); grid?.replaceChildren();
   nodes.forEach((node,index)=>{
     const q=questions[index], s=state.answers[q.id]?.s || [], attempted=s.some(value=>value.trim());
+    if (singlePage) {
+      const active=visible.includes(index) && index === state.exam.currentIndex;
+      node.classList.toggle('exam-active',active); node.setAttribute('aria-hidden',String(!active));
+    }
     const correct=submitted && isExamCorrect(q,s);
     node.classList.toggle('done',submitted); node.classList.toggle('wrong',submitted && !correct);
     node.querySelectorAll<HTMLElement>('li.opt').forEach(option=>{
@@ -105,6 +152,10 @@ function render():void {
     const anchor=document.createElement('a'); anchor.href='#'+node.id; anchor.textContent=String(index+1);
     anchor.setAttribute('aria-label',`${index+1}: ${attempted ? c.answered : c.unanswered}`);
     if (submitted) anchor.className=correct ? 'ok' : 'bad'; else if (attempted) anchor.className='exam-answered';
+    if (singlePage) {
+      if (index === state.exam.currentIndex && visible.length) { anchor.setAttribute('aria-current','step'); anchor.setAttribute('aria-label',`${anchor.getAttribute('aria-label')}, ${c.current}`); }
+      anchor.addEventListener('click',event=>{ event.preventDefault(); goToQuestion(index); });
+    }
     grid?.append(anchor);
   });
   const report=document.getElementById('btn-report'); if (report) { report.classList.add('i18n-noloc'); report.textContent=submitted ? c.report : c.submit; }
@@ -134,7 +185,7 @@ document.getElementById('btn-report')?.addEventListener('click',()=>{
 });
 document.getElementById('rp-close')?.addEventListener('click',()=>document.getElementById('mask')?.classList.remove('open'));
 document.getElementById('mask')?.addEventListener('click',event=>{ if ((event.target as HTMLElement).id === 'mask') document.getElementById('mask')?.classList.remove('open'); });
-function wrongOnly():void { if (!state.exam.submitted) return; document.body.classList.toggle('only-wrong'); render(); }
+function wrongOnly():void { if (!state.exam.submitted) return; document.body.classList.toggle('only-wrong'); render(); save(); }
 document.getElementById('btn-wrong')?.addEventListener('click',wrongOnly);
 document.getElementById('rp-retry')?.addEventListener('click',()=>{ document.getElementById('mask')?.classList.remove('open'); document.body.classList.remove('only-wrong'); wrongOnly(); });
 function updateExpandLabel():void {

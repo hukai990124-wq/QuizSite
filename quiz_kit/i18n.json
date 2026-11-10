@@ -2381,5 +2381,8 @@
   "3 个题库": {"en": "3 question banks", "ja": "3 問題集"},
   "边读代码，边学编程": {"en": "Learn by reading code", "ja": "コードを読んで学ぶ"},
   "20 道分考点练习 + 60 道全真模拟，中英日三语解析。模拟卷 65 分钟，60 分及格。": {"en": "20 focused practice questions and a 60-question mock exam, with Chinese, English and Japanese explanations. 65-minute mock exam; 60 points to pass.", "ja": "分野別演習20問と模擬試験60問。中英日3言語の解説付き。模擬試験は65分、60点で合格。"},
-  "腾讯云 OPC 认证备考。11 个模块、117 道练习 + 60 道模拟题，附解析与出处，支持 90 分钟模考。": {"en": "Tencent Cloud OPC preparation: 117 questions across 11 modules plus a 60-question mock exam. Includes explanations, sources and a 90-minute exam mode.", "ja": "テンセントクラウドOPC認定対策。11モジュール117問と模擬試験60問。解説・出典、90分の模試モード付き。"}
+  "腾讯云 OPC 认证备考。11 个模块、117 道练习 + 60 道模拟题，附解析与出处，支持 90 分钟模考。": {"en": "Tencent Cloud OPC preparation: 117 questions across 11 modules plus a 60-question mock exam. Includes explanations, sources and a 90-minute exam mode.", "ja": "テンセントクラウドOPC認定対策。11モジュール117問と模擬試験60問。解説・出典、90分の模試モード付き。"},
+  "65 道备考练习 · 中英日对照 · 答案与解析 · 随机考试每次抽取 50 题，逐题作答并统一交卷判分 · 非官方题目": {"en": "65 practice questions with English, Chinese and Japanese text and explanations. Random exams draw 50 questions, one per page, and grade on submission. Unofficial material.", "ja": "中英日対訳・解説付きの練習問題65問。試験では50問をランダムに抽出し、1画面1問で回答、提出後に一括採点。非公式問題。"},
+  "65 道备考练习，中英日对照；考试模式随机抽取 50 题，每页一题，统一交卷后查看成绩与解析。": {"en": "65 practice questions in English, Chinese and Japanese. Exam mode draws 50 questions, one per page, with scores and explanations after submission.", "ja": "中英日対訳の練習問題65問。試験では50問を抽出し、1画面1問で回答。提出後に成績・解説を確認。"},
+  "考试模式": {"en": "Exam mode", "ja": "試験モード"}
 }

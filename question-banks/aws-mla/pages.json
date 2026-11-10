@@ -5,11 +5,10 @@
     "content": {
       "script.0.KEY": "quiz:aws:mla:c01",
       "script.1.TOTAL": "65",
-      "script.2.STORE": "quiz:aws:mla:c01",
       "script.3.REL": "../",
       "title.0": "AWS MLA-C01 备考练习 · 机器学习工程师",
       "h1.1": "AWS MLA-C01 备考练习",
-      "p.2": "65 题 · 130 分钟 · 满分 1000 分（720 分及格）· 中英对照 · 答案与解析 · 非官方题目，中文为机器翻译 · 官方考试：65 题（50 道计分 + 15 道不计分）· 130 分钟",
+      "p.2": "65 道备考练习 · 中英日对照 · 答案与解析 · 随机考试每次抽取 50 题，逐题作答并统一交卷判分 · 非官方题目",
       "h3.3": "本份成绩",
       "table.4": "\r\n      <tr><td>已作答</td><td id=\"rp-done\">0</td></tr>\r\n      <tr><td>答对</td><td id=\"rp-ok\">0</td></tr>\r\n      <tr><td>答错</td><td id=\"rp-bad\">0</td></tr>\r\n      <tr><td>未作答</td><td id=\"rp-left\">0</td></tr>\r\n      <tr><td>用时</td><td id=\"rp-time\">—</td></tr>\r\n    "
     },

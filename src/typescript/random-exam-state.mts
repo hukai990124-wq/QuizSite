@@ -1,7 +1,7 @@
 export type ExamQuestion = {id:string; answers:string[]; fill:boolean};
 export type ExamAnswer = {s:string[]; ok:boolean|null; revealed:false};
 export type ExamState = {
-  exam:{startedAt:number;submitted:boolean;submittedAt:number|null};
+  exam:{startedAt:number;submitted:boolean;submittedAt:number|null;currentIndex:number};
   answers:Record<string,ExamAnswer>;
 };
 function record(value:unknown): value is Record<string,unknown> {
@@ -14,13 +14,14 @@ export function isExamCorrect(question:ExamQuestion, selection:string[]):boolean
   return !!question.answers.length && unique.length === question.answers.length && unique.every(value=>question.answers.includes(value));
 }
 export function readExamState(raw:string|null, questions:ExamQuestion[], now:number):ExamState {
-  const state:ExamState={exam:{startedAt:now,submitted:false,submittedAt:null},answers:{}};
+  const state:ExamState={exam:{startedAt:now,submitted:false,submittedAt:null,currentIndex:0},answers:{}};
   let source:unknown;
   try { source=raw ? JSON.parse(raw) : null; }
   catch { return state; }
   if (!record(source)) return state;
   const meta=source.exam;
   if (record(meta)) {
+    if (typeof meta.currentIndex === 'number' && Number.isSafeInteger(meta.currentIndex) && meta.currentIndex >= 0 && meta.currentIndex < questions.length) state.exam.currentIndex=meta.currentIndex;
     if (typeof meta.startedAt === 'number' && Number.isSafeInteger(meta.startedAt) && meta.startedAt > 0 && meta.startedAt <= now) state.exam.startedAt=meta.startedAt;
     if (meta.submitted === true && typeof meta.submittedAt === 'number' && Number.isSafeInteger(meta.submittedAt) && meta.submittedAt >= state.exam.startedAt && meta.submittedAt <= now) {
       state.exam.submitted=true; state.exam.submittedAt=meta.submittedAt;

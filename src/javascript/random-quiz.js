@@ -9,6 +9,7 @@
     "aws-aip": { title: "AWS AIP-C01", type: "aws", files: [...files("aws-aip", 3, "part"), ...files("aws-aip/open-easy", 4, "part"), ...files("aws-aip/open-hard", 3, "part"), ...files("aws-aip/open-veryhard", 3, "part")] },
     "aws-aif": { title: "AWS AIF-C01", type: "aws", files: [...files("aws-aif/bank", 10, "part"), ...files("aws-aif/practice", 5, "part")] },
     "aws-saa": { title: "AWS SAA-C03", type: "aws", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/compliance", 10, "part"), ...files("aws-saa/original", 1, "part")] },
+    "aws-mla": { title: "AWS MLA-C01", type: "aws", files: ["aws-mla/index.html"] },
     "toeic-listening": { title: "TOEIC Listening", type: "listening", files: files("toeic-listening", 10, "TOEIC_Listening_Test_") },
     "toeic-reading": { title: "TOEIC Reading", type: "reading", files: files("toeic-reading", 10, "TOEIC_Reading_Test_") }
   };
@@ -201,6 +202,16 @@
     if (!engine) throw new Error("原试卷缺少答题程序");
     // Random papers have their own controller: never execute the practice engine.
     doc.documentElement.dataset.examStatus = "pending";
+    if (config.type === "aws") {
+      doc.documentElement.dataset.examLayout = "single";
+      doc.querySelectorAll(".exam-bar,.random-entry").forEach(node => node.remove());
+      // Keep the source paper's directory link without covering the shared header controls.
+      doc.querySelectorAll('a[style]').forEach(link => {
+        if (link.style.position === 'fixed' && /目录|总览/.test(link.title)) {
+          link.removeAttribute('style'); link.classList.add('exam-return'); wrap.prepend(link);
+        }
+      });
+    }
     doc.documentElement.dataset.examKey = `quiz:random-exam:${poolName}:${size}:${seed}`;
     doc.documentElement.dataset.examTitle = config.title;
     const examStyle = doc.createElement("link");

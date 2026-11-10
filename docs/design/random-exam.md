@@ -1,6 +1,6 @@
 # Random papers: exam mode
 
-Only random-entry papers use exam mode. Existing AWS50 and TOEIC50/100 sampling, Part quotas, complete passages/dialogues and audio paths stay unchanged. Ordinary practice is untouched.
+Only random-entry papers use exam mode. AWS SAA/CLF/AIF/AIP/MLA use the paged 50-question flow in [aws-paged-exam.md](aws-paged-exam.md); TOEIC remains a full-paper layout. Existing AWS50 and TOEIC50/100 sampling, Part quotas, complete passages/dialogues and audio paths stay unchanged. Ordinary practice is untouched.
 
 Before submission: editable selection/fill drafts, neutral answered count and answer sheet. No per-question submit/reveal/redo, answer panels, transcripts, score/correctness summaries, wrong filter, expand explanations, global AI chat or question AI buttons. Enter/Space on choices selects only, never grades. Pending state is present before source markup is displayed, including print view.
 

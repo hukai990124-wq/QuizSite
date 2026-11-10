@@ -48,7 +48,7 @@ test('MLA-C01 bank holds 65 questions matching the official domain weights', asy
   assert.equal(qs.filter(q => q.answer.length > 1).length, 13, 'multi-answer count');
 });
 
-test('MLA-C01 page renders the bank with a timed mock mode', async () => {
+test('MLA-C01 keeps 65 practice questions and replaces the old timed mode with a random 50-question exam', async () => {
   const page = await load('site/aws-mla/index.html');
   const qs = JSON.parse(await load('question-banks/aws-mla/data/questions.json'));
   const blocks = page.match(/class="q" id="q\d+"/g) || [];
@@ -60,12 +60,12 @@ test('MLA-C01 page renders the bank with a timed mock mode', async () => {
   // would flatten the log excerpts the questions rely on.
   assert.equal((page.match(/class="exhibit-code"/g) || []).length, qs.filter(q => q.exhibit).length);
   assert.equal((page.match(/class="exhibit-code"/g) || []).length, 10);
-  assert.match(page, /id="btn-exam"/);
-  assert.match(page, /id="timer"/);
+  assert.match(page, /random\.html\?pool=aws-mla&amp;size=50/);
+  assert.match(page, /class="random-entry"/);
   assert.match(page, /quiz:aws:mla:c01/);
-  assert.match(page, /LIMIT=130\*60/);
-  assert.match(page, /PASS=720/);
-  assert.match(page, /body\.exam details\.ans/);
+  assert.doesNotMatch(page, /id="btn-exam"/);
+  assert.doesNotMatch(page, /LIMIT=130\*60/);
+  assert.match(page, /random-entry\.css/);
   // English sits beside Chinese on the same question rather than replacing it.
   assert.match(page, /class="zh" lang="zh">/);
   assert.match(page, /class="en" lang="en">/);
