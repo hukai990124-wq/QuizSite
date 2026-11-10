@@ -78,8 +78,10 @@ export function mountColorMode(): void {
       applyMode();
     });
     bar.append(label, select);
+    const slot = document.querySelector('[data-color-mode-slot]');
     const header = document.querySelector('.qb-sitebar');
-    if (header) header.after(bar);
+    if (slot) slot.append(bar);
+    else if (header) header.after(bar);
     else document.body.prepend(bar);
   }
   preference = readPreference();

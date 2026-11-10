@@ -6,132 +6,7 @@
 <title>在线免费 AI 练习题库</title>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-q.png">
 <link rel="icon" href="/favicon.ico?v=2" sizes="any">
-<style>
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:#f5f7f9;color:#0f172a;font-size:15px;line-height:1.7;
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif}
-a{color:#1d4e79}
-
-.hero{position:relative;background:linear-gradient(135deg,#123c5e,#1d4e79 55%,#2a6ca0);color:#fff;padding:36px 0 32px}
-.hero .in{max-width:1180px;margin:0 auto;padding:0 24px}
-.hero-actions{position:absolute;z-index:2;top:16px;right:max(14px,calc((100vw - 1180px)/2 + 24px));display:flex;align-items:center;gap:8px}
-.contact-author-trigger{position:static;
- border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:7px 13px;background:rgba(255,255,255,.13);
- color:#fff;font:inherit;font-size:13px;cursor:pointer;backdrop-filter:blur(8px);transition:background .15s,border-color .15s}
-.contact-author-trigger:hover{background:rgba(255,255,255,.24);border-color:rgba(255,255,255,.7)}
-.contact-author-trigger:focus-visible,.author-dialog button:focus-visible,.author-dialog a:focus-visible,
-.reset-progress:focus-visible,.reset-dialog button:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
-.author-dialog,.reset-dialog{width:min(420px,calc(100vw - 32px));max-width:none;margin:auto;padding:0;border:1px solid #dbe3ea;
- border-radius:16px;color:#0f172a;box-shadow:0 24px 70px rgba(15,23,42,.26)}
-.author-dialog::backdrop,.reset-dialog::backdrop{background:rgba(15,23,42,.48);backdrop-filter:blur(2px)}
-.author-dialog .panel,.reset-dialog .panel{position:relative;padding:25px 24px 24px}
-.author-dialog .close,.reset-dialog .close{position:absolute;top:10px;right:12px;width:34px;height:34px;border:0;border-radius:50%;
- background:#f1f5f9;color:#475569;font-size:22px;line-height:1;cursor:pointer}
-.author-dialog .eyebrow,.reset-dialog .eyebrow{margin:0 0 5px;color:#64748b;font-size:12px}
-.author-dialog h2,.reset-dialog h2{margin:0 38px 8px 0;font-size:20px;line-height:1.35}
-.author-dialog .description,.reset-dialog .description{margin:0 0 18px;color:#475569;font-size:14px;line-height:1.65}
-.author-dialog .profile{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #d8e3ed;border-radius:10px;background:#f8fafc;
- color:#1d4e79;font-size:14px;font-weight:600;overflow-wrap:anywhere;text-decoration:none}
-.author-dialog .profile:hover{background:#eff6ff;border-color:#93c5fd}
-.author-dialog .profile + .profile{margin-top:10px}
-.author-dialog .profile-copy{display:grid;gap:2px;min-width:0}
-.author-dialog .profile-url{font-size:12px;font-weight:400}
-.author-dialog .profile-icon{flex:0 0 24px;width:24px;height:24px}
-.author-dialog .github-logo-dark{display:none}
-html[data-color-mode="dark"] .author-dialog .github-logo-light{display:none}
-html[data-color-mode="dark"] .author-dialog .github-logo-dark{display:block}
-/* 「重置学习进度」确认框里的两个动作按钮 */
-.reset-dialog .acts{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
-.reset-dialog .acts button{font:inherit;font-size:13.5px;font-weight:600;border-radius:10px;padding:9px 17px;
- cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s}
-.reset-dialog .acts .ghost{border-color:#d8dee5;background:#fff;color:#475569}
-.reset-dialog .acts .ghost:hover{background:#f1f5f9}
-.reset-dialog .acts .danger{background:#b4232a;border-color:#b4232a;color:#fff}
-.reset-dialog .acts .danger:hover{background:#9a1c22;border-color:#9a1c22}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.hero .badge{display:inline-block;font-size:12px;letter-spacing:.6px;
- background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.38);border-radius:99px;padding:2px 11px}
-.hero h1{margin:13px 0 8px;font-size:31px;line-height:1.3}
-.hero-sub{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.hero .sub{margin:0;color:#c9dcee;font-size:14px}
-.hero .study-time{margin:8px 0 0;color:#c9dcee;font-size:14px;font-weight:400;font-variant-numeric:tabular-nums}
-.reset-progress{flex:0 0 auto;border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:4px 12px;
- background:rgba(255,255,255,.10);color:#cfe3f5;font:inherit;font-size:12.5px;line-height:1.6;cursor:pointer;
- white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
-.reset-progress:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.72);color:#fff}
-.hero .meta{margin:15px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
-.hero .meta li{font-size:12.5px;background:rgba(255,255,255,.13);border-radius:7px;padding:4px 10px}
-
-main{padding:26px 0 64px}
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-
-.overall{background:#fff;border:1px solid #e3e9ee;border-radius:14px;padding:18px 20px;margin:0 0 22px;
- box-shadow:0 1px 2px rgba(16,24,40,.03)}
-.ov-hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
- font-size:13.5px;color:#5b6570;margin-bottom:10px}
-.ov-hd b{font-size:20px;color:#0f172a;font-variant-numeric:tabular-nums}
-.ov-bar{height:9px;background:#e6ebef;border-radius:99px;overflow:hidden}
-.ov-bar i{display:block;height:100%;width:0;background:#0b6b3a;border-radius:99px;transition:width .3s}
-
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(266px,1fr));gap:16px;margin:0 0 26px}
-a.card{display:flex;flex-direction:column;background:#fff;border:1px solid #e3e9ee;border-radius:14px;
- padding:18px 19px;text-decoration:none;color:inherit;box-shadow:0 1px 2px rgba(16,24,40,.03);
- transition:box-shadow .15s,transform .15s}
-a.card:hover{box-shadow:0 8px 22px rgba(16,24,40,.09);transform:translateY(-1px)}
-a.card .top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
-.tg{font-size:11.5px;border-radius:99px;padding:2px 9px;border:1px solid}
-.tg.b{border-color:#bfdbfe;background:#eff6ff;color:#1d4ed8}
-.tg.p{border-color:#ddd6fe;background:#f5f3ff;color:#6d28d9}
-.tg.o{border-color:#fde68a;background:#fffbeb;color:#b45309}
-.tg.g{border-color:#bbf7d0;background:#f0fdf4;color:#047857}
-.cnt{font-size:12px;color:#8b95a1;font-variant-numeric:tabular-nums}
-a.card h3{margin:0 0 7px;font-size:16.5px;line-height:1.4;color:#0f172a}
-a.card .sd{margin:0 0 15px;font-size:13.2px;color:#5b6570;flex:1 1 auto}
-.pg{position:relative;margin-top:auto}
-.pg::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:#e9eef2;border-radius:99px}
-.pg i{position:relative;display:block;height:5px;width:0;background:#0b6b3a;border-radius:99px;transition:width .3s}
-.pg span{display:block;font-size:12px;color:#8b95a1;margin-top:7px;font-variant-numeric:tabular-nums}
-.pg.on span{color:#0b6b3a;font-weight:600}
-
-.practice-section{margin:28px 0;padding:20px;border:1px solid #ecc0c7;border-top:4px solid #a51d32;border-radius:14px;background:#fff8f8}
-.practice-section h2{margin:0 0 8px;color:#75152a;font-size:20px}
-.practice-section>.sub{margin:0 0 16px;color:#5b6570;font-size:14px}
-.practice-section .cards{margin-bottom:0}
-.practice-section .tg{color:#75152a;background:#fff1f2;border-color:#ecc0c7}
-.practice-section a.card:hover{border-color:#a51d32}
-.mentor-section{margin:28px 0;padding:20px;border:1px solid #d8c7a2;border-top:4px solid #8a672b;border-radius:14px;background:#faf8f2}
-.mentor-section h2{margin:0 0 16px;color:#123c5e;font-size:20px}
-.mentor-section .cards{margin-bottom:0}
-.mentor-section .tg{color:#73521d;background:#fff8e7;border-color:#d8c7a2}
-.mentor-section a.card:hover{border-color:#8a672b}
-.mentor-section a.card:focus-visible{outline:3px solid #8a672b;outline-offset:3px}
-.mentor-status{font-size:12px;color:#68717b}
-.mentor-link{font-size:13px;font-weight:600;color:#1d4e79}
-.howto{background:#fff;border:1px solid #e3e9ee;border-radius:14px;padding:18px 20px}
-.howto h2{margin:0 0 10px;font-size:16px}
-.howto ol{margin:0;padding-left:20px;font-size:13.8px;color:#334155}
-.howto li{margin:5px 0}
-
-footer{border-top:1px solid #e3e9ee;background:#fff;padding:20px 0 28px;color:#5b6570;font-size:12.6px}
-footer .wrap{line-height:1.85}
-footer .build{color:#8b95a1;font-size:12px;margin-top:3px;font-variant-numeric:tabular-nums}
-
-@media (max-width:640px){
-  .hero{padding:24px 0 22px}
-  .hero .in,.wrap{padding-left:14px;padding-right:14px}
-  .hero-actions{top:10px;right:14px;gap:6px}
-  .contact-author-trigger{padding:6px 11px;font-size:12.5px}
-  .hero h1{font-size:23px}
-  .hero .sub{font-size:13px}
-  .hero-sub{gap:9px}
-  .reset-progress{font-size:12px;padding:3px 10px}
-  main{padding:18px 0 44px}
-  .cards{grid-template-columns:1fr;gap:12px}
-  a.card{padding:15px 16px}
-  .overall{padding:15px 16px}
-}
-</style>
+<link rel="stylesheet" href="/assets/home.css">
 <!--i18n:head-->
 <style id="i18n-css">
 .lang-foot{margin:26px 0 0;padding:0 16px 36px;text-align:center}
@@ -164,31 +39,40 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 <!--/i18n:head--></head>
 <body>
 <script type="module" src="/assets/color-mode.mjs"></script>
-<header class="hero">
-  <div class="hero-actions">
-    <button class="contact-author-trigger qb-auth-trigger" id="qb-account-trigger" type="button" aria-haspopup="dialog">登录 / 注册</button>
-    <button class="contact-author-trigger" id="contact-author-trigger" type="button" aria-controls="contact-author-dialog">联系作者</button>
-  </div>
-  <div class="in">
-    <span class="badge">个人题库 · 在线练习</span>
-    <h1>在线免费 AI 练习题库</h1>
-    <div class="hero-sub">
-      <p class="sub">13 个题库 · 共 5691 题次 · 可作答判分 · 登录后跨设备同步</p>
-      <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
+<a class="skip-link" href="#catalog">跳到题库</a>
+<nav class="home-nav" aria-label="主导航">
+  <div class="home-nav__inner">
+    <a class="home-brand i18n-noloc" href="/" aria-label="QuizSite"><span class="home-brand__mark" aria-hidden="true">Q</span>QuizSite</a>
+    <div class="home-nav__links">
+      <a href="#catalog" aria-current="page">全部题库</a>
+      <a href="#programming-practice">编程实操</a>
+      <a href="#ai-teachers">AI 导师</a>
     </div>
-    <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
-    <ul class="meta">
-      <li>西班牙语 DELE A1</li>
-      <li>西班牙语 DELE A2</li>
-      <li>TOEIC 听力</li>
-      <li>TOEIC 阅读</li>
-      <li>AWS SAA-C03</li>
-      <li>AWS CLF-C02</li>
-      <li>AWS AIF-C01</li>
-      <li>AWS MLA-C01</li>
-      <li>基本情報技術者</li>
-      <li>WorkBuddy OPC</li>
-    </ul>
+    <div class="hero-actions">
+      <div data-color-mode-slot></div>
+      <button class="contact-author-trigger" id="contact-author-trigger" type="button" aria-controls="contact-author-dialog">联系作者</button>
+      <button class="contact-author-trigger qb-auth-trigger" id="qb-account-trigger" type="button" aria-haspopup="dialog">登录 / 注册</button>
+    </div>
+  </div>
+</nav>
+<header class="hero">
+  <div class="in">
+    <div class="hero-copy">
+      <span class="badge">个人题库 · 在线练习</span>
+      <h1>在线免费 AI 练习题库</h1>
+      <p class="sub">13 个题库 · 共 5691 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <a class="hero-cta" href="#catalog"><span>开始今天的练习</span><span class="arrow" aria-hidden="true">↗</span></a>
+      <ul class="hero-notes"><li>即时判分与解析</li><li>自动保存进度</li><li>多语言对照</li></ul>
+    </div>
+    <div class="overall">
+      <div class="progress-caption"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15v-4m4 4V7m4 8v-6" stroke-linecap="round"/></svg><span>我的学习概览</span></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 5691</b></div>
+      <div class="ov-bar"><i id="ov-fill"></i></div>
+      <div class="progress-bottom">
+        <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
+        <button class="reset-progress" id="reset-progress" type="button" aria-haspopup="dialog" aria-controls="reset-dialog">重置学习进度</button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -225,110 +109,132 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
 
 <main>
   <div class="wrap">
-    <div class="overall">
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 5691</b></div>
-      <div class="ov-bar"><i id="ov-fill"></i></div>
+    <div class="catalog-heading" id="catalog">
+      <div><h2>找到你的下一步</h2><p>从一门感兴趣的科目，开始今天的进步。</p></div>
+      <nav class="catalog-jumps" aria-label="题库分类"><a href="#language-banks">语言考试</a><a href="#cloud-banks">云与 AI</a><a href="#career-banks">IT 认证</a><a href="#programming-practice">编程入门</a></nav>
     </div>
-
-    <div class="cards">
+    <section class="bank-group" id="language-banks" aria-labelledby="language-banks-title">
+      <div class="section-heading"><span class="section-number" aria-hidden="true">01</span><h2 id="language-banks-title">语言考试</h2><span class="section-total">4 个题库</span></div>
+      <div class="cards language-cards">
       <a class="card" href="dele-a1/index.html" data-site="dele-a1">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">A1</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg p">西班牙语</span><span class="cnt">225 题</span></div>
         <h3>DELE A1 · 阅读 + 写作 + 听力</h3>
         <p class="sd">Instituto Cervantes 官方 5 套真题。阅读 25 题即时判分，4 套另有听力 25 题，写作附参考答案。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
-
       <a class="card" href="dele-a2/index.html" data-site="dele-a2">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">A2</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg p">西班牙语</span><span class="cnt">110 题</span></div>
         <h3>DELE A2 · 阅读 + 写作 + 听力</h3>
         <p class="sd">Instituto Cervantes 官方公开的 2 套 A2 试卷。阅读 55 题、听力 55 题均可即时判分（2020 样卷为官方真人录音，旧版样卷按官方原文合成），写作附参考答案。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
-
       <a class="card" href="toeic-listening/index.html" data-site="toeic-listening">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">♫</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg b">英语 · 听力</span><span class="cnt">1000 题</span></div>
         <h3>TOEIC 听力 · 10 套</h3>
         <p class="sd">Part 1–4 完整套卷，带音频。点「▶」听录音，选完立刻判对错。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
-
       <a class="card" href="toeic-reading/index.html" data-site="toeic-reading">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">Aa</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg b">英语 · 阅读</span><span class="cnt">1000 题</span></div>
         <h3>TOEIC 阅读 · 10 套</h3>
         <p class="sd">Part 5–7 完整套卷，10 套共 1000 题，全部可作答判分。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
+      </div>
+    </section>
 
+    <section class="bank-group" id="cloud-banks" aria-labelledby="cloud-banks-title">
+      <div class="section-heading"><span class="section-number" aria-hidden="true">02</span><h2 id="cloud-banks-title">云计算与 AI 认证</h2><span class="section-total">5 个题库</span></div>
+      <div class="cards">
       <a class="card" href="aws-saa/index.html" data-site="aws-saa">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">SAA</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg o">云计算认证</span><span class="cnt">1060 题</span></div>
         <h3>AWS SAA-C03 题库</h3>
         <p class="sd">中英对照，含真题演练卷、原创练习卷与官方样题；新增 50 道英中日原创加练题，附答案解析。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
-
       <a class="card" href="aws-clf/index.html" data-site="aws-clf">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">CLF</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg o">云计算认证</span><span class="cnt">200 题</span></div>
         <h3>AWS CLF-C02 练习题库</h3>
         <p class="sd">4 套练习卷，每套 50 题，中英日对照，附答案与解析；中文和日文为机器翻译，题目来自 MIT 许可公开题库。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="aws-aif/index.html" data-site="aws-aif">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">AIF</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg g">AI 认证</span><span class="cnt">782 题</span></div>
         <h3>AWS AIF-C01 · AI Practitioner</h3>
         <p class="sd">真题库 452 题 + 练习卷 230 题 + 专业术语 100 题，附答案与解析。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="aws-aip/index.html" data-site="aws-aip">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">AIP</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg g">AI 认证</span><span class="cnt">578 题</span></div>
         <h3>AWS AIP-C01 · GenAI Developer Professional</h3>
         <p class="sd">原有 136 题＋开源练习 442 题，按基础、困难、高难分组。新增题提供英文与中文，暂不翻译日文。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="aws-mla/index.html" data-site="aws-mla">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">ML</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg g">ML 认证</span><span class="cnt">65 题</span></div>
         <h3>AWS MLA-C01 · 机器学习工程师</h3>
         <p class="sd">65 题全真模拟 · 130 分钟 · 720 分及格。按官方四大领域配比，中英对照，含 130 分钟计时模考。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
+      </div>
+    </section>
+
+    <section class="bank-group" id="career-banks" aria-labelledby="career-banks-title">
+      <div class="section-heading"><span class="section-number" aria-hidden="true">03</span><h2 id="career-banks-title">IT 与职业认证</h2><span class="section-total">3 个题库</span></div>
+      <div class="cards">
       <a class="card" href="fe/index.html" data-site="fe">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">FE</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg g">日本 IT 资格考试</span><span class="cnt">344 题次</span></div>
         <h3>基本情報技術者</h3>
         <p class="sd">先选择科目 A 或科目 B；各有三套 A60 / B20 完整练习结构，另保留 2023–2026 年度公开题。B 组卷含重复题。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
-
       <a class="card" href="java-bronze/index.html" data-site="java-bronze">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">Jv</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg b">Java 认证</span><span class="cnt">80 题</span></div>
         <h3>Java Bronze · 备考练习 + 全真模拟</h3>
-        <p class="sd">面向 Oracle Certified Java Programmer, Bronze SE（1Z0-818）的备考练习。共计 80 题：20 道分考点练习 + 60 道全真模拟卷：变量与初始化、final 修饰符、运算符、控制流程、字符串、接口与多态、异常。15 道单选 + 5 道多选，每题附中英日三语解析。模拟卷按真实机考规格（60 题 · 65 分钟 · 60 分及格）编排，带计时模考模式。</p>
+        <p class="sd">20 道分考点练习 + 60 道全真模拟，中英日三语解析。模拟卷 65 分钟，60 分及格。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
-
       <a class="card" href="workbuddy-opc/index.html" data-site="workbuddy-opc">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">OPC</span><span class="card-arrow">↗</span></div>
         <div class="top"><span class="tg g">AI 认证</span><span class="cnt">177 题</span></div>
         <h3>WorkBuddy OPC 从业者 · 备考</h3>
-        <p class="sd">面向腾讯云「效率智能体 OPC 从业者」认证的备考题库。按官方课程地图 11 个模块编排（117 题）用于边看课边查漏，另有 1 套全真模拟卷（60 题：单选 40 + 多选 20），带 90 分钟模考模式、按官方分值换算、70 分及格线。题目依据官方文档自编，每题附解析与出处。</p>
+        <p class="sd">腾讯云 OPC 认证备考。11 个模块、117 道练习 + 60 道模拟题，附解析与出处，支持 90 分钟模考。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
-    </div>
+      </div>
+    </section>
 
     <section class="practice-section" id="programming-practice" aria-labelledby="programming-title">
-      <h2 id="programming-title">编程入门实操</h2>
+      <div class="section-heading"><span class="section-number" aria-hidden="true">04</span><h2 id="programming-title">编程入门实操</h2><span class="section-total">边读代码，边学编程</span></div>
       <p class="sub">先学会看懂 AI 写的代码：发现问题，选出正确修复。</p>
       <div class="cards">
         <a class="card" href="programming/index.html" data-site="programming">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">&lt;/&gt;</span><span class="card-arrow">↗</span></div>
           <div class="top"><span class="tg">代码审查 · 入门</span><span class="cnt">20 题</span></div>
           <h3>HTML 入门 · 代码审查训练</h3>
           <p class="sd">标签、图片、链接与表单基础。每题四选一，附答案与解析，中英日对照。</p>
           <div class="pg"><i></i><span>未开始</span></div>
         </a>
         <a class="card" href="programming/css.html" data-site="programming-css">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">{ }</span><span class="card-arrow">↗</span></div>
           <div class="top"><span class="tg">代码审查 · 样式</span><span class="cnt">20 题</span></div>
           <h3>CSS 入门 · 代码审查训练</h3>
           <p class="sd">盒模型、定位、层叠与布局。每题四选一，附答案与解析，中英日对照。</p>
           <div class="pg"><i></i><span>未开始</span></div>
         </a>
         <a class="card" href="programming/typescript.html" data-site="programming-typescript">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">TS</span><span class="card-arrow">↗</span></div>
           <div class="top"><span class="tg">代码审查 · 类型</span><span class="cnt">30 题</span></div>
           <h3>TypeScript 入门 · 代码审查训练</h3>
           <p class="sd">类型、函数、空值检查与异步基础。30 道四选一，附中英日题干、选项与解析。</p>
@@ -337,6 +243,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
       </div>
     </section>
 
+    <div class="home-extras">
     <section class="mentor-section" id="ai-teachers" aria-labelledby="ai-teachers-title">
       <h2 id="ai-teachers-title">与 AI 老师在线交谈</h2>
       <div class="cards">
@@ -357,6 +264,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <li>未登录时进度保存在本机；登录后同步至账号，可在不同设备继续学习。</li>
         <li>账号进度在云端同步，本机浏览器也保留离线缓存；在新设备登录即可继续。</li>
       </ol>
+    </div>
     </div>
   </div>
 </main>

@@ -10,6 +10,8 @@
 
 `src/typescript/color-mode.mts` 管理状态与控制栏，`src/css/color-mode.css` 管理配色。首页显式载入模块，其余页面由 `quizsite-theme.ts` 的公共入口挂载；动态生成试卷的最终文档也沿用该入口。重新挂载不会重复创建控制栏或定时器。
 
+首页的外观选择放在导航中的 `[data-color-mode-slot]` 内，由 `src/css/home.css` 控制紧凑布局。其他页面没有这个插槽时，继续在公共导航后或页面顶部显示原有控制栏。首页改版保留两种模式原有配色，见 [首页 UI 更新](design/home-ui.md)。
+
 夜间覆盖首页、题目、选项、答案解析、表格、账号与聊天弹窗；不对图片和模型做反色处理。Gavin 夜间保持黑金色，日间为浅底金边。
 
 验证：构建后运行 `node --test tests/color-mode.test.mjs`。浏览器验证使用 `QUIZSITE_BROWSER_MODULES` 指向已安装 Playwright 的模块目录，再运行 `node quiz_kit/color_mode_audit.cjs`。
