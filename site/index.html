@@ -49,7 +49,16 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
       <a href="#ai-teachers">AI 导师</a>
     </div>
     <div class="hero-actions">
-      <div data-color-mode-slot></div>
+      <div class="home-preferences">
+        <!--i18n:sw-->
+        <div class="lang-switch i18n-noloc" role="group" aria-label="Language">
+          <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+          <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+          <button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
+        </div>
+        <!--/i18n:sw-->
+        <div data-color-mode-slot></div>
+      </div>
       <button class="contact-author-trigger" id="contact-author-trigger" type="button" aria-controls="contact-author-dialog">联系作者</button>
       <button class="contact-author-trigger qb-auth-trigger" id="qb-account-trigger" type="button" aria-haspopup="dialog">登录 / 注册</button>
     </div>
@@ -274,13 +283,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <div>个人学习自测用。题目来源与许可证见各题库说明；未经许可的题目请勿再分发。AWS 与相关标志归其所有者所有，本网站与 AWS 无关联或背书。</div>
     <div class="build">最后更新：2026-10-10 JST</div>
   </div>
-<!--i18n:sw-->
-<div class="lang-switch i18n-noloc" role="group" aria-label="Language">
-<button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
-<button type="button" data-set-lang="en" aria-pressed="false">English</button>
-<button type="button" data-set-lang="ja" aria-pressed="false">日本語</button>
-</div>
-<!--/i18n:sw--></footer>
+</footer>
 
 <script>
 (function(){

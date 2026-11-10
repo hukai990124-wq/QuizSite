@@ -21,6 +21,11 @@ a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #c69
 .home-nav__links a[aria-current]::after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:#1d4e79;border-radius:3px 3px 0 0}
 .home-nav__links a:hover{color:var(--home-accent)}
 .hero-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.home-preferences{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.home-nav .lang-switch{flex-wrap:nowrap;gap:4px}
+.home-nav .lang-switch button{min-height:40px;padding:7px 9px;border-radius:8px;font-size:12px;background:var(--home-surface);color:var(--home-ink);border-color:var(--home-line);white-space:nowrap}
+.home-nav .lang-switch button:hover{background:var(--home-soft)}
+.home-nav .lang-switch button[aria-pressed="true"]{background:#0b6b3a;border-color:#0b6b3a;color:#fff}
 .contact-author-trigger{padding:9px 15px;border:1px solid var(--home-line);border-radius:8px;background:transparent;color:var(--home-ink);font-size:13px;cursor:pointer;white-space:nowrap}
 .contact-author-trigger:hover{background:var(--home-soft)}
 .qb-auth-trigger{background:#1d4e79;border-color:#1d4e79;color:#fff}
@@ -133,7 +138,9 @@ html[data-color-mode="dark"] .pg.on span{color:#79d7aa!important}
 @media(max-width:1100px){.home-nav__inner{gap:24px}.home-nav__links{gap:18px}.hero .in{gap:32px;grid-template-columns:minmax(0,1fr) 320px}.language-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:850px){.home-nav__inner{flex-wrap:wrap;gap:0;padding-top:16px}.hero-actions{gap:8px}.home-nav__links{order:3;flex-basis:100%;gap:28px;height:48px}.hero .in{grid-template-columns:1fr;gap:28px;padding-block:32px}.overall{max-width:100%}.ov-hd{flex-direction:row;align-items:baseline;justify-content:space-between}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-heading{align-items:flex-start;flex-direction:column;gap:16px}.home-extras{grid-template-columns:1fr}}
 @media(max-width:560px){.wrap,.hero .in,.home-nav__inner{width:calc(100% - 32px)}.home-brand{font-size:18px;gap:7px}.home-brand__mark{width:30px;height:30px;font-size:20px;border-radius:8px}.hero-actions{gap:6px;flex-wrap:wrap;justify-content:flex-end}.contact-author-trigger{font-size:11px;padding:8px 9px}[data-color-mode-slot] #qb-color-mode{width:66px;min-height:36px;font-size:11px}.hero h1{font-size:29px;letter-spacing:-1px}.hero .sub{font-size:12px}.hero-notes{gap:12px;font-size:11px}.overall{padding:20px}.ov-hd b{font-size:22px}.catalog-heading h2{font-size:22px}.catalog-jumps{width:100%;justify-content:space-between}.catalog-jumps a{padding:6px 8px;font-size:11px}.cards,.language-cards{grid-template-columns:1fr}.bank-group{margin-bottom:28px}.practice-section{padding:16px;margin:28px 0}.practice-section .section-heading{gap:8px}.section-heading h2{font-size:15px}.section-total{font-size:10px}a.card{padding:20px}.card-heading{margin-bottom:14px}.mentor-section,.howto{padding:20px}main{padding-top:28px;padding-bottom:40px}}
-@media(max-width:560px){.ov-hd{flex-direction:column;align-items:flex-start;gap:8px}}
+@media(max-width:560px){.ov-hd{flex-direction:column;align-items:flex-start;gap:8px}.catalog-jumps{flex-wrap:wrap;justify-content:flex-start}}
+@media(max-width:1100px){.home-nav__inner{flex-wrap:wrap;padding-top:16px;gap:0}.home-nav__links{order:3;flex-basis:100%;gap:28px;height:48px}}
+@media(max-width:700px){.hero-actions{display:contents}.home-brand{margin-right:auto}.home-nav .contact-author-trigger{margin-left:6px}.home-preferences{order:2;flex-basis:100%;justify-content:flex-end;margin-top:12px;gap:8px}.home-nav .lang-switch button{min-height:36px;padding:6px 8px;font-size:11px}}
 @media(max-width:420px){.hero-actions{flex-basis:100%;justify-content:space-between;margin:12px 0 0}.home-nav__links{height:44px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 @media print{.home-nav,.hero-cta,.reset-progress,.catalog-jumps,.skip-link{display:none}.hero .in{display:block}.hero{background:#fff;color:#000}.overall{color:#000}a.card{break-inside:avoid}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
