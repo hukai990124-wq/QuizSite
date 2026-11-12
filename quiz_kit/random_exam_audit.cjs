@@ -16,6 +16,8 @@ async function main(){
   try{
     for(const [pool,size,quotas] of [['aws-clf',50],['aws-aif',50],['aws-saa',50],['aws-aip',50],['aws-mla',50],['toeic-listening',50,[3,14,18,15]],['toeic-listening',100,[6,25,39,30]],['toeic-reading',50,[15,8,27]],['toeic-reading',100,[30,16,54]]].filter(([pool])=>process.argv.length<3 || process.argv.slice(2).includes(pool))){
       const ctx=await browser.newContext();let aiCalls=0;
+      const legacySaaDraft=JSON.stringify({exam:{startedAt:1,submitted:false,submittedAt:null,currentIndex:9},'1':{s:['A'],ok:null,revealed:false}});
+      if(pool==='aws-saa')await ctx.addInitScript(raw=>localStorage.setItem('quiz:random-exam:aws-saa:50:12345678',raw),legacySaaDraft);
       await ctx.route('**/api/**',route=>{
         const name=new URL(route.request().url()).pathname;
         if(name==='/api/chat') aiCalls++;
@@ -26,10 +28,20 @@ async function main(){
         await new Promise(resolve=>setTimeout(resolve,1200));await route.continue();
       });
       const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+      const requested=[];page.on('request',request=>requested.push(new URL(request.url()).pathname));
       await page.goto(`${base}/random.html?pool=${pool}&size=${size}&seed=12345678`);
       await page.waitForSelector('.exam-notice');
       await page.waitForSelector('.qb-chat-trigger',{state:'attached',timeout:7000});
       assert.equal(await page.locator('.q').count(),size);
+      if(pool==='aws-saa'){
+        assert.equal(requested.some(path=>path.startsWith('/aws-saa/compliance/')),false,'SAA exams never fetch B-line papers');
+        assert.equal(await page.getAttribute('html','data-exam-key'),'quiz:random-exam:aws-saa-ac:50:12345678');
+        assert.equal(await page.locator('#s-done').textContent(),'0','old mixed-pool answers must not attach to new questions');
+        assert.equal(await page.locator('.q:visible').getAttribute('data-n'),'1');
+        assert.equal(await page.evaluate(()=>localStorage.getItem('quiz:random-exam:aws-saa:50:12345678')),legacySaaDraft,'old exam records are preserved');
+        const shapes=await page.locator('.q').evaluateAll(questions=>questions.map(q=>({answers:q.dataset.ans.split(/[,|]/).length,options:q.querySelectorAll('.opt').length,kind:q.dataset.kind||''})));
+        assert.ok(shapes.every(q=>!q.kind && (q.answers===1 ? q.options===4 : q.answers>=2 && q.options>=5)),'all 50 questions match SAA response types');
+      }
       const paged=pool.startsWith('aws-');
       async function openQuestion(q) {
         if(!paged)return;

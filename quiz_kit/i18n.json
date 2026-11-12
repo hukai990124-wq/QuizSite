@@ -710,9 +710,9 @@
   "en": "1,050 practice questions · English-Chinese (the original extra set also has Japanese) · Instant scoring · 21 sets of 50 (plus 10 official sample questions)",
   "ja": "練習問題1,050問・英中対応（オリジナル追加セットは日本語も対応）・即時採点・50問×21セット（公式サンプル10問を含む）"
  },
- "从三组题库中抽取": {
-  "en": "Drawn from three question banks",
-  "ja": "3つの問題集から出題"
+ "仅从 A、C 线抽取标准单选、多选题": {
+  "en": "Standard single- and multiple-answer questions from A and C only",
+  "ja": "A・Cのみから標準形式の単一選択・複数選択問題を出題"
  },
  "练习题库": {
   "en": "Practice question banks",

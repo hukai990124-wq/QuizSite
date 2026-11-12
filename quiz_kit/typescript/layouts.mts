@@ -13907,7 +13907,7 @@ const layouts: Layouts = {
     {
       "slot": "p.2"
     },
-    "</p>\r\n  <div class=\"random-entry\"><strong>随机出题</strong><span>从三组题库中抽取</span><a href=\"../random.html?pool=aws-saa&amp;size=50\">随机 50 题</a></div>\r\n\r\n  <div class=\"grp\">\n    <h2>",
+    "</p>\r\n  <div class=\"random-entry\"><strong>随机出题</strong><span>仅从 A、C 线抽取标准单选、多选题</span><a href=\"../random.html?pool=aws-saa&amp;size=50\">随机 50 题</a></div>\r\n\r\n  <div class=\"grp\">\n    <h2>",
     {
       "slot": "h2.3"
     },

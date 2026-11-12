@@ -8,7 +8,7 @@
     "aws-clf": { title: "AWS CLF-C02", type: "aws", files: files("aws-clf", 4, "part"), quotas: [12, 15, 17, 6] },
     "aws-aip": { title: "AWS AIP-C01", type: "aws", files: [...files("aws-aip", 3, "part"), ...files("aws-aip/open-easy", 4, "part"), ...files("aws-aip/open-hard", 3, "part"), ...files("aws-aip/open-veryhard", 3, "part")] },
     "aws-aif": { title: "AWS AIF-C01", type: "aws", files: [...files("aws-aif/bank", 10, "part"), ...files("aws-aif/practice", 5, "part")] },
-    "aws-saa": { title: "AWS SAA-C03", type: "aws", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/compliance", 10, "part"), ...files("aws-saa/original", 1, "part")] },
+    "aws-saa": { title: "AWS SAA-C03", type: "aws", storagePool: "aws-saa-ac", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/original", 1, "part")] },
     "aws-mla": { title: "AWS MLA-C01", type: "aws", files: ["aws-mla/index.html"] },
     "toeic-listening": { title: "TOEIC Listening", type: "listening", files: files("toeic-listening", 10, "TOEIC_Listening_Test_") },
     "toeic-reading": { title: "TOEIC Reading", type: "reading", files: files("toeic-reading", 10, "TOEIC_Reading_Test_") }
@@ -212,7 +212,8 @@
         }
       });
     }
-    doc.documentElement.dataset.examKey = `quiz:random-exam:${poolName}:${size}:${seed}`;
+    // A changed question pool must not reuse answers saved for the old numbered paper.
+    doc.documentElement.dataset.examKey = `quiz:random-exam:${config.storagePool || poolName}:${size}:${seed}`;
     doc.documentElement.dataset.examTitle = config.title;
     const examStyle = doc.createElement("link");
     examStyle.rel = "stylesheet";
@@ -240,8 +241,13 @@
     }));
     const base = docs[0];
     if (config.type === "aws") {
+      const saaPolicy = poolName === "aws-saa" ? (await import("/assets/saa-exam-policy.mjs")).isSaaExamQuestion : null;
       const all = distinct(docs.flatMap(({ doc, url }) => Array.from(doc.querySelectorAll(".wrap > .q"))
         .filter(node => node.getAttribute("data-ans") && node.querySelector(".opts, input.fill"))
+        .filter(node => !saaPolicy || saaPolicy(
+          node.getAttribute("data-ans").split(/[,|]/).map(value => value.trim().toUpperCase()),
+          Array.from(node.querySelectorAll(".opts li.opt"), option => option.dataset.letter || ""),
+          node.getAttribute("data-kind") || ""))
         .map(node => ({ ...questionUnit(node), url }))));
       let selected;
       if (config.quotas) {
