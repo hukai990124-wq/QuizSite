@@ -1,8 +1,10 @@
 # Random papers: exam mode
 
-Only random-entry papers use exam mode. AWS SAA/CLF/AIF/AIP/MLA use the paged 50-question flow in [aws-paged-exam.md](aws-paged-exam.md); TOEIC remains a full-paper layout. Existing AWS50 and TOEIC50/100 sampling, Part quotas, complete passages/dialogues and audio paths stay unchanged. Ordinary practice is untouched.
+AWS SAA/CLF/AIF/AIP/MLA use the paged 50-question flow in [aws-paged-exam.md](aws-paged-exam.md). TOEIC 50/100 exams use a full-paper layout with complete passages and audio groups.
 
-Before submission: editable selection/fill drafts, neutral answered count and answer sheet. No per-question submit/reveal/redo, answer panels, transcripts, score/correctness summaries, wrong filter, expand explanations, global AI chat or question AI buttons. Enter/Space on choices selects only, never grades. Pending state is present before source markup is displayed, including print view.
+Each AWS directory also offers a paged 10-question practice alongside the 50-question exam. It uses the same eligible sources and de-duplication as the exam, including SAA's A/C filter and CLF's four-domain mix (2/3/4/1). Selecting an answer saves a draft. Confirming the question scores and locks it, opens its explanation, and updates the answer sheet. The score report measures accuracy over checked questions and counts ungraded drafts as unanswered. Only checked mistakes appear in mistake review. Refresh restores the question position, drafts and checked results from the size-10 key, and “Practice 10 more” starts a fresh seed. Controls are available in Chinese, English and Japanese.
+
+**Exam mode before submission.** Editable selection/fill drafts, neutral answered count and answer sheet. No per-question submit/reveal/redo, answer panels, transcripts, score/correctness summaries, wrong filter, expand explanations, global AI chat or question AI buttons. Enter/Space on choices selects only, never grades. Pending state is present before source markup is displayed, including print view.
 
 Submit explicitly confirms (including unanswered count); cancellation leaves drafts unchanged. Submission grades all questions once, locks selections, shows report with home link, answer explanations and AI. Score denominator is the whole paper; unanswered questions get no credit and remain distinguished from attempted wrong answers in counts. Reload restores pending/submitted state. Start another paper with the existing random-again link; no resetting a submitted exam in place.
 

@@ -77,6 +77,8 @@
  "8 个题库 · 共 4621 题次 · 可作答判分 · 登录后跨设备同步": {"en": "8 question banks · 4,621 attempts · instant scoring · sign in to sync across devices", "ja": "8つの問題集・全4,621問・即時採点・ログインしてデバイス間で同期"},
  "随机出题": {"en": "Random practice", "ja": "ランダム出題"},
  "随机 50 题": {"en": "Random 50 questions", "ja": "ランダム50問"},
+ "随机刷 10 题": {"en": "Practice 10 random questions", "ja": "ランダム練習10問"},
+ "再刷 10 题": {"en": "Practice 10 more", "ja": "別の10問に挑戦"},
  "随机 100 题": {"en": "Random 100 questions", "ja": "ランダム100問"},
  "再随机一套": {"en": "Generate another set", "ja": "別のセットを作る"},
  "从 4 套题中抽取，保留考试领域比例": {"en": "Drawn from four sets, keeping the domain balance", "ja": "4セットから分野別の比率を保って抽出"},

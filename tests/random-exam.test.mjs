@@ -58,3 +58,25 @@ test('MLA exposes the same random 50-question exam entrance as the other AWS ban
   const page=await readFile(new URL('../site/aws-mla/index.html',import.meta.url),'utf8');
   assert.match(page,/random\.html\?pool=aws-mla&amp;size=50/);
 });
+
+test('every random AWS exam entry has an adjacent ten-question practice link',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  for (const pool of ['aws-clf','aws-aif','aws-saa','aws-aip','aws-mla']) {
+    const page=await readFile(new URL(`../site/${pool}/index.html`,import.meta.url),'utf8');
+    assert.match(page,new RegExp(`pool=${pool}&amp;size=50">[^<]+</a>\\s*<a [^>]*pool=${pool}&amp;size=10">`),pool);
+  }
+  for (const pool of ['toeic-listening','toeic-reading']) {
+    const page=await readFile(new URL(`../site/${pool}/index.html`,import.meta.url),'utf8');
+    assert.doesNotMatch(page,new RegExp(`pool=${pool}&amp;size=10(?:"|&)`),pool);
+  }
+});
+
+test('quick practice restores individually checked results and keeps drafts ungraded',()=>{
+  const raw=JSON.stringify({exam:{startedAt:1,currentIndex:2},
+    '1':{s:['B'],ok:true},'2':{s:['A','C'],ok:false},'3':{s:['HI'],ok:null}});
+  const state=readExamState(raw,questions,100,true);
+  assert.equal(state.exam.currentIndex,2);
+  assert.equal(state.exam.submitted,false);
+  assert.deepEqual(questions.map(q=>state.answers[q.id].ok),[false,true,null]);
+  assert.deepEqual(gradeExam(questions,state,true),{answered:2,correct:1,wrong:1,unanswered:1,percent:50});
+});

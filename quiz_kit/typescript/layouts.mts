@@ -1005,7 +1005,7 @@ const layouts: Layouts = {
     {
       "slot": "p.2"
     },
-    "</p>\r\n<div class=\"random-entry\"><strong>随机出题</strong><span>从 AI 真题库与练习卷中抽取</span><a href=\"../random.html?pool=aws-aif&amp;size=50\">随机 50 题</a></div>\r\n<a class=\"card\" href=\"vocabulary.html\"><h3>",
+    "</p>\r\n<div class=\"random-entry\"><strong>随机出题</strong><span>从 AI 真题库与练习卷中抽取</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-aif&amp;size=50\">随机 50 题</a> <a href=\"../random.html?pool=aws-aif&amp;size=10\">随机刷 10 题</a></div></div>\r\n<a class=\"card\" href=\"vocabulary.html\"><h3>",
     {
       "slot": "h3.3"
     },
@@ -2257,7 +2257,7 @@ const layouts: Layouts = {
     {
       "layout": "script-5bf995796f27132ed8d3"
     },
-    "\r\n<!--/i18n:head--><link rel=\"stylesheet\" href=\"/assets/quizsite-theme.css\" id=\"quizsite-theme-css\">\r\n</head><body><main class=\"wrap\"><h1>",
+    "\r\n<!--/i18n:head--><link rel=\"stylesheet\" href=\"/assets/quizsite-theme.css\" id=\"quizsite-theme-css\">\r\n<link rel=\"stylesheet\" href=\"/assets/random-entry.css\">\r\n</head><body><main class=\"wrap\"><h1>",
     {
       "slot": "h1.1"
     },
@@ -2273,7 +2273,7 @@ const layouts: Layouts = {
     {
       "slot": "p.4"
     },
-    "</p><div class=\"toolbar\"><a id=\"aip-random\" href=\"../random.html?pool=aws-aip&amp;size=50\">随机 50 题</a></div><h2 class=\"sub\">",
+    "</p><div class=\"toolbar\"><div class=\"aws-random-actions\"><a id=\"aip-random\" href=\"../random.html?pool=aws-aip&amp;size=50\">随机 50 题</a> <a href=\"../random.html?pool=aws-aip&amp;size=10\">随机刷 10 题</a></div></div><h2 class=\"sub\">",
     {
       "slot": "h2.5"
     },
@@ -11938,7 +11938,7 @@ const layouts: Layouts = {
     {
       "slot": "p.2"
     },
-    "</p>\r\n<div class=\"random-entry\"><strong>随机出题</strong><span>从 4 套题中抽取，保留考试领域比例</span><a href=\"../random.html?pool=aws-clf&amp;size=50\">随机 50 题</a></div>\r\n<div class=\"grp\">\r\n<a class=\"card\" href=\"part01.html\" data-quiz-key=\"aws:clf:01\" data-quiz-total=\"50\"><div class=\"n\">第 01 套</div><div class=\"r\">50 道练习题</div><div class=\"pg\"><i></i><span>未开始</span></div></a>\r\n<a class=\"card\" href=\"part02.html\" data-quiz-key=\"aws:clf:02\" data-quiz-total=\"50\"><div class=\"n\">第 02 套</div><div class=\"r\">50 道练习题</div><div class=\"pg\"><i></i><span>未开始</span></div></a>\r\n<a class=\"card\" href=\"part03.html\" data-quiz-key=\"aws:clf:03\" data-quiz-total=\"50\"><div class=\"n\">第 03 套</div><div class=\"r\">50 道练习题</div><div class=\"pg\"><i></i><span>未开始</span></div></a>\r\n<a class=\"card\" href=\"part04.html\" data-quiz-key=\"aws:clf:04\" data-quiz-total=\"50\"><div class=\"n\">第 04 套</div><div class=\"r\">50 道练习题</div><div class=\"pg\"><i></i><span>未开始</span></div></a>\r\n</div>\r\n<div class=\"note\"><b>领域分布（每套）：</b>云概念 12 题；安全与合规 15 题；云技术与服务 17 题；账单、定价与支持 6 题。按官方 CLF-C02 领域权重安排。\r\n<br><b>来源与使用：</b>题目来源于 MIT 许可的 <a href=\"https://github.com/nastaso/cloudcertprep/tree/9367b00d9f5b39676f4ec3413304d91a7dccbbfb/src/data/clf-c02\">CloudCertPrep</a>；本页附完整许可证。中文和日文为机器翻译。练习题非 AWS 官方题目或考题预测；AWS 与本题库无关联。<a href=\"LICENSE-CloudCertPrep.txt\">查看 MIT License</a>。</div>\r\n</div>\r\n",
+    "</p>\r\n<div class=\"random-entry\"><strong>随机出题</strong><span>从 4 套题中抽取，保留考试领域比例</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-clf&amp;size=50\">随机 50 题</a> <a href=\"../random.html?pool=aws-clf&amp;size=10\">随机刷 10 题</a></div></div>\r\n<div class=\"grp\">\r\n<a class=\"card\" href=\"part01.html\" data-quiz-key=\"aws:clf:01\" data-quiz-total=\"50\"><div class=\"n\">第 01 套</div><div class=\"r\">50 道练习题</div><div class=\"pg\"><i></i><span>未开始</span></div></a>\r\n<a class=\"card\" href=\"part02.html\" data-quiz-key=\"aws:clf:02\" data-quiz-total=\"50\"><div class=\"n\">第 02 套</div><div class=\"r\">50 道练习题</div><div class=\"pg\"><i></i><span>未开始</span></div></a>\r\n<a class=\"card\" href=\"part03.html\" data-quiz-key=\"aws:clf:03\" data-quiz-total=\"50\"><div class=\"n\">第 03 套</div><div class=\"r\">50 道练习题</div><div class=\"pg\"><i></i><span>未开始</span></div></a>\r\n<a class=\"card\" href=\"part04.html\" data-quiz-key=\"aws:clf:04\" data-quiz-total=\"50\"><div class=\"n\">第 04 套</div><div class=\"r\">50 道练习题</div><div class=\"pg\"><i></i><span>未开始</span></div></a>\r\n</div>\r\n<div class=\"note\"><b>领域分布（每套）：</b>云概念 12 题；安全与合规 15 题；云技术与服务 17 题；账单、定价与支持 6 题。按官方 CLF-C02 领域权重安排。\r\n<br><b>来源与使用：</b>题目来源于 MIT 许可的 <a href=\"https://github.com/nastaso/cloudcertprep/tree/9367b00d9f5b39676f4ec3413304d91a7dccbbfb/src/data/clf-c02\">CloudCertPrep</a>；本页附完整许可证。中文和日文为机器翻译。练习题非 AWS 官方题目或考题预测；AWS 与本题库无关联。<a href=\"LICENSE-CloudCertPrep.txt\">查看 MIT License</a>。</div>\r\n</div>\r\n",
     {
       "layout": "script-c735d5dbcd5c5e593f76"
     },
@@ -12534,7 +12534,7 @@ const layouts: Layouts = {
     {
       "slot": "p.2"
     },
-    "</p>\r\n<div class=\"random-entry\"><strong>考试模式</strong><a href=\"../random.html?pool=aws-mla&amp;size=50\">随机 50 题</a></div>\r\n<div class=\"toolbar\"><div class=\"btns\">\r\n<button class=\"primary\" id=\"btn-sheet\" type=\"button\">答题卡</button>\r\n<button id=\"btn-wrong\" type=\"button\">只看错题</button>\r\n<button id=\"btn-expand\" type=\"button\">展开全部解析</button>\r\n<button id=\"btn-report\" type=\"button\">交卷</button>\r\n<button id=\"btn-reset\" type=\"button\">重置</button>\r\n<button onclick=\"window.print()\" type=\"button\">打印 / 存 PDF</button>\r\n</div>\r\n<div class=\"qbar\"><span>已答 <b id=\"s-done\">0</b>/<b>65</b></span><span>正确 <b id=\"s-ok\" class=\"ok\">0</b></span><span>错误 <b id=\"s-bad\" class=\"bad\">0</b></span><span>正确率 <b id=\"s-pct\">—</b></span><span class=\"pbar\"><i id=\"s-fill\"></i></span></div>\r\n</div>\r\n",
+    "</p>\r\n<div class=\"random-entry\"><strong>随机出题</strong><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-mla&amp;size=50\">随机 50 题</a> <a href=\"../random.html?pool=aws-mla&amp;size=10\">随机刷 10 题</a></div></div>\r\n<div class=\"toolbar\"><div class=\"btns\">\r\n<button class=\"primary\" id=\"btn-sheet\" type=\"button\">答题卡</button>\r\n<button id=\"btn-wrong\" type=\"button\">只看错题</button>\r\n<button id=\"btn-expand\" type=\"button\">展开全部解析</button>\r\n<button id=\"btn-report\" type=\"button\">交卷</button>\r\n<button id=\"btn-reset\" type=\"button\">重置</button>\r\n<button onclick=\"window.print()\" type=\"button\">打印 / 存 PDF</button>\r\n</div>\r\n<div class=\"qbar\"><span>已答 <b id=\"s-done\">0</b>/<b>65</b></span><span>正确 <b id=\"s-ok\" class=\"ok\">0</b></span><span>错误 <b id=\"s-bad\" class=\"bad\">0</b></span><span>正确率 <b id=\"s-pct\">—</b></span><span class=\"pbar\"><i id=\"s-fill\"></i></span></div>\r\n</div>\r\n",
     {
       "slot": "question.0"
     },
@@ -13907,7 +13907,7 @@ const layouts: Layouts = {
     {
       "slot": "p.2"
     },
-    "</p>\r\n  <div class=\"random-entry\"><strong>随机出题</strong><span>仅从 A、C 线抽取标准单选、多选题</span><a href=\"../random.html?pool=aws-saa&amp;size=50\">随机 50 题</a></div>\r\n\r\n  <div class=\"grp\">\n    <h2>",
+    "</p>\r\n  <div class=\"random-entry\"><strong>随机出题</strong><span>仅从 A、C 线抽取标准单选、多选题</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-saa&amp;size=50\">随机 50 题</a> <a href=\"../random.html?pool=aws-saa&amp;size=10\">随机刷 10 题</a></div></div>\r\n\r\n  <div class=\"grp\">\n    <h2>",
     {
       "slot": "h2.3"
     },

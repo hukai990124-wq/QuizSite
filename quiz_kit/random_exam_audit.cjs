@@ -2,6 +2,98 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const {chromium}=require(require.resolve('playwright',{paths:[process.env.QUIZSITE_BROWSER_MODULES || process.cwd()]}));
 const site=path.resolve(__dirname,'../site');
+
+async function auditQuickPractice(browser,base,pool){
+  const ctx=await browser.newContext({viewport:{width:320,height:780},isMobile:true,hasTouch:true});
+  try{
+    await ctx.route('**/*',route=>{
+      const url=new URL(route.request().url());
+      if(url.origin!==base)return route.abort();
+      if(url.pathname.startsWith('/api/'))return route.fulfill({json:{user:null,available:false}});
+      return route.continue();
+    });
+    await ctx.routeWebSocket('**/api/presence**',socket=>socket.close());
+    const page=await ctx.newPage(),errors=[];
+    page.on('pageerror',error=>errors.push(error.message));
+    await page.goto(`${base}/${pool}/index.html`);
+    const practice=page.locator(`a[href$="pool=${pool}&size=10"]`);
+    const exam=page.locator(`a[href$="pool=${pool}&size=50"]`);
+    for(const [lang,label] of [['en','Practice 10 random questions'],['ja','ランダム練習10問'],['zh','随机刷 10 题']]){
+      await page.locator(`[data-set-lang="${lang}"]`).click();
+      assert.equal(await practice.textContent(),label);
+      const [practiceBox,examBox]=await Promise.all([practice.boundingBox(),exam.boundingBox()]);
+      assert.ok(practiceBox.x>=examBox.x+examBox.width && Math.abs(practiceBox.y-examBox.y)<2,`${pool} ${lang}: links are side by side on a narrow screen`);
+    }
+    await practice.click();
+    await page.waitForSelector('.exam-notice');
+    const initialUrl=page.url();
+    assert.match(initialUrl,/size=10&seed=[a-f0-9]{8}/);
+    assert.equal(await page.locator('html').getAttribute('data-exam-status'),'practice');
+    assert.equal(await page.locator('.q').count(),10);
+    assert.equal(await page.locator('.q:visible').count(),1);
+    assert.equal(await page.locator('#sheet .grid a').count(),10);
+    const stems=await page.locator('.q .stem').evaluateAll(nodes=>nodes.map(node=>(node.querySelector('.en')||node).textContent.replace(/\s+/g,' ').trim().toLowerCase()));
+    assert.equal(new Set(stems).size,10);
+    if(pool==='aws-clf'){
+      const badges=await page.locator('.q .badge').allTextContents();
+      assert.deepEqual([1,2,3,4].map(domain=>badges.filter(badge=>badge.includes(`Domain ${domain}`)).length),[2,3,4,1]);
+    }
+    if(pool==='aws-saa')assert.match(await page.locator('html').getAttribute('data-exam-key'),/aws-saa-ac:10:/);
+    await page.emulateMedia({media:'print'});
+    assert.equal(await page.locator('details.ans:visible').count(),0);
+    await page.emulateMedia({media:'screen'});
+
+    const first=page.locator('.q').first(),check=first.locator('.js-submit');
+    assert.equal(await check.isDisabled(),true);
+    const answers=(await first.getAttribute('data-ans')).split(/[,|]/).map(letter=>letter.trim().toUpperCase());
+    if(await first.getAttribute('data-kind')==='fill')await first.locator('input.fill').fill(answers[0]);
+    else for(const letter of answers)await first.locator(`.opt[data-letter="${letter}"]`).click();
+    assert.equal(await first.locator('details.ans').isVisible(),false);
+    assert.equal(await page.locator('#s-done').textContent(),'0','a draft is not graded');
+    await check.click();
+    assert.equal(await check.isDisabled(),true);
+    assert.match(await first.locator('.verdict').textContent(),/答对了/);
+    assert.equal(await first.locator('details.ans[open]').isVisible(),true);
+    assert.equal(await page.locator('.q.done').count(),1);
+    await page.locator('#exam-next').click();
+    const second=page.locator('.q:visible');
+    if(await second.getAttribute('data-kind')==='fill')await second.locator('input.fill').fill('deliberately wrong');
+    else {
+      const correct=(await second.getAttribute('data-ans')).split(/[,|]/).map(letter=>letter.trim().toUpperCase());
+      const letters=await second.locator('.opt').evaluateAll(options=>options.map(option=>option.dataset.letter));
+      await second.locator(`.opt[data-letter="${letters.find(letter=>!correct.includes(letter))}"]`).click();
+    }
+    await page.reload();
+    await page.waitForSelector('.exam-notice');
+    assert.equal(await second.getAttribute('data-n'),'2');
+    assert.equal(await page.locator('#s-ok').textContent(),'1');
+    assert.equal(await second.locator('.js-submit').isEnabled(),true);
+    await second.locator('.js-submit').click();
+    assert.match(await second.locator('.verdict').textContent(),/答错了/);
+    await page.locator('#btn-report').click();
+    await page.waitForSelector('#mask.open');
+    assert.equal(await page.locator('#rp-left').textContent(),'8');
+    assert.equal(await page.locator('#rp-pct').textContent(),'50%');
+    await page.locator('#rp-retry').click();
+    assert.equal(await second.getAttribute('data-n'),'2');
+    assert.equal(await page.locator('#exam-next').isDisabled(),true,'unanswered questions are excluded from mistake review');
+    await page.locator('#btn-wrong').click();
+    for(const [lang,title] of [['en','10-question practice'],['ja','ランダム練習10問'],['zh','随机刷 10 题']]){
+      await page.locator(`[data-set-lang="${lang}"]`).click();
+      assert.ok((await page.locator('h1').textContent()).includes(title));
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`${pool} ${lang} mobile`);
+    }
+    await page.locator('#qb-color-mode').selectOption('dark');
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`${pool} dark mobile`);
+    await page.locator('.random-again').click();
+    await page.waitForSelector('.exam-notice');
+    assert.notEqual(page.url(),initialUrl);
+    assert.equal(await page.locator('.q.done').count(),0);
+    assert.deepEqual(errors,[]);
+    console.log(`${pool} 10: mobile entry, sampling, scoring, reload, report and fresh seed PASS`);
+  }finally{await ctx.close();}
+}
+
 async function main(){
   const server=http.createServer((req,res)=>{
     const file=path.resolve(site,'.'+new URL(req.url,'http://localhost').pathname);
@@ -14,6 +106,9 @@ async function main(){
   const base=`http://127.0.0.1:${server.address().port}`;
   const browser=await chromium.launch({headless:true,channel:'msedge'});
   try{
+    for(const pool of ['aws-clf','aws-aif','aws-saa','aws-aip','aws-mla'].filter(pool=>process.argv.length<3 || process.argv.slice(2).includes(pool))){
+      await auditQuickPractice(browser,base,pool);
+    }
     for(const [pool,size,quotas] of [['aws-clf',50],['aws-aif',50],['aws-saa',50],['aws-aip',50],['aws-mla',50],['toeic-listening',50,[3,14,18,15]],['toeic-listening',100,[6,25,39,30]],['toeic-reading',50,[15,8,27]],['toeic-reading',100,[30,16,54]]].filter(([pool])=>process.argv.length<3 || process.argv.slice(2).includes(pool))){
       const ctx=await browser.newContext();let aiCalls=0;
       const legacySaaDraft=JSON.stringify({exam:{startedAt:1,submitted:false,submittedAt:null,currentIndex:9},'1':{s:['A'],ok:null,revealed:false}});
@@ -176,7 +271,12 @@ async function main(){
       await ctx.close();
     }
     const ctx=await browser.newContext();await ctx.route('**/api/**',route=>route.fulfill({json:{user:null,configured:true,available:true,authenticated:false,dailyLimit:10,remaining:10}}));await ctx.routeWebSocket('**/api/presence**',socket=>socket.close());
-    const page=await ctx.newPage();await page.goto(base+'/aws-clf/part01.html');await page.waitForSelector('#q1 .qb-question-chat');
+    const page=await ctx.newPage();
+    for(const [pool,size] of [['toeic-reading',10],['toeic-listening',10],['aws-clf',100]]){
+      await page.goto(`${base}/random.html?pool=${pool}&size=${size}`);
+      await page.locator('#message').getByText(/随机出题参数无效/).waitFor();
+    }
+    await page.goto(base+'/aws-clf/part01.html');await page.waitForSelector('#q1 .qb-question-chat');
     await page.locator('#q1 .opt').first().click();await page.locator('#q1 .js-submit').click();assert.equal(await page.locator('#q1').evaluate(el=>el.classList.contains('done')),true);
     console.log('Ordinary practice still grades instantly and retains AI explanations.');
   }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

@@ -5,7 +5,7 @@
     return Array.from({ length: count }, (_, i) => `${prefix}/${name}${String(i + 1).padStart(2, "0")}.html`);
   }
   const pools = {
-    "aws-clf": { title: "AWS CLF-C02", type: "aws", files: files("aws-clf", 4, "part"), quotas: [12, 15, 17, 6] },
+    "aws-clf": { title: "AWS CLF-C02", type: "aws", files: files("aws-clf", 4, "part"), quotas: [12, 15, 17, 6], quickQuotas: [2, 3, 4, 1] },
     "aws-aip": { title: "AWS AIP-C01", type: "aws", files: [...files("aws-aip", 3, "part"), ...files("aws-aip/open-easy", 4, "part"), ...files("aws-aip/open-hard", 3, "part"), ...files("aws-aip/open-veryhard", 3, "part")] },
     "aws-aif": { title: "AWS AIF-C01", type: "aws", files: [...files("aws-aif/bank", 10, "part"), ...files("aws-aif/practice", 5, "part")] },
     "aws-saa": { title: "AWS SAA-C03", type: "aws", storagePool: "aws-saa-ac", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/original", 1, "part")] },
@@ -17,11 +17,12 @@
   const poolName = params.get("pool");
   const config = pools[poolName];
   const size = Number(params.get("size"));
+  const quickPractice = config?.type === "aws" && size === 10;
   const message = document.getElementById("message");
   const retry = document.getElementById("retry");
   retry.addEventListener("click", () => location.reload());
 
-  if (!config || !([50, 100].includes(size)) || (config.type === "aws" && size !== 50)) {
+  if (!config || !(quickPractice || size === 50 || (size === 100 && config.type !== "aws"))) {
     message.textContent = "随机出题参数无效，请返回题库目录重新选择。";
     return;
   }
@@ -155,7 +156,7 @@
   function render(base, selected, quotas) {
     const doc = base.doc;
     const wrap = doc.querySelector(".wrap");
-    const title = `${config.title} · 随机考试 ${size} 题`;
+    const title = `${config.title} · ${quickPractice ? "随机刷 10 题" : `随机考试 ${size} 题`}`;
     doc.title = title;
     wrap.querySelector("h1").textContent = title;
     const intro = wrap.querySelector("p.sub, p.meta");
@@ -166,7 +167,7 @@
     const nextUrl = `/random.html?pool=${encodeURIComponent(poolName)}&size=${size}`;
     const newButton = doc.createElement("a");
     newButton.href = nextUrl;
-    newButton.textContent = "再随机一套";
+    newButton.textContent = quickPractice ? "再刷 10 题" : "再随机一套";
     newButton.className = "random-again";
     doc.querySelector(".toolbar .btns").append(newButton);
     const extraStyle = doc.createElement("style");
@@ -200,8 +201,8 @@
     const scripts = Array.from(doc.querySelectorAll("script:not([src])"));
     const engine = scripts.find(script => /var KEY="quiz:/.test(script.textContent));
     if (!engine) throw new Error("原试卷缺少答题程序");
-    // Random papers have their own controller: never execute the practice engine.
-    doc.documentElement.dataset.examStatus = "pending";
+    // Random papers have their own controller regardless of the source paper's engine.
+    doc.documentElement.dataset.examStatus = quickPractice ? "practice" : "pending";
     if (config.type === "aws") {
       doc.documentElement.dataset.examLayout = "single";
       doc.querySelectorAll(".exam-bar,.random-entry").forEach(node => node.remove());
@@ -249,11 +250,12 @@
           Array.from(node.querySelectorAll(".opts li.opt"), option => option.dataset.letter || ""),
           node.getAttribute("data-kind") || ""))
         .map(node => ({ ...questionUnit(node), url }))));
+      const quotas = quickPractice ? config.quickQuotas : config.quotas;
       let selected;
-      if (config.quotas) {
-        selected = config.quotas.flatMap((count, index) => sample(all.filter(unit => unit.nodes[0].querySelector(".badge")?.textContent.includes(`Domain ${index + 1}`)), count));
+      if (quotas) {
+        selected = quotas.flatMap((count, index) => sample(all.filter(unit => unit.nodes[0].querySelector(".badge")?.textContent.includes(`Domain ${index + 1}`)), count));
         selected = shuffle(selected);
-      } else selected = sample(all, 50);
+      } else selected = sample(all, size);
       render(base, selected, null);
     } else {
       const quotas = config.type === "listening" ? (size === 50 ? [3, 14, 18, 15] : [6, 25, 39, 30]) : (size === 50 ? [15, 8, 27] : [30, 16, 54]);
