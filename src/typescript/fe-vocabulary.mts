@@ -5,14 +5,13 @@ export interface VocabularyWord {
 type LearningStatus = 'review' | 'mastered';
 type VocabularyState = Record<string, LearningStatus>;
 interface VocabularyFilter { query?: string; category?: string; status?: string }
-const storageKey = 'fe:vocabulary:v1';
 
-export function readVocabularyState(raw: string): VocabularyState {
+export function readVocabularyState(raw: string, bank = 'fe'): VocabularyState {
   try {
     const value: unknown = JSON.parse(raw);
     if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
     return Object.fromEntries(Object.entries(value).filter(([id, status]) =>
-      /^fe-[a-z]+-\d{2}$/.test(id) && (status === 'review' || status === 'mastered')));
+      id.startsWith(bank + '-') && /^(fe|aib)-[a-z]+-\d{2}$/.test(id) && (status === 'review' || status === 'mastered')));
   } catch { return {}; }
 }
 
@@ -31,6 +30,8 @@ function element<T extends HTMLElement>(id: string): T {
 }
 
 async function mountVocabulary(): Promise<void> {
+  const bank = document.body.dataset.vocabularyBank || 'fe';
+  const storageKey = `${bank}:vocabulary:v1`;
   const loading = element('v-loading');
   const retry = element<HTMLButtonElement>('v-retry');
   retry.hidden = true;
@@ -62,7 +63,7 @@ async function mountVocabulary(): Promise<void> {
   const cardView = element<HTMLButtonElement>('v-card-view');
   const listView = element<HTMLButtonElement>('v-list-view');
   let state: VocabularyState = {};
-  try { state = readVocabularyState(localStorage.getItem(storageKey) || '{}'); }
+  try { state = readVocabularyState(localStorage.getItem(storageKey) || '{}', bank); }
   catch { notice.hidden = false; }
   let order = [...words];
   let currentId = words[0].id;
@@ -181,7 +182,7 @@ async function mountVocabulary(): Promise<void> {
   }
   window.addEventListener('storage', event => {
     if (event.key !== storageKey && event.key !== null) return;
-    state = readVocabularyState(event.newValue || '{}'); revealed = false; render();
+    state = readVocabularyState(event.newValue || '{}', bank); revealed = false; render();
   });
   render();
 }

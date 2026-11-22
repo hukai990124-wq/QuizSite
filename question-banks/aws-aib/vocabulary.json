@@ -1,0 +1,602 @@
+[
+  {
+    "id": "aib-term-01",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "ルールベースの自動化",
+    "reading": "るーるべーすのじどうか",
+    "english": "Rule-based automation",
+    "meaning": "基于规则的自动化",
+    "hint": "按预先写明的条件执行相应动作。",
+    "contrast": "规则固定且需精确复现时，引入预测模型反而增加验证成本。"
+  },
+  {
+    "id": "aib-term-02",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "教師あり学習",
+    "reading": "きょうしありがくしゅう",
+    "english": "Supervised learning",
+    "meaning": "监督学习",
+    "hint": "利用带有正确结果的历史样本学习输入与结果的关系。",
+    "contrast": "有历史解约标签可用于训练；仅按相似性分群无法直接学习解约结果。"
+  },
+  {
+    "id": "aib-term-03",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "クラスタリング",
+    "reading": "くらすたりんぐ",
+    "english": "Clustering",
+    "meaning": "聚类",
+    "hint": "根据样本之间的相似性发现群组。",
+    "contrast": "分类需要预先定义目标类别，聚类可以帮助发现尚未定义的客群。"
+  },
+  {
+    "id": "aib-term-04",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "生成 AI",
+    "reading": "せいせいえーあい",
+    "english": "Generative AI",
+    "meaning": "生成式 AI",
+    "hint": "根据上下文生成新的文本、图像等内容。",
+    "contrast": "起草文本与预测一个数字是不同任务，草稿仍需核实。"
+  },
+  {
+    "id": "aib-term-05",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "推論",
+    "reading": "すいろん",
+    "english": "Inference",
+    "meaning": "推理",
+    "hint": "将训练好的模型应用于新输入，得到输出。",
+    "contrast": "训练改变参数，处理一笔新订单通常只使用已学到的参数。"
+  },
+  {
+    "id": "aib-term-06",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "検索拡張生成",
+    "reading": "けんさくかくちょうせいせい",
+    "english": "Retrieval-augmented generation (RAG)",
+    "meaning": "检索增强生成",
+    "hint": "回答前检索相关资料，并将资料作为上下文提供给模型。",
+    "contrast": "每周变动的政策适合更新检索库；微调不能保证引用最新条款。"
+  },
+  {
+    "id": "aib-term-07",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "ファインチューニング",
+    "reading": "ふぁいんちゅーにんぐ",
+    "english": "Fine-tuning",
+    "meaning": "微调",
+    "hint": "用精选训练样本进一步更新模型参数，以调整其行为。",
+    "contrast": "当问题是稳定的输出风格且提示词已充分试验时，可评估微调；知识更新另行处理。"
+  },
+  {
+    "id": "aib-term-08",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "AI エージェント",
+    "reading": "えーあいえーじぇんと",
+    "english": "AI agent",
+    "meaning": "AI 智能体",
+    "hint": "围绕目标选择步骤、调用工具并利用返回结果继续工作。",
+    "contrast": "单轮生成只能给出文本；执行订单变更还需工具权限与审批边界。"
+  },
+  {
+    "id": "aib-term-09",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "コンテキストウィンドウ",
+    "reading": "こんてきすとうぃんどう",
+    "english": "Context window",
+    "meaning": "上下文窗口",
+    "hint": "一次模型调用可处理的上下文容量，以词元计量。",
+    "contrast": "知识库的总大小可以超过窗口，单次送入的内容仍受限制。"
+  },
+  {
+    "id": "aib-term-10",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "ハルシネーション",
+    "reading": "はるしねーしょん",
+    "english": "Hallucination",
+    "meaning": "幻觉",
+    "hint": "模型生成貌似可信却缺乏事实依据的内容。",
+    "contrast": "语气自信不等于事实可靠，应核实引用是否存在。"
+  },
+  {
+    "id": "aib-term-11",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "モデルドリフト",
+    "reading": "もでるどりふと",
+    "english": "Model drift",
+    "meaning": "模型漂移",
+    "hint": "上线后，业务环境变化可能让模型的预测关系或表现发生变化。",
+    "contrast": "一次离线验收无法发现数月后客户行为变化造成的误差。"
+  },
+  {
+    "id": "aib-term-12",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "少数例プロンプティング",
+    "reading": "しょうすうれいぷろんぷてぃんぐ",
+    "english": "Few-shot prompting",
+    "meaning": "少样本提示",
+    "hint": "在本次提示中展示少量输入输出示例，引导模型模仿。",
+    "contrast": "示例位于上下文内，无需更新模型参数。"
+  },
+  {
+    "id": "aib-term-13",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "埋め込み",
+    "reading": "うめこみ",
+    "english": "Embedding",
+    "meaning": "嵌入向量",
+    "hint": "用数值向量表示文本等对象，便于比较语义相似性。",
+    "contrast": "词面不同但意思接近时，语义相似度比精确匹配更有用。"
+  },
+  {
+    "id": "aib-term-14",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "非構造化データ",
+    "reading": "ひこうぞうかでーた",
+    "english": "Unstructured data",
+    "meaning": "非结构化数据",
+    "hint": "内容本身没有预先规定的表格行列结构。",
+    "contrast": "文件名和时间戳可结构化，音频中的对话内容仍是非结构化数据。"
+  },
+  {
+    "id": "aib-term-15",
+    "category": "Domain 1 · AI 基础与素养",
+    "term": "ターゲットリーケージ",
+    "reading": "たーげっとりーけーじ",
+    "english": "Target leakage",
+    "meaning": "目标泄漏",
+    "hint": "训练或评估使用了预测发生时不可能获得的结果信息。",
+    "contrast": "属于模型评估失真，区别于把机密数据发给未经授权的第三方。"
+  },
+  {
+    "id": "aib-term-16",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "ベースライン",
+    "reading": "べーすらいん",
+    "english": "Baseline",
+    "meaning": "基线",
+    "hint": "记录干预前的现状，作为后续比较起点。",
+    "contrast": "只有上线后的数字，难以说清改善了多少。"
+  },
+  {
+    "id": "aib-term-17",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "重要業績評価指標",
+    "reading": "じゅうようぎょうせきひょうかしひょう",
+    "english": "Key performance indicator (KPI)",
+    "meaning": "关键绩效指标",
+    "hint": "用来追踪目标完成情况的量化指标。",
+    "contrast": "模型调用量能反映活动，但未必反映订单履约这一业务目标。"
+  },
+  {
+    "id": "aib-term-18",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "先行指標",
+    "reading": "せんこうしひょう",
+    "english": "Leading indicator",
+    "meaning": "先行指标",
+    "hint": "比预期业务结果更早出现，可预示后续结果的信号。",
+    "contrast": "应验证它和最终业务效果的关系，不能把早期信号当作已实现收益。"
+  },
+  {
+    "id": "aib-term-19",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "遅行指標",
+    "reading": "ちこうしひょう",
+    "english": "Lagging indicator",
+    "meaning": "滞后指标",
+    "hint": "在业务活动发生后衡量已实现的结果。",
+    "contrast": "已入账的年度增收衡量结果，而培训参与率可作为较早的信号。"
+  },
+  {
+    "id": "aib-term-20",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "投資収益率",
+    "reading": "とうししゅうえきりつ",
+    "english": "Return on investment (ROI)",
+    "meaning": "投资回报率",
+    "hint": "用净收益除以投资成本衡量回报。",
+    "contrast": "先从收益中减去成本；收益除以成本是效益成本比。"
+  },
+  {
+    "id": "aib-term-21",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "総保有コスト",
+    "reading": "そうほゆうこすと",
+    "english": "Total cost of ownership (TCO)",
+    "meaning": "总拥有成本",
+    "hint": "汇总从采购、集成到运营、人员和退出等生命周期成本。",
+    "contrast": "供应商报价可能不含内部复核、培训或迁移费用。"
+  },
+  {
+    "id": "aib-term-22",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "投資回収期間",
+    "reading": "とうしかいしゅうきかん",
+    "english": "Payback period",
+    "meaning": "投资回收期",
+    "hint": "累计净现金流收回初始投资所需的时间。",
+    "contrast": "回收速度不反映回收点之后的全部收益。"
+  },
+  {
+    "id": "aib-term-23",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "単位当たりコスト",
+    "reading": "たんいあたりこすと",
+    "english": "Unit cost",
+    "meaning": "单位成本",
+    "hint": "把相同口径下的成本分摊到每个有效业务产出。",
+    "contrast": "每次调用成本低，不代表每个成功解决的工单成本也低。"
+  },
+  {
+    "id": "aib-term-24",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "機会費用",
+    "reading": "きかいひよう",
+    "english": "Opportunity cost",
+    "meaning": "机会成本",
+    "hint": "选择一个方案时放弃的最佳可行替代方案的价值。",
+    "contrast": "已经花掉的研发费是沉没成本；没有资源做的次优项目才构成取舍。"
+  },
+  {
+    "id": "aib-term-25",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "概念実証",
+    "reading": "がいねんじっしょう",
+    "english": "Proof of concept (PoC)",
+    "meaning": "概念验证",
+    "hint": "用小范围试验回答某项能力在技术上是否可行。",
+    "contrast": "技术可行不代表一线业务流程已验证，更不等于已具备上线条件。"
+  },
+  {
+    "id": "aib-term-26",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "パイロット導入",
+    "reading": "ぱいろっとどうにゅう",
+    "english": "Pilot deployment",
+    "meaning": "试点部署",
+    "hint": "在受控范围内让真实用户试用，检验业务价值与运营条件。",
+    "contrast": "离线原型测能力，试点还能发现交接、培训、排班等问题。"
+  },
+  {
+    "id": "aib-term-27",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "A/B テスト",
+    "reading": "えーびーてすと",
+    "english": "A/B test",
+    "meaning": "A/B 测试",
+    "hint": "随机把可比对象分配到不同方案，比较一致定义的结果。",
+    "contrast": "简单比较上线前后，容易混入季节性和市场活动的影响。"
+  },
+  {
+    "id": "aib-term-28",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "感度分析",
+    "reading": "かんどぶんせき",
+    "english": "Sensitivity analysis",
+    "meaning": "敏感性分析",
+    "hint": "改变关键假设，观察结论是否反转或大幅波动。",
+    "contrast": "单一乐观预测看不到调用量或采用率下降后的投资风险。"
+  },
+  {
+    "id": "aib-term-29",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "内製・購入・提携の評価",
+    "reading": "ないせい・こうにゅう・ていけいのひょうか",
+    "english": "Build, buy or partner assessment",
+    "meaning": "自研、采购或合作评估",
+    "hint": "按差异化、时间、能力、成本和控制要求比较交付路径。",
+    "contrast": "即使原型成本低，长期支持能力也可能影响选择。"
+  },
+  {
+    "id": "aib-term-30",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "ポートフォリオの優先順位付け",
+    "reading": "ぽーとふぉりおのゆうせんじゅんいづけ",
+    "english": "Portfolio prioritization",
+    "meaning": "项目组合优先排序",
+    "hint": "跨项目按价值、可行性、风险和战略契合度配置有限资源。",
+    "contrast": "单个项目可行，不代表它比其他候选更值得优先投入。"
+  },
+  {
+    "id": "aib-term-31",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "ベンダーロックイン",
+    "reading": "べんだーろっくいん",
+    "english": "Vendor lock-in",
+    "meaning": "供应商锁定",
+    "hint": "专有接口、数据格式或合同条款使切换供应商代价过高。",
+    "contrast": "服务好用与退出是否可行是两个独立问题，应验证数据导出和替代路径。"
+  },
+  {
+    "id": "aib-term-32",
+    "category": "Domain 2 · AI 战略与商业价值",
+    "term": "競争優位性",
+    "reading": "きょうそうゆういせい",
+    "english": "Competitive advantage",
+    "meaning": "竞争优势",
+    "hint": "企业持续为客户创造竞争者难以复制的价值。",
+    "contrast": "能买到同一模型时，独有数据、反馈循环和流程嵌入更可能形成差异。"
+  },
+  {
+    "id": "aib-term-33",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "公平性",
+    "reading": "こうへいせい",
+    "english": "Fairness",
+    "meaning": "公平性",
+    "hint": "检查决策对不同人群的影响，识别并处理缺乏正当依据的差异。",
+    "contrast": "总体准确率可能掩盖特定群体被误拒的情况。"
+  },
+  {
+    "id": "aib-term-34",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "説明可能性",
+    "reading": "せつめいかのうせい",
+    "english": "Explainability",
+    "meaning": "可解释性",
+    "hint": "让相关人员能够理解影响特定预测或决策的主要因素。",
+    "contrast": "公布系统使用了 AI 属于透明度；解释为何个案被拒更强调可解释性。"
+  },
+  {
+    "id": "aib-term-35",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "透明性",
+    "reading": "とうめいせい",
+    "english": "Transparency",
+    "meaning": "透明度",
+    "hint": "向相关方说明 AI 的使用方式、适用边界和已知限制。",
+    "contrast": "系统级披露与逐案解释相关，但针对的提问不同。"
+  },
+  {
+    "id": "aib-term-36",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "データ最小化",
+    "reading": "でーたさいしょうか",
+    "english": "Data minimization",
+    "meaning": "数据最小化",
+    "hint": "仅收集、处理和保留实现目的所需的数据。",
+    "contrast": "加密保护已有数据，不会减少采集不必要字段造成的暴露。"
+  },
+  {
+    "id": "aib-term-37",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "最小権限",
+    "reading": "さいしょうけんげん",
+    "english": "Least privilege",
+    "meaning": "最小权限",
+    "hint": "把用户或系统的访问权限限制在完成任务所需的范围。",
+    "contrast": "能读取账单的助手不一定需要取消订单或签发退款的权限。"
+  },
+  {
+    "id": "aib-term-38",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "監査証跡",
+    "reading": "かんさしょうせき",
+    "english": "Audit trail",
+    "meaning": "审计轨迹",
+    "hint": "保留可追溯的记录，以重建人员、版本、审批与决策经过。",
+    "contrast": "当前配置只反映现在，不能还原上个月是谁批准了哪个版本。"
+  },
+  {
+    "id": "aib-term-39",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "人間による監督",
+    "reading": "にんげんによるかんとく",
+    "english": "Human oversight",
+    "meaning": "人工监督",
+    "hint": "让有权介入的人审查、覆盖或中止有影响的 AI 决策。",
+    "contrast": "让人看见结果并不代表能阻止执行；关键是介入权和时间点。"
+  },
+  {
+    "id": "aib-term-40",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "リスク登録簿",
+    "reading": "りすくとうろくぼ",
+    "english": "Risk register",
+    "meaning": "风险登记册",
+    "hint": "集中记录风险、严重性、责任人、应对措施及剩余风险。",
+    "contrast": "故障日志记录已经发生的事，风险登记册还跟踪潜在事件。"
+  },
+  {
+    "id": "aib-term-41",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "リスク許容度",
+    "reading": "りすくきょようど",
+    "english": "Risk tolerance",
+    "meaning": "风险容忍度",
+    "hint": "组织为达成目标可接受的风险水平或具体偏差界限。",
+    "contrast": "风险评级描述风险大小，容忍界限用于决定是否需升级处理。"
+  },
+  {
+    "id": "aib-term-42",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "モデルカード",
+    "reading": "もでるかーど",
+    "english": "Model card",
+    "meaning": "模型卡",
+    "hint": "面向使用者说明模型用途、评估条件、表现和局限的文档。",
+    "contrast": "它描述模型本身；每次实际调用和审批属于运行记录。"
+  },
+  {
+    "id": "aib-term-43",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "インシデント対応計画",
+    "reading": "いんしでんとたいおうけいかく",
+    "english": "Incident response plan",
+    "meaning": "事件响应计划",
+    "hint": "事先规定发现异常后的控制、调查、沟通、恢复和复盘步骤。",
+    "contrast": "事前风险评价不能替代发生事件时的指挥与升级机制。"
+  },
+  {
+    "id": "aib-term-44",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "堅牢性",
+    "reading": "けんろうせい",
+    "english": "Robustness",
+    "meaning": "稳健性",
+    "hint": "面对合理范围内的噪声、格式变化或干扰时仍能维持可接受表现。",
+    "contrast": "总体精度高并不能证明遇到低质量扫描件时也能工作。"
+  },
+  {
+    "id": "aib-term-45",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "データリネージ",
+    "reading": "でーたりねーじ",
+    "english": "Data lineage",
+    "meaning": "数据血缘",
+    "hint": "描述数据从来源经过转换到下游产出的流转关系。",
+    "contrast": "权限表回答谁能访问，血缘回答一项数据来自哪里、影响哪里。"
+  },
+  {
+    "id": "aib-term-46",
+    "category": "Domain 3 · AI 治理与负责任领导力",
+    "term": "利用ポリシー",
+    "reading": "りようぽりしー",
+    "english": "Acceptable use policy",
+    "meaning": "可接受使用政策",
+    "hint": "向员工说明允许使用哪些工具、数据和场景，以及例外申请路径。",
+    "contrast": "只有原则口号，员工仍无法判断能否把客户资料送入某个工具。"
+  },
+  {
+    "id": "aib-term-47",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "準備状況評価",
+    "reading": "じゅんびじょうきょうひょうか",
+    "english": "Readiness assessment",
+    "meaning": "就绪度评估",
+    "hint": "在推广前检查数据、技能、流程、领导支持和运营能力的缺口。",
+    "contrast": "工具可用不代表组织已有负责人、培训和响应能力。"
+  },
+  {
+    "id": "aib-term-48",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "経営スポンサー",
+    "reading": "けいえいすぽんさー",
+    "english": "Executive sponsor",
+    "meaning": "高层发起人",
+    "hint": "承担领导责任、争取资源并解决跨部门障碍的高级管理者。",
+    "contrast": "一线推广者能影响同事，通常无权重排跨部门预算。"
+  },
+  {
+    "id": "aib-term-49",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "チェンジチャンピオン",
+    "reading": "ちぇんじちゃんぴおん",
+    "english": "Change champion",
+    "meaning": "变革推动者",
+    "hint": "在一线示范新做法、帮助同事并向项目团队反馈障碍。",
+    "contrast": "制定政策与在同事身边示范实际操作，是两种不同工作。"
+  },
+  {
+    "id": "aib-term-50",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "ステークホルダーマッピング",
+    "reading": "すてーくほるだーまっぴんぐ",
+    "english": "Stakeholder mapping",
+    "meaning": "利益相关方映射",
+    "hint": "识别受影响者及其影响力、关切与参与方式。",
+    "contrast": "同一份全员公告很难回应不同群体的决策权和担忧。"
+  },
+  {
+    "id": "aib-term-51",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "スキルギャップ分析",
+    "reading": "すきるぎゃっぷぶんせき",
+    "english": "Skills gap analysis",
+    "meaning": "技能差距分析",
+    "hint": "比较岗位现在掌握的能力和目标任务所需能力。",
+    "contrast": "知道缺口后才能选择培训、招聘或外部支持。"
+  },
+  {
+    "id": "aib-term-52",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "職種別研修",
+    "reading": "しょくしゅべつけんしゅう",
+    "english": "Role-based training",
+    "meaning": "岗位定制培训",
+    "hint": "按岗位职责用实际工作任务训练并检验能力。",
+    "contrast": "管理者的投资判断与一线员工的输出复核，不宜只用同一门通识课验收。"
+  },
+  {
+    "id": "aib-term-53",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "責任分担表（RACI）",
+    "reading": "せきにんぶんたんひょう",
+    "english": "RACI matrix",
+    "meaning": "职责分配矩阵",
+    "hint": "明确任务的执行人、最终负责者、咨询对象及知会对象。",
+    "contrast": "组织架构图显示汇报关系，未必交代某项上线审批由谁最终负责。"
+  },
+  {
+    "id": "aib-term-54",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "AI センター・オブ・エクセレンス",
+    "reading": "えーあいせんたーおぶえくせれんす",
+    "english": "AI center of excellence",
+    "meaning": "AI 卓越中心",
+    "hint": "集中沉淀专业能力、模板和指导，供各业务团队复用。",
+    "contrast": "共享标准并不要求总部接管所有业务成果。"
+  },
+  {
+    "id": "aib-term-55",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "段階的展開",
+    "reading": "だんかいてきてんかい",
+    "english": "Phased rollout",
+    "meaning": "分阶段推广",
+    "hint": "按批次扩大上线范围，每一批根据效果和故障决定下一步。",
+    "contrast": "分批能控制影响范围，前提是每一批有观测指标和暂停条件。"
+  },
+  {
+    "id": "aib-term-56",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "ロールバック計画",
+    "reading": "ろーるばっくけいかく",
+    "english": "Rollback plan",
+    "meaning": "回退计划",
+    "hint": "预先明确何时以及如何恢复到可工作的旧流程或版本。",
+    "contrast": "停止新系统并不足以恢复业务，还需指定旧路径和执行负责人。"
+  },
+  {
+    "id": "aib-term-57",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "フィードバックループ",
+    "reading": "ふぃーどばっくるーぷ",
+    "english": "Feedback loop",
+    "meaning": "反馈闭环",
+    "hint": "让用户反馈进入分析、修正、验证，并把结果返回给使用者。",
+    "contrast": "收集意见却没人处理，只形成了收件箱，还没有闭环。"
+  },
+  {
+    "id": "aib-term-58",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "利用定着率",
+    "reading": "りようていちゃくりつ",
+    "english": "Sustained adoption rate",
+    "meaning": "持续采用率",
+    "hint": "观察目标用户在指定期间内是否持续于真实业务中使用新流程。",
+    "contrast": "购买的席位数和首次登录数不能证明流程已经落地。"
+  },
+  {
+    "id": "aib-term-59",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "ビジネスオーナー",
+    "reading": "びじねすおーなー",
+    "english": "Business owner",
+    "meaning": "业务负责人",
+    "hint": "对某个用例的业务指标、流程调整和价值兑现承担责任。",
+    "contrast": "模型开发人员负责技术交付，不能替代业务指标的归属。"
+  },
+  {
+    "id": "aib-term-60",
+    "category": "Domain 4 · 组织准备与 AI 转型",
+    "term": "業務プロセス再設計",
+    "reading": "ぎょうむぷろせすさいせっけい",
+    "english": "Business process redesign",
+    "meaning": "业务流程再设计",
+    "hint": "围绕目标重新安排人、系统和决策环节，使技术改善能转化为业务效果。",
+    "contrast": "单个步骤提速，如果下一步仍然排队，端到端周期可能毫无变化。"
+  }
+]

@@ -16,7 +16,7 @@ QuizSite/
 │  ├─ css/                    公共样式、聊天框、账号框、考试、页脚
 │  ├─ javascript/             手写 JS、账号、在线人数、随机题、翻译运行时
 │  └─ typescript/             带类型检查的交互代码（.ts / .mts）
-├─ question-banks/            13 个题库的 bank.mts、pages.json 和历史采集资料
+├─ question-banks/            14 个题库的 bank.mts、pages.json 和历史采集资料
 ├─ site/                      构建输出、发布数据、图片、音频；部署目录
 │  ├─ index.html              首页
 │  ├─ assets/                 构建生成的 CSS/JS，以及公共图片/数据

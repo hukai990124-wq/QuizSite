@@ -6,6 +6,7 @@
   }
   const pools = {
     "aws-clf": { title: "AWS CLF-C02", type: "aws", files: files("aws-clf", 4, "part"), quotas: [12, 15, 17, 6], quickQuotas: [2, 3, 4, 1] },
+    "aws-aib": { title: "AWS AIB-C01", type: "aws", files: ["aws-aib/mock01.html"], quotas: [12, 14, 12, 12], quickQuotas: [2, 3, 2, 3], tenQuestionExam: true, mockSize: 85 },
     "aws-aip": { title: "AWS AIP-C01", type: "aws", files: [...files("aws-aip", 3, "part"), ...files("aws-aip/open-easy", 4, "part"), ...files("aws-aip/open-hard", 3, "part"), ...files("aws-aip/open-veryhard", 3, "part")] },
     "aws-aif": { title: "AWS AIF-C01", type: "aws", files: [...files("aws-aif/bank", 10, "part"), ...files("aws-aif/practice", 5, "part")] },
     "aws-saa": { title: "AWS SAA-C03", type: "aws", storagePool: "aws-saa-ac", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/original", 1, "part")] },
@@ -17,12 +18,14 @@
   const poolName = params.get("pool");
   const config = pools[poolName];
   const size = Number(params.get("size"));
-  const quickPractice = config?.type === "aws" && size === 10;
+  const fixedMock = config?.mockSize === size;
+  const shortAwsPaper = config?.type === "aws" && size === 10;
+  const quickPractice = shortAwsPaper && !config.tenQuestionExam;
   const message = document.getElementById("message");
   const retry = document.getElementById("retry");
   retry.addEventListener("click", () => location.reload());
 
-  if (!config || !(quickPractice || size === 50 || (size === 100 && config.type !== "aws"))) {
+  if (!config || !(fixedMock || shortAwsPaper || size === 50 || (size === 100 && config.type !== "aws"))) {
     message.textContent = "随机出题参数无效，请返回题库目录重新选择。";
     return;
   }
@@ -167,7 +170,7 @@
     const nextUrl = `/random.html?pool=${encodeURIComponent(poolName)}&size=${size}`;
     const newButton = doc.createElement("a");
     newButton.href = nextUrl;
-    newButton.textContent = quickPractice ? "再刷 10 题" : "再随机一套";
+    newButton.textContent = fixedMock ? "重新模拟考" : quickPractice ? "再刷 10 题" : "再随机一套";
     newButton.className = "random-again";
     doc.querySelector(".toolbar .btns").append(newButton);
     const extraStyle = doc.createElement("style");
@@ -216,6 +219,7 @@
     // A changed question pool must not reuse answers saved for the old numbered paper.
     doc.documentElement.dataset.examKey = `quiz:random-exam:${config.storagePool || poolName}:${size}:${seed}`;
     doc.documentElement.dataset.examTitle = config.title;
+    if (fixedMock) doc.documentElement.dataset.fixedMock = "true";
     const examStyle = doc.createElement("link");
     examStyle.rel = "stylesheet";
     examStyle.href = "/assets/random-exam.css";
@@ -250,9 +254,12 @@
           Array.from(node.querySelectorAll(".opts li.opt"), option => option.dataset.letter || ""),
           node.getAttribute("data-kind") || ""))
         .map(node => ({ ...questionUnit(node), url }))));
-      const quotas = quickPractice ? config.quickQuotas : config.quotas;
+      const quotas = shortAwsPaper ? config.quickQuotas : config.quotas;
       let selected;
-      if (quotas) {
+      if (fixedMock) {
+        if (all.length !== size) throw new Error("模拟卷题数与目录不一致");
+        selected = all;
+      } else if (quotas) {
         selected = quotas.flatMap((count, index) => sample(all.filter(unit => unit.nodes[0].querySelector(".badge")?.textContent.includes(`Domain ${index + 1}`)), count));
         selected = shuffle(selected);
       } else selected = sample(all, size);

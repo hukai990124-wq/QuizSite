@@ -1,8 +1,11 @@
 // Imported reusable markup. Edit question content in question-banks/*/pages.json.
 import type { Layouts } from './model.mjs';
-import feVocabularyLayout from './fe-vocabulary-layout.mjs';
+import { aibLayouts } from './aib-layouts.mjs';
+import feVocabularyLayout, { aibVocabularyLayout } from './fe-vocabulary-layout.mjs';
 
 const layouts: Layouts = {
+  ...aibLayouts,
+  "aib-vocabulary": [aibVocabularyLayout],
   "fe-vocabulary-page": [feVocabularyLayout],
   "style-f8f9fb141fae927841f7": [
     "<style>body{margin:0;background:#f5f6f8;font:15px/1.7 -apple-system,\"Segoe UI\",\"PingFang SC\",sans-serif;color:#111827}\r\n.wrap{max-width:720px;margin:0 auto;padding:34px 22px 70px}h1{font-size:24px;margin:0 0 6px}\r\n.sub{color:#6b7280;margin:0 0 24px;font-size:13px}\r\na.card{display:block;background:#fff;border:1px solid #e3e6ea;\r\nborder-radius:12px;padding:15px 18px;margin-bottom:10px;text-decoration:none;color:#111827}\r\na.card:hover{border-color:#93c5fd;background:#f8fbff}\r\na.card .n{font-weight:700}.r{color:#6b7280;font-size:13px;margin-top:3px}\r\na.back{display:inline-block;margin-bottom:14px;font-size:13px}\r\n</style>"

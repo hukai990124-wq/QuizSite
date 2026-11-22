@@ -1,0 +1,3726 @@
+[
+  {
+    "path": "aws-aib/index.html",
+    "layout": "aib-index",
+    "content": {
+      "title.0": "AWS AIB-C01 · AI Business Strategist",
+      "h1.1": "AWS AIB-C01 · AI Business Strategist",
+      "p.2": "AWS Certified AI Business Strategist · 日中英备考",
+      "script.0.REL": "../",
+      "resources": "<div class=\"random-entry\"><strong>随机考试</strong><span>按四个考纲领域抽题，交卷后查看成绩与解析。</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-aib&amp;size=50\">随机 50 题</a> <a href=\"../random.html?pool=aws-aib&amp;size=10\">随机 10 题</a></div></div>\n<div class=\"grp\"><a class=\"card\" href=\"vocabulary.html\"><div class=\"n\">用语集 · 单词卡</div><div class=\"r\">60 个术语 · 日文读音、英文与中文释义</div></a>\n<a class=\"card\" href=\"../random.html?pool=aws-aib&amp;size=85\"><div class=\"n\">原创模拟卷</div><div class=\"r\">85 题 · 固定顺序 · 交卷后统一判分</div></a>\n<a class=\"card\" href=\"mock01.html\" data-quiz-key=\"aws:aib:mock:01\" data-quiz-total=\"85\"><div class=\"n\">模拟卷逐题练习</div><div class=\"r\">85 题 · 固定试卷 · 含单选与多选</div><div class=\"pg\"><i></i><span>未开始</span></div></a></div>\n<div class=\"note\"><p>本卷根据 AWS 考纲原创编写。AI 基础 20 题、战略与价值 24 题、治理 20 题、组织转型 21 题。</p>\n<p><a href=\"https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html\">AWS 日文考试指南</a> · <a href=\"https://aws.amazon.com/jp/certification/certified-ai-business-strategist/\">AWS 官方备考资源</a> · <a href=\"https://zghanw.github.io/aws-ai-business-strategist/\">社区英文计时模拟考</a></p></div>"
+    },
+    "questions": []
+  },
+  {
+    "path": "aws-aib/vocabulary.html",
+    "layout": "aib-vocabulary",
+    "content": {},
+    "questions": []
+  },
+  {
+    "path": "aws-aib/mock01.html",
+    "layout": "aib-paper",
+    "content": {
+      "script.0.KEY": "quiz:aws:aib:mock:01",
+      "script.1.TOTAL": "85",
+      "script.2.REL": "../",
+      "title.0": "AWS AIB-C01 · 原创模拟卷",
+      "h1.1": "AWS AIB-C01 · 原创模拟卷",
+      "p.2": "85 道原创情境题 · 日中英对照 · 单选与多选 · 作答后可查看解析或交卷查看成绩。",
+      "h3.3": "本份成绩",
+      "table.4": "\r\n      <tr><td>已作答</td><td id=\"rp-done\">0</td></tr>\r\n      <tr><td>答对</td><td id=\"rp-ok\">0</td></tr>\r\n      <tr><td>答错</td><td id=\"rp-bad\">0</td></tr>\r\n      <tr><td>未作答</td><td id=\"rp-left\">0</td></tr>\r\n      <tr><td>用时</td><td id=\"rp-time\">—</td></tr>\r\n    "
+    },
+    "questions": [
+      {
+        "id": "q1",
+        "number": "1",
+        "answer": "A,D",
+        "kind": "",
+        "layout": "question-26abc51ab49e9531f344",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 1</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A long history crowds out new instructions. Choose two ways to preserve relevant evidence.</p><p class=\"zh\" lang=\"zh-CN\">对话记录太长，新指令放不下。选两种能保留作答依据的处理方法。</p><p class=\"ja\" lang=\"ja\">長い会話履歴のため新しい指示が収まらない。応答の根拠を保ちながら対処する方法を二つ選ぶ。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Compression and selective retrieval use the context budget for evidence relevant to this turn.</p><p class=\"zh\" lang=\"zh-CN\">压缩已确认的上下文，再检索当前任务的证据。调整生成随机性不会增加容量。</p><p class=\"ja\" lang=\"ja\">要点の圧縮と関連資料の選択で、重要な文脈を限られた容量に収められる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Retrieve relevant original passages for the current query</p><p class=\"zh\" lang=\"zh-CN\">检索并加入本次问题所需原文</p><p class=\"ja\" lang=\"ja\">今回の質問に関係する原文だけを検索して追加する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Keep only the earliest messages for every query</p><p class=\"zh\" lang=\"zh-CN\">始终只保留最早的消息</p><p class=\"ja\" lang=\"ja\">最古のメッセージだけを常に残す</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Paste the full history twice</p><p class=\"zh\" lang=\"zh-CN\">将同一历史粘贴两遍</p><p class=\"ja\" lang=\"ja\">同じ履歴を二回貼り付ける</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Summarize verified facts and open issues</p><p class=\"zh\" lang=\"zh-CN\">总结已核实要点与未决事项</p><p class=\"ja\" lang=\"ja\">検証済みの要点と未解決事項を要約する</p>"
+            }
+          },
+          {
+            "letter": "E",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Increase randomness to expand input capacity</p><p class=\"zh\" lang=\"zh-CN\">调高随机性来扩大输入上限</p><p class=\"ja\" lang=\"ja\">出力の多様性を上げて入力上限を広げる</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q2",
+        "number": "2",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 2</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">After a pricing change, churn predictions lose accuracy even with the same fields. What should be monitored?</p><p class=\"zh\" lang=\"zh-CN\">改价后，即使输入字段不变，流失预测也开始失准。要持续监控哪种现象？</p><p class=\"ja\" lang=\"ja\">料金制度の変更後、従来と同じ入力項目でも解約予測が外れ始めた。継続監視すべき現象はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The relationship learned under the old pricing may no longer hold.</p><p class=\"zh\" lang=\"zh-CN\">上线后，业务环境变化可能让模型的预测关系或表现发生变化。 一次离线验收无法发现数月后客户行为变化造成的误差。</p><p class=\"ja\" lang=\"ja\">料金変更で行動と解約の関係が変わり、以前の学習内容が合わなくなり得る。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model drift</p><p class=\"zh\" lang=\"zh-CN\">模型漂移</p><p class=\"ja\" lang=\"ja\">モデルドリフト</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Hallucination</p><p class=\"zh\" lang=\"zh-CN\">幻觉</p><p class=\"ja\" lang=\"ja\">ハルシネーション</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Target leakage</p><p class=\"zh\" lang=\"zh-CN\">目标泄漏</p><p class=\"ja\" lang=\"ja\">ターゲットリーケージ</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Context window</p><p class=\"zh\" lang=\"zh-CN\">上下文窗口</p><p class=\"ja\" lang=\"ja\">コンテキストウィンドウ</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q3",
+        "number": "3",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 3</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A team wants to demonstrate a ticket-label format with three examples and no weight updates. Which method fits?</p><p class=\"zh\" lang=\"zh-CN\">不更新模型权重，希望通过三个示例说明工单分类格式。用什么方法？</p><p class=\"ja\" lang=\"ja\">モデルの重みを変えずに、問い合わせ分類の形式を三つの見本で示したい。何を使うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Examples in the prompt demonstrate the desired format at inference time.</p><p class=\"zh\" lang=\"zh-CN\">在本次提示中展示少量输入输出示例，引导模型模仿。 示例位于上下文内，无需更新模型参数。</p><p class=\"ja\" lang=\"ja\">入出力の見本を指示と一緒に渡せば、出力様式を示せる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Clustering</p><p class=\"zh\" lang=\"zh-CN\">聚类</p><p class=\"ja\" lang=\"ja\">クラスタリング</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Retrieval-augmented generation (RAG)</p><p class=\"zh\" lang=\"zh-CN\">检索增强生成</p><p class=\"ja\" lang=\"ja\">検索拡張生成</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Fine-tuning</p><p class=\"zh\" lang=\"zh-CN\">微调</p><p class=\"ja\" lang=\"ja\">ファインチューニング</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Few-shot prompting</p><p class=\"zh\" lang=\"zh-CN\">少样本提示</p><p class=\"ja\" lang=\"ja\">少数例プロンプティング</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q4",
+        "number": "4",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 4</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Executives rank ten initiatives against value, feasibility and strategic fit to fund three. Which activity is this?</p><p class=\"zh\" lang=\"zh-CN\">十个项目只能资助三个，管理层按价值、可行性和战略契合度统一评估。这是什么活动？</p><p class=\"ja\" lang=\"ja\">経営陣は十案件のうち三件に資金を配る。価値、実現可能性、戦略との整合を共通尺度で比較する活動は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A common framework lets leaders allocate resources across competing initiatives.</p><p class=\"zh\" lang=\"zh-CN\">跨项目按价值、可行性、风险和战略契合度配置有限资源。 单个项目可行，不代表它比其他候选更值得优先投入。</p><p class=\"ja\" lang=\"ja\">個別案件を横断して限られた資源の配分を決めている。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Build, buy or partner assessment</p><p class=\"zh\" lang=\"zh-CN\">自研、采购或合作评估</p><p class=\"ja\" lang=\"ja\">内製・購入・提携の評価</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Portfolio prioritization</p><p class=\"zh\" lang=\"zh-CN\">项目组合优先排序</p><p class=\"ja\" lang=\"ja\">ポートフォリオの優先順位付け</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">A/B test</p><p class=\"zh\" lang=\"zh-CN\">A/B 测试</p><p class=\"ja\" lang=\"ja\">A/B テスト</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Proof of concept (PoC)</p><p class=\"zh\" lang=\"zh-CN\">概念验证</p><p class=\"ja\" lang=\"ja\">概念実証</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q5",
+        "number": "5",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 5</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Managers practice investment decisions while agents rehearse escalating bad answers. Which training strategy is this?</p><p class=\"zh\" lang=\"zh-CN\">经理演练投资判断，客服演练退回错误回答。属于哪种培养方式？</p><p class=\"ja\" lang=\"ja\">管理職には投資判断を、窓口担当には誤回答の差し戻しを演習させる。どの人材施策か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Practice tied to real responsibilities builds the skills each role needs.</p><p class=\"zh\" lang=\"zh-CN\">按岗位职责用实际工作任务训练并检验能力。 管理者的投资判断与一线员工的输出复核，不宜只用同一门通识课验收。</p><p class=\"ja\" lang=\"ja\">各職種が本番で担う判断に合わせて演習を変えている。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Skills gap analysis</p><p class=\"zh\" lang=\"zh-CN\">技能差距分析</p><p class=\"ja\" lang=\"ja\">スキルギャップ分析</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Change champion</p><p class=\"zh\" lang=\"zh-CN\">变革推动者</p><p class=\"ja\" lang=\"ja\">チェンジチャンピオン</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Stakeholder mapping</p><p class=\"zh\" lang=\"zh-CN\">利益相关方映射</p><p class=\"ja\" lang=\"ja\">ステークホルダーマッピング</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Role-based training</p><p class=\"zh\" lang=\"zh-CN\">岗位定制培训</p><p class=\"ja\" lang=\"ja\">職種別研修</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q6",
+        "number": "6",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 6</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Stores use conflicting definitions of a return. What should precede retraining on their combined data?</p><p class=\"zh\" lang=\"zh-CN\">不同门店对“退货”的定义不一致，数据已合并。再次训练前先做什么？</p><p class=\"ja\" lang=\"ja\">店舗ごとに「返品」の定義が違うまま学習データを統合した。再学習の前に何を行うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">More rows or iterations cannot reconcile incompatible outcome definitions.</p><p class=\"zh\" lang=\"zh-CN\">标签的业务含义冲突，增加数据量或训练轮数只会延续这种冲突。</p><p class=\"ja\" lang=\"ja\">目的変数の意味が一致しなければ、件数や反復を増やしても矛盾は解消しない。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Duplicate minority-class rows</p><p class=\"zh\" lang=\"zh-CN\">复制少数类样本</p><p class=\"ja\" lang=\"ja\">少ないクラスの行を複製する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Train longer on the same labels</p><p class=\"zh\" lang=\"zh-CN\">保留原标签并增加训练轮数</p><p class=\"ja\" lang=\"ja\">同じラベルのまま学習回数を増やす</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Remove store names and proceed</p><p class=\"zh\" lang=\"zh-CN\">去掉店名后继续训练</p><p class=\"ja\" lang=\"ja\">店舗名を削除して学習を続ける</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Align definitions and relabel a representative sample</p><p class=\"zh\" lang=\"zh-CN\">统一口径并重标代表样本</p><p class=\"ja\" lang=\"ja\">定義を統一し代表例を再ラベル付けする</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q7",
+        "number": "7",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 7</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Leadership wants to track possible harms, impact, mitigation owners and residual exposure. Which artifact fits?</p><p class=\"zh\" lang=\"zh-CN\">管理层要跟踪含未发生事项在内的风险、影响、责任人与剩余风险。应维护什么？</p><p class=\"ja\" lang=\"ja\">経営会議で、未発生のリスクも含めて影響度、対策責任者、残留リスクを追跡したい。何を維持するか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A register tracks each risk from assessment through treatment.</p><p class=\"zh\" lang=\"zh-CN\">集中记录风险、严重性、责任人、应对措施及剩余风险。 故障日志记录已经发生的事，风险登记册还跟踪潜在事件。</p><p class=\"ja\" lang=\"ja\">リスクごとの対応と責任を継続して管理するための記録である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model card</p><p class=\"zh\" lang=\"zh-CN\">模型卡</p><p class=\"ja\" lang=\"ja\">モデルカード</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Risk register</p><p class=\"zh\" lang=\"zh-CN\">风险登记册</p><p class=\"ja\" lang=\"ja\">リスク登録簿</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Acceptable use policy</p><p class=\"zh\" lang=\"zh-CN\">可接受使用政策</p><p class=\"ja\" lang=\"ja\">利用ポリシー</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Audit trail</p><p class=\"zh\" lang=\"zh-CN\">审计轨迹</p><p class=\"ja\" lang=\"ja\">監査証跡</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q8",
+        "number": "8",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 8</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Teams duplicate evaluation work. Which standing group could maintain shared templates, expertise and guidance?</p><p class=\"zh\" lang=\"zh-CN\">各部门反复从头做评估。想成立专家团队维护共用评估模板和教材并指导业务。适合哪种组织？</p><p class=\"ja\" lang=\"ja\">全社で同じ評価作業を繰り返している。専門家が評価手順や教材を整え、各部門を支援する常設組織はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A center of excellence spreads reusable expertise across business units.</p><p class=\"zh\" lang=\"zh-CN\">集中沉淀专业能力、模板和指导，供各业务团队复用。 共享标准并不要求总部接管所有业务成果。</p><p class=\"ja\" lang=\"ja\">専門知識と再利用できる資産を集約し、複数部門を支える。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">AI center of excellence</p><p class=\"zh\" lang=\"zh-CN\">AI 卓越中心</p><p class=\"ja\" lang=\"ja\">AI センター・オブ・エクセレンス</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Change champion</p><p class=\"zh\" lang=\"zh-CN\">变革推动者</p><p class=\"ja\" lang=\"ja\">チェンジチャンピオン</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Executive sponsor</p><p class=\"zh\" lang=\"zh-CN\">高层发起人</p><p class=\"ja\" lang=\"ja\">経営スポンサー</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Business owner</p><p class=\"zh\" lang=\"zh-CN\">业务负责人</p><p class=\"ja\" lang=\"ja\">ビジネスオーナー</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q9",
+        "number": "9",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 9</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Regions have distinct workflows but need consistent safety standards. Which operating model fits?</p><p class=\"zh\" lang=\"zh-CN\">各地区业务不同，但希望安全底线一致。哪种运营方式最合适？</p><p class=\"ja\" lang=\"ja\">地域ごとに業務要件が異なるが、安全基準は統一したい。最適な運営方式はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Federated execution combines common safeguards with local adaptation.</p><p class=\"zh\" lang=\"zh-CN\">中央约束保障一致性，地方在边界内可适配业务需求。</p><p class=\"ja\" lang=\"ja\">共通のガードレールと現場の裁量を組み合わせると、一貫性と適応性を保てる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Set central standards and let regions implement within them</p><p class=\"zh\" lang=\"zh-CN\">总部定共同标准，地区在边界内实施</p><p class=\"ja\" lang=\"ja\">中央で共通基準を定め、地域がその範囲で実装する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Require identical workflows in every region</p><p class=\"zh\" lang=\"zh-CN\">无例外强制各地使用同一业务流程</p><p class=\"ja\" lang=\"ja\">全地域に同一業務手順を例外なく強制する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Let every region define independent safety minimums</p><p class=\"zh\" lang=\"zh-CN\">各地区自行决定安全底线</p><p class=\"ja\" lang=\"ja\">各地域が安全基準も独立に決める</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Defer ownership until after implementation</p><p class=\"zh\" lang=\"zh-CN\">实施后再确定责任</p><p class=\"ja\" lang=\"ja\">実装後まで責任を決めない</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q10",
+        "number": "10",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 10</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Before connecting live workflows, a team tests whether representative scanned forms can be read accurately. What is this trial?</p><p class=\"zh\" lang=\"zh-CN\">尚不清楚能否准确读取手写表单。连接实际流程前，先用代表性的脱敏样本验证可行性。该做什么？</p><p class=\"ja\" lang=\"ja\">手書き帳票の読取精度が足りるか不明だ。実運用に接続する前に、匿名化した代表例で可能性を確かめたい。何を行うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A bounded technical test addresses the feasibility question.</p><p class=\"zh\" lang=\"zh-CN\">用小范围试验回答某项能力在技术上是否可行。 技术可行不代表一线业务流程已验证，更不等于已具备上线条件。</p><p class=\"ja\" lang=\"ja\">まず限定した条件で技術上の不確実性を解消する。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Pilot deployment</p><p class=\"zh\" lang=\"zh-CN\">试点部署</p><p class=\"ja\" lang=\"ja\">パイロット導入</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">A/B test</p><p class=\"zh\" lang=\"zh-CN\">A/B 测试</p><p class=\"ja\" lang=\"ja\">A/B テスト</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Sensitivity analysis</p><p class=\"zh\" lang=\"zh-CN\">敏感性分析</p><p class=\"ja\" lang=\"ja\">感度分析</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Proof of concept (PoC)</p><p class=\"zh\" lang=\"zh-CN\">概念验证</p><p class=\"ja\" lang=\"ja\">概念実証</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q11",
+        "number": "11",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 11</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">An already trained model estimates delivery time for a new order. What operation is this?</p><p class=\"zh\" lang=\"zh-CN\">把今早的订单交给已训练好的模型估算配送时间。这一步叫什么？</p><p class=\"ja\" lang=\"ja\">学習済みモデルに今朝の注文を入力し、配送所要時間を算出した。この処理は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The model applies existing parameters to a new input.</p><p class=\"zh\" lang=\"zh-CN\">将训练好的模型应用于新输入，得到输出。 训练改变参数，处理一笔新订单通常只使用已学到的参数。</p><p class=\"ja\" lang=\"ja\">既存のパラメータを使い新しい注文について出力している。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Clustering</p><p class=\"zh\" lang=\"zh-CN\">聚类</p><p class=\"ja\" lang=\"ja\">クラスタリング</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Supervised learning</p><p class=\"zh\" lang=\"zh-CN\">监督学习</p><p class=\"ja\" lang=\"ja\">教師あり学習</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Inference</p><p class=\"zh\" lang=\"zh-CN\">推理</p><p class=\"ja\" lang=\"ja\">推論</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Fine-tuning</p><p class=\"zh\" lang=\"zh-CN\">微调</p><p class=\"ja\" lang=\"ja\">ファインチューニング</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q12",
+        "number": "12",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 12</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Sales and legal priorities conflict and the pilot stalls. Which role can align executive priorities and unlock funding?</p><p class=\"zh\" lang=\"zh-CN\">销售与法务优先级冲突导致试点停滞。哪个角色最适合推动跨部门决策和资源协调？</p><p class=\"ja\" lang=\"ja\">営業と法務の優先順位が対立し、試行が止まった。予算と部門間の意思決定を後押しする役割はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A senior sponsor can resolve competing priorities beyond the project team's authority.</p><p class=\"zh\" lang=\"zh-CN\">承担领导责任、争取资源并解决跨部门障碍的高级管理者。 一线推广者能影响同事，通常无权重排跨部门预算。</p><p class=\"ja\" lang=\"ja\">部門をまたぐ意思決定には経営レベルの権限と支援が必要である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Executive sponsor</p><p class=\"zh\" lang=\"zh-CN\">高层发起人</p><p class=\"ja\" lang=\"ja\">経営スポンサー</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Stakeholder mapping</p><p class=\"zh\" lang=\"zh-CN\">利益相关方映射</p><p class=\"ja\" lang=\"ja\">ステークホルダーマッピング</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Business owner</p><p class=\"zh\" lang=\"zh-CN\">业务负责人</p><p class=\"ja\" lang=\"ja\">ビジネスオーナー</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Change champion</p><p class=\"zh\" lang=\"zh-CN\">变革推动者</p><p class=\"ja\" lang=\"ja\">チェンジチャンピオン</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q13",
+        "number": "13",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 13</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Training completion is high, yet night shifts rarely use the assistant. What should be investigated first?</p><p class=\"zh\" lang=\"zh-CN\">培训完成率高，夜班使用率却很低。强制使用前先调查什么？</p><p class=\"ja\" lang=\"ja\">研修修了率は高いのに夜勤での利用が少ない。利用を義務化する前に何を調べるか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Direct observation identifies shift-specific barriers that completion rates miss.</p><p class=\"zh\" lang=\"zh-CN\">高完课率不能解释班次差异。先观察真实工作，才能找到采用障碍。</p><p class=\"ja\" lang=\"ja\">交代勤務固有の障害を現場で特定してから、的を絞った支援を行う。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Vendor documentation for planned features</p><p class=\"zh\" lang=\"zh-CN\">计划发布功能的产品文档</p><p class=\"ja\" lang=\"ja\">次期機能の製品資料</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Actual night-shift workflows, access and available support</p><p class=\"zh\" lang=\"zh-CN\">夜班真实流程、访问权限与支持渠道</p><p class=\"ja\" lang=\"ja\">夜勤の実際の手順、アクセス権、支援窓口</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Only combined day and night usage</p><p class=\"zh\" lang=\"zh-CN\">仅合并日夜班后的平均使用率</p><p class=\"ja\" lang=\"ja\">昼勤と夜勤を合わせた平均利用率だけ</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Only enterprise-wide course satisfaction</p><p class=\"zh\" lang=\"zh-CN\">仅全公司课程满意度</p><p class=\"ja\" lang=\"ja\">全社の研修満足度だけ</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q14",
+        "number": "14",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 14</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Before expanding a successful pilot to a factory, leaders need to find data, skills and operating gaps. What should they conduct?</p><p class=\"zh\" lang=\"zh-CN\">另一部门的 AI 试点成功，工厂推广前想找出数据、技能与运维缺口。应做什么？</p><p class=\"ja\" lang=\"ja\">他部門で成功した AI を工場に展開する前に、データ品質、現場スキル、運用体制の不足を洗い出したい。何を行うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Readiness depends on the receiving team's capabilities and operating context.</p><p class=\"zh\" lang=\"zh-CN\">在推广前检查数据、技能、流程、领导支持和运营能力的缺口。 工具可用不代表组织已有负责人、培训和响应能力。</p><p class=\"ja\" lang=\"ja\">対象組織が実際に使い続けるための前提を点検する。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Readiness assessment</p><p class=\"zh\" lang=\"zh-CN\">就绪度评估</p><p class=\"ja\" lang=\"ja\">準備状況評価</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Proof of concept (PoC)</p><p class=\"zh\" lang=\"zh-CN\">概念验证</p><p class=\"ja\" lang=\"ja\">概念実証</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Skills gap analysis</p><p class=\"zh\" lang=\"zh-CN\">技能差距分析</p><p class=\"ja\" lang=\"ja\">スキルギャップ分析</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Phased rollout</p><p class=\"zh\" lang=\"zh-CN\">分阶段推广</p><p class=\"ja\" lang=\"ja\">段階的展開</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q15",
+        "number": "15",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 15</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Staff are using unapproved AI. Which document should define permitted tools, prohibited inputs and exception requests?</p><p class=\"zh\" lang=\"zh-CN\">员工开始自行使用未经审批的 AI。要明确获准工具、禁止提交的数据和例外申请渠道，应制定什么？</p><p class=\"ja\" lang=\"ja\">社員が未承認の生成 AI を使い始めた。承認済みツール、入力禁止情報、例外申請先を明文化する文書は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Operational use rules give staff a clear boundary and an escalation path.</p><p class=\"zh\" lang=\"zh-CN\">向员工说明允许使用哪些工具、数据和场景，以及例外申请路径。 只有原则口号，员工仍无法判断能否把客户资料送入某个工具。</p><p class=\"ja\" lang=\"ja\">現場が利用可否を具体的に判断できるルールを示す。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Incident response plan</p><p class=\"zh\" lang=\"zh-CN\">事件响应计划</p><p class=\"ja\" lang=\"ja\">インシデント対応計画</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Acceptable use policy</p><p class=\"zh\" lang=\"zh-CN\">可接受使用政策</p><p class=\"ja\" lang=\"ja\">利用ポリシー</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model card</p><p class=\"zh\" lang=\"zh-CN\">模型卡</p><p class=\"ja\" lang=\"ja\">モデルカード</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Audit trail</p><p class=\"zh\" lang=\"zh-CN\">审计轨迹</p><p class=\"ja\" lang=\"ja\">監査証跡</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q16",
+        "number": "16",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 16</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A summer promotion coincides with an AI copy launch. How can randomized concurrent groups isolate the copy's effect?</p><p class=\"zh\" lang=\"zh-CN\">促销与 AI 文案同期上线。要通过同期随机分组尽量隔离文案效果，采用什么方法？</p><p class=\"ja\" lang=\"ja\">夏の販促と同時に AI 文案を出す。同じ期間内で文案自体の効果を分離するには、利用者を無作為に分けるどの手法か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Random assignment and a concurrent control reduce confounding.</p><p class=\"zh\" lang=\"zh-CN\">随机把可比对象分配到不同方案，比较一致定义的结果。 简单比较上线前后，容易混入季节性和市场活动的影响。</p><p class=\"ja\" lang=\"ja\">同じ時期の対照群を設け、割り当てを無作為化する。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Baseline</p><p class=\"zh\" lang=\"zh-CN\">基线</p><p class=\"ja\" lang=\"ja\">ベースライン</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">A/B test</p><p class=\"zh\" lang=\"zh-CN\">A/B 测试</p><p class=\"ja\" lang=\"ja\">A/B テスト</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Sensitivity analysis</p><p class=\"zh\" lang=\"zh-CN\">敏感性分析</p><p class=\"ja\" lang=\"ja\">感度分析</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Proof of concept (PoC)</p><p class=\"zh\" lang=\"zh-CN\">概念验证</p><p class=\"ja\" lang=\"ja\">概念実証</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q17",
+        "number": "17",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 17</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A retailer has renewal outcomes for past customers. How should it learn to predict churn?</p><p class=\"zh\" lang=\"zh-CN\">有客户历史续约标签，要预测下月哪些客户会流失，适合哪种学习方法？</p><p class=\"ja\" lang=\"ja\">契約更新の有無を記録した過去の顧客データがある。来月解約しそうな顧客を予測する学習方法はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Recorded renewals supply the outcome label.</p><p class=\"zh\" lang=\"zh-CN\">利用带有正确结果的历史样本学习输入与结果的关系。 有历史解约标签可用于训练；仅按相似性分群无法直接学习解约结果。</p><p class=\"ja\" lang=\"ja\">過去の解約結果が教師ラベルになる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Rule-based automation</p><p class=\"zh\" lang=\"zh-CN\">基于规则的自动化</p><p class=\"ja\" lang=\"ja\">ルールベースの自動化</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Supervised learning</p><p class=\"zh\" lang=\"zh-CN\">监督学习</p><p class=\"ja\" lang=\"ja\">教師あり学習</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Clustering</p><p class=\"zh\" lang=\"zh-CN\">聚类</p><p class=\"ja\" lang=\"ja\">クラスタリング</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Generative AI</p><p class=\"zh\" lang=\"zh-CN\">生成式 AI</p><p class=\"ja\" lang=\"ja\">生成 AI</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q18",
+        "number": "18",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 18</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A team specifies when and how to restore the old dispatch workflow if misroutes spike after cutover. What is this?</p><p class=\"zh\" lang=\"zh-CN\">为了应对切换后错配激增，提前确定恢复旧调度路径的条件和负责人。准备的是什么？</p><p class=\"ja\" lang=\"ja\">切り替え直後の誤配送が急増した場合に備え、旧ルートへの復帰条件と担当者を決める。何を用意しているか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A rollback plan names a known working path and the trigger to restore it.</p><p class=\"zh\" lang=\"zh-CN\">预先明确何时以及如何恢复到可工作的旧流程或版本。 停止新系统并不足以恢复业务，还需指定旧路径和执行负责人。</p><p class=\"ja\" lang=\"ja\">不具合時にも業務を継続できるよう、復帰先と手順を決めている。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Phased rollout</p><p class=\"zh\" lang=\"zh-CN\">分阶段推广</p><p class=\"ja\" lang=\"ja\">段階的展開</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Skills gap analysis</p><p class=\"zh\" lang=\"zh-CN\">技能差距分析</p><p class=\"ja\" lang=\"ja\">スキルギャップ分析</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Feedback loop</p><p class=\"zh\" lang=\"zh-CN\">反馈闭环</p><p class=\"ja\" lang=\"ja\">フィードバックループ</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Rollback plan</p><p class=\"zh\" lang=\"zh-CN\">回退计划</p><p class=\"ja\" lang=\"ja\">ロールバック計画</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q19",
+        "number": "19",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 19</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A chain enables five stores at a time and checks quality before opening the next group. Which rollout is this?</p><p class=\"zh\" lang=\"zh-CN\">一百家门店每次上线五家，只有质量达标才继续下一批。这是哪种推广方式？</p><p class=\"ja\" lang=\"ja\">百店舗への導入を五店舗ずつ行い、品質が基準を満たした場合だけ次の店舗群へ進む。どの展開方式か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Waves limit exposure and provide decision points before expansion.</p><p class=\"zh\" lang=\"zh-CN\">按批次扩大上线范围，每一批根据效果和故障决定下一步。 分批能控制影响范围，前提是每一批有观测指标和暂停条件。</p><p class=\"ja\" lang=\"ja\">各段階で学んだ結果を次段階の判断に反映できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Phased rollout</p><p class=\"zh\" lang=\"zh-CN\">分阶段推广</p><p class=\"ja\" lang=\"ja\">段階的展開</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Rollback plan</p><p class=\"zh\" lang=\"zh-CN\">回退计划</p><p class=\"ja\" lang=\"ja\">ロールバック計画</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Proof of concept (PoC)</p><p class=\"zh\" lang=\"zh-CN\">概念验证</p><p class=\"ja\" lang=\"ja\">概念実証</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">A/B test</p><p class=\"zh\" lang=\"zh-CN\">A/B 测试</p><p class=\"ja\" lang=\"ja\">A/B テスト</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q20",
+        "number": "20",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 20</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">An applicant asks which factors drove the decision on their particular case. Which property addresses this?</p><p class=\"zh\" lang=\"zh-CN\">客户想知道哪些因素影响了自己的申请结果。需要哪项特性？</p><p class=\"ja\" lang=\"ja\">審査を受けた顧客が、自分の申請結果を左右した主な要因を知りたい。どの性質が必要か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">An explanation connects the individual result to factors that influenced it.</p><p class=\"zh\" lang=\"zh-CN\">让相关人员能够理解影响特定预测或决策的主要因素。 公布系统使用了 AI 属于透明度；解释为何个案被拒更强调可解释性。</p><p class=\"ja\" lang=\"ja\">個別結果に寄与した根拠を理解できる形で示す必要がある。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Fairness</p><p class=\"zh\" lang=\"zh-CN\">公平性</p><p class=\"ja\" lang=\"ja\">公平性</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Explainability</p><p class=\"zh\" lang=\"zh-CN\">可解释性</p><p class=\"ja\" lang=\"ja\">説明可能性</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Transparency</p><p class=\"zh\" lang=\"zh-CN\">透明度</p><p class=\"ja\" lang=\"ja\">透明性</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Audit trail</p><p class=\"zh\" lang=\"zh-CN\">审计轨迹</p><p class=\"ja\" lang=\"ja\">監査証跡</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q21",
+        "number": "21",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 21</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A vendor upgrades the model after approval. What should precede continued reliance on that approval?</p><p class=\"zh\" lang=\"zh-CN\">模型在审批后被供应商升级。沿用审批前应先做什么？</p><p class=\"ja\" lang=\"ja\">審査部門の承認後にベンダーがモデル提供版を変更した。同じ承認を継続する前に何を行うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Approval evidence relates to a tested version and operating conditions.</p><p class=\"zh\" lang=\"zh-CN\">原审批针对已测试的版本和条件，新版本需按影响范围重新验证。</p><p class=\"ja\" lang=\"ja\">承認は検証した条件に依存する。版の変更が品質やリスクに与える影響を確認する。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Record the change only after a complaint</p><p class=\"zh\" lang=\"zh-CN\">有投诉时再记录变更</p><p class=\"ja\" lang=\"ja\">苦情が出るまで変更を記録しない</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Assess the change and revalidate against approved criteria</p><p class=\"zh\" lang=\"zh-CN\">评估变更影响并按既定标准重验</p><p class=\"ja\" lang=\"ja\">変更影響を評価し既存基準で再検証する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Renew approval automatically because the brand is unchanged</p><p class=\"zh\" lang=\"zh-CN\">因商品名相同自动续批</p><p class=\"ja\" lang=\"ja\">同じ商品名なので承認を自動継続する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Delete the previous evaluation records</p><p class=\"zh\" lang=\"zh-CN\">清除原先的验证日志</p><p class=\"ja\" lang=\"ja\">既存の検証ログを消去する</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q22",
+        "number": "22",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 22</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">An invoice summarizer can issue refunds. Which principle calls for removing that unnecessary capability?</p><p class=\"zh\" lang=\"zh-CN\">发票摘要助手意外拥有退款权限。保留摘要功能并移除多余权限，体现什么原则？</p><p class=\"ja\" lang=\"ja\">請求書を要約するアシスタントが返金処理も実行できる。業務を維持したまま不要な操作権限を外す原則は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Read access can support summarization without granting payment authority.</p><p class=\"zh\" lang=\"zh-CN\">把用户或系统的访问权限限制在完成任务所需的范围。 能读取账单的助手不一定需要取消订单或签发退款的权限。</p><p class=\"ja\" lang=\"ja\">要約には閲覧で足りるので、支払いを変更する権限を付ける理由がない。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Data minimization</p><p class=\"zh\" lang=\"zh-CN\">数据最小化</p><p class=\"ja\" lang=\"ja\">データ最小化</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Least privilege</p><p class=\"zh\" lang=\"zh-CN\">最小权限</p><p class=\"ja\" lang=\"ja\">最小権限</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Transparency</p><p class=\"zh\" lang=\"zh-CN\">透明度</p><p class=\"ja\" lang=\"ja\">透明性</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Robustness</p><p class=\"zh\" lang=\"zh-CN\">稳健性</p><p class=\"ja\" lang=\"ja\">堅牢性</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q23",
+        "number": "23",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 23</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Each branch nominates a peer to demonstrate the workflow and surface local frustrations. Which role fits?</p><p class=\"zh\" lang=\"zh-CN\">每个网点选一位员工给同事示范新流程，并反馈不同班次的困难。这是什么角色？</p><p class=\"ja\" lang=\"ja\">新しい応対支援を同僚の言葉で示し、シフトごとの困り事を吸い上げる担当を各拠点に置く。どの役割か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Trusted peers translate change into local practice and relay feedback.</p><p class=\"zh\" lang=\"zh-CN\">在一线示范新做法、帮助同事并向项目团队反馈障碍。 制定政策与在同事身边示范实际操作，是两种不同工作。</p><p class=\"ja\" lang=\"ja\">現場の信頼関係を生かし、利用者と推進チームをつなぐ。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Change champion</p><p class=\"zh\" lang=\"zh-CN\">变革推动者</p><p class=\"ja\" lang=\"ja\">チェンジチャンピオン</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Phased rollout</p><p class=\"zh\" lang=\"zh-CN\">分阶段推广</p><p class=\"ja\" lang=\"ja\">段階的展開</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Executive sponsor</p><p class=\"zh\" lang=\"zh-CN\">高层发起人</p><p class=\"ja\" lang=\"ja\">経営スポンサー</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">AI center of excellence</p><p class=\"zh\" lang=\"zh-CN\">AI 卓越中心</p><p class=\"ja\" lang=\"ja\">AI センター・オブ・エクセレンス</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q24",
+        "number": "24",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 24</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A hiring tool has high overall accuracy but rejects qualified members of one group more often. What should be assessed?</p><p class=\"zh\" lang=\"zh-CN\">招聘工具整体准确率很高，但条件相当时某群体更容易被误筛。应优先评估什么？</p><p class=\"ja\" lang=\"ja\">採用支援の全体精度は高いが、条件が同じでもある集団の候補者だけ誤って除外されやすい。まず検証する観点は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Disaggregated error rates reveal harms hidden in the aggregate.</p><p class=\"zh\" lang=\"zh-CN\">检查决策对不同人群的影响，识别并处理缺乏正当依据的差异。 总体准确率可能掩盖特定群体被误拒的情况。</p><p class=\"ja\" lang=\"ja\">集団別の誤りを比較し、選考上の不利益が偏っていないか調べる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Transparency</p><p class=\"zh\" lang=\"zh-CN\">透明度</p><p class=\"ja\" lang=\"ja\">透明性</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Fairness</p><p class=\"zh\" lang=\"zh-CN\">公平性</p><p class=\"ja\" lang=\"ja\">公平性</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Explainability</p><p class=\"zh\" lang=\"zh-CN\">可解释性</p><p class=\"ja\" lang=\"ja\">説明可能性</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Robustness</p><p class=\"zh\" lang=\"zh-CN\">稳健性</p><p class=\"ja\" lang=\"ja\">堅牢性</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q25",
+        "number": "25",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 25</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A benefits system proposes decisions, but an authorized reviewer can reject them before they take effect. Which control is this?</p><p class=\"zh\" lang=\"zh-CN\">医疗费用例外申请中，系统只能建议，执行前由有权人员批准或退回。设置了什么机制？</p><p class=\"ja\" lang=\"ja\">医療費の例外申請では、自動提案だけで給付を止められないよう、担当者が実行前に承認・差し戻しを行う。何を設けたか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A reviewer with authority can intervene before the decision affects someone.</p><p class=\"zh\" lang=\"zh-CN\">让有权介入的人审查、覆盖或中止有影响的 AI 决策。 让人看见结果并不代表能阻止执行；关键是介入权和时间点。</p><p class=\"ja\" lang=\"ja\">判断を確定する前に権限を持つ人が介入できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Incident response plan</p><p class=\"zh\" lang=\"zh-CN\">事件响应计划</p><p class=\"ja\" lang=\"ja\">インシデント対応計画</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Human oversight</p><p class=\"zh\" lang=\"zh-CN\">人工监督</p><p class=\"ja\" lang=\"ja\">人間による監督</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Audit trail</p><p class=\"zh\" lang=\"zh-CN\">审计轨迹</p><p class=\"ja\" lang=\"ja\">監査証跡</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Transparency</p><p class=\"zh\" lang=\"zh-CN\">透明度</p><p class=\"ja\" lang=\"ja\">透明性</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q26",
+        "number": "26",
+        "answer": "B,D",
+        "kind": "",
+        "layout": "question-26abc51ab49e9531f344",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 26</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A model vendor says data is safe. Choose two matters to verify before sending confidential contracts.</p><p class=\"zh\" lang=\"zh-CN\">外部模型供应商只承诺“数据安全”。传入保密合同前，要核实哪两件事？</p><p class=\"ja\" lang=\"ja\">外部モデルの供給者が「データは安全」とだけ回答した。機密契約を送る前に確認すべき二点はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Retention and secondary use determine material exposure of confidential inputs.</p><p class=\"zh\" lang=\"zh-CN\">留存与训练复用会改变机密资料的实际暴露范围，应查可验证条款。</p><p class=\"ja\" lang=\"ja\">預けた情報がどこまで残り何に再利用されるかを、確認可能な条件で判断する。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Average latency under peak load</p><p class=\"zh\" lang=\"zh-CN\">高峰负载的平均响应时长</p><p class=\"ja\" lang=\"ja\">ピーク時の平均応答時間</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Training reuse terms and contractual restrictions</p><p class=\"zh\" lang=\"zh-CN\">训练复用条件及合同限制</p><p class=\"ja\" lang=\"ja\">入力を再学習に利用する条件と契約上の制限</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Accuracy on a vendor-selected benchmark</p><p class=\"zh\" lang=\"zh-CN\">供应商自选基准测试的准确率</p><p class=\"ja\" lang=\"ja\">提供元が選んだベンチマークでの精度</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Retention periods and deletion terms</p><p class=\"zh\" lang=\"zh-CN\">输入保留期限与删除条件</p><p class=\"ja\" lang=\"ja\">入力の保管期間と削除条件</p>"
+            }
+          },
+          {
+            "letter": "E",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Dates of the vendor's planned feature releases</p><p class=\"zh\" lang=\"zh-CN\">供应商新功能的计划发布日期</p><p class=\"ja\" lang=\"ja\">提供元の次期機能の公開予定日</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q27",
+        "number": "27",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 27</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Model updates stall at approval. Which artifact clarifies who executes, is accountable, is consulted and is informed?</p><p class=\"zh\" lang=\"zh-CN\">模型更新总是卡在批准环节，需要按步骤注明执行、最终负责、咨询、知会角色。该编制什么？</p><p class=\"ja\" lang=\"ja\">モデル更新のたびに承認が滞る。作業者、最終決裁者、相談先、報告先を工程別に明記する。何を作るか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">RACI makes task-level ownership and participation explicit.</p><p class=\"zh\" lang=\"zh-CN\">明确任务的执行人、最终负责者、咨询对象及知会对象。 组织架构图显示汇报关系，未必交代某项上线审批由谁最终负责。</p><p class=\"ja\" lang=\"ja\">工程ごとに意思決定と作業の責任を割り当てる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Risk register</p><p class=\"zh\" lang=\"zh-CN\">风险登记册</p><p class=\"ja\" lang=\"ja\">リスク登録簿</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">AI center of excellence</p><p class=\"zh\" lang=\"zh-CN\">AI 卓越中心</p><p class=\"ja\" lang=\"ja\">AI センター・オブ・エクセレンス</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Stakeholder mapping</p><p class=\"zh\" lang=\"zh-CN\">利益相关方映射</p><p class=\"ja\" lang=\"ja\">ステークホルダーマッピング</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">RACI matrix</p><p class=\"zh\" lang=\"zh-CN\">职责分配矩阵</p><p class=\"ja\" lang=\"ja\">責任分担表（RACI）</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q28",
+        "number": "28",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 28</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Labeled data can only be exported in a proprietary format, making migration expensive. Which risk is this?</p><p class=\"zh\" lang=\"zh-CN\">合同终止时标注数据只能以专有格式导出，切换成本极高。属于哪种风险？</p><p class=\"ja\" lang=\"ja\">契約終了時、注釈データを独自形式でしか取り出せず、他社への移行に大きな費用がかかる。どのリスクか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Poor portability raises the cost of switching providers.</p><p class=\"zh\" lang=\"zh-CN\">专有接口、数据格式或合同条款使切换供应商代价过高。 服务好用与退出是否可行是两个独立问题，应验证数据导出和替代路径。</p><p class=\"ja\" lang=\"ja\">データの移植性が低いため、取引先を変更しにくい。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Vendor lock-in</p><p class=\"zh\" lang=\"zh-CN\">供应商锁定</p><p class=\"ja\" lang=\"ja\">ベンダーロックイン</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Return on investment (ROI)</p><p class=\"zh\" lang=\"zh-CN\">投资回报率</p><p class=\"ja\" lang=\"ja\">投資収益率</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model drift</p><p class=\"zh\" lang=\"zh-CN\">模型漂移</p><p class=\"ja\" lang=\"ja\">モデルドリフト</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Opportunity cost</p><p class=\"zh\" lang=\"zh-CN\">机会成本</p><p class=\"ja\" lang=\"ja\">機会費用</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q29",
+        "number": "29",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 29</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A cash-constrained company wants to know how many months it takes to recover the initial outlay. Which metric fits?</p><p class=\"zh\" lang=\"zh-CN\">资金紧张的公司要知道几个月能收回初始支出。该看哪个指标？</p><p class=\"ja\" lang=\"ja\">資金余力が小さい会社が、初期支出を何か月で取り戻せるか知りたい。どの指標を使うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Payback measures time until cumulative net inflows recover the outlay.</p><p class=\"zh\" lang=\"zh-CN\">累计净现金流收回初始投资所需的时间。 回收速度不反映回收点之后的全部收益。</p><p class=\"ja\" lang=\"ja\">初期支出が累積の正味キャッシュフローで賄われる時期を見る。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Total cost of ownership (TCO)</p><p class=\"zh\" lang=\"zh-CN\">总拥有成本</p><p class=\"ja\" lang=\"ja\">総保有コスト</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Unit cost</p><p class=\"zh\" lang=\"zh-CN\">单位成本</p><p class=\"ja\" lang=\"ja\">単位当たりコスト</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Return on investment (ROI)</p><p class=\"zh\" lang=\"zh-CN\">投资回报率</p><p class=\"ja\" lang=\"ja\">投資収益率</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Payback period</p><p class=\"zh\" lang=\"zh-CN\">投资回收期</p><p class=\"ja\" lang=\"ja\">投資回収期間</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q30",
+        "number": "30",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 30</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A pilot succeeded at one branch, but other branches use different forms and staffing. What comes next?</p><p class=\"zh\" lang=\"zh-CN\">一家分部试点成功，其他分部表单和排班不同。推广决定前该做什么？</p><p class=\"ja\" lang=\"ja\">一支店の試行は成功したが、他店の帳票と勤務体制が違う。拡大判断前に何を行うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Contrasting sites reveal whether initial success generalizes.</p><p class=\"zh\" lang=\"zh-CN\">用有代表性的差异场景验证外推条件，避免误把单点成果当成规模化能力。</p><p class=\"ja\" lang=\"ja\">初回の成功条件が他拠点でも成立するか、異なる条件で確かめる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Inspect form differences after company-wide release</p><p class=\"zh\" lang=\"zh-CN\">全公司上线后再检查表单差异</p><p class=\"ja\" lang=\"ja\">全社展開後に帳票差を調べる</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Validate only in identical branches</p><p class=\"zh\" lang=\"zh-CN\">只在与首家相同的门店继续验证</p><p class=\"ja\" lang=\"ja\">条件が同じ支店だけで追加検証する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Extrapolate the first result to all branches</p><p class=\"zh\" lang=\"zh-CN\">直接将首家门店结果推算到全部分部</p><p class=\"ja\" lang=\"ja\">最初の結果を全店舗にそのまま外挿する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Test transferability and support load in a few contrasting branches</p><p class=\"zh\" lang=\"zh-CN\">选少量不同条件的门店验证效果与支持负担</p><p class=\"ja\" lang=\"ja\">条件の異なる少数店舗で再現性と支援負荷を確認する</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q31",
+        "number": "31",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 31</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Random row splitting gives strong demand forecasts. Which evaluation best represents next-quarter use?</p><p class=\"zh\" lang=\"zh-CN\">销量行随机切分时效果很好。要模拟预测下一季度，最合适的评估是什么？</p><p class=\"ja\" lang=\"ja\">需要予測で、学習時の売上行を無作為に分けると好成績だ。来四半期の利用を想定した評価として最適なのはどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A chronological holdout respects the information available when forecasts are made.</p><p class=\"zh\" lang=\"zh-CN\">按时间留出能模拟上线时的信息边界，避免训练看到验证期之后的信息。</p><p class=\"ja\" lang=\"ja\">本番と同じ時間順序で評価することで、将来情報が紛れ込む危険を抑えられる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Train on earlier periods and validate on a later held-out period</p><p class=\"zh\" lang=\"zh-CN\">用过去训练，用更晚的留出期间验证</p><p class=\"ja\" lang=\"ja\">過去で学習し、それより後の未使用期間で検証する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Evaluate on the training months again</p><p class=\"zh\" lang=\"zh-CN\">重新评估训练月份</p><p class=\"ja\" lang=\"ja\">学習に使った月で再評価する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Test only top-selling stores</p><p class=\"zh\" lang=\"zh-CN\">只评估销量最高的门店</p><p class=\"ja\" lang=\"ja\">最も売れた店舗だけを選ぶ</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Add realized next-quarter sales as an input</p><p class=\"zh\" lang=\"zh-CN\">把下一季度实际销量加入输入</p><p class=\"ja\" lang=\"ja\">来期の確定売上を入力に加える</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q32",
+        "number": "32",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 32</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Delivery leadership tracks the percentage of orders arriving on time against its service goal. What is this measure?</p><p class=\"zh\" lang=\"zh-CN\">物流团队以准时履约为目标，定期汇报按时送达率。该数字扮演什么角色？</p><p class=\"ja\" lang=\"ja\">配送改善を掲げる部門が、経営会議で「期限内に届いた注文の割合」を継続報告する。この数値の役割は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">On-time delivery tracks the stated business objective.</p><p class=\"zh\" lang=\"zh-CN\">用来追踪目标完成情况的量化指标。 模型调用量能反映活动，但未必反映订单履约这一业务目标。</p><p class=\"ja\" lang=\"ja\">期限内配送率は、業務目標の達成度を直接追跡する。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Key performance indicator (KPI)</p><p class=\"zh\" lang=\"zh-CN\">关键绩效指标</p><p class=\"ja\" lang=\"ja\">重要業績評価指標</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Opportunity cost</p><p class=\"zh\" lang=\"zh-CN\">机会成本</p><p class=\"ja\" lang=\"ja\">機会費用</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Total cost of ownership (TCO)</p><p class=\"zh\" lang=\"zh-CN\">总拥有成本</p><p class=\"ja\" lang=\"ja\">総保有コスト</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Baseline</p><p class=\"zh\" lang=\"zh-CN\">基线</p><p class=\"ja\" lang=\"ja\">ベースライン</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q33",
+        "number": "33",
+        "answer": "A,B",
+        "kind": "",
+        "layout": "question-26abc51ab49e9531f344",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 33</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Model calls are cheap, but rework is rising. Choose two measures for the scale decision.</p><p class=\"zh\" lang=\"zh-CN\">模型调用便宜，但返工增加。扩张前应配对比较哪两项？</p><p class=\"ja\" lang=\"ja\">モデル利用料は安いが、差し戻しで手作業が増えた。案件を拡大する前に対で比較すべき二つの指標はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Cost per case and acceptable completion reveal whether cheap calls translate into valuable outcomes.</p><p class=\"zh\" lang=\"zh-CN\">按合格产出衡量质量并计入返工，才能看出低调用费是否真的节省总成本。</p><p class=\"ja\" lang=\"ja\">単価と品質の両面から、安い推論が業務全体でも価値を生むか判断できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Completion rate meeting agreed quality criteria</p><p class=\"zh\" lang=\"zh-CN\">达到约定质量标准的完成率</p><p class=\"ja\" lang=\"ja\">合意した品質基準を満たす完了率</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Total cost per completed case including rework</p><p class=\"zh\" lang=\"zh-CN\">含返工的每件完工总成本</p><p class=\"ja\" lang=\"ja\">再作業を含む完了一件当たり総費用</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Latency of a single model call</p><p class=\"zh\" lang=\"zh-CN\">单次模型调用延迟</p><p class=\"ja\" lang=\"ja\">一回の推論の応答時間</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Number of licenses purchased</p><p class=\"zh\" lang=\"zh-CN\">已购许可证数量</p><p class=\"ja\" lang=\"ja\">購入済みライセンス数</p>"
+            }
+          },
+          {
+            "letter": "E",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Number of departments requesting a demo</p><p class=\"zh\" lang=\"zh-CN\">申请演示的部门数</p><p class=\"ja\" lang=\"ja\">デモを希望した部門数</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q34",
+        "number": "34",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 34</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Staff corrections are triaged, fixes evaluated and outcomes relayed to staff. Which mechanism is this?</p><p class=\"zh\" lang=\"zh-CN\">团队每周整理一线纠错、验证修正、告知反馈人处理结果。这是什么机制？</p><p class=\"ja\" lang=\"ja\">現場の訂正を週次で分類し、修正版を評価し、採用した改善を担当者に知らせる。どの仕組みか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The process closes the path from observed problems to verified improvements.</p><p class=\"zh\" lang=\"zh-CN\">让用户反馈进入分析、修正、验证，并把结果返回给使用者。 收集意见却没人处理，只形成了收件箱，还没有闭环。</p><p class=\"ja\" lang=\"ja\">利用者の経験が実際の改善につながり、結果が利用者に戻る。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Feedback loop</p><p class=\"zh\" lang=\"zh-CN\">反馈闭环</p><p class=\"ja\" lang=\"ja\">フィードバックループ</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Role-based training</p><p class=\"zh\" lang=\"zh-CN\">岗位定制培训</p><p class=\"ja\" lang=\"ja\">職種別研修</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Audit trail</p><p class=\"zh\" lang=\"zh-CN\">审计轨迹</p><p class=\"ja\" lang=\"ja\">監査証跡</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Stakeholder mapping</p><p class=\"zh\" lang=\"zh-CN\">利益相关方映射</p><p class=\"ja\" lang=\"ja\">ステークホルダーマッピング</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q35",
+        "number": "35",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 35</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">An overdue-payment predictor uses a collection date recorded after delinquency. Why is validation overly optimistic?</p><p class=\"zh\" lang=\"zh-CN\">训练逾期预测模型时加入了事后催收日期，离线成绩异常好。最可能的问题是什么？</p><p class=\"ja\" lang=\"ja\">延滞を予測する学習表に、延滞後の督促日が入っている。検証成績だけが高い原因は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The feature reveals information unavailable at prediction time.</p><p class=\"zh\" lang=\"zh-CN\">训练或评估使用了预测发生时不可能获得的结果信息。 属于模型评估失真，区别于把机密数据发给未经授权的第三方。</p><p class=\"ja\" lang=\"ja\">予測する時点では存在しない将来情報から結果を推測している。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Hallucination</p><p class=\"zh\" lang=\"zh-CN\">幻觉</p><p class=\"ja\" lang=\"ja\">ハルシネーション</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Clustering</p><p class=\"zh\" lang=\"zh-CN\">聚类</p><p class=\"ja\" lang=\"ja\">クラスタリング</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Target leakage</p><p class=\"zh\" lang=\"zh-CN\">目标泄漏</p><p class=\"ja\" lang=\"ja\">ターゲットリーケージ</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model drift</p><p class=\"zh\" lang=\"zh-CN\">模型漂移</p><p class=\"ja\" lang=\"ja\">モデルドリフト</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q36",
+        "number": "36",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 36</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A high-impact decision can be appealed, yet nobody can overturn it. What must be established before rollout?</p><p class=\"zh\" lang=\"zh-CN\">高风险决策准备自动化，但申诉后无人有权改判。推广前应建立什么？</p><p class=\"ja\" lang=\"ja\">高リスクの判定を自動化したいが、異議申立てで判定を変更できる人がいない。展開前に何を整えるか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Effective recourse requires the authority and process to correct an outcome.</p><p class=\"zh\" lang=\"zh-CN\">有效的申诉机制必须能在合理时间内纠正错误，而不只是收集意见。</p><p class=\"ja\" lang=\"ja\">異議申立てが機能するには、判断を調べて修正できる人と手順が必要である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Authorized reviewers and a time-bound redress process</p><p class=\"zh\" lang=\"zh-CN\">有改判权限的复审人及有时限的救济流程</p><p class=\"ja\" lang=\"ja\">権限のある再審査者と期限付きの救済手順</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Show only a confidence score</p><p class=\"zh\" lang=\"zh-CN\">只在界面展示置信度</p><p class=\"ja\" lang=\"ja\">画面に信頼度だけを追加する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Hide appeal volumes</p><p class=\"zh\" lang=\"zh-CN\">隐藏申诉数量</p><p class=\"ja\" lang=\"ja\">申立件数を非公開にする</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Lengthier terms of use</p><p class=\"zh\" lang=\"zh-CN\">延长服务条款</p><p class=\"ja\" lang=\"ja\">利用規約を長くする</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q37",
+        "number": "37",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 37</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A store wants to discover previously unknown shopper segments from unlabeled baskets. Which method fits?</p><p class=\"zh\" lang=\"zh-CN\">只有购买记录，没有客群标签。要发现新的消费群体，适合哪种方法？</p><p class=\"ja\" lang=\"ja\">購買履歴から未知の顧客層を発見したい。顧客区分のラベルはない。どの手法が合うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Grouping similar baskets can reveal segments without predefined labels.</p><p class=\"zh\" lang=\"zh-CN\">根据样本之间的相似性发现群组。 分类需要预先定义目标类别，聚类可以帮助发现尚未定义的客群。</p><p class=\"ja\" lang=\"ja\">似た購買行動をまとめることで、未知の区分を探索できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Supervised learning</p><p class=\"zh\" lang=\"zh-CN\">监督学习</p><p class=\"ja\" lang=\"ja\">教師あり学習</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Rule-based automation</p><p class=\"zh\" lang=\"zh-CN\">基于规则的自动化</p><p class=\"ja\" lang=\"ja\">ルールベースの自動化</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Inference</p><p class=\"zh\" lang=\"zh-CN\">推理</p><p class=\"ja\" lang=\"ja\">推論</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Clustering</p><p class=\"zh\" lang=\"zh-CN\">聚类</p><p class=\"ja\" lang=\"ja\">クラスタリング</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q38",
+        "number": "38",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 38</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Travel policies change weekly. Answers must cite the current clause. Which method fits best?</p><p class=\"zh\" lang=\"zh-CN\">差旅规定每周变化，回答需引用现行条款。适合哪种方案？</p><p class=\"ja\" lang=\"ja\">旅費規程が毎週更新される。回答に現行条項と出典を付けたい。どの手法が適切か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Retrieval supplies current source passages at answer time.</p><p class=\"zh\" lang=\"zh-CN\">回答前检索相关资料，并将资料作为上下文提供给模型。 每周变动的政策适合更新检索库；微调不能保证引用最新条款。</p><p class=\"ja\" lang=\"ja\">管理された最新版を検索し、回答の根拠として渡せる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Context window</p><p class=\"zh\" lang=\"zh-CN\">上下文窗口</p><p class=\"ja\" lang=\"ja\">コンテキストウィンドウ</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Fine-tuning</p><p class=\"zh\" lang=\"zh-CN\">微调</p><p class=\"ja\" lang=\"ja\">ファインチューニング</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Few-shot prompting</p><p class=\"zh\" lang=\"zh-CN\">少样本提示</p><p class=\"ja\" lang=\"ja\">少数例プロンプティング</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Retrieval-augmented generation (RAG)</p><p class=\"zh\" lang=\"zh-CN\">检索增强生成</p><p class=\"ja\" lang=\"ja\">検索拡張生成</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q39",
+        "number": "39",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 39</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Retries increased after a model change. Which measure compares spending per successfully resolved case?</p><p class=\"zh\" lang=\"zh-CN\">换模型后重试变多，需要比较每成功解决一个工单的开销。该用什么尺度？</p><p class=\"ja\" lang=\"ja\">モデルを変更したら再試行が増えた。解決できた問い合わせ一件を得るための負担を比べたい。どの尺度か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Divide all relevant costs, including retries, by successful resolutions.</p><p class=\"zh\" lang=\"zh-CN\">把相同口径下的成本分摊到每个有效业务产出。 每次调用成本低，不代表每个成功解决的工单成本也低。</p><p class=\"ja\" lang=\"ja\">総費用を解決件数で割れば、再試行分も含む効率が分かる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Payback period</p><p class=\"zh\" lang=\"zh-CN\">投资回收期</p><p class=\"ja\" lang=\"ja\">投資回収期間</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Unit cost</p><p class=\"zh\" lang=\"zh-CN\">单位成本</p><p class=\"ja\" lang=\"ja\">単位当たりコスト</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Total cost of ownership (TCO)</p><p class=\"zh\" lang=\"zh-CN\">总拥有成本</p><p class=\"ja\" lang=\"ja\">総保有コスト</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Return on investment (ROI)</p><p class=\"zh\" lang=\"zh-CN\">投资回报率</p><p class=\"ja\" lang=\"ja\">投資収益率</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q40",
+        "number": "40",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 40</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Service staff fear replacement. What is the best opening for an adoption conversation?</p><p class=\"zh\" lang=\"zh-CN\">客服担心被 AI 取代。为了促进采用，初次沟通该怎么做？</p><p class=\"ja\" lang=\"ja\">相談員は「AI が自分たちを置き換える」と不安を訴えている。定着を図る最初の対話として適切なのはどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Participation and clear role expectations address real uncertainty about the transition.</p><p class=\"zh\" lang=\"zh-CN\">把笼统担忧落到实际任务、决策权和支持上，才便于共同设计过渡方案。</p><p class=\"ja\" lang=\"ja\">懸念を聞き、担当業務の変化と支援策を示すことで、具体的な不確実性に対応できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Email only technical specifications</p><p class=\"zh\" lang=\"zh-CN\">只邮件发送技术规格</p><p class=\"ja\" lang=\"ja\">技術仕様だけをメールで送る</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Promise without evidence that no role will change</p><p class=\"zh\" lang=\"zh-CN\">没有依据地承诺岗位完全不变</p><p class=\"ja\" lang=\"ja\">役割は一切変わらないと根拠なく保証する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Publicize adoption figures only</p><p class=\"zh\" lang=\"zh-CN\">每天只公布使用率</p><p class=\"ja\" lang=\"ja\">導入率だけを毎日公表する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Map affected tasks together and clarify human decisions and training support</p><p class=\"zh\" lang=\"zh-CN\">共同梳理受影响工作，明确人工决策和培训支持</p><p class=\"ja\" lang=\"ja\">影響する作業を一緒に洗い出し、人が担う判断と研修支援を具体化する</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q41",
+        "number": "41",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 41</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A demand forecast needs only store totals, so names and phone numbers are excluded at collection. What principle is applied?</p><p class=\"zh\" lang=\"zh-CN\">门店需求预测只需门店级销量，因此从采集表去掉姓名与手机号。遵循哪项原则？</p><p class=\"ja\" lang=\"ja\">需要予測に店舗別の販売数だけで足りる。顧客名と電話番号を収集項目から外す判断は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Restricting collection to necessary fields reduces exposure at the source.</p><p class=\"zh\" lang=\"zh-CN\">仅收集、处理和保留实现目的所需的数据。 加密保护已有数据，不会减少采集不必要字段造成的暴露。</p><p class=\"ja\" lang=\"ja\">目的達成に不要な個人情報を最初から持たない。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Least privilege</p><p class=\"zh\" lang=\"zh-CN\">最小权限</p><p class=\"ja\" lang=\"ja\">最小権限</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Data minimization</p><p class=\"zh\" lang=\"zh-CN\">数据最小化</p><p class=\"ja\" lang=\"ja\">データ最小化</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Audit trail</p><p class=\"zh\" lang=\"zh-CN\">审计轨迹</p><p class=\"ja\" lang=\"ja\">監査証跡</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Data lineage</p><p class=\"zh\" lang=\"zh-CN\">数据血缘</p><p class=\"ja\" lang=\"ja\">データリネージ</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q42",
+        "number": "42",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 42</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Rivals use the same model, but unique service histories and feedback improve fault detection and retention. What does this sustain?</p><p class=\"zh\" lang=\"zh-CN\">竞争对手能买到相同模型，公司却凭专有维修记录和持续反馈更早发现故障，赢得续约。这支撑了什么？</p><p class=\"ja\" lang=\"ja\">競合も同じモデルを購入できる。自社だけの保守履歴と改善サイクルで故障を早く見つけ、顧客が継続契約している。これが支えるものは何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Hard-to-copy assets can sustain a meaningful difference in customer value.</p><p class=\"zh\" lang=\"zh-CN\">企业持续为客户创造竞争者难以复制的价值。 能买到同一模型时，独有数据、反馈循环和流程嵌入更可能形成差异。</p><p class=\"ja\" lang=\"ja\">模倣しにくい業務資産が、顧客の受ける価値の差につながる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Competitive advantage</p><p class=\"zh\" lang=\"zh-CN\">竞争优势</p><p class=\"ja\" lang=\"ja\">競争優位性</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Vendor lock-in</p><p class=\"zh\" lang=\"zh-CN\">供应商锁定</p><p class=\"ja\" lang=\"ja\">ベンダーロックイン</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Total cost of ownership (TCO)</p><p class=\"zh\" lang=\"zh-CN\">总拥有成本</p><p class=\"ja\" lang=\"ja\">総保有コスト</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Opportunity cost</p><p class=\"zh\" lang=\"zh-CN\">机会成本</p><p class=\"ja\" lang=\"ja\">機会費用</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q43",
+        "number": "43",
+        "answer": "A,E",
+        "kind": "",
+        "layout": "question-26abc51ab49e9531f344",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 43</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Choose two conditions for handing a pilot over to production operations.</p><p class=\"zh\" lang=\"zh-CN\">试点移交正式运营时，选出应核实的两项条件。</p><p class=\"ja\" lang=\"ja\">試行から本番運用へ引き渡す際に確認すべき二つの条件を選ぶ。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Sustainable operation requires incident ownership, ongoing funding and accountability.</p><p class=\"zh\" lang=\"zh-CN\">移交关注出现问题时谁处理、长期成本谁承担、价值谁负责。</p><p class=\"ja\" lang=\"ja\">本番には障害対応と継続的な価値・費用の管理が必要である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Funded running costs and ownership of business outcomes</p><p class=\"zh\" lang=\"zh-CN\">已落实持续运营预算及业务效果负责人</p><p class=\"ja\" lang=\"ja\">継続費用の予算と業務成果の責任者が決まっている</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">The prototype met a one-off latency target</p><p class=\"zh\" lang=\"zh-CN\">原型通过了一次延迟测试</p><p class=\"ja\" lang=\"ja\">試作品が単発の応答時間テストを通過した</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">The initial trial had more volunteers than places</p><p class=\"zh\" lang=\"zh-CN\">首批试点报名人数超过名额</p><p class=\"ja\" lang=\"ja\">試行への応募人数が募集枠を上回った</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">The pilot presentation is complete</p><p class=\"zh\" lang=\"zh-CN\">试点汇报幻灯片已完成</p><p class=\"ja\" lang=\"ja\">試行チームの発表資料が完成している</p>"
+            }
+          },
+          {
+            "letter": "E",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Named on-call ownership and escalation paths</p><p class=\"zh\" lang=\"zh-CN\">已明确异常值班人员和升级路径</p><p class=\"ja\" lang=\"ja\">異常時の当番とエスカレーション経路が決まっている</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q44",
+        "number": "44",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 44</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Drivers, dispatchers, unions and leaders have different concerns about automated routing. What should precede the engagement plan?</p><p class=\"zh\" lang=\"zh-CN\">自动调度影响司机、调度员、工会和管理层。制定沟通计划前，应做什么？</p><p class=\"ja\" lang=\"ja\">自動配車で運転手、配車係、労組、経営層の関心が異なる。対話計画を作る前に何を行うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Mapping affected parties helps tailor engagement to their influence and needs.</p><p class=\"zh\" lang=\"zh-CN\">识别受影响者及其影响力、关切与参与方式。 同一份全员公告很难回应不同群体的决策权和担忧。</p><p class=\"ja\" lang=\"ja\">誰が影響を受け、誰が決定に関与するかを先に整理する。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Skills gap analysis</p><p class=\"zh\" lang=\"zh-CN\">技能差距分析</p><p class=\"ja\" lang=\"ja\">スキルギャップ分析</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">RACI matrix</p><p class=\"zh\" lang=\"zh-CN\">职责分配矩阵</p><p class=\"ja\" lang=\"ja\">責任分担表（RACI）</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Stakeholder mapping</p><p class=\"zh\" lang=\"zh-CN\">利益相关方映射</p><p class=\"ja\" lang=\"ja\">ステークホルダーマッピング</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Feedback loop</p><p class=\"zh\" lang=\"zh-CN\">反馈闭环</p><p class=\"ja\" lang=\"ja\">フィードバックループ</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q45",
+        "number": "45",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 45</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Invoices above a contractual limit require approval. All exceptions are explicit. Which approach is easiest to audit?</p><p class=\"zh\" lang=\"zh-CN\">合同要求金额超限时送审，例外条件也已全部列明。哪种办法最容易审计？</p><p class=\"ja\" lang=\"ja\">請求額が契約上限を超えた場合にだけ承認を求める。例外条件もすべて明文化されている。最も簡単に監査できる方式はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Explicit conditions make each decision reproducible.</p><p class=\"zh\" lang=\"zh-CN\">按预先写明的条件执行相应动作。 规则固定且需精确复现时，引入预测模型反而增加验证成本。</p><p class=\"ja\" lang=\"ja\">判定条件が既に定まっているので、規則と実行結果を一件ずつ照合できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Rule-based automation</p><p class=\"zh\" lang=\"zh-CN\">基于规则的自动化</p><p class=\"ja\" lang=\"ja\">ルールベースの自動化</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Clustering</p><p class=\"zh\" lang=\"zh-CN\">聚类</p><p class=\"ja\" lang=\"ja\">クラスタリング</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">AI agent</p><p class=\"zh\" lang=\"zh-CN\">AI 智能体</p><p class=\"ja\" lang=\"ja\">AI エージェント</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Supervised learning</p><p class=\"zh\" lang=\"zh-CN\">监督学习</p><p class=\"ja\" lang=\"ja\">教師あり学習</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q46",
+        "number": "46",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 46</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Staff stop logging errors because reporting lowers their ratings. What should leadership do?</p><p class=\"zh\" lang=\"zh-CN\">员工担心上报错误影响绩效，开始不再记录错误回答。领导应如何应对？</p><p class=\"ja\" lang=\"ja\">担当者は「修正を報告すると評価が下がる」と考え、誤回答を記録しなくなった。リーダーの対応として適切なのはどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Changing incentives and closing the feedback loop makes issues visible.</p><p class=\"zh\" lang=\"zh-CN\">要消除隐瞒问题的激励，并让员工看到报告能带来修正。</p><p class=\"ja\" lang=\"ja\">障害を隠す誘因を取り除き、報告が改善に結び付くと示す必要がある。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Set zero complaints as a personal target</p><p class=\"zh\" lang=\"zh-CN\">将零投诉定为个人指标</p><p class=\"ja\" lang=\"ja\">苦情件数ゼロを個人目標にする</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Reward responsible reporting and share resulting improvements</p><p class=\"zh\" lang=\"zh-CN\">调整激励以鼓励报告，并向一线反馈改进结果</p><p class=\"ja\" lang=\"ja\">報告を歓迎する評価基準に改め、改善結果を現場に返す</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Publish the names of everyone who finds an error</p><p class=\"zh\" lang=\"zh-CN\">公布每位发现错误者的名字</p><p class=\"ja\" lang=\"ja\">誤りを発見した人を公表する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Restrict reporting to managers</p><p class=\"zh\" lang=\"zh-CN\">只允许管理层上报</p><p class=\"ja\" lang=\"ja\">報告経路を管理職だけに絞る</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q47",
+        "number": "47",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 47</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Public rankings and local feedback disagree on a summarizer. What evidence should drive selection?</p><p class=\"zh\" lang=\"zh-CN\">两款摘要模型的公开排名与一线反馈冲突。应以什么作为选型依据？</p><p class=\"ja\" lang=\"ja\">海外拠点の要約器を選ぶ。公開評価の首位と現場の評価が食い違う。採用判断に使うべき根拠は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A matched, task-specific evaluation exposes errors an aggregate ranking can hide.</p><p class=\"zh\" lang=\"zh-CN\">同题对比并按业务语言分组，才能发现平均排名掩盖的事实错误。</p><p class=\"ja\" lang=\"ja\">実際の言語構成と許容誤差で評価すると利用目的に沿った比較になる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Compare factual errors and costs by language on the same representative cases</p><p class=\"zh\" lang=\"zh-CN\">用同一批脱敏业务样本按语言比较事实错误和成本</p><p class=\"ja\" lang=\"ja\">同じ実案件を匿名化し、言語別の事実誤りと費用を比較する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Select on median response latency alone</p><p class=\"zh\" lang=\"zh-CN\">只按响应延迟中位数选择</p><p class=\"ja\" lang=\"ja\">応答時間の中央値だけで選ぶ</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Choose the public benchmark winner</p><p class=\"zh\" lang=\"zh-CN\">直接选公开榜首</p><p class=\"ja\" lang=\"ja\">公開順位のみで上位を採用する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Choose the most popular product in a staff poll</p><p class=\"zh\" lang=\"zh-CN\">选择员工投票最受欢迎的产品</p><p class=\"ja\" lang=\"ja\">人気投票で得票の多い製品を選ぶ</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q48",
+        "number": "48",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 48</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">One team can fund only one project. What is the forgone benefit of its best alternative called?</p><p class=\"zh\" lang=\"zh-CN\">同一团队只够做一个项目。被放弃的最佳项目本可创造的收益叫什么？</p><p class=\"ja\" lang=\"ja\">同じ分析チームは一案件だけ担当できる。採用しなかった最良案件が生んだはずの便益を何と呼ぶか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Choosing one use of a scarce resource forgoes the next-best alternative.</p><p class=\"zh\" lang=\"zh-CN\">选择一个方案时放弃的最佳可行替代方案的价值。 已经花掉的研发费是沉没成本；没有资源做的次优项目才构成取舍。</p><p class=\"ja\" lang=\"ja\">希少な人員を使うことで失われる次善の選択肢の価値である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Unit cost</p><p class=\"zh\" lang=\"zh-CN\">单位成本</p><p class=\"ja\" lang=\"ja\">単位当たりコスト</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Opportunity cost</p><p class=\"zh\" lang=\"zh-CN\">机会成本</p><p class=\"ja\" lang=\"ja\">機会費用</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Payback period</p><p class=\"zh\" lang=\"zh-CN\">投资回收期</p><p class=\"ja\" lang=\"ja\">投資回収期間</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Total cost of ownership (TCO)</p><p class=\"zh\" lang=\"zh-CN\">总拥有成本</p><p class=\"ja\" lang=\"ja\">総保有コスト</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q49",
+        "number": "49",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 49</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A help center wants refund and get my money back to match by meaning. Which representation helps?</p><p class=\"zh\" lang=\"zh-CN\">希望把“退款”和“想把钱退回来”视为相近表达。可将文本转换为什么？</p><p class=\"ja\" lang=\"ja\">「返金」と「代金を戻したい」を近い意味として検索したい。文章をどの表現に変換するか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Vectors allow comparison by semantic proximity.</p><p class=\"zh\" lang=\"zh-CN\">用数值向量表示文本等对象，便于比较语义相似性。 词面不同但意思接近时，语义相似度比精确匹配更有用。</p><p class=\"ja\" lang=\"ja\">意味が近い表現をベクトル空間で比較できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Few-shot prompting</p><p class=\"zh\" lang=\"zh-CN\">少样本提示</p><p class=\"ja\" lang=\"ja\">少数例プロンプティング</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Supervised learning</p><p class=\"zh\" lang=\"zh-CN\">监督学习</p><p class=\"ja\" lang=\"ja\">教師あり学習</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Context window</p><p class=\"zh\" lang=\"zh-CN\">上下文窗口</p><p class=\"ja\" lang=\"ja\">コンテキストウィンドウ</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Embedding</p><p class=\"zh\" lang=\"zh-CN\">嵌入向量</p><p class=\"ja\" lang=\"ja\">埋め込み</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q50",
+        "number": "50",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 50</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Testers tilt scans and vary lighting to see whether extraction quality holds. What are they measuring?</p><p class=\"zh\" lang=\"zh-CN\">团队改变扫描角度和光照，观察识别质量是否保持。评估的是哪项特性？</p><p class=\"ja\" lang=\"ja\">帳票を少し傾けたり、照明を変えたりしても読取性能が保たれるか調べる。何を評価しているか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The test probes stability under realistic input perturbations.</p><p class=\"zh\" lang=\"zh-CN\">面对合理范围内的噪声、格式变化或干扰时仍能维持可接受表现。 总体精度高并不能证明遇到低质量扫描件时也能工作。</p><p class=\"ja\" lang=\"ja\">通常生じる入力の揺れに対する性能の安定性を見ている。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Explainability</p><p class=\"zh\" lang=\"zh-CN\">可解释性</p><p class=\"ja\" lang=\"ja\">説明可能性</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Transparency</p><p class=\"zh\" lang=\"zh-CN\">透明度</p><p class=\"ja\" lang=\"ja\">透明性</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Fairness</p><p class=\"zh\" lang=\"zh-CN\">公平性</p><p class=\"ja\" lang=\"ja\">公平性</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Robustness</p><p class=\"zh\" lang=\"zh-CN\">稳健性</p><p class=\"ja\" lang=\"ja\">堅牢性</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q51",
+        "number": "51",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 51</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Before buying courses, a firm compares current source-verification skills with the level required in each role. What is it doing?</p><p class=\"zh\" lang=\"zh-CN\">希望员工会核实来源，购买课程前按岗位比较现有能力与所需水平。这是什么活动？</p><p class=\"ja\" lang=\"ja\">担当者が出典確認をできるようにしたい。研修を買う前に、今の能力と必要水準の差を職種別に調べる。この活動は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A role-by-role gap assessment identifies what training must address.</p><p class=\"zh\" lang=\"zh-CN\">比较岗位现在掌握的能力和目标任务所需能力。 知道缺口后才能选择培训、招聘或外部支持。</p><p class=\"ja\" lang=\"ja\">必要な能力との差を特定すれば教育の対象と深さを決められる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">RACI matrix</p><p class=\"zh\" lang=\"zh-CN\">职责分配矩阵</p><p class=\"ja\" lang=\"ja\">責任分担表（RACI）</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Skills gap analysis</p><p class=\"zh\" lang=\"zh-CN\">技能差距分析</p><p class=\"ja\" lang=\"ja\">スキルギャップ分析</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Role-based training</p><p class=\"zh\" lang=\"zh-CN\">岗位定制培训</p><p class=\"ja\" lang=\"ja\">職種別研修</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Rollback plan</p><p class=\"zh\" lang=\"zh-CN\">回退计划</p><p class=\"ja\" lang=\"ja\">ロールバック計画</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q52",
+        "number": "52",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 52</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">After launch, who should own returns-cycle outcomes and have authority to change the business workflow?</p><p class=\"zh\" lang=\"zh-CN\">项目验收后仍需一人对退货处理时长负责，且有权调整人手和流程。应指定什么角色？</p><p class=\"ja\" lang=\"ja\">検証後も返品処理時間の改善に責任を持ち、担当配置や手順を変えられる人を定める。どの役割か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The owner can act on the workflow that produces the intended business result.</p><p class=\"zh\" lang=\"zh-CN\">对某个用例的业务指标、流程调整和价值兑现承担责任。 模型开发人员负责技术交付，不能替代业务指标的归属。</p><p class=\"ja\" lang=\"ja\">効果を実現するには業務プロセスを変更できる責任者が必要である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Business owner</p><p class=\"zh\" lang=\"zh-CN\">业务负责人</p><p class=\"ja\" lang=\"ja\">ビジネスオーナー</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">AI center of excellence</p><p class=\"zh\" lang=\"zh-CN\">AI 卓越中心</p><p class=\"ja\" lang=\"ja\">AI センター・オブ・エクセレンス</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Change champion</p><p class=\"zh\" lang=\"zh-CN\">变革推动者</p><p class=\"ja\" lang=\"ja\">チェンジチャンピオン</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Stakeholder mapping</p><p class=\"zh\" lang=\"zh-CN\">利益相关方映射</p><p class=\"ja\" lang=\"ja\">ステークホルダーマッピング</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q53",
+        "number": "53",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 53</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Which system can check stock, choose a warehouse based on the result, then request a transfer after approval?</p><p class=\"zh\" lang=\"zh-CN\">缺货时需查询库存、按结果选择仓库，并在获批后申请调拨。什么机制适合动态选择下一步？</p><p class=\"ja\" lang=\"ja\">欠品時に在庫を照会し、結果に応じて代替倉庫を探し、承認後に振替を依頼したい。状況に応じ手順を選ぶ仕組みはどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">An agent can choose tools and adapt its next action to their results.</p><p class=\"zh\" lang=\"zh-CN\">围绕目标选择步骤、调用工具并利用返回结果继续工作。 单轮生成只能给出文本；执行订单变更还需工具权限与审批边界。</p><p class=\"ja\" lang=\"ja\">目標に沿って複数のツールを使い分ける。実行権限は別途制限する。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Retrieval-augmented generation (RAG)</p><p class=\"zh\" lang=\"zh-CN\">检索增强生成</p><p class=\"ja\" lang=\"ja\">検索拡張生成</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Clustering</p><p class=\"zh\" lang=\"zh-CN\">聚类</p><p class=\"ja\" lang=\"ja\">クラスタリング</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">AI agent</p><p class=\"zh\" lang=\"zh-CN\">AI 智能体</p><p class=\"ja\" lang=\"ja\">AI エージェント</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Fine-tuning</p><p class=\"zh\" lang=\"zh-CN\">微调</p><p class=\"ja\" lang=\"ja\">ファインチューニング</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q54",
+        "number": "54",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 54</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Two vendors charge the same monthly fee but differ in integration, staffing and exit costs. What should procurement compare?</p><p class=\"zh\" lang=\"zh-CN\">两家供应商月费相同，但集成、人力与退出成本各异。应该比较哪种成本？</p><p class=\"ja\" lang=\"ja\">二社の月額料金は同じだが、連携、運用要員、終了時の移行費が異なる。比較すべき費用は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">TCO captures the full cost across the solution's life.</p><p class=\"zh\" lang=\"zh-CN\">汇总从采购、集成到运营、人员和退出等生命周期成本。 供应商报价可能不含内部复核、培训或迁移费用。</p><p class=\"ja\" lang=\"ja\">契約料金だけでは見えないライフサイクル全体の負担を含める。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Unit cost</p><p class=\"zh\" lang=\"zh-CN\">单位成本</p><p class=\"ja\" lang=\"ja\">単位当たりコスト</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Payback period</p><p class=\"zh\" lang=\"zh-CN\">投资回收期</p><p class=\"ja\" lang=\"ja\">投資回収期間</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Total cost of ownership (TCO)</p><p class=\"zh\" lang=\"zh-CN\">总拥有成本</p><p class=\"ja\" lang=\"ja\">総保有コスト</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Return on investment (ROI)</p><p class=\"zh\" lang=\"zh-CN\">投资回报率</p><p class=\"ja\" lang=\"ja\">投資収益率</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q55",
+        "number": "55",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 55</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Initial logins are high. Which measure shows whether eligible staff still use the tool for real cases six weeks later?</p><p class=\"zh\" lang=\"zh-CN\">培训后首次登录很多，要看六周后目标员工是否仍在真实案件中使用。该看什么？</p><p class=\"ja\" lang=\"ja\">研修直後のログイン数は多い。六週間後も対象職員が実際の案件で使い続けるか測りたい。どの指標か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Repeated task use among eligible users measures sustained adoption.</p><p class=\"zh\" lang=\"zh-CN\">观察目标用户在指定期间内是否持续于真实业务中使用新流程。 购买的席位数和首次登录数不能证明流程已经落地。</p><p class=\"ja\" lang=\"ja\">対象者を分母にして、継続利用の条件を満たす人数を測る。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Skills gap analysis</p><p class=\"zh\" lang=\"zh-CN\">技能差距分析</p><p class=\"ja\" lang=\"ja\">スキルギャップ分析</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Payback period</p><p class=\"zh\" lang=\"zh-CN\">投资回收期</p><p class=\"ja\" lang=\"ja\">投資回収期間</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Sustained adoption rate</p><p class=\"zh\" lang=\"zh-CN\">持续采用率</p><p class=\"ja\" lang=\"ja\">利用定着率</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Return on investment (ROI)</p><p class=\"zh\" lang=\"zh-CN\">投资回报率</p><p class=\"ja\" lang=\"ja\">投資収益率</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q56",
+        "number": "56",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 56</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A team analyzes the audio itself from support calls. What type of input is it?</p><p class=\"zh\" lang=\"zh-CN\">分析的是客户通话录音本身。它属于哪种数据？</p><p class=\"ja\" lang=\"ja\">通話録音の音声そのものを分析対象にする。入力データの種類はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The audio content has no fixed tabular fields.</p><p class=\"zh\" lang=\"zh-CN\">内容本身没有预先规定的表格行列结构。 文件名和时间戳可结构化，音频中的对话内容仍是非结构化数据。</p><p class=\"ja\" lang=\"ja\">発話内容は表の固定列として記録されていない。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Context window</p><p class=\"zh\" lang=\"zh-CN\">上下文窗口</p><p class=\"ja\" lang=\"ja\">コンテキストウィンドウ</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Unstructured data</p><p class=\"zh\" lang=\"zh-CN\">非结构化数据</p><p class=\"ja\" lang=\"ja\">非構造化データ</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Target leakage</p><p class=\"zh\" lang=\"zh-CN\">目标泄漏</p><p class=\"ja\" lang=\"ja\">ターゲットリーケージ</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Embedding</p><p class=\"zh\" lang=\"zh-CN\">嵌入向量</p><p class=\"ja\" lang=\"ja\">埋め込み</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q57",
+        "number": "57",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 57</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Summarization frees two hours daily with no staffing or payroll change. How should finance report the benefit?</p><p class=\"zh\" lang=\"zh-CN\">摘要每天能省两小时，但工资和人数都没变。投资评审时如何表述？</p><p class=\"ja\" lang=\"ja\">要約案で一日二時間浮くが、人件費も人員も変わらない。投資審査で便益をどう扱うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Freed capacity is measurable, while cash savings require a real expenditure reduction.</p><p class=\"zh\" lang=\"zh-CN\">省时可以量化为产能，只有实际支出减少才能确认现金节省。</p><p class=\"ja\" lang=\"ja\">時間の創出は生産能力の改善であり、現金削減には支出が実際に減った証拠が必要である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Track redeployable capacity separately from cash savings</p><p class=\"zh\" lang=\"zh-CN\">衡量可重新分配的时间，另行核算现金节省</p><p class=\"ja\" lang=\"ja\">再配分できた時間を測り、現金支出の削減とは区別する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Book two hours of payroll reduction immediately</p><p class=\"zh\" lang=\"zh-CN\">按两小时工资记为已实现的现金节省</p><p class=\"ja\" lang=\"ja\">二時間分を確定済み給与削減と計上する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Report that there is no measurable benefit</p><p class=\"zh\" lang=\"zh-CN\">报告无法量化任何收益</p><p class=\"ja\" lang=\"ja\">定量化できる便益はないと報告する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Record equal incremental revenue</p><p class=\"zh\" lang=\"zh-CN\">将省时折算成等额新增收入</p><p class=\"ja\" lang=\"ja\">時間短縮と同額の売上増を計上する</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q58",
+        "number": "58",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 58</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Revenue impact will not be visible for six months. How should monthly leadership updates present progress?</p><p class=\"zh\" lang=\"zh-CN\">收入效果要半年后才能显现。月度经营会上怎样报告进展最合适？</p><p class=\"ja\" lang=\"ja\">収益への効果が六か月後にしか分からない。経営会議へ月次で進捗を伝える最適な方法はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Distinguishing early evidence from realized value supports informed decisions.</p><p class=\"zh\" lang=\"zh-CN\">说明目前可观察到的信号，以及何时能验证最终价值，避免把预测当作实绩。</p><p class=\"ja\" lang=\"ja\">途中経過と確定した効果を分ければ、経営陣は証拠の強さを理解して判断できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Provide no updates until revenue arrives</p><p class=\"zh\" lang=\"zh-CN\">收入出现前完全不汇报</p><p class=\"ja\" lang=\"ja\">収益が出るまで一切報告しない</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Convert usage counts directly into realized revenue</p><p class=\"zh\" lang=\"zh-CN\">将使用次数直接换算成已实现收入</p><p class=\"ja\" lang=\"ja\">利用回数をそのまま収益額に換算する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Report forecasts as realized outcomes</p><p class=\"zh\" lang=\"zh-CN\">将预测当作实绩</p><p class=\"ja\" lang=\"ja\">予測値を実績として報告する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Report leading signals, open assumptions and the revenue validation date</p><p class=\"zh\" lang=\"zh-CN\">报告先行指标、待验证假设和收入验证时间</p><p class=\"ja\" lang=\"ja\">先行指標、未検証の仮説、収益を検証する時期を示す</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q59",
+        "number": "59",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 59</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Before signing, finance varies adoption and inference prices to find when the case stops paying off. What analysis is this?</p><p class=\"zh\" lang=\"zh-CN\">签约前改变三档采用率和两档推理单价，看哪些情况下项目不赚钱。这是什么分析？</p><p class=\"ja\" lang=\"ja\">契約締結前に、利用率を三段階、推論単価を二段階に変えて採算が崩れる条件を探る。何をしているか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Varying assumptions reveals which conditions drive the decision.</p><p class=\"zh\" lang=\"zh-CN\">改变关键假设，观察结论是否反转或大幅波动。 单一乐观预测看不到调用量或采用率下降后的投资风险。</p><p class=\"ja\" lang=\"ja\">前提条件を動かして採算がどの程度変わるかを調べている。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Sensitivity analysis</p><p class=\"zh\" lang=\"zh-CN\">敏感性分析</p><p class=\"ja\" lang=\"ja\">感度分析</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Baseline</p><p class=\"zh\" lang=\"zh-CN\">基线</p><p class=\"ja\" lang=\"ja\">ベースライン</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">A/B test</p><p class=\"zh\" lang=\"zh-CN\">A/B 测试</p><p class=\"ja\" lang=\"ja\">A/B テスト</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Payback period</p><p class=\"zh\" lang=\"zh-CN\">投资回收期</p><p class=\"ja\" lang=\"ja\">投資回収期間</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q60",
+        "number": "60",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 60</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Prompt trials have plateaued. Thousands of approved examples show the required house style. What should the team evaluate next?</p><p class=\"zh\" lang=\"zh-CN\">提示词优化已到瓶颈，有大量获批输入输出样例，希望短指令也能稳定复现品牌文风。下一步评估什么？</p><p class=\"ja\" lang=\"ja\">短い指示で社内独自の文体を再現したい。プロンプトの改善は頭打ちで、承認済みの入出力例が大量にある。次に評価する手法はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Training on curated examples targets repeatable behavior.</p><p class=\"zh\" lang=\"zh-CN\">用精选训练样本进一步更新模型参数，以调整其行为。 当问题是稳定的输出风格且提示词已充分试验时，可评估微调；知识更新另行处理。</p><p class=\"ja\" lang=\"ja\">例示データを使ってモデルの出力傾向を調整できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Fine-tuning</p><p class=\"zh\" lang=\"zh-CN\">微调</p><p class=\"ja\" lang=\"ja\">ファインチューニング</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Hallucination</p><p class=\"zh\" lang=\"zh-CN\">幻觉</p><p class=\"ja\" lang=\"ja\">ハルシネーション</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Retrieval-augmented generation (RAG)</p><p class=\"zh\" lang=\"zh-CN\">检索增强生成</p><p class=\"ja\" lang=\"ja\">検索拡張生成</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Embedding</p><p class=\"zh\" lang=\"zh-CN\">嵌入向量</p><p class=\"ja\" lang=\"ja\">埋め込み</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q61",
+        "number": "61",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 61</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A source field is wrong. The team needs to trace affected derived tables and forecasts. What enables this?</p><p class=\"zh\" lang=\"zh-CN\">发现源数据有误，需要沿转换过程追踪受影响的派生表和预测。需要什么？</p><p class=\"ja\" lang=\"ja\">元データの誤記が判明した。どの加工表や予測に影響したか、変換経路をたどりたい。必要なものは何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Lineage links upstream inputs to the artifacts derived from them.</p><p class=\"zh\" lang=\"zh-CN\">描述数据从来源经过转换到下游产出的流转关系。 权限表回答谁能访问，血缘回答一项数据来自哪里、影响哪里。</p><p class=\"ja\" lang=\"ja\">元データと下流の成果物を変換単位で結び付けて追跡する。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Least privilege</p><p class=\"zh\" lang=\"zh-CN\">最小权限</p><p class=\"ja\" lang=\"ja\">最小権限</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Data lineage</p><p class=\"zh\" lang=\"zh-CN\">数据血缘</p><p class=\"ja\" lang=\"ja\">データリネージ</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model card</p><p class=\"zh\" lang=\"zh-CN\">模型卡</p><p class=\"ja\" lang=\"ja\">モデルカード</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Risk register</p><p class=\"zh\" lang=\"zh-CN\">风险登记册</p><p class=\"ja\" lang=\"ja\">リスク登録簿</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q62",
+        "number": "62",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 62</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Residual exposure exceeds board tolerance as launch approaches. What should the project lead do?</p><p class=\"zh\" lang=\"zh-CN\">缓解后预期损失仍超董事会容忍范围。临近上线日，该如何决策？</p><p class=\"ja\" lang=\"ja\">リスク対策後も損失見込みが取締役会の許容範囲を超える。予定日に合わせるための最良の判断は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Exposure outside delegated tolerance requires an authorized decision.</p><p class=\"zh\" lang=\"zh-CN\">残余风险超授权边界时，应升级决策并调整暴露或控制。</p><p class=\"ja\" lang=\"ja\">許容範囲外の残留リスクをプロジェクト担当者だけで受け入れることはできない。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Silently accept the risk to meet schedule</p><p class=\"zh\" lang=\"zh-CN\">为赶进度自行接受风险</p><p class=\"ja\" lang=\"ja\">予定日を守るため黙って受容する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Transfer business accountability to users</p><p class=\"zh\" lang=\"zh-CN\">将业务责任转给用户</p><p class=\"ja\" lang=\"ja\">事業責任を利用者に移す</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Pause rollout and escalate further controls or reduced scope</p><p class=\"zh\" lang=\"zh-CN\">暂缓推广，提请授权人决定追加控制或缩小范围</p><p class=\"ja\" lang=\"ja\">展開を保留し権限者に追加対策か範囲縮小を諮る</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Remove the risk from the register</p><p class=\"zh\" lang=\"zh-CN\">从登记册中移除这一项</p><p class=\"ja\" lang=\"ja\">リスク一覧から該当行を削除する</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q63",
+        "number": "63",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 63</span><span class=\"badge\">Domain 4</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Drafting quotes is faster, but all quotes queue at one approval step. What should be revisited to reduce total cycle time?</p><p class=\"zh\" lang=\"zh-CN\">报价草案生成更快了，但所有订单仍堵在审批队列。为了缩短端到端时间，应该优先做什么？</p><p class=\"ja\" lang=\"ja\">見積案の作成は速くなったが、全件が同じ承認待ち行列に滞留する。総所要時間を短くするため見直すべきものはどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Redesign must address the downstream bottleneck to realize end-to-end savings.</p><p class=\"zh\" lang=\"zh-CN\">围绕目标重新安排人、系统和决策环节，使技术改善能转化为业务效果。 单个步骤提速，如果下一步仍然排队，端到端周期可能毫无变化。</p><p class=\"ja\" lang=\"ja\">ボトルネックを含む工程全体の役割と流れを組み直す必要がある。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Business process redesign</p><p class=\"zh\" lang=\"zh-CN\">业务流程再设计</p><p class=\"ja\" lang=\"ja\">業務プロセス再設計</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Role-based training</p><p class=\"zh\" lang=\"zh-CN\">岗位定制培训</p><p class=\"ja\" lang=\"ja\">職種別研修</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">AI center of excellence</p><p class=\"zh\" lang=\"zh-CN\">AI 卓越中心</p><p class=\"ja\" lang=\"ja\">AI センター・オブ・エクセレンス</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Skills gap analysis</p><p class=\"zh\" lang=\"zh-CN\">技能差距分析</p><p class=\"ja\" lang=\"ja\">スキルギャップ分析</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q64",
+        "number": "64",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 64</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Marketing needs three draft dealer announcements from a product brief. Which capability fits?</p><p class=\"zh\" lang=\"zh-CN\">市场部想基于产品规格起草三版经销商通知。该用哪类技术？</p><p class=\"ja\" lang=\"ja\">広報担当者が製品仕様を基に、販売店向けの案内文を三案作りたい。何を使うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The desired output is new text conditioned on the brief.</p><p class=\"zh\" lang=\"zh-CN\">根据上下文生成新的文本、图像等内容。 起草文本与预测一个数字是不同任务，草稿仍需核实。</p><p class=\"ja\" lang=\"ja\">必要な成果物は新しい文章であり、生成後に仕様との整合を確認できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Rule-based automation</p><p class=\"zh\" lang=\"zh-CN\">基于规则的自动化</p><p class=\"ja\" lang=\"ja\">ルールベースの自動化</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Generative AI</p><p class=\"zh\" lang=\"zh-CN\">生成式 AI</p><p class=\"ja\" lang=\"ja\">生成 AI</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Inference</p><p class=\"zh\" lang=\"zh-CN\">推理</p><p class=\"ja\" lang=\"ja\">推論</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Clustering</p><p class=\"zh\" lang=\"zh-CN\">聚类</p><p class=\"ja\" lang=\"ja\">クラスタリング</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q65",
+        "number": "65",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 65</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A firm escalates refund decisions above its accepted loss exposure. What does the threshold express?</p><p class=\"zh\" lang=\"zh-CN\">自动退款设置损失暴露上限，超出后交高层审批。这个限额反映了什么？</p><p class=\"ja\" lang=\"ja\">返品の自動承認額に上限を設け、それを超える損失の可能性は役員審査に回す。上限を決める基準は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A tolerance threshold distinguishes accepted exposure from cases needing escalation.</p><p class=\"zh\" lang=\"zh-CN\">组织为达成目标可接受的风险水平或具体偏差界限。 风险评级描述风险大小，容忍界限用于决定是否需升级处理。</p><p class=\"ja\" lang=\"ja\">受容できる範囲を超えた案件は、追加の判断に回す。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Audit trail</p><p class=\"zh\" lang=\"zh-CN\">审计轨迹</p><p class=\"ja\" lang=\"ja\">監査証跡</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Risk register</p><p class=\"zh\" lang=\"zh-CN\">风险登记册</p><p class=\"ja\" lang=\"ja\">リスク登録簿</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Data minimization</p><p class=\"zh\" lang=\"zh-CN\">数据最小化</p><p class=\"ja\" lang=\"ja\">データ最小化</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Risk tolerance</p><p class=\"zh\" lang=\"zh-CN\">风险容忍度</p><p class=\"ja\" lang=\"ja\">リスク許容度</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q66",
+        "number": "66",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 66</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A summary exposes another customer's information. Which plan specifies containment, contacts, investigation and recovery?</p><p class=\"zh\" lang=\"zh-CN\">摘要混入其他客户机密，需要立即查停用流程、联系人、调查记录和恢复条件。应查什么？</p><p class=\"ja\" lang=\"ja\">要約文に他社の機密情報が混入した。停止判断、連絡先、調査記録、復旧条件をすぐ確認できる文書は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Incident procedures coordinate containment and recovery after a suspected breach.</p><p class=\"zh\" lang=\"zh-CN\">事先规定发现异常后的控制、调查、沟通、恢复和复盘步骤。 事前风险评价不能替代发生事件时的指挥与升级机制。</p><p class=\"ja\" lang=\"ja\">発生後に役割と手順に沿って影響を抑え、復旧するための計画である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Risk register</p><p class=\"zh\" lang=\"zh-CN\">风险登记册</p><p class=\"ja\" lang=\"ja\">リスク登録簿</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Risk tolerance</p><p class=\"zh\" lang=\"zh-CN\">风险容忍度</p><p class=\"ja\" lang=\"ja\">リスク許容度</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Incident response plan</p><p class=\"zh\" lang=\"zh-CN\">事件响应计划</p><p class=\"ja\" lang=\"ja\">インシデント対応計画</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model card</p><p class=\"zh\" lang=\"zh-CN\">模型卡</p><p class=\"ja\" lang=\"ja\">モデルカード</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q67",
+        "number": "67",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 67</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">An assistant cites a convincing court decision that never existed. What is this failure?</p><p class=\"zh\" lang=\"zh-CN\">答复读起来很自然，但引用的判例并不存在。属于什么现象？</p><p class=\"ja\" lang=\"ja\">回答は自然だが、引用した判例が実在しない。どの現象か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Plausible language can contain invented facts or citations.</p><p class=\"zh\" lang=\"zh-CN\">模型生成貌似可信却缺乏事实依据的内容。 语气自信不等于事实可靠，应核实引用是否存在。</p><p class=\"ja\" lang=\"ja\">流暢さと引用の正しさは別であり、原典との照合が必要である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Hallucination</p><p class=\"zh\" lang=\"zh-CN\">幻觉</p><p class=\"ja\" lang=\"ja\">ハルシネーション</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Unstructured data</p><p class=\"zh\" lang=\"zh-CN\">非结构化数据</p><p class=\"ja\" lang=\"ja\">非構造化データ</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Target leakage</p><p class=\"zh\" lang=\"zh-CN\">目标泄漏</p><p class=\"ja\" lang=\"ja\">ターゲットリーケージ</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model drift</p><p class=\"zh\" lang=\"zh-CN\">模型漂移</p><p class=\"ja\" lang=\"ja\">モデルドリフト</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q68",
+        "number": "68",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 68</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">The end of a lengthy contract cannot fit into one model call. Which limit should be checked?</p><p class=\"zh\" lang=\"zh-CN\">整份合同输入时末尾条款放不下。首先应核对哪个规格？</p><p class=\"ja\" lang=\"ja\">長い契約書を一度に入力すると、末尾の条項を渡せない。最初に確認する仕様はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The limit applies to the tokens available in a single call.</p><p class=\"zh\" lang=\"zh-CN\">一次模型调用可处理的上下文容量，以词元计量。 知识库的总大小可以超过窗口，单次送入的内容仍受限制。</p><p class=\"ja\" lang=\"ja\">一回の呼び出しに収められるトークン数には上限がある。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Fine-tuning</p><p class=\"zh\" lang=\"zh-CN\">微调</p><p class=\"ja\" lang=\"ja\">ファインチューニング</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Unstructured data</p><p class=\"zh\" lang=\"zh-CN\">非结构化数据</p><p class=\"ja\" lang=\"ja\">非構造化データ</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Few-shot prompting</p><p class=\"zh\" lang=\"zh-CN\">少样本提示</p><p class=\"ja\" lang=\"ja\">少数例プロンプティング</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Context window</p><p class=\"zh\" lang=\"zh-CN\">上下文窗口</p><p class=\"ja\" lang=\"ja\">コンテキストウィンドウ</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q69",
+        "number": "69",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 69</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">After technical feasibility is proven, one branch uses the system in daily work to measure rework and satisfaction. What stage is this?</p><p class=\"zh\" lang=\"zh-CN\">识别技术已验证，想先让一个分部的真实员工使用，观察返工和满意度。该做什么？</p><p class=\"ja\" lang=\"ja\">読み取りは検証済みである。全国展開の前に一支店で実際の担当者に使ってもらい、手戻りと満足度を調べたい。何を行うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A pilot tests operational fit with real users in a limited setting.</p><p class=\"zh\" lang=\"zh-CN\">在受控范围内让真实用户试用，检验业务价值与运营条件。 离线原型测能力，试点还能发现交接、培训、排班等问题。</p><p class=\"ja\" lang=\"ja\">現場を限定して、実際の業務での効果と課題を確かめる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Opportunity cost</p><p class=\"zh\" lang=\"zh-CN\">机会成本</p><p class=\"ja\" lang=\"ja\">機会費用</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Portfolio prioritization</p><p class=\"zh\" lang=\"zh-CN\">项目组合优先排序</p><p class=\"ja\" lang=\"ja\">ポートフォリオの優先順位付け</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Proof of concept (PoC)</p><p class=\"zh\" lang=\"zh-CN\">概念验证</p><p class=\"ja\" lang=\"ja\">概念実証</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Pilot deployment</p><p class=\"zh\" lang=\"zh-CN\">试点部署</p><p class=\"ja\" lang=\"ja\">パイロット導入</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q70",
+        "number": "70",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 70</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Several teams each claim the entire time saving on the same cases. What should the investment committee request?</p><p class=\"zh\" lang=\"zh-CN\">多个部门都把同一工单节省的时间全额计作本部门收益。投资委员会应要求什么？</p><p class=\"ja\" lang=\"ja\">同じ案件で複数の部署が「短縮した時間」をそれぞれ全額便益に計上した。投資委員会は何を求めるべきか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">One realized saving should be counted once at enterprise level.</p><p class=\"zh\" lang=\"zh-CN\">一项节省在公司层面只能计一次，应注明核算单位和责任部门。</p><p class=\"ja\" lang=\"ja\">一つの時間短縮を複数回計上すると投資効果が過大になる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Add all claims without adjustment</p><p class=\"zh\" lang=\"zh-CN\">直接汇总各部门估算</p><p class=\"ja\" lang=\"ja\">各部署の試算をそのまま合計する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Deduplicate the benefit and agree units and attribution</p><p class=\"zh\" lang=\"zh-CN\">去重并明确收益计量单位和归属</p><p class=\"ja\" lang=\"ja\">重複を除き、便益の算定単位と帰属を定める</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Average the departmental totals without tracing the cases</p><p class=\"zh\" lang=\"zh-CN\">不核对涉及工单，直接取各部门汇报的平均值</p><p class=\"ja\" lang=\"ja\">対象案件を突き合わせず部門報告を平均する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Allocate each team's claim by budget share without reconciling overlaps</p><p class=\"zh\" lang=\"zh-CN\">不核对重叠情况，按预算比例分摊各部门申报额</p><p class=\"ja\" lang=\"ja\">重複を確認せず部門予算の比率で各申告を配分する</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q71",
+        "number": "71",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 71</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Procurement requests a summary of intended uses, evaluated languages and known model limitations. Which document fits?</p><p class=\"zh\" lang=\"zh-CN\">采购想看候选模型的预期用途、已评估语言和已知弱点。哪种材料最合适？</p><p class=\"ja\" lang=\"ja\">調達担当が、候補モデルの想定用途、評価した言語、苦手な条件をまとめた資料を求める。最適な資料は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A model card documents intended use and evidence about performance limits.</p><p class=\"zh\" lang=\"zh-CN\">面向使用者说明模型用途、评估条件、表现和局限的文档。 它描述模型本身；每次实际调用和审批属于运行记录。</p><p class=\"ja\" lang=\"ja\">モデルカードは適用範囲と評価条件を判断する材料になる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Acceptable use policy</p><p class=\"zh\" lang=\"zh-CN\">可接受使用政策</p><p class=\"ja\" lang=\"ja\">利用ポリシー</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Risk register</p><p class=\"zh\" lang=\"zh-CN\">风险登记册</p><p class=\"ja\" lang=\"ja\">リスク登録簿</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Audit trail</p><p class=\"zh\" lang=\"zh-CN\">审计轨迹</p><p class=\"ja\" lang=\"ja\">監査証跡</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model card</p><p class=\"zh\" lang=\"zh-CN\">模型卡</p><p class=\"ja\" lang=\"ja\">モデルカード</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q72",
+        "number": "72",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 72</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Training data includes customer artwork with unclear license scope. What should precede training?</p><p class=\"zh\" lang=\"zh-CN\">训练数据含客户创作内容，授权范围不明。训练前最合适的动作是什么？</p><p class=\"ja\" lang=\"ja\">学習用データに顧客の制作物が含まれ、利用許諾の範囲が不明だ。学習開始前に何を行うか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Availability and de-identification do not establish rights for the intended use.</p><p class=\"zh\" lang=\"zh-CN\">要确认授权是否覆盖预期使用方式，去掉姓名并不能解决授权问题。</p><p class=\"ja\" lang=\"ja\">入手可能性や匿名化だけでは、予定する利用の権限を確認したことにならない。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Strip creator names and use all items</p><p class=\"zh\" lang=\"zh-CN\">删除作者名后全部使用</p><p class=\"ja\" lang=\"ja\">作者名を消してすべて使う</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Waive review for small models</p><p class=\"zh\" lang=\"zh-CN\">模型小时跳过确认</p><p class=\"ja\" lang=\"ja\">モデルが小さければ確認を省く</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Treat public access as training permission</p><p class=\"zh\" lang=\"zh-CN\">将公开可访问视为训练授权</p><p class=\"ja\" lang=\"ja\">公開されていたことを利用許諾とみなす</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Verify provenance and permitted uses and exclude unresolved material</p><p class=\"zh\" lang=\"zh-CN\">核实来源及授权范围，排除未确认素材</p><p class=\"ja\" lang=\"ja\">由来と利用条件を確認し、未確認の素材を除外する</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q73",
+        "number": "73",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 73</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A standard meeting-notes capability is due in six weeks. A product meets data requirements and no internal developers are available. What should be tried first?</p><p class=\"zh\" lang=\"zh-CN\">六周内需上线标准会议纪要功能。现成产品满足信息管理要求，公司没有开发人手。优先试什么？</p><p class=\"ja\" lang=\"ja\">標準的な議事録作成を六週間で導入したい。既製品が情報管理要件を満たし、社内開発要員はいない。最初に試す選択はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A bounded product trial fits the timeline and skills constraint while validating quality.</p><p class=\"zh\" lang=\"zh-CN\">标准需求、短期限和能力约束支持先采购验证；长期承诺仍需证据。</p><p class=\"ja\" lang=\"ja\">汎用的な用途と短い期限には購入が適合する。限定試行で品質も確認できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Defer discovery until custom development finishes</p><p class=\"zh\" lang=\"zh-CN\">等自研完成再做需求调研</p><p class=\"ja\" lang=\"ja\">独自開発が終わるまで現状調査を保留する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Train a proprietary foundation model from scratch</p><p class=\"zh\" lang=\"zh-CN\">从头训练专有基础模型</p><p class=\"ja\" lang=\"ja\">独自の基盤モデルを一から学習する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Commit long term without reviewing exit terms</p><p class=\"zh\" lang=\"zh-CN\">不审退出条款直接签长约</p><p class=\"ja\" lang=\"ja\">退出条件を確認せず長期契約を即決する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Pilot the existing product on representative meetings</p><p class=\"zh\" lang=\"zh-CN\">用代表性会议评测现成产品</p><p class=\"ja\" lang=\"ja\">既製品を代表的な会議で検証する</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q74",
+        "number": "74",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 74</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A year after rollout, finance reports realized incremental revenue. What type of indicator is it in time terms?</p><p class=\"zh\" lang=\"zh-CN\">销售助手上线一年后汇报账目确认的年度增收。按时间属性属于哪种指标？</p><p class=\"ja\" lang=\"ja\">販売支援の開始から一年後、会計記録で確認した年間増収を報告した。時系列上どの指標か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Booked revenue measures an outcome after it occurred.</p><p class=\"zh\" lang=\"zh-CN\">在业务活动发生后衡量已实现的结果。 已入账的年度增收衡量结果，而培训参与率可作为较早的信号。</p><p class=\"ja\" lang=\"ja\">既に発生した売上という結果を測定している。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Baseline</p><p class=\"zh\" lang=\"zh-CN\">基线</p><p class=\"ja\" lang=\"ja\">ベースライン</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Leading indicator</p><p class=\"zh\" lang=\"zh-CN\">先行指标</p><p class=\"ja\" lang=\"ja\">先行指標</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Lagging indicator</p><p class=\"zh\" lang=\"zh-CN\">滞后指标</p><p class=\"ja\" lang=\"ja\">遅行指標</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Sensitivity analysis</p><p class=\"zh\" lang=\"zh-CN\">敏感性分析</p><p class=\"ja\" lang=\"ja\">感度分析</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q75",
+        "number": "75",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 75</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A low-margin process is slow because of a redundant approval. What should be tried first?</p><p class=\"zh\" lang=\"zh-CN\">重复性业务利润很薄。调查发现一项多余审批造成催促和延迟。最先做什么？</p><p class=\"ja\" lang=\"ja\">利益率の低い反復業務を改善したい。現場調査では一つの不要な承認が催促と遅延の原因だった。最初の施策は何か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Removing the cause tests a simpler intervention before investing in AI.</p><p class=\"zh\" lang=\"zh-CN\">先验证直接消除瓶颈的效果，再判断是否还有值得投资的 AI 问题。</p><p class=\"ja\" lang=\"ja\">根本原因は手順にあり、取り除けば追加の AI 投資なしで改善を検証できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Build a model to predict approval wait</p><p class=\"zh\" lang=\"zh-CN\">先训练审批等待预测模型</p><p class=\"ja\" lang=\"ja\">承認待ちを予測するモデルを構築する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Remove the redundant approval and measure cycle time</p><p class=\"zh\" lang=\"zh-CN\">移除多余审批并测量周期</p><p class=\"ja\" lang=\"ja\">不要な承認を取り除き所要時間を測る</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Add a review stage with no new capacity</p><p class=\"zh\" lang=\"zh-CN\">不增人手再增加一级审查</p><p class=\"ja\" lang=\"ja\">承認者を増やさず審査段階だけ追加する</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Generate reminder emails</p><p class=\"zh\" lang=\"zh-CN\">自动生成催办邮件</p><p class=\"ja\" lang=\"ja\">催促メールの文章を自動生成する</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q76",
+        "number": "76",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 76</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Renewal outcomes arrive in six months. Earlier usage frequency predicts them. How can the team use frequency?</p><p class=\"zh\" lang=\"zh-CN\">续约流失率半年后才能得知，已验证早期使用频率与该结果有关。使用频率是什么指标？</p><p class=\"ja\" lang=\"ja\">更新時の解約率は半年後に判明する。先に見られる活用頻度が解約率と関係することを確認した。活用頻度を何として使えるか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">The signal is available before the outcome and can inform early action.</p><p class=\"zh\" lang=\"zh-CN\">比预期业务结果更早出现，可预示后续结果的信号。 应验证它和最终业务效果的关系，不能把早期信号当作已实现收益。</p><p class=\"ja\" lang=\"ja\">結果より前に観測できるため、介入の判断に役立つ。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Unit cost</p><p class=\"zh\" lang=\"zh-CN\">单位成本</p><p class=\"ja\" lang=\"ja\">単位当たりコスト</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Lagging indicator</p><p class=\"zh\" lang=\"zh-CN\">滞后指标</p><p class=\"ja\" lang=\"ja\">遅行指標</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Leading indicator</p><p class=\"zh\" lang=\"zh-CN\">先行指标</p><p class=\"ja\" lang=\"ja\">先行指標</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Return on investment (ROI)</p><p class=\"zh\" lang=\"zh-CN\">投资回报率</p><p class=\"ja\" lang=\"ja\">投資収益率</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q77",
+        "number": "77",
+        "answer": "A,E",
+        "kind": "",
+        "layout": "question-26abc51ab49e9531f344",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 77</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A lending assistant meets aggregate accuracy targets. Choose two actions to monitor fairness.</p><p class=\"zh\" lang=\"zh-CN\">贷款辅助模型历史整体精度达标。选两项适合监控公平性的做法。</p><p class=\"ja\" lang=\"ja\">過去の成績で精度を満たした融資支援モデルを導入する。公平性の監視に適した施策を二つ選ぶ。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Group-level outcomes expose disparities, and assigned remediation turns monitoring into action.</p><p class=\"zh\" lang=\"zh-CN\">分群指标可发现总体平均掩盖的问题；阈值、责任人和处置流程使监控能触发行动。</p><p class=\"ja\" lang=\"ja\">集団別の結果を観測し、差を発見した後に行動できる体制を整える。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Compare false rejection rates across appropriately governed groups</p><p class=\"zh\" lang=\"zh-CN\">在适当的数据治理下比较群体间误拒率</p><p class=\"ja\" lang=\"ja\">適切に扱える属性で集団別の誤拒否率を確認する</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Review only the aggregate average each month</p><p class=\"zh\" lang=\"zh-CN\">每月只检查总体平均</p><p class=\"ja\" lang=\"ja\">全体平均だけを月次で確認する</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Leave complaints solely to the model provider</p><p class=\"zh\" lang=\"zh-CN\">将投诉渠道完全交给模型供应商</p><p class=\"ja\" lang=\"ja\">苦情の受付をモデル提供元だけに任せる</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Declare fairness once protected columns are removed</p><p class=\"zh\" lang=\"zh-CN\">仅凭移除敏感属性列即认定公平</p><p class=\"ja\" lang=\"ja\">属性列の削除だけで公平性を認定する</p>"
+            }
+          },
+          {
+            "letter": "E",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Assign investigation and remediation when disparity thresholds are exceeded</p><p class=\"zh\" lang=\"zh-CN\">指定差异超限时的调查负责人和纠正流程</p><p class=\"ja\" lang=\"ja\">差が閾値を超えた時の調査責任者と是正手順を決める</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q78",
+        "number": "78",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 78</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Initial cost is ¥7.2m. Monthly benefits are ¥1m and incremental operating costs ¥0.4m. Ignoring discounting, when is payback?</p><p class=\"zh\" lang=\"zh-CN\">初始投入 720 万日元，每月收益 100 万、增量运营费 40 万。忽略折现，回收期多久？</p><p class=\"ja\" lang=\"ja\">初期投資は720万円、毎月の便益100万円、追加運用費40万円。割引を無視した回収期間はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Monthly net inflow is ¥0.6m. Payback is 7.2 divided by 0.6.</p><p class=\"zh\" lang=\"zh-CN\">按每月净流入 60 万计算，720 ÷ 60＝12 个月。</p><p class=\"ja\" lang=\"ja\">毎月の純流入は60万円。720万円を60万円で割る。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">12 months</p><p class=\"zh\" lang=\"zh-CN\">12 个月</p><p class=\"ja\" lang=\"ja\">12か月</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">5.1 months</p><p class=\"zh\" lang=\"zh-CN\">5.1 个月</p><p class=\"ja\" lang=\"ja\">5.1か月</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">7.2 months</p><p class=\"zh\" lang=\"zh-CN\">7.2 个月</p><p class=\"ja\" lang=\"ja\">7.2か月</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">18 months</p><p class=\"zh\" lang=\"zh-CN\">18 个月</p><p class=\"ja\" lang=\"ja\">18か月</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q79",
+        "number": "79",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 79</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Customers are told when AI is used, its limits and how to contact staff. Which principle does this serve?</p><p class=\"zh\" lang=\"zh-CN\">购买前告知客户客服使用 AI、适用范围及人工渠道。这主要体现哪项原则？</p><p class=\"ja\" lang=\"ja\">購入前に、相談窓口が AI を使うこと、対象外の相談、担当者への連絡方法を明示する。どの原則を実践しているか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Disclosure lets users understand the system and its boundaries.</p><p class=\"zh\" lang=\"zh-CN\">向相关方说明 AI 的使用方式、适用边界和已知限制。 系统级披露与逐案解释相关，但针对的提问不同。</p><p class=\"ja\" lang=\"ja\">利用者が仕組みと限界を知ったうえで利用を判断できる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Explainability</p><p class=\"zh\" lang=\"zh-CN\">可解释性</p><p class=\"ja\" lang=\"ja\">説明可能性</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Transparency</p><p class=\"zh\" lang=\"zh-CN\">透明度</p><p class=\"ja\" lang=\"ja\">透明性</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Robustness</p><p class=\"zh\" lang=\"zh-CN\">稳健性</p><p class=\"ja\" lang=\"ja\">堅牢性</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Data minimization</p><p class=\"zh\" lang=\"zh-CN\">数据最小化</p><p class=\"ja\" lang=\"ja\">データ最小化</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q80",
+        "number": "80",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 80</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">Finance divides net benefit by investment cost for each initiative. What is it comparing?</p><p class=\"zh\" lang=\"zh-CN\">财务用同期净收益除以投入金额来比较两个项目。算的是什么？</p><p class=\"ja\" lang=\"ja\">財務部が二案件を比べる際、同じ期間の純便益を投資額で割った。何を比較したのか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">ROI expresses net benefit relative to the investment.</p><p class=\"zh\" lang=\"zh-CN\">用净收益除以投资成本衡量回报。 先从收益中减去成本；收益除以成本是效益成本比。</p><p class=\"ja\" lang=\"ja\">費用控除後の便益を投資額に対する割合として示している。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Payback period</p><p class=\"zh\" lang=\"zh-CN\">投资回收期</p><p class=\"ja\" lang=\"ja\">投資回収期間</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Unit cost</p><p class=\"zh\" lang=\"zh-CN\">单位成本</p><p class=\"ja\" lang=\"ja\">単位当たりコスト</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Total cost of ownership (TCO)</p><p class=\"zh\" lang=\"zh-CN\">总拥有成本</p><p class=\"ja\" lang=\"ja\">総保有コスト</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Return on investment (ROI)</p><p class=\"zh\" lang=\"zh-CN\">投资回报率</p><p class=\"ja\" lang=\"ja\">投資収益率</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q81",
+        "number": "81",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 81</span><span class=\"badge\">Domain 1</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A benefits assistant retrieves only obsolete policy documents. What is the best response?</p><p class=\"zh\" lang=\"zh-CN\">福利资格查询只检索到过期文件。助手此时应如何处理？</p><p class=\"ja\" lang=\"ja\">給付条件の照会に、検索した文書が古い版しかない。設計上、最も適切な応答はどれか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A current source or an authorized reviewer is needed for an eligibility decision.</p><p class=\"zh\" lang=\"zh-CN\">资格结论依赖有效规则。来源已过期时应升级核实。</p><p class=\"ja\" lang=\"ja\">適用条件の誤案内を避けるには、確認できる現行資料か権限ある担当者が必要である。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Assume the old version still applies</p><p class=\"zh\" lang=\"zh-CN\">默认旧版本仍有效</p><p class=\"ja\" lang=\"ja\">古い版を現行版とみなす</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Disclose the evidence gap and refer the case to the policy owner</p><p class=\"zh\" lang=\"zh-CN\">说明缺少现行依据并转人工</p><p class=\"ja\" lang=\"ja\">現行根拠が不足すると伝え担当窓口に引き継ぐ</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Decide eligibility using model confidence alone</p><p class=\"zh\" lang=\"zh-CN\">按模型自信程度给出资格结论</p><p class=\"ja\" lang=\"ja\">モデルの自信度で適用条件を決める</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Decide using general advice without a citation</p><p class=\"zh\" lang=\"zh-CN\">用不带来源的一般原则直接判定</p><p class=\"ja\" lang=\"ja\">参考文献を付けずに一般論で可否を決める</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q82",
+        "number": "82",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 82</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A firm weighs proprietary data, a three-month deadline and scarce talent against co-development with a vendor. Which decision is this?</p><p class=\"zh\" lang=\"zh-CN\">公司有独家数据、三个月期限、人手不足，也考虑与供应商联合开发。正在做哪类决策？</p><p class=\"ja\" lang=\"ja\">自社の独自データ、三か月の納期、人材不足を踏まえ、開発会社との共同開発も検討する。どの判断か。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Delivery choices trade speed and available skills against control and differentiation.</p><p class=\"zh\" lang=\"zh-CN\">按差异化、时间、能力、成本和控制要求比较交付路径。 即使原型成本低，长期支持能力也可能影响选择。</p><p class=\"ja\" lang=\"ja\">調達形態によって、速度・継続運用・独自性を管理できる範囲が異なる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Build, buy or partner assessment</p><p class=\"zh\" lang=\"zh-CN\">自研、采购或合作评估</p><p class=\"ja\" lang=\"ja\">内製・購入・提携の評価</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Payback period</p><p class=\"zh\" lang=\"zh-CN\">投资回收期</p><p class=\"ja\" lang=\"ja\">投資回収期間</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">A/B test</p><p class=\"zh\" lang=\"zh-CN\">A/B 测试</p><p class=\"ja\" lang=\"ja\">A/B テスト</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Sensitivity analysis</p><p class=\"zh\" lang=\"zh-CN\">敏感性分析</p><p class=\"ja\" lang=\"ja\">感度分析</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q83",
+        "number": "83",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 83</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">A support assistant launches next month. What is needed now to quantify later time savings?</p><p class=\"zh\" lang=\"zh-CN\">下月上线客服助手。为了之后算出处理时长缩短了多少，现在应建立什么？</p><p class=\"ja\" lang=\"ja\">応対支援を翌月導入する。処理時間をどれだけ短縮できたか後で示すには、今何を確立すべきか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">A pre-launch measure provides the reference for change.</p><p class=\"zh\" lang=\"zh-CN\">记录干预前的现状，作为后续比较起点。 只有上线后的数字，难以说清改善了多少。</p><p class=\"ja\" lang=\"ja\">導入前の同一定義の処理時間が比較の起点になる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Baseline</p><p class=\"zh\" lang=\"zh-CN\">基线</p><p class=\"ja\" lang=\"ja\">ベースライン</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Return on investment (ROI)</p><p class=\"zh\" lang=\"zh-CN\">投资回报率</p><p class=\"ja\" lang=\"ja\">投資収益率</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Key performance indicator (KPI)</p><p class=\"zh\" lang=\"zh-CN\">关键绩效指标</p><p class=\"ja\" lang=\"ja\">重要業績評価指標</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Leading indicator</p><p class=\"zh\" lang=\"zh-CN\">先行指标</p><p class=\"ja\" lang=\"ja\">先行指標</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q84",
+        "number": "84",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 84</span><span class=\"badge\">Domain 3</span>",
+          "stem": "<p class=\"en\" lang=\"en\">An auditor must reconstruct the model version, approver and time for a decision last month. What is needed?</p><p class=\"zh\" lang=\"zh-CN\">要还原上月一次关键决策的模型版本、批准人和时间。需要什么？</p><p class=\"ja\" lang=\"ja\">先月の重要判断について、使用モデルの版と承認者、判断時刻を再構成したい。何を用意すべきか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Linked records preserve the sequence needed for reconstruction.</p><p class=\"zh\" lang=\"zh-CN\">保留可追溯的记录，以重建人员、版本、审批与决策经过。 当前配置只反映现在，不能还原上个月是谁批准了哪个版本。</p><p class=\"ja\" lang=\"ja\">時点ごとの変更と承認が結び付いた履歴から経緯をたどれる。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Robustness</p><p class=\"zh\" lang=\"zh-CN\">稳健性</p><p class=\"ja\" lang=\"ja\">堅牢性</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Model card</p><p class=\"zh\" lang=\"zh-CN\">模型卡</p><p class=\"ja\" lang=\"ja\">モデルカード</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Audit trail</p><p class=\"zh\" lang=\"zh-CN\">审计轨迹</p><p class=\"ja\" lang=\"ja\">監査証跡</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">Transparency</p><p class=\"zh\" lang=\"zh-CN\">透明度</p><p class=\"ja\" lang=\"ja\">透明性</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q85",
+        "number": "85",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 85</span><span class=\"badge\">Domain 2</span>",
+          "stem": "<p class=\"en\" lang=\"en\">First-year benefits are ¥9m and all costs are ¥6m. What is first-year ROI?</p><p class=\"zh\" lang=\"zh-CN\">首年实现收益 900 万日元，全部成本 600 万。首年投资回报率是多少？</p><p class=\"ja\" lang=\"ja\">初年度の実現便益は900万円、集計済みの全費用は600万円。初年度の ROI はいくらか。</p>",
+          "expl": "<p class=\"en\" lang=\"en\">Net benefit is ¥3m. Dividing by ¥6m gives 50%.</p><p class=\"zh\" lang=\"zh-CN\">净收益为 900−600＝300 万，再除以 600 万，得到 50%。</p><p class=\"ja\" lang=\"ja\">純便益300万円を費用600万円で割る。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">150%</p><p class=\"zh\" lang=\"zh-CN\">150%</p><p class=\"ja\" lang=\"ja\">150%</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">50%</p><p class=\"zh\" lang=\"zh-CN\">50%</p><p class=\"ja\" lang=\"ja\">50%</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">33.3%</p><p class=\"zh\" lang=\"zh-CN\">33.3%</p><p class=\"ja\" lang=\"ja\">33.3%</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en\" lang=\"en\">66.7%</p><p class=\"zh\" lang=\"zh-CN\">66.7%</p><p class=\"ja\" lang=\"ja\">66.7%</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      }
+    ]
+  }
+]

@@ -30,7 +30,7 @@ test('the published dictionary contains every source translation and the editabl
 });
 
 test('all subject materials have one grouped location without old root directories', async () => {
-  const subjects = ['aws-aif', 'aws-aip', 'aws-clf', 'aws-mla', 'aws-saa', 'dele-a1', 'dele-a2',
+  const subjects = ['aws-aib', 'aws-aif', 'aws-aip', 'aws-clf', 'aws-mla', 'aws-saa', 'dele-a1', 'dele-a2',
     'fe', 'java-bronze', 'programming', 'toeic-listening', 'toeic-reading', 'workbuddy-opc'];
   for (const subject of subjects) {
     assert.ok((await stat(new URL('question-banks/' + subject + '/', root))).isDirectory(), subject);

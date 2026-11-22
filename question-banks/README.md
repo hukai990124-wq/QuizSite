@@ -1,10 +1,10 @@
 # 全题库 TypeScript 维护方式
 
-13 个题库都由同一套严格检查的 TypeScript 发布器构建。题目数据与页面框架已经分开；正常构建不需要运行旧 Python 页面生成器，也不读取 `site` 中的 HTML 作为模板。
+14 个题库都由同一套严格检查的 TypeScript 发布器构建。题目数据与页面框架已经分开；正常构建不需要运行旧 Python 页面生成器，也不读取 `site` 中的 HTML 作为模板。
 
 ```text
 question-banks/
-  aws-aif/、aws-aip/、aws-clf/、aws-mla/、aws-saa/
+  aws-aib/、aws-aif/、aws-aip/、aws-clf/、aws-mla/、aws-saa/
   dele-a1/、dele-a2/、fe/、java-bronze/、programming/
   toeic-listening/、toeic-reading/、workbuddy-opc/
     bank.mts            # 题库名称、页面数据与附加文件的 TypeScript 声明

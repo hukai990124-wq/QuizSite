@@ -69,13 +69,13 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     <div class="hero-copy">
       <span class="badge">个人题库 · 在线练习</span>
       <h1>在线免费 AI 练习题库</h1>
-      <p class="sub">13 个题库 · 共 5691 题次 · 可作答判分 · 登录后跨设备同步</p>
+      <p class="sub">14 个题库 · 共 5776 题次 · 可作答判分 · 登录后跨设备同步</p>
       <a class="hero-cta" href="#catalog"><span>开始今天的练习</span><span class="arrow" aria-hidden="true">↗</span></a>
       <ul class="hero-notes"><li>即时判分与解析</li><li>自动保存进度</li><li>多语言对照</li></ul>
     </div>
     <div class="overall">
       <div class="progress-caption"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15v-4m4 4V7m4 8v-6" stroke-linecap="round"/></svg><span>我的学习概览</span></div>
-      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 5691</b></div>
+      <div class="ov-hd"><span>总进度（全部题库）</span><b id="ov-txt">0 / 5776</b></div>
       <div class="ov-bar"><i id="ov-fill"></i></div>
       <div class="progress-bottom">
         <p class="study-time i18n-noloc" id="qb-study-time" role="timer" aria-live="off">今日已学习 00:00:00</p>
@@ -157,7 +157,7 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
     </section>
 
     <section class="bank-group" id="cloud-banks" aria-labelledby="cloud-banks-title">
-      <div class="section-heading"><span class="section-number" aria-hidden="true">02</span><h2 id="cloud-banks-title">云计算与 AI 认证</h2><span class="section-total">5 个题库</span></div>
+      <div class="section-heading"><span class="section-number" aria-hidden="true">02</span><h2 id="cloud-banks-title">云计算与 AI 认证</h2><span class="section-total">6 个题库</span></div>
       <div class="cards">
       <a class="card" href="aws-saa/index.html" data-site="aws-saa">
         <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">SAA</span><span class="card-arrow">↗</span></div>
@@ -178,6 +178,13 @@ document.documentElement.setAttribute("lang",l==="zh"?"zh-CN":(l==="ja"?"ja":"en
         <div class="top"><span class="tg g">AI 认证</span><span class="cnt">782 题</span></div>
         <h3>AWS AIF-C01 · AI Practitioner</h3>
         <p class="sd">真题库 452 题 + 练习卷 230 题 + 专业术语 100 题，附答案与解析。</p>
+        <div class="pg"><i></i><span>未开始</span></div>
+      </a>
+      <a class="card" href="aws-aib/index.html" data-site="aws-aib">
+        <div class="card-heading" aria-hidden="true"><span class="subject-icon i18n-noloc">AIB</span><span class="card-arrow">↗</span></div>
+        <div class="top"><span class="tg g">AI 认证</span><span class="cnt">85 题</span></div>
+        <h3>AWS AIB-C01 · AI Business Strategist</h3>
+        <p class="sd">60 张日中英术语卡，85 道原创模拟题，支持随机 10 题和 50 题考试。</p>
         <div class="pg"><i></i><span>未开始</span></div>
       </a>
       <a class="card" href="aws-aip/index.html" data-site="aws-aip">
@@ -371,6 +378,7 @@ var SITES={
   "aws-saa":{keys:awsKeys()},
   "aws-clf":{keys:seq("aws:clf:",1,4,50)},
   "aws-aif":{keys:aifKeys()},
+  "aws-aib":{keys:[["aws:aib:mock:01",85]]},
   "aws-aip":{keys:[["aws:aip:01",50],["aws:aip:02",50],["aws:aip:03",36],["aws:aip:open:easy:01",50],["aws:aip:open:easy:02",50],["aws:aip:open:easy:03",50],["aws:aip:open:easy:04",46],["aws:aip:open:hard:01",50],["aws:aip:open:hard:02",50],["aws:aip:open:hard:03",15],["aws:aip:open:veryhard:01",50],["aws:aip:open:veryhard:02",50],["aws:aip:open:veryhard:03",31]]},
   "aws-mla":{keys:[["aws:mla:c01",65]]},
   "fe":{keys:[["fe:a:2022",60],["fe:a:2023",20],["fe:a:2024",20],["fe:a:2025",20],["fe:a:2026",20],

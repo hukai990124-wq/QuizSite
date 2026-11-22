@@ -1,3 +1,4 @@
+import aib from '../../question-banks/aws-aib/bank.mjs';
 import aif from '../../question-banks/aws-aif/bank.mjs';
 import aip from '../../question-banks/aws-aip/bank.mjs';
 import clf from '../../question-banks/aws-clf/bank.mjs';
@@ -13,4 +14,4 @@ import reading from '../../question-banks/toeic-reading/bank.mjs';
 import opc from '../../question-banks/workbuddy-opc/bank.mjs';
 import type { QuestionBank } from './model.mjs';
 
-export const banks: readonly QuestionBank[] = [aif, aip, clf, mla, saa, a1, a2, fe, java, programming, listening, reading, opc];
+export const banks: readonly QuestionBank[] = [aib, aif, aip, clf, mla, saa, a1, a2, fe, java, programming, listening, reading, opc];
