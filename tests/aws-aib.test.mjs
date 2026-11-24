@@ -22,9 +22,9 @@ test('the user-curated AIB paper preserves its supplied key and flags disputed q
   const pages = JSON.parse(await load('question-banks/aws-aib/pages.json'));
   assert.deepEqual(pages.filter(page => page.questions.length).map(page => page.path), ['aws-aib/community01.html']);
   const paper = pages.find(page => page.path === 'aws-aib/community01.html');
-  assert.equal(paper.questions.length, 30);
-  assert.equal(new Set(paper.questions.map(question => question.content.stem)).size, 30);
-  assert.equal(paper.questions.map(question => question.answer).join(''), 'DADBBBBCDDABACBCDCABDADDCDBCDD');
+  assert.equal(paper.questions.length, 31);
+  assert.equal(new Set(paper.questions.map(question => question.content.stem)).size, 31);
+  assert.equal(paper.questions.map(question => question.answer).join(''), 'DADBBBBCDDABACBCDCABDADDCDBCDDD');
   for (const [index, question] of paper.questions.entries()) {
     assert.equal(question.id, 'q' + (index + 1));
     assert.equal(question.number, String(index + 1));
@@ -44,12 +44,12 @@ test('the user-curated AIB paper preserves its supplied key and flags disputed q
   const index = await load('site/aws-aib/index.html');
   assert.match(index, /pool=aws-aib&amp;size=10"/);
   assert.doesNotMatch(index, /mock01\.html|pool=aws-aib&amp;size=(50|85)"/);
-  assert.match(index, /href="community01.html" data-quiz-key="aws:aib:community:01" data-quiz-total="30"/);
+  assert.match(index, /href="community01.html" data-quiz-key="aws:aib:community:01" data-quiz-total="31"/);
 });
 
 test('AIB uses the supplied paper for random exams and landing-page progress', async () => {
   const home = await load('site/index.html');
-  assert.match(home, /"aws-aib":\{keys:\[\["aws:aib:community:01",30\]\]\}/);
+  assert.match(home, /"aws-aib":\{keys:\[\["aws:aib:community:01",31\]\]\}/);
   const random = await load('site/assets/random-quiz.js');
   assert.match(random, /"aws-aib":[^\n]+files: \["aws-aib\/community01\.html"\]/);
   assert.doesNotMatch(random, /aws-aib\/mock01\.html/);

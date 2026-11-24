@@ -64,5 +64,5 @@ export const aibLayouts: Layouts = {
     {"layout":"script-9c3048d5306030feff49","bindings":{"REL.0":"script.0.REL"}},
     "\r\n<!--/i18n:js--></body></html>\r\n"
   ],
-  'aib-community-paper': aibPaper(30, '用户整理 · 附件参考答案'),
+  'aib-community-paper': aibPaper(31, '用户整理 · 参考答案'),
 };

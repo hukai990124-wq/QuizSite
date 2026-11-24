@@ -7,7 +7,7 @@
       "h1.1": "AWS AIB-C01 · AI Business Strategist",
       "p.2": "AWS Certified AI Business Strategist",
       "script.0.REL": "../",
-      "resources": "<div class=\"random-entry\"><strong>随机考试</strong><span>按四个考纲领域抽题，交卷后查看成绩与解析。</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-aib&amp;size=10\">随机 10 题</a></div></div>\n<div class=\"grp\"><a class=\"card\" href=\"vocabulary.html\"><div class=\"n\">用语集 · 单词卡</div><div class=\"r\">60 个术语 · 日文读音、英文与中文释义</div></a>\n<a class=\"card\" href=\"community01.html\" data-quiz-key=\"aws:aib:community:01\" data-quiz-total=\"30\"><div class=\"n\">用户整理练习卷</div><div class=\"r\">30 题 · 英文原题 · 中文解析</div><div class=\"pg\"><i></i><span>未开始</span></div></a></div>\n<div class=\"note\"><p><a href=\"https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html\">AWS 日文考试指南</a> · <a href=\"https://aws.amazon.com/jp/certification/certified-ai-business-strategist/\">AWS 官方备考资源</a> · <a href=\"https://zghanw.github.io/aws-ai-business-strategist/\">社区英文计时模拟考</a></p></div>"
+      "resources": "<div class=\"random-entry\"><strong>随机考试</strong><span>按四个考纲领域抽题，交卷后查看成绩与解析。</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-aib&amp;size=10\">随机 10 题</a></div></div>\n<div class=\"grp\"><a class=\"card\" href=\"vocabulary.html\"><div class=\"n\">用语集 · 单词卡</div><div class=\"r\">60 个术语 · 日文读音、英文与中文释义</div></a>\n<a class=\"card\" href=\"community01.html\" data-quiz-key=\"aws:aib:community:01\" data-quiz-total=\"31\"><div class=\"n\">用户整理练习卷</div><div class=\"r\">31 题 · 英文原题 · 中文解析</div><div class=\"pg\"><i></i><span>未开始</span></div></a></div>\n<div class=\"note\"><p><a href=\"https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html\">AWS 日文考试指南</a> · <a href=\"https://aws.amazon.com/jp/certification/certified-ai-business-strategist/\">AWS 官方备考资源</a> · <a href=\"https://zghanw.github.io/aws-ai-business-strategist/\">社区英文计时模拟考</a></p></div>"
     },
     "questions": []
   },
@@ -22,11 +22,11 @@
     "layout": "aib-community-paper",
     "content": {
       "script.0.KEY": "quiz:aws:aib:community:01",
-      "script.1.TOTAL": "30",
+      "script.1.TOTAL": "31",
       "script.2.REL": "../",
       "title.0": "AWS AIB-C01 · 用户整理练习卷",
       "h1.1": "AWS AIB-C01 · 用户整理练习卷",
-      "p.2": "30 道单选 · 英文原题与中文解析 · 按附件参考答案判分，题目疑点见备注。",
+      "p.2": "31 道单选 · 英文原题与中文解析 · 按参考答案判分，题目疑点见备注。",
       "h3.3": "本份成绩",
       "table.4": "\r\n      <tr><td>已作答</td><td id=\"rp-done\">0</td></tr>\r\n      <tr><td>答对</td><td id=\"rp-ok\">0</td></tr>\r\n      <tr><td>答错</td><td id=\"rp-bad\">0</td></tr>\r\n      <tr><td>未作答</td><td id=\"rp-left\">0</td></tr>\r\n      <tr><td>用时</td><td id=\"rp-time\">—</td></tr>\r\n    "
     },
@@ -1316,6 +1316,49 @@
             "layout": "choice-c7c7ed2d90f1ba3c1f47",
             "content": {
               "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Annual net benefit: $1.8M + ($85K × 2) + $220K − $150K − $65K = $1.975M. Payback period: about 7 months. The full multi-source benefit is included and the compliance documentation cost is subtracted.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q31",
+        "number": "31",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 31</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI Investment Posture - Specialty Retail\">AI031</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional specialty retail chain operating 88 stores in six states sells outdoor and technical apparel. The CEO is reviewing an industry landscape report that shows the following: approximately 15% of comparable specialty retailers now use AI-powered demand forecasting or personalization, and the leading 5% are deploying AI-powered visual search, virtual try-on, and predictive customer service across their digital and in-store experiences. Industry analysts characterize outdoor and technical apparel retail as Emerging (Stage 2) in AI adoption. The chain's competitive position: 44% of revenue is from a proprietary product line designed in-house that has strong brand loyalty; store staff have deep product knowledge that customers value; and the chain's e-commerce platform is functional but limited. A recent survey of top customers shows they value \"expert staff\" (72%) and \"quality of proprietary product line\" (68%) as their top two reasons for shopping there. Digital experience ranks fourth in importance (34%). The CFO has proposed either matching the leading 5% investment posture (multiple AI capabilities across digital and in-store) or continuing to invest at industry pace.</p><p class=\"en i18n-noloc\" lang=\"en\">Which investment posture is most appropriate for the described industry maturity stage?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">D 最符合题设。行业处于 AI 采用的起步阶段，已有部分同行使用需求预测或个性化。公司可按行业节奏选择有明确价值的场景试点，同时保留预算投入自有产品线和门店专业服务。A 和 B 都缺乏足以支持追赶头部投资的业务证据。C 则错过了验证 AI 业务价值的机会。</p><p class=\"i18n-noloc\" lang=\"zh-CN\">备注：15% 是采用相关 AI 能力的同行比例。题目没有提供同行投资额的中位数，也不足以判断这家公司的现有投入是否偏低。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Match the leading 5% posture. Emerging-stage industries reward early movers with disproportionate market share gains, and the chain should not risk falling behind.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Match the leading 5% posture but only in the digital channel, since the chain's digital experience is the ranked-fourth weakness. In-store AI investment is not needed given the expert staff signal.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Hold, the 72% expert staff and 68% proprietary product signals show that AI is not what drives shopping decisions. No AI investment is warranted until customer preferences shift.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Invest at industry pace (match the median 15% adoption). The chain is not underinvested, and matching median AI investment preserves competitive parity while protecting capital for the proprietary product line, which is the primary differentiator.</p>"
             }
           }
         ],

@@ -2398,11 +2398,11 @@
   "AWS 日文考试指南": {"en": "AWS exam guide in Japanese", "ja": "AWS 試験ガイド（日本語）"},
   "AWS 官方备考资源": {"en": "Official AWS preparation resources", "ja": "AWS 公式試験対策"},
   "社区英文计时模拟考": {"en": "Community timed mock exam in English", "ja": "コミュニティの時間制模擬試験（英語）"},
-  "14 个题库 · 共 5721 题次 · 可作答判分 · 登录后跨设备同步": {"en": "14 question banks · 5,721 questions · sign in to sync progress", "ja": "14の問題集・全5,721問・ログインで進捗を同期"},
-  "60 张日中英术语卡、30 道用户整理题，支持随机 10 题。": {"en": "60 glossary cards and 30 user-curated questions. Take a random 10-question exam.", "ja": "用語カード60枚、ユーザー提供問題30問、ランダム試験10問。"},
+  "14 个题库 · 共 5722 题次 · 可作答判分 · 登录后跨设备同步": {"en": "14 question banks · 5,722 questions · sign in to sync progress", "ja": "14の問題集・全5,722問・ログインで進捗を同期"},
+  "60 张日中英术语卡、31 道用户整理题，支持随机 10 题。": {"en": "60 glossary cards and 31 user-curated questions. Take a random 10-question exam.", "ja": "用語カード60枚、ユーザー提供問題31問、ランダム試験10問。"},
   "用户整理练习卷": {"en": "User-curated practice paper", "ja": "ユーザー提供の練習問題"},
   "AWS AIB-C01 · 用户整理练习卷": {"en": "AWS AIB-C01 · User-curated practice paper", "ja": "AWS AIB-C01 · ユーザー提供の練習問題"},
-  "30 题 · 英文原题 · 中文解析": {"en": "30 questions in English with Chinese explanations", "ja": "全30問・問題文は英語、解説は中国語"},
-  "30 道单选 · 英文原题与中文解析 · 按附件参考答案判分，题目疑点见备注。": {"en": "30 single-answer questions in English with Chinese explanations. Grading follows the supplied answer key. See notes for disputed items.", "ja": "択一式30問。問題文は英語、解説は中国語です。提供された参考解答に基づいて採点します。疑義がある箇所は注記をご確認ください。"},
-  "用户整理 · 附件参考答案 ·": {"en": "User-curated · Supplied answer key ·", "ja": "ユーザー提供・参考解答・"}
+  "31 题 · 英文原题 · 中文解析": {"en": "31 questions in English with Chinese explanations", "ja": "全31問・問題文は英語、解説は中国語"},
+  "31 道单选 · 英文原题与中文解析 · 按参考答案判分，题目疑点见备注。": {"en": "31 single-answer questions in English with Chinese explanations. Grading follows the supplied answer key. See notes for disputed items.", "ja": "択一式31問。問題文は英語、解説は中国語です。提供された参考解答に基づいて採点します。疑義がある箇所は注記をご確認ください。"},
+  "用户整理 · 参考答案 ·": {"en": "User-curated · Supplied answer key ·", "ja": "ユーザー提供・参考解答・"}
 }

@@ -6,7 +6,7 @@
   }
   const pools = {
     "aws-clf": { title: "AWS CLF-C02", type: "aws", files: files("aws-clf", 4, "part"), quotas: [12, 15, 17, 6], quickQuotas: [2, 3, 4, 1] },
-    "aws-aib": { title: "AWS AIB-C01", type: "aws", files: ["aws-aib/community01.html"], storagePool: "aws-aib-community", quickQuotas: [2, 3, 3, 2], tenQuestionExam: true, maxSize: 30 },
+    "aws-aib": { title: "AWS AIB-C01", type: "aws", files: ["aws-aib/community01.html"], storagePool: "aws-aib-community", quickQuotas: [2, 3, 3, 2], tenQuestionExam: true, maxSize: 31 },
     "aws-aip": { title: "AWS AIP-C01", type: "aws", files: [...files("aws-aip", 3, "part"), ...files("aws-aip/open-easy", 4, "part"), ...files("aws-aip/open-hard", 3, "part"), ...files("aws-aip/open-veryhard", 3, "part")] },
     "aws-aif": { title: "AWS AIF-C01", type: "aws", files: [...files("aws-aif/bank", 10, "part"), ...files("aws-aif/practice", 5, "part")] },
     "aws-saa": { title: "AWS SAA-C03", type: "aws", storagePool: "aws-saa-ac", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/original", 1, "part")] },
@@ -31,9 +31,12 @@
 
   let seed = params.get("seed");
   const hasSeed = /^[a-f0-9]{8}$/i.test(seed || "");
+  // Keep the original 30-question pool for saved links from before the new question.
+  const legacyAib = poolName === "aws-aib" && hasSeed && params.get("bank") !== "31";
   if (!hasSeed) {
     seed = Array.from(crypto.getRandomValues(new Uint8Array(4)), n => n.toString(16).padStart(2, "0")).join("");
     params.set("seed", seed);
+    if (poolName === "aws-aib") params.set("bank", "31");
     history.replaceState(null, "", `${location.pathname}?${params}`);
   }
   let state = parseInt(seed, 16) || 1;
@@ -217,7 +220,8 @@
       });
     }
     // A changed question pool must not reuse answers saved for the old numbered paper.
-    doc.documentElement.dataset.examKey = `quiz:random-exam:${config.storagePool || poolName}:${size}:${seed}`;
+    const storagePool = poolName === "aws-aib" && !legacyAib ? "aws-aib-retail" : config.storagePool || poolName;
+    doc.documentElement.dataset.examKey = `quiz:random-exam:${storagePool}:${size}:${seed}`;
     doc.documentElement.dataset.examTitle = config.title;
     const examStyle = doc.createElement("link");
     examStyle.rel = "stylesheet";
@@ -253,12 +257,13 @@
           Array.from(node.querySelectorAll(".opts li.opt"), option => option.dataset.letter || ""),
           node.getAttribute("data-kind") || ""))
         .map(node => ({ ...questionUnit(node), url }))));
+      const candidates = legacyAib ? all.slice(0, 30) : all;
       const quotas = shortAwsPaper ? config.quickQuotas : config.quotas;
       let selected;
       if (quotas) {
-        selected = quotas.flatMap((count, index) => sample(all.filter(unit => unit.nodes[0].querySelector(".badge")?.textContent.includes(`Domain ${index + 1}`)), count));
+        selected = quotas.flatMap((count, index) => sample(candidates.filter(unit => unit.nodes[0].querySelector(".badge")?.textContent.includes(`Domain ${index + 1}`)), count));
         selected = shuffle(selected);
-      } else selected = sample(all, size);
+      } else selected = sample(candidates, size);
       render(base, selected, null);
     } else {
       const quotas = config.type === "listening" ? (size === 50 ? [3, 14, 18, 15] : [6, 25, 39, 30]) : (size === 50 ? [15, 8, 27] : [30, 16, 54]);

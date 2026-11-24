@@ -54,7 +54,7 @@ test('AIP directory, aggregate progress and random pool include old and new pape
   assert.equal((index.match(/data-quiz-key="aws:aip:/g)||[]).length,13);
   // The shared translator must not flatten the link's enclosing toolbar.
   assert.match(index,/<a id="aip-random" href="\.\.\/random\.html\?pool=aws-aip&amp;size=50">/);
-  const home=await load('site/index.html');assert.match(home,/>578 题</);assert.match(home,/0 \/ 5721</);
+  const home=await load('site/index.html');assert.match(home,/>578 题</);assert.match(home,/0 \/ 5722</);
   for(const [tier,counts] of groups)for(const [i,count] of counts.entries()){
     const part=String(i+1).padStart(2,'0');
     assert.ok(home.includes(`["aws:aip:open:${tier}:${part}",${count}]`));
