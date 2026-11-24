@@ -7,7 +7,7 @@
       "h1.1": "AWS AIB-C01 · AI Business Strategist",
       "p.2": "AWS Certified AI Business Strategist",
       "script.0.REL": "../",
-      "resources": "<div class=\"random-entry\"><strong>随机考试</strong><span>按四个考纲领域抽题，交卷后查看成绩与解析。</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-aib&amp;size=10\">随机 10 题</a></div></div>\n<div class=\"grp\"><a class=\"card\" href=\"vocabulary.html\"><div class=\"n\">用语集 · 单词卡</div><div class=\"r\">60 个术语 · 日文读音、英文与中文释义</div></a>\n<a class=\"card\" href=\"community01.html\" data-quiz-key=\"aws:aib:community:01\" data-quiz-total=\"31\"><div class=\"n\">用户整理练习卷</div><div class=\"r\">31 题 · 英文原题 · 中文解析</div><div class=\"pg\"><i></i><span>未开始</span></div></a></div>\n<div class=\"note\"><p><a href=\"https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html\">AWS 日文考试指南</a> · <a href=\"https://aws.amazon.com/jp/certification/certified-ai-business-strategist/\">AWS 官方备考资源</a> · <a href=\"https://zghanw.github.io/aws-ai-business-strategist/\">社区英文计时模拟考</a></p></div>"
+      "resources": "<div class=\"random-entry\"><strong>随机考试</strong><span>按四个考纲领域抽题，交卷后查看成绩与解析。</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-aib&amp;size=10\">随机 10 题</a></div></div>\n<div class=\"grp\"><a class=\"card\" href=\"vocabulary.html\"><div class=\"n\">用语集 · 单词卡</div><div class=\"r\">60 个术语 · 日文读音、英文与中文释义</div></a>\n<a class=\"card\" href=\"community01.html\" data-quiz-key=\"aws:aib:community:01\" data-quiz-total=\"40\"><div class=\"n\">用户整理练习卷</div><div class=\"r\">40 题 · 英文原题 · 中文解析</div><div class=\"pg\"><i></i><span>未开始</span></div></a></div>\n<div class=\"note\"><p><a href=\"https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html\">AWS 日文考试指南</a> · <a href=\"https://aws.amazon.com/jp/certification/certified-ai-business-strategist/\">AWS 官方备考资源</a> · <a href=\"https://zghanw.github.io/aws-ai-business-strategist/\">社区英文计时模拟考</a></p></div>"
     },
     "questions": []
   },
@@ -22,11 +22,11 @@
     "layout": "aib-community-paper",
     "content": {
       "script.0.KEY": "quiz:aws:aib:community:01",
-      "script.1.TOTAL": "31",
+      "script.1.TOTAL": "40",
       "script.2.REL": "../",
       "title.0": "AWS AIB-C01 · 用户整理练习卷",
       "h1.1": "AWS AIB-C01 · 用户整理练习卷",
-      "p.2": "31 道单选 · 英文原题与中文解析 · 按参考答案判分，题目疑点见备注。",
+      "p.2": "40 道单选 · 英文原题与中文解析 · 按参考答案判分，题目疑点见备注。",
       "h3.3": "本份成绩",
       "table.4": "\r\n      <tr><td>已作答</td><td id=\"rp-done\">0</td></tr>\r\n      <tr><td>答对</td><td id=\"rp-ok\">0</td></tr>\r\n      <tr><td>答错</td><td id=\"rp-bad\">0</td></tr>\r\n      <tr><td>未作答</td><td id=\"rp-left\">0</td></tr>\r\n      <tr><td>用时</td><td id=\"rp-time\">—</td></tr>\r\n    "
     },
@@ -1359,6 +1359,393 @@
             "layout": "choice-c7c7ed2d90f1ba3c1f47",
             "content": {
               "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Invest at industry pace (match the median 15% adoption). The chain is not underinvested, and matching median AI investment preserves competitive parity while protecting capital for the proprietary product line, which is the primary differentiator.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q32",
+        "number": "32",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 32</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI-B2-001 · 地区流媒体：个性化推荐的竞争威胁\">AI032</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional streaming service with 2.4M subscribers learns that a national competitor has deployed an AI-powered content recommendation and personalization engine. The competitor's engine personalizes not just what content is shown, but thumbnail images, content descriptions, and notification timing for each subscriber. The competitor has 16 months of live deployment. Two major content studios have begun offering the competitor exclusive early-window releases based on the platform's demonstrated viewer engagement data. The regional service's competitive position: exclusive rights to regional sports and local news content that the national competitor cannot offer, an average subscriber relationship of 3.8 years, and a subscriber survey showing 74% cite \"local and regional content\" as their primary reason for subscribing. A recent survey also shows 38% of subscribers rate their recommendation experience as \"poor or fair\", up from 22% two years ago.</p><p class=\"en i18n-noloc\" lang=\"en\">Which strategic response is most defensible?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">地区体育和本地新闻是74%用户选择订阅的主要原因，核心差异化仍在；但推荐体验差评达到38%，因此应针对性改进，而不是复制全国对手全套系统。题目未直接提供流失数据。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Accelerate: the 16-month deployment, studio exclusive relationships, and 38% dissatisfied recommendation experience together signal that the window for the regional service to retain subscribers is closing rapidly. Invest immediately in a comparable personalization engine.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Pivot: the regional service cannot compete with a national operator's personalization technology. Invest instead in deepening the regional content library and local news coverage to make the content advantage more defensible.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Hold: the 74% regional content signal is strong enough that no technology investment in personalization is justified. The competitor's personalization advantage does not threaten local content access, which is the primary subscription driver.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Hold with targeted investment: the 74% regional content retention signal is the durable advantage. The 38% recommendation dissatisfaction is a real gap but is not yet driving churn. Invest in a recommendation improvement that closes the most visible gap for subscribers, without attempting to match the national competitor's full personalization stack.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q33",
+        "number": "33",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 33</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI-B2-002 · 航空公司：专有数据与可持续竞争优势\">AI033</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional airline operates 78 aircraft on short-haul routes between mid-sized cities. The executive team is reviewing two AI initiatives and needs to identify which one is more likely to produce a sustainable competitive advantage versus an operational improvement.</p><p class=\"en i18n-noloc\" lang=\"en\">Initiative 1 (AI-powered fuel-burn optimization): An AI model recommends optimal flight profiles (climb rate, cruise altitude, descent path) to minimize fuel burn based on aircraft weight, weather, and route. Expected result: 2.8% reduction in fuel cost per flight. The underlying technology is available from three commercial vendors and used by many airlines globally.<br>Initiative 2 (AI-powered network optimization using proprietary customer data): The airline has 11 years of customer booking data, cancellation patterns, and route preferences unique to its regional network. An AI system uses this proprietary data to optimize schedule design, which routes to fly, at which frequencies, at which times, in ways competitors cannot replicate without the same data history in the same regional market. Expected result: 4.5% revenue lift and 6% load factor improvement, both compounding as the data set grows over time.<br>Which initiative is more likely to produce a sustainable competitive advantage, and why?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">商业燃油优化工具可被其他航空公司购买，主要带来运营改进；11年独有的地区客户及航线数据更难被竞争对手复制，结合数据飞轮更可能构成可持续优势。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Initiative 1 (fuel-burn optimization) because fuel is the largest single cost line and reducing it produces the largest financial impact.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Both initiatives produce sustainable advantages because both improve financial performance over time.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Neither initiative produces a sustainable advantage because AI capabilities can be copied by competitors within 12-18 months of any deployment.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Initiative 2 (network optimization using proprietary data) because the 11-year proprietary regional data set is a resource competitors cannot replicate. Sustainable advantage comes from AI applications that use resources unique to the company, not from AI applications that are widely available from commercial vendors.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q34",
+        "number": "34",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 34</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI-B2-003 · 住宅建筑商：运营改进与商业模式转型\">AI034</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional home builder constructs 340 homes per year in three metro areas. The executive team is evaluating two AI investments. The Chief Executive wants to categorize each investment correctly before presenting them to the private equity investors who own the company, because the investors treat business model changes as strategic initiatives requiring board approval, while operational improvements can be approved by the executive team alone.</p><p class=\"en i18n-noloc\" lang=\"en\">Proposal 1 (AI construction sequencing): An AI system optimizes the sequence of trades on each construction site (framing, electrical, plumbing, drywall, finishing) based on weather forecasts, trade crew availability, and material delivery schedules. Expected result: 12% reduction in average build cycle time, 7% reduction in idle-time waste, more predictable delivery dates. The builder continues to sell homes at a fixed contract price; the customer relationship, product line, and revenue model are unchanged.<br>Proposal 2 (AI-driven customization-at-scale with dynamic pricing): The builder shifts to a \"configurable home\" model. Customers use an AI-powered design tool to customize floor plans, finishes, and features. The AI generates real-time pricing based on complexity, material availability, and current labor rates. The builder shifts from selling pre-designed home models to selling customized home builds at dynamic prices. Requires new legal contracts (customization scope, change orders, pricing model), new customer sales process, new operations model for handling per-home customization, and new relationships with material suppliers who can support faster-turn customization.<br>Which proposal requires board approval as a business model change, and why?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">方案1只优化建造流程，固定定价、产品与客户关系不变；方案2改变产品（定制住宅）、收费方式（动态定价）和运营流程，因此属于需董事会批准的商业模式变化。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Proposal 2 requires board approval because it changes the product (from pre-designed models to customized builds), the revenue model (from fixed contract price to dynamic pricing), and the operational model (from series production to per-home customization). Proposal 1 is an operational improvement within the existing business model.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Proposal 1 requires board approval because it directly affects construction operations, which are the primary business function of a home builder.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Both proposals require board approval because AI investments at this scale represent strategic changes that private equity investors will want to review.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Neither proposal requires board approval, the executive team can approve both because AI is a technology decision, not a business decision.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q35",
+        "number": "35",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 35</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI-B2-004 · 食品配送商：按消耗量收费的商业模式\">AI035</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional food service distributor supplies 1,200 restaurants across four states with a mix of dry goods, produce, and refrigerated products. The executive team is reviewing two AI investment proposals with a $2M budget for one initiative. The board wants to understand which proposal represents an operational improvement and which represents a business model change, because the board's evaluation criteria are different for each.</p><p class=\"en i18n-noloc\" lang=\"en\">Proposal A (Dynamic route optimization): AI reoptimizes delivery routes every 15 minutes based on real-time order updates, traffic, and driver availability. Expected result: 18% reduction in delivery miles, 12% reduction in fuel and vehicle costs, faster delivery for time-sensitive orders. The distributor continues to bill customers on the current model (per-case wholesale pricing plus delivery fees).<br>Proposal B (Autonomous replenishment with consumption-based billing): AI monitors real-time inventory levels at each restaurant using sensor data (weight-sensing shelves, refrigerator sensors) and automatically triggers replenishment orders. Restaurants pay for what they consume in a period, not what they order. The distributor takes responsibility for maintaining inventory levels within agreed ranges. Requires new legal agreements, new billing infrastructure, restaurant-side sensor deployment, and a new operating team to manage restaurant-side inventory across 1,200 sites.<br>Which proposal represents an operational improvement and which represents a business model change?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">方案A仍按箱计价与收配送费，只改善配送效率；方案B改为按实际消耗量收费，并由配送商承担餐厅现场库存维护责任，改变价值主张、收入模式和运营责任。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Proposal A is a business model change; Proposal B is an operational improvement. Proposal A changes how customers experience delivery. Proposal B is a more efficient version of the existing order-and-replenish process.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Both proposals are business model changes. Any AI investment at this scale ($2M) represents a change to how the distributor operates, and the board should evaluate both as strategic transformations.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Both proposals are operational improvements. Both use AI to make an existing process (delivery in A, replenishment in B) more efficient. Neither changes what the distributor sells.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Proposal A is an operational improvement; Proposal B is a business model change. Proposal A optimizes an existing process (delivery) within the current business model. Proposal B changes what the distributor sells (from cases delivered to inventory levels maintained), how customers pay (from per-case orders to consumption-based billing), and what the distributor is responsible for (its warehouse plus restaurant-side inventory).</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q36",
+        "number": "36",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 36</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI-B2-005 · 电子零售商：12年会员数据的独占优势\">AI036</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A national consumer electronics retailer is comparing two AI investments to allocate its innovation budget. The Chief Strategy Officer wants to invest in the one that creates a more sustainable competitive advantage, and needs to articulate the reasoning to the board.</p><p class=\"en i18n-noloc\" lang=\"en\">Investment 1 (AI-powered inventory forecasting using industry benchmark data): A vendor offers an AI forecasting service that pools anonymized inventory and sales data across 400+ retailers globally. The retailer's forecasting improves by 15%, matching the improvement other subscribers report. Cost: $180K/year.<br>Investment 2 (AI-powered customer product matching using the retailer's 12-year purchase history, service records, and product ownership data across 8 million loyalty members): The retailer builds a matching engine that recommends products based on each customer's actual product ownership timeline, service history, and household product mix. The data required is unique to the retailer, no competitor has the same 12-year loyalty history for the same customer base. Expected result: 24% increase in relevant recommendation clicks, 11% increase in repeat purchase rate, both improving further as the loyalty data set continues to grow.<br>Which investment creates a more sustainable competitive advantage, and what is the distinguishing factor?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">共享行业数据的预测服务可被其他零售商取得；12年、800万会员的购买和维修记录为企业专有，难以复制，因此更可能形成持续优势。不同指标的15%与24%不能直接比较。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Investment 2 (customer product matching) because it applies AI to a resource, the retailer's 12-year loyalty history for 8 million customers, that competitors cannot replicate. The AI is the enabling technology; the sustainable advantage comes from the proprietary data resource underneath.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Investment 1 (inventory forecasting) because the 15% improvement is a proven benchmark, while Investment 2's 24% is a projection.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Investment 1 (inventory forecasting) because vendor-provided AI is faster to deploy and lower risk, which allows the retailer to concentrate innovation budget on other areas.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Both investments produce equivalent competitive advantages because both use AI to improve customer or operational outcomes.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q37",
+        "number": "37",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 37</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI-B2-006 · 专业出版社：AI阅读工具的局部威胁\">AI037</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A specialty book publisher focused on academic and professional titles learns that a large competitor has deployed an AI-powered \"reader recommendation and reading path\" engine on its digital platform. Readers receive personalized recommendations, curated topical reading paths, and adaptive summaries of key chapters. The competitor has 24 months of live deployment across its full catalog of 45,000 titles. Three research libraries and two corporate learning platforms have integrated the competitor's platform as their default academic reading source. The specialty publisher's competitive position: a catalog of 8,200 titles concentrated in three specialized professional domains (law, medicine, engineering) where the competitor's coverage is broader but shallower; long-standing editorial relationships with domain experts who peer-review titles pre-publication; and 34 years of trust as the reference publisher in these three domains. Reader survey shows 71% of specialty publisher readers cite \"editorial quality and domain expertise\" as the primary reason for choosing its titles. However, a separate survey of readers under 40 shows 47% expect \"AI-assisted reading tools\" from any modern publishing platform, up from 19% four years ago.</p><p class=\"en i18n-noloc\" lang=\"en\">Which competitive assessment is most defensible?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">专业出版社的专家审稿与领域权威仍是核心优势；竞品AI主要威胁阅读工具体验，年轻读者对AI辅助功能的需求升高，应做与专业内容互补的针对性投资。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Zero threat. The 71% editorial-quality signal insulates the specialty publisher from AI-driven competition; readers who value editorial expertise will not switch platforms based on recommendation engines.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Threat to library integrations only. The competitor's advantage is real for institutional accounts (libraries, corporate learning platforms), but individual readers are not affected. The specialty publisher should focus on retaining its editorial reputation and let the library segment go.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Focused threat on the reader-experience layer. The competitor's advantage is at the reading tool layer, not the editorial layer. The specialty publisher's editorial reputation remains durable, but the under-40 expectation signal requires proportionate investment in AI-assisted reading tools that complement, not replace, the editorial value.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Structural threat requiring platform parity. The competitor's 24-month lead and the 47% under-40 expectation signal that specialty publishing is being redefined around AI tools, and the specialty publisher must match the full platform capability.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q38",
+        "number": "38",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 38</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI-B2-007 · 汽车配件零售商：线上AI助手的局部威胁\">AI038</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional automotive parts retailer with 210 store locations across four states learns that a national competitor has deployed an AI-powered \"vehicle profile assistant\" for its e-commerce site. Customers enter their vehicle year, make, and model, and the assistant recommends compatible parts, cross-sells related components (for example, brake pads plus rotors plus fluid), and suggests preventive maintenance items based on typical service intervals. The competitor has launched the assistant in 12 of its 45 metro markets and reports early results: online basket size up 22% in launch markets and repeat purchase rate up 14%. The competitor operates on a modern e-commerce platform and has an in-house data science team of 8. The regional retailer's competitive position: 210 physical locations concentrated in mid-market cities where the national competitor has smaller footprint, an average customer relationship of 6.4 years, and a customer survey showing 68% cite \"trusted local counter staff\" as the primary reason for shopping there. Online sales are 14% of the retailer's total revenue.</p><p class=\"en i18n-noloc\" lang=\"en\">Which competitive assessment is most defensible?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">竞品AI助手的直接优势集中在线上渠道，而地区商家线上收入占14%，线下店员信任是主要优势；应提升线上兼容性和推荐功能，不必仓促复制全套平台。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">High threat requiring emergency response. The competitor's 22% basket lift and 14% repeat rate demonstrate the AI advantage is real, and the retailer must match it within 12 months.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Low threat. The retailer's counter-staff advantage and 6.4-year relationships insulate it from the competitor's AI capability, which only affects online transactions.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Moderate, focused threat. The competitor's advantage is concentrated in the e-commerce channel, which is 14% of the retailer's revenue. The counter-staff advantage (68% cite it as primary reason) protects the larger in-store channel. The right response is targeted online capability improvement, not full parity with the competitor.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Structural threat requiring pivot. The retailer cannot compete with the competitor's data science capability, so it should exit online sales and focus entirely on the physical store channel.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q39",
+        "number": "39",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 39</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI-B2-008 · 商业银行：增长期AI投资策略\">AI039</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional business bank serving mid-market commercial clients ($10M–$500M in annual revenue) is reviewing its AI investment strategy. The CIO reports the following industry data: approximately 68% of comparable business banks now have AI in production across credit decisioning, fraud detection, and treasury management workflows. The leading 15% have moved to AI-driven client advisory platforms and AI-powered commercial loan structuring. The industry is characterized as Growth (Stage 3). The regional bank currently has AI in production for fraud detection and credit decisioning, matching the median adoption. It has no AI capability in treasury management workflows or client advisory. The bank's competitive position: 12-year average client relationship with mid-market commercial clients, relationship managers with deep sector expertise (manufacturing, healthcare, professional services), and a client survey showing 78% cite \"relationship manager expertise and responsiveness\" as the primary reason for banking there. However, a separate survey shows 42% of the bank's clients under age 55 are using competitor AI tools (from other banks) for financial insight, up from 18% four years ago.</p><p class=\"en i18n-noloc\" lang=\"en\">Which investment posture is most appropriate given the industry maturity stage and the competitive evidence?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">行业处于增长阶段，银行应补齐正在成为主流的资金管理AI，同时根据年轻客户使用竞品AI工具的信号，选择性推出支持客户经理而非取代他们的AI咨询能力。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Match industry median (fraud + credit decisioning only). The bank already meets the median; the 78% relationship manager signal is the durable advantage, and further AI investment is not warranted.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Close to industry median by adding AI to treasury management workflows (currently unaddressed), and invest selectively in AI-assisted client advisory tools that support, not replace, the relationship manager. The bank is at median on two of four production areas; treasury management is now table-stakes at 68% industry adoption. Client advisory is not yet median but the 42% signal on under-55 client behavior warrants a proportionate advisory investment.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Match the leading 15% posture across all four capabilities (fraud, credit, treasury, advisory). The 42% signal that clients under 55 are using competitor AI tools shows that failing to match leaders creates client attrition risk.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Pivot from AI investment entirely. The 78% relationship manager signal shows that AI is not what clients value. Invest instead in expanding the relationship management team.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q40",
+        "number": "40",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 40</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI-B2-009 · 财富管理公司：数字化与顾问关系\">AI040</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional wealth management firm serving 1,800 high-net-worth clients learns that a national competitor has launched an \"AI-powered portfolio intelligence platform.\" The platform provides clients with real-time portfolio analysis, tax-loss harvesting recommendations, rebalancing alerts, and a conversational interface for financial questions. The competitor has 10 months of live deployment at 12% of its client base. Three fintech integrations with popular personal finance aggregation tools bring the platform's recommendations directly into clients' financial dashboards. The regional firm's competitive position: advisors with 8-year average client relationships, deep knowledge of each client's estate planning and business ownership context, and a client survey showing 81% cite \"my advisor understands my full financial picture\" as the primary reason for staying. A separate survey shows 29% of clients under 50 rate digital access and self-service tools as \"very important\", up from 11% five years ago.</p><p class=\"en i18n-noloc\" lang=\"en\">Which strategic response is most defensible?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">81%客户看重顾问对整体财务的理解，长期关系仍是差异化优势；29%的年轻客户重视数字化入口，支持适度投入组合可视化与基本自助服务，但不足以要求完全复制竞品AI平台。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Hold: the 81% advisor relationship signal is strong enough that no digital investment is warranted. The competitor's platform serves a different segment (clients who prefer self-service over advisor relationships) and does not threaten the regional firm's client base.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Hold with targeted investment: the 81% advisor relationship retention signal is the durable advantage and is not threatened by the competitor's platform. The 29% digital access signal among under-50 clients is a generational trend requiring a proportionate response, a client-facing digital portal that provides portfolio visibility and basic self-service without attempting to match the full AI platform.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Accelerate: the fintech integrations and 29% digital access signal among under-50 clients indicate the window for the regional firm to retain the next generation of high-net-worth clients is closing. Invest immediately in a comparable AI client platform.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Pivot: the regional firm cannot match a national operator's AI investment. Invest instead in expanding the estate planning and business ownership advisory capabilities that the competitor's AI platform cannot replicate.</p>"
             }
           }
         ],
