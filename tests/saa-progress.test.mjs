@@ -41,7 +41,7 @@ test('homepage includes saved SAA C-line and official answers in both subject an
     getElementById: id => ({ 'ov-txt': overall, 'ov-fill': fill })[id],
   }, storage);
   assert.equal(card.text.textContent, '6/1060 题 · 正确率 50%');
-  assert.equal(overall.textContent, '6 / 5806 · 正确率 50%');
+  assert.equal(overall.textContent, '6 / 5721 · 正确率 50%');
   assert.equal(card.bar.style.width, (6 / 1060 * 100) + '%');
   storage.set(originalKey, '{}');
   dispatch('quizsite:progress-updated');

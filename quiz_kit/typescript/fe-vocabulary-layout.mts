@@ -57,5 +57,5 @@ export default vocabularyPage({
 export const aibVocabularyLayout = vocabularyPage({
   subject: 'AWS AIB-C01', label: 'AIB-C01', count: 60, themes: '四个考纲领域',
   bankAttribute: ' data-vocabulary-bank="aib"',
-  footer: '<a href="https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html">AWS 日文考试指南</a> · <a href="mock01.html">原创模拟卷</a>',
+  footer: '<a href="https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html">AWS 日文考试指南</a> · <a href="community01.html">用户整理练习卷</a>',
 });

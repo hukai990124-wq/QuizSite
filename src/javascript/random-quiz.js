@@ -6,7 +6,7 @@
   }
   const pools = {
     "aws-clf": { title: "AWS CLF-C02", type: "aws", files: files("aws-clf", 4, "part"), quotas: [12, 15, 17, 6], quickQuotas: [2, 3, 4, 1] },
-    "aws-aib": { title: "AWS AIB-C01", type: "aws", files: ["aws-aib/mock01.html"], quotas: [12, 14, 12, 12], quickQuotas: [2, 3, 2, 3], tenQuestionExam: true, mockSize: 85 },
+    "aws-aib": { title: "AWS AIB-C01", type: "aws", files: ["aws-aib/community01.html"], storagePool: "aws-aib-community", quickQuotas: [2, 3, 3, 2], tenQuestionExam: true, maxSize: 30 },
     "aws-aip": { title: "AWS AIP-C01", type: "aws", files: [...files("aws-aip", 3, "part"), ...files("aws-aip/open-easy", 4, "part"), ...files("aws-aip/open-hard", 3, "part"), ...files("aws-aip/open-veryhard", 3, "part")] },
     "aws-aif": { title: "AWS AIF-C01", type: "aws", files: [...files("aws-aif/bank", 10, "part"), ...files("aws-aif/practice", 5, "part")] },
     "aws-saa": { title: "AWS SAA-C03", type: "aws", storagePool: "aws-saa-ac", files: [...files("aws-saa/real", 10, "part"), ...files("aws-saa/original", 1, "part")] },
@@ -18,26 +18,22 @@
   const poolName = params.get("pool");
   const config = pools[poolName];
   const size = Number(params.get("size"));
-  const fixedMock = config?.mockSize === size;
   const shortAwsPaper = config?.type === "aws" && size === 10;
   const quickPractice = shortAwsPaper && !config.tenQuestionExam;
   const message = document.getElementById("message");
   const retry = document.getElementById("retry");
   retry.addEventListener("click", () => location.reload());
 
-  if (!config || !(fixedMock || shortAwsPaper || size === 50 || (size === 100 && config.type !== "aws"))) {
+  if (!config || size > (config.maxSize ?? 100) || !(shortAwsPaper || size === 50 || (size === 100 && config.type !== "aws"))) {
     message.textContent = "随机出题参数无效，请返回题库目录重新选择。";
     return;
   }
 
   let seed = params.get("seed");
   const hasSeed = /^[a-f0-9]{8}$/i.test(seed || "");
-  // Older shared links must keep their original pool because drafts are keyed by question position.
-  const expandedAib = poolName === "aws-aib" && !fixedMock && (!hasSeed || params.get("bank") === "2");
   if (!hasSeed) {
     seed = Array.from(crypto.getRandomValues(new Uint8Array(4)), n => n.toString(16).padStart(2, "0")).join("");
     params.set("seed", seed);
-    if (expandedAib) params.set("bank", "2");
     history.replaceState(null, "", `${location.pathname}?${params}`);
   }
   let state = parseInt(seed, 16) || 1;
@@ -174,7 +170,7 @@
     const nextUrl = `/random.html?pool=${encodeURIComponent(poolName)}&size=${size}`;
     const newButton = doc.createElement("a");
     newButton.href = nextUrl;
-    newButton.textContent = fixedMock ? "重新模拟考" : quickPractice ? "再刷 10 题" : "再随机一套";
+    newButton.textContent = quickPractice ? "再刷 10 题" : "再随机一套";
     newButton.className = "random-again";
     doc.querySelector(".toolbar .btns").append(newButton);
     const extraStyle = doc.createElement("style");
@@ -221,10 +217,8 @@
       });
     }
     // A changed question pool must not reuse answers saved for the old numbered paper.
-    const storagePool = expandedAib ? "aws-aib-expanded" : config.storagePool || poolName;
-    doc.documentElement.dataset.examKey = `quiz:random-exam:${storagePool}:${size}:${seed}`;
+    doc.documentElement.dataset.examKey = `quiz:random-exam:${config.storagePool || poolName}:${size}:${seed}`;
     doc.documentElement.dataset.examTitle = config.title;
-    if (fixedMock) doc.documentElement.dataset.fixedMock = "true";
     const examStyle = doc.createElement("link");
     examStyle.rel = "stylesheet";
     examStyle.href = "/assets/random-exam.css";
@@ -243,8 +237,7 @@
     document.close();
   }
   async function run() {
-    const sourceFiles = expandedAib ? [...config.files, "aws-aib/community01.html"] : config.files;
-    const docs = await Promise.all(sourceFiles.map(async path => {
+    const docs = await Promise.all(config.files.map(async path => {
       const url = new URL(path, location.href).href;
       const response = await fetch(url);
       if (!response.ok) throw new Error(`无法读取 ${path}（HTTP ${response.status}）`);
@@ -262,10 +255,7 @@
         .map(node => ({ ...questionUnit(node), url }))));
       const quotas = shortAwsPaper ? config.quickQuotas : config.quotas;
       let selected;
-      if (fixedMock) {
-        if (all.length !== size) throw new Error("模拟卷题数与目录不一致");
-        selected = all;
-      } else if (quotas) {
+      if (quotas) {
         selected = quotas.flatMap((count, index) => sample(all.filter(unit => unit.nodes[0].querySelector(".badge")?.textContent.includes(`Domain ${index + 1}`)), count));
         selected = shuffle(selected);
       } else selected = sample(all, size);

@@ -3,7 +3,7 @@ import type {ExamQuestion} from './random-exam-state.mjs';
 
 const root=document.documentElement;
 const key=root.dataset.examKey;
-if (!key || !/^quiz:random-exam:[a-z-]+:(10|50|85|100):[a-f0-9]{8}$/i.test(key)) throw new Error('Invalid exam key');
+if (!key || !/^quiz:random-exam:[a-z-]+:(10|50|100):[a-f0-9]{8}$/i.test(key)) throw new Error('Invalid exam key');
 const storageKey=key;
 const quickPractice=root.dataset.examStatus === 'practice';
 const singlePage=root.dataset.examLayout === 'single';
@@ -23,9 +23,9 @@ function text(id:string,value:string|number):void {
   if (el) el.textContent=String(value);
 }
 const copy={
-  zh:{previous:'上一题',next:'下一题',question:'题目',noMistakes:'没有错题。',current:'当前题',score:'得分率',expand:'展开全部解析',collapse:'收起全部解析',title:'随机考试',mock:'原创模拟卷',pending:'考试模式：交卷前不显示答案、对错或 AI 讲解。选择会自动保存，交卷前可修改。',submitted:'已交卷：可查看成绩、答案与 AI 讲解。作答已锁定。可重新开始一份试卷。',answered:'已答',unanswered:'未作答',right:'答对了',wrong:'答错了',answer:'正确答案',confirm:'确定交卷？交卷后不能修改答案。',left:'题未作答',review:'查看试卷',wrongOnly:'查看错题',all:'显示全部',report:'查看成绩',submit:'交卷',unsaved:'当前浏览器无法保存进度，关闭页面后作答可能丢失。'},
-  en:{previous:'Previous',next:'Next',question:'Question',noMistakes:'No mistakes to review.',current:'Current question',score:'Score',expand:'Expand explanations',collapse:'Collapse explanations',title:'Random exam',mock:'Original mock exam',pending:'Exam mode: answers, correctness and AI explanations stay hidden until submission. Choices save automatically and can be changed before submitting.',submitted:'Submitted: review your score, answers and AI explanations. Answers are locked; generate another paper to start a new exam.',answered:'Answered',unanswered:'Unanswered',right:'Correct',wrong:'Incorrect',answer:'Correct answer',confirm:'Submit this exam? Answers cannot be changed afterwards.',left:'questions unanswered',review:'Review paper',wrongOnly:'View mistakes',all:'Show all',report:'View score',submit:'Submit exam',unsaved:'This browser cannot save progress; closing the page may lose your answers.'},
-  ja:{previous:'前の問題',next:'次の問題',question:'問題',noMistakes:'誤答はない。',current:'現在の問題',score:'得点率',expand:'解説をすべて開く',collapse:'解説をすべて閉じる',title:'ランダム試験',mock:'オリジナル模擬試験',pending:'試験モード：提出までは解答・正誤・AI解説を表示しない。選択は自動保存され、提出前は変更できる。',submitted:'提出済み：成績・解答・AI解説を確認できる。回答は変更不可。新しい試験は別のセットを作成する。',answered:'回答済み',unanswered:'未回答',right:'正解',wrong:'不正解',answer:'正解',confirm:'提出する？提出後は回答を変更できない。',left:'問が未回答',review:'問題を確認',wrongOnly:'誤答を確認',all:'すべて表示',report:'成績を確認',submit:'提出',unsaved:'このブラウザーでは進捗を保存できない。ページを閉じると回答が失われる場合がある。'}
+  zh:{previous:'上一题',next:'下一题',question:'题目',noMistakes:'没有错题。',current:'当前题',score:'得分率',expand:'展开全部解析',collapse:'收起全部解析',title:'随机考试',pending:'考试模式：交卷前不显示答案、对错或 AI 讲解。选择会自动保存，交卷前可修改。',submitted:'已交卷：可查看成绩、答案与 AI 讲解。作答已锁定。可重新开始一份试卷。',answered:'已答',unanswered:'未作答',right:'答对了',wrong:'答错了',answer:'正确答案',confirm:'确定交卷？交卷后不能修改答案。',left:'题未作答',review:'查看试卷',wrongOnly:'查看错题',all:'显示全部',report:'查看成绩',submit:'交卷',unsaved:'当前浏览器无法保存进度，关闭页面后作答可能丢失。'},
+  en:{previous:'Previous',next:'Next',question:'Question',noMistakes:'No mistakes to review.',current:'Current question',score:'Score',expand:'Expand explanations',collapse:'Collapse explanations',title:'Random exam',pending:'Exam mode: answers, correctness and AI explanations stay hidden until submission. Choices save automatically and can be changed before submitting.',submitted:'Submitted: review your score, answers and AI explanations. Answers are locked; generate another paper to start a new exam.',answered:'Answered',unanswered:'Unanswered',right:'Correct',wrong:'Incorrect',answer:'Correct answer',confirm:'Submit this exam? Answers cannot be changed afterwards.',left:'questions unanswered',review:'Review paper',wrongOnly:'View mistakes',all:'Show all',report:'View score',submit:'Submit exam',unsaved:'This browser cannot save progress; closing the page may lose your answers.'},
+  ja:{previous:'前の問題',next:'次の問題',question:'問題',noMistakes:'誤答はない。',current:'現在の問題',score:'得点率',expand:'解説をすべて開く',collapse:'解説をすべて閉じる',title:'ランダム試験',pending:'試験モード：提出までは解答・正誤・AI解説を表示しない。選択は自動保存され、提出前は変更できる。',submitted:'提出済み：成績・解答・AI解説を確認できる。回答は変更不可。新しい試験は別のセットを作成する。',answered:'回答済み',unanswered:'未回答',right:'正解',wrong:'不正解',answer:'正解',confirm:'提出する？提出後は回答を変更できない。',left:'問が未回答',review:'問題を確認',wrongOnly:'誤答を確認',all:'すべて表示',report:'成績を確認',submit:'提出',unsaved:'このブラウザーでは進捗を保存できない。ページを閉じると回答が失われる場合がある。'}
 };
 const practiceCopy={
   zh:{title:'随机刷 10 题',check:'确认作答',note:'每题独立判分。确认后即可查看解析。',complete:'10 题已完成。可以查看成绩或再刷 10 题。',score:'正确率'},
@@ -136,7 +136,7 @@ function render():void {
   root.dataset.examStatus=quickPractice ? 'practice' : submitted ? 'submitted' : 'pending';
   if (!result) { document.body.classList.remove('only-wrong'); document.getElementById('mask')?.classList.remove('open'); }
   const answered=result?.answered ?? questions.filter(q=>state.answers[q.id]?.s.some(value=>value.trim())).length;
-  const title=`${root.dataset.examTitle} · ${quickPractice ? practice.title : `${root.dataset.fixedMock ? c.mock : c.title} ${questions.length}`}`;
+  const title=`${root.dataset.examTitle} · ${quickPractice ? practice.title : `${c.title} ${questions.length}`}`;
   if (heading) heading.textContent=title;
   document.title=title;
   const intro=document.querySelector('.wrap > p.sub,.wrap > p.meta');
