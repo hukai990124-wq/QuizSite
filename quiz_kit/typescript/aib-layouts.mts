@@ -1,4 +1,39 @@
-import type { Layouts } from './model.mjs';
+import type { Layout, Layouts } from './model.mjs';
+
+function aibPaper(count: number, attribution: string): Layout {
+  return [
+    "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\">\r\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\r\n<title>",
+    {"slot":"title.0"},
+    "</title>\r\n",
+    {"layout":"style-3fab60f7761e2fbd01b0"},
+    "<link rel=\"stylesheet\" href=\"/assets/quizsite-theme.css\" id=\"quizsite-theme-css\">\r\n<!--i18n:head-->\r\n",
+    {"layout":"style-49059a140f67cf1e8026"},
+    "\r\n",
+    {"layout":"script-5bf995796f27132ed8d3"},
+    "\r\n<!--/i18n:head--></head><body>\r\n<a href=\"index.html\" title=\"返回 AIB-C01 目录\" style=\"position:fixed;right:14px;top:14px;z-index:99;background:rgba(255,255,255,.95);border:1px solid #d8dee5;border-radius:99px;padding:6px 14px;font:12.5px/1.4 -apple-system,Segoe UI,Microsoft YaHei,sans-serif;color:#334155;text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.10)\">← 题库目录</a>\r\n<div class=\"wrap\">\r\n<h1>",
+    {"slot":"h1.1"},
+    "</h1>\r\n<p class=\"sub\">",
+    {"slot":"p.2"},
+    `</p>\r\n<div class=\"toolbar\"><div class=\"btns\">\r\n<button class=\"primary\" id=\"btn-sheet\" type=\"button\">答题卡</button>\r\n<button id=\"btn-wrong\" type=\"button\">只看错题</button>\r\n<button id=\"btn-expand\" type=\"button\">展开全部解析</button>\r\n<button id=\"btn-report\" type=\"button\">交卷</button>\r\n<button id=\"btn-reset\" type=\"button\">重置</button>\r\n<button onclick=\"window.print()\" type=\"button\">打印 / 存 PDF</button>\r\n</div>\r\n<div class=\"qbar\"><span>已答 <b id=\"s-done\">0</b>/<b>${count}</b></span><span>正确 <b id=\"s-ok\" class=\"ok\">0</b></span><span>错误 <b id=\"s-bad\" class=\"bad\">0</b></span><span>正确率 <b id=\"s-pct\">—</b></span><span class=\"pbar\"><i id=\"s-fill\"></i></span></div>\r\n</div>\r\n`,
+    ...Array.from({ length: count }, (_, index) => ({ slot: `question.${index}` })),
+    `\r\n<footer class=\"sub\">${attribution} · <a href=\"https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html\">AWS 日文考试指南</a>。<!--i18n:sw-->\r\n<div class=\"lang-switch i18n-noloc\" role=\"group\" aria-label=\"Language\">\r\n<button type=\"button\" data-set-lang=\"zh\" aria-pressed=\"false\">中文</button>\r\n<button type=\"button\" data-set-lang=\"en\" aria-pressed=\"false\">English</button>\r\n<button type=\"button\" data-set-lang=\"ja\" aria-pressed=\"false\">日本語</button>\r\n</div>\r\n<!--/i18n:sw--></footer>\r\n</div>\r\n<div class=\"sheet\" id=\"sheet\">\r\n  <div class=\"hd\"><span><b>答题卡</b></span>\r\n    <span>已答 <b id=\"sh-done\">0</b> · 正确 <b id=\"sh-ok\">0</b> · 错误 <b id=\"sh-bad\">0</b></span>\r\n    <button class=\"redo\" id=\"sh-close\" type=\"button\" style=\"margin-left:auto\">收起</button>\r\n  </div>\r\n  <div class=\"grid\"></div>\r\n</div>\r\n<div class=\"mask\" id=\"mask\" role=\"dialog\" aria-label=\"成绩单\">\r\n  <div class=\"report\">\r\n    <h3>`,
+    {"slot":"h3.3"},
+    "</h3>\r\n    <div class=\"big\" id=\"rp-pct\">0%</div>\r\n    <table>",
+    {"slot":"table.4"},
+    "</table>\r\n    <div class=\"row\"><button id=\"rp-close\">继续答题</button><button class=\"ghost\" id=\"rp-retry\">只练错题</button></div>\r\n  </div>\r\n</div>\r\n",
+    {"layout":"script-526cdd027f92fb735504","bindings":{"KEY.0":"script.0.KEY","TOTAL.1":"script.1.TOTAL"}},
+    "\r\n",
+    "\r\n<!--pc:js-->\r\n",
+    {"layout":"script-62872728a187e31e14f0"},
+    "\r\n<!--/pc:js-->\r\n",
+    {"layout":"script-96f10a1dc2ff0436eca8"},
+    "\r\n<!--i18n:js-->\r\n",
+    {"layout":"script-016d784cacfa05649a7a"},
+    "\r\n",
+    {"layout":"script-9c3048d5306030feff49","bindings":{"REL.0":"script.2.REL"}},
+    "\r\n<!--/i18n:js--></body></html>"
+  ];
+}
 
 export const aibLayouts: Layouts = {
   'aib-index': [
@@ -29,36 +64,6 @@ export const aibLayouts: Layouts = {
     {"layout":"script-9c3048d5306030feff49","bindings":{"REL.0":"script.0.REL"}},
     "\r\n<!--/i18n:js--></body></html>\r\n"
   ],
-  'aib-paper': [
-    "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\">\r\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\r\n<title>",
-    {"slot":"title.0"},
-    "</title>\r\n",
-    {"layout":"style-3fab60f7761e2fbd01b0"},
-    "<link rel=\"stylesheet\" href=\"/assets/quizsite-theme.css\" id=\"quizsite-theme-css\">\r\n<!--i18n:head-->\r\n",
-    {"layout":"style-49059a140f67cf1e8026"},
-    "\r\n",
-    {"layout":"script-5bf995796f27132ed8d3"},
-    "\r\n<!--/i18n:head--></head><body>\r\n<a href=\"index.html\" title=\"返回 AIB-C01 目录\" style=\"position:fixed;right:14px;top:14px;z-index:99;background:rgba(255,255,255,.95);border:1px solid #d8dee5;border-radius:99px;padding:6px 14px;font:12.5px/1.4 -apple-system,Segoe UI,Microsoft YaHei,sans-serif;color:#334155;text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.10)\">← 题库目录</a>\r\n<div class=\"wrap\">\r\n<h1>",
-    {"slot":"h1.1"},
-    "</h1>\r\n<p class=\"sub\">",
-    {"slot":"p.2"},
-    "</p>\r\n<div class=\"toolbar\"><div class=\"btns\">\r\n<button class=\"primary\" id=\"btn-sheet\" type=\"button\">答题卡</button>\r\n<button id=\"btn-wrong\" type=\"button\">只看错题</button>\r\n<button id=\"btn-expand\" type=\"button\">展开全部解析</button>\r\n<button id=\"btn-report\" type=\"button\">交卷</button>\r\n<button id=\"btn-reset\" type=\"button\">重置</button>\r\n<button onclick=\"window.print()\" type=\"button\">打印 / 存 PDF</button>\r\n</div>\r\n<div class=\"qbar\"><span>已答 <b id=\"s-done\">0</b>/<b>85</b></span><span>正确 <b id=\"s-ok\" class=\"ok\">0</b></span><span>错误 <b id=\"s-bad\" class=\"bad\">0</b></span><span>正确率 <b id=\"s-pct\">—</b></span><span class=\"pbar\"><i id=\"s-fill\"></i></span></div>\r\n</div>\r\n",
-    ...Array.from({ length: 85 }, (_, index) => ({ slot: `question.${index}` })),
-    "\r\n<footer class=\"sub\">本站原创模拟题 · <a href=\"https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html\">AWS 日文考试指南</a>。<!--i18n:sw-->\r\n<div class=\"lang-switch i18n-noloc\" role=\"group\" aria-label=\"Language\">\r\n<button type=\"button\" data-set-lang=\"zh\" aria-pressed=\"false\">中文</button>\r\n<button type=\"button\" data-set-lang=\"en\" aria-pressed=\"false\">English</button>\r\n<button type=\"button\" data-set-lang=\"ja\" aria-pressed=\"false\">日本語</button>\r\n</div>\r\n<!--/i18n:sw--></footer>\r\n</div>\r\n<div class=\"sheet\" id=\"sheet\">\r\n  <div class=\"hd\"><span><b>答题卡</b></span>\r\n    <span>已答 <b id=\"sh-done\">0</b> · 正确 <b id=\"sh-ok\">0</b> · 错误 <b id=\"sh-bad\">0</b></span>\r\n    <button class=\"redo\" id=\"sh-close\" type=\"button\" style=\"margin-left:auto\">收起</button>\r\n  </div>\r\n  <div class=\"grid\"></div>\r\n</div>\r\n<div class=\"mask\" id=\"mask\" role=\"dialog\" aria-label=\"成绩单\">\r\n  <div class=\"report\">\r\n    <h3>",
-    {"slot":"h3.3"},
-    "</h3>\r\n    <div class=\"big\" id=\"rp-pct\">0%</div>\r\n    <table>",
-    {"slot":"table.4"},
-    "</table>\r\n    <div class=\"row\"><button id=\"rp-close\">继续答题</button><button class=\"ghost\" id=\"rp-retry\">只练错题</button></div>\r\n  </div>\r\n</div>\r\n",
-    {"layout":"script-526cdd027f92fb735504","bindings":{"KEY.0":"script.0.KEY","TOTAL.1":"script.1.TOTAL"}},
-    "\r\n",
-    "\r\n<!--pc:js-->\r\n",
-    {"layout":"script-62872728a187e31e14f0"},
-    "\r\n<!--/pc:js-->\r\n",
-    {"layout":"script-96f10a1dc2ff0436eca8"},
-    "\r\n<!--i18n:js-->\r\n",
-    {"layout":"script-016d784cacfa05649a7a"},
-    "\r\n",
-    {"layout":"script-9c3048d5306030feff49","bindings":{"REL.0":"script.2.REL"}},
-    "\r\n<!--/i18n:js--></body></html>"
-  ],
+  'aib-paper': aibPaper(85, '本站原创模拟题'),
+  'aib-community-paper': aibPaper(30, '用户整理 · 附件参考答案'),
 };

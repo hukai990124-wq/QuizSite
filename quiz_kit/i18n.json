@@ -2406,5 +2406,13 @@
   "社区英文计时模拟考": {"en": "Community timed mock exam in English", "ja": "コミュニティの時間制模擬試験（英語）"},
   "重新模拟考": {"en": "Retake mock exam", "ja": "模擬試験をやり直す"},
   "AWS AIB-C01 · 原创模拟卷": {"en": "AWS AIB-C01 · Original mock paper", "ja": "AWS AIB-C01 · オリジナル模擬問題"},
-  "85 道原创情境题 · 日中英对照 · 单选与多选 · 作答后可查看解析或交卷查看成绩。": {"en": "85 original scenarios in Japanese, Chinese and English. Check individual answers or submit for a score.", "ja": "日中英のオリジナル事例問題85問。択一・複数選択。各問で解説を確認し、提出すると成績を表示します。"}
+  "85 道原创情境题 · 日中英对照 · 单选与多选 · 作答后可查看解析或交卷查看成绩。": {"en": "85 original scenarios in Japanese, Chinese and English. Check individual answers or submit for a score.", "ja": "日中英のオリジナル事例問題85問。択一・複数選択。各問で解説を確認し、提出すると成績を表示します。"},
+  "14 个题库 · 共 5806 题次 · 可作答判分 · 登录后跨设备同步": {"en": "14 question banks · 5,806 questions · sign in to sync progress", "ja": "14の問題集・全5,806問・ログインで進捗を同期"},
+  "115 题": {"en": "115 questions", "ja": "115問"},
+  "60 张日中英术语卡、85 道原创模拟题及 30 道用户整理题。支持随机 10 题和 50 题考试。": {"en": "60 glossary cards, 85 original mock questions and 30 user-curated questions. Random exams draw 10 or 50 questions.", "ja": "用語カード60枚、オリジナル模擬問題85問、ユーザー提供問題30問。ランダム試験は10問または50問。"},
+  "用户整理练习卷": {"en": "User-curated practice paper", "ja": "ユーザー提供の練習問題"},
+  "AWS AIB-C01 · 用户整理练习卷": {"en": "AWS AIB-C01 · User-curated practice paper", "ja": "AWS AIB-C01 · ユーザー提供の練習問題"},
+  "30 题 · 英文原题 · 中文解析": {"en": "30 questions in English with Chinese explanations", "ja": "全30問・問題文は英語、解説は中国語"},
+  "30 道单选 · 英文原题与中文解析 · 按附件参考答案判分，题目疑点见备注。": {"en": "30 single-answer questions in English with Chinese explanations. Grading follows the supplied answer key. See notes for disputed items.", "ja": "択一式30問。問題文は英語、解説は中国語です。提供された参考解答に基づいて採点します。疑義がある箇所は注記をご確認ください。"},
+  "用户整理 · 附件参考答案 ·": {"en": "User-curated · Supplied answer key ·", "ja": "ユーザー提供・参考解答・"}
 }

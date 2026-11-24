@@ -7,7 +7,7 @@
       "h1.1": "AWS AIB-C01 · AI Business Strategist",
       "p.2": "AWS Certified AI Business Strategist · 日中英备考",
       "script.0.REL": "../",
-      "resources": "<div class=\"random-entry\"><strong>随机考试</strong><span>按四个考纲领域抽题，交卷后查看成绩与解析。</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-aib&amp;size=50\">随机 50 题</a> <a href=\"../random.html?pool=aws-aib&amp;size=10\">随机 10 题</a></div></div>\n<div class=\"grp\"><a class=\"card\" href=\"vocabulary.html\"><div class=\"n\">用语集 · 单词卡</div><div class=\"r\">60 个术语 · 日文读音、英文与中文释义</div></a>\n<a class=\"card\" href=\"../random.html?pool=aws-aib&amp;size=85\"><div class=\"n\">原创模拟卷</div><div class=\"r\">85 题 · 固定顺序 · 交卷后统一判分</div></a>\n<a class=\"card\" href=\"mock01.html\" data-quiz-key=\"aws:aib:mock:01\" data-quiz-total=\"85\"><div class=\"n\">模拟卷逐题练习</div><div class=\"r\">85 题 · 固定试卷 · 含单选与多选</div><div class=\"pg\"><i></i><span>未开始</span></div></a></div>\n<div class=\"note\"><p>本卷根据 AWS 考纲原创编写。AI 基础 20 题、战略与价值 24 题、治理 20 题、组织转型 21 题。</p>\n<p><a href=\"https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html\">AWS 日文考试指南</a> · <a href=\"https://aws.amazon.com/jp/certification/certified-ai-business-strategist/\">AWS 官方备考资源</a> · <a href=\"https://zghanw.github.io/aws-ai-business-strategist/\">社区英文计时模拟考</a></p></div>"
+      "resources": "<div class=\"random-entry\"><strong>随机考试</strong><span>按四个考纲领域抽题，交卷后查看成绩与解析。</span><div class=\"aws-random-actions\"><a href=\"../random.html?pool=aws-aib&amp;size=50\">随机 50 题</a> <a href=\"../random.html?pool=aws-aib&amp;size=10\">随机 10 题</a></div></div>\n<div class=\"grp\"><a class=\"card\" href=\"vocabulary.html\"><div class=\"n\">用语集 · 单词卡</div><div class=\"r\">60 个术语 · 日文读音、英文与中文释义</div></a>\n<a class=\"card\" href=\"../random.html?pool=aws-aib&amp;size=85\"><div class=\"n\">原创模拟卷</div><div class=\"r\">85 题 · 固定顺序 · 交卷后统一判分</div></a>\n<a class=\"card\" href=\"mock01.html\" data-quiz-key=\"aws:aib:mock:01\" data-quiz-total=\"85\"><div class=\"n\">模拟卷逐题练习</div><div class=\"r\">85 题 · 固定试卷 · 含单选与多选</div><div class=\"pg\"><i></i><span>未开始</span></div></a>\n<a class=\"card\" href=\"community01.html\" data-quiz-key=\"aws:aib:community:01\" data-quiz-total=\"30\"><div class=\"n\">用户整理练习卷</div><div class=\"r\">30 题 · 英文原题 · 中文解析</div><div class=\"pg\"><i></i><span>未开始</span></div></a></div>\n<div class=\"note\"><p>本卷根据 AWS 考纲原创编写。AI 基础 20 题、战略与价值 24 题、治理 20 题、组织转型 21 题。</p>\n<p><a href=\"https://docs.aws.amazon.com/ja_jp/aws-certification/latest/ai-business-strategist-01/ai-business-strategist-01.html\">AWS 日文考试指南</a> · <a href=\"https://aws.amazon.com/jp/certification/certified-ai-business-strategist/\">AWS 官方备考资源</a> · <a href=\"https://zghanw.github.io/aws-ai-business-strategist/\">社区英文计时模拟考</a></p></div>"
     },
     "questions": []
   },
@@ -3716,6 +3716,1312 @@
             "layout": "choice-c7c7ed2d90f1ba3c1f47",
             "content": {
               "text.0": "<p class=\"en\" lang=\"en\">66.7%</p><p class=\"zh\" lang=\"zh-CN\">66.7%</p><p class=\"ja\" lang=\"ja\">66.7%</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      }
+    ]
+  },
+  {
+    "path": "aws-aib/community01.html",
+    "layout": "aib-community-paper",
+    "content": {
+      "script.0.KEY": "quiz:aws:aib:community:01",
+      "script.1.TOTAL": "30",
+      "script.2.REL": "../",
+      "title.0": "AWS AIB-C01 · 用户整理练习卷",
+      "h1.1": "AWS AIB-C01 · 用户整理练习卷",
+      "p.2": "30 道单选 · 英文原题与中文解析 · 按附件参考答案判分，题目疑点见备注。",
+      "h3.3": "本份成绩",
+      "table.4": "\r\n      <tr><td>已作答</td><td id=\"rp-done\">0</td></tr>\r\n      <tr><td>答对</td><td id=\"rp-ok\">0</td></tr>\r\n      <tr><td>答错</td><td id=\"rp-bad\">0</td></tr>\r\n      <tr><td>未作答</td><td id=\"rp-left\">0</td></tr>\r\n      <tr><td>用时</td><td id=\"rp-time\">—</td></tr>\r\n    "
+    },
+    "questions": [
+      {
+        "id": "q1",
+        "number": "1",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 1</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Training vs Prediction\">AI001</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A merchandising analyst reads a status report from the engineering team that includes the sentence, \"The system was shown two years of returns data until it could identify which items were likely to be sent back.\" Which core AI concept does the sentence describe?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">强调系统通过历史退货数据获得识别能力，属于训练，而不是使用已训练模型作出一次预测。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Prediction, because the sentence describes items identified as likely returns</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Algorithm, because the sentence describes the processing steps engineers wrote</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Inference, because the system is producing an answer about which items qualify</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Training, because the system learned the pattern from historical examples</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q2",
+        "number": "2",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 2</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Context Window\">AI002</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A pilot prompt template pastes a customer's complete two-year support history into every request. For the most active customers, the tool writes summaries that leave out part of the history while reading as though nothing were missing. Which explanation fits the pattern?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">客户历史记录过长，可能超过模型上下文窗口，导致信息截断或遗漏。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The prompt sends more than the window holds, so some history never arrives</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The model is producing random errors that have no relationship to the prompt length</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The tool ranks each contact record by importance and reports only the significant ones</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The tool has been trained on outdated support records and needs to be retrained</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q3",
+        "number": "3",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 3</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Context Window Optimization\">AI003</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A vendor offers a model tier with a context window four times larger than the current one at three times the per-prompt cost, presenting it as the fix for inconsistent output. The team's prompts currently send each customer's full purchase history. What should the product manager verify before deciding?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">先验证能否精简输入并在现有窗口内解决问题，避免不必要的高成本升级。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Whether a competing vendor offers a comparable window at a lower price point</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Whether the larger window also improves the accuracy of the model's writing</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Whether the larger window is available at a discount for a longer contract term</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Whether the current prompts can be trimmed so the existing window is sufficient</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q4",
+        "number": "4",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 4</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Prompt Engineering - Constraints\">AI004</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">Two writers submit prompts for the same email campaign task. Prompt 1: \"Write five subject lines for the spring sale email that will get a high open rate from our best customers.\" Prompt 2: \"Write five subject lines for the spring sale email to loyalty members. Each under 45 characters. Mention the discount. Avoid exclamation points.\" Which prompt is stronger, and why?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">提示词2有可执行、可验证的字符长度、内容和标点限制。两个提示词都要求五个标题。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Prompt 1, because naming the open-rate goal focuses the tool on business results</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Prompt 2, because it sets concrete constraints the tool is able to honor</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Prompt 1, because describing customers as the best ones signals a premium tone</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Prompt 2, because requesting five variations gives the writer more options</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q5",
+        "number": "5",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 5</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Prompt Engineering - Task Specificity\">AI005</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A writer is deciding between two prompts for the same product page. Prompt 1: \"Write a description for the wool throw blanket, then write five subject lines for the campaign email, and suggest a headline for the landing page.\" Prompt 2: \"Write a description for the wool throw blanket for the home goods page. Audience: shoppers furnishing a first apartment. Format: three sentences.\" Which prompt is stronger, and why?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">提示词2集中于单一任务，并给出背景受众与输出格式；不是越严格越好。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Prompt 2, because a three-sentence limit is the strictest constraint available</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Prompt 2, because a single task with context and format produces reliable output</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Prompt 1, because handling three related deliverables at once saves the writer time</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Prompt 1, because the tool can keep the campaign consistent across all three pieces</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q6",
+        "number": "6",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 6</span><span class=\"badge\">Domain 3</span><span class=\"badge i18n-noloc\" title=\"Fine-tuning &amp; Data Governance\">AI006</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A vendor proposes fine-tuning a model on AnyCompany Retail's archive of past marketing copy so that output matches the brand voice by default. Which consideration should the product manager raise before the proposal advances?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">微调使用企业专有内容继续训练，需要审查数据使用权限、隐私、保留和知识产权。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Fine-tuning eliminates the need for prompt engineering across the marketing team</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Fine-tuning retrains the model on proprietary content, which raises data-governance questions</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Fine-tuning cannot influence writing style, so the proposal addresses the wrong problem</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Fine-tuning requires the brand voice to change frequently to justify the investment</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q7",
+        "number": "7",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 7</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Model Monitoring\">AI007</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A leadership team is preparing to launch an AI recommendation system and asks what monitoring should be established. Which recommendation reflects the module's guidance?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">在上线前建立阈值与应对计划，上线即持续主动监控。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Review the system after the first quarter, once enough production data has accumulated</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Define thresholds and a response plan before launch, tracking metrics immediately</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Track outcome metrics, and investigate whenever the engineering team raises a concern</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Monitor infrastructure availability closely, since model accuracy stays stable once trained</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q8",
+        "number": "8",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 8</span><span class=\"badge\">Domain 3</span><span class=\"badge i18n-noloc\" title=\"Vendor Transparency\">AI008</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A vendor claims its platform uses AI to process supplier contracts. When the CX operations lead asks how the system decides, the vendor answers that it relies on proprietary algorithms trained on industry data. What does that response indicate?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">“行业数据训练的专有算法”没有具体说明数据和决策方式，应继续追问透明度及可解释性。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The vendor is protecting legitimate intellectual property and the claim needs no follow-up</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The vendor has confirmed the platform is rules-based automation rather than AI</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The vendor is dodging, because sound vendors describe their training data concretely</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The vendor has confirmed the platform learns continuously from every contract processed</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q9",
+        "number": "9",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 9</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Shadow AI Governance\">AI009</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A department has been using an unapproved AI transcription tool for internal meetings for several months. Security review has not begun, and the department reports real productivity gains. Which classification and governance action fit best?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">未经批准但有业务价值，应受控试点、限制数据并设明确审批期限，不可直接默认批准。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Blocked, with enforcement applied and the productivity benefit set aside</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Under evaluation, with the department continuing current use until review concludes</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Approved, with usage guidelines issued to the department already using it</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Under evaluation, with a scoped pilot, data restrictions, and a deadline</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q10",
+        "number": "10",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 10</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Concept Drift\">AI010</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A fraud detection model at AnyCompany Retail begins missing fraudulent transactions it would previously have caught. The transaction data arriving looks similar in shape to the training data, but the tactics fraudsters use have changed. Which category of drift describes this?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">结果对应的规律改变，是Concept Drift；检测性能下降只是表现。</p><p class=\"i18n-noloc\" lang=\"zh-CN\">备注：来源为成绩回顾截图，截图明确标注D为Correct、C为用户选择。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Data drift, because the transactions reaching the model have changed</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">No drift, because the model and the shape of its input data are both unchanged</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Performance drift, because the model catches fewer fraudulent transactions than before</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Concept drift, because the relationship between inputs and the right output has changed</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q11",
+        "number": "11",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 11</span><span class=\"badge\">Domain 4</span><span class=\"badge i18n-noloc\" title=\"AI Transition - Investment Portfolios\">AI011</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A mid-market wealth management firm is replacing its manual client portfolio rebalancing process with an AI-powered system that automatically generates rebalancing recommendations for 8,400 client portfolios. The current process requires 18 advisors spending 40% of their time on rebalancing. The AI system reduces this to advisors reviewing and approving AI recommendations, estimated at 15% of their time. Key facts: SEC regulations require that a licensed advisor approve every rebalancing recommendation before execution; the AI system has been validated on 3 years of historical portfolio data with 96% alignment to advisor decisions; the Chief Investment Officer needs the system live within 5 months; the advisory team is skeptical, they believe the AI \"does not understand client relationships\"; and the firm's largest clients (top 200 by AUM) have complex tax situations that the AI has not been tested on. Which transition approach is most appropriate given the constraints?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">优先针对已验证的标准组合分阶段上线，排除复杂且尚未测试的客户，确保持牌顾问审批，监控表现后再扩展。</p><p class=\"i18n-noloc\" lang=\"zh-CN\">备注：本题未提供官方标准答案。A为整理时的最佳判断；原对话曾讨论A/D两种可能。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Phased rollout, deploy for standard portfolios first (8,200 portfolios, excluding the top 200 complex accounts), validate advisor alignment for 60 days, then expand to complex accounts</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Rollback-only planning, deploy across all portfolios with a rollback trigger if advisor override rate exceeds 15%</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Full deployment across all 8,400 portfolios, advisors retain approval authority, which manages the regulatory requirement; the 96% alignment rate is sufficient validation</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Parallel running for 90 days, advisors generate their own recommendations and review AI recommendations simultaneously; compare alignment before full cutover</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q12",
+        "number": "12",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 12</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"Build Buy Partner - Insurance Claims\">AI012</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A national insurance carrier is implementing AI-powered claims triage, automatically routing and prioritizing incoming claims based on complexity, fraud risk, and required expertise. Four options are under evaluation. The Chief Claims Officer needs the system live within 9 months to meet a regulatory commitment. The CISO requires that claims data not leave the carrier's private cloud. The CFO wants the best 5-year TCO. Legal has flagged that any co-developed model must be fully owned by the carrier.<br><br>Build: 16 months, $2.8M upfront, $220K/year. Full customization for the carrier's claim taxonomy. Data stays on private cloud. Requires hiring 3 ML engineers and a claims domain specialist.<br>Buy (established insurtech vendor): 6 weeks, $380K/year. CISO-approved private cloud deployment available. Standard claim categories cover 75% of the carrier's claim types; the remaining 25% require manual routing rules added post-deployment.<br>Partner (claims AI specialist firm): 7 months, $1.1M upfront, $140K/year. Co-developed on the carrier's private cloud. Full claim taxonomy coverage. IP: negotiable, currently proposed as joint ownership.<br>Buy (general-purpose AI platform, self-configured): 3 months, $180K/year. Requires 6 months of internal configuration by the carrier's IT team before it handles claims routing. Data stays on private cloud.<br><br>Which option best satisfies all constraints?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">专业合作方满足期限、私有云和分类覆盖；知识产权必须谈判落实独占归属。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Buy (general-purpose platform), private cloud and lower cost, but 3 months + 6 months configuration = 9 months total, and the carrier bears all configuration risk</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Partner, 7-month timeline meets the deadline, private cloud deployment, full taxonomy coverage, and IP terms are negotiable to full carrier ownership</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Build, full IP ownership and private cloud, but 16-month timeline misses the 9-month regulatory commitment</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Buy (established vendor), fastest deployment and CISO-approved, but 25% manual routing gap creates ongoing operational cost and the carrier owns no IP</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q13",
+        "number": "13",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 13</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI Portfolio - Media\">AI013</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A global media company has eight AI initiatives across three business units. The new Chief AI Officer has been asked to rationalize the portfolio, and the board wants no more than five active initiatives, with clear scale/pause/terminate recommendations for the rest. Current status at the 18-month mark:<br><br>A (Content recommendation engine): 18 months live. Subscriber retention up 8%. Data flywheel strong. Economic sustainability concern: compute costs have tripled as the subscriber base grew, margin on the initiative is now negative.<br>B (Ad targeting optimization): 14 months live. CPM up 22%. Strong sponsor (Chief Revenue Officer). Model stable. No data flywheel, performance plateaued 4 months ago.<br>C (Automated subtitle generation): 10 months live. 91% accuracy. 78% adoption by production teams. Saves 3.2 hours per episode. Organizational sustainability strong, process is documented, not dependent on any individual.<br>D (Churn prediction): 6 months live. Accuracy at 71% (target: 82%). Data science team says accuracy will improve with 6 more months of behavioral data. Sponsor is the VP of Subscriber Growth.<br>E (AI-assisted content moderation): Paused 8 months ago pending legal review of liability implications. Legal review completed last month, approved with conditions. Ready to restart.<br>F (Personalized push notifications): 4 months live. 34% open rate improvement. Sponsor just left. No successor named. No data flywheel.<br>G (Automated sports highlights): 2 months live. Early accuracy at 88%. Production team adoption at 62%. Sponsor is the VP of Sports Content.<br>H (AI dubbing for international markets): Proposed. No development started. Business case: $12M/year in dubbing cost savings. Data: 8 years of dubbed content available for training.<br>Which five initiatives should be continued, and what is the appropriate action for the remaining three?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">保留B、C、D、E、G；对负利润A及无负责人的F设置有期限的暂停改进条件，推迟未启动H。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Scale C, B. Continue D, G. Restart E. Pause F (60-day sponsor condition). Pause A (negative margin, pause condition: submit a compute cost optimization plan within 30 days). Defer H (no development started).</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Scale A, C, G. Continue B, D. Pause E. Terminate F. Defer H.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Scale B, C, E. Continue D, G. Pause A (margin problem). Terminate F. Defer H.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Scale A, B, C. Continue D, G. Pause E (just approved, needs scoping). Terminate F. Defer H.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q14",
+        "number": "14",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 14</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"Build Buy Partner - Energy Utility\">AI014</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A mid-market energy utility is deploying AI-powered outage prediction, identifying grid segments at elevated failure risk before outages occur. The VP of Grid Operations needs the system integrated with the existing SCADA infrastructure and live within 12 months. The CFO wants the best 3-year TCO. The General Counsel has flagged that grid operational data is classified as critical infrastructure and cannot be processed by any third-party cloud service. The data science team has two engineers with ML experience but no grid domain expertise.<br><br>Build: 18 months, $1.9M upfront, $280K/year. Full SCADA integration. Data stays on-premises. Requires hiring a grid domain expert ($180K/year). Team has ML capability but no grid domain knowledge.<br>Buy (grid analytics vendor): 4 months, $520K/year. Vendor offers on-premises deployment to meet data classification requirement. Standard outage prediction models trained on 40+ utility datasets. Limited SCADA customization for the utility's specific grid topology.<br>Partner (general systems integrator): 8 months, $900K upfront, $200K/year. On-premises deployment. Integrator has no grid domain experience but strong ML engineering capability. IP: full utility ownership.<br>Partner (utility-focused AI firm with grid domain expertise): 10 months, $1.4M upfront, $160K/year. On-premises deployment. Co-developed with the utility's SCADA data. Partner brings grid domain expertise. IP: full utility ownership proposed.<br>Which option best satisfies all constraints?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">专业电网AI合作方满足12个月期限、本地部署和领域知识要求。注意选项声称最低3年TCO与数字不一致：该方案188万美元，普通集成商150万美元（按列明费用）。</p><p class=\"i18n-noloc\" lang=\"zh-CN\">备注：原题选项C关于lowest TCO的断言不符合题目所列成本，需核对命题质量。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Build, best long-term control, but 18-month timeline misses the 12-month deadline and requires a domain expert hire</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Buy, fastest deployment and proven grid models, but limited SCADA customization may reduce accuracy for this utility's specific topology</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Partner (utility-focused firm), 10-month timeline meets the deadline, on-premises deployment, grid domain expertise, full IP ownership, and lowest 3-year TCO</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Partner (general systems integrator), 8-month timeline, on-premises, full IP ownership, but no grid domain expertise creates a model accuracy risk</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q15",
+        "number": "15",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 15</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Rules vs AI - Hotel Pricing\">AI015</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional hospitality chain operates 42 franchised hotels under a single brand. The corporate operations team is reviewing two proposals to modernize the room rate management process, which currently sets weekly rates using a manually maintained spreadsheet.<br><br>Proposal 1 (AI-based): A vendor proposes an AI dynamic pricing system that adjusts room rates every 15 minutes based on real-time demand signals (search volume, competitor rates, local event data, and booking pace). Estimated implementation: $340K upfront, $80K/year. Expected revenue lift: 4–7% based on vendor case studies from larger chains (200+ properties).<br>Proposal 2 (Rules-based automation): The internal operations team proposes a rules-based system with about 60 predefined pricing rules (day-of-week factors, seasonality bands, occupancy thresholds, local event calendars). Estimated implementation: $85K upfront, $12K/year. Expected revenue lift: 2–3%.<br>Key constraints: The chain has 3 years of booking data across 42 properties (approximately 180,000 booking records). Franchise partners require rate rules to be documented and explainable, franchise agreements guarantee partners the right to review and challenge any rate change. Local event data is available through public feeds. The chain's Chief Operating Officer has flagged that any rate change that a franchise partner cannot explain to a guest creates a franchise relationship risk.<br><br>Which proposal is the appropriate choice, and why?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">加盟商必须解释、审查定价，明确规则和较低成本使规则自动化更合适；AI案例收入提升外推有限。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Proposal 1 (AI), dynamic pricing is the industry standard for large chains, and adopting it positions the regional chain to compete on rate optimization</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Proposal 2 (rules-based), the explainability requirement, the modest data volume, and the well-understood pricing logic all point to rules; AI is not the appropriate solution for the described constraints</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Proposal 2 (rules-based), franchise partners will resist any pricing system that costs more than the current spreadsheet approach</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Proposal 1 (AI), the revenue lift range (4–7%) exceeds Proposal 2 by a wide margin, and 3 years of booking data across 42 properties is sufficient training data</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q16",
+        "number": "16",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 16</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"Predictive Maintenance - Airline\">AI016</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional airline operates a fleet of 78 aircraft. Unscheduled maintenance events, where an aircraft is grounded outside its planned maintenance windows, cost an average of $110K per event in delays, rebookings, and rerouted crew, and the airline experiences roughly 40 such events per year. The VP of Maintenance Operations wants to apply AI to reduce unscheduled events. Four use cases have been proposed:<br><br>Use case A: Predict which aircraft components are likely to fail before their next scheduled maintenance window, based on sensor telemetry, operating conditions, and component age.<br>Use case B: Classify incoming maintenance requests by urgency tier to support technician workload balancing.<br>Use case C: Identify recurring failure patterns across component types, aircraft models, and route profiles.<br>Use case D: Recommend parts ordering schedules to the parts management team based on projected maintenance demand.<br>Which use case best matches the highest-impact application of AI capabilities for the described business function?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">目标是减少非计划维修，因此应预测零件故障并提前安排维护（Use case A；答案字母C）。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Use case D, recommendation of parts ordering schedules improves supply chain readiness for maintenance work</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Use case C, pattern recognition across component types and route profiles supports fleet-level design conversations with the manufacturer</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Use case A, prediction of component failures before scheduled windows enables preemptive maintenance, directly reducing unscheduled events</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Use case B, classification of maintenance requests supports workload balancing and technician utilization</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q17",
+        "number": "17",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 17</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"Pattern Recognition - Chemical Manufacturing\">AI017</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A specialty chemical manufacturer makes industrial coatings for aerospace and automotive customers. Quality assurance is its highest-cost function. Each batch is tested against 40 chemical and physical specifications. Failed batches must be reprocessed or thrown out, at an average cost of $18K each. The company produces 220 batches per month with a 6% failure rate.<br><br>For every batch, the company records the raw material source, environmental conditions, equipment settings, and shift team. Past reviews show most failures come from combinations of these factors, not one factor alone. During a batch, operators can adjust process settings only within a narrow range.<br><br>The Chief Operations Officer wants to use AI to reduce batch failures. Four use cases have been proposed:<br><br>Use case A: Predict which incoming raw material lots will produce failed batches. Use supplier data, arrival conditions, and past batch results.<br>Use case B: Sort each failed batch by root cause category (raw material, process, environment, equipment) for corrective action reports.<br>Use case C: Find recurring failure patterns across raw material sources, environmental conditions, equipment settings, and shift teams.<br>Use case D: Recommend process setting changes to operators during production, based on real-time sensor data.<br>Which use case is the highest-impact use of AI for this business problem?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">问题由原料、环境、设备、班组的组合造成，且实时参数调整空间小；多因素模式识别有助于找源头并改进工艺。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Use case B, classification of failed batches supports corrective action reports and quality records</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Use case D, real-time recommendations to operators allow process changes during production</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Use case A, prediction on raw material lots allows quality holds that keep failure-prone lots out of production</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Use case C, pattern recognition finds recurring failure combinations, allowing process-level fixes at the source</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q18",
+        "number": "18",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 18</span><span class=\"badge\">Domain 1</span><span class=\"badge i18n-noloc\" title=\"AI Suitability - Fraud Detection\">AI018</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional insurance brokerage handles roughly 3 million property and casualty claims per year for the small carriers it represents. The Chief Underwriting Officer has flagged that the current fraud detection process, a rules-based system installed 8 years ago, is missing an increasing volume of suspicious claims. The rules engine flags claims based on 340 fixed criteria (claim amount thresholds, prior claim history, timing patterns, geographic patterns). Two changes have occurred in the last 3 years: (1) fraud rings have adapted to the known rules and now structure claims to fall just below flagging thresholds, and (2) the volume of claims has doubled, but the rules have been updated only twice in that period because each update requires a 6-week review cycle involving compliance, legal, and IT. Fraud losses have grown from $18M/year to $41M/year.<br><br>Two options are on the table:<br><br>Option 1: Rebuild the rules-based system with a modern rules engine that supports faster updates (2-week cycle instead of 6-week). Expand from 340 criteria to approximately 900 criteria. Estimated implementation: $1.2M upfront, $180K/year.<br>Option 2: Deploy an AI-based anomaly detection model trained on 5 years of historical claims data. The model learns fraud patterns from historical outcomes and updates weekly. Explainability layer required by compliance is in place. Estimated implementation: $2.1M upfront, $340K/year.<br>Which option is the appropriate choice for this business task?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">诈骗者主动规避固定规则，高交易量、历史数据、更新能力和可解释性使AI异常检测更适合。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Option 1 (modern rules engine), the cost difference is significant ($1.2M vs. $2.1M upfront, $180K vs. $340K annual) and rules-based systems have lower operational risk</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Option 2 (AI-based anomaly detection), AI is the industry standard for fraud detection and the brokerage cannot afford to lag competitors on this capability</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Option 2 (AI-based anomaly detection), the task characteristics (evolving adversarial patterns, high volume, sufficient historical data, and available explainability) match AI, not rules; extending the rules engine perpetuates a losing race</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Option 1 (modern rules engine), a rules-based system is easier to maintain and satisfies compliance and legal review requirements with fewer complications</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q19",
+        "number": "19",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 19</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI Portfolio - Logistics\">AI019</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A mid-market logistics company has six AI initiatives. The CFO has asked for a portfolio review after a difficult Q3. Two initiatives missed their targets and the board is questioning the AI investment strategy. Budget for Q4 sustains four initiatives. The CFO wants clear criteria for every decision.<br><br>A (Route optimization): 14 months live. Fuel cost down 9.2%. Model improving. Data flywheel active, more routes improve predictions. Economic sustainability strong.<br>B (Predictive maintenance for fleet): 10 months live. Unplanned breakdowns down 31%. Sponsor (VP Fleet Operations) is retiring in 60 days. Successor not yet named.<br>C (Demand forecasting for warehouse staffing): 8 months live. Accuracy at 74% (target: 85%). Staffing managers report the model \"does not account for seasonal spikes.\" Data science team says the seasonal data exists but has not been incorporated, 45-day fix.<br>D (AI-assisted customs documentation): 6 months live. 12% adoption by customs brokers. Accuracy at 96% but brokers say the output format requires manual reformatting before submission. No format fix planned.<br>E (Customer churn prediction): Paused 6 months ago. The data integration with the CRM was blocked by a vendor contract dispute. Contract resolved last month. Ready to restart.<br>F (AI pricing for spot freight): 3 months live. Win rate on spot quotes up 14%. Sponsor is the Chief Commercial Officer. Early data flywheel forming.<br>Which four initiatives should be funded, and what is the appropriate action for the other two?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">资助A/B/F/E；C有45天可修复季节性问题可暂缓，D采用率低且没有格式修复计划宜终止。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Fund A, B, F, E. Pause C (45-day seasonal data fix as condition). Terminate D (12% adoption, no format fix planned).</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Fund A, B, C, F. Pause E (just restarted, needs validation). Terminate D (adoption failure).</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Fund A, B, D, F. Pause C (below accuracy target). Terminate E (CRM integration just resolved, unproven).</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Fund A, C, F, E. Pause B (sponsor transition risk). Terminate D (adoption failure).</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q20",
+        "number": "20",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 20</span><span class=\"badge\">Domain 4</span><span class=\"badge i18n-noloc\" title=\"AI Rollout - Grocery Retail\">AI020</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A national grocery chain is replacing its manual inventory replenishment process with an AI-powered system that automatically generates purchase orders for 45,000 SKUs across 180 stores. The current process requires 12 buyers working full-time to manage replenishment. The AI system reduces this to 3 buyers for exception handling. Key facts: the system has been tested on 6 months of historical data with 91% order accuracy; the current process has never had a stockout rate above 2.1%; the VP of Supply Chain needs the system live within 4 months to capture Q4 holiday season savings; the buyers' union has flagged concerns about job displacement; and the CFO has asked about the cost of running both systems simultaneously. Three transition options are under evaluation.<br><br>Full deployment: Deploy across all 180 stores and all 45,000 SKUs simultaneously. 4-month deadline met with margin.<br>Parallel running: Run both systems simultaneously for 60 days across all 180 stores. Buyers review AI-generated orders before submission. Full cutover after 60 days. CFO estimates parallel running costs $280K in buyer overtime.<br>Phased rollout by SKU category: Deploy AI for non-perishable, high-volume SKUs first (30% of SKUs, 70% of volume). Validate for 45 days. Then expand to perishables and long-tail SKUs.<br>Phased rollout by store: Deploy at 30 pilot stores for 60 days, validate stockout rate against the 2.1% benchmark, then expand to remaining 150 stores. Timeline: 4 months total, tight but achievable.<br>Which transition approach is most appropriate, and what is the primary reason?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">先在30家门店验证缺货率，再扩至150家，既满足4个月期限又限制试点故障影响范围。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Full deployment, the 4-month deadline requires full deployment; the 91% accuracy in testing is sufficient validation</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Phased rollout by store, limits blast radius, meets the deadline, and validates live performance before full exposure</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Phased rollout by SKU category, the most operationally logical approach; perishables carry the highest stockout risk</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Parallel running, the safest approach; the $280K cost is justified by the continuity protection</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q21",
+        "number": "21",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 21</span><span class=\"badge\">Domain 3</span><span class=\"badge i18n-noloc\" title=\"Responsible AI - Board Questions\">AI021</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A Chief Digital Officer at a consumer products company is presenting the company's AI value story to a new board member who has a background in regulatory compliance. The board member asks three questions in sequence:<br><br>Question 1: \"Your AI-powered product recommendation engine has a 94% click-through rate. How do you know it is not steering customers toward higher-margin products at the expense of the products that best meet their needs?\"<br>Question 2: \"Your AI-powered supply chain optimization system makes autonomous reorder decisions for 8,000 SKUs. What happens when it makes a wrong decision that results in a stockout or an overstock event?\"<br>Question 3: \"Who is accountable when one of your AI systems causes a customer harm or a business loss?\"<br>Which benchmark category does each question map to, and which response correctly addresses all three?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">公平推荐→Fairness；错误导致损失的防护→Safety；责任归属→Governance。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Question 1: Trust. Question 2: Controllability. Question 3: Governance. Response: \"We provide customers with explanations for each recommendation, we allow supply chain managers to override any autonomous reorder decision, and we have a named model owner accountable for each production system.\"</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Question 1: Fairness. Question 2: Controllability. Question 3: Governance. Response: \"We have not yet completed a formal recommendation equity assessment but plan to do so, we allow supply chain managers to override reorder decisions, and we are in the process of naming model owners for each system.\"</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Question 1: Performance. Question 2: Safety. Question 3: Controllability. Response: \"Our recommendation engine has a 94% click-through rate confirming customer acceptance, we have guardrails on reorder quantities to prevent extreme decisions, and supply chain managers can override the system at any time.\"</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Question 1: Fairness. Question 2: Safety. Question 3: Governance. Response: \"We assess recommendation equity across product categories quarterly, we have defined error containment thresholds and human review triggers for supply chain decisions, and we have named model owners with documented accountability for each production system.\"</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q22",
+        "number": "22",
+        "answer": "A",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 22</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"AI ROI - Specialty Foods\">AI022</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A specialty foods manufacturer deployed an AI demand forecasting system 24 months ago to reduce waste in a highly perishable product line. The CFO is preparing a two-year retrospective for the executive team. The following data has been compiled:<br><br>Implementation cost: $850K in Year 1 (fully amortized). Ongoing compute and data pipeline costs: $95K/year.<br>Waste reduction: 38% reduction in perishable product waste. Baseline waste was $3.6M/year; current waste is $2.23M/year. Annual savings: $1.37M/year.<br>Stockout reduction: 41% reduction in retailer stockout events. Value of recovered sales (products that would have stocked out): $480K/year.<br>Retailer relationship value: The two largest retail customers (representing 34% of revenue) have cited the improved fill rate in renewing their supply agreements. The CFO estimates that retaining these accounts is worth $2.4M/year in preserved revenue, but the AI system is one of several factors those retailers considered.<br>Workforce impact: Two demand planners were promoted into new strategic roles when their forecasting workload dropped. Their prior salary cost of $95K each per year continues as they remain on payroll in the new roles.<br>The CFO asks whether the retailer relationship value should be included in the ROI calculation and, if so, at what value.<br>Which ROI approach is the most defensible for the executive team presentation?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">直接年度收益137+48-9.5=175.5万美元。客户留存收入不能完全归因于AI，应审慎部分估值并披露范围；员工仍领工资不能计作现金工资节省。</p><p class=\"i18n-noloc\" lang=\"zh-CN\">备注：题目用挽回销售额作为收益；严格财务ROI还需考虑毛利和归因。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Include a partial, defensible share of the retailer relationship value (for example, 30–50 percent) as a supporting intangible with the range disclosed, and present the tangible benefits as the primary ROI figure. Annual tangible net benefit: $1.37M + $480K − $95K = $1.755M. With disclosed partial retention value ($720K to $1.2M/year), total range: $2.475M to $2.955M/year.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Include the full retailer relationship value AND the demand planner salary savings ($190K/year), since both are documented effects of the AI initiative. Annual net benefit: $1.37M + $480K + $2.4M + $190K − $95K = $4.345M.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Exclude retailer relationship value entirely because it is not directly attributable and cannot be measured cleanly. Annual net benefit: $1.37M + $480K − $95K = $1.755M.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Include full retailer relationship value ($2.4M/year) because the retailers explicitly cited the improved fill rate. Annual net benefit: $1.37M + $480K + $2.4M − $95K = $4.155M.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q23",
+        "number": "23",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 23</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"KPI Mix - Healthcare\">AI023</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional healthcare system has deployed an AI-powered patient triage assistant in its urgent care clinics. The system helps intake staff prioritize incoming patients based on symptom descriptions, medical history, and current clinic load. Six months into deployment, the Chief Financial Officer has asked for a KPI report to justify continued investment. The CFO is presenting to the board in three weeks. The board is finance-oriented and has asked for a return-on-capital analysis for all technology investments.<br><br>The AI operations team has proposed four KPI mixes for the CFO's board presentation:<br><br>Mix A: Tangibles only, average patient wait time reduction (minutes), staff hours saved per week, revenue per patient encounter<br>Mix B: Intangibles only, patient satisfaction (NPS delta), staff satisfaction, community reputation score<br>Mix C: Both, tangibles primary with intangibles as supporting context, wait time reduction, staff hours saved, revenue per encounter, PLUS patient satisfaction and staff satisfaction as supporting evidence<br>Mix D: Both, intangibles primary with tangibles as supporting context, patient satisfaction and staff satisfaction, PLUS wait time reduction and staff hours saved<br>Which KPI mix is the most appropriate for the CFO's board presentation?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">面向财务导向董事会，以效率、成本和收入等有形指标为主，以患者和员工满意度等无形指标补充。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Mix B, a board that asks for return-on-capital is telling the CFO that intangibles are secondary; tangibles alone answer the question</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Mix A, the board asked for return-on-capital, which is a financial measure; intangibles complicate the analysis</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Mix D, intangibles matter most in healthcare, and board members should be educated on the full value story</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Mix C, tangibles align with the board's return-on-capital ask, while intangibles substantiate the case with the qualitative signals that finance-oriented boards increasingly expect</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q24",
+        "number": "24",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 24</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"Cost Variance - Lease Analysis\">AI024</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional real estate services firm deployed an AI-powered lease analysis system 10 months ago to extract structured data from tenant lease documents (average 42 pages each, roughly 8,000 leases processed per year). The CFO is reviewing a Q3 budget variance report and has flagged that the initiative is running 72% over budget. The team has provided the following cost breakdown:<br><br>Compute costs (document processing, model inference): $340K/year, budgeted at $180K. Overrun driven by the team running the full document through the model every time a lease is amended, rather than reprocessing only the changed pages.<br>Storage costs: $85K/year, budgeted at $50K. Overrun driven by retaining full-resolution document images for every version of every lease indefinitely, with no retention policy in place.<br>Model retraining: $110K/year, budgeted at $80K. Team has been retraining the model monthly to incorporate new lease types.<br>Human review of low-confidence extractions: $180K/year, budgeted at $200K. Slightly under budget.<br>Compliance documentation: $45K/year, budgeted at $40K. Slightly over budget.<br>Vendor licensing: $120K/year, budgeted at $120K. On budget.<br>Total actual: $880K/year.<br>Total budgeted: $670K/year.<br>Variance: $210K over (31% over-budget).<br>The CFO's question: which cost driver contributes the largest share of the overrun, and what is the appropriate first action?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">计算成本差额340-180=160K，为最大单项超支；采用增量处理仅重新计算修改页。净超支210K，按预算670K算约31.34%。</p><p class=\"i18n-noloc\" lang=\"zh-CN\">备注：这道原题在对话里出现了两次，已去重。题首“72% over budget”与明细“31%”矛盾。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Model retraining costs, the $30K overrun signals over-frequent retraining. Action: reduce retraining cadence to quarterly.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Vendor licensing, although currently on budget, licensing is the largest absolute line item and offers the biggest optimization target. Action: renegotiate the vendor contract.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Human review costs, reassign review to junior staff to reduce labor cost. Action: renegotiate reviewer rates.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Compute costs, the $160K overrun is the largest single driver. Action: implement incremental processing so only changed pages are reprocessed on lease amendments.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q25",
+        "number": "25",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 25</span><span class=\"badge\">Domain 4</span><span class=\"badge i18n-noloc\" title=\"Audience-Specific KPIs\">AI025</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A national consumer electronics retailer has deployed an AI-powered product recommendation engine on its e-commerce site. Nine months into deployment, the Chief Digital Officer is preparing an update for the executive team. Three executives will attend and each has a different primary interest:<br><br>The CFO wants to know whether to continue the initiative next fiscal year based on financial return.<br>The Chief Marketing Officer wants to understand how the recommendation engine is affecting brand perception among younger customers.<br>The Chief Human Resources Officer, who owns customer service, wants to know whether recommendation-related customer service inquiries have changed.<br>The AI team has proposed four KPI packages, each with a different emphasis:<br><br>Package A: One universal KPI set for all three executives, revenue lift, average order value increase, customer satisfaction, customer service inquiry volume, brand perception NPS<br>Package B: Audience-specific KPI sets, CFO gets revenue lift and average order value; CMO gets brand perception NPS and younger-customer engagement metrics; CHRO gets customer service inquiry volume and inquiry resolution time<br>Package C: Financial KPIs for the CFO only, and a single combined qualitative report for the CMO and CHRO<br>Package D: A single scorecard combining all KPIs with the CFO's metrics highlighted, since the CFO is the primary decision-maker on next-year budget<br>Which KPI package is the most appropriate for this stakeholder mix?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">为不同利益相关者提供不同指标：CFO财务、CMO品牌及参与度、CHRO客服运营。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Package D, highlighting the CFO's metrics acknowledges the primary decision-maker while keeping the other executives informed</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Package A, a single KPI set is easier to maintain and ensures all executives see the same information</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Package B, audience-specific KPI sets match each executive's decision context; tangibles for the CFO, intangibles for the CMO, mixed operational metrics for the CHRO</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Package C, the CFO's financial ask is the primary business question; the other executives can share a qualitative view</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q26",
+        "number": "26",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 26</span><span class=\"badge\">Domain 3</span><span class=\"badge i18n-noloc\" title=\"Responsible AI - Insurance Underwriting\">AI026</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A VP of Digital Strategy at a mid-market insurance company is preparing a board presentation on the company's AI portfolio. The company has two production AI systems: a claims processing automation system (live 18 months) and a customer risk scoring system (live 9 months). The board has asked for a responsible AI update alongside the financial results.<br><br>Here is the benchmark status for each system:<br><br>Claims processing automation:<br>Performance: 96% straight-through processing rate. Average claims cycle time reduced from 14 days to 3 days.<br>Fairness: Assessed. No statistically significant difference in processing time or approval rates across demographic groups.<br>Safety: Error containment defined. All claims above $50K reviewed by a human adjuster before payment.<br>Trust: Claimants receive an automated explanation of their claim status. Adjusters can see the top 5 factors driving each recommendation.<br>Controllability: Adjusters can override any recommendation. Override rate: 4%.<br>Privacy and Security: Claimant data encrypted. Access restricted to claims and data science teams.<br>Governance: Model owner named (VP of Claims). Quarterly review cadence. Audit trail for all model updates.<br><br>Customer risk scoring:<br>Performance: 84% concordance with manual underwriter assessments.<br>Fairness: Not assessed. No demographic analysis of risk score distributions.<br>Safety: Score floor and ceiling guardrails in place.<br>Trust: Underwriters see a risk tier (1 to 5) but no explanation of which factors drove the score.<br>Controllability: Underwriters can override the score. Override rate: 31%.<br>Privacy and Security: Customer data encrypted. Access controls in place.<br>Governance: No formal model owner. No documented review cadence.<br>The board asks: \"Which system is better managed from a responsible AI perspective, and what is the most important gap to close in the weaker system?\"<br>Which response is correct?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">理赔系统七维基准管理更完整；风险评分系统尚未评估公平性，是严重合规风险。高人工覆盖率本身不证明信任不足。</p><p class=\"i18n-noloc\" lang=\"zh-CN\">备注：选项D的fair lending法律措辞未必适用于所有保险业务，需按具体司法辖区核实。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The claims processing system is better managed. The most important gap in the customer risk scoring system is the Trust benchmark, because a 31% override rate indicates underwriters do not trust the system's output and are reverting to manual judgment on nearly one in three decisions.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Both systems are equally well managed. The claims system has stronger governance and explainability; the risk scoring system has stronger safety guardrails and a more conservative automation posture. The gaps in each system offset the strengths of the other.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The customer risk scoring system is better managed because its 84% concordance rate is more conservative and appropriate for a risk-sensitive application than the claims system's 96% automation rate, which may be moving too fast for a high-stakes insurance context.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The claims processing system is better managed. The most important gap in the customer risk scoring system is the Fairness benchmark, because an unassessed risk scoring system in insurance has direct regulatory exposure under fair lending and anti-discrimination requirements.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q27",
+        "number": "27",
+        "answer": "B",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 27</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"Leading Indicators - Logistics\">AI027</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A VP of Operations at a mid-market logistics company is conducting a six-month portfolio review of three AI initiatives. The company's CFO has asked for a recommendation on how to handle each initiative — invest further, place on a performance improvement plan, or terminate.<br><br>Here is the leading indicator data:<br><br>Initiative A (Route optimization): 88% adoption by dispatch team. Data pipeline health: 99.1% uptime, GPS data refreshed every 2 minutes. Sponsor (COO) attending monthly reviews. Model accuracy: 89%, improving 0.5% per month. Compute costs: on budget.<br><br>Initiative B (Customer churn prediction): 19% adoption by the customer success team. Data pipeline health: 93% uptime, CRM data feed is 48 hours stale. Sponsor (Chief Revenue Officer) has been reassigned; no replacement named. The company's Chief Revenue Officer role is currently in a search process, with a candidate expected to be named within 30 days. Model accuracy: 83%, flat for 12 weeks. Compute costs: 55% over budget due to full-production-data experiments.<br><br>Initiative C (Demand forecasting for fleet capacity): 67% adoption by the capacity planning team. Data pipeline health: 96% uptime. Sponsor (VP of Operations) engaged. Model accuracy: 77%, improving 2.1% per month. Compute costs: on budget. Capacity planners report the model does not yet incorporate seasonal demand patterns, which they are adding manually.<br><br>Which recommendation is correct?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">A各项领先指标强值得投资；C季节性缺口可修复；B尽管问题多但30天内可能确定新负责人，可给予限期改善机会。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Invest in Initiative C (highest accuracy improvement trajectory). Place Initiative A on a performance improvement plan (89% accuracy is below the 95% threshold for production logistics systems). Terminate Initiative B.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Invest in Initiative A (all leading indicators strong). Place Initiative C on a performance improvement plan (seasonal gap is an addressable model gap). Place Initiative B on a performance improvement plan (sponsor gap is addressable with a replacement).</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Invest in Initiative A (all leading indicators strong). Place Initiative B on a performance improvement plan (diagnosable problems). Terminate Initiative C (77% accuracy after six months is below acceptable threshold).</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Invest in Initiative A (all leading indicators strong, on trajectory). Place Initiative C on a performance improvement plan (accuracy below threshold, seasonal gap). Terminate Initiative B (low adoption, no sponsor, stale data, compute overrun).</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q28",
+        "number": "28",
+        "answer": "C",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 28</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"Leading Indicators - Data Quality\">AI028</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A Chief Underwriting Officer at a national insurance company is reviewing a 10-month leading indicator report on an AI-powered underwriting recommendation system. The data shows:<br><br>Overall model accuracy: 81% against the target of 88%.<br>Accuracy on standard commercial policies (75% of volume): 89%.<br>Accuracy on complex commercial policies (25% of volume): 54%.<br>Adoption by junior underwriters (58% of the underwriting team): 74%.<br>Adoption by senior underwriters (42% of the underwriting team): 21%.<br>Data pipeline health: 98% uptime. Training data is a 3-year historical claims dataset that a recent audit found has a 12% error rate in the historical loss estimates.<br>Sponsor (VP of Underwriting): engaged, attending weekly reviews.<br>Compute costs: on budget.<br>The Chief Underwriting Officer asks: \"What is the most important thing we need to fix before the annual board review in 60 days?\"<br>Which response correctly identifies the highest-priority leading indicator issue?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">12%训练数据错误是需要优先修复的根因候选；复杂保单54%准确率同时需要人工风险控制。</p><p class=\"i18n-noloc\" lang=\"zh-CN\">备注：按75%×89% +25%×54%得80.25%，与题目给出的整体81%略有差异。选项C“不能通过其他干预解决”措辞过于绝对。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The 54% accuracy on complex commercial policies is the highest priority. A model that performs at 54% on a policy category is producing recommendations that are wrong nearly half the time, which creates underwriting liability.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The adoption gap among senior underwriters is the highest priority. Senior underwriters handle the highest-value policies, and their non-adoption means the initiative is not reaching its highest-impact use cases.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The 12% data quality error in historical claims data is the highest priority. Training data errors are a root cause that affects model accuracy on all policy types and cannot be resolved by any other intervention.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">The 81% accuracy on standard policies is the highest priority. The model is 7 points below target, and the board will ask why the accuracy target has not been met after 10 months.</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q29",
+        "number": "29",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 29</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"Baseline &amp; Confounders - Airline\">AI029</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional airline is preparing to deploy an AI-powered crew scheduling optimizer, which will replace a decades-old manual scheduling process. The VP of Flight Operations wants to prove business value 12 months after deployment. The AI team has 6 weeks before the system goes live and has proposed capturing baseline data during that window. Available operational data includes:<br><br>Crew utilization rate (percent of duty hours flown vs. available duty hours), tracked daily for the past 5 years<br>Overtime cost per pay period, tracked by base and by crew role, past 3 years<br>Trip trade rate (percent of trips crew members voluntarily swap with other crew members), tracked past 2 years<br>Crew satisfaction survey scores, quarterly for past 3 years<br>Regulatory rest-rule violations, tracked as compliance events, past 5 years<br>On-time departure rate influenced by crew availability, tracked but not attributed to scheduling specifically<br>Additional context: The airline's largest crew base is transitioning to a new labor agreement in month 4 after deployment. The current scheduling manager, who has 22 years of tenure and knows the informal rules, is retiring 30 days after deployment.<br><br>Which baseline capture approach best positions the airline to prove the AI system's business value 12 months after deployment?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">上线前记录多维度基线，且记录劳动协议变化和经理退休这两个混杂因素，避免错误归因。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Capture the full 5 years of historical data as the baseline, since more historical data produces a more stable baseline</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Capture only tangible cost baselines (overtime cost, utilization rate) during the 6-week window before deployment, since intangibles are subjective and hard to defend</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Defer baseline capture until 3 months after deployment so the new system's initial performance can serve as its own baseline</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Establish a multi-dimensional baseline during the 6-week window (utilization, overtime, trip trade, satisfaction, rest-rule compliance) AND document the two known confounders (labor agreement change in month 4, scheduling manager retirement at day 30) so post-deployment measurement can control for them</p>"
+            }
+          }
+        ],
+        "answerLabels": {}
+      },
+      {
+        "id": "q30",
+        "number": "30",
+        "answer": "D",
+        "kind": "",
+        "layout": "question-3e46fad86092fd4129c5",
+        "content": {
+          "qhead": "<span class=\"qno\">Question 30</span><span class=\"badge\">Domain 2</span><span class=\"badge i18n-noloc\" title=\"ROI &amp; Payback - Credit Union\">AI030</span>",
+          "stem": "<p class=\"en i18n-noloc\" lang=\"en\">A regional credit union deployed an AI-based fraud detection upgrade 18 months ago. The Chief Financial Officer is preparing the annual ROI analysis for the board. The following data has been compiled:<br><br>Implementation cost: $1.2M in Year 1 (already amortized). Annual compute and model retraining: $150K/year.<br>Prevented fraud losses: $1.8M/year (measured as reduction from the 3-year pre-deployment baseline of $2.9M/year in fraud losses, so current annual loss is $1.1M).<br>False positive reduction: 22% fewer false positive alerts. The savings from investigation time recovered are estimated at 2 analyst FTEs at $85K each per year.<br>Customer experience improvement: 34% reduction in false decline events at point of sale. Member satisfaction scores up 6 points. Estimated member retention value: $220K/year.<br>Compliance documentation: additional $65K/year to maintain regulatory documentation for the AI model.<br>The CFO asks the team to calculate the annual net benefit and the payback period on the Year 1 implementation cost.<br>Which calculation is correct?</p>",
+          "expl": "<p class=\"i18n-noloc\" lang=\"zh-CN\">按题目经济价值口径，1800+170+220-150-65=1975K美元/年；回收期1200/1975×12≈7.29个月。</p><p class=\"i18n-noloc\" lang=\"zh-CN\">备注：FTE时间释放并非必然产生现金节省，客户留存价值也是估算；真实财务报告应区分。</p>"
+        },
+        "choices": [
+          {
+            "letter": "A",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Annual net benefit: $1.8M + $220K − $150K − $65K = $1.805M. Payback period: about 8 months. Analyst FTE savings should be excluded because the analysts were reassigned, not eliminated.</p>"
+            }
+          },
+          {
+            "letter": "B",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Annual net benefit: $1.8M + ($85K × 2) − $150K = $1.82M. Payback period: about 8 months. Member retention value should be excluded because it is not directly attributable to fraud detection.</p>"
+            }
+          },
+          {
+            "letter": "C",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Annual net benefit: $1.8M − $150K = $1.65M. Payback period: about 8 months.</p>"
+            }
+          },
+          {
+            "letter": "D",
+            "layout": "choice-c7c7ed2d90f1ba3c1f47",
+            "content": {
+              "text.0": "<p class=\"en i18n-noloc\" lang=\"en\">Annual net benefit: $1.8M + ($85K × 2) + $220K − $150K − $65K = $1.975M. Payback period: about 7 months. The full multi-source benefit is included and the compliance documentation cost is subtracted.</p>"
             }
           }
         ],

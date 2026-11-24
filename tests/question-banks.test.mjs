@@ -18,8 +18,8 @@ const hash = value => createHash('sha256').update(value).digest('hex');
 test('all 14 banks render their complete published page and question inventory', async () => {
   assert.deepEqual(banks.map(bank => bank.id), ['aws-aib', 'aws-aif', 'aws-aip', 'aws-clf', 'aws-mla', 'aws-saa', 'dele-a1', 'dele-a2', 'fe', 'java-bronze', 'programming', 'toeic-listening', 'toeic-reading', 'workbuddy-opc']);
   const outputs = renderBanks(banks, layouts);
-  assert.equal(banks.reduce((n, bank) => n + bank.pages.length, 0), 121);
-  assert.equal(banks.reduce((n, bank) => n + bank.pages.reduce((sum, page) => sum + page.questions.length, 0), 0), 5432);
+  assert.equal(banks.reduce((n, bank) => n + bank.pages.length, 0), 122);
+  assert.equal(banks.reduce((n, bank) => n + bank.pages.reduce((sum, page) => sum + page.questions.length, 0), 0), 5462);
   for (const bank of banks) {
     for (const page of bank.pages) {
       assert.equal(outputs.get(page.path), await readFile(join(root, 'site', page.path), 'utf8'), page.path);

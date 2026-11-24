@@ -40,3 +40,21 @@ test('AIB cards retain their own learning state and cover each exam domain', asy
   assert.deepEqual(readVocabularyState(raw, 'aib'), { [cards[0].id]: 'review' });
   assert.deepEqual(readVocabularyState(raw), { 'fe-system-01': 'mastered' });
 });
+
+test('the user-curated AIB paper preserves its supplied key and flags disputed questions', async () => {
+  const pages = JSON.parse(await load('question-banks/aws-aib/pages.json'));
+  const paper = pages.find(page => page.path === 'aws-aib/community01.html');
+  assert.equal(paper.questions.length, 30);
+  assert.equal(paper.questions.map(question => question.answer).join(''), 'DADBBBBCDDABACBCDCABDADDCDBCDD');
+  for (const [index, question] of paper.questions.entries()) {
+    assert.match(question.content.qhead, new RegExp('AI' + String(index + 1).padStart(3, '0')));
+    assert.equal(question.choices.map(choice => choice.letter).join(''), 'ABCD');
+    assert.match(question.content.stem, /lang="en"/);
+    assert.match(question.content.expl, /lang="zh-CN"/);
+  }
+  for (const number of [14, 24, 26, 28, 30]) {
+    assert.match(paper.questions[number - 1].content.expl, /备注：/);
+  }
+  const index = await load('site/aws-aib/index.html');
+  assert.match(index, /href="community01.html" data-quiz-key="aws:aib:community:01" data-quiz-total="30"/);
+});

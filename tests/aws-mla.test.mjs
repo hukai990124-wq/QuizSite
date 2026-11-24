@@ -75,8 +75,8 @@ test('homepage lists MLA-C01 and counts it once', async () => {
   const home = await load('site/index.html');
   assert.ok(home.includes('href="aws-mla/index.html"'), 'card missing');
   assert.match(home, /"aws-mla":\{keys:\[\["aws:mla:c01",65\]\]\}/);
-  assert.ok(home.includes('14 个题库 · 共 5776 题次'), 'bank count not updated');
-  assert.ok(home.includes('0 / 5776'), 'progress total not updated');
+  assert.ok(home.includes('14 个题库 · 共 5806 题次'), 'bank count not updated');
+  assert.ok(home.includes('0 / 5806'), 'progress total not updated');
   // The AIF card sits directly above; MLA must not have displaced OPC's last slot.
   const mla = home.indexOf('href="aws-mla/index.html"');
   const aif = home.indexOf('href="aws-aif/index.html"');

@@ -31,9 +31,13 @@
   }
 
   let seed = params.get("seed");
-  if (!seed || !/^[a-f0-9]{8}$/i.test(seed)) {
+  const hasSeed = /^[a-f0-9]{8}$/i.test(seed || "");
+  // Older shared links must keep their original pool because drafts are keyed by question position.
+  const expandedAib = poolName === "aws-aib" && !fixedMock && (!hasSeed || params.get("bank") === "2");
+  if (!hasSeed) {
     seed = Array.from(crypto.getRandomValues(new Uint8Array(4)), n => n.toString(16).padStart(2, "0")).join("");
     params.set("seed", seed);
+    if (expandedAib) params.set("bank", "2");
     history.replaceState(null, "", `${location.pathname}?${params}`);
   }
   let state = parseInt(seed, 16) || 1;
@@ -217,7 +221,8 @@
       });
     }
     // A changed question pool must not reuse answers saved for the old numbered paper.
-    doc.documentElement.dataset.examKey = `quiz:random-exam:${config.storagePool || poolName}:${size}:${seed}`;
+    const storagePool = expandedAib ? "aws-aib-expanded" : config.storagePool || poolName;
+    doc.documentElement.dataset.examKey = `quiz:random-exam:${storagePool}:${size}:${seed}`;
     doc.documentElement.dataset.examTitle = config.title;
     if (fixedMock) doc.documentElement.dataset.fixedMock = "true";
     const examStyle = doc.createElement("link");
@@ -238,7 +243,8 @@
     document.close();
   }
   async function run() {
-    const docs = await Promise.all(config.files.map(async path => {
+    const sourceFiles = expandedAib ? [...config.files, "aws-aib/community01.html"] : config.files;
+    const docs = await Promise.all(sourceFiles.map(async path => {
       const url = new URL(path, location.href).href;
       const response = await fetch(url);
       if (!response.ok) throw new Error(`无法读取 ${path}（HTTP ${response.status}）`);
